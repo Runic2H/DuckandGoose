@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/Exomata/.vs/Exomata/v16
+/.vs
+/Exomata/Debug

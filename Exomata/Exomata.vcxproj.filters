@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Base Engine">
+      <UniqueIdentifier>{5d8571c3-5aaa-47bd-9e8b-5167015e4266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base Engine\Engine">
+      <UniqueIdentifier>{bbef184c-622d-48a7-b81a-bf02631209b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{6e9b31fa-bc76-41f0-912f-7d9411116979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{92652d14-7390-4dfc-8411-cc948487d8d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Graphics">
+      <UniqueIdentifier>{efcf8beb-4957-4f24-a5a7-e91caf6ecc7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Physics">
+      <UniqueIdentifier>{1a9b07ac-45d0-4492-9210-a9d33672698a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Windows">
+      <UniqueIdentifier>{73c97555-3a75-480e-9808-0a41f841381d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base Engine\Headers">
+      <UniqueIdentifier>{446e1d49-e95e-4157-ac4d-2b5254d68734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base Engine\Serialization">
+      <UniqueIdentifier>{5d9b2f56-bfd0-410e-a0ef-efc013354cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base Engine\Composition">
+      <UniqueIdentifier>{0671b9fe-9c7c-4f6e-a5c7-bc2ccf726962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Graphics\System">
+      <UniqueIdentifier>{c127f64e-32fb-43c5-91f8-74f759b58fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Windows\System">
+      <UniqueIdentifier>{587b5ea4-0011-44a8-826b-33250033bfae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Physics\System">
+      <UniqueIdentifier>{56d9cada-26ef-488d-9925-d6f15145f86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{7df1024e-3f2c-4147-ae15-0d37974b4ea3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base Engine\Engine\ComponentTypeID.h">
+      <Filter>Base Engine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Base Engine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Vmath.h">
+      <Filter>Base Engine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Precompiled.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Base Engine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Base Engine\Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Precompiled.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
