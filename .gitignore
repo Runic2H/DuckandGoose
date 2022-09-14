@@ -14,7 +14,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -33,3 +32,6 @@
 /Exomata/.vs/Exomata/v16
 /.vs
 /Exomata/Debug
+/Exomata/.vs/Exotama
+/Exomata/Exotama/x64/Debug
+/Exomata/x64/Debug
