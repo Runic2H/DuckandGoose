@@ -28,6 +28,11 @@
 *.exe
 *.out
 *.app
+/Exomata/.vs/Exomata/v16
+/.vs
+/Exomata/Debug
+/Exomata/.vs/Exomata/v17
+/Exomata/.vs/Exomata/FileContentIndex
 /.vs/Exomata
 /bin-int/Debug-x64
 /bin/Debug-x64
