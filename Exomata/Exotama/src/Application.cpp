@@ -14,9 +14,34 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "JSONserialization.h"
+
+BaseEngine::Player player;
+BaseEngine::Player player2;
+BaseEngine::Player player3;
 
 int main(void)
 {
+
+
+    player.Name("Dummy");
+    player.Health(100);
+    player.Armour(420.69);
+    player.SerializeToFile("test/test.json");
+
+
+    player2.DeserializeFromFile("test/test.json");
+    player2.Name("NewDummy");
+    player2.Health(player2.Health());
+    player2.Armour(player2.Armour());
+    player2.SerializeToFile("test/test2.json");
+
+
+    player3.DeserializeFromFile("test/test2.json");
+    player3.Armour(500);
+    player3.Health(420);
+    player3.SerializeToFile("test/test3.json");
+
     GLFWwindow* window;
 
     /* Initialize the library */

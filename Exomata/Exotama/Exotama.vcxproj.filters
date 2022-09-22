@@ -1,72 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="BaseEngine">
+      <UniqueIdentifier>{f751c993-0f8c-452f-bb68-9cc4fbd31846}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{0e4a131a-f95f-4c0c-8274-927b7117b67c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Systems\Graphics">
+      <UniqueIdentifier>{08579724-8fd5-4855-8512-f29f53ebc420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Graphics\System">
+      <UniqueIdentifier>{6976bc2d-f0c3-43cd-8315-653c6c2abb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Graphics\Shaders">
+      <UniqueIdentifier>{58c38981-d13e-41f5-b8cb-f23555d460dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Physics">
+      <UniqueIdentifier>{5a0e4b4c-39ca-418a-a00e-4de6c065b1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\Serialization">
+      <UniqueIdentifier>{8eb70e21-d427-4da4-be7a-12835d9afc17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParties">
+      <UniqueIdentifier>{d9a26c14-03f9-4fd4-89c4-a43de722bd3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\System">
+      <UniqueIdentifier>{a19836e8-6620-4a9c-b0af-b04df6cafad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\ECS">
+      <UniqueIdentifier>{a71ca40d-e996-4e88-92c3-da600c0ae829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseEngine\Factory">
+      <UniqueIdentifier>{e1fb67a2-c984-4416-8dbd-1c27316268a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Systems\Graphics\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Systems\Graphics\System</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Systems\Graphics\System</Filter>
     </ClCompile>
     <ClCompile Include="src\IndexBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Systems\Graphics\System</Filter>
     </ClCompile>
-    <ClCompile Include="src\VertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\renderer.cpp">
+      <Filter>Systems\Graphics\System</Filter>
     </ClCompile>
     <ClCompile Include="src\vendor\stb_image\stb_image.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Systems\Graphics\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VertexArray.cpp">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JSONserialization.cpp">
+      <Filter>BaseEngine\Serialization</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\basic.shader" />
+    <None Include="Assets\Shaders\basic.shader">
+      <Filter>Systems\Graphics\Shaders</Filter>
+    </None>
+    <None Include="glew32.dll">
+      <Filter>ThirdParties</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VertexBuffer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Shader.h">
+      <Filter>Systems\Graphics\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="src\IndexBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Systems\Graphics\System</Filter>
     </ClInclude>
-    <ClInclude Include="src\VertexArray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VertexBufferLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Texture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\renderer.h">
+      <Filter>Systems\Graphics\System</Filter>
     </ClInclude>
     <ClInclude Include="src\vendor\stb_image\stb_image.h">
-      <Filter>Header Files</Filter>
+      <Filter>Systems\Graphics\System</Filter>
     </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexArray.h">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexBuffer.h">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexBufferLayout.h">
+      <Filter>Systems\Graphics\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JSONserialization.h">
+      <Filter>BaseEngine\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Types.h">
+      <Filter>BaseEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System.h">
+      <Filter>BaseEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JSONincludes.h">
+      <Filter>BaseEngine\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engineprecompiled.h">
+      <Filter>BaseEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECSprecompiled.h">
+      <Filter>BaseEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityManager.h">
+      <Filter>BaseEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComponentArray.h">
+      <Filter>BaseEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComponentManager.h" />
   </ItemGroup>
 </Project>
