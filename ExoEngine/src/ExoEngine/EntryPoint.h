@@ -8,7 +8,7 @@ extern EM::Application* EM::CreateApplication();
 
 int main(int argc, char* argv[])
 {
-	
+
 	EM::Log::Init();
 	auto app = EM::CreateApplication();
 	app->Run();

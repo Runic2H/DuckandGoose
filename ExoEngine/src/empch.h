@@ -16,3 +16,6 @@
 #include <unordered_set>
 
 #include "ExoEngine/Log.h"
+
+#include "Serialization/JSONincludes.h"
+#include "Platform/ECS/ECSprecompiled.h"

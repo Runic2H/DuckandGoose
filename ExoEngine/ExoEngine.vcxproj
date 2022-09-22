@@ -12,15 +12,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\empch.h" />
+    <ClInclude Include="src\ExoEngine\EntryPoint.h" />
     <ClInclude Include="src\ExoEngine\Log.h" />
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
-    <ClInclude Include="src\ExoEngine\EntryPoint.h" />
+    <ClInclude Include="src\Platform\ECS\ComponentArray.h" />
+    <ClInclude Include="src\Platform\ECS\ComponentManager.h" />
+    <ClInclude Include="src\Platform\ECS\ECS.h" />
+    <ClInclude Include="src\Platform\ECS\ECSprecompiled.h" />
+    <ClInclude Include="src\Platform\ECS\EntityManager.h" />
+    <ClInclude Include="src\Platform\ECS\SystemManager.h" />
+    <ClInclude Include="src\Platform\ECS\Types.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\System\System.h" />
     <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
+    <ClInclude Include="src\Serialization\JSONincludes.h" />
+    <ClInclude Include="src\Serialization\JSONserialization.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\empch.cpp">
@@ -32,6 +41,7 @@
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
+    <ClCompile Include="src\Serialization\JSONserialization.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -84,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;EM_PLATFORM_WINDOWS;EM_BUILD_DLL;GLFW_INCLUDE_NONE;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\RapidJSON\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -98,7 +108,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)ExoEngine.dll" "C:\dev\DuckandGoose\Exomata\bin\Debug-x64\Exomata"</Command>
+      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Debug-x64\Exomata"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

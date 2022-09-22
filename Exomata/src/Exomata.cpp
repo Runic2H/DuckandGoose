@@ -1,4 +1,4 @@
-#include"ExoEngine/EntryPoint.h"
+#include "ExoEngine/EntryPoint.h"
 
 class EXOMATA : public EM::Application
 {

@@ -1,6 +1,6 @@
 #ifndef PHYSICS_H_
 #define PHYSICS_H_
-namespace EXOTAMA {
+namespace EXOMATA {
     //collision logic
     struct wall {
         vec2D	p1;

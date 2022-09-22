@@ -1,4 +1,4 @@
-namespace EXOTAMA {
+namespace EXOMATA {
     wall buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
         newWall.p1 = pt1;
