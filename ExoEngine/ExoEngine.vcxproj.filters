@@ -6,8 +6,8 @@
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
-    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
+    <ClCompile Include="src\Serialization\JSONserialization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -22,7 +22,6 @@
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
     <ClInclude Include="src\Platform\System\System.h" />
-    <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\cfg\argv.h" />
@@ -124,5 +123,13 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\stopwatch.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\tweakme.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
+    <ClInclude Include="src\Serialization\JSONincludes.h" />
+    <ClInclude Include="src\Serialization\JSONserialization.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
+    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\SystemManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
   </ItemGroup>
 </Project>
