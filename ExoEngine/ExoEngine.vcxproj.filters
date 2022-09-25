@@ -7,6 +7,8 @@
     <ClCompile Include="src\ExoEngine\Application.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -24,6 +26,8 @@
     <ClInclude Include="src\Platform\System\System.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
+    <ClInclude Include="src\Platform\Graphics\Shader.h" />
+    <ClInclude Include="src\Platform\Graphics\Graphics.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\cfg\argv.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\cfg\env.h" />
     <ClInclude Include="vendor\spdlog\include\spdlog\cfg\helpers.h" />

@@ -3,6 +3,8 @@
 #include "ExoEngine/Input/Input.h"
 
 namespace EM{
+
+
 	void Window::Init()
 	{
 		/* Initialize the library */
@@ -84,7 +86,7 @@ namespace EM{
 		data.m_Width = width;
 		data.m_Height = height;
 		glViewport(0, 0, data.m_Width, data.m_Height);
-		EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);//debug purpose tb removed
+		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);//debug purpose tb removed
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
@@ -104,7 +106,7 @@ namespace EM{
 		data.mouseX = xpos;
 		data.mouseY = ypos;
 
-		EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
+		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
 	}
 	void Window::ToggleVsync(bool value)
 	{

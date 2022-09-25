@@ -28,6 +28,8 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\Platform\Graphics\Graphics.h" />
+    <ClInclude Include="src\Platform\Graphics\Shader.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\System\System.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
@@ -141,6 +143,8 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
