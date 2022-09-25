@@ -8,6 +8,8 @@
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -25,5 +27,7 @@
     <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
+    <ClInclude Include="src\Platform\Graphics\Shader.h" />
+    <ClInclude Include="src\Platform\Graphics\Graphics.h" />
   </ItemGroup>
 </Project>
