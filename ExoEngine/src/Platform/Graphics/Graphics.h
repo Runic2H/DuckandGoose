@@ -1,5 +1,8 @@
 #pragma once
-#include "Platform/Window/Window.h"
+#include "Platform/System/System.h"
+#include "Platform/Graphics/VertexBuffer.h"
+#include "Platform/Graphics/Shader.h"
+
 namespace EM {
 
 	class Graphic : public System
@@ -12,10 +15,11 @@ namespace EM {
 		virtual void Init() override;
 		virtual void Update() override;
 		virtual void End() override;
-
 	private:
 		//for testing
-		unsigned int m_VertexArray{ 0 }, m_VertexBuffer{ 0 }, m_IndexBuffer{ 0 };
+		unsigned int m_VertexArray{ 0 };
 		std::unique_ptr<Shader> m_shader;
+		std::unique_ptr<VertexBuffer> m_Vbuffer;
+		std::unique_ptr<IndexBuffer> m_Ibuffer;
 	};
 }

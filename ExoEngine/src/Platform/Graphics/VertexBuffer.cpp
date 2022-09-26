@@ -4,6 +4,7 @@
 
 namespace EM{
 
+	//////////Vertex BUFFER///////////
 	VertexBuffer::VertexBuffer(float* vertices, unsigned int size)
 	{
 		glCreateBuffers(1, &m_RenderID);
@@ -32,8 +33,8 @@ namespace EM{
 		:m_count(count)
 	{
 		glCreateBuffers(1, &m_RenderID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_RenderID);
-		glBufferData(GL_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RenderID);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 	}
 	IndexBuffer::~IndexBuffer()
 	{
