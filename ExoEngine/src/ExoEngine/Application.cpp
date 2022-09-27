@@ -4,11 +4,12 @@
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/Graphics/Graphics.h"
-
+#include "Editor/LevelEditor.h"
 namespace EM {
 
 	Application::Application()
 	{
+
 	}
 
 	Application::~Application()
@@ -26,17 +27,20 @@ namespace EM {
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
 
+		//p_Editor->Init(m_window);
+
 		Graphic* m_graphic = new Graphic;
 		m_graphic->Init();
 		m_Systems.SystemIndex(1, m_graphic);
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			//m_shader->Bind();
-			m_graphic->Update();
+			
 			m_window->Update();
+			m_graphic->Update();
+			
+			//p_Editor->Update();
+			//p_Editor->Draw();
 		}
 
 		End();
@@ -46,6 +50,7 @@ namespace EM {
 
 	void Application::End()
 	{
+		//p_Editor->End();
 		m_Systems.DeleteSystem();
 	}
 
