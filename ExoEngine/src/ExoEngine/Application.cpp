@@ -4,7 +4,7 @@
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/Graphics/Graphics.h"
-#include "ECS/Object.h"
+//#include "ECS/Object.h"
 #include "Editor/LevelEditor.h"
 
 namespace EM {
@@ -39,17 +39,17 @@ namespace EM {
 		{
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			EM::Transform t;
-			t.Position(5);
-			t.Scale(5);
-			t.Rotation(5);
-			t.SerializeToFile("Transform.json");
-			EM::Player p;
-			p.SerializeToFile("Player.json");
+			//EM::Transform t;
+			//t.Position(5);
+			//t.Scale(5);
+			//t.Rotation(5);
+			//t.SerializeToFile("Transform.json");
+			//EM::Player p;
+			//p.SerializeToFile("Player.json");
 			//m_shader->Bind();
 			m_graphic->Update();
 			m_window->Update();
-			m_graphic->Update();
+			//m_graphic->Update();
 			
 			//p_Editor->Update();
 			//p_Editor->Draw();
