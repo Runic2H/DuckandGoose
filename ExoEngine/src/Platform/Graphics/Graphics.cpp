@@ -1,7 +1,9 @@
 #include "empch.h"
 #include "Graphics.h"
 
+
 namespace EM {
+
 	//for testing purpose
 	void Graphic::Init()
 	{

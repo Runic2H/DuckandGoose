@@ -10,6 +10,11 @@
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
+    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\physics.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vmath.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -129,11 +134,10 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
     <ClInclude Include="src\Serialization\JSONincludes.h" />
     <ClInclude Include="src\Serialization\JSONserialization.h" />
-    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
-    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
-    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\SystemManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
+    <ClInclude Include="src\Platform\System\SystemManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Object.h" />
+    <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
+    <ClInclude Include="src\ExoEngine\Math\physics.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
   </ItemGroup>
 </Project>

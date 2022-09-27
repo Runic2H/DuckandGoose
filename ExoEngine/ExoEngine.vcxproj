@@ -11,12 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
-    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
-    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\SystemManager.h" />
-    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Object.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
@@ -28,10 +23,14 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
+    <ClInclude Include="src\ExoEngine\Math\physics.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\System\System.h" />
+    <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
     <ClInclude Include="src\Serialization\JSONincludes.h" />
     <ClInclude Include="src\Serialization\JSONserialization.h" />
@@ -136,6 +135,9 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExoEngine\ECS\Object.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -143,9 +145,19 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ExoEngine\Math\physics.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\ExoEngine\Math\Vmath.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
   </ItemGroup>
@@ -184,7 +196,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)ExoEngine\vendor\GLFW\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -204,7 +215,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
