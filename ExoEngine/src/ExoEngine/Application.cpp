@@ -27,7 +27,7 @@ namespace EM {
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
 
-		p_Editor->Init(m_window);
+		//p_Editor->Init(m_window);
 
 		Graphic* m_graphic = new Graphic;
 		m_graphic->Init();
@@ -35,13 +35,12 @@ namespace EM {
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
-			//glClearColor(1.0f, 1.0f, 0.1f, 1);
-			//glClear(GL_COLOR_BUFFER_BIT );
+			
 			m_window->Update();
 			m_graphic->Update();
 			
-			p_Editor->Update();
-			p_Editor->Draw();
+			//p_Editor->Update();
+			//p_Editor->Draw();
 		}
 
 		End();
@@ -51,7 +50,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Editor->End();
+		//p_Editor->End();
 		m_Systems.DeleteSystem();
 	}
 

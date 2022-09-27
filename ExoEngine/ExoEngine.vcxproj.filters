@@ -9,7 +9,6 @@
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
-    <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
     <ClCompile Include="vendor\imgui\imgui_demo.cpp" />
     <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
@@ -18,6 +17,7 @@
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -36,7 +36,6 @@
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
-    <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
     <ClInclude Include="vendor\imgui\imgui.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_glfw.h" />
@@ -47,5 +46,6 @@
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Platform\System\SystemManager.h" />
+    <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
   </ItemGroup>
 </Project>

@@ -17,9 +17,16 @@ namespace EM {
 		virtual void End() override;
 	private:
 		//for testing
-		unsigned int m_VertexArray{ 0 };
-		std::unique_ptr<Shader> m_shader;
-		std::unique_ptr<VertexBuffer> m_Vbuffer;
-		std::unique_ptr<IndexBuffer> m_Ibuffer;
+		//unsigned int m_VertexArray{ 0 };
+		std::shared_ptr<Shader> m_shader;
+		std::shared_ptr<VertexBuffer> m_Vbuffer;
+		std::shared_ptr<IndexBuffer> m_Ibuffer;
+		std::shared_ptr<VertexArray> m_vertexArr;
+
+		struct obj {
+			glm::vec2 position{ 0.0f, 0.0f };
+			float dir{ 0.0f };
+			glm::vec2 scale{ 0.0f, 0.0f };
+		}player, wall;
 	};
 }

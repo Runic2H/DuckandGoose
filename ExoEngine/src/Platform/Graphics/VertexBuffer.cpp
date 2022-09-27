@@ -1,5 +1,4 @@
 #include "empch.h"
-#include <GL/glew.h>
 #include "VertexBuffer.h"
 
 namespace EM{
@@ -47,5 +46,60 @@ namespace EM{
 	void IndexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+
+	//////////Vertex Array///////////
+	VertexArray::VertexArray()
+	{
+		glCreateVertexArrays(1, &m_RenderID);
+	}
+
+	VertexArray::~VertexArray()
+	{
+		glDeleteVertexArrays(1, &m_RenderID);
+	}
+
+	void VertexArray::Bind() const
+	{
+		glBindVertexArray(m_RenderID);
+	}
+
+	void VertexArray::Unbind() const
+	{
+		glBindVertexArray(0);
+	}
+
+	void VertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexbuffer)
+	{
+		glBindVertexArray(m_RenderID);
+		vertexbuffer->Bind();
+		//do the layout here
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "position"}
+		};
+
+		for (const auto& element : layout)
+		{
+			glEnableVertexAttribArray(m_VBIndex);
+			glVertexAttribPointer(m_VBIndex, element.GetComponentCount(),
+				GL_FLOAT, element.Normalized, layout.GetStride(), (const void*)element.Offset);
+
+			m_VBIndex++;
+		}
+
+		m_VertexBuffers.push_back(vertexbuffer);
+	}
+	void VertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+	{
+		glBindVertexArray(m_RenderID);
+		indexBuffer->Bind();
+
+		m_IndexBuffers = indexBuffer;
+
+	}
+	VertexArray* VertexArray::Create()
+	{
+		return new VertexArray;
 	}
 }
