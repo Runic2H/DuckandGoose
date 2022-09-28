@@ -1,24 +1,17 @@
 // dear imgui: Platform Backend for GLFW
 // This needs to be used along with a Renderer (e.g. OpenGL3, Vulkan, WebGPU..)
 // (Info: GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan graphics context creation, etc.)
-<<<<<<< Updated upstream
-// (Requires: GLFW 3.1+)
-=======
 // (Requires: GLFW 3.1+. Prefer GLFW 3.3+ for full feature support.)
->>>>>>> Stashed changes
 
 // Implemented features:
 //  [X] Platform: Clipboard support.
 //  [X] Platform: Keyboard support. Since 1.87 we are using the io.AddKeyEvent() function. Pass ImGuiKey values to all key functions e.g. ImGui::IsKeyPressed(ImGuiKey_Space). [Legacy GLFW_KEY_* values will also be supported unless IMGUI_DISABLE_OBSOLETE_KEYIO is set]
 //  [X] Platform: Gamepad support. Enable with 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad'.
 //  [X] Platform: Mouse cursor shape and visibility. Disable with 'io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange' (note: the resizing cursors requires GLFW 3.4+).
-<<<<<<< Updated upstream
-=======
 //  [X] Platform: Multi-viewport support (multiple windows). Enable with 'io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable'.
 
 // Issues:
 //  [ ] Platform: Multi-viewport support: ParentViewportID not honored, and so io.ConfigViewportsNoDefaultParent has no effect (minor).
->>>>>>> Stashed changes
 
 // You can use unmodified imgui_impl_* files in your project. See examples/ folder for examples of using this.
 // Prefer including the entire imgui/ repository into your project (either as a copy or as a submodule), and only build the backends you need.
@@ -27,20 +20,13 @@
 
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
-<<<<<<< Updated upstream
-=======
 //  2022-XX-XX: Platform: Added support for multiple windows via the ImGuiPlatformIO interface.
 //  2022-09-26: Inputs: Renamed ImGuiKey_ModXXX introduced in 1.87 to ImGuiMod_XXX (old names still supported).
->>>>>>> Stashed changes
 //  2022-09-01: Inputs: Honor GLFW_CURSOR_DISABLED by not setting mouse position.
 //  2022-04-30: Inputs: Fixed ImGui_ImplGlfw_TranslateUntranslatedKey() for lower case letters on OSX.
 //  2022-03-23: Inputs: Fixed a regression in 1.87 which resulted in keyboard modifiers events being reported incorrectly on Linux/X11.
 //  2022-02-07: Added ImGui_ImplGlfw_InstallCallbacks()/ImGui_ImplGlfw_RestoreCallbacks() helpers to facilitate user installing callbacks after initializing backend.
-<<<<<<< Updated upstream
-//  2022-01-26: Inputs: replaced short-lived io.AddKeyModsEvent() (added two weeks ago)with io.AddKeyEvent() using ImGuiKey_ModXXX flags. Sorry for the confusion.
-=======
 //  2022-01-26: Inputs: replaced short-lived io.AddKeyModsEvent() (added two weeks ago) with io.AddKeyEvent() using ImGuiKey_ModXXX flags. Sorry for the confusion.
->>>>>>> Stashed changes
 //  2021-01-20: Inputs: calling new io.AddKeyAnalogEvent() for gamepad support, instead of writing directly to io.NavInputs[].
 //  2022-01-17: Inputs: calling new io.AddMousePosEvent(), io.AddMouseButtonEvent(), io.AddMouseWheelEvent() API (1.87+).
 //  2022-01-17: Inputs: always update key mods next and before key event (not in NewFrame) to fix input queue with very low framerates.
@@ -87,13 +73,6 @@
 
 // GLFW
 #include <GLFW/glfw3.h>
-<<<<<<< Updated upstream
-#ifdef _WIN32
-#undef APIENTRY
-#define GLFW_EXPOSE_NATIVE_WIN32
-#include <GLFW/glfw3native.h>   // for glfwGetWin32Window
-#endif
-=======
 
 #ifdef _WIN32
 #undef APIENTRY
@@ -114,20 +93,16 @@
 #define GLFW_HAS_FOCUS_ON_SHOW        (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3300) // 3.3+ GLFW_FOCUS_ON_SHOW
 #define GLFW_HAS_MONITOR_WORK_AREA    (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3300) // 3.3+ glfwGetMonitorWorkarea
 #define GLFW_HAS_OSX_WINDOW_POS_FIX   (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 + GLFW_VERSION_REVISION * 10 >= 3310) // 3.3.1+ Fixed: Resizing window repositions it on MacOS #1553
->>>>>>> Stashed changes
 #ifdef GLFW_RESIZE_NESW_CURSOR        // Let's be nice to people who pulled GLFW between 2019-04-16 (3.4 define) and 2019-11-29 (cursors defines) // FIXME: Remove when GLFW 3.4 is released?
 #define GLFW_HAS_NEW_CURSORS          (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3400) // 3.4+ GLFW_RESIZE_ALL_CURSOR, GLFW_RESIZE_NESW_CURSOR, GLFW_RESIZE_NWSE_CURSOR, GLFW_NOT_ALLOWED_CURSOR
 #else
 #define GLFW_HAS_NEW_CURSORS          (0)
 #endif
-<<<<<<< Updated upstream
-=======
 #ifdef GLFW_MOUSE_PASSTHROUGH         // Let's be nice to people who pulled GLFW between 2019-04-16 (3.4 define) and 2020-07-17 (passthrough)
 #define GLFW_HAS_MOUSE_PASSTHROUGH    (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3400) // 3.4+ GLFW_MOUSE_PASSTHROUGH
 #else
 #define GLFW_HAS_MOUSE_PASSTHROUGH    (0)
 #endif
->>>>>>> Stashed changes
 #define GLFW_HAS_GAMEPAD_API          (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3300) // 3.3+ glfwGetGamepadState() new api
 #define GLFW_HAS_GET_KEY_NAME         (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 >= 3200) // 3.2+ glfwGetKeyName()
 
@@ -147,16 +122,12 @@ struct ImGui_ImplGlfw_Data
     GLFWwindow*             MouseWindow;
     GLFWcursor*             MouseCursors[ImGuiMouseCursor_COUNT];
     ImVec2                  LastValidMousePos;
-<<<<<<< Updated upstream
-    bool                    InstalledCallbacks;
-=======
     GLFWwindow*             KeyOwnerWindows[GLFW_KEY_LAST];
     bool                    InstalledCallbacks;
     bool                    WantUpdateMonitors;
 #ifdef _WIN32
     WNDPROC                 GlfwWndProc;
 #endif
->>>>>>> Stashed changes
 
     // Chain GLFW callbacks: our callbacks will call the user's previously installed callbacks, if any.
     GLFWwindowfocusfun      PrevUserCallbackWindowFocus;
@@ -183,14 +154,11 @@ static ImGui_ImplGlfw_Data* ImGui_ImplGlfw_GetBackendData()
     return ImGui::GetCurrentContext() ? (ImGui_ImplGlfw_Data*)ImGui::GetIO().BackendPlatformUserData : NULL;
 }
 
-<<<<<<< Updated upstream
-=======
 // Forward Declarations
 static void ImGui_ImplGlfw_UpdateMonitors();
 static void ImGui_ImplGlfw_InitPlatformInterface();
 static void ImGui_ImplGlfw_ShutdownPlatformInterface();
 
->>>>>>> Stashed changes
 // Functions
 static const char* ImGui_ImplGlfw_GetClipboardText(void* user_data)
 {
@@ -331,17 +299,10 @@ static int ImGui_ImplGlfw_KeyToModifier(int key)
 static void ImGui_ImplGlfw_UpdateKeyModifiers(int mods)
 {
     ImGuiIO& io = ImGui::GetIO();
-<<<<<<< Updated upstream
-    io.AddKeyEvent(ImGuiKey_ModCtrl, (mods & GLFW_MOD_CONTROL) != 0);
-    io.AddKeyEvent(ImGuiKey_ModShift, (mods & GLFW_MOD_SHIFT) != 0);
-    io.AddKeyEvent(ImGuiKey_ModAlt, (mods & GLFW_MOD_ALT) != 0);
-    io.AddKeyEvent(ImGuiKey_ModSuper, (mods & GLFW_MOD_SUPER) != 0);
-=======
     io.AddKeyEvent(ImGuiMod_Ctrl, (mods & GLFW_MOD_CONTROL) != 0);
     io.AddKeyEvent(ImGuiMod_Shift, (mods & GLFW_MOD_SHIFT) != 0);
     io.AddKeyEvent(ImGuiMod_Alt, (mods & GLFW_MOD_ALT) != 0);
     io.AddKeyEvent(ImGuiMod_Super, (mods & GLFW_MOD_SUPER) != 0);
->>>>>>> Stashed changes
 }
 
 void ImGui_ImplGlfw_MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -409,12 +370,9 @@ void ImGui_ImplGlfw_KeyCallback(GLFWwindow* window, int keycode, int scancode, i
         mods = (action == GLFW_PRESS) ? (mods | keycode_to_mod) : (mods & ~keycode_to_mod);
     ImGui_ImplGlfw_UpdateKeyModifiers(mods);
 
-<<<<<<< Updated upstream
-=======
     if (keycode >= 0 && keycode < IM_ARRAYSIZE(bd->KeyOwnerWindows))
         bd->KeyOwnerWindows[keycode] = (action == GLFW_PRESS) ? window : NULL;
 
->>>>>>> Stashed changes
     keycode = ImGui_ImplGlfw_TranslateUntranslatedKey(keycode, scancode);
 
     ImGuiIO& io = ImGui::GetIO();
@@ -442,8 +400,6 @@ void ImGui_ImplGlfw_CursorPosCallback(GLFWwindow* window, double x, double y)
         return;
 
     ImGuiIO& io = ImGui::GetIO();
-<<<<<<< Updated upstream
-=======
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
         int window_x, window_y;
@@ -451,7 +407,6 @@ void ImGui_ImplGlfw_CursorPosCallback(GLFWwindow* window, double x, double y)
         x += window_x;
         y += window_y;
     }
->>>>>>> Stashed changes
     io.AddMousePosEvent((float)x, (float)y);
     bd->LastValidMousePos = ImVec2((float)x, (float)y);
 }
@@ -492,12 +447,8 @@ void ImGui_ImplGlfw_CharCallback(GLFWwindow* window, unsigned int c)
 
 void ImGui_ImplGlfw_MonitorCallback(GLFWmonitor*, int)
 {
-<<<<<<< Updated upstream
-	// Unused in 'master' branch but 'docking' branch will use this, so we declare it ahead of it so if you have to install callbacks you can install this one too.
-=======
     ImGui_ImplGlfw_Data* bd = ImGui_ImplGlfw_GetBackendData();
     bd->WantUpdateMonitors = true;
->>>>>>> Stashed changes
 }
 
 void ImGui_ImplGlfw_InstallCallbacks(GLFWwindow* window)
@@ -553,11 +504,6 @@ static bool ImGui_ImplGlfw_Init(GLFWwindow* window, bool install_callbacks, Glfw
     io.BackendPlatformName = "imgui_impl_glfw";
     io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;         // We can honor GetMouseCursor() values (optional)
     io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;          // We can honor io.WantSetMousePos requests (optional, rarely used)
-<<<<<<< Updated upstream
-
-    bd->Window = window;
-    bd->Time = 0.0;
-=======
     io.BackendFlags |= ImGuiBackendFlags_PlatformHasViewports;    // We can create multi-viewports on the Platform side (optional)
 #if GLFW_HAS_MOUSE_PASSTHROUGH || (GLFW_HAS_WINDOW_HOVERED && defined(_WIN32))
     io.BackendFlags |= ImGuiBackendFlags_HasMouseHoveredViewport; // We can call io.AddMouseViewportEvent() with correct data (optional)
@@ -566,20 +512,11 @@ static bool ImGui_ImplGlfw_Init(GLFWwindow* window, bool install_callbacks, Glfw
     bd->Window = window;
     bd->Time = 0.0;
     bd->WantUpdateMonitors = true;
->>>>>>> Stashed changes
 
     io.SetClipboardTextFn = ImGui_ImplGlfw_SetClipboardText;
     io.GetClipboardTextFn = ImGui_ImplGlfw_GetClipboardText;
     io.ClipboardUserData = bd->Window;
 
-<<<<<<< Updated upstream
-    // Set platform dependent data in viewport
-#if defined(_WIN32)
-    ImGui::GetMainViewport()->PlatformHandleRaw = (void*)glfwGetWin32Window(bd->Window);
-#endif
-
-=======
->>>>>>> Stashed changes
     // Create mouse cursors
     // (By design, on X11 cursors are user configurable and some cursors may be missing. When a cursor doesn't exist,
     // GLFW will emit an error which will often be printed by the app, so we temporarily disable error reporting.
@@ -607,8 +544,6 @@ static bool ImGui_ImplGlfw_Init(GLFWwindow* window, bool install_callbacks, Glfw
     if (install_callbacks)
         ImGui_ImplGlfw_InstallCallbacks(window);
 
-<<<<<<< Updated upstream
-=======
     // Update monitors the first time (note: monitor callback are broken in GLFW 3.2 and earlier, see github.com/glfw/glfw/issues/784)
     ImGui_ImplGlfw_UpdateMonitors();
     glfwSetMonitorCallback(ImGui_ImplGlfw_MonitorCallback);
@@ -624,7 +559,6 @@ static bool ImGui_ImplGlfw_Init(GLFWwindow* window, bool install_callbacks, Glfw
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         ImGui_ImplGlfw_InitPlatformInterface();
 
->>>>>>> Stashed changes
     bd->ClientApi = client_api;
     return true;
 }
@@ -650,11 +584,8 @@ void ImGui_ImplGlfw_Shutdown()
     IM_ASSERT(bd != NULL && "No platform backend to shutdown, or already shutdown?");
     ImGuiIO& io = ImGui::GetIO();
 
-<<<<<<< Updated upstream
-=======
     ImGui_ImplGlfw_ShutdownPlatformInterface();
 
->>>>>>> Stashed changes
     if (bd->InstalledCallbacks)
         ImGui_ImplGlfw_RestoreCallbacks(bd->Window);
 
@@ -670,10 +601,7 @@ static void ImGui_ImplGlfw_UpdateMouseData()
 {
     ImGui_ImplGlfw_Data* bd = ImGui_ImplGlfw_GetBackendData();
     ImGuiIO& io = ImGui::GetIO();
-<<<<<<< Updated upstream
-=======
     ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
->>>>>>> Stashed changes
 
     if (glfwGetInputMode(bd->Window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
     {
@@ -681,28 +609,6 @@ static void ImGui_ImplGlfw_UpdateMouseData()
         return;
     }
 
-<<<<<<< Updated upstream
-#ifdef __EMSCRIPTEN__
-    const bool is_app_focused = true;
-#else
-    const bool is_app_focused = glfwGetWindowAttrib(bd->Window, GLFW_FOCUSED) != 0;
-#endif
-    if (is_app_focused)
-    {
-        // (Optional) Set OS mouse position from Dear ImGui if requested (rarely used, only when ImGuiConfigFlags_NavEnableSetMousePos is enabled by user)
-        if (io.WantSetMousePos)
-            glfwSetCursorPos(bd->Window, (double)io.MousePos.x, (double)io.MousePos.y);
-
-        // (Optional) Fallback to provide mouse position when focused (ImGui_ImplGlfw_CursorPosCallback already provides this when hovered or captured)
-        if (is_app_focused && bd->MouseWindow == NULL)
-        {
-            double mouse_x, mouse_y;
-            glfwGetCursorPos(bd->Window, &mouse_x, &mouse_y);
-            io.AddMousePosEvent((float)mouse_x, (float)mouse_y);
-            bd->LastValidMousePos = ImVec2((float)mouse_x, (float)mouse_y);
-        }
-    }
-=======
     ImGuiID mouse_viewport_id = 0;
     const ImVec2 mouse_pos_prev = io.MousePos;
     for (int n = 0; n < platform_io.Viewports.Size; n++)
@@ -765,7 +671,6 @@ static void ImGui_ImplGlfw_UpdateMouseData()
 
     if (io.BackendFlags & ImGuiBackendFlags_HasMouseHoveredViewport)
         io.AddMouseViewportEvent(mouse_viewport_id);
->>>>>>> Stashed changes
 }
 
 static void ImGui_ImplGlfw_UpdateMouseCursor()
@@ -776,19 +681,6 @@ static void ImGui_ImplGlfw_UpdateMouseCursor()
         return;
 
     ImGuiMouseCursor imgui_cursor = ImGui::GetMouseCursor();
-<<<<<<< Updated upstream
-    if (imgui_cursor == ImGuiMouseCursor_None || io.MouseDrawCursor)
-    {
-        // Hide OS mouse cursor if imgui is drawing it or if it wants no cursor
-        glfwSetInputMode(bd->Window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-    }
-    else
-    {
-        // Show OS mouse cursor
-        // FIXME-PLATFORM: Unfocused windows seems to fail changing the mouse cursor with GLFW 3.2, but 3.3 works here.
-        glfwSetCursor(bd->Window, bd->MouseCursors[imgui_cursor] ? bd->MouseCursors[imgui_cursor] : bd->MouseCursors[ImGuiMouseCursor_Arrow]);
-        glfwSetInputMode(bd->Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-=======
     ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
     for (int n = 0; n < platform_io.Viewports.Size; n++)
     {
@@ -805,7 +697,6 @@ static void ImGui_ImplGlfw_UpdateMouseCursor()
             glfwSetCursor(window, bd->MouseCursors[imgui_cursor] ? bd->MouseCursors[imgui_cursor] : bd->MouseCursors[ImGuiMouseCursor_Arrow]);
             glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         }
->>>>>>> Stashed changes
     }
 }
 
@@ -862,8 +753,6 @@ static void ImGui_ImplGlfw_UpdateGamepads()
     #undef MAP_ANALOG
 }
 
-<<<<<<< Updated upstream
-=======
 static void ImGui_ImplGlfw_UpdateMonitors()
 {
     ImGui_ImplGlfw_Data* bd = ImGui_ImplGlfw_GetBackendData();
@@ -899,7 +788,6 @@ static void ImGui_ImplGlfw_UpdateMonitors()
     bd->WantUpdateMonitors = false;
 }
 
->>>>>>> Stashed changes
 void ImGui_ImplGlfw_NewFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
@@ -914,11 +802,8 @@ void ImGui_ImplGlfw_NewFrame()
     io.DisplaySize = ImVec2((float)w, (float)h);
     if (w > 0 && h > 0)
         io.DisplayFramebufferScale = ImVec2((float)display_w / (float)w, (float)display_h / (float)h);
-<<<<<<< Updated upstream
-=======
     if (bd->WantUpdateMonitors)
         ImGui_ImplGlfw_UpdateMonitors();
->>>>>>> Stashed changes
 
     // Setup time step
     double current_time = glfwGetTime();
@@ -932,8 +817,6 @@ void ImGui_ImplGlfw_NewFrame()
     ImGui_ImplGlfw_UpdateGamepads();
 }
 
-<<<<<<< Updated upstream
-=======
 //--------------------------------------------------------------------------------------------------------
 // MULTI-VIEWPORT / PLATFORM INTERFACE SUPPORT
 // This is an _advanced_ and _optional_ feature, allowing the backend to create and handle multiple viewports simultaneously.
@@ -1292,7 +1175,6 @@ static void ImGui_ImplGlfw_ShutdownPlatformInterface()
     ImGui::DestroyPlatformWindows();
 }
 
->>>>>>> Stashed changes
 #if defined(__clang__)
 #pragma clang diagnostic pop
 #endif

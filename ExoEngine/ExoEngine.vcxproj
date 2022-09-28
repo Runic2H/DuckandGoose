@@ -11,6 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
@@ -146,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Debug\debug_draw.cpp" />
-    <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">

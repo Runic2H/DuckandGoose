@@ -116,7 +116,7 @@ namespace EM{
 			previousTime = currentTime;
 		}
 	}
-	*/
+
 	void Window::End()
 	{
 		glfwDestroyWindow(m_window);
