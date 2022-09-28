@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Graphic.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain a temporarily rendering class which will be bring over
+				once render class is up.
+
+****************************************************************************
+***/
 #include "empch.h"
 #include "Graphics.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -8,15 +21,16 @@ namespace EM {
 	void Graphic::Init()
 	{
 		m_shader.reset(new Shader("Assets/Shaders/basic.shader"));
-
+		m_shader.reset(new Shader("Assets/Shaders/texture.shader"));
+		m_Texture->GenTexture("Assets/Textures/DuckandGoose.png");
 
 		m_vertexArr.reset(VertexArray::Create());
 
 		float vertices[] = {
-			-0.5f, -0.5f, 0.0f, //per vertex->
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, //0//per vertex->
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, //1
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, //2
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f, //3
 		};
 		m_Vbuffer.reset(new VertexBuffer(vertices, sizeof(vertices)));
 		
@@ -33,19 +47,23 @@ namespace EM {
 
 		//wall
 		wall.position = { 0.1f, 0.1f };
-		wall.scale = { 0.1f, 0.1 };
+		wall.scale = { 0.5f, 0.5f };
 	}
 	//testing purpose for now
 	//to be fix as now is calling two draw calls
 	//need to create a proper rendering calls
 	void Graphic::Update()
 	{
+		
 		m_shader->Bind();
 		m_vertexArr->Bind();
 		{
+			
 			glm::mat4 transform = glm::translate(glm::mat4(1.f), { player.position, 0.0f }) *
 				glm::rotate(glm::mat4(1.0f), player.dir, glm::vec3(0.f, 0.f, 1.f)) *
 				glm::scale(glm::mat4(1.f), { player.scale, 1.0f });
+			m_Texture->Bind();
+			m_shader->SetUniform("u_Texture", 0);
 			m_shader->SetUniform("u_Mvp", transform);
 			glDrawElements(GL_TRIANGLES, m_Ibuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 		}
@@ -57,25 +75,21 @@ namespace EM {
 			glDrawElements(GL_TRIANGLES, m_Ibuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 		}
 		if (p_Input->isKeyPressed(GLFW_KEY_W))
-		{
 			player.position.y += 0.01f;
-		}
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
-		{
 			player.position.y -= 0.01f;
-		}
 		if (p_Input->isKeyPressed(GLFW_KEY_A))
-		{
 			player.position.x -= 0.01f;
-		}
 		if (p_Input->isKeyPressed(GLFW_KEY_D))
-		{
 			player.position.x += 0.01f;
-		}
-		
-		
-
-
+		if (p_Input->isKeyPressed(GLFW_KEY_E))
+			player.scale += 0.01f;
+		if (p_Input->isKeyPressed(GLFW_KEY_Q))
+			player.scale -= 0.01f;
+		if (p_Input->isKeyPressed(GLFW_KEY_Z))
+			player.dir += 0.01f;
+		if (p_Input->isKeyPressed(GLFW_KEY_C))
+			player.dir -= 0.01f;
 	}
 
 	void Graphic::End()

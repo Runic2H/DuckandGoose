@@ -1,7 +1,20 @@
+/*!*************************************************************************
+****
+\file			Graphic.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain neccessary function for graphic class
+
+****************************************************************************
+***/
 #pragma once
 #include "Platform/System/System.h"
 #include "Platform/Graphics/VertexBuffer.h"
 #include "Platform/Graphics/Shader.h"
+#include "Platform/Graphics/Texture.h"
 
 namespace EM {
 
@@ -22,11 +35,13 @@ namespace EM {
 		std::shared_ptr<VertexBuffer> m_Vbuffer;
 		std::shared_ptr<IndexBuffer> m_Ibuffer;
 		std::shared_ptr<VertexArray> m_vertexArr;
-
+		std::shared_ptr<Texture> m_Texture = std::make_shared<Texture>();
 		struct obj {
 			glm::vec2 position{ 0.0f, 0.0f };
 			float dir{ 0.0f };
 			glm::vec2 scale{ 0.0f, 0.0f };
+		
 		}player, wall;
+
 	};
 }

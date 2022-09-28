@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Log.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the neccesary declaration functions for class Log.
+
+****************************************************************************
+***/
 #pragma once
 #include "core.h"
 #include "spdlog/spdlog.h"

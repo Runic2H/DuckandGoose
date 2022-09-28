@@ -18,6 +18,8 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -47,5 +49,7 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
+    <ClInclude Include="src\Platform\Graphics\Texture.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
 </Project>
