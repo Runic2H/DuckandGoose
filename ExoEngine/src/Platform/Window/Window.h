@@ -42,11 +42,15 @@ namespace EM {
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
 
+		void SetWindowFPS();
+
 	private:
 		GLFWwindow* m_window;
 		GLFWmonitor* m_monitor;
 		WindowProps m_windowData;
 		bool m_vsync;
+		double previousTime;
+		int frameCount;
 		WinData windowData;
 
 	private:
@@ -59,5 +63,6 @@ namespace EM {
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
 		
 		void ToggleVsync(bool value);// vync based on internal
+
 	};
 }

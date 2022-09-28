@@ -12,6 +12,7 @@ namespace EM {
 
 		void SystemIncrement(System* system);
 		void SystemIndex(unsigned int index, System* system);
+
 		//Destroy Systems
 		void DeleteSystem();
 
@@ -22,6 +23,7 @@ namespace EM {
 
 	public:
 
+		//Start of testing ECS : Not In Use
 		template<typename T>
 		std::shared_ptr<T> RegisterSystem()
 		{
@@ -71,8 +73,12 @@ namespace EM {
 				}
 			}
 		}
+		//End of testing ECS : Not In Use
+
 	private:
 		std::vector<System*> m_Systems;
+
+		//For Future ECS : Not In Use
 		std::unordered_map<const char*, Signature> mSignatures{};
 		std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};
 	};

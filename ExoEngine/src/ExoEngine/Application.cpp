@@ -6,6 +6,8 @@
 #include "Platform/Graphics/Graphics.h"
 #include "Editor/LevelEditor.h"
 #include "ECS/Components.h"
+double previousTime = glfwGetTime();
+int frameCount = 0;
 
 namespace EM {
 
@@ -36,6 +38,7 @@ namespace EM {
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
+			m_window->SetWindowFPS();
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//m_shader->Bind();
