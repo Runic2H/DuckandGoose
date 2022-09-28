@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Window.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain function that create a window using GLFW library
+
+****************************************************************************
+***/
 #include "empch.h"
 #include "Window.h"
 #include "ExoEngine/Input/Input.h"
@@ -101,8 +113,12 @@ namespace EM{
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.f, 0.f, 0.f, 1.f);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		windowData.SerializeToFile("Window.json");
 	}
+  
 	void Window::SetWindowFPS()
 	{
 		double currentTime = glfwGetTime();
