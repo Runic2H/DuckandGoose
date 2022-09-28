@@ -1,3 +1,21 @@
+/*!*************************************************************************
+****
+\file ComponentManager.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains a templated class for communicating with all
+Component Arrays and allowing for different components to be registerd to
+the ECS. Registered components can then be added to various systems and
+entities within the ECS. The system will then have a unique signature based
+on components added and will update all components belonging to the system
+
+****************************************************************************
+***/
+
 #pragma once
 #include "ComponentArray.h"
 #include "Types.h"
@@ -9,6 +27,7 @@ namespace EM
 	class ComponentManager
 	{
 	public:
+		//Registers Components for use within the ECS
 		template <typename T>
 		void RegisterComponent()
 		{
@@ -25,6 +44,7 @@ namespace EM
 			++mNextComponentType;
 		}
 
+		//Returns the ComponentType;
 		template <typename T>
 		ComponentType GetComponentType()
 		{
@@ -36,6 +56,7 @@ namespace EM
 			return mComponentTypes[typeName];
 		}
 
+		//Add Components to the ComponentArray
 		template<typename T>
 		void AddComponent(Entity entity, T component)
 		{
@@ -43,6 +64,7 @@ namespace EM
 			GetComponentArray<T>()->InsertData(entity, component);
 		}
 
+		//Remove Components to the ComponentArray
 		template<typename T>
 		void RemoveComponent(Entity entity)
 		{
@@ -50,6 +72,7 @@ namespace EM
 			GetComponentArray<T>()->RemoveData(entity);
 		}
 
+		//Retrieve Component Data from the Respective ComponentArray
 		template<typename T>
 		T& GetComponent(Entity entity)
 		{
@@ -57,10 +80,10 @@ namespace EM
 			return GetComponentArray<T>()->GetData(entity);
 		}
 
+		// Notify each component array that an entity has been destroyed
+		// If it has a component for that entity, it will remove it
 		void EntityDestroyed(Entity entity)
 		{
-			// Notify each component array that an entity has been destroyed
-			// If it has a component for that entity, it will remove it
 			for (auto const& pair : mComponentArrays)
 			{
 				auto const& component = pair.second;

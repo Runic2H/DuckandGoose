@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file ECS.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains the coordinator for the three systems in place
+that manages the ECS, the component, entity and system manager communicates
+with each other using this class
+****************************************************************************
+***/
+
 #pragma once
 
 #include "ComponentManager.h"
