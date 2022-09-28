@@ -1,12 +1,13 @@
 /*!*************************************************************************
 ****
-\file			Log.h
-\author			Huang Xin Xiang
-\par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			28-9-2022
-\brief			This file contain the neccesary declaration functions for class Log.
+\file Log.h
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 1
+\date 28-9-2022
+\brief  This file holds the assert system for the project
 
 ****************************************************************************
 ***/

@@ -156,12 +156,13 @@ namespace EM{
 	}
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
 	{
+		(void)window, (void)mode;
 		InputSystem::GetInstance()->SetMouseStatus(button, action);
 	}
-	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	{
-	
-	}
+	//void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	//{
+	//
+	//}
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
 		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
