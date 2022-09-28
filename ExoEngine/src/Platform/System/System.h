@@ -15,7 +15,7 @@ namespace EM {
 		virtual void Init() = 0 {};
 		virtual void Update() = 0 {};
 		virtual void End() = 0 {};
-		
+
 	protected:
 		std::string m_DebugName;
 

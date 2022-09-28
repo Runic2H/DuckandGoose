@@ -11,6 +11,8 @@ namespace EM
 	{
 		min = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
 		max = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
+		vel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
+		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
 		return true;
 	}
 	bool RigidBody::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
@@ -24,6 +26,14 @@ namespace EM
 		writer->Double(max.value.x);
 		writer->Key("maxY");
 		writer->Double(max.value.y);
+		writer->Key("velX");
+		writer->Double(vel.value.x);
+		writer->Key("velY");
+		writer->Double(vel.value.y);
+		writer->Key("initX");
+		writer->Double(initvel.value.x);
+		writer->Key("initY");
+		writer->Double(initvel.value.y);
 		writer->EndObject();
 		return true;
 	}

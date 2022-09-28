@@ -14,15 +14,21 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
 
-		vec2D GetMin() { return min; }
-		vec2D GetMax() { return max; }
+		vec2D& GetMin() { return min; }
+		vec2D& GetMax() { return max; }
+		vec2D& GetVel() { return vel; }
+		vec2D& GetInitVel() { return initvel; }
 
 		void SetMin(vec2D Min) { min = Min; }
 		void SetMax(vec2D Max) { max = Max; }
+		void SetVel(vec2D Vel) { vel = Vel; }
+		void SetInitVel(vec2D Vel) { initvel = Vel; }
 
 	private:
 		vec2D	min;
 		vec2D	max;
+		vec2D	vel;
+		vec2D	initvel;
 	};
 
 	//Transform Component
@@ -35,7 +41,7 @@ namespace EM
 		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
 
 		vec2D& GetPos() { return position; }
-		vec2D GetScale() { return scale; }
+		vec2D& GetScale() { return scale; }
 
 		void SetPos(vec2D Pos) { position = Pos; }
 		void SetScale(vec2D Scale) { scale = Scale; }
