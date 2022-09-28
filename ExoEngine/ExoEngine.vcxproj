@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Debug\Debug_draw.h" />
     <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
@@ -23,6 +24,7 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
     <ClInclude Include="src\ExoEngine\Math\physics.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
@@ -43,6 +45,7 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">

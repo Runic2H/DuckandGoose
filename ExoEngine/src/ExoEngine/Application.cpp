@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/Graphics/Graphics.h"
+
 //#include "ECS/Object.h"
 #include "Editor/LevelEditor.h"
 
@@ -49,6 +50,7 @@ namespace EM {
 			//m_shader->Bind();
 			m_graphic->Update();
 			m_window->Update();
+			
 			//m_graphic->Update();
 			
 			//p_Editor->Update();

@@ -22,6 +22,7 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
+    <ClCompile Include="src\Debug\debug_draw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -54,6 +55,8 @@
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
+    <ClInclude Include="src\Debug\Debug_draw.h" />
+    <ClInclude Include="src\ExoEngine\Math\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="vendor\GLFW\libs\glfw3.lib" />
