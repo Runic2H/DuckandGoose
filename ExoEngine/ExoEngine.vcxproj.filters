@@ -21,6 +21,8 @@
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
+    <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
   </ItemGroup>
@@ -54,6 +56,12 @@
     <ClInclude Include="vendor\imgui\imstb_rectpack.h" />
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
+    <ClInclude Include="src\Debug\Debug_draw.h" />
+    <ClInclude Include="src\ExoEngine\Math\Math.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\GLFW\libs\glfw3.lib" />
     <ClInclude Include="src\Serialization\JSONincludes.h" />
     <ClInclude Include="src\Serialization\JSONserialization.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />

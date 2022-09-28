@@ -41,7 +41,8 @@ namespace EM {
 			//m_shader->Bind();
 			m_graphic->Update();
 			m_window->Update();
-			m_graphic->Update();
+			
+			//m_graphic->Update();
 			
 			//p_Editor->Update();
 			//p_Editor->Draw();
