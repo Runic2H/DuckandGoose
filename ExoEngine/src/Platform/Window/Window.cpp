@@ -1,6 +1,8 @@
 #include "empch.h"
 #include "Window.h"
 #include "ExoEngine/Input/Input.h"
+#include "Platform/LevelEditor/LevelEditor.h"
+
 
 namespace EM{
 
@@ -18,12 +20,14 @@ namespace EM{
 
 	void Window::Init()
 	{
+
 		/* Initialize the library */
 		if (!glfwInit())
 		{
 			EM_EXO_ASSERT(!glfwInit(), "\aGLFW init has failed - exit project...");
 		}
 		glfwSetErrorCallback(ErrorCallback);
+
 
 		//specify the constraints
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -112,8 +116,10 @@ namespace EM{
 			previousTime = currentTime;
 		}
 	}
+	*/
 	void Window::End()
 	{
+		glfwDestroyWindow(m_window);
 		glfwTerminate();
 	}
 	void Window::ErrorCallback(int error, const char* description)

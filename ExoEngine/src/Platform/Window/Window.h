@@ -1,9 +1,15 @@
 #pragma once
 #include "ExoEngine.h"
 #include "ExoEngine/Core.h"
+
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include"imgui/imgui_impl_opengl3.h"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "ExoEngine/ECS/Components.h"
+
 
 namespace EM {
 
@@ -32,6 +38,9 @@ namespace EM {
 		virtual void Init() override;
 		//update
 		virtual void Update() override;
+
+		//virtual voide Draw() override;
+		
 		//Delete window
 		virtual void End() override;
 
