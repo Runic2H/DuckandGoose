@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file SystemManager.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains a general implementation of a System Manager in
+place of the ECS which is not integrated with the rest of the solution. 
+It stores a vector of systems registered during runtime.
+****************************************************************************
+***/
+
 #pragma once
 #include "ExoEngine/Core.h"
 #include "Platform/System/System.h"
@@ -21,6 +36,12 @@ namespace EM {
 		std::vector<System*>::iterator start() { return m_Systems.begin(); };
 		std::vector<System*>::iterator end() { return m_Systems.end(); }
 
+	private:
+		std::vector<System*> m_Systems;
+	};
+
+	class ECSSystemManager
+	{
 	public:
 
 		//Start of testing ECS : Not In Use
@@ -76,9 +97,6 @@ namespace EM {
 		//End of testing ECS : Not In Use
 
 	private:
-		std::vector<System*> m_Systems;
-
-		//For Future ECS : Not In Use
 		std::unordered_map<const char*, Signature> mSignatures{};
 		std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};
 	};
