@@ -69,8 +69,6 @@ namespace EM {
 		if (p_Input->isKeyPressed(GLFW_KEY_W))
 		{
 			player.m_Transform.GetPos().value.y += 0.01f;
-
-			std::cout << player.m_Transform.GetPos().value.y << std::endl;
 		}
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
 		{

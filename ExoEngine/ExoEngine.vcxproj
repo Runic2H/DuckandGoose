@@ -14,6 +14,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Types.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />

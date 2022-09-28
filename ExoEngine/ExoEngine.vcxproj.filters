@@ -61,5 +61,6 @@
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Types.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
   </ItemGroup>
 </Project>

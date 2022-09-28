@@ -2,7 +2,7 @@
 
 #include "ComponentManager.h"
 #include "EntityManager.h"
-#include "SystemManagerN.h"
+#include "Platform/System/SystemManager.h"
 #include "Types.h"
 #include "empch.h"
 
@@ -15,7 +15,7 @@ namespace EM
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<SystemManagerN>();
+			mSystemManager = std::make_unique<SystemManager>();
 		}
 
 
@@ -94,6 +94,6 @@ namespace EM
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManagerN> mSystemManager;
+		std::unique_ptr<SystemManager> mSystemManager;
 	};
 }
