@@ -4,19 +4,19 @@
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/Graphics/Graphics.h"
-#include "ECS/Object.h"
 #include "Editor/LevelEditor.h"
+#include "ECS/Components.h"
 
 namespace EM {
 
 	Application::Application()
 	{
-
 	}
 
 	Application::~Application()
 	{
 	}
+
 	void Application::SystemInput(System* system)
 	{
 		m_Systems.SystemIncrement(system);
@@ -25,10 +25,9 @@ namespace EM {
 
 	void Application::Run() 
 	{
-		Window* m_window = new Window;
+		Window* m_window = new Window();
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
-
 		//p_Editor->Init(m_window);
 
 		Graphic* m_graphic = new Graphic;
@@ -39,13 +38,6 @@ namespace EM {
 		{
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			EM::Transform t;
-			t.Position(5);
-			t.Scale(5);
-			t.Rotation(5);
-			t.SerializeToFile("Transform.json");
-			EM::Player p;
-			p.SerializeToFile("Player.json");
 			//m_shader->Bind();
 			m_graphic->Update();
 			m_window->Update();

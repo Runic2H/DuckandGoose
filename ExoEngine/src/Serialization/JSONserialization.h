@@ -2,11 +2,7 @@
 * Abstract Class for JSON serialization and deserialization
 */ 
 #pragma once
-//#include "empch.h"
-#include "RapidJSON/rapidjson.h"
-#include "rapidjson/document.h"		// rapidjson's DOM-style API
-#include "rapidjson/stringbuffer.h"	// wrapper of C stream for prettywriter as output
-#include "rapidjson/prettywriter.h"	// for stringify JSON
+#include "JSONincludes.h"
 #include "ExoEngine/Core.h"
 
 namespace EM

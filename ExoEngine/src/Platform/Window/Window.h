@@ -3,6 +3,7 @@
 #include "ExoEngine/Core.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "ExoEngine/ECS/Components.h"
 
 namespace EM {
 
@@ -21,9 +22,7 @@ namespace EM {
 	class EM_API Window : public System
 	{
 	public:
-		Window() : m_window{ nullptr }, m_monitor{ nullptr },
-			m_windowData{ "Exomata", 1280, 720, 0, 0, 0, 0},//should be serialized
-			m_vsync{ false }{};
+		Window();
 
 		~Window() = default;
 
@@ -48,6 +47,7 @@ namespace EM {
 		GLFWmonitor* m_monitor;
 		WindowProps m_windowData;
 		bool m_vsync;
+		WinData windowData;
 
 	private:
 		// Event callback functions
