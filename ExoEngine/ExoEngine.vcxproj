@@ -11,8 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ExoEngine\ECS\Object.h" />
-    <ClInclude Include="src\ExoEngine\Editor\LevelEditor.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
+    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
@@ -33,6 +37,8 @@
     <ClInclude Include="src\Platform\System\System.h" />
     <ClInclude Include="src\Platform\System\SystemManager.h" />
     <ClInclude Include="src\Platform\Window\Window.h" />
+    <ClInclude Include="src\Serialization\JSONincludes.h" />
+    <ClInclude Include="src\Serialization\JSONserialization.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
     <ClInclude Include="vendor\imgui\imgui.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_glfw.h" />
@@ -44,10 +50,7 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ExoEngine\ECS\Object.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -69,6 +72,7 @@
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
+    <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

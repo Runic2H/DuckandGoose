@@ -4,6 +4,17 @@
 
 namespace EM{
 
+	Window::Window() : m_window{ nullptr }, m_monitor{ nullptr },
+		m_windowData{ windowData.GetTitle(), windowData.GetWidth(), windowData.GetHeight(), windowData.GetCurrWidth(), windowData.GetCurrHeight(), 0, 0 },//should be serialized
+		m_vsync{ false }
+	{
+		windowData.DeserializeFromFile("Window.json");
+		m_windowData.Title = windowData.GetTitle();
+		m_windowData.m_Width = windowData.GetWidth();
+		m_windowData.m_Height = windowData.GetHeight();
+		m_windowData.m_CurrentWidth = windowData.GetCurrWidth();
+		m_windowData.m_CurrentHeight = windowData.GetCurrHeight();
+	};
 
 	void Window::Init()
 	{
@@ -65,13 +76,25 @@ namespace EM{
 	}
 	void Window::Update()
 	{
+
 		/* Poll for and process events */
 		glfwPollEvents();
+
+
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
+		//set initialize window width & height to current (to be set in rapidjson file)
+		m_windowData.m_CurrentWidth = m_windowData.m_Width;
+		m_windowData.m_CurrentHeight = m_windowData.m_Height;
+
+		windowData.SetCurrWidth(m_windowData.m_CurrentWidth);
+		windowData.SetCurrHeight(m_windowData.m_CurrentHeight);
+		windowData.SetWidth(windowData.GetCurrWidth());
+		windowData.SetHeight(windowData.GetCurrHeight());
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.f, 0.f, 0.f, 1.f);
+		windowData.SerializeToFile("Window.json");
 	}
 	void Window::End()
 	{

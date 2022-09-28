@@ -1,7 +1,7 @@
 #pragma once
 #include "Types.h"
 #include "empch.h"
-#include "Component.h"
+#include "Components.h"
 
 namespace EM
 {
