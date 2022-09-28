@@ -2,7 +2,7 @@
 
 #include "ComponentManager.h"
 #include "EntityManager.h"
-#include "SystemManager.h"
+#include "Platform/System/SystemManager.h"
 #include "Types.h"
 #include "empch.h"
 
@@ -15,17 +15,17 @@ namespace EM
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<SystemManagerN>();
+			mSystemManager = std::make_unique<SystemManager>();
 		}
 
 
 		// Entity methods
-		EntityID CreateEntity()
+		Entity CreateEntity()
 		{
 			return mEntityManager->CreateEntity();
 		}
 
-		void DestroyEntity(EntityID entity)
+		void DestroyEntity(Entity entity)
 		{
 			mEntityManager->DestroyEntity(entity);
 
@@ -33,7 +33,6 @@ namespace EM
 
 			mSystemManager->EntityDestroyed(entity);
 		}
-
 
 		// Component methods
 		template<typename T>
@@ -43,7 +42,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void AddComponent(EntityID entity, T component)
+		void AddComponent(Entity entity, T component)
 		{
 			mComponentManager->AddComponent<T>(entity, component);
 
@@ -55,7 +54,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void RemoveComponent(EntityID entity)
+		void RemoveComponent(Entity entity)
 		{
 			mComponentManager->RemoveComponent<T>(entity);
 
@@ -67,13 +66,13 @@ namespace EM
 		}
 
 		template<typename T>
-		T& GetComponent(EntityID entity)
+		T& GetComponent(Entity entity)
 		{
 			return mComponentManager->GetComponent<T>(entity);
 		}
 
 		template<typename T>
-		ComponentTypeID GetComponentType()
+		ComponentType GetComponentType()
 		{
 			return mComponentManager->GetComponentType<T>();
 		}
@@ -87,7 +86,7 @@ namespace EM
 		}
 
 		template<typename T>
-		void SetSystemSignature(SignatureID signature)
+		void SetSystemSignature(Signature signature)
 		{
 			mSystemManager->SetSignature<T>(signature);
 		}
@@ -95,6 +94,6 @@ namespace EM
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManagerN> mSystemManager;
+		std::unique_ptr<SystemManager> mSystemManager;
 	};
 }

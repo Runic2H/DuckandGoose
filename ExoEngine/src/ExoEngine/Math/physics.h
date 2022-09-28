@@ -4,6 +4,7 @@
 #include "Vmath.h"
 
 namespace EM {
+
     //collision logic
     struct wall {
         vec2D	p0;

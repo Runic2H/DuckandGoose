@@ -2,6 +2,7 @@
 #include "ComponentArray.h"
 #include "Types.h"
 #include "empch.h"
+#include "Components.h"
 
 namespace EM
 {
@@ -19,7 +20,7 @@ namespace EM
 			mComponentTypes.insert({ typeName, mNextComponentType });
 
 			// Create a ComponentArray pointer and add it to the component arrays map
-			mComponentArrays.insert({typename, std::make_shared<ComponentArray<T>>()});
+			mComponentArrays.insert({ typeName, std::make_shared<ComponentArray<T>>() });
 
 			++mNextComponentType;
 		}
@@ -36,17 +37,36 @@ namespace EM
 		}
 
 		template<typename T>
-		void AddComponent(Entity entity, T Component)
+		void AddComponent(Entity entity, T component)
 		{
 			// Add a component to the array for an entity
-			// Serialize the Component here
-			
+			GetComponentArray<T>()->InsertData(entity, component);
 		}
 
 		template<typename T>
-		void SerializeToBuild(Entity entity, T Component)
+		void RemoveComponent(Entity entity)
 		{
-			//Serialize all the data into file
+			// Remove a component from the array for an entity
+			GetComponentArray<T>()->RemoveData(entity);
+		}
+
+		template<typename T>
+		T& GetComponent(Entity entity)
+		{
+			// Get a reference to a component from the array for an entity
+			return GetComponentArray<T>()->GetData(entity);
+		}
+
+		void EntityDestroyed(Entity entity)
+		{
+			// Notify each component array that an entity has been destroyed
+			// If it has a component for that entity, it will remove it
+			for (auto const& pair : mComponentArrays)
+			{
+				auto const& component = pair.second;
+
+				component->EntityDestroyed(entity);
+			}
 		}
 
 	private:

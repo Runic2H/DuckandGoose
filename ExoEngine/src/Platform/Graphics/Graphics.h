@@ -2,6 +2,9 @@
 #include "Platform/System/System.h"
 #include "Platform/Graphics/VertexBuffer.h"
 #include "Platform/Graphics/Shader.h"
+#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/Math/Vmath.h";
+#include "ExoEngine/Math/matrix3D.h";
 
 namespace EM {
 
@@ -23,10 +26,10 @@ namespace EM {
 		std::shared_ptr<IndexBuffer> m_Ibuffer;
 		std::shared_ptr<VertexArray> m_vertexArr;
 
+		//For Testing Serialization
 		struct obj {
-			glm::vec2 position{ 0.0f, 0.0f };
-			float dir{ 0.0f };
-			glm::vec2 scale{ 0.0f, 0.0f };
-		}player, wall;
+			RigidBody m_RigidBody;
+			Transform m_Transform;
+		} player, wall;
 	};
 }

@@ -23,6 +23,8 @@
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\ExoEngine\Editor\LevelEditor.cpp" />
     <ClCompile Include="src\Debug\debug_draw.cpp" />
+    <ClCompile Include="src\Serialization\JSONserialization.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -60,5 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="vendor\GLFW\libs\glfw3.lib" />
+    <ClInclude Include="src\Serialization\JSONincludes.h" />
+    <ClInclude Include="src\Serialization\JSONserialization.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Types.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
   </ItemGroup>
 </Project>
