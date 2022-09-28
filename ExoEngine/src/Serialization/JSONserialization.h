@@ -1,6 +1,18 @@
-/*
-* Abstract Class for JSON serialization and deserialization
-*/ 
+/*!*************************************************************************
+****
+\file JSONserialization.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains the function declarations for the JSONSerializer
+class which allows child classes of this class to define the data type they
+serialize and deserialize using virtual functions.
+****************************************************************************
+***/
+
 #pragma once
 #include "JSONincludes.h"
 #include "ExoEngine/Core.h"

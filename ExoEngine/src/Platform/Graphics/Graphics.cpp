@@ -67,18 +67,11 @@ namespace EM {
 		//player
 		player.m_Transform.DeserializeFromFile("PlayerTransform.json");
 		player.m_RigidBody.DeserializeFromFile("PlayerAABB.json");
-		wall.m_Transform.DeserializeFromFile("WallTransform.json");
-		wall.m_RigidBody.DeserializeFromFile("WallAABB.json");
 
 		player.m_RigidBody.SetMin(vec2D(-0.5f, -0.5f) *= player.m_Transform.GetScale());
 		player.m_RigidBody.SetMin(player.m_RigidBody.GetMin() += player.m_Transform.GetPos());
 		player.m_RigidBody.SetMax(vec2D(0.5f, 0.5f) *= player.m_Transform.GetScale());
 		player.m_RigidBody.SetMax(player.m_RigidBody.GetMax() += player.m_Transform.GetPos());
-
-		wall.m_RigidBody.SetMin(vec2D(-0.5f, -0.5f) *= wall.m_Transform.GetScale());
-		wall.m_RigidBody.SetMin(wall.m_RigidBody.GetMin() += wall.m_Transform.GetPos());
-		wall.m_RigidBody.SetMax(vec2D(0.5f, 0.5f) *= wall.m_Transform.GetScale());
-		wall.m_RigidBody.SetMax(wall.m_RigidBody.GetMax() += wall.m_Transform.GetPos());
 
 		if (m_IsColliding.boundingBoxCollision(player.m_RigidBody.GetMax(), player.m_RigidBody.GetMin(), player.m_RigidBody.GetVel()
 			, wall.m_RigidBody.GetMax(), wall.m_RigidBody.GetMin(), wall.m_RigidBody.GetVel()))
@@ -129,8 +122,6 @@ namespace EM {
 
 		player.m_Transform.SerializeToFile("PlayerTransform.json");
 		player.m_RigidBody.SerializeToFile("PlayerAABB.json");
-		wall.m_Transform.SerializeToFile("WallTransform.json");
-		wall.m_RigidBody.SerializeToFile("WallAABB.json");
 
 	}
 
