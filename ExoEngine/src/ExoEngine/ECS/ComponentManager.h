@@ -1,16 +1,34 @@
-#pragma once
-#pragma once
+/*!*************************************************************************
+****
+\file ComponentManager.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains a templated class for communicating with all
+Component Arrays and allowing for different components to be registerd to
+the ECS. Registered components can then be added to various systems and
+entities within the ECS. The system will then have a unique signature based
+on components added and will update all components belonging to the system
 
-#include "empch.h"
-#include "Types.h"
+****************************************************************************
+***/
+
+#pragma once
 #include "ComponentArray.h"
+#include "Types.h"
+#include "empch.h"
+#include "Components.h"
 
 namespace EM
 {
 	class ComponentManager
 	{
 	public:
-		template<typename T>
+		//Registers Components for use within the ECS
+		template <typename T>
 		void RegisterComponent()
 		{
 			const char* typeName = typeid(T).name();
@@ -23,12 +41,12 @@ namespace EM
 			// Create a ComponentArray pointer and add it to the component arrays map
 			mComponentArrays.insert({ typeName, std::make_shared<ComponentArray<T>>() });
 
-			// Increment the value so that the next component registered will be different
 			++mNextComponentType;
 		}
 
-		template<typename T>
-		ComponentTypeID GetComponentType()
+		//Returns the ComponentType;
+		template <typename T>
+		ComponentType GetComponentType()
 		{
 			const char* typeName = typeid(T).name();
 
@@ -38,31 +56,34 @@ namespace EM
 			return mComponentTypes[typeName];
 		}
 
+		//Add Components to the ComponentArray
 		template<typename T>
-		void AddComponent(EntityID entity, T component)
+		void AddComponent(Entity entity, T component)
 		{
 			// Add a component to the array for an entity
 			GetComponentArray<T>()->InsertData(entity, component);
 		}
 
+		//Remove Components to the ComponentArray
 		template<typename T>
-		void RemoveComponent(EntityID entity)
+		void RemoveComponent(Entity entity)
 		{
 			// Remove a component from the array for an entity
 			GetComponentArray<T>()->RemoveData(entity);
 		}
 
+		//Retrieve Component Data from the Respective ComponentArray
 		template<typename T>
-		T& GetComponent(EntityID entity)
+		T& GetComponent(Entity entity)
 		{
 			// Get a reference to a component from the array for an entity
 			return GetComponentArray<T>()->GetData(entity);
 		}
 
-		void EntityDestroyed(EntityID entity)
+		// Notify each component array that an entity has been destroyed
+		// If it has a component for that entity, it will remove it
+		void EntityDestroyed(Entity entity)
 		{
-			// Notify each component array that an entity has been destroyed
-			// If it has a component for that entity, it will rEMove it
 			for (auto const& pair : mComponentArrays)
 			{
 				auto const& component = pair.second;
@@ -72,14 +93,15 @@ namespace EM
 		}
 
 	private:
+
 		// Map from type string pointer to a component type
-		std::unordered_map<const char*, ComponentTypeID> mComponentTypes{};
+		std::unordered_map<const char*, ComponentType> mComponentTypes{};
 
 		// Map from type string pointer to a component array
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};
 
-		// The component type to be assigned to the next registered component - starting at 0
-		ComponentTypeID mNextComponentType{};
+		//Initial component type id
+		static const ComponentType mNextComponentType{};
 
 		// Convenience function to get the statically casted pointer to the ComponentArray of type T.
 		template<typename T>

@@ -1,32 +1,49 @@
-namespace EXOMATA {
-    wall buildWall(vec2D pt1, vec2D pt2) {
+#include "physics.h"
+
+
+namespace EM {
+    //class functions
+    void entityPhysics::accelent(vec2D& entvel, vec2D applied) {
+        entvel += applied;
+        entvel = entvel * 0.99f;
+    }
+    void entityPhysics::friction(vec2D& entvel) {
+        entvel -= 0.5f * entvel;
+    }
+    void entityPhysics::gravity(vec2D& entvel) {
+        entvel.value.y -= 9.8f;
+    }
+    /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
-        newWall.p1 = pt1;
-        newWall.p2 = pt2;
-        newWall.normal = ;
+        newWall.p0 = pt1;
+        newWall.p1 = pt2;
+        vec2D temp = newWall.p0 - newWall.p1;
+        newWall.normal.value.x = -temp.value.y;
+        newWall.normal.value.y = temp.value.x;
+        Normalize(newWall.normal, newWall.normal);
         return newWall;
     }
-    circle buildCircle(vec2D pos, float radius) {
+    circle entityCollision::buildCircle(vec2D pos, float radius) {
         circle newCirc;
         newCirc.center = pos;
-        newCirc.rad = radius;
+        newCirc.radius = radius;
         return newCirc;
     }
-    castRay buildRay(vec2D pos, vec2D dir) {
+    castRay entityCollision::buildRay(vec2D pos, vec2D dir) {
         castRay newCast;
-        newCast.p0 = pos;
+        newCast.pt0 = pos;
         newCast.dir = dir;
         return newCast;
-    }
+    } NOT FUNCTIONING CURRENTLY--------------------------------------------------------------------------------------------*/
     //circle to wall
-    bool wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime, bool & edgecheck) {
+    bool entityCollision::wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
         float circdot = dotProduct(wall.normal, circle.center);
         float normaldot = dotProduct(wall.normal, wall.p0);
 
         vec2D circVel = entnextpos - circle.center;
         vec2D circVelNormal;
-        circVelNormal.x =  circVel.y;
-        circVelNormal.y = - circVel.x;
+        circVelNormal.value.x =  circVel.value.y;
+        circVelNormal.value.y = -circVel.value.x;
 
         vec2D p0plusrad = (wall.p0 + circle.radius * wall.normal);
         vec2D p1plusrad = (wall.p1 + circle.radius * wall.normal);
@@ -75,11 +92,11 @@ namespace EXOMATA {
         return 0;
     }
     //circle to edge
-    bool edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
+    bool entityCollision::edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
         vec2D circVel = entnextpos - circle.center;
         vec2D normVel;
         Normalize(normVel, circVel);
-        vec2D velNormal = vec2D(normVel.y, -normVel.x);
+        vec2D velNormal = vec2D(normVel.value.y, -normVel.value.x);
         if (willcollide) {
             if (dotProduct(wall.p0 - circle.center, wall.p1 - wall.p0) > 0) {
                 float m = dotProduct(wall.p0 - circle.center, normVel);
@@ -179,17 +196,17 @@ namespace EXOMATA {
         return 0;
     }
     //circle to circle
-    bool objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
+    bool entityCollision::objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
         vec2D relativeVel = ent1vel - ent2vel;
         circle tempCirc;
         tempCirc.center = ent2.center;
         tempCirc.radius = ent1.radius + ent2.radius;
-        Ray tempRay;
-        tempRay.p0 = ent1.center;
+        castRay tempRay;
+        tempRay.pt0 = ent1.center;
         tempRay.dir = relativeVel;
 
         //collision ray-circle
-        vec2D rayToCirc = tempCirc.center - tempRay.p0;
+        vec2D rayToCirc = tempCirc.center - tempRay.pt0;
         vec2D normalRay;
         Normalize(normalRay, tempRay.dir);
         float actualdist = length(rayToCirc);
@@ -204,7 +221,7 @@ namespace EXOMATA {
         float s = sqrt(tempCirc.radius * tempCirc.radius - distOsquared);
         float ti0 = (vectorDot - s) / length(tempRay.dir);
         float ti1 = (vectorDot + s) / length(tempRay.dir);
-        coltime = min(ti0, ti1);
+        coltime = std::min(ti0, ti1);
         if ((coltime > 1 || coltime < 0)) {
             return 0;
         }
@@ -215,10 +232,10 @@ namespace EXOMATA {
         }
     }
     //cone circle collision
-    bool coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
+    bool entityCollision::coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
         vec2D dist0 = ent2.center - ent1.center;
-        float startRad = startAngle / 180 * M_PI;
-        float endRad = endAngle / 180 * M_PI;
+        float startRad = (float)(startAngle / 180 * (atan(1) * 4));
+        float endRad = (float)(endAngle / 180 * (atan(1) * 4));
         vec2D dir1;
         vec2D dir2;
         if (length(dist0) > ent1.radius + ent2.radius) {
@@ -227,51 +244,119 @@ namespace EXOMATA {
         //check if within cone
         if(lr) {
             //get start and end of cone
-            dir1.x = -cos(startRad);
-            dir1.y = sin(startRad);
-            dir2.x = -cos(endRad);
-            dir2.y = -sin(endRad);
+            dir1.value.x = -cos(startRad);
+            dir1.value.y = sin(startRad);
+            dir2.value.x = -cos(endRad);
+            dir2.value.y = -sin(endRad);
         }
         else {
             //get start and end of cone
-            dir1.x = cos(startRad);
-            dir1.y = sin(startRad);
-            dir2.x = cos(endRad);
-            dir2.y = -sin(endRad);
+            dir1.value.x = cos(startRad);
+            dir1.value.y = sin(startRad);
+            dir2.value.x = cos(endRad);
+            dir2.value.y = -sin(endRad);
         }
         //check if above or below midpoint
-        if (atan(dist0.y/dist0.x) > 0) {
+        if (atan(dist0.value.y/dist0.value.x) > 0) {
             vec2D dist0Normal;
-            dist0Normal.x = dir1.y;
-            dist0Normal.y = -dir1.x;
+            dist0Normal.value.x = dir1.value.y;
+            dist0Normal.value.y = -dir1.value.x;
             vec2D extended = ent2.center + (ent2.radius * dist0Normal);
             vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || atan(dist1.y / dist1.x) > startRad) {
+            if (length(dist1) > ent1.radius || atan(dist1.value.y / dist1.value.x) > startRad) {
                 return 0;
             }
         }
         else {
             vec2D dist0Normal;
-            dist0Normal.x = -dir2.y;
-            dist0Normal.y = dir2.x;
+            dist0Normal.value.x = -dir2.value.y;
+            dist0Normal.value.y = dir2.value.x;
             vec2D extended = ent2.center + (ent2.radius * dist0Normal);
             vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || -atan(dist1.y / dist1.x) > endRad) {
+            if (length(dist1) > ent1.radius || -atan(dist1.value.y / dist1.value.x) > endRad) {
                 return 0;
             }
         }
         return 1;
     }
+    //AABB Collision
+    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2) {
+        //Static collision
+        if (!(min1.value.x > max2.value.x || min2.value.x > max1.value.x || max1.value.y < min2.value.y || max2.value.y < min1.value.y)) {
+            return true;
+        }
+        //dynamic collision
+        float tFirst = 0;
+        float tLast = 1;
+        vec2D relvel = vel2 - vel1;
+        vec2D dFirst = min1 - max2;
+        vec2D dLast = max1 - min2;
+        if (relvel.value.x < 0) {
+            if (min1.value.x > max2.value.x) {
+                return false;
+            }
+            if (max1.value.x < min2.value.x && dFirst.value.x / relvel.value.x > tFirst) {
+                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            }
+            if (max1.value.x > min2.value.x && (dLast.value.x / relvel.value.x) < tLast) {
+                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            }
+        }
+        if (relvel.value.x > 0) {
+            if (max1.value.x < min2.value.x) {
+                return false;
+            }
+            if (min1.value.x > max2.value.x && (dFirst.value.x / relvel.value.x) > tFirst) {
+                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            }
+            if (max1.value.x > min2.value.x && dLast.value.x / relvel.value.x < tLast) {
+                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            }
+        }
+        if (tFirst > tLast) {
+            return false;
+        }
+        if (relvel.value.y < 0) {
+            if (min1.value.y > max2.value.y) {
+                return false;
+            }
+            if (max1.value.y < min2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
+                tFirst = std::max((max1.value.y - min2.value.y) / relvel.value.y, tFirst);
+            }
+            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
+                tLast = std::min((min1.value.y - max2.value.y) / relvel.value.y, tLast);
+            }
+
+        }
+        if (relvel.value.y > 0) {
+            if (max1.value.y < min2.value.y) {
+                return false;
+            }
+            if (min1.value.y > max2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
+                tFirst = std::max((min1.value.y - max2.value.y) / relvel.value.y, tFirst);
+            }
+            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
+                tLast = std::min((max1.value.y - min2.value.y) / relvel.value.y, tLast);
+            }
+
+        }
+        if (tFirst > tLast) {
+            return false;
+        }
+        //if all falls through, return no collision
+        return false;
+    }
+
     //circle wall reaction
-    void wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
+    void entityCollision::wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
         vec2D penPoint = entnextpos - colpt;
         float dotprod = 2 * (dotProduct(penPoint, ptnorm));
         entnextpos = colpt + penPoint - (dotprod * ptnorm);
-        reflected = entnextpos - colpt;
-        Normalize(reflected, reflected);
+        reflectiondir = entnextpos - colpt;
+        Normalize(reflectiondir, reflectiondir);
     }
     //circle circle reaction
-    void circleBounce(const vec2D &colnorm, const float coltime, vec2D &ent1vel, vec2D &ent1colpt, vec2D &ent2vel, vec2D &ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos) {
+    void entityCollision::circleBounce(const vec2D &colnorm, const float coltime, vec2D &ent1vel, vec2D &ent1colpt, vec2D &ent2vel, vec2D &ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos) {
         float magA = dotProduct(ent1vel, colnorm);
         float magB = dotProduct(ent2vel, colnorm);
         float forceMagnitude = 2 * (magA - magB) / (1 + 1);
@@ -281,23 +366,11 @@ namespace EXOMATA {
         ent2nextpos = ent2colpt + ent2newvel * (1 - coltime);
     }
     //circle obstacle reaction
-    void obstacleBounce(const vec2D &colnorm, const vec2D &colpt, vec2D &entnextpos, vec2D &reflectionnorm) {
+    void entityCollision::obstacleBounce(const vec2D &colnorm, const vec2D &colpt, vec2D &entnextpos, vec2D &reflectionnorm) {
         vec2D penPoint = entnextpos - colpt;
         float dotprod = 2 * (dotProduct(penPoint, colnorm));
         entnextpos = colpt + penPoint - (dotprod * colnorm);
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
-    }
-
-    void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
-        entvel += (dir * mag);
-        if (length(entvel) >= lim) {
-            entvel = 0.9 * entvel;
-        }
-    }
-    void decelent(vec2D &entvel) {
-        if (length(entvel) > 0) {
-            entvel -= entvel * 0.5;
-        }
     }
 }

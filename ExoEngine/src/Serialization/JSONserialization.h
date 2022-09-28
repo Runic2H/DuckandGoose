@@ -1,16 +1,25 @@
-/*
-* Abstract Class for JSON serialization and deserialization
-*/ 
+/*!*************************************************************************
+****
+\file JSONserialization.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains the function declarations for the JSONSerializer
+class which allows child classes of this class to define the data type they
+serialize and deserialize using virtual functions.
+****************************************************************************
+***/
+
 #pragma once
-//#include "empch.h"
-#include "RapidJSON/rapidjson.h"
-#include "rapidjson/document.h"		// rapidjson's DOM-style API
-#include "rapidjson/stringbuffer.h"	// wrapper of C stream for prettywriter as output
-#include "rapidjson/prettywriter.h"	// for stringify JSON
+#include "JSONincludes.h"
 #include "ExoEngine/Core.h"
 
 namespace EM
 {
+
 	class EM_API JSONSerializer
 	{
 		public:
@@ -22,32 +31,10 @@ namespace EM
 
 			virtual bool Deserialize(const rapidjson::Value& obj) = 0;
 			virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const = 0;
+
+			virtual ~JSONSerializer() = default;
+
 		protected:
 			bool InitDocument(const std::string& s, rapidjson::Document& doc);
-	};
-
-	class Player : public JSONSerializer
-	{
-		public:
-			Player();
-			virtual ~Player();
-
-			virtual bool Deserialize(const rapidjson::Value& obj);
-			virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
-
-			// Getters/Setters.
-			const std::string& Name() const { return _name; }
-			void Name(const std::string& name) { _name = name; }
-
-			const int& Health() const { return _health; }
-			void Health(const int& health) { _health = health; }
-
-			double Armour() const { return _armour; }
-			void Armour(const double& armour) { _armour = armour; }
-
-		private:
-			std::string _name;
-			int _health;
-			double _armour;
 	};
 }
