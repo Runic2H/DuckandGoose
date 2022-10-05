@@ -136,11 +136,11 @@ namespace EM
 	{
 		vec2D temp = vec_p1 - vec_p0;//find the vector between the 2 point
 
-		return length(temp);//return the result after running the temp value through Vector2DLength();
+		return squarelength(temp);//return the result after running the temp value through Vector2DLength();
 
 	}
 
-	float dotProduct(const vec2D& Vec0, const vec2D& Vec1) ///calculate the dot product of 2 vectors
+	float dotproduct(const vec2D& Vec0, const vec2D& Vec1) ///calculate the dot product of 2 vectors
 	{
 		return (Vec0.value.x * Vec1.value.x + Vec0.value.y * Vec1.value.y);
 	}
@@ -148,5 +148,13 @@ namespace EM
 	float crossproduct(const vec2D& Vec0, const vec2D& Vec1) ///calculate the cross product between 2 vectors
 	{
 		return (Vec0.value.x * Vec1.value.y - Vec0.value.y * Vec1.value.x);
+	}
+
+	Vec2 ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1)
+	{
+		float dot_prod = dotproduct(Vec0, Vec1);
+		float Vec1_length = squaredistance(Vec0, Vec1);
+		float temp = dot_prod / Vec1_length;
+		return (temp * Vec1);
 	}
 }
