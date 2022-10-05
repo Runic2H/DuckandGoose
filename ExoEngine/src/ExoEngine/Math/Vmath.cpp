@@ -133,7 +133,7 @@ namespace EM
 
 	}
 
-	float dotproduct(const vec2D& Vec0, const vec2D& Vec1) ///calculate the dot product of 2 vectors
+	float dotProduct(const vec2D& Vec0, const vec2D& Vec1) ///calculate the dot product of 2 vectors
 	{
 		return (Vec0.value.x * Vec1.value.x + Vec0.value.y * Vec1.value.y);
 	}
@@ -145,7 +145,7 @@ namespace EM
 
 	Vec2 ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1)
 	{
-		float dot_prod = dotproduct(Vec0, Vec1);
+		float dot_prod = dotProduct(Vec0, Vec1);
 		float Vec1_length = squaredistance(Vec0, Vec1);
 		float temp = dot_prod / Vec1_length;
 		return (temp * Vec1);

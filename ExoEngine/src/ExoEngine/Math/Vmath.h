@@ -60,7 +60,7 @@ namespace EM
 
 	float squaredistance(const vec2D& vec_p0, const vec2D& vec_p1);
 
-	float dotproduct(const vec2D& Vec0, const vec2D& Vec1);
+	float dotProduct(const vec2D& Vec0, const vec2D& Vec1);
 
 	float crossproduct(const vec2D& Vec0, const vec2D& Vec1);
 

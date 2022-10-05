@@ -374,4 +374,9 @@ namespace EM {
             entvel -= entvel * 0.5;
         }
     }
+
+    void Knockback()
+    {
+
+    }
 }
