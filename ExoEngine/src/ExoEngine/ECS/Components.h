@@ -1,3 +1,20 @@
+/*!*************************************************************************
+****
+\file Components.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 28/09/2022
+\brief  This file contains all the Various Components to be used in the ECS
+in the future. Currently, Every Component is still handling its own data
+by inheriting from an abstract class of the JSONSerializer to serialize and
+deserialize its data
+
+****************************************************************************
+***/
+
 #pragma once
 #include "empch.h"
 #include "Types.h"
@@ -14,15 +31,21 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
 
-		vec2D GetMin() { return min; }
-		vec2D GetMax() { return max; }
+		vec2D& GetMin() { return min; }
+		vec2D& GetMax() { return max; }
+		vec2D& GetVel() { return vel; }
+		vec2D& GetInitVel() { return initvel; }
 
 		void SetMin(vec2D Min) { min = Min; }
 		void SetMax(vec2D Max) { max = Max; }
+		void SetVel(vec2D Vel) { vel = Vel; }
+		void SetInitVel(vec2D Vel) { initvel = Vel; }
 
 	private:
 		vec2D	min;
 		vec2D	max;
+		vec2D	vel;
+		vec2D	initvel;
 	};
 
 	//Transform Component
@@ -35,15 +58,18 @@ namespace EM
 		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
 
 		vec2D& GetPos() { return position; }
-		vec2D GetScale() { return scale; }
+		vec2D& GetScale() { return scale; }
+		float& GetRot() { return rot; }
 
 		void SetPos(vec2D Pos) { position = Pos; }
 		void SetScale(vec2D Scale) { scale = Scale; }
+		void SetRot(float value) { rot = value; }
 
 
 	private:
 		vec2D position;
 		vec2D scale;
+		float rot;
 	};
 
 	//Window Component

@@ -26,6 +26,7 @@ namespace EM
 		vec2D operator /= (const vec2D& rhs);
 		vec2D operator = (const vec2D& lhs);
 		vec2D& operator += (float& rhs);
+		vec2D& operator -= (float& rhs);
 
 		vec2D operator -() const;
 
@@ -63,6 +64,4 @@ namespace EM
 	float dotProduct(const vec2D& Vec0, const vec2D& Vec1);
 
 	float crossproduct(const vec2D& Vec0, const vec2D& Vec1);
-
-	Vec2 ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1);
 }

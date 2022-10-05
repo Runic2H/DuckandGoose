@@ -3,8 +3,8 @@
 namespace EM
 {
 	Mat3D::Mat3D() :value{ 0.0f, 0.0f, 0.0f ,
-						   0.0f, 0.0f, 0.0f ,
-						   0.0f, 0.0f, 0.0f }
+								   0.0f, 0.0f, 0.0f ,
+								   0.0f, 0.0f, 0.0f }
 	{}
 
 	Mat3D::Mat3D(const float* pArray) : value{ pArray[0], pArray[1], pArray[2],

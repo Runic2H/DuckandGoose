@@ -60,6 +60,13 @@ namespace EM
 		return *this;
 	}
 
+	vec2D& vec2D::operator-=(float& rhs)
+	{
+		value.x -= rhs;
+		value.y -= rhs;
+		return *this;
+	}
+
 
 	vec2D  vec2D::operator -() const /// function to make vector into negative
 	{
@@ -129,7 +136,7 @@ namespace EM
 	{
 		vec2D temp = vec_p1 - vec_p0;//find the vector between the 2 point
 
-		return squarelength(temp);//return the result after running the temp value through Vector2DLength();
+		return length(temp);//return the result after running the temp value through Vector2DLength();
 
 	}
 
@@ -142,7 +149,6 @@ namespace EM
 	{
 		return (Vec0.value.x * Vec1.value.y - Vec0.value.y * Vec1.value.x);
 	}
-
 	Vec2 ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1)
 	{
 		float dot_prod = dotProduct(Vec0, Vec1);
@@ -150,4 +156,5 @@ namespace EM
 		float temp = dot_prod / Vec1_length;
 		return (temp * Vec1);
 	}
+
 }

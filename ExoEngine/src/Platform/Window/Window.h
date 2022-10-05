@@ -1,9 +1,27 @@
+/*!*************************************************************************
+****
+\file			Window.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			28-9-2022
+\brief			This file contain the declaration function for window class
+
+****************************************************************************
+***/
 #pragma once
 #include "ExoEngine.h"
 #include "ExoEngine/Core.h"
+
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include"imgui/imgui_impl_opengl3.h"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "ExoEngine/ECS/Components.h"
+
 
 namespace EM {
 
@@ -32,6 +50,9 @@ namespace EM {
 		virtual void Init() override;
 		//update
 		virtual void Update() override;
+
+		//virtual voide Draw() override;
+		
 		//Delete window
 		virtual void End() override;
 
@@ -42,11 +63,15 @@ namespace EM {
 		GLFWwindow* GetWindow() const { return m_window; }
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
 
+		void SetWindowFPS();
+
 	private:
 		GLFWwindow* m_window;
 		GLFWmonitor* m_monitor;
 		WindowProps m_windowData;
 		bool m_vsync;
+		double previousTime;
+		int frameCount;
 		WinData windowData;
 
 	private:
@@ -59,5 +84,6 @@ namespace EM {
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
 		
 		void ToggleVsync(bool value);// vync based on internal
+
 	};
 }
