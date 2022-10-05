@@ -149,4 +149,12 @@ namespace EM
 	{
 		return (Vec0.value.x * Vec1.value.y - Vec0.value.y * Vec1.value.x);
 	}
+	Vec2 ADV_OrthProj(const vec2D& Vec0, const vec2D& Vec1)
+	{
+		float dot_prod = dotProduct(Vec0, Vec1);
+		float Vec1_length = squaredistance(Vec0, Vec1);
+		float temp = dot_prod / Vec1_length;
+		return (temp * Vec1);
+	}
+
 }

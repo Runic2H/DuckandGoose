@@ -373,4 +373,20 @@ namespace EM {
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
     }
+    void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
+        entvel += (dir * mag);
+        if (length(entvel) >= lim) {
+            entvel = 0.9 * entvel;
+        }
+    }
+    void decelent(vec2D &entvel) {
+        if (length(entvel) > 0) {
+            entvel -= entvel * 0.5;
+        }
+    }
+
+    void Knockback()
+    {
+
+    }
 }
