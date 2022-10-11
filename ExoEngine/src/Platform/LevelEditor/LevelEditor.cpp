@@ -43,30 +43,30 @@ namespace EM {
 	void LevelEditor::Init(Window* window)
 	{
 		m_window = window;
-		GLFWwindow* m_window = glfwGetCurrentContext();
-		glfwMakeContextCurrent(m_window);
+		/*GLFWwindow* m_window = glfwGetCurrentContext();
+		glfwMakeContextCurrent(m_window);*/
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO();
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
+        io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
 		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
 		ImGui_ImplOpenGL3_Init("#version 450");
-
-        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	}
 
     //  Update loop for level editor, poll events and set new frames
 	void LevelEditor::Update()
 	{
-        dock_space_flags = ImGuiDockNodeFlags_None;
+        //dock_space_flags = ImGuiDockNodeFlags_None;
 
 		/* Poll for and process events */
-		glfwPollEvents();
+		//glfwPollEvents();
 
-		glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	//	glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+		//glClear(GL_COLOR_BUFFER_BIT);
 		// Render imgui into screen
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -75,7 +75,9 @@ namespace EM {
 		// tells imgui how big our display is 
 		io.DisplaySize = ImVec2(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
 		//ImGui::ShowDemoWindow();
-
+        
+        docking();
+        //ViewDockingSpace();
 		DropDownMenu();
 		ColorPickerTab();
 		
@@ -85,9 +87,17 @@ namespace EM {
 	void LevelEditor::Draw()
 	{
 		ImGui::Render();
-		ImGui::EndFrame();
+		//ImGui::EndFrame();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* m_window = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(m_window);
+		}
+      
 	}
 
     //  End instance
@@ -434,55 +444,60 @@ namespace EM {
     
     //Docking function is based off of ImGui demo's ShowExampleAppDockSpace function which will allow tools to dock with the sides of the
     //level editor. However, as of now it is not yet functional as I have yet to fix the frame layering to allow this function to work
-    void LevelEditor::docking()
+   void LevelEditor::docking()
     {
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;// | ImGuiWindowFlags_NoDocking;
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
+            ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
+            ImGuiWindowFlags_NoBackground;
+        //if (fullscreenMode)
+        //{
+          ImGuiViewport* viewport = ImGui::GetMainViewport();
+           ImGui::SetNextWindowPos(viewport->WorkPos);
+           ImGui::SetNextWindowSize(viewport->WorkSize);
+           ImGui::SetNextWindowViewport(viewport->ID);
 
-        if (fullscreenMode)
-        {
-            const ImGuiViewport* viewport = ImGui::GetMainViewport();
-            ImGui::SetNextWindowPos(viewport->WorkPos);
-            ImGui::SetNextWindowSize(viewport->WorkSize);
-            ImGui::SetNextWindowViewport(viewport->ID);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-            window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-        }
+           ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+           ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+           ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        /*   window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+           window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;*/
+       // }
 
-        if (dock_space_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-            window_flags |= ImGuiWindowFlags_NoBackground;
+      //  if (dock_space_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+      //      window_flags |= ImGuiWindowFlags_NoBackground;
 
-        if (!pad)
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-        ImGui::Begin("DockSpace", &dockspaceOpen, window_flags);
-        if (!pad)
-            ImGui::PopStyleVar();
+      ////  if (!pad)
+      //      ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        ImGui::Begin("DockSpace", /*&dockspaceOpen*/0, window_flags);
+        //if (!pad)
+            //ImGui::PopStyleVar();
 
-        if (fullscreenMode)
-            ImGui::PopStyleVar(2);
+        //if (fullscreenMode)
+            ImGui::PopStyleVar(3);
 
         //DockSpace
-        ImGuiIO& io = ImGui::GetIO();
+   /*     ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-        {
+        {*/
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dock_space_flags);
-        }
-
+            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+      //  }
+        
+        ImGui::End();
     }
     
     //  View docking window, not yet functional due to window layering 
     void LevelEditor::ViewDockingSpace()
     {
-        static bool opt_fullscreen_persistant = true;
-        bool opt_fullscreen = opt_fullscreen_persistant;
+        //static bool opt_fullscreen_persistant = true;
+       // bool opt_fullscreen = opt_fullscreen_persistant;
         dock_space_flags = ImGuiDockNodeFlags_None;
 
         //  ImGuiWindowFlags_NoDocking flag to make window undockable
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-        if (opt_fullscreen)
-        {
+        //if (opt_fullscreen)
+       // {
             ImGuiViewport* viewport = ImGui::GetMainViewport();
             ImGui::SetNextWindowPos(viewport->Pos);
             ImGui::SetNextWindowSize(viewport->Size);
@@ -491,7 +506,7 @@ namespace EM {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
             window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
             window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-        }
+       // }
 
         if (dock_space_flags & ImGuiDockNodeFlags_PassthruCentralNode)
             window_flags |= ImGuiWindowFlags_NoBackground;
@@ -500,7 +515,7 @@ namespace EM {
         ImGui::Begin("###DockSpace", 0, window_flags);
         ImGui::PopStyleVar();
 
-        if (opt_fullscreen)
+        //if (opt_fullscreen)
             ImGui::PopStyleVar(2);
 
         // DockSpace

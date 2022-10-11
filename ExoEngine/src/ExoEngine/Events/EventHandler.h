@@ -30,6 +30,7 @@ namespace EM {
 	class EM_API EventHandler
 	{
 	public:
+		virtual ~EventHandler() = default;
 		bool Handle = false;
 
 		virtual EventType GetEventType() const = 0;
@@ -37,7 +38,7 @@ namespace EM {
 		virtual int GetEventFlags() const = 0; // indicate which event is ongoing 
 		virtual std::string ToString() const { return GetName(); }
 
-		inline bool IsInEvent(EventSetFlag setter)
+		 bool IsInEvent(EventSetFlag setter)
 		{
 			return GetEventFlags() & setter;
 		}
@@ -45,19 +46,19 @@ namespace EM {
 
 	class EventDispatcher
 	{
-		template<typename T> // can be any event type
-		using EventFunction = std::function<bool(T&)>;
+		//template<typename T> // can be any event type
+		//using EventFunction = std::function<bool(T&)>;
 	public:
 
 		EventDispatcher(EventHandler& event) :m_Event(event) {}
 
 		
-		template<typename T>
-		bool Dispatch(EventFunction<T> function)
+		template<typename T, typename F>
+		bool Dispatch(const F& function)
 		{ 
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.Handle = function(*(T*)&m_Event);
+				m_Event.Handle |= func(static_cast<T&>(m_Event));
 				return true;
 			}
 

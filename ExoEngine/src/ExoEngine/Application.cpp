@@ -18,7 +18,8 @@
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
 #include "ECS/Components.h"
-
+#include "Timer/Time.h"
+#include "Timer/Fps.h"
 namespace EM {
 
 	Application::Application()
@@ -48,17 +49,26 @@ namespace EM {
 		m_graphic->Init();
 		m_Systems.SystemIndex(1, m_graphic);
 
+		FramePerSec fpschecker;
+		fpschecker.InitFrame();
 
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
-			m_window->SetWindowFPS();
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			//m_shader->Bind();
-			m_window->Update();
+			Timer::GetInstance().Start(Systems::API);
+			Timer::GetInstance().GetDT(Systems::API);
+			
+			fpschecker.StartFrameCount();
+
+			for (System* system : m_Systems)
+			{
+				system->Update(Timer::GetInstance().GetGlobalDT());
+			}
+			
 			p_Editor->Update();
 			p_Editor->Draw();
-			m_graphic->Update();
+
+			fpschecker.EndFrameCount();
+			Timer::GetInstance().Update(Systems::API);
 		}
 
 		End();

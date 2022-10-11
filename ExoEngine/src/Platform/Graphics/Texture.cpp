@@ -25,7 +25,6 @@ namespace EM {
 
 	Texture::~Texture()
 	{
-
 		glDeleteTextures(1, &m_RendererID);
 	}
 

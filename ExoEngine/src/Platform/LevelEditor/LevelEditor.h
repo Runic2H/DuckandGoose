@@ -14,7 +14,6 @@
 #pragma once
 #include "Platform/Window/Window.h"
 
-
 #define p_Editor EM::LevelEditor::GetInstance()
 
 namespace EM {
