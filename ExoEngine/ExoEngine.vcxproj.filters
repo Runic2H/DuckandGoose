@@ -34,6 +34,8 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\transformation.cpp" />
     <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
@@ -173,6 +175,8 @@
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
     <ClInclude Include="src\ExoEngine\Timer\Time.h" />
     <ClInclude Include="src\Platform\Graphics\Renderer.h" />

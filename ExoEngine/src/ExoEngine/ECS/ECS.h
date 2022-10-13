@@ -46,7 +46,7 @@ namespace EM
 
 			mComponentManager->EntityDestroyed(entity);
 
-			mSystemManager->EntityDestroyed(entity);
+			//mSystemManager->EntityDestroyed(entity);
 		}
 
 		// Component methods

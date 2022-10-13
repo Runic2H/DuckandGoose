@@ -26,6 +26,8 @@
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
     <ClInclude Include="src\ExoEngine\Math\physics.h" />
+    <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
@@ -170,6 +172,8 @@
     <ClCompile Include="src\ExoEngine\Math\physics.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\ExoEngine\Math\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\transformation.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vmath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

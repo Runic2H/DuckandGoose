@@ -15,6 +15,12 @@ namespace EM {
         vec2D   center;
         float	radius; //mass tied to radius
     };
+
+    struct aabb
+    {
+        vec2D	min;
+        vec2D	max;
+    };
     
     class entityPhysics {
         public: 
