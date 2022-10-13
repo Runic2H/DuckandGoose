@@ -8,7 +8,6 @@
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
-    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp" />
     <ClCompile Include="src\ExoEngine\Math\physics.cpp" />
@@ -35,15 +34,18 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
-    <ClInclude Include="src\ExoEngine\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\EventHandler.h" />
-    <ClInclude Include="src\ExoEngine\Events\KeysEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\ExoEngine\Log.h" />
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
@@ -171,6 +173,13 @@
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
+    <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Time.h" />
+    <ClInclude Include="src\Platform\Graphics\Renderer.h" />
+    <ClInclude Include="src\Platform\Graphics\VertexArray.h" />
+    <ClInclude Include="src\Platform\Graphics\Buffer.h" />
+    <ClInclude Include="src\Platform\Graphics\Camera2D.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

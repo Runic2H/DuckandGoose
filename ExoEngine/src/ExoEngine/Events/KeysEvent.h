@@ -7,7 +7,7 @@ namespace EM {
 	class EM_API KeysEvent : public EventHandler
 	{
 	public:
-		inline int GetKeyCode() const { return m_KeyCode; } // will be reading from glfw_keycode
+		/*inline*/ int GetKeyCode() const { return m_KeyCode; } // will be reading from glfw_keycode
 		virtual int GetEventFlags() const override { return EventSetFlag::EventSetKeyInput| EventSetFlag::EventSetInput; }
 	protected:
 		KeysEvent(int keycode)

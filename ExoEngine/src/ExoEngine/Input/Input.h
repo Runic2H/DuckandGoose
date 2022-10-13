@@ -53,6 +53,7 @@ namespace EM {
 		std::unordered_map<mousecode, mousestatus> m_MouseStatus;
 		std::vector<keycode> m_reset;
 		
+		double MouseScrollStatus = 0.0f;
 		
 	};
 }

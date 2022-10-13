@@ -14,7 +14,6 @@
 #pragma once
 #include "ExoEngine/Core.h"
 #include "ExoEngine/ECS/Types.h"
-
 namespace EM {
 
 	class EM_API System
@@ -25,7 +24,7 @@ namespace EM {
 		virtual ~System() {};
 		//System function
 		virtual void Init() = 0 {};
-		virtual void Update() = 0 {};
+		virtual void Update(float Frametime){};
 		virtual void End() = 0 {};
 
 	protected:

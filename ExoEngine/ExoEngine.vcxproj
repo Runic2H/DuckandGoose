@@ -19,10 +19,6 @@
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
-    <ClInclude Include="src\ExoEngine\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\EventHandler.h" />
-    <ClInclude Include="src\ExoEngine\Events\KeysEvent.h" />
-    <ClInclude Include="src\ExoEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\ExoEngine\Log.h" />
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
@@ -31,9 +27,16 @@
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
     <ClInclude Include="src\ExoEngine\Math\physics.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
+    <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
+    <ClInclude Include="src\ExoEngine\Timer\Time.h" />
+    <ClInclude Include="src\Platform\Graphics\Buffer.h" />
+    <ClInclude Include="src\Platform\Graphics\Camera2D.h" />
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
+    <ClInclude Include="src\Platform\Graphics\Renderer.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
     <ClInclude Include="src\Platform\Graphics\Texture.h" />
+    <ClInclude Include="src\Platform\Graphics\VertexArray.h" />
     <ClInclude Include="src\Platform\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Platform\LevelEditor\LevelEditor.h" />
     <ClInclude Include="src\Platform\System\System.h" />
@@ -170,9 +173,15 @@
     <ClCompile Include="src\ExoEngine\Math\Vmath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
+    <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
     <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
+    <ClCompile Include="src\Platform\Graphics\VertexArray.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
