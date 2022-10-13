@@ -21,7 +21,7 @@ available entities allowed for the game
 
 namespace EM
 {
-	class EM_API EntityManager
+	class EntityManager
 	{
 	public:
 		//Initializes the queue for for all available entity IDs
@@ -83,7 +83,7 @@ namespace EM
 
 		// Array of signatures where the index corresponds to the entity ID
 		//std::array<SignatureID, MAX_ENTITIES> mSignatures{};
-		std::vector<Signature> mSignatures {};
+		std::array<Signature, MAX_ENTITIES> mSignatures{};
 
 		// Total living entities - used to keep limits on how many exist
 		uint32_t mLivingEntityCount{};

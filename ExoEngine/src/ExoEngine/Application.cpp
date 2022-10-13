@@ -20,10 +20,14 @@
 #include "ECS/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
+#include "ECS/ECS.h"
 namespace EM {
+
+	ECS ecs;
 
 	Application::Application()
 	{
+		ecs.Init();
 	}
 
 	Application::~Application()
@@ -45,15 +49,33 @@ namespace EM {
 		
 		p_Editor->Init(m_window);
 
-		Graphic* m_graphic = new Graphic;
-		m_graphic->Init();
-		m_Systems.SystemIndex(1, m_graphic);
+		//Graphic* m_graphic = new Graphic;
+		//m_graphic->Init();
+		//m_Systems.SystemIndex(1, m_graphic);
+
+		Transform transform;
+		transform.DeserializeFromFile("PlayerTransform.json");
+		ecs.RegisterComponent<Transform>();
+		ecs.RegisterComponent<RigidBody>();
+
+		auto mGraphics = ecs.RegisterSystem<Graphic>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
+			ecs.SetSystemSignature<Graphic>(signature);
+		}
+		mGraphics->Init();
+
+		Entity player = ecs.CreateEntity();
+		//ecs.AddComponent(player, Player{});
+		ecs.AddComponent<Transform>(player, transform);
 
 		FramePerSec fpschecker;
 		fpschecker.InitFrame();
 
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
+
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
 			
@@ -63,6 +85,8 @@ namespace EM {
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
+
+			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();

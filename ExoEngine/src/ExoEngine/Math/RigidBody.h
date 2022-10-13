@@ -1,4 +1,4 @@
-#pragma onc
+#pragma once
 
 #include "empch.h"
 #include "Vmath.h"

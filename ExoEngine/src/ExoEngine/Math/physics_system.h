@@ -8,11 +8,13 @@
 #include "../../Platform/System/System.h"
 
 namespace EM {
-	class PhysicsSystem : System
+	class PhysicsSystem : public System
 	{
-		void Init();
+		void Init() override;
 
-		void Update(float dt);
+		void Update(float dt) override;
+
+		void End() override;
 	};
 
 }

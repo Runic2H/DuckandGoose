@@ -101,7 +101,7 @@ namespace EM
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};
 
 		//Initial component type id
-		static const ComponentType mNextComponentType{};
+		ComponentType mNextComponentType{};
 
 		// Convenience function to get the statically casted pointer to the ComponentArray of type T.
 		template<typename T>

@@ -30,7 +30,7 @@ namespace EM
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<SystemManager>();
+			mSystemManager = std::make_unique<ECSSystemManager>();
 		}
 
 
@@ -46,7 +46,7 @@ namespace EM
 
 			mComponentManager->EntityDestroyed(entity);
 
-			//mSystemManager->EntityDestroyed(entity);
+			mSystemManager->EntityDestroyed(entity);
 		}
 
 		// Component methods
@@ -109,6 +109,6 @@ namespace EM
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<SystemManager> mSystemManager;
+		std::unique_ptr<ECSSystemManager> mSystemManager;
 	};
 }

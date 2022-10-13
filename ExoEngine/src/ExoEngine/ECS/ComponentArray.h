@@ -89,7 +89,7 @@ namespace EM
 
 	private:
 
-		std::vector<T> mComponentArray {MAX_ENTITIES};
+		std::array<T, MAX_ENTITIES> mComponentArray{};
 
 		// Map from an entity ID to an array index.
 		std::unordered_map<Entity, size_t> mEntityToIndexMap;

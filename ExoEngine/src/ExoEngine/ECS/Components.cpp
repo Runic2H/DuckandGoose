@@ -57,7 +57,7 @@ namespace EM
 	//End RigidBody
 
 	//Transform
-	Transform::Transform() : position{ vec2D() }, scale{ vec2D() } 
+	Transform::Transform() : position{ vec2D() }, scale{ vec2D() }, rot {0.0f}
 	{
 		//Transform::SerializeToFile("Transform.json");
 	};

@@ -21,8 +21,6 @@ namespace EM {
 			vec2D currpos = transformation.GetPos();
 			currpos += rigidBody2.get_vel() * dt;
 			transformation.SetPos(currpos);
-
-
 		}
 
 		

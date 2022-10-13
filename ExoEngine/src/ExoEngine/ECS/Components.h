@@ -102,4 +102,9 @@ namespace EM
 			currentHeight;
 	};
 
+	class Player
+	{
+
+	};
+
 }
