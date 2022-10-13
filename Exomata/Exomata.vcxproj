@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\basic.shader" />
+    <None Include="Assets\Shaders\Line.shader" />
     <None Include="Assets\Shaders\texture.shader" />
     <None Include="glew32.dll" />
   </ItemGroup>

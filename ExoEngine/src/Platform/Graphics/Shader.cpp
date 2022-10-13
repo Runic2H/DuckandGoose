@@ -187,7 +187,7 @@ namespace EM {
 
 	void Shader::Unbind() const
 	{
-		glUseProgram(m_RendererID);
+		glUseProgram(0);
 	}
 
 	void Shader::SetUniform(const std::string& name, int value)

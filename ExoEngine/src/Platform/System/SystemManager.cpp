@@ -27,7 +27,7 @@ namespace EM {
 
 	void SystemManager::SystemIndex(unsigned int index, System* system)
 	{
-		m_Systems.insert(index + m_Systems.begin(), system);
+		m_Systems.insert(m_Systems.begin() + index, system);
 	}
 
 	void SystemManager::DeleteSystem()

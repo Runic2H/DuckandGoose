@@ -33,7 +33,7 @@ namespace EM {
 
 	public:
 		//Iterating the gameloop
-		std::vector<System*>::iterator start() { return m_Systems.begin(); };
+		std::vector<System*>::iterator begin() { return m_Systems.begin(); };
 		std::vector<System*>::iterator end() { return m_Systems.end(); }
 
 	private:

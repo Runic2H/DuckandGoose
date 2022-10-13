@@ -12,13 +12,15 @@
 ***/
 #pragma once
 #include "Platform/System/System.h"
-#include "Platform/Graphics/VertexBuffer.h"
-#include "Platform/Graphics/Shader.h"
 #include "Platform/Graphics/Texture.h"
 #include "ExoEngine/ECS/Components.h"
 #include "ExoEngine/Math/Vmath.h";
 #include "ExoEngine/Math/matrix3D.h";
 #include "ExoEngine/Math/physics.h"
+#include "Camera2D.h"
+#include "Platform/Window/Window.h"
+#include "Renderer.h"
+#include "Buffer.h"
 
 namespace EM {
 
@@ -30,23 +32,17 @@ namespace EM {
 		virtual std::string GetName() { return "graphic"; }
 
 		virtual void Init() override;
-		virtual void Update() override;
+		virtual void Update(float Frametime) override;
 		virtual void End() override;
-
+		
 	private:
 		//for testing
-		//unsigned int m_VertexArray{ 0 };
-		std::shared_ptr<Shader> m_shader;
-		std::shared_ptr<VertexBuffer> m_Vbuffer;
-		std::shared_ptr<IndexBuffer> m_Ibuffer;
-		std::shared_ptr<VertexArray> m_vertexArr;
 		std::shared_ptr<Texture> m_Texture = std::make_shared<Texture>();
-		entityCollision m_IsColliding;
-    
-		//For Testing Serialization
-		struct obj {
-			RigidBody m_RigidBody;
-			Transform m_Transform;
-		} player, wall;
+		std::unique_ptr<Renderer> m_Renderer = std::make_unique<Renderer>();
+
+		Camera2D camera = { -1.0f, 1.0f, -1.0f , 1.0f };
+		glm::vec3 m_cameraposition = { 0.0f, 0.0f, 0.0f };
+		float CameraSpeed = 5.0f;
+		glm::vec3 SquarePosition = { 0.0f, 0.0f, 0.0f };
 	};
 }
