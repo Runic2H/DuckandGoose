@@ -13,10 +13,11 @@ namespace EM
         Circle
     };
     
-    class RigidBody {
+    class RigidBody2 {
     public:
-        RigidBody();
-        RigidBody(vec2D point={0,0}, vec2D vel = {0,0}, Col_Type type ={Circle});
+
+        RigidBody2();
+        RigidBody2(vec2D vel = {0,0});
 
         //function take in acceleration, calculate and set force
         //function take force and find the acceleration of the moving object
@@ -28,7 +29,7 @@ namespace EM
         //getter function
         vec2D get_accel();//return acceleration
         vec2D get_vel();//return velocity
-        float get_force();
+        vec2D get_force();
 
         //reset function
         void reset_force();
@@ -36,7 +37,7 @@ namespace EM
         void reset_velocity();
 
         //helper function and setter
-        void set_weight(float Mass = 0);
+        void set_weight(float Mass = { 0 });
         void set_velocity(vec2D Velocity);
         void set_acceleration(vec2D Accel);
         void set_pos(vec2D Pos);
@@ -45,9 +46,9 @@ namespace EM
        
         
         //modifier 
-        void add_weight(float Mass = 0);
-        void add_Force(float Velocity = 0);
-        void add_acceleration(float Accel = 0);
+        void add_weight(float Mass = {0});
+        void add_Force(Vec2 force = {0,0});
+        void add_acceleration(Vec2 Accel = {0,0});
 
 
 
@@ -56,10 +57,11 @@ namespace EM
         Col_Type Type;
         Vec2 pos;//position of actor this is a temp object, to be deletedd after intergration
 
-        float mass;//nass of actor
-        Vec2 velocity{0,0};//spped of actor
+        float  mass;//nass of actor
+        Vec2 velocity{0,0};//speed of actor
         Vec2 aceleration;//acceleration of actor
-        float force;//force applied
+        Vec2 force;//force applied
+        bool mordify;
 
         aabb bounding_box;
         circle bounding_circle;
@@ -69,4 +71,6 @@ namespace EM
 
         
     };
+
+
 }

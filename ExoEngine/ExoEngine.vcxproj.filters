@@ -36,6 +36,7 @@
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
     <ClCompile Include="src\ExoEngine\Math\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
