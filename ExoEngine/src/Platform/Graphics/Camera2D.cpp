@@ -34,7 +34,6 @@ namespace EM {
 		m_AspectRatio = (float)m_viewportWidth / (float)m_viewportHeight;
 
 		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
-		std::cout << "PENIS" << std::endl;
 		return false;
 	}
 	void Camera2D::RecalculateMatrix()
