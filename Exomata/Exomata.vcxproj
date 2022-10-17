@@ -14,8 +14,8 @@
     <ClCompile Include="src\Exomata.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\basic.shader" />
     <None Include="Assets\Shaders\Line.shader" />
+    <None Include="Assets\Shaders\text.shader" />
     <None Include="Assets\Shaders\texture.shader" />
     <None Include="glew32.dll" />
   </ItemGroup>
@@ -23,9 +23,6 @@
     <ProjectReference Include="..\ExoEngine\ExoEngine.vcxproj">
       <Project>{4605499b-2ff7-42b2-8386-0311b0d25478}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\DuckandGoose.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

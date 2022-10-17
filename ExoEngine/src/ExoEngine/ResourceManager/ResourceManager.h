@@ -13,8 +13,7 @@ namespace EM {
 		//load texture from file
 		static std::shared_ptr<Texture> LoadTexture(std::string name, const std::string& filepath);
 		static std::shared_ptr<Texture> GetTexture(std::string name);
-
-		
+		static std::shared_ptr<Texture> GenTexture(unsigned int width, unsigned int height);
 		//load shader from file
 		static std::shared_ptr<Shader> LoadShader(std::string name, const std::string& filepath);
 		static std::shared_ptr<Shader> GetShader(std::string name);

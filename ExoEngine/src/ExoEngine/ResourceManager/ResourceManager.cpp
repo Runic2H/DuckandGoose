@@ -12,7 +12,6 @@ namespace EM {
 
 	std::shared_ptr<Texture> ResourceManager::GetTexture(std::string name)
 	{
-
 		return textures[name];
 	}
 
@@ -20,10 +19,14 @@ namespace EM {
 	{
 		std::shared_ptr<Texture> m_texture = std::make_shared<Texture>();
 		m_texture->GenTexture(filepath);
-
 		return m_texture;
 	}
-
+	std::shared_ptr<Texture> ResourceManager::GenTexture(unsigned int width, unsigned int height)
+	{
+		std::shared_ptr<Texture> m_texture = std::make_shared<Texture>();
+		m_texture->GenTexture(width, height);
+		return m_texture;
+	}
 	std::shared_ptr<Shader> ResourceManager::LoadShaderFromFile(const std::string& filepath)
 	{
 		auto m_shader = std::make_shared<Shader>(filepath);
