@@ -51,8 +51,6 @@ namespace EM {
 		//update
 		virtual void Update(float frametime) override;
 
-		//virtual voide Draw() override;
-		
 		//Delete window
 		virtual void End() override;
 
