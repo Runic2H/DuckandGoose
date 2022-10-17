@@ -3,7 +3,12 @@
 #include "VertexBuffer.h"
 
 namespace EM {
-	MultiRefs<VertexBuffer> VertexBuffer::Create(float* data, unsigned int size)
+	MultiRefs<VertexBuffer> VertexBuffer::Create(uint32_t size)//Dynamic Draw
+	{
+		return CreateMultiRefs<VBuffer>(size);
+	}
+
+	MultiRefs<VertexBuffer> VertexBuffer::Create(float* data, unsigned int size)//Static Draw
 	{
 		return CreateMultiRefs<VBuffer>(data, size);
 	}

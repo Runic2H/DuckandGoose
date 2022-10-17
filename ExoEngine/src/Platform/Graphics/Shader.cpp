@@ -196,6 +196,12 @@ namespace EM {
 		glUniform1i(location, value);
 	}
 
+	void Shader::SetUniform(const std::string& name, int* value, unsigned int count)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1iv(location, count, value);
+	}
+
 	void Shader::SetUniform(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());

@@ -117,8 +117,10 @@ namespace EM {
 
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
+		virtual void SetBufferData(const void* data, unsigned int size) = 0;
 
 		static MultiRefs<VertexBuffer> Create(float* data, unsigned int size);
+		static MultiRefs<VertexBuffer> Create(uint32_t size);
 	};
 
 	class IndexBuffer

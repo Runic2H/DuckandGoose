@@ -22,7 +22,6 @@
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
-    <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
@@ -43,7 +42,7 @@
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
-    <ClCompile Include="src\ExoEngine\ECS\SceneViewer.cpp" />
+    <ClCompile Include="src\Platform\Graphics\TextRendering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -187,6 +186,7 @@
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneViewer.h" />
+    <ClInclude Include="src\Platform\Graphics\TextRendering.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
