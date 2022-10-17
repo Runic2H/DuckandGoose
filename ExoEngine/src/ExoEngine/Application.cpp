@@ -21,6 +21,8 @@
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
+#include "ECS/SceneViewer.h"
+
 namespace EM {
 
 	ECS ecs;

@@ -107,4 +107,10 @@ namespace EM
 
 	};
 
+	//Sprite Component
+	//vec2D position
+	//vec2D scale
+	//transform mat444
+	//texture texture type
+
 }

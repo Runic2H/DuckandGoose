@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\SceneViewer.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

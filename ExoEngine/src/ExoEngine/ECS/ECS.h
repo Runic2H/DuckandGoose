@@ -49,6 +49,14 @@ namespace EM
 			mSystemManager->EntityDestroyed(entity);
 		}
 
+		template<typename T>
+		Entity CloneEntity(Entity entity, T Component)
+		{
+			Entity newEntity = mEntityManager->CreateEntity();
+			AddComponent(newEntity, GetComponent(entity));
+			return newEntity;
+		}
+
 		// Component methods
 		template<typename T>
 		void RegisterComponent()
