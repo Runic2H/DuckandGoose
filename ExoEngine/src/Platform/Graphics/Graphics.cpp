@@ -46,32 +46,12 @@ namespace EM {
 		m_Renderer->Begin(camera);
 		{//test for rendering texture, line and rectange to be removed
 			m_Font->RenderText("Duck and Goose! Quack", 0.0f, 0.0f, 0.01f, camera, { 1.0f, -0.5f, 0.8f });
-			//m_Renderer->DrawQuad({ 0.0f, 0.0f, 0.0f }, { 20.0f, 10.0f }, ResourceManager::GetTexture("BackGround"));
-	/*		m_Renderer->DrawQuad({ 1.0f, 0.8f, 0.0f }, { 1.0f, 0.5f }, 45.0f, ResourceManager::GetTexture("BackGround"));
-			m_Renderer->DrawQuad({ -2.5f, -0.8f, 0.0f }, { 0.5f, 0.5f }, ResourceManager::GetTexture("Player"));
-			m_Renderer->DrawRect({ -2.0f, -1.6f, 0.0f }, { 1.0f, 0.5f }, { 1.0f, 1.0f, 0.0f, 1.0f });
 
-			m_Renderer->DrawQuad({ 1.0f, -0.8f }, { 0.1f, 0.1f }, { 0.0f, 0.5f, 0.8f, 1.0f });
-			m_Renderer->DrawQuad({ 0.0f, 0.0f }, { 0.1f, 0.1f }, 45.0f, { 0.0f, 0.5f, 0.8f, 1.0f });
-			m_Renderer->DrawLine({ 0.0f,-0.2f,0.0f }, { 5.0f,-0.2f,0.0f }, { 0.22f, 0.22, 0.99, 1.0f });*/
 		}
-		{//test for text rendering
-			/*m_Font->RenderText("Duck and Goose! Quack", 0.0f, 0.0f, 0.01f, camera, { 1.0f, -0.5f, 0.8f });*/
-		}
-		{//test for loading sprite
-		/*	m_Renderer->DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, ResourceManager::GetTexture("Player"));
-
-			m_Renderer->DrawQuad({ 0.0f, -1.0f, 0.0f }, { 10.0f, 1.0f }, ResourceManager::GetTexture("Splash"));
-*/
 		for (auto const& entity : mEntities)
 		{
 			auto& transform = ecs.GetComponent<Transform>(entity);
-			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), ResourceManager::GetTexture("BackGround"));
-		}
-
-		//static float rotationspeed = 0.0f;
-		//rotationspeed += frametime * 10.0f;
-
+			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), { 1.0f, -0.5f, 0.8f, 1.0f });
 		}
 		
 		m_Renderer->End();

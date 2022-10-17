@@ -36,6 +36,7 @@
     <ClInclude Include="src\ExoEngine\Timer\Time.h" />
     <ClInclude Include="src\Platform\Graphics\Buffer.h" />
     <ClInclude Include="src\Platform\Graphics\Camera2D.h" />
+    <ClInclude Include="src\Platform\Graphics\FrameBuffer.h" />
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
     <ClInclude Include="src\Platform\Graphics\Renderer.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
@@ -161,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
-    <ClCompile Include="src\ExoEngine\ECS\SceneViewer.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -184,6 +184,7 @@
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
+    <ClCompile Include="src\Platform\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />

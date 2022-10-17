@@ -40,7 +40,6 @@ namespace EM {
 		static std::unique_ptr<LevelEditor> m_instance;
 		
 		void docking();
-		void ViewDockingSpace();
 		bool dockspaceOpen{};
 		bool fullscreenMode{};
 		bool pad{};
