@@ -40,7 +40,7 @@ namespace EM {
 		void setImageFormat(unsigned int imageformat) { image_format = imageformat; }
 	private:
 		unsigned int m_RendererID = 0;		//ID of the texture object
-		int _width, _height;	//width and height of the loaded image in pixels
+		unsigned int _width, _height;	//width and height of the loaded image in pixels
 		unsigned int _wrapS, _wrapT;	// wrapping mode on S and T axis
 		unsigned int _FilterMin, _FilterMax; // filtering mode if texture pixels > or < screen pixels( 1648 by 720 )
 		unsigned int inner_format, image_format;

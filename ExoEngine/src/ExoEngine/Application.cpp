@@ -30,6 +30,7 @@ namespace EM {
 	Application::Application()
 	{
 		ecs.Init();
+
 	}
 
 	Application::~Application()

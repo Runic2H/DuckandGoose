@@ -11,7 +11,7 @@
 
 namespace EM
 {
-	extern ECS ecs;
+	/*extern ECS ecs;
 
 	template <typename T>
 	class SceneViewer : JSONSerializer
@@ -42,7 +42,7 @@ namespace EM
 			}
 		}
 
-		virtual bool Deserialize(const rapidjson::Value& obj) { return false };
+		virtual bool Deserialize(const rapidjson::Value& obj) { return false; }
 		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
 		{
 			writer->StartArray();
@@ -59,5 +59,5 @@ namespace EM
 
 	private:
 		std::vector<T> mComponents;
-	};
+	};*/
 }

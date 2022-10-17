@@ -19,6 +19,7 @@ namespace EM {
 		glm::vec3 Position;
 		glm::vec4 Color;
 	};
+
 	struct RendererData
 	{
 		glm::vec4 QuadVertexPosition[4] = { { -0.5f, -0.5f, 0.0f, 1.0f },
@@ -72,7 +73,6 @@ namespace EM {
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
 		/// FOR QUADS
 		r_Data.QuadVertexArray = VertexArray::Create();
 
