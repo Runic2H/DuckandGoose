@@ -80,8 +80,17 @@ namespace EM {
                                     vec2D ent2colpt;
                                     float coltime;
                                     if (entityCollision::objCollision(ent1, rigid1.GetVel(), ent2, rigid2.GetVel(), ent1colpt, ent2colpt, coltime)) {
-                                        
-                                        entityCollision::circleBounce(const vec2D &colnorm, coltime, rigid1.GetVel(), ent1colpt, rigid2.GetVel(), ent2colpt, vec2D &ent1newvel, vec2D &ent1nextpos, vec2D &ent2newvel, vec2D &ent2nextpos);
+                                        vec2D colnorm = ent1colpt - ent2pos;
+                                        Normalize(colnorm, colnorm);
+                                        vec2D ent1newvel = rigid1.GetVel();
+                                        vec2D ent2newvel = rigid2.GetVel();
+                                        vec2D ent1nextpos = rigid1.GetNextPos();
+                                        vec2D ent2nextpos = rigid2.GetNextPos();
+                                        entityCollision::circleBounce(colnorm, coltime, rigid1.GetVel(), ent1colpt, rigid2.GetVel(), ent2colpt, ent1newvel, ent1nextpos, ent2newvel, ent2nextpos);
+                                        rigid1.SetVel(ent1newvel);
+                                        rigid2.SetVel(ent2newvel);
+                                        rigid1.SetNextPos(ent1nextpos);
+                                        rigid2.SetNextPos(ent2nextpos);
                                     }
                                 }
                                 else if (e2 == Col_Type::cone) {
@@ -96,7 +105,7 @@ namespace EM {
                                         lr = 1;
                                     }
                                     //check which attack variant for angles
-                                    
+
                                     if (entityCollision::coneCollision(ent1, const int startAngle, const int endAngle, lr, ent2)) {
                                         //hit detected. take damage
                                     }
@@ -110,9 +119,13 @@ namespace EM {
                                     wall2.normal.value.y = -temp.value.x;
                                     Normalize(wall2.normal, wall2.normal);
                                     vec2D colpt;
+                                    vec2D colnorm;
+                                    vec2D entnextpos = rigid1.GetNextPos();
                                     float coltime;
-                                    if (entityCollision::wallCollision(ent1, const vec2D &entnextpos, wall2, colpt, vec2D &colnorm, coltime)) {
-                                        entityCollision::wallBounce(colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir);
+                                    if (entityCollision::wallCollision(ent1, entnextpos, wall2, colpt, colnorm, coltime)) {
+                                        vec2D reflectiondir;
+                                        entityCollision::wallBounce(colpt, colnorm, entnextpos, reflectiondir);
+                                        rigid1.SetNextPos(entnextpos);
                                     }
                                 }
                                 else if (e2 == Col_Type::rect) {
@@ -135,9 +148,13 @@ namespace EM {
                                     ent1.center = ent2pos;
                                     ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
                                     vec2D colpt;
+                                    vec2D colnorm;
+                                    vec2D entnextpos = rigid2.GetNextPos();
                                     float coltime;
-                                    if (entityCollision::wallCollision(ent1, const vec2D &entnextpos, wall2, colpt, vec2D &colnorm, coltime)) {
-                                        entityCollision::wallBounce(colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir);
+                                    if (entityCollision::wallCollision(ent1, const vec2D entnextpos, wall2, colpt, colnorm, coltime)) {
+                                        vec2D reflectiondir;
+                                        entityCollision::wallBounce(colpt, colnorm, vec2D entnextpos, vec2D &reflectiondir);
+                                        rigid2.SetNextPos(entnextpos);
                                     }
                                 }
                             }
@@ -151,7 +168,7 @@ namespace EM {
                                     }
                                 }
                                 else if (e2 == Col_Type::rect) {
-                                    if (bool boundingBoxCollision(rigid1.GetMax(), rigid1.GetMin(), vec2D vel1, rigid2.GetMax(), rigid2.GetMin(), vec2D vel2, float dt)) {
+                                    if (bool boundingBoxCollision(rigid1.GetMax(), rigid1.GetMin(), vec2D vel1, rigid2.GetMax(), rigid2.GetMin(), vec2D vel2, dt)) {
                                         //parry mechanics? 
                                     }
                                 }

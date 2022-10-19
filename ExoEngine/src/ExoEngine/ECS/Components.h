@@ -43,11 +43,13 @@ namespace EM
 		vec2D& GetMax() { return max; }
 		vec2D& GetVel() { return vel; }
 		vec2D& GetInitVel() { return initvel; }
+		vec2D& GetNextPos() { return nextpos; }
 		vec2D& GetCollider() { return collider; }
 
 		void SetMin(vec2D Min) { min = Min; }
 		void SetMax(vec2D Max) { max = Max; }
 		void SetVel(vec2D Vel) { vel = Vel; }
+		void SetNextPos(vec2D Pos) { nextpos = Pos; }
 		void SetInitVel(vec2D Vel) { initvel = Vel; }
 		void SetCollider(Col_Type col) { collider = col; }
 
@@ -55,6 +57,7 @@ namespace EM
 		vec2D		min;
 		vec2D		max;
 		vec2D		vel;
+		vec2D		nextpos; //set to position + vel. for use in collision response calculation
 		vec2D		initvel;
 		Col_Type 	collider;
 	};
