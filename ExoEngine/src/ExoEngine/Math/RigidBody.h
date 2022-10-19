@@ -9,8 +9,10 @@ namespace EM
 
     enum Col_Type
     {
-        rectangle,
-        Circle
+        cone, //---------Cone
+        circle, //-------Circle
+        line, //---------LineSegment
+        rect //----------AABB
     };
     
     class RigidBody2 {
@@ -25,11 +27,14 @@ namespace EM
        // void update_physics();
         //bounding box creation tool
         void set_aabb(aabb box);// create aabb
+        void set_collider(Col_Type in);
 
         //getter function
         vec2D get_accel();//return acceleration
         vec2D get_vel();//return velocity
         vec2D get_force();
+        float get_rad();
+        Col_Type get_collider();
 
         //reset function
         void reset_force();
@@ -64,12 +69,7 @@ namespace EM
         bool mordify;
 
         aabb bounding_box;
-        circle bounding_circle;
-
-
-
-
-        
+        circle_bound bounding_circle;
     };
 
 

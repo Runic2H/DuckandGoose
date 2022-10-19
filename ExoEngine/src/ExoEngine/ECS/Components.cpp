@@ -30,6 +30,7 @@ namespace EM
 		max = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
 		vel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
 		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
+		collider = Col_Type::obj["???"].GetInt();//----------------Collider serialization
 		return true;
 	}
 	bool RigidBody::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
@@ -51,6 +52,8 @@ namespace EM
 		writer->Double(initvel.value.x);
 		writer->Key("initY");
 		writer->Double(initvel.value.y);
+		writer->Key("???");//------------------------------
+		writer->Int(collider);//-----Collider serialization
 		writer->EndObject();
 		return true;
 	}
