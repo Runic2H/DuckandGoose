@@ -96,9 +96,9 @@ namespace EM {
 			m_stride = 0;
 			for (auto& element : m_Elements)
 			{
-				element.Offset = offset;
+				element.Offset = static_cast<unsigned int> (offset);
 				offset += element.Size;
-				m_stride += element.Size;
+				m_stride += static_cast<unsigned int>(element.Size);
 			}
 		}
 	private:

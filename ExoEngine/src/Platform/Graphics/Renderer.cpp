@@ -20,6 +20,22 @@ namespace EM {
 		glm::vec4 Color;
 	};
 
+	//whats inside a quad with color only
+	struct BoxVertex
+	{
+		glm::vec3 Position;
+		glm::vec4 Color;
+	};
+	
+	//whats inside a circle
+	struct CircleVertex
+	{
+		glm::vec3 Wposition; //world position
+		glm::vec3 Lposition; //Local position
+		glm::vec4 color;
+		float depth;		// the thickness
+		float decline;		// fade
+	};
 	struct RendererData
 	{
 		glm::vec4 QuadVertexPosition[4] = { { -0.5f, -0.5f, 0.0f, 1.0f },
@@ -31,6 +47,14 @@ namespace EM {
 		static const unsigned int MaxVertices = MaxQuads * 4;	//since one quard have 4 vertices we multi by 4
 		static const unsigned int MaxIndices = MaxQuads * 6;	//{0, 1, 2, 2, 3, 0} 6 indices per quad
 
+		//for boxes without texture
+		MultiRefs<VertexArray> BoxVertexArray;
+		MultiRefs<VertexBuffer> BoxVertexBuffer;
+		MultiRefs<Shader> BoxShader;
+
+		unsigned int BoxIndexCount = 0;
+		BoxVertex* BoxVertexBufferBase = nullptr;
+		BoxVertex* BoxVertexBufferPtr = nullptr;
 
 		//for lines
 		MultiRefs<VertexArray> LineVertexArray;
@@ -51,11 +75,20 @@ namespace EM {
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
 
+		//for circle
+		MultiRefs<VertexArray> CircleVertexArray;
+		MultiRefs<VertexBuffer> CircleVertexBuffer;
+		MultiRefs<Shader> CircleShader;
+
+		unsigned int CircleIndexCount = 0;
+		CircleVertex* CircleVertexBufferBase = nullptr;
+		CircleVertex* CircleVertexBufferPtr = nullptr;
+
 		//contain an array of texture
 		std::array<MultiRefs<Texture>, 32> TextureUnits;
 		unsigned int TextureUnitIndex = 1; // 0 = blank texture. Index to keep track of the texture
 
-
+		Renderer::Information Infos;
 
 	}static r_Data;
 
@@ -86,25 +119,25 @@ namespace EM {
 		
 		r_Data.QuadVertexBufferBase = new QuadVertex[r_Data.MaxVertices];
 
-		unsigned int* SquareIndices = new unsigned int[r_Data.MaxIndices];
+		unsigned int* QuadIndices = new unsigned int[r_Data.MaxIndices];
 
 		unsigned int offset = 0;
 		for (int i = 0; i < r_Data.MaxIndices; i += 6)
 		{
-			SquareIndices[i + 0] = offset + 0;
-			SquareIndices[i + 1] = offset + 1;
-			SquareIndices[i + 2] = offset + 2;
+			QuadIndices[i + 0] = offset + 0;
+			QuadIndices[i + 1] = offset + 1;
+			QuadIndices[i + 2] = offset + 2;
 
-			SquareIndices[i + 3] = offset + 2;
-			SquareIndices[i + 4] = offset + 3;
-			SquareIndices[i + 5] = offset + 0;
+			QuadIndices[i + 3] = offset + 2;
+			QuadIndices[i + 4] = offset + 3;
+			QuadIndices[i + 5] = offset + 0;
 
 			offset += 4;
 		}
 
-		MultiRefs<IndexBuffer> SquareIndexBuffer = IndexBuffer::Create(SquareIndices, r_Data.MaxIndices);
-		r_Data.QuadVertexArray->SetIndexBuffer(SquareIndexBuffer);
-		delete[] SquareIndices;
+		MultiRefs<IndexBuffer> QuadIndexBuffer = IndexBuffer::Create(QuadIndices, r_Data.MaxIndices);
+		r_Data.QuadVertexArray->SetIndexBuffer(QuadIndexBuffer);
+		delete[] QuadIndices;
 
 
 		//setting empty texture in unit 0
@@ -139,6 +172,54 @@ namespace EM {
 
 		r_Data.LineShader = ResourceManager::GetShader("LineShader");
 
+		/// For boxes without texture
+
+		r_Data.BoxVertexArray = VertexArray::Create();
+
+		r_Data.BoxVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(BoxVertex));
+		r_Data.BoxVertexBuffer->SetLayout({ { ShaderDataType::Float3, "position" },
+											{ ShaderDataType::Float4, "a_Color" },
+			});
+		r_Data.BoxVertexArray->AddVertexBuffer(r_Data.BoxVertexBuffer);
+
+		r_Data.BoxVertexBufferBase = new BoxVertex[r_Data.MaxVertices];
+
+		unsigned int* BoxIndices = new unsigned int[r_Data.MaxIndices];
+
+		unsigned int offsetBox = 0;
+		for (int i = 0; i < r_Data.MaxIndices; i += 6)
+		{
+			BoxIndices[i + 0] = offsetBox + 0;
+			BoxIndices[i + 1] = offsetBox + 1;
+			BoxIndices[i + 2] = offsetBox + 2;
+
+			BoxIndices[i + 3] = offsetBox + 2;
+			BoxIndices[i + 4] = offsetBox + 3;
+			BoxIndices[i + 5] = offsetBox + 0;
+
+			offsetBox += 4;
+		}
+
+		MultiRefs<IndexBuffer> BoxIndexBuffer = IndexBuffer::Create(BoxIndices, r_Data.MaxIndices);
+		r_Data.BoxVertexArray->SetIndexBuffer(BoxIndexBuffer);
+		delete[] BoxIndices;
+		//box shader
+		r_Data.BoxShader = ResourceManager::GetShader("LineShader");
+
+		/// For Circle
+		r_Data.CircleVertexArray = VertexArray::Create();
+
+		r_Data.CircleVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(CircleVertex));
+		r_Data.CircleVertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_WorldPosition" },
+			{ ShaderDataType::Float3, "a_LocalPosition" },
+			{ ShaderDataType::Float4, "a_Color"         },
+			{ ShaderDataType::Float,  "a_Depth"     },
+			{ ShaderDataType::Float,  "a_Decline"  },
+			});
+		r_Data.CircleVertexArray->AddVertexBuffer(r_Data.CircleVertexBuffer);
+		r_Data.CircleVertexArray->SetIndexBuffer(QuadIndexBuffer);  //use quad index
+		r_Data.CircleVertexBufferBase = new CircleVertex[r_Data.MaxVertices];
+		r_Data.CircleShader = ResourceManager::GetShader("CircleShader");
 	}
 	void Renderer::Begin(Camera2D& camera)
 	{
@@ -157,28 +238,38 @@ namespace EM {
 		//quad
 		r_Data.QuadIndexCount = 0;
 		r_Data.QuadVertexBufferPtr = r_Data.QuadVertexBufferBase; //keep track of the buffer 
+		r_Data.TextureUnitIndex = 1;
 
 		//Line
 		r_Data.LineVertexCount = 0;
 		r_Data.LineVertexBufferPtr = r_Data.LineVertexBufferBase;
 
-		r_Data.TextureUnitIndex = 1;
+		//Box
+		r_Data.BoxIndexCount = 0;
+		r_Data.BoxVertexBufferPtr = r_Data.BoxVertexBufferBase;
+
+		//Circle
+		r_Data.CircleIndexCount = 0;
+		r_Data.CircleVertexBufferPtr = r_Data.CircleVertexBufferBase;
+		
 	}
 	void Renderer::Flush()
 	{
+		//Quads
 		if (r_Data.QuadIndexCount)
 		{
 			unsigned int  QuadsDataSize = (unsigned int)((uint8_t*)r_Data.QuadVertexBufferPtr - (uint8_t*)r_Data.QuadVertexBufferBase);
 			r_Data.QuadVertexBuffer->SetBufferData(r_Data.QuadVertexBufferBase, QuadsDataSize);
 
 			//Bind All Textures
-			for (int i = 0; i < r_Data.TextureUnitIndex; i++)
+			for (unsigned int i = 0; i < r_Data.TextureUnitIndex; i++)
 				r_Data.TextureUnits[i]->Bind(i);
 
 			//reset count
 			r_Data.QuadShader->Bind();
 			r_Data.QuadShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 			Renderer::DrawIndexed(r_Data.QuadVertexArray, r_Data.QuadIndexCount);
+			r_Data.Infos.n_DrawCalls++;
 		}
 		//Line
 		if (r_Data.LineVertexCount)
@@ -190,6 +281,30 @@ namespace EM {
 			r_Data.LineShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 			glLineWidth(1.0f);
 			Renderer::DrawForLine(r_Data.LineVertexArray, r_Data.LineVertexCount);
+			r_Data.Infos.n_DrawCalls++;
+		}
+		//Box
+		if (r_Data.BoxIndexCount)
+		{
+			unsigned int  BoxDataSize = (unsigned int)((uint8_t*)r_Data.BoxVertexBufferPtr - (uint8_t*)r_Data.BoxVertexBufferBase);
+			r_Data.BoxVertexBuffer->SetBufferData(r_Data.BoxVertexBufferBase, BoxDataSize);
+
+			//reset count
+			r_Data.BoxShader->Bind();
+			r_Data.BoxShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			Renderer::DrawIndexed(r_Data.BoxVertexArray, r_Data.BoxIndexCount);
+			r_Data.Infos.n_DrawCalls++;
+		}
+		if (r_Data.CircleIndexCount)
+		{
+			unsigned int  CircleDataSize = (unsigned int)((uint8_t*)r_Data.CircleVertexBufferPtr - (uint8_t*)r_Data.CircleVertexBufferBase);
+			r_Data.CircleVertexBuffer->SetBufferData(r_Data.CircleVertexBufferBase, CircleDataSize);
+
+			//reset count
+			r_Data.CircleShader->Bind();
+			r_Data.CircleShader->SetUniform("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+			Renderer::DrawIndexed(r_Data.CircleVertexArray, r_Data.CircleIndexCount);
+			r_Data.Infos.n_DrawCalls++;
 		}
 	}
 	void Renderer::NextBatch()
@@ -200,6 +315,7 @@ namespace EM {
 	void Renderer::ShutDown()
 	{
 		delete[] r_Data.QuadVertexBufferBase;
+		delete[] r_Data.BoxVertexBufferBase;
 	}
 
 	void Renderer::DrawIndexed(const MultiRefs<VertexArray>& vertexarray, unsigned int IndexCount)
@@ -230,22 +346,20 @@ namespace EM {
 
 	void Renderer::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 	{
-		constexpr glm::vec2 textureCoors[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-		const float textureIndex = 0.0f; // White Texture
-		constexpr size_t quadCount = 4;
+		constexpr size_t BoxCount = 4;
 
-		if (r_Data.QuadIndexCount >= RendererData::MaxIndices)
+		if (r_Data.BoxIndexCount >= RendererData::MaxIndices)
 			NextBatch();
 
-		for (size_t i = 0; i < quadCount; i++)
+		for (size_t i = 0; i < BoxCount; i++)
 		{
-			r_Data.QuadVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];
-			r_Data.QuadVertexBufferPtr->Color = color;
-			r_Data.QuadVertexBufferPtr->TexCoord = textureCoors[i];
-			r_Data.QuadVertexBufferPtr->TextureIndex = textureIndex; // blank texture
-			r_Data.QuadVertexBufferPtr++;
+			r_Data.BoxVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];
+			r_Data.BoxVertexBufferPtr->Color = color;
+			r_Data.BoxVertexBufferPtr++;
 		}
-		r_Data.QuadIndexCount += 6;
+		r_Data.BoxIndexCount += 6;
+
+		r_Data.Infos.n_Quad++;
 	}
 
 	void Renderer:: DrawQuad(const glm::vec2& position, const glm::vec2& size, const MultiRefs<Texture>& texture)
@@ -264,14 +378,9 @@ namespace EM {
 
 	void Renderer::DrawQuad(const glm::mat4& transform, const MultiRefs<Texture>& texture)
 	{
-		
-		float t_width = texture->GetWidth(), t_height = texture->GetHeight();
-		float X_index = 2.0f, Y_index = 0.0f;
-		float spritewidth = t_width / X_index, spriteheight = t_height;
-
 
 		float textureIndex = 0.0f;
-		for (int i = 1; i < r_Data.TextureUnitIndex; i++)
+		for (unsigned int i = 1; i < r_Data.TextureUnitIndex; i++)
 		{
 			if (*r_Data.TextureUnits[i] == *texture)
 			{
@@ -301,6 +410,8 @@ namespace EM {
 			r_Data.QuadVertexBufferPtr++;
 		}
 		r_Data.QuadIndexCount += 6;
+
+		r_Data.Infos.n_Quad++;
 	}
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
@@ -350,6 +461,33 @@ namespace EM {
 		DrawLine(p1, p2, color);
 		DrawLine(p2, p3, color);
 		DrawLine(p3, p0, color);
+	}
+
+	void Renderer::DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth, float decline)
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			r_Data.CircleVertexBufferPtr->Wposition = transform * r_Data.QuadVertexPosition[i];
+			r_Data.CircleVertexBufferPtr->Lposition = r_Data.QuadVertexPosition[i] * 2.0f;
+			r_Data.CircleVertexBufferPtr->color = color;
+			r_Data.CircleVertexBufferPtr->depth = depth;
+			r_Data.CircleVertexBufferPtr->decline= decline;
+			r_Data.CircleVertexBufferPtr++;
+		}
+
+		r_Data.CircleIndexCount += 6;
+
+		r_Data.Infos.n_Quad++;
+	}
+
+	void Renderer::ResetInfo()
+	{
+		memset(&r_Data.Infos, 0, sizeof(Information));
+	}
+
+	Renderer::Information Renderer::GetInfo()
+	{
+		return r_Data.Infos;
 	}
 
 

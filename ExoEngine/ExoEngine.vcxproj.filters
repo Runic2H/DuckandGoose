@@ -207,4 +207,7 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Platform\LevelEditor\LevelEditor.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\freetype\libs\freetype.lib" />
+  </ItemGroup>
 </Project>

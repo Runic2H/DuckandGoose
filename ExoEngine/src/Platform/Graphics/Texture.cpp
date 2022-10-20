@@ -27,7 +27,7 @@ namespace EM {
 		glDeleteTextures(1, &m_RendererID);
 	}
 
-	void Texture::Bind(int slot) const
+	void Texture::Bind(unsigned int slot) const
 	{
 		glBindTextureUnit(slot, m_RendererID);
 	}

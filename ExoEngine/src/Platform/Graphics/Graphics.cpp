@@ -17,7 +17,6 @@
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Timer/Time.h"
-
 namespace EM {
 
 	extern ECS ecs;
@@ -27,6 +26,7 @@ namespace EM {
 	{
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
+		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
 		
 		ResourceManager::LoadTexture("BackGround", "Assets/Textures/BackGround.png");
 		ResourceManager::LoadTexture("Player", "Assets/Textures/PlayerSpriteSheet.png");
@@ -41,32 +41,50 @@ namespace EM {
 	{
 		Timer::GetInstance().Start(Systems::GRAPHIC);
 		Timer::GetInstance().GetDT(Systems::GRAPHIC);
+		m_Renderer->ResetInfo();
 		m_Renderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		m_Renderer->Clear();
 		m_Renderer->Begin(camera);
-		{//test for rendering texture, line and rectange to be removed
-			m_Font->RenderText("Duck and Goose! Quack", 0.0f, 0.0f, 0.01f, camera, { 1.0f, -0.5f, 0.8f });
-
-		}
+		//test for rendering texture, line and rectange to be removed
+		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
+		
+			
+	
 		for (auto const& entity : mEntities)
 		{
 			auto& transform = ecs.GetComponent<Transform>(entity);
+			//draw quad without texture
 			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), { 1.0f, -0.5f, 0.8f, 1.0f });
 		}
+		// draw quad with texture
+		m_Renderer->DrawQuad({ 0.0f, -0.5f }, { 1.0f, 1.0f }, ResourceManager::GetTexture("BackGround"));
+		// draw line with color
+		m_Renderer->DrawLine({ 0.0f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f });
+		// draw rect with color
+		m_Renderer->DrawRect({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f });
 		
+		//render circle
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), { 0.0, 0.0f, 0.0f }) //position of the circle
+								*glm::scale(glm::mat4(1.0f), glm::vec3(0.5*2)); //radius * 2
+		m_Renderer->DrawCircle(transform, { 0.0f, 1.0f, 0.0f, 1.0f }, 0.01f);
+
+		glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), { 1.0, 1.0f, 0.0f }) //position of the circle
+			* glm::scale(glm::mat4(1.0f), glm::vec3(0.5 * 2)); //radius * 2
+		m_Renderer->DrawCircle(transform2, { 0.0f, 0.0f, 1.0f, 1.0f }); //depth is defaulted as 1.0f so i a full circle no hollow
+
 		m_Renderer->End();
 		//for testing 
-		camera.SetPosition(m_cameraposition);
+		camera.SetPosition({ player.position.value.x, player.position.value.y, 0.0f });
 
 		if (p_Input->isKeyPressed(GLFW_KEY_W))
-			m_cameraposition.y += CameraSpeed * frametime;
+			player.position.value.y += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
-			m_cameraposition.y -= CameraSpeed * frametime;
+			player.position.value.y -= CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_D))
-			m_cameraposition.x += CameraSpeed * frametime;
+			player.position.value.x += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_A))
 		{
-			m_cameraposition.x -= CameraSpeed * frametime;	
+			player.position.value.x -= CameraSpeed * frametime;
 			
 		}
 		camera.MouseScrolling();
