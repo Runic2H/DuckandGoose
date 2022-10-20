@@ -28,6 +28,14 @@ namespace EM {
 			}
 			return m_Fps;
 		}
+
+		
+		float GetFps()const { return m_Fps; }
+		static FramePerSec& GetInstance()
+		{
+			static FramePerSec instance;
+			return instance;
+		}
 	private:
 		float m_counter, MaxFrameRate, m_FrameRate, m_FrameTime,
 			MinFrameTime, m_start, m_Fps;

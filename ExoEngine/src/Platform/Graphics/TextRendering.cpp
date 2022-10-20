@@ -9,7 +9,7 @@ namespace EM {
 	void Font::Init()
 	{
 		TextShader = ResourceManager::LoadShader("text", "Assets/Shaders/text.shader");;
-        Load("Assets/fonts/ArialItalic.ttf", 28);
+        Load("Assets/fonts/ArialItalic.ttf");
 
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -83,15 +83,13 @@ namespace EM {
         FT_Done_FreeType(ft);
 	}
 
-	void Font::RenderText(const std::string& text, float x, float y, float scale, Camera2D& camera, glm::vec3 color)
+    void Font::RenderText(const std::string& text, glm::vec2 position , float scale, Camera2D& camera, glm::vec3 color)
 	{
         // activate corresponding render state	
         TextShader->Bind();
         TextShader->SetUniform("u_ViewProjection", camera.GetViewProjectionMatrix());
         TextShader->SetUniform("textColor", color);
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
 
@@ -101,20 +99,20 @@ namespace EM {
         {
             Character ch = Characters[*c];
 
-            float xpos = x + ch.Bearing.x * scale;
-            float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+           // float xpos = position.x + ch.Bearing.x * scale;
+           // float ypos = position.y - (ch.Size.y - ch.Bearing.y) * scale;
 
             float w = ch.Size.x * scale;
             float h = ch.Size.y * scale;
             // update VBO for each character
             float vertices[6][4] = {
-                { xpos,     ypos + h,   0.0f, 0.0f },
-                { xpos ,    ypos,       0.0f, 1.0f },
-                { xpos + w, ypos,       1.0f, 1.0f },
+                { position.x,     position.y + h,   0.0f, 0.0f },
+                { position.x ,    position.y,       0.0f, 1.0f },
+                { position.x + w, position.y,       1.0f, 1.0f },
 
-                { xpos,     ypos + h,   0.0f, 0.0f },
-                { xpos + w, ypos ,      1.0f, 1.0f },
-                { xpos + w, ypos + h,   1.0f, 0.0f }
+                { position.x,     position.y + h,   0.0f, 0.0f },
+                { position.x + w, position.y ,      1.0f, 1.0f },
+                { position.x + w, position.y + h,   1.0f, 0.0f }
             };
             // render glyph texture over quad
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
@@ -126,7 +124,7 @@ namespace EM {
             // render quad
             glDrawArrays(GL_TRIANGLES, 0, 6);
             // now advance cursors for next glyph
-            x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (1/64th times 2^6 = 64)
+            position.x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (1/64th times 2^6 = 64)
         }
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindVertexArray(0);

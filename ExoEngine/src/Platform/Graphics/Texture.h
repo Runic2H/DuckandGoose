@@ -20,7 +20,7 @@ namespace EM {
 	public:
 		Texture();
 		~Texture();
-		void Bind(int slot = 0) const; //  specify the slot to bind texture to
+		void Bind(unsigned int slot = 0) const; //  specify the slot to bind texture to
 		void UnBind() const;
 		void GenTexture(const std::string& path);
 		void GenTexture(unsigned int width, unsigned int height);
@@ -30,7 +30,7 @@ namespace EM {
 
 		inline int GetWidth() const { return _width; }
 		inline int GetHeight() const { return _height; }
-		inline int GetRendererID() const { return m_RendererID; }
+		inline unsigned int GetRendererID() const { return m_RendererID; }
 
 		bool operator==(const Texture& other) const
 		{

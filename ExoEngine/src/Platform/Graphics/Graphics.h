@@ -22,6 +22,7 @@
 #include "Renderer.h"
 #include "Buffer.h"
 #include "TextRendering.h"
+#include "ExoEngine/Math/Vmath.h"
 
 namespace EM {
 
@@ -44,7 +45,15 @@ namespace EM {
 
 		Camera2D camera = { -1.0f, 1.0f, -1.0f , 1.0f };
 		glm::vec3 m_cameraposition = { 0.0f, 0.0f, 0.0f };
-		float CameraSpeed = 5.0f;
+		float CameraSpeed = 2.0f;
 		glm::vec3 SquarePosition = { 0.0f, 0.0f, 0.0f };
+
+		struct Obj
+		{
+			vec2D position;
+			vec2D scale;
+			int collisiontype;
+
+		}player, wall;
 	};
 }

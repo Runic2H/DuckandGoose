@@ -21,11 +21,11 @@ namespace EM {
 		std::map<char, Character> Characters;
 		
 		Font() = default;
-		void Init(/*Camera2D& camera*/); // load the path of the font we taking
+		void Init(); // load the path of the font we taking
 
-		void Load(const std::string& fontpath, unsigned int fontsize);
+		void Load(const std::string& fontpath, unsigned int fontsize = 50);
 
-		void RenderText(const std::string& text, float x, float y, float scale, Camera2D& camera, glm::vec3 color = glm::vec3(1.0f));
+		void RenderText(const std::string& text, glm::vec2 position, float scale, Camera2D& camera, glm::vec3 color = glm::vec3(1.0f));
 
 	private:
 		MultiRefs<Shader> TextShader;

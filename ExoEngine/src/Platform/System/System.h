@@ -24,7 +24,7 @@ namespace EM {
 		virtual ~System() {};
 		//System function
 		virtual void Init() = 0 {};
-		virtual void Update(float Frametime){};
+		virtual void Update(float Frametime) { UNREFERENCED_PARAMETER(Frametime); };
 		virtual void End() = 0 {};
 
 	protected:
