@@ -7,11 +7,6 @@
 namespace EM
 {
 
-    enum Col_Type
-    {
-        rectangle,
-        Circle
-    };
     
     class RigidBody2 {
     public:
@@ -30,6 +25,7 @@ namespace EM
         vec2D get_accel();//return acceleration
         vec2D get_vel();//return velocity
         vec2D get_force();
+        float get_rad();
 
         //reset function
         void reset_force();
@@ -54,7 +50,6 @@ namespace EM
 
 
     private:
-        Col_Type Type;
         Vec2 pos;//position of actor this is a temp object, to be deletedd after intergration
 
         float  mass;//nass of actor
@@ -64,12 +59,7 @@ namespace EM
         bool mordify;
 
         aabb bounding_box;
-        circle bounding_circle;
-
-
-
-
-        
+        circle_bound bounding_circle;
     };
 
 

@@ -36,7 +36,7 @@ namespace EM {
         return newCast;
     } NOT FUNCTIONING CURRENTLY--------------------------------------------------------------------------------------------*/
     //circle to wall
-    bool entityCollision::wallCollision(const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
+    bool entityCollision::wallCollision(const circle_bound&circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
         float circdot = dotProduct(wall.normal, circle.center);
         float normaldot = dotProduct(wall.normal, wall.p0);
 
@@ -92,7 +92,7 @@ namespace EM {
         return 0;
     }
     //circle to edge
-    bool entityCollision::edgeCollision(bool willcollide, const circle &circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
+    bool entityCollision::edgeCollision(bool willcollide, const circle_bound&circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm,	float &coltime) {
         vec2D circVel = entnextpos - circle.center;
         vec2D normVel;
         Normalize(normVel, circVel);
@@ -196,9 +196,9 @@ namespace EM {
         return 0;
     }
     //circle to circle
-    bool entityCollision::objCollision(const circle &ent1, const vec2D &ent1vel, const circle &ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
+    bool entityCollision::objCollision(const circle_bound&ent1, const vec2D &ent1vel, const circle_bound&ent2, const vec2D &ent2vel, vec2D &ent1colpt, vec2D &ent2colpt, float &coltime) {
         vec2D relativeVel = ent1vel - ent2vel;
-        circle tempCirc;
+        circle_bound tempCirc;
         tempCirc.center = ent2.center;
         tempCirc.radius = ent1.radius + ent2.radius;
         castRay tempRay;
@@ -232,7 +232,7 @@ namespace EM {
         }
     }
     //cone circle collision
-    bool entityCollision::coneCollision(const circle &ent1, const int startAngle, const int endAngle, bool lr, const circle &ent2) {
+    bool entityCollision::coneCollision(const circle_bound&ent1, const int startAngle, const int endAngle, bool lr, const circle_bound&ent2) {
         vec2D dist0 = ent2.center - ent1.center;
         float startRad = (float)(startAngle / 180 * (atan(1) * 4));
         float endRad = (float)(endAngle / 180 * (atan(1) * 4));
@@ -280,14 +280,14 @@ namespace EM {
         return 1;
     }
     //AABB Collision
-    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2) {
+    bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt) {
         //Static collision
         if (!(min1.value.x > max2.value.x || min2.value.x > max1.value.x || max1.value.y < min2.value.y || max2.value.y < min1.value.y)) {
             return true;
         }
         //dynamic collision
         float tFirst = 0;
-        float tLast = 1;
+        float tLast = dt;//dt
         vec2D relvel = vel2 - vel1;
         vec2D dFirst = min1 - max2;
         vec2D dLast = max1 - min2;
@@ -346,7 +346,20 @@ namespace EM {
         //if all falls through, return no collision
         return false;
     }
-
+    //circle aabb collision
+    bool entityCollision::boundingBoxCircle(const circle_bound& ent1, vec2D max2, vec2D min2) {
+        if (min2.value.x - ent1.center.value.x > ent1.radius || ent1.center.value.x - max2.value.x > ent1.radius ||
+            min2.value.y - ent1.center.value.y > ent1.radius || ent1.center.value.y - max2.value.y > ent1.radius) {
+            return 0;
+        }
+        vec2D topleft(min2.value.x, max2.value.y);
+        vec2D bottomright(max2.value.x, min2.value.y);
+        if (distance(ent1.center, min2) > ent1.radius && distance(ent1.center, max2) > ent1.radius &&
+            distance(ent1.center, topleft) > ent1.radius && distance(ent1.center, bottomright) > ent1.radius) {
+            return 0;
+        }
+        return 1;
+    }
     //circle wall reaction
     void entityCollision::wallBounce(const vec2D &colpt, const vec2D &ptnorm, vec2D &entnextpos, vec2D &reflectiondir) {
         vec2D penPoint = entnextpos - colpt;
@@ -376,7 +389,7 @@ namespace EM {
     void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
         entvel += (dir * mag);
         if (length(entvel) >= lim) {
-            entvel = 0.9 * entvel;
+            entvel = 0.9f * entvel;
         }
     }
     void decelent(vec2D &entvel) {

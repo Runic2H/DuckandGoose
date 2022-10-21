@@ -4,12 +4,6 @@ namespace EM
 {
 
 
-	RigidBody2::RigidBody2( vec2D vel)
-	{
-		velocity = vel;
-		
-	}
-
 	/*void RigidBody2::update_physics()
 	{
 		pos += velocity * pos;
@@ -42,6 +36,10 @@ namespace EM
 	vec2D RigidBody2::get_force()
 	{
 		return force;
+	}
+    float RigidBody2::get_rad()
+	{
+		return bounding_circle.radius;
 	}
 
 	void RigidBody2::reset_accel()

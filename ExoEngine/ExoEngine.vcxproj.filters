@@ -44,6 +44,7 @@
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\Graphics\TextRendering.cpp" />
     <ClCompile Include="src\Platform\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\collision_system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="src\Platform\Graphics\TextRendering.h" />
     <ClInclude Include="src\Platform\Graphics\FrameBuffer.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneViewer.h" />
+    <ClInclude Include="src\ExoEngine\Math\collision_system.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

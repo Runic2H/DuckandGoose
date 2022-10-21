@@ -17,6 +17,7 @@
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
+#include "ExoEngine/Math/collision_system.h"
 #include "ECS/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
@@ -68,6 +69,14 @@ namespace EM {
 		}
 		mGraphics->Init();
 
+		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<RigidBody>());
+			ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
+
 		Entity player = ecs.CreateEntity();
 		//ecs.AddComponent(player, Player{});
 		ecs.AddComponent<Transform>(player, transform);
@@ -87,7 +96,7 @@ namespace EM {
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
 
-			
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
