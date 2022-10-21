@@ -31,7 +31,6 @@ namespace EM {
 	Application::Application()
 	{
 		ecs.Init();
-
 	}
 
 	Application::~Application()
@@ -46,7 +45,7 @@ namespace EM {
 
 	void Application::Run() 
 	{
-
+		Timer::GetInstance().GlobalTimeStarter();
 		Window* m_window = new Window;
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
@@ -82,31 +81,32 @@ namespace EM {
 		//ecs.AddComponent(player, Player{});
 		ecs.AddComponent<Transform>(player, transform);
 
-		FramePerSec fpschecker;
-		fpschecker.InitFrame();
-
+		FramePerSec::GetInstance().InitFrame();
+		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
 
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
+			FramePerSec::GetInstance().StartFrameCount();
 			
-			fpschecker.StartFrameCount();
 
 			for (System* system : m_Systems)
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
 
+			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();
-
-			fpschecker.EndFrameCount();
+			
 			Timer::GetInstance().Update(Systems::API);
+			FramePerSec::GetInstance().EndFrameCount();
+	
 		}
-
+		
 		End();
 	}
 

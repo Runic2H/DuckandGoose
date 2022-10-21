@@ -51,13 +51,13 @@ namespace EM {
 
 	std::chrono::system_clock::time_point Timer::GetStartTime(Systems system)
 	{
-		return std::chrono::system_clock::time_point();
+		return t_StartTime[static_cast<int>(system)];
 	}
 
-	//time_t Timer::GetSystemTimeNow()
-	//{
-	//	return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); // converts current time to seconds
-	//}
+	time_t Timer::GetSystemTimeNow()
+	{
+		return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); // converts current time to seconds
+	}
 
 	void Timer::GlobalUpdate()
 	{

@@ -231,6 +231,9 @@
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\freetype\libs\freetype.lib" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

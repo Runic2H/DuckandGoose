@@ -40,6 +40,19 @@ namespace EM {
 		
 		void DrawLine(const glm::vec3& position0, const glm::vec3& position1, const glm::vec4& color);
 		void DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
+
+		void DrawCircle(const glm::mat4& transform, const glm::vec4& color, float depth = 1.0f, float decline = 0.01f);
+		//Information for renderer
+		struct Information
+		{
+			unsigned int n_DrawCalls = 0; //n_ = no. of
+			unsigned int n_Quad = 0;
+
+			unsigned int TotalVertexUsed()const { return n_Quad * 4; }
+			unsigned int TotalIndexUsed()const { return n_Quad * 6; }
+		};
+		void ResetInfo();
+		static Information GetInfo();
 	private:
 
 		struct SceneData

@@ -19,6 +19,9 @@
 #include <imgui/imgui_impl_opengl3.h>
 
 #include "LevelEditor.h"
+#include "ExoEngine/Timer/Time.h"
+#include "ExoEngine/Timer/Fps.h"
+#include "Platform/Graphics/Renderer.h"
 
 namespace EM {
 
@@ -53,6 +56,9 @@ namespace EM {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
+        //can be removed not important
+        ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 20); //modify the font in each of the tabs
+        
 		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
 		ImGui_ImplOpenGL3_Init("#version 450");
 	}
@@ -66,14 +72,27 @@ namespace EM {
 		ImGuiIO& io = ImGui::GetIO();
 		// tells imgui how big our display is 
 		io.DisplaySize = ImVec2(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
         
         docking();
+        Profiler();
+        Font();
+        ImGui::ShowMetricsWindow();
 		DropDownMenu();
 		ColorPickerTab();
 		
 	}
+    void LevelEditor::Font()
+    {
+        //ImGuiIO& io = ImGui::GetIO();
+        //ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 50);
+        //ImFont* font2 = io.Fonts->AddFontFromFileTTF("anotherfont.otf", 50);
 
+        //ImGui::Text("Hello"); // use the default font (which is the first loaded font)
+        //ImGui::PushFont(font2);
+        //ImGui::Text("Hello with another font");
+        //ImGui::PopFont();
+    }
     //  Render interface onto frame
 	void LevelEditor::Draw()
 	{
@@ -464,6 +483,30 @@ namespace EM {
         ImGui::End();
     }
     
-  
+   void LevelEditor::Profiler()
+   {
+       ImGui::Begin("Profiler");
+       //Opengl information
+       ImGui::Text("Opengl Information ");
+       ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+       ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+       ImGui::Text("Version: %s", glGetString(GL_VERSION));
+       ImGui::Text("\n");
+
+       // how much time per frame and Fps
+       ImGui::Text("Application average % .3f ms / frame(% .1f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
+       
+       //Renderering Information
+       ImGui::Text("\n");
+       auto Infos = Renderer::GetInfo();
+       ImGui::Text("Renderer Information");
+       ImGui::Text("Draw Calls: %d", Infos.n_DrawCalls);
+       ImGui::Text("Quads: %d", Infos.n_Quad);
+       ImGui::Text("Vertices: %d", Infos.TotalVertexUsed());
+       ImGui::Text("Indices: %d", Infos.TotalIndexUsed());
+
+       //Todo show the each system consume how much at runtime
+       ImGui::End();
+   }
 	
 }
