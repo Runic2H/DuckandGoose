@@ -352,8 +352,8 @@ namespace EM {
             min2.value.y - ent1.center.value.y > ent1.radius || ent1.center.value.y - max2.value.y > ent1.radius) {
             return 0;
         }
-        vec2D topleft(min2.value.x, max.value.y);
-        vec2D bottomright(max2.value.x, min.value.y);
+        vec2D topleft(min2.value.x, max2.value.y);
+        vec2D bottomright(max2.value.x, min2.value.y);
         if (distance(ent1.center, min2) > ent1.radius && distance(ent1.center, max2) > ent1.radius &&
             distance(ent1.center, topleft) > ent1.radius && distance(ent1.center, bottomright) > ent1.radius) {
             return 0;
@@ -389,7 +389,7 @@ namespace EM {
     void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
         entvel += (dir * mag);
         if (length(entvel) >= lim) {
-            entvel = 0.9 * entvel;
+            entvel = 0.9f * entvel;
         }
     }
     void decelent(vec2D &entvel) {

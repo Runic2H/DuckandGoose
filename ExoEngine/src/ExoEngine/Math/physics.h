@@ -35,6 +35,7 @@ namespace EM {
                 vec2D	dir;
             };
         public:
+            entityCollision() = default;
             //bool basicBoundingBox(vec2D max1, vec2D min1, vec2D max2, vec2D min2);
             /***************************************************************************//*!
             \brief

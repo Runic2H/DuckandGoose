@@ -4,12 +4,6 @@ namespace EM
 {
 
 
-	RigidBody2::RigidBody2( vec2D vel)
-	{
-		velocity = vel;
-		
-	}
-
 	/*void RigidBody2::update_physics()
 	{
 		pos += velocity * pos;
@@ -18,11 +12,6 @@ namespace EM
 	void RigidBody2::set_aabb(aabb box)
 	{
 		bounding_box = box;
-	}
-
-	void RigidBody2::set_collider(Col_Type in)
-	{
-		Type = in;
 	}
 	
 	void RigidBody2::calculate_accel()
@@ -51,10 +40,6 @@ namespace EM
     float RigidBody2::get_rad()
 	{
 		return bounding_circle.radius;
-	}
-	Col_Type RigidBody2::get_collider()
-	{
-		return Type;
 	}
 
 	void RigidBody2::reset_accel()

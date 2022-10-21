@@ -22,7 +22,7 @@ deserialize its data
 #include "ExoEngine/Math/Vmath.h"
 namespace EM
 {
-	enum class Col_Type:int
+	enum class Col_Type
     {
 		none, 
         cone, //---------Cone
@@ -44,7 +44,7 @@ namespace EM
 		vec2D& GetVel() { return vel; }
 		vec2D& GetInitVel() { return initvel; }
 		vec2D& GetNextPos() { return nextpos; }
-		vec2D& GetCollider() { return collider; }
+		Col_Type& GetCollider() { return collider; }
 
 		void SetMin(vec2D Min) { min = Min; }
 		void SetMax(vec2D Max) { max = Max; }

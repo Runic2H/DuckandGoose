@@ -7,13 +7,6 @@
 namespace EM
 {
 
-    enum Col_Type
-    {
-        cone, //---------Cone
-        circle, //-------Circle
-        line, //---------LineSegment
-        rect //----------AABB
-    };
     
     class RigidBody2 {
     public:
@@ -27,14 +20,12 @@ namespace EM
        // void update_physics();
         //bounding box creation tool
         void set_aabb(aabb box);// create aabb
-        void set_collider(Col_Type in);
 
         //getter function
         vec2D get_accel();//return acceleration
         vec2D get_vel();//return velocity
         vec2D get_force();
         float get_rad();
-        Col_Type get_collider();
 
         //reset function
         void reset_force();
@@ -59,7 +50,6 @@ namespace EM
 
 
     private:
-        Col_Type Type;
         Vec2 pos;//position of actor this is a temp object, to be deletedd after intergration
 
         float  mass;//nass of actor

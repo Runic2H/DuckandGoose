@@ -55,6 +55,7 @@ namespace EM {
 			auto& transform = ecs.GetComponent<Transform>(entity);
 			//draw quad without texture
 			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), { 1.0f, -0.5f, 0.8f, 1.0f });
+			
 		}
 		// draw quad with texture
 		m_Renderer->DrawQuad({ 0.0f, -0.5f }, { 1.0f, 1.0f }, ResourceManager::GetTexture("BackGround"));

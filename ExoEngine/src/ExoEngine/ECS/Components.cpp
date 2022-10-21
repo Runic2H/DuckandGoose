@@ -30,7 +30,21 @@ namespace EM
 		max = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
 		vel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
 		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
-		collider = Col_Type::obj["???"].GetInt();//----------------Collider serialization
+		if (obj["???"].GetInt() == 0) {
+			collider = Col_Type::none;
+		}//----------------Collider serialization
+		else if (obj["???"].GetInt() == 1) {
+			collider = Col_Type::cone;
+		}
+		else if (obj["???"].GetInt() == 2) {
+			collider = Col_Type::circle;
+		}
+		else if (obj["???"].GetInt() == 3) {
+			collider = Col_Type::line;
+		}
+		else if (obj["???"].GetInt() == 4) {
+			collider = Col_Type::rect;
+		}
 		return true;
 	}
 	bool RigidBody::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
@@ -53,7 +67,21 @@ namespace EM
 		writer->Key("initY");
 		writer->Double(initvel.value.y);
 		writer->Key("???");//------------------------------
-		writer->Int(collider);//-----Collider serialization
+		if (collider == Col_Type::none) {
+			writer->Int(0);//-----Collider serialization
+		}
+		else if (collider == Col_Type::cone) {
+			writer->Int(1);
+		}
+		else if (collider == Col_Type::circle) {
+			writer->Int(2);
+		}
+		else if (collider == Col_Type::line) {
+			writer->Int(3);
+		}
+		else if (collider == Col_Type::rect) {
+			writer->Int(4);
+		}
 		writer->EndObject();
 		return true;
 	}

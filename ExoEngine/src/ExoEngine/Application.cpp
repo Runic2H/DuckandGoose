@@ -96,7 +96,7 @@ namespace EM {
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
 
-			
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
