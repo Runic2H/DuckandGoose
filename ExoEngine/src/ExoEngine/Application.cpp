@@ -57,6 +57,7 @@ namespace EM {
 		//m_Systems.SystemIndex(1, m_graphic);
 
 		Transform transform;
+		RigidBody rigidbody;
 		transform.DeserializeFromFile("PlayerTransform.json");
 		ecs.RegisterComponent<Transform>();
 		ecs.RegisterComponent<RigidBody>();
@@ -80,6 +81,11 @@ namespace EM {
 		Entity player = ecs.CreateEntity();
 		//ecs.AddComponent(player, Player{});
 		ecs.AddComponent<Transform>(player, transform);
+		ecs.AddComponent<RigidBody>(player, rigidbody);
+
+		Entity wall = ecs.CreateEntity();
+		ecs.AddComponent<Transform>(wall, transform);
+		ecs.AddComponent<RigidBody>(wall, rigidbody);
 
 		FramePerSec::GetInstance().InitFrame();
 		
