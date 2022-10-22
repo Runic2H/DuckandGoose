@@ -21,8 +21,8 @@ namespace EM
 	//reset function
 	void RigidBody2::reset_force()
 	{
-		force.value.x = 0;
-		force.value.y = 0;
+		force.x = 0;
+		force.y = 0;
 	}
 
 	vec2D RigidBody2::get_accel()
@@ -44,13 +44,13 @@ namespace EM
 
 	void RigidBody2::reset_accel()
 	{
-		aceleration.vector.x = 0;
-		aceleration.vector.y = 0;
+		aceleration.x = 0;
+		aceleration.y = 0;
 	}
 	void RigidBody2::reset_velocity()
 	{
-		velocity.vector.x = 0;
-		velocity.vector.y = 0;
+		velocity.x = 0;
+		velocity.y = 0;
 	}
 
 	//helper function
@@ -61,8 +61,8 @@ namespace EM
 
 	void RigidBody2::set_velocity(vec2D Velocity)
 	{
-		velocity.vector.y = Velocity.vector.y;
-		velocity.vector.x = Velocity.vector.x;
+		velocity.y = Velocity.y;
+		velocity.x = Velocity.x;
 	}
 
 	void RigidBody2::set_acceleration(vec2D Accel)

@@ -49,12 +49,12 @@ namespace EM {
                                 if (e2 == Col_Type::circle) {
                                     circle_bound ent1;
                                     ent1.center = ent1pos;
-                                    ent1.radius = rigid1.GetMax().value.x - ent1pos.value.x;
+                                    ent1.radius = rigid1.GetMax().x - ent1pos.x;
                                     circle_bound ent2;
                                     ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
+                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     bool lr;
-                                    if (rigid1.GetVel().value.x < 0) {
+                                    if (rigid1.GetVel().x < 0) {
                                         lr = 0;
                                     }
                                     else {
@@ -72,11 +72,11 @@ namespace EM {
                             else if (e1 == Col_Type::circle) {
                                 circle_bound ent1;
                                 ent1.center = ent1pos;
-                                ent1.radius = rigid1.GetMax().value.x - ent1pos.value.x;
+                                ent1.radius = rigid1.GetMax().x - ent1pos.x;
                                 if (e2 == Col_Type::circle) {
                                     circle_bound ent2;
                                     ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
+                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     vec2D ent1colpt;
                                     vec2D ent2colpt;
                                     float coltime;
@@ -97,9 +97,9 @@ namespace EM {
                                 else if (e2 == Col_Type::cone) {
                                     circle_bound ent2;
                                     ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
+                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     bool lr;
-                                    if (rigid2.GetVel().value.x < 0) {
+                                    if (rigid2.GetVel().x < 0) {
                                         lr = 0;
                                     }
                                     else {
@@ -118,8 +118,8 @@ namespace EM {
                                     wall2.p0 = rigid2.GetMin();
                                     wall2.p1 = rigid2.GetMax();
                                     vec2D temp = wall2.p1 - wall2.p0;
-                                    wall2.normal.value.x = temp.value.y;
-                                    wall2.normal.value.y = -temp.value.x;
+                                    wall2.normal.x = temp.y;
+                                    wall2.normal.y = -temp.x;
                                     Normalize(wall2.normal, wall2.normal);
                                     vec2D colpt;
                                     vec2D colnorm;
@@ -144,12 +144,12 @@ namespace EM {
                                     wall2.p0 = rigid1.GetMin();
                                     wall2.p1 = rigid1.GetMax();
                                     vec2D temp = wall2.p1 - wall2.p0;
-                                    wall2.normal.value.x = temp.value.y;
-                                    wall2.normal.value.y = -temp.value.x;
+                                    wall2.normal.x = temp.y;
+                                    wall2.normal.y = -temp.x;
                                     Normalize(wall2.normal, wall2.normal);
                                     circle_bound ent1;
                                     ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
+                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     vec2D colpt;
                                     vec2D colnorm;
                                     vec2D entnextpos = rigid2.GetNextPos();
@@ -165,7 +165,7 @@ namespace EM {
                                 if (e2 == Col_Type::circle) {
                                     circle_bound ent1;
                                     ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().value.x - ent2pos.value.x;
+                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     if (ecm.boundingBoxCircle(ent1, rigid1.GetMax(), rigid1.GetMin())) {
                                         //hit detected. take damage
                                     }

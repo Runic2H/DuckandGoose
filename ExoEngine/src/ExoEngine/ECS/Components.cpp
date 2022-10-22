@@ -51,21 +51,21 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("minX");
-		writer->Double(min.value.x);
+		writer->Double(min.x);
 		writer->Key("minY");
-		writer->Double(min.value.y);
+		writer->Double(min.y);
 		writer->Key("maxX");
-		writer->Double(max.value.x);
+		writer->Double(max.x);
 		writer->Key("maxY");
-		writer->Double(max.value.y);
+		writer->Double(max.y);
 		writer->Key("velX");
-		writer->Double(vel.value.x);
+		writer->Double(vel.x);
 		writer->Key("velY");
-		writer->Double(vel.value.y);
+		writer->Double(vel.y);
 		writer->Key("initX");
-		writer->Double(initvel.value.x);
+		writer->Double(initvel.x);
 		writer->Key("initY");
-		writer->Double(initvel.value.y);
+		writer->Double(initvel.y);
 		writer->Key("???");//------------------------------
 		if (collider == Col_Type::none) {
 			writer->Int(0);//-----Collider serialization
@@ -103,13 +103,13 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("posX");
-		writer->Double(position.value.x);
+		writer->Double(position.x);
 		writer->Key("posY");
-		writer->Double(position.value.y);
+		writer->Double(position.y);
 		writer->Key("scaleX");
-		writer->Double(scale.value.x);
+		writer->Double(scale.x);
 		writer->Key("scaleY");
-		writer->Double(scale.value.y);
+		writer->Double(scale.y);
 		writer->Key("Rot");
 		writer->Double(rot);
 		writer->EndObject();
