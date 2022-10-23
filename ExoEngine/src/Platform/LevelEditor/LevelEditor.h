@@ -32,6 +32,10 @@ namespace EM {
 
 		void DropDownMenu(); //Menu widget
 		void ColorPickerTab(); //color picker widget
+		void EditorTabs();
+		void TransformTab();
+		void SpriteRenderer();
+		void SceneHierarchyWindow();
 
 		static std::unique_ptr<LevelEditor>& GetInstance();
 	private:	
