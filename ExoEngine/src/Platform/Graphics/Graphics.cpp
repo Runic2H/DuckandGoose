@@ -49,43 +49,43 @@ namespace EM {
 		glm::vec4 redcolor{ 1.0f, 0.0f, 0.0f, 1.0f };
 		glm::vec4 greencolor{ 0.0f, 1.0f, 0.0f, 1.0f };
 
-		for (auto const& entity : mEntities)
+		/*for (auto const& entity : mEntities)
 		{
 			auto& transform = ecs.GetComponent<Transform>(entity);
 			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), greencolor);
+		}*/
+
+		static float rotationspeed = 0.0f;
+		rotationspeed += frametime * 10.0f;
+
+		static float rotationspeed2 = 0.0f;
+		rotationspeed2 -= frametime * 10.0f;
+		//test for box with color and without texture
+		glm::vec2 pos{ 2.0f };
+		m_Renderer->DrawQuad(pos, { 1.0f, 1.0f }, redcolor);
+
+		glm::vec2 pos1{ 0.0f };
+		
+		m_Renderer->DrawQuad(pos1, { 1.0f, 1.0f }, rotationspeed, greencolor);
+		
+		glm::vec2 pos2{ -1.0f };
+		m_Renderer->DrawQuad(pos2, { 2.5f, 1.0f }, ResourceManager::GetTexture("BackGround"));
+		
+		glm::vec2 pos3{ -1.0f, 1.0f };
+		m_Renderer->DrawQuad(pos3, { 1.0f, 1.0f }, ResourceManager::GetTexture("Duck"));
+
+		glm::vec2 pos4{ 1.0f, -1.0f };
+		m_Renderer->DrawQuad(pos4, { 1.0f, 1.0f }, rotationspeed2, ResourceManager::GetTexture("Duck"));
+
+		//example for renderering tile once data is up
+		for (int y = 0; y < 30 ; y++)
+		{
+			for (int x = 0; x < 30; x++)
+			{
+				glm::vec2 tilePos(x * 0.11f, y * 0.11f);
+				m_Renderer->DrawQuad(tilePos, { 0.1f, 0.1f }, ResourceManager::GetTexture("Player"));
+			}
 		}
-
-		//static float rotationspeed = 0.0f;
-		//rotationspeed += frametime * 10.0f;
-
-		//static float rotationspeed2 = 0.0f;
-		//rotationspeed2 -= frametime * 10.0f;
-		////test for box with color and without texture
-		//glm::vec2 pos{ 2.0f };
-		//m_Renderer->DrawQuad(pos, { 1.0f, 1.0f }, redcolor);
-
-		//glm::vec2 pos1{ 0.0f };
-		//
-		//m_Renderer->DrawQuad(pos1, { 1.0f, 1.0f }, rotationspeed, greencolor);
-		//
-		//glm::vec2 pos2{ -1.0f };
-		//m_Renderer->DrawQuad(pos2, { 2.5f, 1.0f }, ResourceManager::GetTexture("BackGround"));
-		//
-		//glm::vec2 pos3{ -1.0f, 1.0f };
-		//m_Renderer->DrawQuad(pos3, { 1.0f, 1.0f }, ResourceManager::GetTexture("Duck"));
-
-		//glm::vec2 pos4{ 1.0f, -1.0f };
-		//m_Renderer->DrawQuad(pos4, { 1.0f, 1.0f }, rotationspeed2, ResourceManager::GetTexture("Duck"));
-
-		////example for renderering tile once data is up
-		//for (int y = 0; y < 30 ; y++)
-		//{
-		//	for (int x = 0; x < 30; x++)
-		//	{
-		//		glm::vec2 tilePos(x * 0.11f, y * 0.11f);
-		//		m_Renderer->DrawQuad(tilePos, { 0.1f, 0.1f }, ResourceManager::GetTexture("Player"));
-		//	}
-		//}
 		/*glm::vec3 pos5{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 pos6{ 0.5f, 0.5f, 0.0f };
 		m_Renderer->DrawLine(pos5, pos6, { 1.0f, 0.1f, 0.1f, 1.0f });

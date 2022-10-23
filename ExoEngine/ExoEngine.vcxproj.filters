@@ -43,6 +43,8 @@
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
+    <ClCompile Include="vendor\imgui\ImGuizmo.cpp" />
+    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -186,6 +188,8 @@
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneViewer.h" />
+    <ClInclude Include="vendor\imgui\ImGuizmo.h" />
+    <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

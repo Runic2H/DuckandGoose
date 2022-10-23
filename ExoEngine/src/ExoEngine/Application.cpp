@@ -21,6 +21,7 @@
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
+#include "Audio/AudioEngine.h"
 namespace EM {
 
 	ECS ecs;
@@ -49,10 +50,19 @@ namespace EM {
 		
 		p_Editor->Init(m_window);
 
-		//Graphic* m_graphic = new Graphic;
-		//m_graphic->Init();
-		//m_Systems.SystemIndex(1, m_graphic);
+		Graphic* m_graphic = new Graphic;
+		m_graphic->Init();
+		//init audio
+		/*CAudioEngine aengine;
+		aengine.Init();*/
 
+
+		m_Systems.SystemIndex(1, m_graphic);
+
+		
+		p_Audio->Init();
+		//p_Audio->Loadsound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav");
+		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 100.f);
 		Transform transform;
 		transform.DeserializeFromFile("PlayerTransform.json");
 		ecs.RegisterComponent<Transform>();
@@ -64,7 +74,7 @@ namespace EM {
 			signature.set(ecs.GetComponentType<Transform>());
 			ecs.SetSystemSignature<Graphic>(signature);
 		}
-		mGraphics->Init();
+		//mGraphics->Init();
 
 		Entity player = ecs.CreateEntity();
 		//ecs.AddComponent(player, Player{});
@@ -80,17 +90,17 @@ namespace EM {
 			Timer::GetInstance().GetDT(Systems::API);
 			
 			fpschecker.StartFrameCount();
-
+			p_Audio->Update();
 			for (System* system : m_Systems)
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
 
-			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
+			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();
-
+		
 			fpschecker.EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
@@ -102,6 +112,7 @@ namespace EM {
 	void Application::End()
 	{
 		p_Editor->End();
+		p_Audio->Release();
 		m_Systems.DeleteSystem();
 	}
 
