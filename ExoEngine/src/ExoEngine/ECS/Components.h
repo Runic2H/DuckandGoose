@@ -25,7 +25,6 @@ namespace EM
 	enum class Col_Type
     {
 		none, 
-        cone, //---------Cone
         circle, //-------Circle
         line, //---------LineSegment
         rect //----------AABB
