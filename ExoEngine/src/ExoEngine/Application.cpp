@@ -64,8 +64,8 @@ namespace EM {
 
 		
 		p_Audio->Init();
-		//p_Audio->Loadsound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav");
-		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 100.f);
+		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
+
 		Transform transform;
 		RigidBody rigidbody;
 		transform.DeserializeFromFile("PlayerTransform.json");
@@ -106,7 +106,6 @@ namespace EM {
 			Timer::GetInstance().GetDT(Systems::API);
 			FramePerSec::GetInstance().StartFrameCount();
 			
-			fpschecker.StartFrameCount();
 			p_Audio->Update();
 
 			for (System* system : m_Systems)
@@ -119,12 +118,8 @@ namespace EM {
 			p_Editor->Update();
 			p_Editor->Draw();
 		
-			fpschecker.EndFrameCount();
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			
-			p_Editor->Update();
-			p_Editor->Draw();
 			
 			Timer::GetInstance().Update(Systems::API);
 			FramePerSec::GetInstance().EndFrameCount();

@@ -64,7 +64,7 @@ namespace EM
 		writer->Key("initY");
 		writer->Double(initvel.y);
 		writer->Key("???");//------------------------------
-		writer->Double(initvel.value.y);
+		writer->Double(initvel.y);
 		writer->Key("col");//------------------------------
 		if (collider == Col_Type::none) {
 			writer->Int(0);//-----Collider serialization
