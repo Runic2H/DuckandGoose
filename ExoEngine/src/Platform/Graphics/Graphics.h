@@ -22,7 +22,8 @@
 #include "Renderer.h"
 #include "Buffer.h"
 #include "TextRendering.h"
-#include "ExoEngine/Math/Vmath.h"
+#include "ExoEngine/Math/math.h"
+
 
 namespace EM {
 
@@ -47,6 +48,7 @@ namespace EM {
 		glm::vec3 m_cameraposition = { 0.0f, 0.0f, 0.0f };
 		float CameraSpeed = 2.0f;
 		glm::vec3 SquarePosition = { 0.0f, 0.0f, 0.0f };
+		Mat4x4 test;
 
 		struct Obj
 		{

@@ -8,13 +8,25 @@
 #include "../../Platform/System/System.h"
 
 namespace EM {
-	class PhysicsSystem : public System
+	class EM_API PhysicsSystem : System
 	{
-		void Init() override;
+	public:
+		virtual void Init() override;
 
-		void Update(float dt) override;
+		virtual void Update(float dt);
+	private:
+        //function take in acceleration, calculate and set force
+       //function take force and find the acceleration of the moving object
+        void calculate_accel(RigidBody2 obj);
+        
+       
 
-		void End() override;
+         //reset function
+        void reset_force(RigidBody2 obj);
+        void reset_accel(RigidBody2 obj);
+        void reset_velocity(RigidBody2 obj);
+        void multiply_scale(Transform2 obj, vec2D Scale);
+       
 	};
 
 }

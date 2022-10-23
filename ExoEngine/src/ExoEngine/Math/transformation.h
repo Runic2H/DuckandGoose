@@ -6,10 +6,17 @@
 
 namespace EM 
 {
-	class Transform2
+	struct Transform2
 	{
-	public:
-		Transform2();
+		vec2D pos;
+		vec2D scale;
+		float rotation;
+		bool collision_flag{ false };
+	};
+
+}
+
+/*		Transform2();
 		Transform2(vec2D Pos, vec2D Scale, float Rotation);
 
 		void set_pos(vec2D Pos);
@@ -23,13 +30,4 @@ namespace EM
 
 		void add_pos(vec2D Pos);
 		void subtract_pos(vec2D Pos);
-		void multiply_scale(vec2D Scale);
-	
-	private:
-		vec2D pos;
-		vec2D scale;
-		float rotation;
-		bool collision_flag{ false };
-	};
-
-}
+		void multiply_scale(vec2D Scale);*/

@@ -11,15 +11,15 @@ namespace EM {
         entvel -= 0.5f * entvel;
     }
     void entityPhysics::gravity(vec2D& entvel) {
-        entvel.value.y -= 9.8f;
+        entvel.y -= 9.8f;
     }
     /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
         newWall.p0 = pt1;
         newWall.p1 = pt2;
         vec2D temp = newWall.p0 - newWall.p1;
-        newWall.normal.value.x = -temp.value.y;
-        newWall.normal.value.y = temp.value.x;
+        newWall.normal.x = -temp.y;
+        newWall.normal.y = temp.x;
         Normalize(newWall.normal, newWall.normal);
         return newWall;
     }
@@ -42,8 +42,8 @@ namespace EM {
 
         vec2D circVel = entnextpos - circle.center;
         vec2D circVelNormal;
-        circVelNormal.value.x =  circVel.value.y;
-        circVelNormal.value.y = -circVel.value.x;
+        circVelNormal.x =  circVel.y;
+        circVelNormal.y = -circVel.x;
 
         vec2D p0plusrad = (wall.p0 + circle.radius * wall.normal);
         vec2D p1plusrad = (wall.p1 + circle.radius * wall.normal);
@@ -96,7 +96,7 @@ namespace EM {
         vec2D circVel = entnextpos - circle.center;
         vec2D normVel;
         Normalize(normVel, circVel);
-        vec2D velNormal = vec2D(normVel.value.y, -normVel.value.x);
+        vec2D velNormal = vec2D(normVel.y, -normVel.x);
         if (willcollide) {
             if (dotProduct(wall.p0 - circle.center, wall.p1 - wall.p0) > 0) {
                 float m = dotProduct(wall.p0 - circle.center, normVel);
@@ -234,7 +234,7 @@ namespace EM {
     //AABB Collision
     bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt) {
         //Static collision
-        if (!(min1.value.x > max2.value.x || min2.value.x > max1.value.x || max1.value.y < min2.value.y || max2.value.y < min1.value.y)) {
+        if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
             return true;
         }
         //dynamic collision
@@ -243,52 +243,52 @@ namespace EM {
         vec2D relvel = vel2 - vel1;
         vec2D dFirst = min1 - max2;
         vec2D dLast = max1 - min2;
-        if (relvel.value.x < 0) {
-            if (min1.value.x > max2.value.x) {
+        if (relvel.x < 0) {
+            if (min1.x > max2.x) {
                 return false;
             }
-            if (max1.value.x < min2.value.x && dFirst.value.x / relvel.value.x > tFirst) {
-                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            if (max1.x < min2.x && dFirst.x / relvel.x > tFirst) {
+                tFirst = std::max(dFirst.x / relvel.x, tFirst);
             }
-            if (max1.value.x > min2.value.x && (dLast.value.x / relvel.value.x) < tLast) {
-                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            if (max1.x > min2.x && (dLast.x / relvel.x) < tLast) {
+                tLast = std::min(dLast.x / relvel.x, tLast);
             }
         }
-        if (relvel.value.x > 0) {
-            if (max1.value.x < min2.value.x) {
+        if (relvel.x > 0) {
+            if (max1.x < min2.x) {
                 return false;
             }
-            if (min1.value.x > max2.value.x && (dFirst.value.x / relvel.value.x) > tFirst) {
-                tFirst = std::max(dFirst.value.x / relvel.value.x, tFirst);
+            if (min1.x > max2.x && (dFirst.x / relvel.x) > tFirst) {
+                tFirst = std::max(dFirst.x / relvel.x, tFirst);
             }
-            if (max1.value.x > min2.value.x && dLast.value.x / relvel.value.x < tLast) {
-                tLast = std::min(dLast.value.x / relvel.value.x, tLast);
+            if (max1.x > min2.x && dLast.x / relvel.x < tLast) {
+                tLast = std::min(dLast.x / relvel.x, tLast);
             }
         }
         if (tFirst > tLast) {
             return false;
         }
-        if (relvel.value.y < 0) {
-            if (min1.value.y > max2.value.y) {
+        if (relvel.y < 0) {
+            if (min1.y > max2.y) {
                 return false;
             }
-            if (max1.value.y < min2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
-                tFirst = std::max((max1.value.y - min2.value.y) / relvel.value.y, tFirst);
+            if (max1.y < min2.y && (dFirst.y / relvel.y) > tFirst) {
+                tFirst = std::max((max1.y - min2.y) / relvel.y, tFirst);
             }
-            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
-                tLast = std::min((min1.value.y - max2.value.y) / relvel.value.y, tLast);
+            if (max1.y > min2.y && (dLast.y / relvel.y) < tLast) {
+                tLast = std::min((min1.y - max2.y) / relvel.y, tLast);
             }
 
         }
-        if (relvel.value.y > 0) {
-            if (max1.value.y < min2.value.y) {
+        if (relvel.y > 0) {
+            if (max1.y < min2.y) {
                 return false;
             }
-            if (min1.value.y > max2.value.y && (dFirst.value.y / relvel.value.y) > tFirst) {
-                tFirst = std::max((min1.value.y - max2.value.y) / relvel.value.y, tFirst);
+            if (min1.y > max2.y && (dFirst.y / relvel.y) > tFirst) {
+                tFirst = std::max((min1.y - max2.y) / relvel.y, tFirst);
             }
-            if (max1.value.y > min2.value.y && (dLast.value.y / relvel.value.y) < tLast) {
-                tLast = std::min((max1.value.y - min2.value.y) / relvel.value.y, tLast);
+            if (max1.y > min2.y && (dLast.y / relvel.y) < tLast) {
+                tLast = std::min((max1.y - min2.y) / relvel.y, tLast);
             }
 
         }
@@ -300,12 +300,12 @@ namespace EM {
     }
     //circle aabb collision
     bool entityCollision::boundingBoxCircle(const circle_bound& ent1, vec2D max2, vec2D min2) {
-        if (min2.value.x - ent1.center.value.x > ent1.radius || ent1.center.value.x - max2.value.x > ent1.radius ||
-            min2.value.y - ent1.center.value.y > ent1.radius || ent1.center.value.y - max2.value.y > ent1.radius) {
+        if (min2.x - ent1.center.x > ent1.radius || ent1.center.x - max2.x > ent1.radius ||
+            min2.y - ent1.center.y > ent1.radius || ent1.center.y - max2.y > ent1.radius) {
             return 0;
         }
-        vec2D topleft(min2.value.x, max2.value.y);
-        vec2D bottomright(max2.value.x, min2.value.y);
+        vec2D topleft(min2.x, max2.y);
+        vec2D bottomright(max2.x, min2.y);
         if (distance(ent1.center, min2) > ent1.radius && distance(ent1.center, max2) > ent1.radius &&
             distance(ent1.center, topleft) > ent1.radius && distance(ent1.center, bottomright) > ent1.radius) {
             return 0;
