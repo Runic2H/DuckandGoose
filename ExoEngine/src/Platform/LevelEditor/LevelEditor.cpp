@@ -20,7 +20,9 @@
 
 #include "imgui/ImGuizmo.h"
 #include "LevelEditor.h"
-#include <Platform/Graphics/Graphics.h>
+#include "ExoEngine/Timer/Time.h"
+#include "ExoEngine/Timer/Fps.h"
+#include "Platform/Graphics/Renderer.h"
 
 namespace EM {
 
@@ -55,6 +57,9 @@ namespace EM {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
+        //can be removed not important
+        ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 20); //modify the font in each of the tabs
+        
 		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
 		ImGui_ImplOpenGL3_Init("#version 450");
 	}
@@ -62,16 +67,7 @@ namespace EM {
     //  Update loop for level editor, poll events and set new frames
 	void LevelEditor::Update()
 	{
-        //dock_space_flags = ImGuiDockNodeFlags_None;
-
-		/* Poll for and process events */
-		//glfwPollEvents();
-
-	//	glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-		//glClear(GL_COLOR_BUFFER_BIT);
-		// Render imgui into screen
-		
-        ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
     /*
@@ -114,12 +110,25 @@ namespace EM {
         //ImGui::ShowDemoWindow();
         
         docking();
+        Profiler();
+        Font();
+        ImGui::ShowMetricsWindow();
 		DropDownMenu();
 		ColorPickerTab();
       
         //ImGui::ColorEdit3("color", greencolor);
 	}
+    void LevelEditor::Font()
+    {
+        //ImGuiIO& io = ImGui::GetIO();
+        //ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 50);
+        //ImFont* font2 = io.Fonts->AddFontFromFileTTF("anotherfont.otf", 50);
 
+        //ImGui::Text("Hello"); // use the default font (which is the first loaded font)
+        //ImGui::PushFont(font2);
+        //ImGui::Text("Hello with another font");
+        //ImGui::PopFont();
+    }
     //  Render interface onto frame
 	void LevelEditor::Draw()
 	{
@@ -528,8 +537,7 @@ namespace EM {
             ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
             ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
             ImGuiWindowFlags_NoBackground;
-        //if (fullscreenMode)
-        //{
+      
           ImGuiViewport* viewport = ImGui::GetMainViewport();
            ImGui::SetNextWindowPos(viewport->WorkPos);
            ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -542,28 +550,44 @@ namespace EM {
         /*   window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;*/
        // }
+   
 
-      //  if (dock_space_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-      //      window_flags |= ImGuiWindowFlags_NoBackground;
+        ImGui::Begin("DockSpace", 0, window_flags);
+       
 
-      ////  if (!pad)
-      //      ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-        ImGui::Begin("DockSpace", /*&dockspaceOpen*/0, window_flags);
-        //if (!pad)
-            //ImGui::PopStyleVar();
-
-        //if (fullscreenMode)
+      
             ImGui::PopStyleVar(3);
 
-        //DockSpace
-   /*     ImGuiIO& io = ImGui::GetIO();
-        if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-        {*/
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
-      //  }
-        
+  
         ImGui::End();
     }
+    
+   void LevelEditor::Profiler()
+   {
+       ImGui::Begin("Profiler");
+       //Opengl information
+       ImGui::Text("Opengl Information ");
+       ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+       ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+       ImGui::Text("Version: %s", glGetString(GL_VERSION));
+       ImGui::Text("\n");
+
+       // how much time per frame and Fps
+       ImGui::Text("Application average % .3f ms / frame(% .1f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
+       
+       //Renderering Information
+       ImGui::Text("\n");
+       auto Infos = Renderer::GetInfo();
+       ImGui::Text("Renderer Information");
+       ImGui::Text("Draw Calls: %d", Infos.n_DrawCalls);
+       ImGui::Text("Quads: %d", Infos.n_Quad);
+       ImGui::Text("Vertices: %d", Infos.TotalVertexUsed());
+       ImGui::Text("Indices: %d", Infos.TotalIndexUsed());
+
+       //Todo show the each system consume how much at runtime
+       ImGui::End();
+   }
 	
 }

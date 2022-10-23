@@ -17,11 +17,14 @@
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
+#include "ExoEngine/Math/collision_system.h"
 #include "ECS/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
 #include "Audio/AudioEngine.h"
+#include "ECS/SceneViewer.h"
+
 namespace EM {
 
 	ECS ecs;
@@ -43,7 +46,7 @@ namespace EM {
 
 	void Application::Run() 
 	{
-
+		Timer::GetInstance().GlobalTimeStarter();
 		Window* m_window = new Window;
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
@@ -64,6 +67,7 @@ namespace EM {
 		//p_Audio->Loadsound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav");
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 100.f);
 		Transform transform;
+		RigidBody rigidbody;
 		transform.DeserializeFromFile("PlayerTransform.json");
 		ecs.RegisterComponent<Transform>();
 		ecs.RegisterComponent<RigidBody>();
@@ -76,21 +80,35 @@ namespace EM {
 		}
 		//mGraphics->Init();
 
+		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<RigidBody>());
+			ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
+
 		Entity player = ecs.CreateEntity();
 		//ecs.AddComponent(player, Player{});
 		ecs.AddComponent<Transform>(player, transform);
+		ecs.AddComponent<RigidBody>(player, rigidbody);
 
-		FramePerSec fpschecker;
-		fpschecker.InitFrame();
+		Entity wall = ecs.CreateEntity();
+		ecs.AddComponent<Transform>(wall, transform);
+		ecs.AddComponent<RigidBody>(wall, rigidbody);
 
+		FramePerSec::GetInstance().InitFrame();
+		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
 
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
+			FramePerSec::GetInstance().StartFrameCount();
 			
 			fpschecker.StartFrameCount();
 			p_Audio->Update();
+
 			for (System* system : m_Systems)
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
@@ -102,9 +120,17 @@ namespace EM {
 			p_Editor->Draw();
 		
 			fpschecker.EndFrameCount();
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
+			
+			p_Editor->Update();
+			p_Editor->Draw();
+			
 			Timer::GetInstance().Update(Systems::API);
+			FramePerSec::GetInstance().EndFrameCount();
+	
 		}
-
+		
 		End();
 	}
 

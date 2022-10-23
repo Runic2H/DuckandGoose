@@ -17,21 +17,24 @@
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Timer/Time.h"
-
 namespace EM {
 
 	extern ECS ecs;
+	
 
 	//for testing purpose
 	void Graphic::Init()
 	{
-		ResourceManager::LoadShader("BasicShader","Assets/Shaders/basic.shader");
-		ResourceManager::LoadShader("TextureShader", "Assets/Shaders/texture.shader");
+		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
-		ResourceManager::LoadTexture("Duck","Assets/Textures/DuckandGoose.png");
+		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
+		
 		ResourceManager::LoadTexture("BackGround", "Assets/Textures/BackGround.png");
 		ResourceManager::LoadTexture("Player", "Assets/Textures/PlayerSpriteSheet.png");
-		m_Renderer->Init();
+		ResourceManager::LoadTexture("Splash", "Assets/Textures/HitSplash.png");
+
+		Renderer::Init();
+		m_Font->Init();
 	}
 
 
@@ -39,72 +42,63 @@ namespace EM {
 	{
 		Timer::GetInstance().Start(Systems::GRAPHIC);
 		Timer::GetInstance().GetDT(Systems::GRAPHIC);
-
-		m_Renderer->SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		m_Renderer->ResetInfo();
+		m_Renderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		m_Renderer->Clear();
 		m_Renderer->Begin(camera);
-
-
-		//example for setting position to a square
-		glm::vec4 redcolor{ 1.0f, 0.0f, 0.0f, 1.0f };
-		glm::vec4 greencolor{ 0.0f, 1.0f, 0.0f, 1.0f };
-
-		/*for (auto const& entity : mEntities)
+		//test for rendering texture, line and rectange to be removed
+		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
+		
+			
+	
+		for (auto const& entity : mEntities)
 		{
 			auto& transform = ecs.GetComponent<Transform>(entity);
-			m_Renderer->DrawQuad({ transform.GetPos().value.x , transform.GetPos().value.y }, { transform.GetScale().value.x , transform.GetScale().value.y }, transform.GetRot(), greencolor);
-		}*/
-
-		static float rotationspeed = 0.0f;
-		rotationspeed += frametime * 10.0f;
-
-		static float rotationspeed2 = 0.0f;
-		rotationspeed2 -= frametime * 10.0f;
-		//test for box with color and without texture
-		glm::vec2 pos{ 2.0f };
-		m_Renderer->DrawQuad(pos, { 1.0f, 1.0f }, redcolor);
-
-		glm::vec2 pos1{ 0.0f };
-		
-		m_Renderer->DrawQuad(pos1, { 1.0f, 1.0f }, rotationspeed, greencolor);
-		
-		glm::vec2 pos2{ -1.0f };
-		m_Renderer->DrawQuad(pos2, { 2.5f, 1.0f }, ResourceManager::GetTexture("BackGround"));
-		
-		glm::vec2 pos3{ -1.0f, 1.0f };
-		m_Renderer->DrawQuad(pos3, { 1.0f, 1.0f }, ResourceManager::GetTexture("Duck"));
-
-		glm::vec2 pos4{ 1.0f, -1.0f };
-		m_Renderer->DrawQuad(pos4, { 1.0f, 1.0f }, rotationspeed2, ResourceManager::GetTexture("Duck"));
-
-		//example for renderering tile once data is up
-		for (int y = 0; y < 30 ; y++)
-		{
-			for (int x = 0; x < 30; x++)
-			{
-				glm::vec2 tilePos(x * 0.11f, y * 0.11f);
-				m_Renderer->DrawQuad(tilePos, { 0.1f, 0.1f }, ResourceManager::GetTexture("Player"));
-			}
+			//draw quad without texture
+			m_Renderer->DrawQuad({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y }, transform.GetRot(), { 1.0f, -0.5f, 0.8f, 1.0f });
+			
 		}
-		/*glm::vec3 pos5{ 0.0f, 0.0f, 0.0f };
-		glm::vec3 pos6{ 0.5f, 0.5f, 0.0f };
-		m_Renderer->DrawLine(pos5, pos6, { 1.0f, 0.1f, 0.1f, 1.0f });
+		// draw quad with texture
+		m_Renderer->DrawQuad({ 0.0f, -0.5f }, { 1.0f, 1.0f }, ResourceManager::GetTexture("BackGround"));
+		// draw line with color
+		m_Renderer->DrawLine({ 0.0f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f });
+		// draw rect with color
+		m_Renderer->DrawRect({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f });
+		
+		//render circle
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), { 0.0, 0.0f, 0.0f }) //position of the circle
+								*glm::scale(glm::mat4(1.0f), glm::vec3(0.5*2)); //radius * 2
+		m_Renderer->DrawCircle(transform, { 0.0f, 1.0f, 0.0f, 1.0f }, 0.01f);
 
-		glm::vec3 pos3{ 1.0f ,1.0f, 0.0f};
+		glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), { 1.0, 1.0f, 0.0f }) //position of the circle
+			* glm::scale(glm::mat4(1.0f), glm::vec3(0.5 * 2)); //radius * 2
+		m_Renderer->DrawCircle(transform2, { 0.0f, 0.0f, 1.0f, 1.0f }); //depth is defaulted as 1.0f so i a full circle no hollow
 
-		m_Renderer->DrawRect(pos3, { 0.1f, 0.1f }, { 0.0f, 0.1f, 1.0f, 1.0f });*/
+		/*custom matrix test here*/
+		Mat4x4 testform{ 1.0f };
+		Mat4x4 scale{ 1.0f };
+		Mat4x4 translate{ 1.0f };
+		Mat4x4 rotate{ 1.0f };
+		Translate4x4(translate, 0.0f, 0.0f, 0.0f);
+		Scale4x4(scale, 0.2f, 0.2f, 0.0f);
+		RotRad4x4(rotate, 45, Vec3{ 0.0f,0.0f,1.0f });
+		testform = translate * (scale * rotate);
+		m_Renderer->DrawQuad(mtx_adapter(testform), { 0.0f,1.0f,0.0f, 1.0f });
+		/*custom matrix test here*/
+
+		m_Renderer->End();
 		//for testing 
-		camera.SetPosition(m_cameraposition);
+		camera.SetPosition({ player.position.x, player.position.y, 0.0f });
 
 		if (p_Input->isKeyPressed(GLFW_KEY_W))
-			m_cameraposition.y += CameraSpeed * frametime;
+			player.position.y += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
-			m_cameraposition.y -= CameraSpeed * frametime;
+			player.position.y -= CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_D))
-			m_cameraposition.x += CameraSpeed * frametime;
+			player.position.x += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_A))
 		{
-			m_cameraposition.x -= CameraSpeed * frametime;	
+			player.position.x -= CameraSpeed * frametime;
 			
 		}
 		camera.MouseScrolling();
@@ -114,6 +108,6 @@ namespace EM {
 	void Graphic::End()
 	{
 		ResourceManager::clear();
-		Renderer::End();
+		Renderer::ShutDown();
 	}
 }

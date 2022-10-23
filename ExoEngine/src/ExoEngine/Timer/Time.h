@@ -52,7 +52,7 @@ namespace EM {
 		float m_GlobalDT, m_TotalRuntime, m_fps, m_dt;
 
 	private:
-		/*time_t GetSystemTimeNow()*/
+		time_t GetSystemTimeNow();
 	};
 
 }

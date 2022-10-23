@@ -30,27 +30,54 @@ namespace EM
 		max = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
 		vel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
 		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
+		if (obj["col"].GetInt() == 0) {
+			collider = Col_Type::none;
+		}//----------------Collider serialization
+		else if (obj["col"].GetInt() == 1) {
+			collider = Col_Type::circle;
+		}
+		else if (obj["col"].GetInt() == 2) {
+			collider = Col_Type::line;
+		}
+		else if (obj["col"].GetInt() == 3) {
+			collider = Col_Type::rect;
+		}
 		return true;
 	}
 	bool RigidBody::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
 		writer->Key("minX");
-		writer->Double(min.value.x);
+		writer->Double(min.x);
 		writer->Key("minY");
-		writer->Double(min.value.y);
+		writer->Double(min.y);
 		writer->Key("maxX");
-		writer->Double(max.value.x);
+		writer->Double(max.x);
 		writer->Key("maxY");
-		writer->Double(max.value.y);
+		writer->Double(max.y);
 		writer->Key("velX");
-		writer->Double(vel.value.x);
+		writer->Double(vel.x);
 		writer->Key("velY");
-		writer->Double(vel.value.y);
+		writer->Double(vel.y);
 		writer->Key("initX");
-		writer->Double(initvel.value.x);
+		writer->Double(initvel.x);
 		writer->Key("initY");
+		writer->Double(initvel.y);
+		writer->Key("???");//------------------------------
 		writer->Double(initvel.value.y);
+		writer->Key("col");//------------------------------
+		if (collider == Col_Type::none) {
+			writer->Int(0);//-----Collider serialization
+		}
+		else if (collider == Col_Type::circle) {
+			writer->Int(1);
+		}
+		else if (collider == Col_Type::line) {
+			writer->Int(2);
+		}
+		else if (collider == Col_Type::rect) {
+			writer->Int(3);
+		}
 		writer->EndObject();
 		return true;
 	}
@@ -72,13 +99,13 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("posX");
-		writer->Double(position.value.x);
+		writer->Double(position.x);
 		writer->Key("posY");
-		writer->Double(position.value.y);
+		writer->Double(position.y);
 		writer->Key("scaleX");
-		writer->Double(scale.value.x);
+		writer->Double(scale.x);
 		writer->Key("scaleY");
-		writer->Double(scale.value.y);
+		writer->Double(scale.y);
 		writer->Key("Rot");
 		writer->Double(rot);
 		writer->EndObject();

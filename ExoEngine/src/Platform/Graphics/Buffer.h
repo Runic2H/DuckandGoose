@@ -96,9 +96,9 @@ namespace EM {
 			m_stride = 0;
 			for (auto& element : m_Elements)
 			{
-				element.Offset = offset;
+				element.Offset = static_cast<unsigned int> (offset);
 				offset += element.Size;
-				m_stride += element.Size;
+				m_stride += static_cast<unsigned int>(element.Size);
 			}
 		}
 	private:
@@ -117,8 +117,10 @@ namespace EM {
 
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
+		virtual void SetBufferData(const void* data, unsigned int size) = 0;
 
 		static MultiRefs<VertexBuffer> Create(float* data, unsigned int size);
+		static MultiRefs<VertexBuffer> Create(uint32_t size);
 	};
 
 	class IndexBuffer

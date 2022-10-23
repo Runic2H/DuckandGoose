@@ -46,25 +46,25 @@ namespace EM
 
 	bool Transform2::get_collision()
 	{
-		return collision_flag;
+		return colision_flag;
 	}
 
 	void Transform2::add_pos(vec2D Pos)
 	{
-		pos.value.x += Pos.value.x;
-		pos.value.y += Pos.value.y;
+		pos.x += Pos.x;
+		pos.y += Pos.y;
 	}
 
 	void Transform2::subtract_pos(vec2D Pos)
 	{
-		pos.value.x -= Pos.value.x;
-		pos.value.y -= Pos.value.y;
+		pos.x -= Pos.x;
+		pos.y -= Pos.y;
 	}
 
 	void Transform2::multiply_scale(vec2D Scale)
 	{
-		scale.value.x += Scale.value.x;
-		scale.value.y += Scale .value.y;
+		scale.x += Scale.x;
+		scale.y += Scale .y;
 	}
 
 }

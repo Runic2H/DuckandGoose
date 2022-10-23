@@ -22,7 +22,6 @@
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
-    <ClCompile Include="src\Debug\debug_draw.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="src\Platform\System\SystemManager.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
@@ -34,8 +33,6 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components.cpp" />
-    <ClCompile Include="src\ExoEngine\Math\RigidBody.cpp" />
-    <ClCompile Include="src\ExoEngine\Math\transformation.cpp" />
     <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
@@ -43,8 +40,12 @@
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
-    <ClCompile Include="vendor\imgui\ImGuizmo.cpp" />
-    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\matrix4x4.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vec3.cpp" />
+    <ClCompile Include="src\Platform\Graphics\TextRendering.cpp" />
+    <ClCompile Include="src\Platform\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\collision_system.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\physics_system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -187,9 +188,13 @@
     <ClInclude Include="src\Platform\Graphics\Camera2D.h" />
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
+    <ClInclude Include="src\Platform\Graphics\TextRendering.h" />
+    <ClInclude Include="src\Platform\Graphics\FrameBuffer.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneViewer.h" />
-    <ClInclude Include="vendor\imgui\ImGuizmo.h" />
-    <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
+    <ClInclude Include="src\ExoEngine\Math\collision_system.h" />
+    <ClInclude Include="src\ExoEngine\Math\matrix4x4.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
+    <ClInclude Include="src\ExoEngine\Math\physics_system.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
@@ -207,5 +212,8 @@
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Platform\LevelEditor\LevelEditor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\freetype\libs\freetype.lib" />
   </ItemGroup>
 </Project>
