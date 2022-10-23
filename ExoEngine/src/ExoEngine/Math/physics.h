@@ -146,25 +146,6 @@ namespace EM {
             bool objCollision(const circle_bound& ent1, const vec2D& ent1vel, const circle_bound& ent2, const vec2D& ent2vel, vec2D& ent1colpt, vec2D& ent2colpt, float& coltime);
             /***************************************************************************//*!
             \brief
-            calculates collision between a cone and a circle. Used for hit detection.
-
-            \param[in] ent1
-            struct of the circle which will be the cone
-            \param[in] startAngle
-            angle of the start of the cone in degrees
-            \param[in] endAngle
-            angle of the end of the cone in degrees
-            \param[in] lr
-            bool indicating facing left or right (1 right, 0 left)
-            \param[in] ent2
-            struct of the second circle
-
-            \return
-            boolean indicating collision true or false
-            *//**************************************************************************/
-            bool coneCollision(const circle_bound& ent1, const int startAngle, const int endAngle, bool lr, const circle_bound& ent2);
-            /***************************************************************************//*!
-            \brief
             calculates collision between two rectangles
 
             \param[in] max1
@@ -188,7 +169,7 @@ namespace EM {
             bool boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt);
             /***************************************************************************//*!
             \brief
-            calculates collision between a cone and a circle. Used for hit detection.
+            calculates collision between an aabb and a circle. Used for hit detection.
 
             \param[in] ent1
             struct of the circle to calculate collision with

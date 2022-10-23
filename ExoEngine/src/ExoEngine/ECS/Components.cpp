@@ -30,19 +30,16 @@ namespace EM
 		max = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
 		vel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
 		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
-		if (obj["???"].GetInt() == 0) {
+		if (obj["col"].GetInt() == 0) {
 			collider = Col_Type::none;
 		}//----------------Collider serialization
-		else if (obj["???"].GetInt() == 1) {
-			collider = Col_Type::cone;
-		}
-		else if (obj["???"].GetInt() == 2) {
+		else if (obj["col"].GetInt() == 1) {
 			collider = Col_Type::circle;
 		}
-		else if (obj["???"].GetInt() == 3) {
+		else if (obj["col"].GetInt() == 2) {
 			collider = Col_Type::line;
 		}
-		else if (obj["???"].GetInt() == 4) {
+		else if (obj["col"].GetInt() == 3) {
 			collider = Col_Type::rect;
 		}
 		return true;
@@ -67,20 +64,19 @@ namespace EM
 		writer->Key("initY");
 		writer->Double(initvel.y);
 		writer->Key("???");//------------------------------
+		writer->Double(initvel.value.y);
+		writer->Key("col");//------------------------------
 		if (collider == Col_Type::none) {
 			writer->Int(0);//-----Collider serialization
 		}
-		else if (collider == Col_Type::cone) {
+		else if (collider == Col_Type::circle) {
 			writer->Int(1);
 		}
-		else if (collider == Col_Type::circle) {
+		else if (collider == Col_Type::line) {
 			writer->Int(2);
 		}
-		else if (collider == Col_Type::line) {
-			writer->Int(3);
-		}
 		else if (collider == Col_Type::rect) {
-			writer->Int(4);
+			writer->Int(3);
 		}
 		writer->EndObject();
 		return true;

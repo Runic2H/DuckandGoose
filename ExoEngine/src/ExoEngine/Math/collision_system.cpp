@@ -45,31 +45,7 @@ namespace EM {
                             Col_Type e2 = rigid2.GetCollider();
                             //apply collision based on entity 1 and 2 collider types
                             //apply appropriate collision response
-                            if (e1 == Col_Type::cone) {
-                                if (e2 == Col_Type::circle) {
-                                    circle_bound ent1;
-                                    ent1.center = ent1pos;
-                                    ent1.radius = rigid1.GetMax().x - ent1pos.x;
-                                    circle_bound ent2;
-                                    ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
-                                    bool lr;
-                                    if (rigid1.GetVel().x < 0) {
-                                        lr = 0;
-                                    }
-                                    else {
-                                        lr = 1;
-                                    }
-                                    int startAngle = 0;
-                                    int endAngle = 90;
-                                    //check which attack variant for angles
-
-                                    if (ecm.coneCollision(ent1, startAngle, endAngle, lr, ent2)) {
-                                        //hit detected. take damage
-                                    }
-                                }
-                            }
-                            else if (e1 == Col_Type::circle) {
+                            if (e1 == Col_Type::circle) {
                                 circle_bound ent1;
                                 ent1.center = ent1pos;
                                 ent1.radius = rigid1.GetMax().x - ent1pos.x;
@@ -81,6 +57,7 @@ namespace EM {
                                     vec2D ent2colpt;
                                     float coltime;
                                     if (ecm.objCollision(ent1, rigid1.GetVel(), ent2, rigid2.GetVel(), ent1colpt, ent2colpt, coltime)) {
+                                        std::cout << "hit\n";
                                         vec2D colnorm = ent1colpt - ent2pos;
                                         Normalize(colnorm, colnorm);
                                         vec2D ent1newvel = rigid1.GetVel();
@@ -92,25 +69,6 @@ namespace EM {
                                         rigid2.SetVel(ent2newvel);
                                         rigid1.SetNextPos(ent1nextpos);
                                         rigid2.SetNextPos(ent2nextpos);
-                                    }
-                                }
-                                else if (e2 == Col_Type::cone) {
-                                    circle_bound ent2;
-                                    ent1.center = ent2pos;
-                                    ent1.radius = rigid2.GetMax().x - ent2pos.x;
-                                    bool lr;
-                                    if (rigid2.GetVel().x < 0) {
-                                        lr = 0;
-                                    }
-                                    else {
-                                        lr = 1;
-                                    }
-                                    int startAngle = 0;
-                                    int endAngle = 90;
-                                    //check which attack variant for angles
-
-                                    if (ecm.coneCollision(ent1, startAngle, endAngle, lr, ent2)) {
-                                        //hit detected. take damage
                                     }
                                 }
                                 else if (e2 == Col_Type::line) {
@@ -126,14 +84,15 @@ namespace EM {
                                     vec2D entnextpos = rigid1.GetNextPos();
                                     float coltime;
                                     if (ecm.wallCollision(ent1, entnextpos, wall2, colpt, colnorm, coltime)) {
+                                        std::cout << "hit\n";
                                         vec2D reflectiondir;
                                         ecm.wallBounce(colpt, colnorm, entnextpos, reflectiondir);
                                         rigid1.SetNextPos(entnextpos);
                                     }
                                 }
                                 else if (e2 == Col_Type::rect) {
-
                                     if (ecm.boundingBoxCircle(ent1, rigid2.GetMax(), rigid2.GetMin())) {
+                                        std::cout << "hit\n";
                                         //hit detected. take damage
                                     }
                                 }
@@ -155,6 +114,7 @@ namespace EM {
                                     vec2D entnextpos = rigid2.GetNextPos();
                                     float coltime;
                                     if (ecm.wallCollision(ent1, entnextpos, wall2, colpt, colnorm, coltime)) {
+                                        std::cout << "hit\n";
                                         vec2D reflectiondir;
                                         ecm.wallBounce(colpt, colnorm, entnextpos, reflectiondir);
                                         rigid2.SetNextPos(entnextpos);
@@ -167,11 +127,13 @@ namespace EM {
                                     ent1.center = ent2pos;
                                     ent1.radius = rigid2.GetMax().x - ent2pos.x;
                                     if (ecm.boundingBoxCircle(ent1, rigid1.GetMax(), rigid1.GetMin())) {
+                                        std::cout << "hit\n";
                                         //hit detected. take damage
                                     }
                                 }
                                 else if (e2 == Col_Type::rect) {
                                     if (ecm.boundingBoxCollision(rigid1.GetMax(), rigid1.GetMin(), rigid1.GetVel(), rigid2.GetMax(), rigid2.GetMin(), rigid2.GetVel(), dt)) {
+                                        std::cout << "hit\n";
                                         //parry mechanics? 
                                     }
                                 }

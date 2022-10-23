@@ -231,54 +231,6 @@ namespace EM {
             return 1;
         }
     }
-    //cone circle collision
-    bool entityCollision::coneCollision(const circle_bound&ent1, const int startAngle, const int endAngle, bool lr, const circle_bound&ent2) {
-        vec2D dist0 = ent2.center - ent1.center;
-        float startRad = (float)(startAngle / 180 * (atan(1) * 4));
-        float endRad = (float)(endAngle / 180 * (atan(1) * 4));
-        vec2D dir1;
-        vec2D dir2;
-        if (length(dist0) > ent1.radius + ent2.radius) {
-            return 0;
-        }
-        //check if within cone
-        if(lr) {
-            //get start and end of cone
-            dir1.x = -cos(startRad);
-            dir1.y = sin(startRad);
-            dir2.x = -cos(endRad);
-            dir2.y = -sin(endRad);
-        }
-        else {
-            //get start and end of cone
-            dir1.x = cos(startRad);
-            dir1.y = sin(startRad);
-            dir2.x = cos(endRad);
-            dir2.y = -sin(endRad);
-        }
-        //check if above or below midpoint
-        if (atan(dist0.y/dist0.x) > 0) {
-            vec2D dist0Normal;
-            dist0Normal.x = dir1.y;
-            dist0Normal.y = -dir1.x;
-            vec2D extended = ent2.center + (ent2.radius * dist0Normal);
-            vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || atan(dist1.y / dist1.x) > startRad) {
-                return 0;
-            }
-        }
-        else {
-            vec2D dist0Normal;
-            dist0Normal.x = -dir2.y;
-            dist0Normal.y = dir2.x;
-            vec2D extended = ent2.center + (ent2.radius * dist0Normal);
-            vec2D dist1 = extended - ent1.center;
-            if (length(dist1) > ent1.radius || -atan(dist1.y / dist1.x) > endRad) {
-                return 0;
-            }
-        }
-        return 1;
-    }
     //AABB Collision
     bool entityCollision::boundingBoxCollision(vec2D max1, vec2D min1, vec2D vel1, vec2D max2, vec2D min2, vec2D vel2, float dt) {
         //Static collision
