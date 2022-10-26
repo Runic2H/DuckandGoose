@@ -18,6 +18,7 @@
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
 
+#include "imgui/ImGuizmo.h"
 #include "LevelEditor.h"
 #include "ExoEngine/Timer/Time.h"
 #include "ExoEngine/Timer/Fps.h"
@@ -69,10 +70,44 @@ namespace EM {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+    /*
+        ImGuizmo::BeginFrame();
+        ImGuizmo::IsOver();
+        ImGuizmo::IsUsing();
+
+        float windowWidth = (float)ImGui::GetWindowWidth();
+        float windowHeight = (float)ImGui::GetWindowHeight();
+        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+        static const float identityMatrix[16] =
+        { 1.f, 0.f, 0.f, 0.f,
+            0.f, 1.f, 0.f, 0.f,
+            0.f, 0.f, 1.f, 0.f,
+            0.f, 0.f, 0.f, 1.f };
+        
+        float cameraView[16] =
+        { 1.f, 0.f, 0.f, 0.f,
+          0.f, 1.f, 0.f, 0.f,
+          0.f, 0.f, 1.f, 0.f,
+          0.f, 0.f, 0.f, 1.f };
+
+        float cameraProjection[16];
+
+       ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
+    */
 		ImGuiIO& io = ImGui::GetIO();
+
+        ImVec4* colors = ImGui::GetStyle().Colors;
+        ImGui::GetStyle().WindowTitleAlign = ImVec2(0.5, 0.5);
+
+        static float color[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+        colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f); //changes imgui window background color
+
 		// tells imgui how big our display is 
 		io.DisplaySize = ImVec2(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
-		//ImGui::ShowDemoWindow();
+		
+        //ImGui::ShowDemoWindow();
         
         docking();
         Profiler();
@@ -80,7 +115,8 @@ namespace EM {
         ImGui::ShowMetricsWindow();
 		DropDownMenu();
 		ColorPickerTab();
-		
+      
+        //ImGui::ColorEdit3("color", greencolor);
 	}
     void LevelEditor::Font()
     {
@@ -107,7 +143,6 @@ namespace EM {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(m_window);
 		}
-      
 	}
 
     //  End instance
@@ -122,9 +157,11 @@ namespace EM {
     //  Widgets, boxes and other useful tools in ImGui, which will be developed in the future 
     void LevelEditor::DropDownMenu()
     {
-        //ImGui::SetNextWindowSize(ImVec2(500, 500)); // ,NULL, ImguiWindowFlags_NoResize
+        
+        ImGui::SetNextWindowSize(ImVec2(500, 500)); // ,NULL, ImguiWindowFlags_NoResize
         if (ImGui::Begin("Drop down menu")) //main box for color picker window
         {
+            EditorTabs();
             ImGui::Checkbox("Experimental buttons", &drop_menu);
             if (ImGui::Button("Click here"))
             {
@@ -232,23 +269,8 @@ namespace EM {
             static bool drag_and_drop = true;
             static bool options_menu = true;
             static bool hdr = false;
-            ImGui::Checkbox("With Alpha Preview", &alpha_preview);
-            ImGui::Checkbox("With Half Alpha Preview", &alpha_half_preview);
-            ImGui::Checkbox("With Drag and Drop", &drag_and_drop);
-            ImGui::Checkbox("With Options Menu", &options_menu); ImGui::SameLine(); 
-            ImGui::Checkbox("With HDR", &hdr); ImGui::SameLine();
-            ImGuiColorEditFlags misc_flags = (hdr ? ImGuiColorEditFlags_HDR : 0) | (drag_and_drop ? 0 : ImGuiColorEditFlags_NoDragDrop) | (alpha_half_preview ? ImGuiColorEditFlags_AlphaPreviewHalf : (alpha_preview ? ImGuiColorEditFlags_AlphaPreview : 0)) | (options_menu ? 0 : ImGuiColorEditFlags_NoOptions);
 
-   
-            ImGui::Text("Color widget:");
-            ImGui::SameLine(); 
-            ImGui::ColorEdit3("MyColor##1", (float*)&color, misc_flags);
-            
-            ImGui::Text("Color widget HSV with Alpha:");
-            ImGui::ColorEdit4("MyColor##2", (float*)&color, ImGuiColorEditFlags_DisplayHSV | misc_flags);
-      
-            ImGui::Text("Color widget with Float Display:");
-            ImGui::ColorEdit4("MyColor##2f", (float*)&color, ImGuiColorEditFlags_Float | misc_flags);
+            ImGuiColorEditFlags misc_flags = (hdr ? ImGuiColorEditFlags_HDR : 0) | (drag_and_drop ? 0 : ImGuiColorEditFlags_NoDragDrop) | (alpha_half_preview ? ImGuiColorEditFlags_AlphaPreviewHalf : (alpha_preview ? ImGuiColorEditFlags_AlphaPreview : 0)) | (options_menu ? 0 : ImGuiColorEditFlags_NoOptions);
 
             ImGui::Text("Color button with Picker:");
             ImGui::SameLine();
@@ -321,12 +343,12 @@ namespace EM {
                 
             }
 
-            ImGui::Text("Color button only:");
+           /* ImGui::Text("Color button only:");
             static bool no_border = false;
             ImGui::Checkbox("ImGuiColorEditFlags_NoBorder", &no_border);
-            ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));
+            ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));*/
 
-            ImGui::Text("Color picker:");
+            //ImGui::Text("Color picker:");
             static bool alpha = true;
             static bool alpha_bar = true;
             static bool side_preview = true;
@@ -334,10 +356,10 @@ namespace EM {
             static ImVec4 ref_color_v(1.0f, 0.0f, 1.0f, 0.5f);
             static int display_mode = 0;
             static int picker_mode = 0;
-            ImGui::Checkbox("With Alpha", &alpha);
-            ImGui::Checkbox("With Alpha Bar", &alpha_bar);
-            ImGui::Checkbox("With Side Preview", &side_preview);
-            if (side_preview)
+            //ImGui::Checkbox("With Alpha", &alpha);
+            //ImGui::Checkbox("With Alpha Bar", &alpha_bar);
+            //ImGui::Checkbox("With Side Preview", &side_preview);
+            /*if (side_preview)
             {
                 ImGui::SameLine();
                 ImGui::Checkbox("With Ref Color", &ref_color);
@@ -349,7 +371,7 @@ namespace EM {
             }
             ImGui::Combo("Display Mode", &display_mode, "Auto/Current\0None\0RGB Only\0HSV Only\0Hex Only\0");
             ImGui::SameLine(); 
-            ImGui::SameLine();
+            ImGui::SameLine();*/
             ImGuiColorEditFlags flags = misc_flags;
             if (!alpha)            flags |= ImGuiColorEditFlags_NoAlpha;        // This is by default if you call ColorPicker3() instead of ColorPicker4()
             if (alpha_bar)         flags |= ImGuiColorEditFlags_AlphaBar;
@@ -388,69 +410,124 @@ namespace EM {
             ImGui::ColorEdit4("HSV shown as HSV##1", (float*)&color_hsv, ImGuiColorEditFlags_DisplayHSV | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_Float);
             ImGui::DragFloat4("Raw HSV values", (float*)&color_hsv, 0.01f, 0.0f, 1.0f);
 
-            const float spacing = 4;
-            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(spacing, spacing));
-
-            static int int_value = 0;
-            ImGui::VSliderInt("##int", ImVec2(18, 160), &int_value, 0, 5);
-            ImGui::SameLine();
-
-            static float values[7] = { 0.0f, 0.60f, 0.35f, 0.9f, 0.70f, 0.20f, 0.0f };
-            ImGui::PushID("set1");
-            for (int i = 0; i < 7; i++)
-            {
-                if (i > 0) ImGui::SameLine();
-                ImGui::PushID(i);
-                ImGui::PushStyleColor(ImGuiCol_FrameBg, (ImVec4)ImColor::HSV(i / 7.0f, 0.5f, 0.5f));
-                ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, (ImVec4)ImColor::HSV(i / 7.0f, 0.6f, 0.5f));
-                ImGui::PushStyleColor(ImGuiCol_FrameBgActive, (ImVec4)ImColor::HSV(i / 7.0f, 0.7f, 0.5f));
-                ImGui::PushStyleColor(ImGuiCol_SliderGrab, (ImVec4)ImColor::HSV(i / 7.0f, 0.9f, 0.9f));
-                ImGui::VSliderFloat("##v", ImVec2(18, 160), &values[i], 0.0f, 1.0f, "");
-                if (ImGui::IsItemActive() || ImGui::IsItemHovered())
-                    ImGui::SetTooltip("%.3f", values[i]);
-                ImGui::PopStyleColor(4);
-                ImGui::PopID();
-            }
-            ImGui::PopID();
-
-            ImGui::SameLine();
-            ImGui::PushID("set2");
-            static float values2[4] = { 0.20f, 0.80f, 0.40f, 0.25f };
-            const int rows = 3;
-            const ImVec2 small_slider_size(18, (float)(int)((160.0f - (rows - 1) * spacing) / rows));
-            for (int nx = 0; nx < 4; nx++)
-            {
-                if (nx > 0) ImGui::SameLine();
-                ImGui::BeginGroup();
-                for (int ny = 0; ny < rows; ny++)
-                {
-                    ImGui::PushID(nx * rows + ny);
-                    ImGui::VSliderFloat("##v", small_slider_size, &values2[nx], 0.0f, 1.0f, "");
-                    if (ImGui::IsItemActive() || ImGui::IsItemHovered())
-                        ImGui::SetTooltip("%.3f", values2[nx]);
-                    ImGui::PopID();
-                }
-                ImGui::EndGroup();
-            }
-            ImGui::PopID();
-
-            ImGui::SameLine();
-            ImGui::PushID("set3");
-            for (int i = 0; i < 4; i++)
-            {
-                if (i > 0) ImGui::SameLine();
-                ImGui::PushID(i);
-                ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 40);
-                ImGui::VSliderFloat("##v", ImVec2(40, 160), &values[i], 0.0f, 1.0f, "%.2f\nsec");
-                ImGui::PopStyleVar();
-                ImGui::PopID();
-            }
-            ImGui::PopID();
-            ImGui::PopStyleVar();
             ImGui::TreePop();
         }
 
 	}
+
+    void LevelEditor::EditorTabs()
+    {
+        ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
+        if (ImGui::BeginTabBar("MyTabBar", tab_bar_flags))
+        {
+            if (ImGui::BeginTabItem("Inspector"))
+            {
+                ImGui::Text("inspector window");
+                TransformTab();
+                SpriteRenderer();
+
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Hierarchy"))
+            {
+                ImGui::Text("Hierarchy window");
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Console"))
+            {
+                ImGui::Text("Console window");
+                ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
+        }
+        ImGui::Separator();
+    
+    }
+
+    void LevelEditor::TransformTab()
+    {
+        if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_None))
+        {
+            //will have to add a disable key in game when pressing these buttons
+
+            ImGui::PushItemWidth(100.0f);
+            
+            ImGui::Text("X"); ImGui::SameLine();
+            static float posx = 0.10f;
+            ImGui::PushID(1);
+            ImGui::InputFloat("Y", &posx); ImGui::SameLine();
+            ImGui::PopID();
+
+            static float posy = 0.20f;
+            ImGui::PushID(2);
+            ImGui::InputFloat("Z", &posy); ImGui::SameLine();
+            ImGui::PopID();
+
+            static float posz = 0.40f;
+            ImGui::InputFloat("Position", &posz); 
+
+
+            ImGui::Text("X"); ImGui::SameLine();
+            static float rotx = 0.10f;
+            ImGui::PushID(3);
+            ImGui::InputFloat("Y", &rotx); ImGui::SameLine();
+            ImGui::PopID();
+
+            static float roty = 0.20f;
+            ImGui::PushID(4);
+            ImGui::InputFloat("Z", &roty); ImGui::SameLine();
+            ImGui::PopID();
+
+            static float rotz = 0.40f;
+            ImGui::InputFloat("Rotation", &rotz);
+
+            ImGui::Text("X"); ImGui::SameLine();
+            static float scax = 0.10f;
+            ImGui::InputFloat("Y", &scax); ImGui::SameLine();
+
+            static float scay = 0.20f;
+            ImGui::InputFloat("Z", &scay); ImGui::SameLine();
+
+            static float scaz = 0.40f;
+            ImGui::InputFloat("Scale", &scaz); 
+
+            ImGui::PopItemWidth();
+        }
+    }
+
+    void LevelEditor::SpriteRenderer()
+    {
+        if (ImGui::CollapsingHeader("Sprite Renderer", ImGuiTreeNodeFlags_None))
+        {
+
+            ImGui::Text("Sprite");
+            ImGui::Text("Color"); ImGui::SameLine(); 
+
+            ImGui::Text("Color button with Picker:");
+            ImGui::SameLine(); 
+
+           
+            ImGui::Text("Flip");
+            ImGui::Text("Draw Mode");
+            ImGui::Text("Mask Interaction");
+            ImGui::Text("Sprite Sort Point");
+
+            if (ImGui::CollapsingHeader("Additional Settings", ImGuiTreeNodeFlags_None))
+            {
+                ImGui::Text("Sorting Layer");
+                ImGui::Text("Ordering Layer");
+            }
+        }
+    }
+
+    void LevelEditor::SceneHierarchyWindow()
+    {
+        ImGui::SetNextWindowSize(ImVec2(500, 500));
+        if(ImGui::Begin("Hierarchy"))
+        {
+
+        }
+    }
     
     //Docking function is based off of ImGui demo's ShowExampleAppDockSpace function which will allow tools to dock with the sides of the
     //level editor. However, as of now it is not yet functional as I have yet to fix the frame layering to allow this function to work
@@ -469,6 +546,10 @@ namespace EM {
            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
+        /*   window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+           window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;*/
+       // }
    
 
         ImGui::Begin("DockSpace", 0, window_flags);
