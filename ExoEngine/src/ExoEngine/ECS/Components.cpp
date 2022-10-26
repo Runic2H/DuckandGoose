@@ -19,11 +19,20 @@ deserialize its data
 
 namespace EM
 {
+	PlayerIn::PlayerIn() : is{ true } {}
+	bool PlayerIn::Deserialize(const rapidjson::Value& obj) {
+		is = obj["isPlayer"].GetInt();
+		return true;
+	}
+	bool PlayerIn::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const {
+		writer->StartObject();
+		writer->Key("isPlayer");
+		writer->Int(is);
+		writer->EndObject();
+		return true;
+	}
 	//RigidBody
-	RigidBody::RigidBody() : min{ vec2D() }, max{ vec2D() } 
-	{
-		//RigidBody::SerializeToFile("RigidBody.json");
-	};
+	RigidBody::RigidBody() : min{ vec2D(1.0f,1.0f) }, max{ vec2D(1.0f,1.0f) }, vel{ vec2D(0.01f,0.01f) }, nextpos{ vec2D(0.f, 0.f) }, initvel{ vec2D(0.01f,0.01f) }{}
 	bool RigidBody::Deserialize(const rapidjson::Value& obj)
 	{
 		min = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
@@ -62,8 +71,6 @@ namespace EM
 		writer->Key("initX");
 		writer->Double(initvel.x);
 		writer->Key("initY");
-		writer->Double(initvel.y);
-		writer->Key("???");//------------------------------
 		writer->Double(initvel.y);
 		writer->Key("col");//------------------------------
 		if (collider == Col_Type::none) {

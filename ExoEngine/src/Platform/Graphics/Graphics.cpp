@@ -47,7 +47,7 @@ namespace EM {
 		m_Renderer->Clear();
 		m_Renderer->Begin(camera);
 		//test for rendering texture, line and rectange to be removed
-		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
+		//m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
 		
 			
 	
@@ -58,6 +58,7 @@ namespace EM {
 			m_Renderer->DrawQuad({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y }, transform.GetRot(), { 1.0f, -0.5f, 0.8f, 1.0f });
 			
 		}
+
 		// draw quad with texture
 		m_Renderer->DrawQuad({ 0.0f, -0.5f }, { 1.0f, 1.0f }, ResourceManager::GetTexture("BackGround"));
 		// draw line with color
@@ -83,14 +84,14 @@ namespace EM {
 		Scale4x4(scale, 0.2f, 0.2f, 0.0f);
 		RotRad4x4(rotate, 45, Vec3{ 0.0f,0.0f,1.0f });
 		testform = translate * (scale * rotate);
-		m_Renderer->DrawQuad(mtx_adapter(testform), { 0.0f,1.0f,0.0f, 1.0f });
+		//m_Renderer->DrawQuad(mtx_adapter(testform), { 0.0f,1.0f,0.0f, 1.0f });
 		/*custom matrix test here*/
 
 		m_Renderer->End();
 		//for testing 
-		camera.SetPosition({ player.position.x, player.position.y, 0.0f });
-
-		if (p_Input->isKeyPressed(GLFW_KEY_W))
+		
+		//camera.SetPosition({.GetPos().x, .GetPos().y, 0.0f });
+		/*if (p_Input->isKeyPressed(GLFW_KEY_W))
 			player.position.y += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
 			player.position.y -= CameraSpeed * frametime;
@@ -100,7 +101,7 @@ namespace EM {
 		{
 			player.position.x -= CameraSpeed * frametime;
 			
-		}
+		}*/
 		camera.MouseScrolling();
 		
 		Timer::GetInstance().Update(Systems::GRAPHIC);

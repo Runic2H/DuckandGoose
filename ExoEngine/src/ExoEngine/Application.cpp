@@ -17,13 +17,16 @@
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
-#include "ExoEngine/Math/collision_system.h"
+#include "ExoEngine/Math/CollisionSystem.h"
+#include "ExoEngine/Math/PlayerInput.h"
+#include <ExoEngine/Math/PhysicsSystem.h>
 #include "ECS/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
 #include "Audio/AudioEngine.h"
 #include "ECS/SceneViewer.h"
+
 
 namespace EM {
 
@@ -68,9 +71,11 @@ namespace EM {
 
 		Transform transform;
 		RigidBody rigidbody;
+		PlayerIn playerinput;
 		transform.DeserializeFromFile("PlayerTransform.json");
 		ecs.RegisterComponent<Transform>();
 		ecs.RegisterComponent<RigidBody>();
+		ecs.RegisterComponent<PlayerIn>();
 
 		auto mGraphics = ecs.RegisterSystem<Graphic>();
 		{
@@ -83,15 +88,36 @@ namespace EM {
 		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
 			signature.set(ecs.GetComponentType<RigidBody>());
 			ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
 
+		auto pInput = ecs.RegisterSystem<PlayerInput>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
+			signature.set(ecs.GetComponentType<RigidBody>());
+			signature.set(ecs.GetComponentType<PlayerIn>());
+			ecs.SetSystemSignature<PlayerInput>(signature);
+		}
+		pInput->Init();
+
+		auto mPosUpdate = ecs.RegisterSystem<PhysicsSystem>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
+			signature.set(ecs.GetComponentType<RigidBody>());
+			ecs.SetSystemSignature<PhysicsSystem>(signature);
+		}
+		mPosUpdate->Init();
+
 		Entity player = ecs.CreateEntity();
 		//ecs.AddComponent(player, Player{});
 		ecs.AddComponent<Transform>(player, transform);
 		ecs.AddComponent<RigidBody>(player, rigidbody);
+		ecs.AddComponent<PlayerIn>(player, playerinput);
 
 		Entity wall = ecs.CreateEntity();
 		ecs.AddComponent<Transform>(wall, transform);
@@ -112,15 +138,14 @@ namespace EM {
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
 			}
-
-			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();
-		
+
+			pInput->Update(Timer::GetInstance().GetGlobalDT());
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			mPosUpdate->Update();
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			
 			Timer::GetInstance().Update(Systems::API);
 			FramePerSec::GetInstance().EndFrameCount();
 	

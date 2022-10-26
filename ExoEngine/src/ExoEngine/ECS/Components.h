@@ -22,6 +22,17 @@ deserialize its data
 #include "ExoEngine/Math/Vmath.h"
 namespace EM
 {
+	//player input component
+	class PlayerIn : public JSONSerializer {
+		public:
+		PlayerIn();
+		~PlayerIn() = default;
+		virtual bool Deserialize(const rapidjson::Value& obj);
+		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
+		bool isPlayer() { return is; }
+		private:
+		bool is;
+	};
 	enum class Col_Type
     {
 		none, 

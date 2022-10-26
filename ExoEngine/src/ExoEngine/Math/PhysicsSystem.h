@@ -1,23 +1,23 @@
 #pragma once
-#include "RigidBody.h"
-#include "physics.h"
-#include "transformation.h"
-//#include "../ECS/ECS.h"
+#include "Physics.h"
 #include "ExoEngine/ECS/Components.h"
 #include "empch.h"
 #include "../../Platform/System/System.h"
 
 namespace EM {
-	class EM_API PhysicsSystem : System
+	class PhysicsSystem : public System
 	{
 	public:
+		virtual std::string GetName() { return "Update Positions"; }
 		virtual void Init() override;
 
-		virtual void Update(float dt);
+		virtual void Update();
+
+		void End();
 	private:
         //function take in acceleration, calculate and set force
        //function take force and find the acceleration of the moving object
-        void calculate_accel(RigidBody2 obj);
+        /*void calculate_accel(RigidBody2 obj);
         
        
 
@@ -25,8 +25,7 @@ namespace EM {
         void reset_force(RigidBody2 obj);
         void reset_accel(RigidBody2 obj);
         void reset_velocity(RigidBody2 obj);
-        void multiply_scale(Transform2 obj, vec2D Scale);
-       
+        void multiply_scale(Transform2 obj, vec2D Scale);*/
 	};
 
 }

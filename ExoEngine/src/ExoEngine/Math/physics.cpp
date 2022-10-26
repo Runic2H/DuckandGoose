@@ -3,15 +3,18 @@
 
 namespace EM {
     //class functions
-    void entityPhysics::accelent(vec2D& entvel, vec2D applied) {
-        entvel += applied;
-        entvel = entvel * 0.99f;
+    vec2D entityPhysics::accelent(vec2D& entvel, vec2D applied, float dt) {
+        entvel += applied * dt;
+        entvel = entvel * 0.99f * dt;
+        return entvel;
     }
-    void entityPhysics::friction(vec2D& entvel) {
-        entvel -= 0.5f * entvel;
+    vec2D entityPhysics::friction(vec2D& entvel, float dt) {
+        entvel -= entvel * 9.5f * dt;
+        return entvel;
     }
-    void entityPhysics::gravity(vec2D& entvel) {
-        entvel.y -= 9.8f;
+    vec2D entityPhysics::gravity(vec2D& entvel, float dt) {
+        entvel.y -= 9.8f * dt;
+        return entvel;
     }
     /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
         wall newWall;
