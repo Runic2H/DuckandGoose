@@ -47,6 +47,7 @@
     <ClCompile Include="src\ExoEngine\Math\collision_system.cpp" />
     <ClCompile Include="src\ExoEngine\Math\physics_system.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="src\ExoEngine\Math\physics_system.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
     <ClInclude Include="src\Platform\Logic\LogicSystem.h" />
+    <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

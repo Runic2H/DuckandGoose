@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -291,7 +293,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;EM_PLATFORM_WINDOWS;EM_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor\freetype\include;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\RapidJSON\include;imgui;imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor\freetype\include;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\RapidJSON\include;imgui;imgui;$(SolutionDir)ExoEngine\vendor\fmodL\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -303,8 +305,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Debug-x64\Exomata"</Command>
@@ -318,7 +320,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;EM_PLATFORM_WINDOWS;EM_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor\freetype\include;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\stb_image;imgui;imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ExoEngine\vendor\glew-2.1.0\include;$(SolutionDir)ExoEngine\vendor\spdlog\include;$(SolutionDir)ExoEngine\vendor\GLFW\include;$(SolutionDir)ExoEngine\vendor\freetype\include;$(SolutionDir)ExoEngine\vendor;$(SolutionDir)ExoEngine\vendor\stb_image;imgui;imgui;$(SolutionDir)ExoEngine\vendor\fmodL\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -331,8 +333,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Debug-x64\Exomata"</Command>

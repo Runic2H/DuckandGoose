@@ -23,7 +23,8 @@
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
-
+#include "Audio/AudioEngine.h"
+W
 namespace EM {
 
 	ECS ecs;
@@ -55,9 +56,18 @@ namespace EM {
 		
 		p_Editor->Init(m_window);
 
-		//Graphic* m_graphic = new Graphic;
-		//m_graphic->Init();
-		//m_Systems.SystemIndex(1, m_graphic);
+		Graphic* m_graphic = new Graphic;
+		m_graphic->Init();
+		//init audio
+		/*CAudioEngine aengine;
+		aengine.Init();*/
+
+
+		m_Systems.SystemIndex(1, m_graphic);
+
+		
+		p_Audio->Init();
+		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 		Transform transform;
 		RigidBody rigidbody;
@@ -72,7 +82,7 @@ namespace EM {
 			signature.set(ecs.GetComponentType<Transform>());
 			ecs.SetSystemSignature<Graphic>(signature);
 		}
-		mGraphics->Init();
+		//mGraphics->Init();
 
 		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
 		{
@@ -123,6 +133,7 @@ namespace EM {
 			//	ecs.GetComponent<Transform>(player).GetPos().x += 1 * Timer::GetInstance().GetGlobalDT();
 			//if (p_Input->isKeyPressed(GLFW_KEY_LEFT))
 			//	ecs.GetComponent<Transform>(player).GetPos().x -= 1 * Timer::GetInstance().GetGlobalDT();
+			p_Audio->Update();
 
 			/*for (System* system : m_Systems)
 			{
@@ -132,9 +143,13 @@ namespace EM {
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
+			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();
+		
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
@@ -149,6 +164,7 @@ namespace EM {
 	{
 		SM.SerializeToFile("SMTest.json");
 		p_Editor->End();
+		p_Audio->Release();
 		m_Systems.DeleteSystem();
 	}
 
