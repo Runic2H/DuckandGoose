@@ -10,7 +10,8 @@ namespace EM {
 	{
 		TextShader = ResourceManager::LoadShader("text", "Assets/Shaders/text.shader");;
         Load("Assets/fonts/ArialItalic.ttf");
-
+        
+     
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glBindVertexArray(VAO);
@@ -23,7 +24,6 @@ namespace EM {
 	}
 	void Font::Load(const std::string& fontpath, unsigned int fontsize)
 	{
-       
 
         Characters.clear();
         // then initialize and load the FreeType library

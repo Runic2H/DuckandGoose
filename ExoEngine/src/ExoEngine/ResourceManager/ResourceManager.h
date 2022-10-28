@@ -20,9 +20,9 @@ namespace EM {
 		static std::shared_ptr<Shader> LoadShader(std::string name, const std::string& filepath);
 		static std::shared_ptr<Shader> GetShader(std::string name);
 
-		//load different type of fonts from file tff
-		static std::shared_ptr<Font> LoadFont(std::string name, unsigned int size);
-		static std::shared_ptr<Font> GetFont(std::string name);
+		////load different type of fonts from file tff
+		//static std::shared_ptr<Font> LoadFont(std::string name, unsigned int size);
+		//static std::shared_ptr<Font> GetFont(std::string name);
 		static void clear();
 	private:
 		

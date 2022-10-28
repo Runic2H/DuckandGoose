@@ -11,7 +11,7 @@ namespace EM {
 
 	VertexArray::~VertexArray()
 	{
-		glDeleteVertexArrays(1, &m_RenderID);
+		glDeleteVertexArrays(0, &m_RenderID);
 	}
 
 	void VertexArray::Bind() const

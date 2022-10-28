@@ -48,6 +48,8 @@
     <ClCompile Include="src\ExoEngine\Math\physics_system.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\Platform\Graphics\SpriteRendering.cpp" />
+    <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -200,6 +202,8 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
     <ClInclude Include="src\Platform\Logic\LogicSystem.h" />
     <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
+    <ClInclude Include="src\Platform\Graphics\SpriteRendering.h" />
+    <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

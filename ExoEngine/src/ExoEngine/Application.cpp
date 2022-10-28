@@ -12,7 +12,6 @@
 ***/
 #include "empch.h"
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
@@ -24,7 +23,7 @@
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
-W
+
 namespace EM {
 
 	ECS ecs;
@@ -50,20 +49,17 @@ namespace EM {
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
 		m_Systems.SystemIndex(0, m_window); //1st layer window
 		
 		p_Editor->Init(m_window);
 
-		Graphic* m_graphic = new Graphic;
-		m_graphic->Init();
+		
 		//init audio
 		/*CAudioEngine aengine;
 		aengine.Init();*/
-
-
-		m_Systems.SystemIndex(1, m_graphic);
 
 		
 		p_Audio->Init();
@@ -82,7 +78,7 @@ namespace EM {
 			signature.set(ecs.GetComponentType<Transform>());
 			ecs.SetSystemSignature<Graphic>(signature);
 		}
-		//mGraphics->Init();
+		mGraphics->Init();
 
 		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
 		{
@@ -93,7 +89,7 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		SM.DeserializeFromFile("SM2.json");
+		SM.DeserializeFromFile("SM.json");
 
 		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		//{
@@ -110,7 +106,7 @@ namespace EM {
 		//}
 
 
-		//Entity playerclone = ecs.CloneEntity(player);
+		Entity playerclone = ecs.CloneEntity(1);
 		//ecs.RemoveComponent<Transform>(playerclone);
 
 		//Entity playerclone = ecs.CreateEntity();
@@ -120,34 +116,17 @@ namespace EM {
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
-
+			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			FramePerSec::GetInstance().StartFrameCount();
 			
-			//if (p_Input->isKeyPressed(GLFW_KEY_UP))
-			//	ecs.GetComponent<Transform>(player).GetPos().y += 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_DOWN))
-			//	ecs.GetComponent<Transform>(player).GetPos().y -= 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_RIGHT))
-			//	ecs.GetComponent<Transform>(player).GetPos().x += 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_LEFT))
-			//	ecs.GetComponent<Transform>(player).GetPos().x -= 1 * Timer::GetInstance().GetGlobalDT();
+		
 			p_Audio->Update();
 
-			/*for (System* system : m_Systems)
-			{
-				system->Update(Timer::GetInstance().GetGlobalDT());
-			}*/
-
-			m_window->Update(Timer::GetInstance().GetGlobalDT());
-			mCollision->Update(Timer::GetInstance().GetGlobalDT());
-			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			
 			p_Editor->Update();
 			p_Editor->Draw();
 		
+			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			

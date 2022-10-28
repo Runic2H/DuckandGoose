@@ -40,19 +40,16 @@ namespace EM {
 		static std::unique_ptr<LevelEditor>& GetInstance();
 	private:
 		void docking();
-		void Font();
 		bool dockspaceOpen{};
 		bool fullscreenMode{};
 		bool pad{};
 		void Profiler();
 
 	private:
+		
 		ImGuiDockNodeFlags dock_space_flags{};
 		Window* m_window;
 		static std::unique_ptr<LevelEditor> m_instance;
-		//profiler
-		bool b_profile = false;
-		float m_SceneRuntime = 0.0f;
-		float m_UpdateTimer = 0.0f;
+		
 	};
 }

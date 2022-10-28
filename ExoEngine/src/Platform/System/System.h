@@ -15,7 +15,7 @@
 #include "ExoEngine/Core.h"
 #include "ExoEngine/ECS/Types.h"
 namespace EM {
-
+	//template class EM_API std::set<Entity>;
 	class EM_API System
 	{
 	public:

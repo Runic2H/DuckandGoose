@@ -95,6 +95,7 @@ namespace EM
 		float rot;
 	};
 
+	
 	//Window Component
 	class WinData : public IComponent
 	{

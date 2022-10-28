@@ -24,7 +24,7 @@
 
 
 namespace EM {
-
+	class EM_API WinData;
 	//properties used in window
 	struct WindowProps 
 	{
