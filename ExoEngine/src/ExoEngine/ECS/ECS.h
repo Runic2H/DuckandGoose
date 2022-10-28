@@ -33,7 +33,6 @@ namespace EM
 			mSystemManager = std::make_unique<ECSSystemManager>();
 		}
 
-
 		// Entity methods
 		Entity CreateEntity()
 		{
@@ -49,12 +48,58 @@ namespace EM
 			mSystemManager->EntityDestroyed(entity);
 		}
 
-		template<typename T>
-		Entity CloneEntity(Entity entity, T Component)
+		Entity CloneEntity(Entity entity)
 		{
 			Entity newEntity = mEntityManager->CreateEntity();
-			AddComponent(newEntity, GetComponent(entity));
+			mEntityManager->SetSignature(newEntity, GetEntitySignature(entity));
+
+			for (size_t i = 0; i < GetTotalRegisteredComponents(); ++i)
+			{
+				if (GetEntitySignature(newEntity).test(i))
+				{
+					mComponentManager->GetComponentArrayFromType(i)->CopyComponent(entity, newEntity);
+				}
+			}
+
+			auto signature = mEntityManager->GetSignature(newEntity);
+
+			mSystemManager->EntitySignatureChanged(newEntity, signature);
+
+			/*if (GetEntitySignature(newEntity).test(GetComponentType<Transform>()))
+			{
+				AddComponent<Transform>(newEntity, GetComponent<Transform>(entity));
+			}
+			if (GetEntitySignature(newEntity).test(GetComponentType<RigidBody>()))
+			{
+				AddComponent<RigidBody>(newEntity, GetComponent<RigidBody>(entity));
+			}*/
+
 			return newEntity;
+		}
+
+		Signature GetEntitySignature(Entity entity)
+		{
+			return mEntityManager->GetSignature(entity);
+		}
+
+		void SetEntitySignature(Entity entity, Signature signature)
+		{
+			mEntityManager->SetSignature(entity, signature);
+		}
+
+		Entity GetTotalEntities()
+		{
+			return mEntityManager->GetTotalEntities();
+		}
+
+		void SetTotalEntitiesForWorldBuild(Entity entity)
+		{
+			mEntityManager->SetTotalEntitiesForWorld(entity);
+		}
+
+		void ResetEntities()
+		{
+			mEntityManager->ResetEntities();
 		}
 
 		// Component methods
@@ -72,8 +117,21 @@ namespace EM
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
-
 			mSystemManager->EntitySignatureChanged(entity, signature);
+		}
+
+		void AddComponentsSignature(Entity entity, Signature signature)
+		{
+			if (signature.test(GetComponentType<Transform>()))
+			{
+				Transform transform;
+				AddComponent<Transform>(entity, transform);
+			}
+			if (signature.test(GetComponentType<RigidBody>()))
+			{
+				RigidBody rigidbody;
+				AddComponent<RigidBody>(entity, rigidbody);
+			}
 		}
 
 		template<typename T>
@@ -98,6 +156,47 @@ namespace EM
 		ComponentType GetComponentType()
 		{
 			return mComponentManager->GetComponentType<T>();
+		}
+
+		std::string GetComponentTypeName(ComponentType Type)
+		{
+			return mComponentManager->GetComponentTypeName(Type);
+		}
+
+		template<typename T>
+		bool HaveComponent(Entity entity)
+		{
+			return mComponentManager->HaveComponent<T>(entity);
+		}
+
+		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMapECS(ComponentType Type)
+		{
+			return mComponentManager->GetEntityToIndexMap(Type);
+		}
+
+		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMapECS(ComponentType Type)
+		{
+			return mComponentManager->GetIndexToEntityMap(Type);
+		}
+
+		const ComponentType GetTotalRegisteredComponents()
+		{
+			return mComponentManager->GetTotalRegisteredComponents();
+		}
+
+		const size_t GetEntitySize(ComponentType Type)
+		{
+			return mComponentManager->GetEntitySize(Type);
+		}
+
+		void ClearArrayForWorldBuild(ComponentType Type)
+		{
+			return mComponentManager->ClearArrayForWorldBuild(Type);
+		}
+
+		std::shared_ptr<IComponentArray> GetComponentArrayFromType(ComponentType Type)
+		{
+			return mComponentManager->GetComponentArrayFromType(Type);
 		}
 
 

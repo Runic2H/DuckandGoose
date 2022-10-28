@@ -13,7 +13,7 @@
 ***/
 #include "empch.h"
 #include "collision_system.h"
-#include "../ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 
 namespace EM {

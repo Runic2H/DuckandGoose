@@ -13,7 +13,7 @@
 #pragma once
 #include "RigidBody.h"
 #include "physics.h"
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "empch.h"
 #include "../../Platform/System/System.h"
 

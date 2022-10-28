@@ -2,7 +2,7 @@
 
 #include"RigidBody.h"
 #include "../ECS/ECS.h"
-#include "../ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 namespace EM {
 	extern ECS ecs;
 

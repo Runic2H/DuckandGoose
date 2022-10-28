@@ -8,6 +8,8 @@
 #include <functional>
 #include <array>
 #include <bitset>
+#include <utility>
+#include <random>
 
 #include <string>
 #include <sstream>

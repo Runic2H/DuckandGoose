@@ -28,13 +28,13 @@ namespace EM {
 		void Init(Window* window);
 		void Update();	//update loop
 		void Draw();
-		void End();	
+		void End();
 
 		void DropDownMenu(); //Menu widget
 		void ColorPickerTab(); //color picker widget
 
 		static std::unique_ptr<LevelEditor>& GetInstance();
-	private:	
+	private:
 		void docking();
 		void Font();
 		bool dockspaceOpen{};

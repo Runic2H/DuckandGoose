@@ -18,19 +18,22 @@
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
 #include "ExoEngine/Math/collision_system.h"
-#include "ECS/Components.h"
+#include "ECS/Components/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
-#include "ECS/SceneViewer.h"
+#include "ECS/SceneManager.h"
 
 namespace EM {
 
 	ECS ecs;
+	SceneManager SM;
 
 	Application::Application()
 	{
+		FramePerSec::GetInstance().InitFrame();
 		ecs.Init();
+		SM.OnInit();
 	}
 
 	Application::~Application()
@@ -58,9 +61,10 @@ namespace EM {
 
 		Transform transform;
 		RigidBody rigidbody;
+		Transform transform2;
 		transform.DeserializeFromFile("PlayerTransform.json");
-		ecs.RegisterComponent<Transform>();
-		ecs.RegisterComponent<RigidBody>();
+		transform2.DeserializeFromFile("WallTransform.json");
+
 
 		auto mGraphics = ecs.RegisterSystem<Graphic>();
 		{
@@ -73,21 +77,36 @@ namespace EM {
 		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
 			signature.set(ecs.GetComponentType<RigidBody>());
 			ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
 
-		Entity player = ecs.CreateEntity();
-		//ecs.AddComponent(player, Player{});
-		ecs.AddComponent<Transform>(player, transform);
-		ecs.AddComponent<RigidBody>(player, rigidbody);
+		SM.DeserializeFromFile("SM2.json");
 
-		Entity wall = ecs.CreateEntity();
-		ecs.AddComponent<Transform>(wall, transform);
-		ecs.AddComponent<RigidBody>(wall, rigidbody);
+		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
+		//{
+		//	Entity player = ecs.CreateEntity();
+		//	if (player % 2)
+		//	{
+		//		ecs.AddComponent<Transform>(player, transform);
+		//	}
+		//	else
+		//	{
+		//		ecs.AddComponent<Transform>(player, transform2);
+		//	}
+		//	ecs.AddComponent<RigidBody>(player, rigidbody);
+		//}
 
-		FramePerSec::GetInstance().InitFrame();
+
+		//Entity playerclone = ecs.CloneEntity(player);
+		//ecs.RemoveComponent<Transform>(playerclone);
+
+		//Entity playerclone = ecs.CreateEntity();
+		//ecs.AddComponent<Transform>(playerclone, transform);
+		//ecs.AddComponent<RigidBody>(playerclone, rigidbody);
+
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
@@ -96,20 +115,29 @@ namespace EM {
 			Timer::GetInstance().GetDT(Systems::API);
 			FramePerSec::GetInstance().StartFrameCount();
 			
+			//if (p_Input->isKeyPressed(GLFW_KEY_UP))
+			//	ecs.GetComponent<Transform>(player).GetPos().y += 1 * Timer::GetInstance().GetGlobalDT();
+			//if (p_Input->isKeyPressed(GLFW_KEY_DOWN))
+			//	ecs.GetComponent<Transform>(player).GetPos().y -= 1 * Timer::GetInstance().GetGlobalDT();
+			//if (p_Input->isKeyPressed(GLFW_KEY_RIGHT))
+			//	ecs.GetComponent<Transform>(player).GetPos().x += 1 * Timer::GetInstance().GetGlobalDT();
+			//if (p_Input->isKeyPressed(GLFW_KEY_LEFT))
+			//	ecs.GetComponent<Transform>(player).GetPos().x -= 1 * Timer::GetInstance().GetGlobalDT();
 
-			for (System* system : m_Systems)
+			/*for (System* system : m_Systems)
 			{
 				system->Update(Timer::GetInstance().GetGlobalDT());
-			}
+			}*/
 
+			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			p_Editor->Update();
 			p_Editor->Draw();
 			
-			Timer::GetInstance().Update(Systems::API);
 			FramePerSec::GetInstance().EndFrameCount();
+			Timer::GetInstance().Update(Systems::API);
 	
 		}
 		
@@ -119,6 +147,7 @@ namespace EM {
 
 	void Application::End()
 	{
+		SM.SerializeToFile("SMTest.json");
 		p_Editor->End();
 		m_Systems.DeleteSystem();
 	}

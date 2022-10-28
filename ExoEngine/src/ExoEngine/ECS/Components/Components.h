@@ -16,27 +16,33 @@ deserialize its data
 ***/
 
 #pragma once
-#include "empch.h"
-#include "Types.h"
-#include "Serialization/JSONSerialization.h"
-#include "ExoEngine/Math/Vmath.h"
+#include "IComponent.h"
+
 namespace EM
 {
 	enum class Col_Type
-    {
-		none, 
-        circle, //-------Circle
-        line, //---------LineSegment
-        rect //----------AABB
-    };
+	{
+		none,
+		circle, //-------Circle
+		line, //---------LineSegment
+		rect //----------AABB
+	};
+
+	enum class Obj_Type
+	{
+		player,
+		enemy,
+		wall
+	};
+
 	//RigidBody Component
-	class RigidBody : public JSONSerializer
+	class RigidBody : public IComponent
 	{
 	public:
 		RigidBody();
 		~RigidBody() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
-		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
+		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
 		vec2D& GetMin() { return min; }
 		vec2D& GetMax() { return max; }
@@ -48,27 +54,29 @@ namespace EM
 		void SetMin(vec2D Min) { min = Min; }
 		void SetMax(vec2D Max) { max = Max; }
 		void SetVel(vec2D Vel) { vel = Vel; }
-		void SetNextPos(vec2D Pos) { nextpos = Pos; }
 		void SetInitVel(vec2D Vel) { initvel = Vel; }
+		void SetNextPos(vec2D Pos) { nextpos = Pos; }
 		void SetCollider(Col_Type col) { collider = col; }
+
+		virtual std::string GetComponentName();
 
 	private:
 		vec2D		min;
 		vec2D		max;
 		vec2D		vel;
-		vec2D		nextpos; //set to position + vel. for use in collision response calculation
 		vec2D		initvel;
+		vec2D		nextpos; //set to position + vel. for use in collision response calculation
 		Col_Type 	collider;
 	};
 
 	//Transform Component
-	class Transform : public JSONSerializer
+	class Transform : public IComponent
 	{
 	public:
 		Transform();
 		~Transform() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
-		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
+		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
 		vec2D& GetPos() { return position; }
 		vec2D& GetScale() { return scale; }
@@ -78,6 +86,8 @@ namespace EM
 		void SetScale(vec2D Scale) { scale = Scale; }
 		void SetRot(float value) { rot = value; }
 
+		virtual std::string GetComponentName();
+
 
 	private:
 		vec2D position;
@@ -86,13 +96,13 @@ namespace EM
 	};
 
 	//Window Component
-	class WinData : public JSONSerializer
+	class WinData : public IComponent
 	{
 	public:
 		WinData();
 		~WinData() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
-		virtual bool Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const;
+		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
 		std::string GetTitle() { return title; }
 		unsigned int GetWidth() { return width; }
@@ -106,6 +116,8 @@ namespace EM
 		void SetCurrWidth(unsigned int CurrWidth) { currentWidth = CurrWidth; }
 		void SetCurrHeight(unsigned int CurrHeight) { currentHeight = CurrHeight; }
 
+		virtual std::string GetComponentName();
+
 
 	private:
 		std::string title;
@@ -115,9 +127,10 @@ namespace EM
 			currentHeight;
 	};
 
-	class Player
+	class ObjectComponent
 	{
-
+	private:
+		Obj_Type ObjType;
 	};
 
 	//Sprite Component

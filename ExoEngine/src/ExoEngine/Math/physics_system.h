@@ -3,7 +3,7 @@
 #include "physics.h"
 #include "transformation.h"
 //#include "../ECS/ECS.h"
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "empch.h"
 #include "../../Platform/System/System.h"
 

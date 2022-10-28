@@ -28,6 +28,7 @@ namespace EM{
 		m_windowData.m_Height = windowData.GetHeight();
 		m_windowData.m_CurrentWidth = windowData.GetCurrWidth();
 		m_windowData.m_CurrentHeight = windowData.GetCurrHeight();
+		windowData.SerializeToFile("Window.json");
 	};
 
 	void Window::Init()

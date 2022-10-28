@@ -28,7 +28,7 @@ namespace EM
 		EntityManager()
 		{
 			// Initialize the queue with all possible entity IDs up to the max number of entities
-			for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
+			for (Entity entity = 1; entity < MAX_ENTITIES; ++entity)
 			{
 				mAvailableEntities.push(entity);
 			}
@@ -76,6 +76,33 @@ namespace EM
 			return mSignatures[entity];
 		}
 
+		Entity GetTotalEntities()
+		{
+			return mLivingEntityCount;
+		}
+
+		void SetTotalEntitiesForWorld(Entity entity)
+		{
+			while(mLivingEntityCount != entity)
+			{
+				CreateEntity();
+			}
+		}
+
+		void ResetEntities()
+		{
+			std::fill(mSignatures.begin(), mSignatures.end(), 0);
+			while (mLivingEntityCount != 0)
+			{
+				DestroyEntity(mLivingEntityCount);
+			}
+			mAvailableEntities.empty();
+			for (Entity entity = 1; entity < MAX_ENTITIES; ++entity)
+			{
+				mAvailableEntities.push(entity);
+			}
+		}
+
 	private:
 
 		// Queue of unused entity IDs
@@ -86,6 +113,6 @@ namespace EM
 		std::array<Signature, MAX_ENTITIES> mSignatures{};
 
 		// Total living entities - used to keep limits on how many exist
-		uint32_t mLivingEntityCount{};
+		Entity mLivingEntityCount{};
 	};
 }

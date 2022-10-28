@@ -20,7 +20,7 @@ deserialize its data
 namespace EM
 {
 	//RigidBody
-	RigidBody::RigidBody() : min{ vec2D() }, max{ vec2D() } 
+	RigidBody::RigidBody() : min{ vec2D() }, max{ vec2D() }, vel{ vec2D() }, initvel{ vec2D() }, nextpos{vec2D()}, collider{ Col_Type::none }
 	{
 		//RigidBody::SerializeToFile("RigidBody.json");
 	};
@@ -32,7 +32,7 @@ namespace EM
 		initvel = vec2D(obj["initX"].GetFloat(), obj["initY"].GetFloat());
 		if (obj["col"].GetInt() == 0) {
 			collider = Col_Type::none;
-		}//----------------Collider serialization
+		}
 		else if (obj["col"].GetInt() == 1) {
 			collider = Col_Type::circle;
 		}
@@ -44,7 +44,7 @@ namespace EM
 		}
 		return true;
 	}
-	bool RigidBody::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
+	bool RigidBody::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
 		writer->Key("minX");
@@ -63,11 +63,9 @@ namespace EM
 		writer->Double(initvel.x);
 		writer->Key("initY");
 		writer->Double(initvel.y);
-		writer->Key("???");//------------------------------
-		writer->Double(initvel.value.y);
 		writer->Key("col");//------------------------------
 		if (collider == Col_Type::none) {
-			writer->Int(0);//-----Collider serialization
+			writer->Int(0); //-----Collider serialization
 		}
 		else if (collider == Col_Type::circle) {
 			writer->Int(1);
@@ -81,13 +79,21 @@ namespace EM
 		writer->EndObject();
 		return true;
 	}
+
+	std::string RigidBody::GetComponentName()
+	{
+		std::string className = __FUNCTION__;
+		size_t found = className.find_last_of("::") - 1;
+		className = className.substr(0, found);
+		found = className.find_last_of("::") + 1;
+		className = className.substr(found);
+		return className;
+	}
 	//End RigidBody
 
 	//Transform
-	Transform::Transform() : position{ vec2D() }, scale{ vec2D() }, rot {0.0f}
-	{
-		//Transform::SerializeToFile("Transform.json");
-	};
+	Transform::Transform() : position{ vec2D(1.0f,1.0f) }, scale{ vec2D(1.0f,1.0f) }, rot {0.0f} {}
+
 	bool Transform::Deserialize(const rapidjson::Value& obj)
 	{
 		position = vec2D(obj["posX"].GetFloat(), obj["posY"].GetFloat());
@@ -95,7 +101,7 @@ namespace EM
 		rot = obj["Rot"].GetFloat();
 		return true;
 	}
-	bool Transform::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
+	bool Transform::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
 		writer->Key("posX");
@@ -111,6 +117,17 @@ namespace EM
 		writer->EndObject();
 		return true;
 	}
+
+	std::string Transform::GetComponentName()
+	{
+		std::string className = __FUNCTION__;
+		size_t found = className.find_last_of("::") - 1;
+		className = className.substr(0, found);
+		found = className.find_last_of("::") + 1;
+		className = className.substr(found);
+		return className;
+	}
+
 	//End Transform
 
 	//Window
@@ -127,20 +144,30 @@ namespace EM
 		currentHeight = obj["Cheight"].GetUint();
 		return true;
 	}
-	bool WinData::Serialize(rapidjson::Writer<rapidjson::StringBuffer>* writer) const
+	bool WinData::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
-		writer->Key("Title");
-		writer->String(title.c_str());
-		writer->Key("Width");
-		writer->Uint(width);
-		writer->Key("Height");
-		writer->Uint(height);
-		writer->Key("Cwidth");
-		writer->Uint(currentWidth);
-		writer->Key("Cheight");
-		writer->Uint(currentHeight);
+			writer->Key("Title");
+			writer->String(title.c_str());
+			writer->Key("Width");
+			writer->Uint(width);
+			writer->Key("Height");
+			writer->Uint(height);
+			writer->Key("Cwidth");
+			writer->Uint(currentWidth);
+			writer->Key("Cheight");
+			writer->Uint(currentHeight);
 		writer->EndObject();
 		return true;
+	}
+
+	std::string WinData::GetComponentName()
+	{
+		std::string className = __FUNCTION__;
+		size_t found = className.find_last_of("::") - 1;
+		className = className.substr(0, found);
+		found = className.find_last_of("::") + 1;
+		className = className.substr(found);
+		return className;
 	}
 }

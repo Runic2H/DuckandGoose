@@ -13,7 +13,7 @@
 #pragma once
 #include "Platform/System/System.h"
 #include "Platform/Graphics/Texture.h"
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/Math/Vmath.h";
 #include "ExoEngine/Math/matrix3D.h";
 #include "ExoEngine/Math/physics.h"
