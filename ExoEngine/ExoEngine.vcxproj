@@ -17,6 +17,9 @@
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />
     <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneManager.h" />
@@ -171,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
     <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />

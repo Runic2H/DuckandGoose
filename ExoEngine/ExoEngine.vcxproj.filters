@@ -50,6 +50,9 @@
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
     <ClCompile Include="src\Platform\Graphics\SpriteRendering.cpp" />
     <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -204,6 +207,9 @@
     <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
     <ClInclude Include="src\Platform\Graphics\SpriteRendering.h" />
     <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

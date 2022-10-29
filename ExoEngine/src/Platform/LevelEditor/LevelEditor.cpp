@@ -380,8 +380,6 @@ namespace EM {
 
     }
 
-	
-
     void LevelEditor::EditorTabs()
     {
         ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
@@ -552,5 +550,5 @@ namespace EM {
         //Todo show the each system consume how much at runtime
         ImGui::End();
     }
-
 }
+

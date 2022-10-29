@@ -52,24 +52,11 @@ namespace EM {
 		
 		Window* m_window = new Window;
 		m_window->Init();
-		m_Systems.SystemIndex(0, m_window); //1st layer window
-		
 		p_Editor->Init(m_window);
-
-		
-		//init audio
-		/*CAudioEngine aengine;
-		aengine.Init();*/
 
 		
 		p_Audio->Init();
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
-
-		Transform transform;
-		RigidBody rigidbody;
-		Transform transform2;
-		transform.DeserializeFromFile("PlayerTransform.json");
-		transform2.DeserializeFromFile("WallTransform.json");
 
 
 		auto mGraphics = ecs.RegisterSystem<Graphic>();
@@ -119,10 +106,8 @@ namespace EM {
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			
 		
 			p_Audio->Update();
-
 			p_Editor->Update();
 			p_Editor->Draw();
 		
