@@ -24,7 +24,6 @@
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
-W
 namespace EM {
 
 	ECS ecs;
@@ -52,28 +51,10 @@ namespace EM {
 		Timer::GetInstance().GlobalTimeStarter();
 		Window* m_window = new Window;
 		m_window->Init();
-		m_Systems.SystemIndex(0, m_window); //1st layer window
-		
 		p_Editor->Init(m_window);
-
-		Graphic* m_graphic = new Graphic;
-		m_graphic->Init();
-		//init audio
-		/*CAudioEngine aengine;
-		aengine.Init();*/
-
-
-		m_Systems.SystemIndex(1, m_graphic);
-
 		
 		p_Audio->Init();
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
-
-		Transform transform;
-		RigidBody rigidbody;
-		Transform transform2;
-		transform.DeserializeFromFile("PlayerTransform.json");
-		transform2.DeserializeFromFile("WallTransform.json");
 
 
 		auto mGraphics = ecs.RegisterSystem<Graphic>();
@@ -82,7 +63,7 @@ namespace EM {
 			signature.set(ecs.GetComponentType<Transform>());
 			ecs.SetSystemSignature<Graphic>(signature);
 		}
-		//mGraphics->Init();
+		mGraphics->Init();
 
 		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
 		{
@@ -125,29 +106,11 @@ namespace EM {
 			Timer::GetInstance().GetDT(Systems::API);
 			FramePerSec::GetInstance().StartFrameCount();
 			
-			//if (p_Input->isKeyPressed(GLFW_KEY_UP))
-			//	ecs.GetComponent<Transform>(player).GetPos().y += 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_DOWN))
-			//	ecs.GetComponent<Transform>(player).GetPos().y -= 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_RIGHT))
-			//	ecs.GetComponent<Transform>(player).GetPos().x += 1 * Timer::GetInstance().GetGlobalDT();
-			//if (p_Input->isKeyPressed(GLFW_KEY_LEFT))
-			//	ecs.GetComponent<Transform>(player).GetPos().x -= 1 * Timer::GetInstance().GetGlobalDT();
 			p_Audio->Update();
-
-			/*for (System* system : m_Systems)
-			{
-				system->Update(Timer::GetInstance().GetGlobalDT());
-			}*/
-
-			m_window->Update(Timer::GetInstance().GetGlobalDT());
-			mCollision->Update(Timer::GetInstance().GetGlobalDT());
-			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			
 			p_Editor->Update();
 			p_Editor->Draw();
 		
+			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
