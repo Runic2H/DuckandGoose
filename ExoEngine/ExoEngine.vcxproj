@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
+    <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="src\Platform\Graphics\Graphics.h" />
     <ClInclude Include="src\Platform\Graphics\Renderer.h" />
     <ClInclude Include="src\Platform\Graphics\Shader.h" />
+    <ClInclude Include="src\Platform\Graphics\SpriteRendering.h" />
     <ClInclude Include="src\Platform\Graphics\TextRendering.h" />
     <ClInclude Include="src\Platform\Graphics\Texture.h" />
     <ClInclude Include="src\Platform\Graphics\VertexArray.h" />
@@ -177,6 +179,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -205,6 +208,7 @@
     <ClCompile Include="src\Platform\Graphics\Graphics.cpp" />
     <ClCompile Include="src\Platform\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Platform\Graphics\SpriteRendering.cpp" />
     <ClCompile Include="src\Platform\Graphics\TextRendering.cpp" />
     <ClCompile Include="src\Platform\Graphics\Texture.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexArray.cpp" />
@@ -307,11 +311,13 @@
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <ProgramDataBaseFileName>$(OutDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetyped.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -339,7 +345,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetyped.lib;glew32.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

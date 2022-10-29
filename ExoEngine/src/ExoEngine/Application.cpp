@@ -12,7 +12,6 @@
 ***/
 #include "empch.h"
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
@@ -24,6 +23,7 @@
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
+
 namespace EM {
 
 	ECS ecs;
@@ -49,9 +49,11 @@ namespace EM {
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Editor->Init(m_window);
+
 		
 		p_Audio->Init();
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
@@ -74,7 +76,7 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		SM.DeserializeFromFile("SM2.json");
+		SM.DeserializeFromFile("SM.json");
 
 		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		//{
@@ -91,7 +93,7 @@ namespace EM {
 		//}
 
 
-		//Entity playerclone = ecs.CloneEntity(player);
+		Entity playerclone = ecs.CloneEntity(1);
 		//ecs.RemoveComponent<Transform>(playerclone);
 
 		//Entity playerclone = ecs.CreateEntity();
@@ -101,11 +103,10 @@ namespace EM {
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
-
+			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			FramePerSec::GetInstance().StartFrameCount();
-			
+		
 			p_Audio->Update();
 			p_Editor->Update();
 			p_Editor->Draw();

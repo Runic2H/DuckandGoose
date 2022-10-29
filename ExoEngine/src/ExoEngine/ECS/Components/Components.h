@@ -51,9 +51,6 @@ namespace EM
 	//Friction
 	//Restitution
 
-	//Transform Component
-
-
 	//std::array of scripts
 		//Array Name of Script std::string
 		//Pointer to instance to the script (Depend on Script)
