@@ -63,6 +63,7 @@ namespace EM {
 		{
 			Signature signature;
 			signature.set(ecs.GetComponentType<Transform>());
+			signature.set(ecs.GetComponentType<Sprite>());
 			ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();
@@ -76,7 +77,16 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		SM.DeserializeFromFile("SM.json");
+		Entity player = ecs.CreateEntity();
+		Sprite sprite;
+		sprite.SetColor({ 0.0f,0.0f,0.0f,0.0f });
+		sprite.SetTexture("Idle");
+		Transform transform;
+		ecs.AddComponent<Transform>(player, transform);
+		ecs.AddComponent<Sprite>(player, sprite);
+		
+		
+		//SM.DeserializeFromFile("SMTest.json");
 
 		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		//{
@@ -93,7 +103,7 @@ namespace EM {
 		//}
 
 
-		Entity playerclone = ecs.CloneEntity(1);
+		//Entity playerclone = ecs.CloneEntity(1);
 		//ecs.RemoveComponent<Transform>(playerclone);
 
 		//Entity playerclone = ecs.CreateEntity();

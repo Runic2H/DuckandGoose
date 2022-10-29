@@ -18,10 +18,11 @@ deserialize its data
 #include "Transform.h"
 #include "RigidBody.h"
 #include "WinData.h"
+#include "Sprite.h"
 
 #define TransformComponent EM::Transform::Transform()
 #define RigidBodyComponent EM::RigidBody::RigidBody()
-
+#define SpriteComponent EM::Sprite::Sprite()
 
 namespace EM
 {

@@ -132,6 +132,11 @@ namespace EM
 				RigidBody rigidbody;
 				AddComponent<RigidBody>(entity, rigidbody);
 			}
+			if (signature.test(GetComponentType<Sprite>()))
+			{
+				Sprite sprite;
+				AddComponent<Sprite>(entity, sprite);
+			}
 		}
 
 		template<typename T>

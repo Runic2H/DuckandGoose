@@ -46,7 +46,7 @@ namespace EM {
 		void Profiler();
 
 	private:
-		
+		std::set<Entity> mEntities;
 		ImGuiDockNodeFlags dock_space_flags{};
 		Window* m_window;
 		static std::unique_ptr<LevelEditor> m_instance;

@@ -26,7 +26,7 @@
 #endif
 
 #define BIT(x) (x << 1)
-
+#define GETTEXTURE(x) ResourceManager::GetTexture(x)
 namespace EM {
 
 	template<typename T>

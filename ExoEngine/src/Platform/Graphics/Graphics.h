@@ -51,5 +51,7 @@ namespace EM {
 		float frameindex = 0.0f;
 		float runtime = 0.0f;
 		Singleton<Window>windowdata;
+	private:
+		void LoadTexture(std::string filename);
 	};
 }

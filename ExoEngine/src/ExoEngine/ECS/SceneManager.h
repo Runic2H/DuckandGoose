@@ -20,6 +20,7 @@ namespace EM
 		{
 			ecs.RegisterComponent<Transform>();
 			ecs.RegisterComponent<RigidBody>();
+			ecs.RegisterComponent<Sprite>();
 		}
 
 		Entity GetEntities()

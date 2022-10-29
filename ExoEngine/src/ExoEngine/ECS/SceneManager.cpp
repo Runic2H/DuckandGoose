@@ -37,6 +37,15 @@ namespace EM
 							ecs.AddComponent<RigidBody>(j, rigidbody);
 						}
 					}
+					if (ecs.GetComponentTypeName(i) == "Sprite")
+					{
+						Sprite sprite;
+						if (sprite.Deserialize(obj["Components"][ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							ecs.AddComponent<Sprite>(j, sprite);
+						}
+					}
+					
 				}
 			}
 			for (Entity j = 1; j < MAX_ENTITIES; ++j)
@@ -115,6 +124,12 @@ namespace EM
 					{
 						ecs.GetComponent<RigidBody>(j).Serialize(writer);
 					}
+					std::cout << "Component Serialized" << std::endl;
+					if (ecs.GetComponentTypeName(i) == "Sprite")
+					{
+						ecs.GetComponent<Sprite>(j).Serialize(writer);
+					}
+					std::cout << "Component Serialized" << std::endl;
 				}
 			}
 			writer->EndArray();

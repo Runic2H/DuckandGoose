@@ -17,10 +17,21 @@
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Timer/Time.h"
+
+
 namespace EM {
 
 	extern ECS ecs;
-	
+
+	void Graphic::LoadTexture(std::string filename)
+	{
+		std::ifstream ifs(filename.c_str());
+		std::string name, textPath;
+		while (ifs >> name >> textPath)
+			ResourceManager::LoadTexture(name.c_str(), textPath.c_str());
+
+		ifs.close();
+	}
 
 	//for testing purpose
 	void Graphic::Init()
@@ -29,13 +40,7 @@ namespace EM {
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
 		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
 		
-		ResourceManager::LoadTexture("BackGround", "Assets/Textures/BackGround.png");
-		ResourceManager::LoadTexture("Player", "Assets/Textures/PlayerSpriteSheet.png");
-		ResourceManager::LoadTexture("Splash", "Assets/Textures/HitSplash.png");
-		ResourceManager::LoadTexture("Animation", "Assets/Textures/Running.png");
-		ResourceManager::LoadTexture("Idle", "Assets/Textures/EXOMATA_IDLE_SPRITESHEET.png");
-		
-	
+		LoadTexture("Assets/textures.txt");
 		Renderer::Init();
 		m_Font->Init();
 	}
@@ -48,13 +53,21 @@ namespace EM {
 		m_Renderer->ResetInfo();
 		m_Renderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		m_Renderer->Clear();
-		m_Renderer->Begin(camera);
+		m_Renderer->Begin(camera);// begin of the renderer 
 		//test for rendering texture, line and rectange to be removed
-		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
-
-		m_Renderer->DrawRect({ 0.0f,0.0f,0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f });
-		m_Renderer->DrawQuad({ 1.0f, 0.0f,0.0f }, { 0.5f, 0.5f }, { 0.3f, 0.4f, 0.5f, 1.0f }); 
-		m_Renderer->End();
+		 
+		for (auto const& entity : mEntities)
+		{
+			auto& transform = ecs.GetComponent<Transform>(entity);
+			auto& sprite = ecs.GetComponent<Sprite>(entity);
+			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture().c_str()), { 0.f,0.f });
+			m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
+				index1);
+	
+		}
+		
+		
+		m_Renderer->End(); //when flush happened
 		//for testing 
 		camera.SetPosition({ m_cameraposition.x, m_cameraposition.y, 0.0f });
 
@@ -77,4 +90,5 @@ namespace EM {
 		ResourceManager::clear();
 		Renderer::ShutDown();
 	}
+
 }

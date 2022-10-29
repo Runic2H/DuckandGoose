@@ -53,6 +53,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

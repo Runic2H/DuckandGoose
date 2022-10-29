@@ -18,6 +18,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />
     <ClInclude Include="src\ExoEngine\ECS\ECS.h" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
