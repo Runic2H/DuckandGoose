@@ -48,7 +48,7 @@ namespace EM {
 	private:
 		std::set<Entity> mEntities;
 		ImGuiDockNodeFlags dock_space_flags{};
-		Window* m_window;
+		Window* m_window{nullptr};
 		static std::unique_ptr<LevelEditor> m_instance;
 		
 	};

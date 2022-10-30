@@ -212,21 +212,21 @@ namespace EM {
 
 	void RotRad4x4(Mat4x4& Result, float angle, Vec3 Dir)
 	{
-		if (Dir.x == true)
+		if (Dir.x != 0)
 		{
 
 			XRotRad4x4(Result, angle);
 		}
 
 
-		if (Dir.y == true)
+		if (Dir.y != 0)
 		{
 
 			YRotRad4x4(Result, angle);
 		}
 
 
-		if (Dir.z == true)
+		if (Dir.z != 0)
 		{
 
 			ZRotRad4x4(Result, angle);
@@ -237,21 +237,21 @@ namespace EM {
 
 	void RotDeg4x4(Mat4x4& Result, float angle, Vec3 Dir)
 	{
-		if (Dir.x == true)
+		if (Dir.x != 0)
 		{
 
 			XRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.y == true)
+		if (Dir.y != 0)
 		{
 
 			YRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.z == true)
+		if (Dir.z != 0)
 		{
 
 			ZRotDeg4x4(Result, angle);
