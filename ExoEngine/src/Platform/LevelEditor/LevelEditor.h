@@ -47,7 +47,7 @@ namespace EM {
 
 	private:
 		ImGuiDockNodeFlags dock_space_flags{};
-		Window* m_window;
+		Window* m_window{nullptr};
 		static std::unique_ptr<LevelEditor> m_instance;
 		//profiler
 		bool b_profile = false;

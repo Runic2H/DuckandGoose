@@ -140,10 +140,10 @@ namespace EM {
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
-            GLFWwindow* m_window = glfwGetCurrentContext();
+            auto* mWindow = glfwGetCurrentContext();
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(m_window);
+            glfwMakeContextCurrent(mWindow);
         }
 
     }
