@@ -96,7 +96,7 @@ namespace EM
 			{
 				DestroyEntity(mLivingEntityCount);
 			}
-			mAvailableEntities.empty();
+			mAvailableEntities = std::queue<Entity>();
 			for (Entity entity = 1; entity < MAX_ENTITIES; ++entity)
 			{
 				mAvailableEntities.push(entity);

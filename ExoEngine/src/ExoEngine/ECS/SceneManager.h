@@ -21,12 +21,6 @@ namespace EM
 		static std::unique_ptr<SceneManager>& GetInstance();
 
 		void Init();
-		{
-			ecs.RegisterComponent<Transform>();
-			ecs.RegisterComponent<RigidBody>();
-			ecs.RegisterComponent<Sprite>();
-		}
-
 		Entity GetEntities()
 		{
 			return p_ecs.GetTotalEntities();

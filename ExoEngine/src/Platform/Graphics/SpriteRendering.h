@@ -13,7 +13,7 @@ namespace EM {
 		const glm::vec2* GetTexCoords()const { return m_TexCoords; }	// retrieve texture coordinates
 
 		//helper function to spilt the spritesheet 
-		static MultiRefs<SpriteRender> CreateSprite(const MultiRefs<Texture>& texture, const glm::vec2& Coordinates, const glm::vec2& SpriteSize = { 512.0f, 512.0f});
+		static MultiRefs<SpriteRender> CreateSprite(const MultiRefs<Texture>& texture, const glm::vec2& Coordinates, const glm::vec2& SpriteSize = { 512.0f, 512.0f});// our sprite sheet is standard 512 by 512
 
 		
 	private:
