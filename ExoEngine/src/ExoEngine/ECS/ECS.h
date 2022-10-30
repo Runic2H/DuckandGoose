@@ -21,16 +21,25 @@ with each other using this class
 #include "Types.h"
 #include "empch.h"
 
+#define p_ecs EM::ECS::GetInstance()
+
 namespace EM
 {
 	class ECS
 	{
 	public:
+
+		static ECS& GetInstance()
+		{
+			static ECS instance;
+			return instance;
+		}
+
 		void Init()
 		{
 			mComponentManager = std::make_unique<ComponentManager>();
 			mEntityManager = std::make_unique<EntityManager>();
-			mSystemManager = std::make_unique<ECSSystemManager>();
+			mSystemManager = std::make_unique<SystemManager>();
 		}
 
 		// Entity methods
@@ -52,7 +61,6 @@ namespace EM
 		{
 			Entity newEntity = mEntityManager->CreateEntity();
 			mEntityManager->SetSignature(newEntity, GetEntitySignature(entity));
-
 			for (size_t i = 0; i < GetTotalRegisteredComponents(); ++i)
 			{
 				if (GetEntitySignature(newEntity).test(i))
@@ -60,19 +68,8 @@ namespace EM
 					mComponentManager->GetComponentArrayFromType(i)->CopyComponent(entity, newEntity);
 				}
 			}
-
 			auto signature = mEntityManager->GetSignature(newEntity);
-
 			mSystemManager->EntitySignatureChanged(newEntity, signature);
-
-			/*if (GetEntitySignature(newEntity).test(GetComponentType<Transform>()))
-			{
-				AddComponent<Transform>(newEntity, GetComponent<Transform>(entity));
-			}
-			if (GetEntitySignature(newEntity).test(GetComponentType<RigidBody>()))
-			{
-				AddComponent<RigidBody>(newEntity, GetComponent<RigidBody>(entity));
-			}*/
 
 			return newEntity;
 		}
@@ -216,6 +213,7 @@ namespace EM
 	private:
 		std::unique_ptr<ComponentManager> mComponentManager;
 		std::unique_ptr<EntityManager> mEntityManager;
-		std::unique_ptr<ECSSystemManager> mSystemManager;
+		std::unique_ptr<SystemManager> mSystemManager;
+		inline static std::unique_ptr<ECS> m_instance;
 	};
 }

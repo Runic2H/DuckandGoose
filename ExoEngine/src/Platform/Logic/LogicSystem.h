@@ -10,7 +10,7 @@ namespace EM
 		virtual std::string GetName() = 0;
 		virtual ~LogicSystem() {};
 		virtual void Init() = 0 {};
-		virtual void Update(float Frametime) { float frametime };
+		virtual void Update(float Frametime) { float frametime; }
 		virtual void End() = 0 {};
 	};
 }

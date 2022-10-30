@@ -12,20 +12,23 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value & obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>*writer) const;
 
-		vec2D& GetPos() { return position; }
-		vec2D& GetScale() { return scale; }
-		float& GetRot() { return rot; }
+		vec2D& GetPos() { return mPosition; }
+		const vec2D& GetPosConst() { return mPosition; } const
+		vec2D& GetScale() { return mScale; }
+		const vec2D& GetScaleConst() { return mScale; } const
+		float& GetRot() { return mRot; }
+		const float& GetRotConst() { return mRot; } const
 
-		void SetPos(vec2D Pos) { position = Pos; }
-		void SetScale(vec2D Scale) { scale = Scale; }
-		void SetRot(float value) { rot = value; }
-
-		virtual std::string GetComponentName();
+		void SetPos(vec2D Pos) { mPosition = Pos; }
+		void SetPos(float posX, float posY) { mPosition = vec2D(posX, posY); }
+		void SetScale(vec2D Scale) { mScale = Scale; }
+		void SetScale(float X, float Y) { mScale = vec2D(X, Y); }
+		void SetRot(float value) { mRot = value; }
 
 
 	private:
-		vec2D position;
-		vec2D scale;
-		float rot;
+		vec2D mPosition;
+		vec2D mScale;
+		float mRot;
 	};
 }

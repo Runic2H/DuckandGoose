@@ -9,27 +9,28 @@
 #include "Serialization/JSONserialization.h"
 #include "Serialization/JSONincludes.h"
 
+#define p_Scene EM::SceneManager::GetInstance()
+
 namespace EM
 {
-	extern ECS ecs;
 
 	class SceneManager : public JSONSerializer
 	{
 	public:
-		void OnInit()
-		{
-			ecs.RegisterComponent<Transform>();
-			ecs.RegisterComponent<RigidBody>();
-		}
+
+		static std::unique_ptr<SceneManager>& GetInstance();
+
+		void Init();
 
 		Entity GetEntities()
 		{
-			return ecs.GetTotalEntities();
+			return p_ecs.GetTotalEntities();
 		}
 
 		virtual bool Deserialize(const rapidjson::Value& obj);
 
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
-
+	private:
+		static std::unique_ptr<SceneManager> m_instance;
 	};
 }

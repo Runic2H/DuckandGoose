@@ -3,43 +3,31 @@
 namespace EM
 {
 	//Window
-	WinData::WinData() : title{ "Exomata" }, width{ 0 }, height(0), currentWidth{ 0 }, currentHeight{ 0 }
-	{
-		//WinData::SerializeToFile("Window.json");
-	};
+	WinData::WinData() : mTitle{ "Exomata" }, mWidth{ 1920 }, mHeight{ 1080 }, mCurrentWidth{ 1920 }, mCurrentHeight{ 1080 } {}
+
 	bool WinData::Deserialize(const rapidjson::Value& obj)
 	{
-		title = obj["Title"].GetString();
-		width = obj["Width"].GetUint();
-		height = obj["Height"].GetUint();
-		currentWidth = obj["Cwidth"].GetUint();
-		currentHeight = obj["Cheight"].GetUint();
+		mTitle = obj["Title"].GetString();
+		mWidth = obj["Width"].GetUint();
+		mHeight = obj["Height"].GetUint();
+		mCurrentWidth = obj["Cwidth"].GetUint();
+		mCurrentHeight = obj["Cheight"].GetUint();
 		return true;
 	}
 	bool WinData::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
 		writer->Key("Title");
-		writer->String(title.c_str());
+		writer->String(mTitle.c_str());
 		writer->Key("Width");
-		writer->Uint(width);
+		writer->Uint(mWidth);
 		writer->Key("Height");
-		writer->Uint(height);
+		writer->Uint(mHeight);
 		writer->Key("Cwidth");
-		writer->Uint(currentWidth);
+		writer->Uint(mCurrentWidth);
 		writer->Key("Cheight");
-		writer->Uint(currentHeight);
+		writer->Uint(mCurrentHeight);
 		writer->EndObject();
 		return true;
-	}
-
-	std::string WinData::GetComponentName()
-	{
-		std::string className = __FUNCTION__;
-		size_t found = className.find_last_of("::") - 1;
-		className = className.substr(0, found);
-		found = className.find_last_of("::") + 1;
-		className = className.substr(found);
-		return className;
 	}
 }

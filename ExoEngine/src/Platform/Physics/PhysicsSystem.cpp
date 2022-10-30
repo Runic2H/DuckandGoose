@@ -1,8 +1,7 @@
-#include"physics_system.h"
-
-#include"RigidBody.h"
-#include "../ECS/ECS.h"
-#include "ExoEngine/ECS/Components/Components.h"
+#include "empch.h"
+#include "PhysicsSystem.h"
+#include "../ECS/Components.h"
+#include "ExoEngine/ResourceManager/ResourceManager.h"
 namespace EM {
 	extern ECS ecs;
 
@@ -11,24 +10,21 @@ namespace EM {
 
 	}
 
-	void PhysicsSystem::Update(float dt)
+	void PhysicsSystem::Update()
 	{
-		for (auto const& Entity : mEntities)
+		for (auto& Entity : mEntities)
 		{
-			auto& rigidBody2 = ecs.GetComponent<RigidBody2>(Entity);
-			auto& transformation = ecs.GetComponent<Transform>(Entity);
-
-			vec2D currpos = transformation.GetPos();
-			currpos += rigidBody2.velocity * dt;
-			transformation.SetPos(currpos);
+			auto mTrans = ecs.GetComponent<Transform>(Entity);
+			auto mRigid = ecs.GetComponent<RigidBody>(Entity);
+			mTrans.SetPos(mRigid.GetNextPos());
 		}
-
-		
 	}
-	
 
+	void PhysicsSystem::End() {
 
-	void PhysicsSystem::calculate_accel(RigidBody2 obj)
+	}
+
+	/*void PhysicsSystem::calculate_accel(RigidBody2 obj)
 	{
 		obj.aceleration = obj.force / obj.mass;
 	}
@@ -54,5 +50,5 @@ namespace EM {
 	{
 		obj.scale += Scale.x;
 		obj.scale.y += Scale.y;
-	}
+	}*/
 }

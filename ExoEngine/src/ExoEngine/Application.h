@@ -19,7 +19,6 @@
 #include "ECS/ECS.h"
 
 namespace EM {
-	extern ECS ecs;
 	class EM_API Application
 	{
 

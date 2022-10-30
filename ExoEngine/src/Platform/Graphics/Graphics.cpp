@@ -51,9 +51,9 @@ namespace EM {
 	
 		for (auto const& entity : mEntities)
 		{
-			auto& transform = ecs.GetComponent<Transform>(entity);
+			auto& transform = p_ecs.GetComponent<Transform>(entity);
 			//draw quad without texture
-			m_Renderer->DrawQuad({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y }, transform.GetRot(), ResourceManager::GetTexture("Player"));
+			m_Renderer->DrawQuad({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y }, transform.GetRot(), {1.0f,0.0f,0.0f,1.0f});
 			
 		}
 

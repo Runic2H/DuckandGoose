@@ -6,6 +6,9 @@
 
 namespace EM
 {
+	//When Buiilding a New Component
+	//Ensure that the SceneManager Init has the component registered
+	//Ensure that the Serialize and De-Serialize functions in the SceneManager has those components checked
 	class IComponent : public JSONSerializer
 	{
 	public:
@@ -13,6 +16,5 @@ namespace EM
 		virtual void ToEditor() {}
 		virtual bool Deserialize(const rapidjson::Value& obj) = 0;
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const = 0;
-		virtual std::string GetComponentName() = 0;
 	};
 }

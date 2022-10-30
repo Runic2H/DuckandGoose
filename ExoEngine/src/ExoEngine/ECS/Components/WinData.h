@@ -13,26 +13,23 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
-		std::string GetTitle() { return title; }
-		unsigned int GetWidth() { return width; }
-		unsigned int GetHeight() { return height; }
-		unsigned int GetCurrWidth() { return currentWidth; }
-		unsigned int GetCurrHeight() { return currentHeight; }
+		std::string GetTitle() { return mTitle; }
+		unsigned int GetWidth() { return mWidth; }
+		unsigned int GetHeight() { return mHeight; }
+		unsigned int GetCurrWidth() { return mCurrentWidth; }
+		unsigned int GetCurrHeight() { return mCurrentHeight; }
 
-		void SetTitle(std::string Title) { title = Title; }
-		void SetWidth(unsigned int Width) { width = Width; }
-		void SetHeight(unsigned int Height) { height = Height; }
-		void SetCurrWidth(unsigned int CurrWidth) { currentWidth = CurrWidth; }
-		void SetCurrHeight(unsigned int CurrHeight) { currentHeight = CurrHeight; }
-
-		virtual std::string GetComponentName();
-
+		void SetTitle(std::string Title) { mTitle = Title; }
+		void SetWidth(unsigned int Width) { mWidth = Width; }
+		void SetHeight(unsigned int Height) { mHeight = Height; }
+		void SetCurrWidth(unsigned int CurrWidth) { mCurrentWidth = CurrWidth; }
+		void SetCurrHeight(unsigned int CurrHeight) { mCurrentHeight = CurrHeight; }
 
 	private:
-		std::string title;
-		unsigned int width,
-			height,
-			currentWidth,
-			currentHeight;
+		std::string mTitle;
+		unsigned int mWidth,
+			mHeight,
+			mCurrentWidth,
+			mCurrentHeight;
 	};
 }
