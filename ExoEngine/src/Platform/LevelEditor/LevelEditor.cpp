@@ -23,7 +23,7 @@
 #include "ExoEngine/Timer/Time.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "Platform/Graphics/Renderer.h"
-
+#include "glm/gtc/type_ptr.hpp"
 namespace EM {
 
     bool color_picker = false;
@@ -75,7 +75,7 @@ namespace EM {
         Profiler();
        
        // DropDownMenu();
-        //ColorPickerTab();
+        ColorPickerTab();
 
     }
     //  Render interface onto frame
@@ -210,11 +210,20 @@ namespace EM {
     void LevelEditor::ColorPickerTab()
     {
 
-        if (ImGui::TreeNode("Color/Picker Widgets"))
-        {
-            static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
+       
+              
+        ImGui::Begin("color");
+        auto& sprite = ecs.GetComponent<Sprite>(1);
+        ImGui::Text("Color widget HSV with Alpha:");
+        ImGui::ColorEdit4("Color", glm::value_ptr(sprite.GetColor()), ImGuiColorEditFlags_Float);
+        ImGui::End();
+             
+                
+            
+ /*         static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
 
-            static bool alpha_preview = true;
+          
+           static bool alpha_preview = true;
             static bool alpha_half_preview = false;
             static bool drag_and_drop = true;
             static bool options_menu = true;
@@ -230,9 +239,6 @@ namespace EM {
             ImGui::Text("Color widget:");
             ImGui::SameLine();
             ImGui::ColorEdit3("MyColor##1", (float*)&color, misc_flags);
-
-            ImGui::Text("Color widget HSV with Alpha:");
-            ImGui::ColorEdit4("MyColor##2", (float*)&color, ImGuiColorEditFlags_DisplayHSV | misc_flags);
 
             ImGui::Text("Color widget with Float Display:");
             ImGui::ColorEdit4("MyColor##2f", (float*)&color, ImGuiColorEditFlags_Float | misc_flags);
@@ -308,12 +314,12 @@ namespace EM {
 
             }
 
-           /* ImGui::Text("Color button only:");
-            static bool no_border = false;
-            ImGui::Checkbox("ImGuiColorEditFlags_NoBorder", &no_border);
-            ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));*/
+         ImGui::Text("Color button only:");
+        static bool no_border = false;
+        ImGui::Checkbox("ImGuiColorEditFlags_NoBorder", &no_border);
+        ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));
 
-            //ImGui::Text("Color picker:");
+            ImGui::Text("Color picker:");
             static bool alpha = true;
             static bool alpha_bar = true;
             static bool side_preview = true;
@@ -324,7 +330,7 @@ namespace EM {
             //ImGui::Checkbox("With Alpha", &alpha);
             //ImGui::Checkbox("With Alpha Bar", &alpha_bar);
             //ImGui::Checkbox("With Side Preview", &side_preview);
-            /*if (side_preview)
+            if (side_preview)
             {
                 ImGui::SameLine();
                 ImGui::Checkbox("With Ref Color", &ref_color);
@@ -336,7 +342,7 @@ namespace EM {
             }
             ImGui::Combo("Display Mode", &display_mode, "Auto/Current\0None\0RGB Only\0HSV Only\0Hex Only\0");
             ImGui::SameLine();
-            ImGui::SameLine();*/
+            ImGui::SameLine();
             ImGuiColorEditFlags flags = misc_flags;
             if (!alpha)            flags |= ImGuiColorEditFlags_NoAlpha;        // This is by default if you call ColorPicker3() instead of ColorPicker4()
             if (alpha_bar)         flags |= ImGuiColorEditFlags_AlphaBar;
@@ -374,10 +380,9 @@ namespace EM {
             ImGui::ColorEdit4("HSV shown as RGB##1", (float*)&color_hsv, ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_Float);
             ImGui::ColorEdit4("HSV shown as HSV##1", (float*)&color_hsv, ImGuiColorEditFlags_DisplayHSV | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_Float);
             ImGui::DragFloat4("Raw HSV values", (float*)&color_hsv, 0.01f, 0.0f, 1.0f);
+*/
 
-            ImGui::TreePop();
-        }
-
+       
     }
 
     void LevelEditor::EditorTabs()

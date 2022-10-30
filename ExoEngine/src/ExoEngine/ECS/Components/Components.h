@@ -20,12 +20,13 @@ deserialize its data
 #include "WinData.h"
 #include "Collider.h"
 #include "NameTag.h"
+#include "Sprite.h"
 
 #define TransformComponent EM::Transform::Transform()
 #define RigidBodyComponent EM::RigidBody::RigidBody()
 #define ColliderComponent EM::Collider::Collider()
 #define NameTagComponent EM::NameTag::NameTag()
-
+#define SpriteComponent EM::Sprite::Sprite()
 
 namespace EM
 {

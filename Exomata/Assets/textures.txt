@@ -1,0 +1,5 @@
+Blank Assets/Textures/Blank.png
+BackGround Assets/Textures/BackGround.png
+Splash Assets/Textures/HitSplash.png
+Running Assets/Textures/Running.png
+Idle Assets/Textures/EXOMATA_IDLE_SPRITESHEET.png

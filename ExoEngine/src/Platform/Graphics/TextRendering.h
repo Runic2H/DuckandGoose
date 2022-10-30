@@ -30,7 +30,7 @@ namespace EM {
 	private:
 		MultiRefs<Shader> TextShader;
 		//MultiRefs<Camera2D> camera;
-		unsigned int VAO, VBO;
+		unsigned int VAO{ 0 }, VBO{ 0 };
 		
 	};
 }

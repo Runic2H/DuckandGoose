@@ -21,6 +21,11 @@ namespace EM
 		static std::unique_ptr<SceneManager>& GetInstance();
 
 		void Init();
+		{
+			ecs.RegisterComponent<Transform>();
+			ecs.RegisterComponent<RigidBody>();
+			ecs.RegisterComponent<Sprite>();
+		}
 
 		Entity GetEntities()
 		{
@@ -30,6 +35,7 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
+		
 	private:
 		static std::unique_ptr<SceneManager> m_instance;
 	};

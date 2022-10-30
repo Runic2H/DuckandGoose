@@ -52,6 +52,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\Scripts\IScript.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

@@ -103,6 +103,7 @@ namespace EM
 			}
 		}
 
+		
 	private:
 
 		// Queue of unused entity IDs
