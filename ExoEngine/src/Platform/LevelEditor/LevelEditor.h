@@ -28,7 +28,7 @@ namespace EM {
 		void Init(Window* window);
 		void Update();	//update loop
 		void Draw();
-		void End();	
+		void End();
 
 		void DropDownMenu(); //Menu widget
 		void ColorPickerTab(); //color picker widget
@@ -38,21 +38,18 @@ namespace EM {
 		void SceneHierarchyWindow();
 
 		static std::unique_ptr<LevelEditor>& GetInstance();
-	private:	
+	private:
 		void docking();
-		void Font();
 		bool dockspaceOpen{};
 		bool fullscreenMode{};
 		bool pad{};
 		void Profiler();
 
 	private:
+		std::set<Entity> mEntities;
 		ImGuiDockNodeFlags dock_space_flags{};
 		Window* m_window;
 		static std::unique_ptr<LevelEditor> m_instance;
-		//profiler
-		bool b_profile = false;
-		float m_SceneRuntime = 0.0f;
-		float m_UpdateTimer = 0.0f;
+		
 	};
 }

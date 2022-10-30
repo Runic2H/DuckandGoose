@@ -8,7 +8,7 @@
 \par Milestone 1
 \date 28-9-2022
 \brief  This program utilises Dear ImGui and OpenGL to create a editor interface
-        to allow us to edit object, create entities and modify the 
+        to allow us to edit object, create entities and modify the
         properties of the components and save them accordingly.
 ****************************************************************************
 ***/
@@ -23,7 +23,7 @@
 #include "ExoEngine/Timer/Time.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "Platform/Graphics/Renderer.h"
-
+#include "glm/gtc/type_ptr.hpp"
 namespace EM {
 
     bool color_picker = false;
@@ -32,126 +32,76 @@ namespace EM {
     int drop_menu_slider = 12;
     bool alphabar = true;
 
-	std::unique_ptr<LevelEditor> LevelEditor::m_instance{ nullptr };
+    std::unique_ptr<LevelEditor> LevelEditor::m_instance{ nullptr };
 
-	std::unique_ptr<LevelEditor>& LevelEditor::GetInstance()
-	{
-		if (m_instance == nullptr)
-		{
-			m_instance = std::make_unique<LevelEditor>();
-		}
-		return m_instance;
-	}
+    std::unique_ptr<LevelEditor>& LevelEditor::GetInstance()
+    {
+        if (m_instance == nullptr)
+        {
+            m_instance = std::make_unique<LevelEditor>();
+        }
+        return m_instance;
+    }
 
     // Init for levelEditor sets context for ImGui 
-	void LevelEditor::Init(Window* window)
-	{
-		m_window = window;
-		/*GLFWwindow* m_window = glfwGetCurrentContext();
-		glfwMakeContextCurrent(m_window);*/
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
+    void LevelEditor::Init(Window* window)
+    {
+        m_window = window;
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO();
         io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
         io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
-        //can be removed not important
-        ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 20); //modify the font in each of the tabs
-        
-		ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
-		ImGui_ImplOpenGL3_Init("#version 450");
-	}
+
+        ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
+        ImGui_ImplOpenGL3_Init("#version 450");
+    }
 
     //  Update loop for level editor, poll events and set new frames
-	void LevelEditor::Update()
-	{
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-    /*
-        ImGuizmo::BeginFrame();
-        ImGuizmo::IsOver();
-        ImGuizmo::IsUsing();
-
-        float windowWidth = (float)ImGui::GetWindowWidth();
-        float windowHeight = (float)ImGui::GetWindowHeight();
-        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
-
-        static const float identityMatrix[16] =
-        { 1.f, 0.f, 0.f, 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            0.f, 0.f, 1.f, 0.f,
-            0.f, 0.f, 0.f, 1.f };
-        
-        float cameraView[16] =
-        { 1.f, 0.f, 0.f, 0.f,
-          0.f, 1.f, 0.f, 0.f,
-          0.f, 0.f, 1.f, 0.f,
-          0.f, 0.f, 0.f, 1.f };
-
-        float cameraProjection[16];
-
-       ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
-    */
-		ImGuiIO& io = ImGui::GetIO();
-
-        ImVec4* colors = ImGui::GetStyle().Colors;
-        ImGui::GetStyle().WindowTitleAlign = ImVec2(0.5, 0.5);
-
-        static float color[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-        colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f); //changes imgui window background color
-
-		// tells imgui how big our display is 
-		io.DisplaySize = ImVec2(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
-		
-        //ImGui::ShowDemoWindow();
-        
+    void LevelEditor::Update()
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGuiIO& io = ImGui::GetIO();
+        // tells imgui how big our display is 
+        io.DisplaySize = ImVec2(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
+  
+        ImGui::ShowDemoWindow();
         docking();
         Profiler();
-        Font();
-        ImGui::ShowMetricsWindow();
-		DropDownMenu();
-		ColorPickerTab();
-      
-        //ImGui::ColorEdit3("color", greencolor);
-	}
-    void LevelEditor::Font()
-    {
-        //ImGuiIO& io = ImGui::GetIO();
-        //ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 50);
-        //ImFont* font2 = io.Fonts->AddFontFromFileTTF("anotherfont.otf", 50);
+       
+       // DropDownMenu();
+        ColorPickerTab();
 
-        //ImGui::Text("Hello"); // use the default font (which is the first loaded font)
-        //ImGui::PushFont(font2);
-        //ImGui::Text("Hello with another font");
-        //ImGui::PopFont();
     }
     //  Render interface onto frame
-	void LevelEditor::Draw()
-	{
-		ImGui::Render();
-		//ImGui::EndFrame();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		ImGuiIO& io = ImGui::GetIO();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			GLFWwindow* m_window = glfwGetCurrentContext();
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-			glfwMakeContextCurrent(m_window);
-		}
-	}
+    void LevelEditor::Draw()
+    {
+        ImGui::Render();
+        ImGui::EndFrame();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGuiIO& io = ImGui::GetIO();
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* m_window = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(m_window);
+        }
+
+    }
 
     //  End instance
-	void LevelEditor::End()
-	{
-		ImGui_ImplOpenGL3_Shutdown();
-		ImGui_ImplGlfw_Shutdown();
-		ImGui::DestroyContext();
-	}
+    void LevelEditor::End()
+    {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+    }
 
     //  This dropdown menu holds check boxes, sliders dropdown menus etc. This was used to learn how to implement
     //  Widgets, boxes and other useful tools in ImGui, which will be developed in the future 
@@ -253,24 +203,44 @@ namespace EM {
                 ImGui::TreePop();
             }
         }
-            ImGui::End();
+        ImGui::End();
     }
 
     // Color selection tool, yet to be connected to the game engine to be able to edit colors
-	void LevelEditor::ColorPickerTab()
-	{
+    void LevelEditor::ColorPickerTab()
+    {
 
-        if (ImGui::TreeNode("Color/Picker Widgets"))
-        {
-            static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
+       
+              
+       /* ImGui::Begin("color");
+        auto& sprite = p_ecs.GetComponent<Sprite>(1);
+        ImGui::Text("Color widget HSV with Alpha:");
+        ImGui::End();*/
+             
+                
+            
+ /*         static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
 
-            static bool alpha_preview = true;
+          
+           static bool alpha_preview = true;
             static bool alpha_half_preview = false;
             static bool drag_and_drop = true;
             static bool options_menu = true;
             static bool hdr = false;
-
+            ImGui::Checkbox("With Alpha Preview", &alpha_preview);
+            ImGui::Checkbox("With Half Alpha Preview", &alpha_half_preview);
+            ImGui::Checkbox("With Drag and Drop", &drag_and_drop);
+            ImGui::Checkbox("With Options Menu", &options_menu); ImGui::SameLine();
+            ImGui::Checkbox("With HDR", &hdr); ImGui::SameLine();
             ImGuiColorEditFlags misc_flags = (hdr ? ImGuiColorEditFlags_HDR : 0) | (drag_and_drop ? 0 : ImGuiColorEditFlags_NoDragDrop) | (alpha_half_preview ? ImGuiColorEditFlags_AlphaPreviewHalf : (alpha_preview ? ImGuiColorEditFlags_AlphaPreview : 0)) | (options_menu ? 0 : ImGuiColorEditFlags_NoOptions);
+
+
+            ImGui::Text("Color widget:");
+            ImGui::SameLine();
+            ImGui::ColorEdit3("MyColor##1", (float*)&color, misc_flags);
+
+            ImGui::Text("Color widget with Float Display:");
+            ImGui::ColorEdit4("MyColor##2f", (float*)&color, ImGuiColorEditFlags_Float | misc_flags);
 
             ImGui::Text("Color button with Picker:");
             ImGui::SameLine();
@@ -340,15 +310,15 @@ namespace EM {
                     ImGui::PopID();
                 }
                 ImGui::EndGroup();
-                
+
             }
 
-           /* ImGui::Text("Color button only:");
-            static bool no_border = false;
-            ImGui::Checkbox("ImGuiColorEditFlags_NoBorder", &no_border);
-            ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));*/
+         ImGui::Text("Color button only:");
+        static bool no_border = false;
+        ImGui::Checkbox("ImGuiColorEditFlags_NoBorder", &no_border);
+        ImGui::ColorButton("MyColor##3c", *(ImVec4*)&color, misc_flags | (no_border ? ImGuiColorEditFlags_NoBorder : 0), ImVec2(80, 80));
 
-            //ImGui::Text("Color picker:");
+            ImGui::Text("Color picker:");
             static bool alpha = true;
             static bool alpha_bar = true;
             static bool side_preview = true;
@@ -359,7 +329,7 @@ namespace EM {
             //ImGui::Checkbox("With Alpha", &alpha);
             //ImGui::Checkbox("With Alpha Bar", &alpha_bar);
             //ImGui::Checkbox("With Side Preview", &side_preview);
-            /*if (side_preview)
+            if (side_preview)
             {
                 ImGui::SameLine();
                 ImGui::Checkbox("With Ref Color", &ref_color);
@@ -370,8 +340,8 @@ namespace EM {
                 }
             }
             ImGui::Combo("Display Mode", &display_mode, "Auto/Current\0None\0RGB Only\0HSV Only\0Hex Only\0");
-            ImGui::SameLine(); 
-            ImGui::SameLine();*/
+            ImGui::SameLine();
+            ImGui::SameLine();
             ImGuiColorEditFlags flags = misc_flags;
             if (!alpha)            flags |= ImGuiColorEditFlags_NoAlpha;        // This is by default if you call ColorPicker3() instead of ColorPicker4()
             if (alpha_bar)         flags |= ImGuiColorEditFlags_AlphaBar;
@@ -404,16 +374,15 @@ namespace EM {
             static ImVec4 color_hsv(0.23f, 1.0f, 1.0f, 1.0f); // Stored as HSV!
             ImGui::Spacing();
             ImGui::Text("HSV encoded colors");
-            ImGui::SameLine(); 
+            ImGui::SameLine();
             ImGui::Text("Color widget with InputHSV:");
             ImGui::ColorEdit4("HSV shown as RGB##1", (float*)&color_hsv, ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_Float);
             ImGui::ColorEdit4("HSV shown as HSV##1", (float*)&color_hsv, ImGuiColorEditFlags_DisplayHSV | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_Float);
             ImGui::DragFloat4("Raw HSV values", (float*)&color_hsv, 0.01f, 0.0f, 1.0f);
+*/
 
-            ImGui::TreePop();
-        }
-
-	}
+       
+    }
 
     void LevelEditor::EditorTabs()
     {
@@ -531,51 +500,47 @@ namespace EM {
     
     //Docking function is based off of ImGui demo's ShowExampleAppDockSpace function which will allow tools to dock with the sides of the
     //level editor. However, as of now it is not yet functional as I have yet to fix the frame layering to allow this function to work
-   void LevelEditor::docking()
+    void LevelEditor::docking()
     {
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
             ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
             ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
             ImGuiWindowFlags_NoBackground;
-      
-          ImGuiViewport* viewport = ImGui::GetMainViewport();
-           ImGui::SetNextWindowPos(viewport->WorkPos);
-           ImGui::SetNextWindowSize(viewport->WorkSize);
-           ImGui::SetNextWindowViewport(viewport->ID);
 
-           ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-           ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-           ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->WorkPos);
+        ImGui::SetNextWindowSize(viewport->WorkSize);
+        ImGui::SetNextWindowViewport(viewport->ID);
 
-        /*   window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-           window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;*/
-       // }
-   
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
 
         ImGui::Begin("DockSpace", 0, window_flags);
-       
 
-      
-            ImGui::PopStyleVar(3);
 
-            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
-  
+
+        ImGui::PopStyleVar(3);
+
+        ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+        ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
         ImGui::End();
     }
-    
-   void LevelEditor::Profiler()
-   {
-       ImGui::Begin("Profiler");
-       //Opengl information
-       ImGui::Text("Opengl Information ");
-       ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
-       ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
-       ImGui::Text("Version: %s", glGetString(GL_VERSION));
-       ImGui::Text("\n");
+
+    void LevelEditor::Profiler()
+    {
+        ImGui::Begin("Profiler");
+        //Opengl information
+        ImGui::Text("Opengl Information ");
+        ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+        ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+        ImGui::Text("Version: %s", glGetString(GL_VERSION));
+        ImGui::Text("\n");
 
        // how much time per frame and Fps
-       ImGui::Text("Application average % .3f ms / frame(% .1f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
+       ImGui::Text("Application average % .3f ms / frame(% .3f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
        
        //Renderering Information
        ImGui::Text("\n");
@@ -586,8 +551,8 @@ namespace EM {
        ImGui::Text("Vertices: %d", Infos.TotalVertexUsed());
        ImGui::Text("Indices: %d", Infos.TotalIndexUsed());
 
-       //Todo show the each system consume how much at runtime
-       ImGui::End();
-   }
-	
+        //Todo show the each system consume how much at runtime
+        ImGui::End();
+    }
 }
+

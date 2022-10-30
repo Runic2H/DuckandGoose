@@ -5,7 +5,7 @@
 namespace EM {
 	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
 	std::map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
-	std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
+	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 	std::shared_ptr<Texture> ResourceManager::LoadTexture(std::string name, const std::string& filepath)
 	{
 		return textures[name] = ResourceManager::LoadTextureFromFile(filepath);
@@ -54,15 +54,15 @@ namespace EM {
 		return m_font;
 	}
 
-	std::shared_ptr<Font> ResourceManager::LoadFont(std::string name, unsigned int size)
-	{
-		return std::shared_ptr<Font>();
-	}
+	//std::shared_ptr<Font> ResourceManager::LoadFont(std::string name, unsigned int size)
+	//{
+	//	return std::shared_ptr<Font>();
+	//}
 
-	std::shared_ptr<Font> ResourceManager::GetFont(std::string name)
-	{
-		return std::shared_ptr<Font>();
-	}
+	//std::shared_ptr<Font> ResourceManager::GetFont(std::string name)
+	//{
+	//	return std::shared_ptr<Font>();
+	//}
 
 	void EM::ResourceManager::clear()
 	{

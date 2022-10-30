@@ -13,7 +13,7 @@
 #pragma once
 #include "Platform/System/System.h"
 #include "Platform/Graphics/Texture.h"
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/Math/Vmath.h";
 #include "ExoEngine/Math/matrix3D.h";
 #include "ExoEngine/Math/physics.h"
@@ -43,19 +43,15 @@ namespace EM {
 		std::shared_ptr<Texture> m_Texture = std::make_shared<Texture>();
 		std::unique_ptr<Renderer> m_Renderer = std::make_unique<Renderer>();
 		std::unique_ptr<Font> m_Font = std::make_unique<Font>();
-
+		MultiRefs<SpriteRender> index1, index2, idle;
 		Camera2D camera = { -1.0f, 1.0f, -1.0f , 1.0f };
 		glm::vec3 m_cameraposition = { 0.0f, 0.0f, 0.0f };
 		float CameraSpeed = 2.0f;
 		glm::vec3 SquarePosition = { 0.0f, 0.0f, 0.0f };
-		Mat4x4 test;
-
-		struct Obj
-		{
-			vec2D position;
-			vec2D scale;
-			int collisiontype;
-
-		}player, wall;
+		float frameindex = 0.0f;
+		float runtime = 0.0f;
+		Singleton<Window>windowdata;
+	private:
+		void LoadTexture(std::string filename);
 	};
 }

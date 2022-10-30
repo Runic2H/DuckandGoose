@@ -14,12 +14,10 @@
 
 #include "Core.h"
 #include "Log.h"
-#include "Events/EventHandler.h"
 #include "Platform/System/SystemManager.h"
 #include "ECS/ECS.h"
 
 namespace EM {
-	extern ECS ecs;
 	class EM_API Application
 	{
 

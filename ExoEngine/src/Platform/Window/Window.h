@@ -20,11 +20,11 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 
 
 namespace EM {
-
+	class EM_API WinData;
 	//properties used in window
 	struct WindowProps 
 	{

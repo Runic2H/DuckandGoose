@@ -398,8 +398,7 @@ namespace EM {
 			r_Data.TextureUnits[r_Data.TextureUnitIndex] = texture;
 			r_Data.TextureUnitIndex++;
 		}
-
-		constexpr glm::vec2 textureCoors[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+		constexpr glm::vec2 textureCoors[] = { { 0.0f , 0.0f }, { 1.f, 0.0f }, { 1.f, 1.0f },{ 0.f,1.0f} };
 		constexpr size_t quadCount = 4;
 		for (size_t i = 0; i < quadCount; i++)
 		{
@@ -413,10 +412,12 @@ namespace EM {
 
 		r_Data.Infos.n_Quad++;
 	}
+
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, color);
 	}
+
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -425,10 +426,12 @@ namespace EM {
 
 		DrawQuad(transform, color);
 	}
+
 	void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture);
 	}
+
 	void Renderer::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -437,6 +440,56 @@ namespace EM {
 
 		DrawQuad(transform, texture);
 	}
+
+	void Renderer::DrawSprite(const glm::vec2& position, const glm::vec2& size, const MultiRefs<SpriteRender>& sprite)
+	{
+		DrawSprite({ position.x, position.y, 0.0f }, size, sprite);
+	}
+
+	void Renderer::DrawSprite(const glm::vec3& position, const glm::vec2& size, const MultiRefs<SpriteRender>& sprite)
+	{
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+		DrawSprite(transform, sprite);
+	}
+
+	void Renderer::DrawSprite(const glm::mat4& transform, const MultiRefs<SpriteRender>& sprite)
+	{
+		float textureIndex = 0.0f;
+		for (unsigned int i = 1; i < r_Data.TextureUnitIndex; i++)
+		{
+			if (*r_Data.TextureUnits[i] == *sprite->GetTexture())
+			{
+				textureIndex = (float)i;
+				break;
+			}
+		}
+
+		if (textureIndex == 0.0f)
+		{
+			if (r_Data.TextureUnitIndex >= 32)
+				NextBatch();
+
+			textureIndex = (float)r_Data.TextureUnitIndex;
+			r_Data.TextureUnits[r_Data.TextureUnitIndex] = sprite->GetTexture();
+			r_Data.TextureUnitIndex++;
+		}
+		const glm::vec2* textureCoors = sprite->GetTexCoords();
+		constexpr size_t quadCount = 4;
+
+		for (size_t i = 0; i < quadCount; i++)
+		{
+			r_Data.QuadVertexBufferPtr->Position =  transform * r_Data.QuadVertexPosition[i];
+			r_Data.QuadVertexBufferPtr->Color = { 1.0f, 1.0f, 1.0f, 1.0f };
+			r_Data.QuadVertexBufferPtr->TexCoord = textureCoors[i];
+			r_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+			r_Data.QuadVertexBufferPtr++;
+		}
+		r_Data.QuadIndexCount += 6;
+		r_Data.Infos.n_Quad++;
+	}
+
 	void Renderer::DrawLine(const glm::vec3& position0, const glm::vec3& position1, const glm::vec4& color)
 	{
 		r_Data.LineVertexBufferPtr->Position = position0;

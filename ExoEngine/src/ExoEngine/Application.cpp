@@ -12,26 +12,25 @@
 ***/
 #include "empch.h"
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
-#include "ExoEngine/Math/collision_system.h"
-#include "ECS/Components.h"
+//#include "ExoEngine/Math/collision_system.h"
+#include "ECS/Components/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
+#include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
-#include "ECS/SceneViewer.h"
 
 namespace EM {
 
-	ECS ecs;
-
 	Application::Application()
 	{
-		ecs.Init();
+		p_ecs.Init();
+		p_Scene->Init();
+		FramePerSec::GetInstance().InitFrame();
 	}
 
 	Application::~Application()
@@ -40,89 +39,79 @@ namespace EM {
 
 	void Application::SystemInput(System* system)
 	{
-		m_Systems.SystemIncrement(system);
-		system->Init();
+		(void)system;
 	}
 
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
-		m_Systems.SystemIndex(0, m_window); //1st layer window
-		
 		p_Editor->Init(m_window);
-
-		Graphic* m_graphic = new Graphic;
-		m_graphic->Init();
-		//init audio
-		/*CAudioEngine aengine;
-		aengine.Init();*/
-
-
-		m_Systems.SystemIndex(1, m_graphic);
 
 		
 		p_Audio->Init();
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
-		Transform transform;
-		RigidBody rigidbody;
-		transform.DeserializeFromFile("PlayerTransform.json");
-		ecs.RegisterComponent<Transform>();
-		ecs.RegisterComponent<RigidBody>();
 
-		auto mGraphics = ecs.RegisterSystem<Graphic>();
+		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
 			Signature signature;
-			signature.set(ecs.GetComponentType<Transform>());
-			ecs.SetSystemSignature<Graphic>(signature);
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<Sprite>());
+			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
-		//mGraphics->Init();
+		mGraphics->Init();
 
-		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
+	/*	auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
-			signature.set(ecs.GetComponentType<RigidBody>());
-			ecs.SetSystemSignature<CollisionSystem>(signature);
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<CollisionSystem>(signature);
+		}*/
+		//mCollision->Init()
+		
+		
+		//SM.DeserializeFromFile("SMTest.json");
+
+
+		while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
+		{
+			Entity player = p_ecs.CreateEntity();
+			if (player % 2)
+			{
+				p_ecs.AddComponent<Transform>(player, TransformComponent);
+				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+			}
+			else
+			{
+				Transform transform;
+				transform.DeserializeFromFile("WallTransform.json");
+				p_ecs.AddComponent<Transform>(player, transform);
+				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+			}
+			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
 		}
-		mCollision->Init();
-
-		Entity player = ecs.CreateEntity();
-		//ecs.AddComponent(player, Player{});
-		ecs.AddComponent<Transform>(player, transform);
-		ecs.AddComponent<RigidBody>(player, rigidbody);
-
-		Entity wall = ecs.CreateEntity();
-		ecs.AddComponent<Transform>(wall, transform);
-		ecs.AddComponent<RigidBody>(wall, rigidbody);
-
-		FramePerSec::GetInstance().InitFrame();
+		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
-
+			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			FramePerSec::GetInstance().StartFrameCount();
-			
+		
 			p_Audio->Update();
-
-			for (System* system : m_Systems)
-			{
-				system->Update(Timer::GetInstance().GetGlobalDT());
-			}
-
-			//mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			
 			p_Editor->Update();
 			p_Editor->Draw();
 		
-			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			m_window->Update(Timer::GetInstance().GetGlobalDT());
+			//mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
-			Timer::GetInstance().Update(Systems::API);
 			FramePerSec::GetInstance().EndFrameCount();
+			Timer::GetInstance().Update(Systems::API);
 	
 		}
 		
@@ -132,9 +121,9 @@ namespace EM {
 
 	void Application::End()
 	{
+		p_Scene->SerializeToFile("SMTest.json");
 		p_Editor->End();
 		p_Audio->Release();
-		m_Systems.DeleteSystem();
 	}
 
 }
