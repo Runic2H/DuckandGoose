@@ -31,6 +31,31 @@ namespace EM
 {
 
 	//Logic Component
+
+	//Enum Class Col_Type
+	//AABB
+	//Circle
+	//Half - Extend
+	//class Collider : public IComponent
+	//{
+	//public:
+	//	Collider();
+	//	~Collider() = default;
+	//	virtual bool Deserialize(const rapidjson::Value& obj);
+	//	virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
+	//private:
+	//	Col_Type mCol;
+	//	vec2D mMin;
+	//	vec2D mMax;
+	//	float radius;
+	//};
+
+	//RigidBody Component
+	//Velocity
+	//Direction
+	//Friction
+	//Restitution
+
 	//std::array of scripts
 		//Array Name of Script std::string
 		//Pointer to instance to the script (Depend on Script)

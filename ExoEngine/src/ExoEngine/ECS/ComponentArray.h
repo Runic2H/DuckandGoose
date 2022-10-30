@@ -119,7 +119,7 @@ namespace EM
 			T* CopyComponent = &mComponentArray[mEntityToIndexMap[entity]];
 			T* CloneComponent = new T(*CopyComponent);
 			InsertData(entityToCopy, *CloneComponent);
-			delete CloneComponent;
+			//delete CloneComponent;
 		}
 
 		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap()

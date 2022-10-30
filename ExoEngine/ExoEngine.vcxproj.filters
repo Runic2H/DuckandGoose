@@ -45,6 +45,8 @@
     <ClCompile Include="src\Platform\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
+    <ClCompile Include="src\Platform\Graphics\SpriteRendering.cpp" />
+    <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\WinData.cpp" />
@@ -198,6 +200,8 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
     <ClInclude Include="src\Platform\Logic\LogicSystem.h" />
     <ClInclude Include="src\ExoEngine\Audio\AudioEngine.h" />
+    <ClInclude Include="src\Platform\Graphics\SpriteRendering.h" />
+    <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\WinData.h" />

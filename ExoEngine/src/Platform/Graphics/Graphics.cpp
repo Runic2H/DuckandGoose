@@ -32,7 +32,10 @@ namespace EM {
 		ResourceManager::LoadTexture("BackGround", "Assets/Textures/BackGround.png");
 		ResourceManager::LoadTexture("Player", "Assets/Textures/PlayerSpriteSheet.png");
 		ResourceManager::LoadTexture("Splash", "Assets/Textures/HitSplash.png");
-
+		ResourceManager::LoadTexture("Animation", "Assets/Textures/Running.png");
+		ResourceManager::LoadTexture("Idle", "Assets/Textures/EXOMATA_IDLE_SPRITESHEET.png");
+		
+	
 		Renderer::Init();
 		m_Font->Init();
 	}
@@ -57,20 +60,21 @@ namespace EM {
 			
 		}
 
+		m_Renderer->DrawRect({ 0.0f,0.0f,0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f });
+		m_Renderer->DrawQuad({ 1.0f, 0.0f,0.0f }, { 0.5f, 0.5f }, { 0.3f, 0.4f, 0.5f, 1.0f }); 
 		m_Renderer->End();
 		//for testing 
-		camera.SetPosition({ player.position.x, player.position.y, 0.0f });
+		camera.SetPosition({ m_cameraposition.x, m_cameraposition.y, 0.0f });
 
 		if (p_Input->isKeyPressed(GLFW_KEY_W))
-			player.position.y += CameraSpeed * frametime;
+			m_cameraposition.y += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
-			player.position.y -= CameraSpeed * frametime;
+			m_cameraposition.y -= CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_D))
-			player.position.x += CameraSpeed * frametime;
+			m_cameraposition.x += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_A))
 		{
-			player.position.x -= CameraSpeed * frametime;
-			
+			m_cameraposition.x -= CameraSpeed * frametime;
 		}
 		camera.MouseScrolling();
 		

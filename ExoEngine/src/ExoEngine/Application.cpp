@@ -12,7 +12,6 @@
 ***/
 #include "empch.h"
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Platform/Window/Window.h"
 #include "Platform/LevelEditor/LevelEditor.h"
@@ -45,9 +44,11 @@ namespace EM {
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Editor->Init(m_window);
+
 		
 		p_Audio->Init();
 		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
@@ -61,7 +62,18 @@ namespace EM {
 		}
 		mGraphics->Init();
 
-		//auto mCollision = p_ecs->RegisterSystem<CollisionSystem>();
+		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(ecs.GetComponentType<Transform>());
+			signature.set(ecs.GetComponentType<RigidBody>());
+			ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
+
+		SM.DeserializeFromFile("SM.json");
+
+		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		//{
 		//	Signature signature;
 		//	signature.set(p_ecs->GetComponentType<Transform>());
@@ -89,15 +101,14 @@ namespace EM {
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
 		}
-
+		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
-
+			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			FramePerSec::GetInstance().StartFrameCount();
-			
+		
 			p_Audio->Update();
 			p_Editor->Update();
 			p_Editor->Draw();
