@@ -39,6 +39,7 @@ namespace EM {
 
 	void Application::SystemInput(System* system)
 	{
+		(void)system;
 	}
 
 	void Application::Run() 
@@ -63,35 +64,16 @@ namespace EM {
 		}
 		mGraphics->Init();
 
-		auto mCollision = ecs.RegisterSystem<CollisionSystem>();
+	/*	auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
-			signature.set(ecs.GetComponentType<Transform>());
-			signature.set(ecs.GetComponentType<RigidBody>());
-			ecs.SetSystemSignature<CollisionSystem>(signature);
-		}
-		mCollision->Init();
-
-		Entity player = ecs.CreateEntity();
-		Sprite sprite;
-		sprite.SetColor({ 0.0f,0.0f,0.0f,0.0f });
-		sprite.SetTexture("Idle");
-		Transform transform;
-		ecs.AddComponent<Transform>(player, transform);
-		ecs.AddComponent<Sprite>(player, sprite);
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<CollisionSystem>(signature);
+		}*/
+		//mCollision->Init()
 		
 		
-		//SM.DeserializeFromFile("SMTest.json");
-
-		//while(ecs.GetTotalEntities() != MAX_ENTITIES - 1)
-		//{
-		//	Signature signature;
-		//	signature.set(p_ecs->GetComponentType<Transform>());
-		//	signature.set(p_ecs->GetComponentType<RigidBody>());
-		//	p_ecs->SetSystemSignature<CollisionSystem>(signature);
-		//}
-		//mCollision->Init();
-
 		//SM.DeserializeFromFile("SMTest.json");
 
 
@@ -101,13 +83,14 @@ namespace EM {
 			if (player % 2)
 			{
 				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
+				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
 			}
 			else
 			{
 				Transform transform;
 				transform.DeserializeFromFile("WallTransform.json");
 				p_ecs.AddComponent<Transform>(player, transform);
+				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
 		}

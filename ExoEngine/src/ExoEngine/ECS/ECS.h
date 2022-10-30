@@ -61,7 +61,7 @@ namespace EM
 		{
 			Entity newEntity = mEntityManager->CreateEntity();
 			mEntityManager->SetSignature(newEntity, GetEntitySignature(entity));
-			for (size_t i = 0; i < GetTotalRegisteredComponents(); ++i)
+			for (ComponentType i = 0; i < GetTotalRegisteredComponents(); ++i)
 			{
 				if (GetEntitySignature(newEntity).test(i))
 				{

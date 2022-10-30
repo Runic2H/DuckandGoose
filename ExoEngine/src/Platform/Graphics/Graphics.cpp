@@ -21,7 +21,7 @@
 
 namespace EM {
 
-	extern ECS ecs;
+	//extern ECS ecs;
 
 	void Graphic::LoadTexture(std::string filename)
 	{
@@ -59,8 +59,8 @@ namespace EM {
 	
 		for (auto const& entity : mEntities)
 		{
-			auto& transform = ecs.GetComponent<Transform>(entity);
-			auto& sprite = ecs.GetComponent<Sprite>(entity);
+			auto& transform = p_ecs.GetComponent<Transform>(entity);
+			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
 			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture().c_str()), { 0.f,0.f });
 			m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
 				index1);

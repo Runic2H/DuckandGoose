@@ -3,7 +3,7 @@
 namespace EM
 {
 
-	std::unique_ptr<SceneManager> SceneManager::m_instance{ nullptr };
+	std::unique_ptr<SceneManager> SceneManager::m_instance;
 
 	std::unique_ptr<SceneManager>& SceneManager::GetInstance()
 	{
@@ -20,6 +20,7 @@ namespace EM
 		p_ecs.RegisterComponent<RigidBody>();
 		p_ecs.RegisterComponent<Collider>();
 		p_ecs.RegisterComponent<NameTag>();
+		p_ecs.RegisterComponent<Sprite>();
 	}
 
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
@@ -67,12 +68,12 @@ namespace EM
 							p_ecs.AddComponent<NameTag>(j, nametag);
 						}
 					}
-					if (ecs.GetComponentTypeName(i) == "Sprite")
+					if (p_ecs.GetComponentTypeName(i) == "Sprite")
 					{
 						Sprite sprite;
-						if (sprite.Deserialize(obj["Components"][ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
 						{
-							ecs.AddComponent<Sprite>(j, sprite);
+							p_ecs.AddComponent<Sprite>(j, sprite);
 						}
 					}
 					
@@ -105,7 +106,7 @@ namespace EM
 			writer->StartArray();
 			for (auto j = p_ecs.GetEntityToIndexMapECS(i).begin(); j != p_ecs.GetEntityToIndexMapECS(i).end(); ++j)
 			{
-				writer->Uint(*j);
+				writer->Uint64(*j);
 			}
 			writer->EndArray();
 		}
@@ -162,9 +163,9 @@ namespace EM
 						p_ecs.GetComponent<NameTag>(j).Serialize(writer);
 					}
 					std::cout << "Component Serialized" << std::endl;
-					if (ecs.GetComponentTypeName(i) == "Sprite")
+					if (p_ecs.GetComponentTypeName(i) == "Sprite")
 					{
-						ecs.GetComponent<Sprite>(j).Serialize(writer);
+						p_ecs.GetComponent<Sprite>(j).Serialize(writer);
 					}
 					std::cout << "Component Serialized" << std::endl;
 				}

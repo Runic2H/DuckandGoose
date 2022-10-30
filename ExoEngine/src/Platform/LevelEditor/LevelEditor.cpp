@@ -212,11 +212,10 @@ namespace EM {
 
        
               
-        ImGui::Begin("color");
-        auto& sprite = ecs.GetComponent<Sprite>(1);
+       /* ImGui::Begin("color");
+        auto& sprite = p_ecs.GetComponent<Sprite>(1);
         ImGui::Text("Color widget HSV with Alpha:");
-        ImGui::ColorEdit4("Color", glm::value_ptr(sprite.GetColor()), ImGuiColorEditFlags_Float);
-        ImGui::End();
+        ImGui::End();*/
              
                 
             

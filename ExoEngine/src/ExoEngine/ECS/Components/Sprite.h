@@ -15,16 +15,11 @@ namespace EM {
 		void SetTexture(const std::string& name) { m_texturename = name; }
 		std::string& GetTexture() { return m_texturename; }
 
-		void SetColor(glm::vec4 mColor) { color = mColor; }
-		glm::vec4& GetColor() { return color; }
+		
 		//boolean isanimated
 		//texture index 
 		//altas 
-
-		virtual std::string GetComponentName();
 	private:
-		//for now using glm math library as we dont have vec4 
-		glm::vec4 color;
 		std::string m_texturename;
 	};
 }
