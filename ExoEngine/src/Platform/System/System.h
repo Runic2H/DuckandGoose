@@ -14,9 +14,8 @@
 #pragma once
 #include "ExoEngine/Core.h"
 #include "ExoEngine/ECS/Types.h"
-
 namespace EM {
-
+	//template class EM_API std::set<Entity>;
 	class EM_API System
 	{
 	public:
@@ -25,7 +24,7 @@ namespace EM {
 		virtual ~System() {};
 		//System function
 		virtual void Init() = 0 {};
-		virtual void Update() = 0 {};
+		virtual void Update(float Frametime) { UNREFERENCED_PARAMETER(Frametime); };
 		virtual void End() = 0 {};
 
 	protected:

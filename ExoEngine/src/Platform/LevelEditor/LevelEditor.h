@@ -14,7 +14,6 @@
 #pragma once
 #include "Platform/Window/Window.h"
 
-
 #define p_Editor EM::LevelEditor::GetInstance()
 
 namespace EM {
@@ -29,23 +28,28 @@ namespace EM {
 		void Init(Window* window);
 		void Update();	//update loop
 		void Draw();
-		void End();	
+		void End();
 
 		void DropDownMenu(); //Menu widget
 		void ColorPickerTab(); //color picker widget
+		void EditorTabs();
+		void TransformTab();
+		void SpriteRenderer();
+		void SceneHierarchyWindow();
 
 		static std::unique_ptr<LevelEditor>& GetInstance();
 	private:
+		void docking();
+		bool dockspaceOpen{};
+		bool fullscreenMode{};
+		bool pad{};
+		void Profiler();
+
+	private:
+		std::set<Entity> mEntities;
 		ImGuiDockNodeFlags dock_space_flags{};
 		Window* m_window;
 		static std::unique_ptr<LevelEditor> m_instance;
 		
-		void docking();
-		void ViewDockingSpace();
-		bool dockspaceOpen{};
-		bool fullscreenMode{};
-		bool pad{};
-		
-
 	};
 }
