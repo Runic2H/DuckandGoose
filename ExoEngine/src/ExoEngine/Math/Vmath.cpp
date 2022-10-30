@@ -5,7 +5,8 @@ namespace EM
 {
 	vec2D::vec2D()///defualt cotr
 	{
-
+		x = 0.0f;
+		y = 0.0f;
 	}
 
 	vec2D::vec2D(float _x, float _y)

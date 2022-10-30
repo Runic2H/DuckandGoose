@@ -28,6 +28,7 @@ namespace EM{
 		m_windowData.m_Height = windowData.GetHeight();
 		m_windowData.m_CurrentWidth = windowData.GetCurrWidth();
 		m_windowData.m_CurrentHeight = windowData.GetCurrHeight();
+		windowData.SerializeToFile("Window.json");
 	};
 
 	void Window::Init()
@@ -125,6 +126,8 @@ namespace EM{
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
+		UNREFERENCED_PARAMETER(window);
+		(void)scancode, (void)mode;
 		InputSystem::GetInstance()->SetKeyStatus(key, action);
 	}
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
@@ -139,11 +142,12 @@ namespace EM{
 	}
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
+		
 		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
 		data.mouseX = xpos;
 		data.mouseY = ypos;
 
-		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
+		EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
 	}
 	void Window::ToggleVsync(bool value)
 	{

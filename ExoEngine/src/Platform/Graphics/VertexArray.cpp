@@ -11,7 +11,7 @@ namespace EM {
 
 	VertexArray::~VertexArray()
 	{
-		glDeleteVertexArrays(1, &m_RenderID);
+		glDeleteVertexArrays(0, &m_RenderID);
 	}
 
 	void VertexArray::Bind() const
@@ -34,7 +34,7 @@ namespace EM {
 		{
 			glEnableVertexAttribArray(m_VBIndex);
 			glVertexAttribPointer(m_VBIndex, element.GetComponentCount(),
-				GL_FLOAT, element.Normalized, layout.GetStride(), (const void*)element.Offset);
+				GL_FLOAT, element.Normalized, layout.GetStride(), (const void*) element.Offset);
 
 			m_VBIndex++;
 		}

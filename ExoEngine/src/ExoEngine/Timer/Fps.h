@@ -26,6 +26,7 @@ namespace EM {
 				m_FrameTime = end - m_start;
 				m_Fps = 1.0f / m_FrameTime;
 			}
+			
 			return m_Fps;
 		}
 

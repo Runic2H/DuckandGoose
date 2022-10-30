@@ -37,7 +37,7 @@ namespace EM {
 		ShaderDataType Type;
 		std::string Name;
 		size_t Size;
-		unsigned int Offset;
+		__int64 Offset;
 		bool Normalized;
 
 

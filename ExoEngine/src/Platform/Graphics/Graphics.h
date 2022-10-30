@@ -13,9 +13,9 @@
 #pragma once
 #include "Platform/System/System.h"
 #include "Platform/Graphics/Texture.h"
-#include "ExoEngine/ECS/Components.h"
-#include "ExoEngine/Math/Vmath.h";
-#include "ExoEngine/Math/matrix3D.h";
+#include "ExoEngine/ECS/Components/Components.h"
+//#include "ExoEngine/Math/Vmath.h";
+//#include "ExoEngine/Math/matrix3D.h";
 #include "ExoEngine/Math/physics.h"
 #include "Camera2D.h"
 #include "Platform/Window/Window.h"
@@ -47,14 +47,10 @@ namespace EM {
 		glm::vec3 m_cameraposition = { 0.0f, 0.0f, 0.0f };
 		float CameraSpeed = 2.0f;
 		glm::vec3 SquarePosition = { 0.0f, 0.0f, 0.0f };
-		Mat4x4 test;
-
-		struct Obj
-		{
-			vec2D position;
-			vec2D scale;
-			int collisiontype;
-
-		}player, wall;
+		float frameindex = 0.0f;
+		float runtime = 0.0f;
+		Singleton<Window>windowdata;
+	private:
+		void LoadTexture(std::string filename);
 	};
 }

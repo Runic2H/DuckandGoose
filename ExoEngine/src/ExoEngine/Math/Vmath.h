@@ -6,6 +6,10 @@
 
 namespace EM
 {
+#ifdef _MSC_VER
+	// Supress warning: nonstandard extension used : nameless struct/union
+#pragma warning( disable : 4201 )
+#endif
 	typedef union vec2D
 	{
 		struct {
@@ -39,7 +43,7 @@ namespace EM
 		//MATH function
 		
 
-	};
+	}Vector2D;
 
 	vec2D operator - (const vec2D& lhs, const vec2D& rhs);
 	vec2D operator + (const vec2D& lhs, const vec2D& rhs);
