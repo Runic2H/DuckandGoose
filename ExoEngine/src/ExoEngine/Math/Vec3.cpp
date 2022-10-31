@@ -80,6 +80,7 @@ namespace EM
 
 	void Vec3::Vec2Set(Vec3& curr, float x_, float y_, float z_)
 	{
+		(void)curr;
 		x = x_;
 		y = y_;
 		z = z_;
