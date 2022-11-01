@@ -33,7 +33,7 @@ namespace EM
 		
 
 		
-	};
+	}Matrix4x4;
 	 void Identity4x4(Mat4x4& pResult);
 	 void Translate4x4(Mat4x4& pResult, float x, float y, float z);
 	 void Scale4x4(Mat4x4& pResult, float x, float y, float z);

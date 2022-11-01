@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file AudioEngine.h
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 2
+\date 10-10-2022
+\brief  Header file for AudioEngine.cpp  
+****************************************************************************
+***/
 #pragma once
 
 #ifndef _AUDIO_ENGINE_H_

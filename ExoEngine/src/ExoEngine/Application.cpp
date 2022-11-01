@@ -55,7 +55,7 @@ namespace EM {
 
 		
 		p_Audio->Init();
-		p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
+		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();

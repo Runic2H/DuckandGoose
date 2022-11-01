@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file AudioEngine.cpp
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: csd2400
+\par Section: a
+\par Milestone 2
+\date 10-10-2022
+\brief  AudioEngine.cpp utilises FMOD Core to load, play, pause, stop and set
+        volume
+****************************************************************************
+***/
 #include "empch.h"
 
 #include "AudioEngine.h"
