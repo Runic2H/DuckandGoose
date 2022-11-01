@@ -32,7 +32,7 @@ namespace EM
 		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
 		{
 			p_ecs.ClearArrayForWorldBuild(i);
-			for (Entity j = 1; j <= p_ecs.GetTotalEntities(); ++j)
+			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
 			{
 				Signature signature(obj["EntitySignatures"][(j-1)].GetString());
 				if (signature.test(i))
@@ -97,7 +97,7 @@ namespace EM
 					
 				}
 			}
-			for (Entity j = 1; j < MAX_ENTITIES; ++j)
+			for (Entity j = 0; j < MAX_ENTITIES; ++j)
 			{
 				p_ecs.GetEntityToIndexMapECS(i)[j] = obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(i).c_str()][j].GetUint();
 				p_ecs.GetIndexToEntityMapECS(i)[j] = obj["IndexToEntityMap"][p_ecs.GetComponentTypeName(i).c_str()][j].GetUint();
@@ -146,7 +146,7 @@ namespace EM
 
 		writer->Key("EntitySignatures");
 		writer->StartArray();
-		for (Entity i = 1; i <= p_ecs.GetTotalEntities(); ++i)
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			writer->String(p_ecs.GetEntitySignature(i).to_string().c_str());
 		}
@@ -158,7 +158,7 @@ namespace EM
 		{
 			writer->Key(p_ecs.GetComponentTypeName(i).c_str());
 			writer->StartArray();
-			for (Entity j = 1; j <= p_ecs.GetTotalEntities(); ++j)
+			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
 			{
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{

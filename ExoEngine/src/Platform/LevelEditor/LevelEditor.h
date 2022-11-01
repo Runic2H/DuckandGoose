@@ -56,6 +56,6 @@ namespace EM {
 		float m_UpdateTimer = 0.0f;
 		
 		//for inspector and Hierarchy
-		Entity selectedEntity{0};
+		Entity selectedEntity{ MAX_ENTITIES };
 	};
 }

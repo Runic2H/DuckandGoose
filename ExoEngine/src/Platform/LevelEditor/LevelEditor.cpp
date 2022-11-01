@@ -344,6 +344,7 @@ namespace EM {
         if (ImGui::Button("Create Entity"))
         {
             selectedEntity = p_ecs.CreateEntity();
+            p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
         }
        
         if (p_ecs.GetTotalEntities() != 0 && p_ecs.GetTotalRegisteredComponents()!=0)
@@ -351,8 +352,11 @@ namespace EM {
             ImGui::SameLine();
             if (ImGui::Button("Destroy Entity") /*&& selectedEntity!= 0*/)
             {
-                p_ecs.DestroyEntity(selectedEntity);
-                selectedEntity = {}; // when the entity is destroy there is no current selected entity
+                if (selectedEntity != MAX_ENTITIES)
+                {
+                    p_ecs.DestroyEntity(selectedEntity);
+                }
+                selectedEntity = MAX_ENTITIES; // when the entity is destroy there is no current selected entity
             }
             ImGui::SameLine();
             if (ImGui::Button("Clone Entity") /*&& selectedEntity!= 0*/)
@@ -360,21 +364,29 @@ namespace EM {
                 Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
                 selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
             }
-            for (Entity e = 1; e <= p_ecs.GetTotalEntities(); ++e)
+            Entity e = 0;
+            Entity livingCount = 0;
+            while (livingCount < p_ecs.GetTotalEntities())
             {
-                const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
-                ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
-                bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
+                if (p_ecs.HaveComponent<NameTag>(e))
+                {
+                    ++livingCount;
+                    const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
 
-                if (ImGui::IsItemClicked())
-                    selectedEntity = e;
+                    ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+                    bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
 
-                if (opened)
-                    ImGui::TreePop();
+                    if (ImGui::IsItemClicked())
+                        selectedEntity = e;
+
+                    if (opened)
+                        ImGui::TreePop();
+                }
+                ++e;
             }
         }
         if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-            selectedEntity = {};
+            selectedEntity = MAX_ENTITIES;
         ImGui::End();
 
     }
@@ -382,7 +394,7 @@ namespace EM {
     void LevelEditor::Inspector()
     {
         ImGui::Begin("Inspector");
-        if (selectedEntity)// if the selectedEntityExist
+        if (selectedEntity != MAX_ENTITIES)// if the selectedEntityExist
         {
             //create component for the selected entity 
             if (ImGui::Button("Add Component"))

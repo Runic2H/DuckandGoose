@@ -48,19 +48,20 @@ namespace EM
 	public:
 		inline ComponentArray()
 		{
-			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), 0);
-			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), 0);
+			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
+			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
 		}
 		//To insert data into the map so that each entity is mapped to its index and vice versa
 		//via std::unordered_map
 		void InsertData(Entity entity, T component)
 		{
-			assert(mEntityToIndexMap[entity] == 0 && "Component added to same entity more than once.");
+			assert(mEntityToIndexMap[entity] == MAX_ENTITIES && "Component added to same entity more than once.");
 
-			size_t newIndex = mSize + 1;
+			size_t newIndex = mSize;
 			mEntityToIndexMap[entity] = newIndex;
 			mIndexToEntityMap[newIndex] = entity;
 			mComponentArray[newIndex] = component;
+			component.entityID = entity;
 			++mSize;
 			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
@@ -68,11 +69,11 @@ namespace EM
 		//To remove data from the std::unordered_map and keep data packed within the array
 		void RemoveData(Entity entity)
 		{
-			assert(mEntityToIndexMap[entity] != 0 && "Removing non-existent component.");
+			assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Removing non-existent component.");
 
 			// Copy element at end into deleted element's place to maintain density
 			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
-			size_t indexOfLastElement = mSize + 1;
+			size_t indexOfLastElement = mSize - 1;
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
 			// Update map to point to moved spot
@@ -81,8 +82,8 @@ namespace EM
 			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
 			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
 
-			mEntityToIndexMap[entity] = 0;
-			mIndexToEntityMap[indexOfLastElement] = 0;
+			mEntityToIndexMap[entity] = MAX_ENTITIES;
+			mIndexToEntityMap[indexOfLastElement] = MAX_ENTITIES;
 
 			--mSize;
 			EM_EXO_INFO("Size of m_size{0}", mSize);
@@ -100,7 +101,7 @@ namespace EM
 		//Checks if Component is attached to entity
 		bool HaveComponent(Entity entity)
 		{
-			if (mEntityToIndexMap[entity] != 0)
+			if (mEntityToIndexMap[entity] != MAX_ENTITIES)
 			{
 				return true;
 			}
@@ -110,7 +111,7 @@ namespace EM
 		//Ensure that the entity is destroyed and component data is removed
 		void EntityDestroyed(Entity entity) override
 		{
-			if (mEntityToIndexMap[entity] != 0)
+			if (mEntityToIndexMap[entity] != MAX_ENTITIES)
 			{
 				// Remove the entity's component if it existed
 				RemoveData(entity);
@@ -143,8 +144,8 @@ namespace EM
 
 		void ClearForWorldBuild()
 		{
-			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), 0);
-			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), 0);
+			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
+			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
 		}
 
 	private:

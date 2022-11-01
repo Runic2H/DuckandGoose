@@ -131,21 +131,20 @@ namespace EM {
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
 		IScript* base = new PlayerMovement();
-		base->SetEntityID(player);
-		logic.InsertScript("PlayerMovement", base);
+		logic.InsertScript("PlayerMovement", base, player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Player>(player, playerID);
 		p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		Entity enemy = p_ecs.CloneEntity(player);
+		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		p_ecs.AddComponent<Player>(player, playerID);
+		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 
 		Logic logic2;
 		IScript* enemyLogic = new EnemyMovement();
-		enemyLogic->SetEntityID(enemy);
-		logic2.InsertScript("EnemyMovement", enemyLogic);
+		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
