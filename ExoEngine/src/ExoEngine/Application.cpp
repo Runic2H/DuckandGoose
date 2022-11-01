@@ -23,6 +23,9 @@
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
+#include "ExoEngine/Scripts/PlayerMovement.h"
+#include "Platform/Logic/LogicSystem.h"
+#include "ExoEngine//Scripts/EnemyMovement.h"
 
 namespace EM {
 
@@ -64,6 +67,14 @@ namespace EM {
 		}
 		mGraphics->Init();
 
+		auto mLogic = p_ecs.RegisterSystem<LogicSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Logic>());
+			p_ecs.SetSystemSignature<LogicSystem>(signature);
+		}
+		mLogic->Init();
+
 	/*	auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
@@ -76,8 +87,7 @@ namespace EM {
 		
 		//SM.DeserializeFromFile("SMTest.json");
 
-
-		while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
+		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
 			Entity player = p_ecs.CreateEntity();
 			if (player % 2)
@@ -93,7 +103,35 @@ namespace EM {
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
+		}*/
+
+		Entity player = p_ecs.CreateEntity();
+		RigidBody rb;
+		Logic logic;
+		Sprite sprite;
+		NameTag name;
+		Player playerID;
+		name.SetNameTag("Player");
+		sprite.SetTexture("Idle");
+		IScript* base = new PlayerMovement();
+		base->SetEntityID(player);
+		logic.InsertScript("PlayerMovement", base);
+		rb.SetVel(vec2D(5.0f, 5.0f));
+		p_ecs.AddComponent<Transform>(player, TransformComponent);
+		p_ecs.AddComponent<RigidBody>(player, rb);
+		p_ecs.AddComponent<Sprite>(player, sprite);
+		Entity enemy = p_ecs.CloneEntity(player);
+		p_ecs.GetComponent<RigidBody>(enemy).SetFriction(0.9f);
+		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		p_ecs.AddComponent<NameTag>(player, name);
+		p_ecs.AddComponent<Player>(player, playerID);
+
+		Logic logic2;
+		IScript* enemyLogic = new EnemyMovement();
+		enemyLogic->SetEntityID(enemy);
+		logic2.InsertScript("EnemyMovement", enemyLogic);
+		p_ecs.AddComponent<Logic>(enemy, logic2);
+		
 		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
@@ -109,6 +147,7 @@ namespace EM {
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			//mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
+			mLogic->Update(Timer::GetInstance().GetGlobalDT());
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);

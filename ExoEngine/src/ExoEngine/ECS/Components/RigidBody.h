@@ -20,13 +20,13 @@ namespace EM
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
 		vec2D& GetVel() { return mVelocity; }
-		const vec2D& GetVelConst() { return mVelocity; } const
+		//const vec2D& GetVelConst() { return mVelocity; } const
 		vec2D& GetDir() { return mDirection; }
-		const vec2D& GetDirConst() { return mDirection; } const
+		//const vec2D& GetDirConst() { return mDirection; } const
 		float& GetFriction() { return mFriction; }
-		const float& GetFrictionConst() { return mFriction; } const
+		//const float& GetFrictionConst() { return mFriction; } const
 		float& GetRestitution() { return mRestitution; }
-		const float& GetRestitutionConst() { return mRestitution; } const
+		//const float& GetRestitutionConst() { return mRestitution; } const
 
 		void SetVel(vec2D vel) { mVelocity = vel; }
 		void SetDir(vec2D dir) { mDirection = dir; }

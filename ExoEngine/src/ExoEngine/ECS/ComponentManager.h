@@ -40,8 +40,6 @@ namespace EM
 			// Add this component type to the component type map
 			mComponentTypes.insert({ typeName, mNextComponentType });
 
-			mComponentTypesName.insert({ mNextComponentType, typeName });
-
 			// Create a ComponentArray pointer and add it to the component arrays map
 			mComponentArrays.insert({ typeName, CompArray });
 
@@ -68,7 +66,14 @@ namespace EM
 
 		std::string GetComponentTypeName(ComponentType Type)
 		{
-			std::string TypeName = mComponentTypesName[Type];
+			std::string TypeName;
+			for (std::unordered_map<const char*, ComponentType>::const_iterator it = mComponentTypes.begin(); it != mComponentTypes.end(); ++it) 
+			{
+				if (it->second == Type)
+				{
+					TypeName = it->first;
+				}
+			}
 			TypeName = TypeName.substr(TypeName.find_first_of("::") + 2, TypeName.length());
 			return TypeName;
 		}
@@ -152,8 +157,6 @@ namespace EM
 
 		// Map from type string pointer to a component type
 		std::unordered_map<const char*, ComponentType> mComponentTypes{};
-
-		std::unordered_map<ComponentType, const char*> mComponentTypesName{};
 
 		// Map from type string pointer to a component array
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};

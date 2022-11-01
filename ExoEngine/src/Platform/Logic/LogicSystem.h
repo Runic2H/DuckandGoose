@@ -1,16 +1,16 @@
 #pragma once
 #include "Platform/System/System.h"
 #include "ExoEngine/ECS/Components/Components.h"
+#include "ExoEngine/ECS/ECS.h"
 
 namespace EM
 {
-	class EM_API LogicSystem : public System
+	class LogicSystem : public System
 	{
-		std::set<Entity> mEntities;
-		virtual std::string GetName() = 0;
-		virtual ~LogicSystem() {};
-		virtual void Init() = 0 {};
-		virtual void Update(float Frametime) { float frametime; }
-		virtual void End() = 0 {};
+	public:
+		virtual std::string GetName() { return "LogicSystem"; }
+		virtual void Init() override;
+		virtual void Update(float Frametime) override;
+		virtual void End() override;
 	};
 }
