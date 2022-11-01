@@ -73,7 +73,7 @@ namespace EM {
 				{1.0f, 0.0f, 0.0f,1.0f});
 			}
 		}
-		
+
 		m_Renderer->End();
 		 
 		//for testing 
