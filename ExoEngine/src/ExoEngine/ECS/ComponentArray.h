@@ -57,11 +57,11 @@ namespace EM
 		{
 			assert(mEntityToIndexMap[entity] == 0 && "Component added to same entity more than once.");
 
-			++mSize;
-			size_t newIndex = mSize;
+			size_t newIndex = mSize + 1;
 			mEntityToIndexMap[entity] = newIndex;
 			mIndexToEntityMap[newIndex] = entity;
 			mComponentArray[newIndex] = component;
+			++mSize;
 		}
 
 		//To remove data from the std::unordered_map and keep data packed within the array
@@ -71,7 +71,7 @@ namespace EM
 
 			// Copy element at end into deleted element's place to maintain density
 			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
-			size_t indexOfLastElement = mSize - 1;
+			size_t indexOfLastElement = mSize;
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
 			// Update map to point to moved spot

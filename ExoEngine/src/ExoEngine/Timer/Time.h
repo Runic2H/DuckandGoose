@@ -2,14 +2,16 @@
 //#define p_Timer EM::Timer::GetInstance()
 namespace EM {
 
-#define TotalSystems 5
+#define TotalSystems 6
 	enum class Systems
 	{
 		NONE = 0,
 		WINDOWS,
 		GRAPHIC,
 		PHYSICS,
+		LOGIC,
 		API
+		
 	};
 
 	class Timer {

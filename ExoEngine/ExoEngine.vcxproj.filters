@@ -55,6 +55,11 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
     <ClCompile Include="src\Platform\InputHandler\PlayerInput.cpp" />
+    <ClCompile Include="src\Platform\Logic\LogicSystem.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\PlayerMovement.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -218,6 +223,9 @@
     <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\Math\transformation.h" />
     <ClInclude Include="src\Platform\InputHandler\PlayerInput.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerMovement.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

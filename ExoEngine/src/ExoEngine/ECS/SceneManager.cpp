@@ -21,6 +21,8 @@ namespace EM
 		p_ecs.RegisterComponent<Collider>();
 		p_ecs.RegisterComponent<NameTag>();
 		p_ecs.RegisterComponent<Sprite>();
+		p_ecs.RegisterComponent<Logic>();
+		p_ecs.RegisterComponent<Player>();
 	}
 
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
@@ -74,6 +76,22 @@ namespace EM
 						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
 						{
 							p_ecs.AddComponent<Sprite>(j, sprite);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						Logic logic;
+						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Logic>(j, logic);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						Player player;
+						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Player>(j, player);
 						}
 					}
 					
@@ -144,8 +162,8 @@ namespace EM
 			{
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{
-					//ADD COMPONENTS HERE FOR SERIALIZE
 					std::cout << "Component Serialized" << std::endl;
+					//ADD COMPONENTS HERE FOR SERIALIZE
 					if (p_ecs.GetComponentTypeName(i) == "Transform")
 					{
 						p_ecs.GetComponent<Transform>(j).Serialize(writer);
@@ -162,12 +180,18 @@ namespace EM
 					{
 						p_ecs.GetComponent<NameTag>(j).Serialize(writer);
 					}
-					std::cout << "Component Serialized" << std::endl;
 					if (p_ecs.GetComponentTypeName(i) == "Sprite")
 					{
 						p_ecs.GetComponent<Sprite>(j).Serialize(writer);
 					}
-					std::cout << "Component Serialized" << std::endl;
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						p_ecs.GetComponent<Logic>(j).Serialize(writer);
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Player")
+					{
+						p_ecs.GetComponent<Player>(j).Serialize(writer);
+					}
 				}
 			}
 			writer->EndArray();
