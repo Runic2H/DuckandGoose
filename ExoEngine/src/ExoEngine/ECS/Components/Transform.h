@@ -13,9 +13,9 @@ namespace EM
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>*writer) const;
 
 		vec2D& GetPos() { return mPosition; }
-		const vec2D& GetPosConst() { return mPosition; } const
+		//const vec2D& GetPos() { return mPosition; } const
 		vec2D& GetScale() { return mScale; }
-		const vec2D& GetScaleConst() { return mScale; } const
+		//const vec2D& GetScale() { return mScale; } const
 		float& GetRot() { return mRot; }
 		const float& GetRotConst() { return mRot; } const
 

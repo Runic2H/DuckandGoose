@@ -23,7 +23,6 @@ namespace EM {
 	{
 	public:
 
-		//Start of testing ECS : Not In Use
 		template<typename T>
 		std::shared_ptr<T> RegisterSystem()
 		{
@@ -73,7 +72,6 @@ namespace EM {
 				}
 			}
 		}
-		//End of testing ECS : Not In Use
 
 	private:
 		std::unordered_map<const char*, Signature> mSignatures{};

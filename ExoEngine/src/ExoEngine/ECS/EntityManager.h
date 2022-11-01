@@ -28,7 +28,7 @@ namespace EM
 		EntityManager()
 		{
 			// Initialize the queue with all possible entity IDs up to the max number of entities
-			for (Entity entity = 1; entity < MAX_ENTITIES; ++entity)
+			for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
 			{
 				mAvailableEntities.push(entity);
 			}

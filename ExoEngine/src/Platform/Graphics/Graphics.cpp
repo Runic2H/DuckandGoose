@@ -17,6 +17,7 @@
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Timer/Time.h"
+#include "Platform/LevelEditor/LevelEditor.h"
 
 
 namespace EM {
@@ -55,35 +56,40 @@ namespace EM {
 		m_Renderer->Clear();
 		m_Renderer->Begin(camera);// begin of the renderer 
 		//test for rendering texture, line and rectange to be removed
-		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });	
+		m_Font->RenderText("Duck and Goose! Quack", { 0.0f, 0.0f }, 0.005f, camera, { 1.0f, -0.5f, 0.8f });
+		
+			
 	
 		for (auto const& entity : mEntities)
 		{
 			auto& transform = p_ecs.GetComponent<Transform>(entity);
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
-			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture().c_str()), { 0.f,0.f });
+			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y });
 			m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
-				index1);
-	
+				transform.GetRot(), index1);
+			if (p_Editor->mDebugDraw)
+			{
+				m_Renderer->DrawRect({ transform.GetPos().x , transform.GetPos().y, 0.0f }, { transform.GetScale().x, transform.GetScale().y },
+				{1.0f, 0.0f, 0.0f,1.0f});
+			}
 		}
 
-		m_Renderer->DrawRect({ 0.0f,0.0f,0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f });
-		m_Renderer->DrawQuad({ 1.0f, 0.0f,0.0f }, { 0.5f, 0.5f }, { 0.3f, 0.4f, 0.5f, 1.0f }); 
 		m_Renderer->End();
 		 
 		//for testing 
-		camera.SetPosition({ m_cameraposition.x, m_cameraposition.y, 0.0f });
-
-		if (p_Input->isKeyPressed(GLFW_KEY_W))
-			m_cameraposition.y += CameraSpeed * frametime;
+		
+		//camera.SetPosition({.GetPos().x, .GetPos().y, 0.0f });
+		/*if (p_Input->isKeyPressed(GLFW_KEY_W))
+			player.position.y += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_S))
 			m_cameraposition.y -= CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_D))
 			m_cameraposition.x += CameraSpeed * frametime;
 		if (p_Input->isKeyPressed(GLFW_KEY_A))
 		{
-			m_cameraposition.x -= CameraSpeed * frametime;
-		}
+			player.position.x -= CameraSpeed * frametime;
+			
+		}*/
 		camera.MouseScrolling();
 		
 		Timer::GetInstance().Update(Systems::GRAPHIC);

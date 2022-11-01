@@ -21,6 +21,8 @@ namespace EM
 		p_ecs.RegisterComponent<Collider>();
 		p_ecs.RegisterComponent<NameTag>();
 		p_ecs.RegisterComponent<Sprite>();
+		p_ecs.RegisterComponent<Logic>();
+		p_ecs.RegisterComponent<Player>();
 	}
 
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
@@ -30,7 +32,7 @@ namespace EM
 		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
 		{
 			p_ecs.ClearArrayForWorldBuild(i);
-			for (Entity j = 1; j <= p_ecs.GetTotalEntities(); ++j)
+			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
 			{
 				Signature signature(obj["EntitySignatures"][(j-1)].GetString());
 				if (signature.test(i))
@@ -76,10 +78,26 @@ namespace EM
 							p_ecs.AddComponent<Sprite>(j, sprite);
 						}
 					}
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						Logic logic;
+						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Logic>(j, logic);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						Player player;
+						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Player>(j, player);
+						}
+					}
 					
 				}
 			}
-			for (Entity j = 1; j < MAX_ENTITIES; ++j)
+			for (Entity j = 0; j < MAX_ENTITIES; ++j)
 			{
 				p_ecs.GetEntityToIndexMapECS(i)[j] = obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(i).c_str()][j].GetUint();
 				p_ecs.GetIndexToEntityMapECS(i)[j] = obj["IndexToEntityMap"][p_ecs.GetComponentTypeName(i).c_str()][j].GetUint();
@@ -128,7 +146,7 @@ namespace EM
 
 		writer->Key("EntitySignatures");
 		writer->StartArray();
-		for (Entity i = 1; i <= p_ecs.GetTotalEntities(); ++i)
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			writer->String(p_ecs.GetEntitySignature(i).to_string().c_str());
 		}
@@ -140,12 +158,11 @@ namespace EM
 		{
 			writer->Key(p_ecs.GetComponentTypeName(i).c_str());
 			writer->StartArray();
-			for (Entity j = 1; j <= p_ecs.GetTotalEntities(); ++j)
+			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
 			{
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{
 					//ADD COMPONENTS HERE FOR SERIALIZE
-					std::cout << "Component Serialized" << std::endl;
 					if (p_ecs.GetComponentTypeName(i) == "Transform")
 					{
 						p_ecs.GetComponent<Transform>(j).Serialize(writer);
@@ -162,12 +179,18 @@ namespace EM
 					{
 						p_ecs.GetComponent<NameTag>(j).Serialize(writer);
 					}
-					std::cout << "Component Serialized" << std::endl;
 					if (p_ecs.GetComponentTypeName(i) == "Sprite")
 					{
 						p_ecs.GetComponent<Sprite>(j).Serialize(writer);
 					}
-					std::cout << "Component Serialized" << std::endl;
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						p_ecs.GetComponent<Logic>(j).Serialize(writer);
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Player")
+					{
+						p_ecs.GetComponent<Player>(j).Serialize(writer);
+					}
 				}
 			}
 			writer->EndArray();
