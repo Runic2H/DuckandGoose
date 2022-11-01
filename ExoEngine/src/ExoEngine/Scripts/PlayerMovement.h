@@ -2,6 +2,7 @@
 #include "IScript.h"
 #include "ExoEngine/Input/Input.h"
 #include "GLFW/glfw3.h"
+#include "ExoEngine/Math/physics.h"
 
 namespace EM
 {
@@ -14,5 +15,7 @@ namespace EM
 		virtual void Start() override;
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
+	private:
+		entityPhysics phys;
 	};
 }

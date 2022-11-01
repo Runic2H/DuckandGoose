@@ -54,7 +54,6 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
-    <ClCompile Include="src\Platform\InputHandler\PlayerInput.cpp" />
     <ClCompile Include="src\Platform\Logic\LogicSystem.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerMovement.cpp" />
@@ -222,7 +221,6 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
     <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\Math\transformation.h" />
-    <ClInclude Include="src\Platform\InputHandler\PlayerInput.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerMovement.h" />
     <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Player.h" />

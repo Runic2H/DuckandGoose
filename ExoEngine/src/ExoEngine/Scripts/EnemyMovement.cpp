@@ -20,9 +20,12 @@ namespace EM
 				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 			}
 		}
-		if (dotProduct(transform.GetPos(), rigidbody.GetDir()) < 5.0f)
+		if (squarelength(rigidbody.GetDir()) < 3.0f)
 		{
-			transform.GetPos() += (rigidbody.GetDir() * rigidbody.GetFriction() * Frametime);
+			rigidbody.SetVel(mPhys.accelent(rigidbody.GetDir(), rigidbody.GetVel(), Frametime));
+			rigidbody.SetVel(mPhys.friction(rigidbody.GetVel(), Frametime));
+			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
+			rigidbody.SetNextPos(nextPos);
 		}
 	}
 
