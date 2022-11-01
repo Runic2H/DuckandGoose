@@ -33,11 +33,10 @@ namespace EM
 		void SetMax(vec2D input) { mMax = input; }
 		void SetRad(float input) { mRadius = input; }
 
-		ColliderType GetCollider() { return mCol; }
+		ColliderType& GetCollider() { return mCol; }
 		vec2D GetMin() { return mMin; }
 		vec2D GetMax() { return mMax; }
 		float GetRad() { return mRadius; }
-
 	private:
 		ColliderType mCol{};
 		vec2D mMin;

@@ -28,6 +28,8 @@
 #include "ExoEngine/Audio/AudioEngine.h"
 
 #include "ExoEngine/Log.h"
+#include "ExoEngine/ECS/Components/Components.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace EM {
 
@@ -101,6 +103,8 @@ namespace EM {
     //  Update loop for level editor, poll events and set new frames
     void LevelEditor::Update()
     {
+        Timer::GetInstance().Start(Systems::GRAPHIC);
+        Timer::GetInstance().GetDT(Systems::GRAPHIC);
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -109,27 +113,14 @@ namespace EM {
         docking();
         MainMenuBar();
         Profiler();
-        Font();
-        // ImGui::ShowMetricsWindow();
+        ImGui::ShowDemoWindow();
         DropDownMenu();
         Logger();
         Hierarchy();
         Inspector();
         Audio();
+        Timer::GetInstance().Update(Systems::GRAPHIC);
     }
-    void LevelEditor::Font()
-    {
-        //ImGuiIO& io = ImGui::GetIO();
-        //ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 50);
-        //ImFont* font2 = io.Fonts->AddFontFromFileTTF("anotherfont.otf", 50);
-
-        //ImGui::Text("Hello"); // use the default font (which is the first loaded font)
-        //ImGui::PushFont(font2);
-        //ImGui::Text("Hello with another font");
-        //ImGui::PopFont();
-        // A few examples... (no title provided, default one used!)
-    }
-
     //  Render interface onto frame
 
     void LevelEditor::Draw()
@@ -328,7 +319,7 @@ namespace EM {
             ImGui::Text("\n");
 
             // how much time per frame and Fps
-            ImGui::Text("Application average % .3f ms / frame(% .1f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
+            ImGui::Text("Application average % .3f ms / frame(% .3f FPS)", 1000.0f / FramePerSec::GetInstance().GetFps(), FramePerSec::GetInstance().GetFps());
 
             //Renderering Information
             ImGui::Text("\n");
@@ -339,112 +330,163 @@ namespace EM {
             ImGui::Text("Vertices: %d", Infos.TotalVertexUsed());
             ImGui::Text("Indices: %d", Infos.TotalIndexUsed());
 
+            ImGui::Checkbox("Show physics colliders", &mDebugDraw);
             //Todo show the each system consume how much at runtime
             ImGui::End();
+
+         
         }
     }
 
     void LevelEditor::Hierarchy()
     {
-        if (show_window)
+        ImGui::Begin("Hierarchy");
+        if (ImGui::Button("Create Entity"))
         {
-            ImGui::Begin("Hierarchy");
-
-            static int clicked = 0;
-            if (ImGui::Button("Create Entity"))
-                clicked++;
-            if (clicked & 1)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Entity Created");
-            }
-            //static ImGuiTextFilter filter;
-            // for parent size
-            // for list of entity size
-            ////EntityID currentEntity = ListofEntities[i][j];
-            ////const char* name = (ecs.getcomponent<baseInfo>(currentEntity)->name).c_str();
-
-            //if (filter.PassFilter(name))
-            //{
-            //    if (ImGui::Selectable(name))
-            //    {
-            //        //selected = currentEntity
-            //    }
-            //
-
-             //ImGuiDragDropFlags_SourceNoPreviewTooltip;
-
-            ImGui::End();
+            selectedEntity = p_ecs.CreateEntity();
         }
+       
+        if (p_ecs.GetTotalEntities() != 0 && p_ecs.GetTotalRegisteredComponents()!=0)
+        {
+            ImGui::SameLine();
+            if (ImGui::Button("Destroy Entity") /*&& selectedEntity!= 0*/)
+            {
+                p_ecs.DestroyEntity(selectedEntity);
+                selectedEntity = {}; // when the entity is destroy there is no current selected entity
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Clone Entity") /*&& selectedEntity!= 0*/)
+            {
+                Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
+                selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
+            }
+            for (Entity e = 1; e <= p_ecs.GetTotalEntities(); ++e)
+            {
+                const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
+                ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+                bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
+
+                if (ImGui::IsItemClicked())
+                    selectedEntity = e;
+
+                if (opened)
+                    ImGui::TreePop();
+            }
+        }
+        if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+            selectedEntity = {};
+        ImGui::End();
 
     }
 
     void LevelEditor::Inspector()
     {
-        if (show_window)
+        ImGui::Begin("Inspector");
+        if (selectedEntity)// if the selectedEntityExist
         {
-            ImGui::Begin("Inspector");
-            if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_None))
+            //create component for the selected entity 
+            if (ImGui::Button("Add Component"))
+                ImGui::OpenPopup("Add Component");
+
+            if (ImGui::BeginPopup("Add Component"))
             {
-                //will have to add a disable key in game when pressing these buttons
-
-                ImGui::PushItemWidth(100.0f);
-
-                ImGui::Text("X"); ImGui::SameLine();
-                static float posx = 0.10f;
-                ImGui::PushID(1);
-                ImGui::InputFloat("Y", &posx); ImGui::SameLine();
-                ImGui::PopID();
-
-                static float posy = 0.20f;
-                ImGui::PushID(2);
-                ImGui::InputFloat("Z", &posy); ImGui::SameLine();
-                ImGui::PopID();
-
-                static float posz = 0.40f;
-                ImGui::InputFloat("Position", &posz);
-
-
-                ImGui::Text("X"); ImGui::SameLine();
-                static float rotx = 0.10f;
-                ImGui::PushID(3);
-                ImGui::InputFloat("Y", &rotx); ImGui::SameLine();
-                ImGui::PopID();
-
-                static float roty = 0.20f;
-                ImGui::PushID(4);
-                ImGui::InputFloat("Z", &roty); ImGui::SameLine();
-                ImGui::PopID();
-
-                static float rotz = 0.40f;
-                ImGui::InputFloat("Rotation", &rotz);
-
-                ImGui::Text("X"); ImGui::SameLine();
-                static float scax = 0.10f;
-                ImGui::InputFloat("Y", &scax); ImGui::SameLine();
-
-                static float scay = 0.20f;
-                ImGui::InputFloat("Z", &scay); ImGui::SameLine();
-
-                static float scaz = 0.40f;
-                ImGui::InputFloat("Scale", &scaz);
-
-                ImGui::PopItemWidth();
+                if (ImGui::MenuItem("NameTag"))
+                {
+                    p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Transform"))
+                {
+                    p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Sprite"))
+                {
+                    p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
             }
-
-            if (ImGui::CollapsingHeader("Sprite Renderer", ImGuiTreeNodeFlags_None))
+            //Check and change the name of the Entity
+            if (p_ecs.HaveComponent<NameTag>(selectedEntity))
             {
-                static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
+                if (ImGui::CollapsingHeader("Name", ImGuiTreeNodeFlags_None))
+                {
+                    auto& name = p_ecs.GetComponent<NameTag>(selectedEntity).GetNameTag();
+                    char buffer[256];
+                    memset(buffer, 0, sizeof(buffer));
+                    strcpy_s(buffer, sizeof(buffer), name.c_str());
+                    if (ImGui::InputText("name", buffer, sizeof(buffer)))
+                    {
+                        name = std::string(buffer);
+                    }
 
-                ImGui::Text("Color");
-
-                ImGui::ColorEdit4("Color Edit", (float*)&color, ImGuiColorEditFlags_DisplayHSV);
-
-                ImGui::ColorPicker4("Color Picker", (float*)&color, ImGuiColorEditFlags_DisplayHSV);
+                }
             }
-            ImGui::End();
+            //If Entity have Transform Component
+            if (p_ecs.HaveComponent<Transform>(selectedEntity)) 
+            {
+                if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_None))
+                {
+                    //position
+                    auto& Position = p_ecs.GetComponent<Transform>(selectedEntity).GetPos();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Position"); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                    ImGui::DragFloat("##Position", (float*)&Position.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                    ImGui::PushID(1);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Position", (float*)&Position.y, 0.005f);
+                    ImGui::PopID();
 
+                    //scale
+                    auto& Scale = p_ecs.GetComponent<Transform>(selectedEntity).GetScale();
+                    ImGui::Text("Scale   "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                    ImGui::DragFloat("##Scale", (float*)&Scale.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                    ImGui::PushID(2);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
+                    ImGui::PopID();
+                    //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
+
+                    //rotation
+                    auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
+                    ImGui::Text("Rotation Z"); ImGui::SameLine();
+                    ImGui::DragFloat("##", (float*)&rotation, 1.0f);
+                    //EM_EXO_INFO("Rotation(z:{0})", rotation);
+                }
+            }
+            //Sprite Component
+            if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
+                {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
+                    ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                    ImGui::PopStyleColor(3);
+                    auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
+                    ImGui::SetNextItemWidth(140.0f);
+
+                    if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                    {
+                        for (auto& [str, tex] : ResourceManager::textures)
+                        {
+                            if (ImGui::Selectable(str.c_str()))
+                            {
+                                texturePath = str;
+                                EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
+                            }
+                        }
+                        ImGui::EndCombo();
+                    }
+                }
+            }
         }
+        ImGui::End();
+
     }
 
     void LevelEditor::Audio()

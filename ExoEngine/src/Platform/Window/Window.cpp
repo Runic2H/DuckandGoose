@@ -147,7 +147,7 @@ namespace EM{
 		data.mouseX = xpos;
 		data.mouseY = ypos;
 
-		EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
+		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
 	}
 	void Window::ToggleVsync(bool value)
 	{

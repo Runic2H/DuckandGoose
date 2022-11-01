@@ -39,8 +39,8 @@ namespace EM {
 		void DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const MultiRefs<Texture>& texture);
 
 		//handle sprite draws
-		void DrawSprite(const glm::vec2& position, const glm::vec2& size, const MultiRefs<SpriteRender>& sprite);
-		void DrawSprite(const glm::vec3& position, const glm::vec2& size, const MultiRefs<SpriteRender>& sprite);
+		void DrawSprite(const glm::vec2& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite);
+		void DrawSprite(const glm::vec3& position, const glm::vec2& size, const float& rotation, const MultiRefs<SpriteRender>& sprite);
 		void DrawSprite(const glm::mat4& transform, const MultiRefs<SpriteRender>& sprite);
 
 

@@ -36,6 +36,7 @@ namespace EM {
 	{
 		p_ecs.Init();
 		p_Scene->Init();
+		//p_Scene->DeserializeFromFile("SMTest.json");
 		FramePerSec::GetInstance().InitFrame();
 	}
 
@@ -128,6 +129,9 @@ namespace EM {
 		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
 			Entity player = p_ecs.CreateEntity();
+			NameTag name;
+			
+			name.SetNameTag("Player");
 			if (player % 2)
 			{
 				p_ecs.AddComponent<Transform>(player, TransformComponent);
@@ -137,41 +141,37 @@ namespace EM {
 			}
 			else
 			{
-				Transform transform;
-				p_ecs.AddComponent<Transform>(player, transform);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
+				name.SetNameTag("Enemy");
+				//transform.DeserializeFromFile("WallTransform.json");
+				p_ecs.AddComponent<Transform>(player, TransformComponent);
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+				p_ecs.AddComponent<NameTag>(player, name);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}*/
+		}
+		*/
+		/*Entity player1 = p_ecs.CreateEntity();
+		Transform transform1;
+		transform1.SetPos(0.0f, 0.0f);
+		Sprite sprite1;
+		NameTag name1;
+		name1.SetNameTag("Player1");
+		sprite1.SetTexture("Idle");
+		p_ecs.AddComponent<Transform>(player1, transform1);
+		p_ecs.AddComponent<Sprite>(player1, sprite1);
+		p_ecs.AddComponent<NameTag>(player1, name1);
 
-		Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
-		Logic logic;
-		Sprite sprite;
-		NameTag name;
-		Player playerID;
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		IScript* base = new PlayerMovement();
-		base->SetEntityID(player);
-		logic.InsertScript("PlayerMovement", base);
-		rb.SetVel(vec2D(5.0f, 5.0f));
-		p_ecs.AddComponent<Transform>(player, TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.GetComponent<RigidBody>(enemy).SetFriction(0.9f);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Player>(player, playerID);
+		Entity Enemy1 = p_ecs.CreateEntity();
+		Transform Etransform1;
+		Etransform1.SetPos(0.5f, 0.0f);
+		Sprite Esprite1;
+		NameTag Ename1;
+		Ename1.SetNameTag("Enemy1");
+		Esprite1.SetTexture("Splash");
+		p_ecs.AddComponent<Transform>(Enemy1, Etransform1);
+		p_ecs.AddComponent<Sprite>(Enemy1, Esprite1);
+		p_ecs.AddComponent<NameTag>(Enemy1, Ename1);*/
 
-		Logic logic2;
-		IScript* enemyLogic = new EnemyMovement();
-		enemyLogic->SetEntityID(enemy);
-		logic2.InsertScript("EnemyMovement", enemyLogic);
-		p_ecs.AddComponent<Logic>(enemy, logic2);
-		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{

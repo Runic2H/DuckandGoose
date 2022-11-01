@@ -13,13 +13,14 @@ namespace EM {
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>*writer) const;
 
 		void SetTexture(const std::string& name) { m_texturename = name; }
-		std::string& GetTexture() { return m_texturename; }
+		std::string &GetTexture() { return m_texturename; }
 
-		
+		void SetIndex(float& x) { m_index.x = x; }
+		vec2D& GetIndex() { return m_index; }
 		//boolean isanimated
-		//texture index 
 		//altas 
 	private:
 		std::string m_texturename;
+		vec2D m_index;
 	};
 }
