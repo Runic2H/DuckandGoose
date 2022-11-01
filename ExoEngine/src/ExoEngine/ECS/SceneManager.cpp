@@ -162,7 +162,6 @@ namespace EM
 			{
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{
-					std::cout << "Component Serialized" << std::endl;
 					//ADD COMPONENTS HERE FOR SERIALIZE
 					if (p_ecs.GetComponentTypeName(i) == "Transform")
 					{

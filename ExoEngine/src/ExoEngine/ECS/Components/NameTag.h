@@ -13,7 +13,7 @@ namespace EM
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
 		void SetNameTag(std::string name) { mName = name; }
-		std::string GetNameTag() { return mName; }
+		std::string& GetNameTag() { return mName; }
 
 	private:
 		std::string mName;

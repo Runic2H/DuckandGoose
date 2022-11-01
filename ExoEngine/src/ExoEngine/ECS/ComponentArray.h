@@ -62,6 +62,7 @@ namespace EM
 			mIndexToEntityMap[newIndex] = entity;
 			mComponentArray[newIndex] = component;
 			++mSize;
+			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
 		//To remove data from the std::unordered_map and keep data packed within the array
@@ -71,10 +72,11 @@ namespace EM
 
 			// Copy element at end into deleted element's place to maintain density
 			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
-			size_t indexOfLastElement = mSize;
+			size_t indexOfLastElement = mSize + 1;
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
 			// Update map to point to moved spot
+
 			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
 			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
 			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
@@ -83,12 +85,13 @@ namespace EM
 			mIndexToEntityMap[indexOfLastElement] = 0;
 
 			--mSize;
+			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
 		//Retrieves Data from the Component Array
 		T& GetData(Entity entity)
 		{
-			assert(mEntityToIndexMap[entity] != 0 && "Retrieving non-existent component.");
+			//assert(mEntityToIndexMap[entity] != 0 && "Retrieving non-existent component.");
 
 			// Return a reference to the entity's component
 			return mComponentArray[mEntityToIndexMap[entity]];
@@ -111,6 +114,7 @@ namespace EM
 			{
 				// Remove the entity's component if it existed
 				RemoveData(entity);
+				std::cout << "mf" << std::endl;
 			}
 		}
 

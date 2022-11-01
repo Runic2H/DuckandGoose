@@ -17,6 +17,7 @@
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Timer/Time.h"
+#include "Platform/LevelEditor/LevelEditor.h"
 
 
 namespace EM {
@@ -63,11 +64,16 @@ namespace EM {
 		{
 			auto& transform = p_ecs.GetComponent<Transform>(entity);
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
-			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture().c_str()), { 0.f,0.f });
+			index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y });
 			m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
-				index1);
-	
+				transform.GetRot(), index1);
+			if (p_Editor->mDebugDraw)
+			{
+				m_Renderer->DrawRect({ transform.GetPos().x , transform.GetPos().y, 0.0f }, { transform.GetScale().x, transform.GetScale().y },
+				{1.0f, 0.0f, 0.0f,1.0f});
+			}
 		}
+
 		m_Renderer->End();
 		 
 		//for testing 

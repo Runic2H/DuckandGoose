@@ -35,6 +35,7 @@ namespace EM {
 	{
 		p_ecs.Init();
 		p_Scene->Init();
+		//p_Scene->DeserializeFromFile("SMTest.json");
 		FramePerSec::GetInstance().InitFrame();
 	}
 
@@ -96,10 +97,12 @@ namespace EM {
 		
 		//SM.DeserializeFromFile("SMTest.json");
 
-
 		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
 			Entity player = p_ecs.CreateEntity();
+			NameTag name;
+			
+			name.SetNameTag("Player");
 			if (player % 2)
 			{
 				p_ecs.AddComponent<Transform>(player, TransformComponent);
@@ -109,13 +112,15 @@ namespace EM {
 			}
 			else
 			{
-				Transform transform;
-				p_ecs.AddComponent<Transform>(player, transform);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
+				name.SetNameTag("Enemy");
+				//transform.DeserializeFromFile("WallTransform.json");
+				p_ecs.AddComponent<Transform>(player, TransformComponent);
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+				p_ecs.AddComponent<NameTag>(player, name);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}*/
+		}
+		*/
 
 		Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
@@ -142,7 +147,6 @@ namespace EM {
 		enemyLogic->SetEntityID(enemy);
 		logic2.InsertScript("EnemyMovement", enemyLogic);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
-		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{

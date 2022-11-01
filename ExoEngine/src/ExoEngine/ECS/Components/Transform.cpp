@@ -3,7 +3,7 @@
 namespace EM
 {
 	//Transform
-	Transform::Transform() : mPosition{ vec2D(1.0f,1.0f) }, mScale{ vec2D(1.0f,1.0f) }, mRot{ 0.0f } {}
+	Transform::Transform() : mPosition{ vec2D(0.0f,0.0f) }, mScale{ vec2D(1.0f,1.0f) }, mRot{ 0.0f } {}
 
 	bool Transform::Deserialize(const rapidjson::Value& obj)
 	{
