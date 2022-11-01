@@ -7,7 +7,6 @@
 \section		A
 \date			28-9-2022
 \brief			This file contain neccessary function for graphic class
-
 ****************************************************************************
 ***/
 #pragma once

@@ -36,10 +36,15 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\Platform\InputHandler\PlayerInput.h" />
+    <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix4x4.h" />
     <ClInclude Include="src\ExoEngine\Math\physics.h" />
+    <ClInclude Include="src\Platform\Physics\PhysicsSystem.h" />
+    <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
     <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
@@ -196,6 +201,8 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\Platform\InputHandler\PlayerInput.cpp" />
+    <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -203,6 +210,7 @@
     <ClCompile Include="src\ExoEngine\Math\physics.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vec3.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vmath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
