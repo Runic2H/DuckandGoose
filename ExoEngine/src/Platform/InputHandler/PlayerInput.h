@@ -11,8 +11,8 @@
 ****************************************************************************
 ***/
 #pragma once
-#include "Physics.h"
-#include "ExoEngine/ECS/Components.h"
+#include "ExoEngine/Math/Physics.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "empch.h"
 #include "../../Platform/System/System.h"
 #include "../../Platform/Graphics/Camera2D.h"

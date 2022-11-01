@@ -17,9 +17,9 @@
 #include "Platform/LevelEditor/LevelEditor.h"
 #include "Platform/Graphics/Graphics.h"
 #include "Platform/Physics/CollisionSystem.h"
-#include "ExoEngine/Math/PlayerInput.h"
+#include "Platform/InputHandler/PlayerInput.h"
 #include "Platform/Physics/PhysicsSystem.h"
-#include "ECS/Components.h"
+#include "ECS/Components/Components.h"
 #include "Timer/Time.h"
 #include "Timer/Fps.h"
 #include "ECS/ECS.h"
@@ -67,36 +67,70 @@ namespace EM {
 		}
 		mGraphics->Init();
 
-	/*	auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
+		auto mPlayerInput = p_ecs.RegisterSystem<PlayerInput>();
 		{
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<NameTag>());
+			p_ecs.SetSystemSignature<PlayerInput>(signature);
+		}
+		mPlayerInput->Init();
+
+		auto mPosUpdate = p_ecs.RegisterSystem<PhysicsSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<PhysicsSystem>(signature);
+		}
+		mPosUpdate->Init();
+
+		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
-		}*/
-		//mCollision->Init()
+		}
+		mCollision->Init();
 		
-		
+		Entity player = p_ecs.CreateEntity();
+		p_ecs.AddComponent<Transform>(player, TransformComponent);
+		p_ecs.AddComponent<NameTag>(player, NameTagComponent);
+		p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+		p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
+		p_ecs.GetComponent<RigidBody>(player).SetVel(0.005f,0.005f);
+
+		Entity enemy = p_ecs.CreateEntity();
+		p_ecs.AddComponent<Transform>(enemy, TransformComponent);
+		p_ecs.AddComponent<Collider>(enemy, ColliderComponent);
+		p_ecs.AddComponent<Sprite>(enemy, SpriteComponent);
+		p_ecs.AddComponent<RigidBody>(enemy, RigidBodyComponent);
 		//SM.DeserializeFromFile("SMTest.json");
 
 
-		while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
+		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
 			Entity player = p_ecs.CreateEntity();
 			if (player % 2)
 			{
 				p_ecs.AddComponent<Transform>(player, TransformComponent);
+				p_ecs.AddComponent<NameTag>(player, NameTagComponent);
+				p_ecs.AddComponent<Collider>(player, ColliderComponent);
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
 			}
 			else
 			{
 				Transform transform;
-				transform.DeserializeFromFile("WallTransform.json");
 				p_ecs.AddComponent<Transform>(player, transform);
+				p_ecs.AddComponent<Collider>(player, ColliderComponent);
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
+		}*/
 		
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
@@ -110,12 +144,19 @@ namespace EM {
 			p_Editor->Draw();
 		
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
-			//mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			//update input
+			mPlayerInput->Update(Timer::GetInstance().GetGlobalDT());
+			//update enemies
+			
+			//run collision calculations
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			//update positions
+			mPosUpdate->Update();
+			//render graphics
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
-	
 		}
 		
 		End();

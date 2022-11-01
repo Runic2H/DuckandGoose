@@ -13,18 +13,18 @@
 ***/
 #include "empch.h"
 #include "PlayerInput.h"
-#include "../ECS/Components.h"
+#include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 
 
 namespace EM {
-    extern ECS ecs;
+    //extern ECS ecs;
     void PlayerInput::Init() {
     }
 	void PlayerInput::Update(float dt) {
         for (auto const& player : mEntities) {
-            auto& pRigid = ecs.GetComponent<RigidBody>(player);
-            auto& pTrans = ecs.GetComponent<Transform>(player);
+            auto& pRigid = p_ecs.GetComponent<RigidBody>(player);
+            auto& pTrans = p_ecs.GetComponent<Transform>(player);
             if (p_Input->isKeyPressed(GLFW_KEY_UP) || p_Input->isKeyPressed(GLFW_KEY_DOWN) || p_Input->isKeyPressed(GLFW_KEY_RIGHT) || p_Input->isKeyPressed(GLFW_KEY_LEFT)) {
                 if (p_Input->isKeyPressed(GLFW_KEY_UP)) {
                     vec2D vel(0, 10.f);
@@ -65,7 +65,7 @@ namespace EM {
             //camera.SetPosition({pTrans.GetPos().x, pTrans.GetPos().y, 0.0f });
             vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
             pRigid.SetNextPos(nextPos);
-            pTrans.SetPos(pRigid.GetNextPos());
+            //pTrans.SetPos(pRigid.GetNextPos());
         }
     }
 	void PlayerInput::End() {

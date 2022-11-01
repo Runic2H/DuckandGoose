@@ -23,6 +23,8 @@ namespace EM
 		const vec2D& GetVelConst() { return mVelocity; } const
 		vec2D& GetDir() { return mDirection; }
 		const vec2D& GetDirConst() { return mDirection; } const
+		vec2D& GetNextPos() { return NextPos; }
+		const vec2D& GetNextPosConst() { return NextPos; } const
 		float& GetFriction() { return mFriction; }
 		const float& GetFrictionConst() { return mFriction; } const
 		float& GetRestitution() { return mRestitution; }
@@ -30,6 +32,7 @@ namespace EM
 
 		void SetVel(vec2D vel) { mVelocity = vel; }
 		void SetDir(vec2D dir) { mDirection = dir; }
+		void SetNextPos(vec2D vec) { NextPos = vec; }
 		void SetVel(float velX, float velY) { mVelocity = vec2D(velX, velY); }
 		void SetDir(float dirX, float dirY) { mDirection = vec2D(dirX, dirY); }
 		void SetFriction(float value) { mFriction = value; }
@@ -37,6 +40,7 @@ namespace EM
 	private:
 		vec2D mVelocity;
 		vec2D mDirection;
+		vec2D NextPos;
 		float mFriction;
 		float mRestitution;
 	};
