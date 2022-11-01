@@ -1,4 +1,5 @@
 #include "LogicSystem.h"
+#include "ExoEngine/Timer/Time.h"
 
 namespace EM
 {
@@ -14,6 +15,9 @@ namespace EM
 
 	void LogicSystem::Update(float Frametime)
 	{
+
+		Timer::GetInstance().Start(Systems::LOGIC);
+		Timer::GetInstance().GetDT(Systems::LOGIC);
 		for (const auto& entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
@@ -22,6 +26,7 @@ namespace EM
 				(*i)->Update(Frametime);
 			}
 		}
+		Timer::GetInstance().Update(Systems::LOGIC);
 	}
 
 	void LogicSystem::End()
