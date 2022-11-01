@@ -89,7 +89,6 @@ namespace EM {
         TextShader->Bind();
         TextShader->SetUniform("u_ViewProjection", camera.GetViewProjectionMatrix());
         TextShader->SetUniform("textColor", color);
-
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
 
