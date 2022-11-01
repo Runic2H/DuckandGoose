@@ -20,6 +20,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Player.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Transform.h" />
@@ -35,14 +36,20 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix4x4.h" />
     <ClInclude Include="src\ExoEngine\Math\physics.h" />
+    <ClInclude Include="src\Platform\Physics\PhysicsSystem.h" />
+    <ClInclude Include="src\ExoEngine\Math\RigidBody.h" />
+    <ClInclude Include="src\ExoEngine\Math\transformation.h" />
     <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
     <ClInclude Include="src\ExoEngine\Scripts\IScript.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerMovement.h" />
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\Timer\Time.h" />
     <ClInclude Include="src\Platform\Graphics\Buffer.h" />
@@ -65,6 +72,7 @@
     <ClInclude Include="src\Serialization\JSONserialization.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
     <ClInclude Include="vendor\imgui\imgui.h" />
+    <ClInclude Include="vendor\imgui\ImGuizmo.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_opengl3_loader.h" />
@@ -176,7 +184,9 @@
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\Player.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Transform.cpp" />
@@ -191,6 +201,7 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -198,11 +209,14 @@
     <ClCompile Include="src\ExoEngine\Math\physics.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vec3.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vmath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\PlayerMovement.cpp" />
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />
@@ -216,12 +230,14 @@
     <ClCompile Include="src\Platform\Graphics\VertexArray.cpp" />
     <ClCompile Include="src\Platform\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\LevelEditor.cpp" />
+    <ClCompile Include="src\Platform\Logic\LogicSystem.cpp" />
     <ClCompile Include="src\Platform\Window\Window.cpp" />
     <ClCompile Include="src\Serialization\JSONserialization.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\imgui\ImGuizmo.cpp" />
     <ClCompile Include="vendor\imgui\imgui_demo.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

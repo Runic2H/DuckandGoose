@@ -37,10 +37,11 @@ namespace EM {
 		void Audio();
 
 		static std::unique_ptr<LevelEditor>& GetInstance();
+		//for inspector and Hierarchy
+		bool mDebugDraw{ false };
 	private:
 		void MainMenuBar();
 		void docking();
-		void Font();
 		bool dockspaceOpen{};
 		bool fullscreenMode{};
 		bool pad{};
@@ -53,5 +54,8 @@ namespace EM {
 		bool b_profile = false;
 		float m_SceneRuntime = 0.0f;
 		float m_UpdateTimer = 0.0f;
+		
+		//for inspector and Hierarchy
+		Entity selectedEntity{ MAX_ENTITIES };
 	};
 }

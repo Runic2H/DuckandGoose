@@ -29,6 +29,14 @@ namespace EM
 			}
 			mCol = static_cast<ColliderType>(type);
 		}
+		void SetMin(vec2D input) { mMin = input; }
+		void SetMax(vec2D input) { mMax = input; }
+		void SetRad(float input) { mRadius = input; }
+
+		ColliderType& GetCollider() { return mCol; }
+		vec2D GetMin() { return mMin; }
+		vec2D GetMax() { return mMax; }
+		float GetRad() { return mRadius; }
 	private:
 		ColliderType mCol{};
 		vec2D mMin;

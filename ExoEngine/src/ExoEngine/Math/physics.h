@@ -24,9 +24,9 @@ namespace EM {
     
     class entityPhysics {
         public: 
-            void accelent(vec2D& entvel, vec2D applied);
-            void friction(vec2D& entvel);
-            void gravity(vec2D& entvel);
+            vec2D accelent(vec2D& entvel, vec2D applied, float dt);
+            vec2D friction(vec2D& entvel, float dt);
+            vec2D gravity(vec2D& entvel, float dt);
     };
     class entityCollision {
         private:

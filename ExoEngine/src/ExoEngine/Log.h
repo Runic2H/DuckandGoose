@@ -18,6 +18,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace EM {
+	template class EM_API std::shared_ptr<spdlog::logger>;
 	class EM_API Log
 	{
 	public:
