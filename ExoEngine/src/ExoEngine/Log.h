@@ -17,6 +17,10 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/fmt/ostr.h"
 
+#ifdef _MSC_VER
+// Supress warning: not sure whether we are going to dllexport out this log
+#pragma warning( disable : 4251 )
+#endif
 namespace EM {
 	template class EM_API std::shared_ptr<spdlog::logger>;
 	class EM_API Log
