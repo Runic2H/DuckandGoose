@@ -24,6 +24,7 @@ namespace EM {
         //assign collider to rigidbody component
     }
     void CollisionSystem::Update(float dt) {
+        (void)dt;
         Timer::GetInstance().Start(Systems::COLLISION);
         Timer::GetInstance().GetDT(Systems::COLLISION);
         //iterate through array of entities

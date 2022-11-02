@@ -22,7 +22,7 @@ namespace EM {
 	{
 
 	public:
-		static enum state
+		enum class state
 		{
 			pause,
 			play,

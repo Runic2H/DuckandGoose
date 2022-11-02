@@ -353,7 +353,7 @@ namespace EM {
             return 0;
         }
     }
-    int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) { return 0; }
+    int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) { (void)rad1; (void)min1; (void)max1; (void)ent1; return 0; }
     int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
         vec2D dist = vec2D();
         dist.x = center.x - ent1.x;
@@ -372,6 +372,8 @@ namespace EM {
         if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
             return 1;
         }
+        else
+            return 0;
     }
 
     void Knockback()
