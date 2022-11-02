@@ -11,7 +11,7 @@ namespace EM {
 		return textures[name] = ResourceManager::LoadTextureFromFile(filepath);
 	}
 
-	std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& name)
+	std::shared_ptr<Texture> ResourceManager::GetTexture(std::string name)
 	{
 		return textures[name];
 	}

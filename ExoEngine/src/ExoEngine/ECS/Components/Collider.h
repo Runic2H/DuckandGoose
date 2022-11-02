@@ -41,6 +41,7 @@ namespace EM
 		ColliderType mCol{};
 		vec2D mMin;
 		vec2D mMax;
+		vec2D offset;
 		float mRadius;
 	};
 }

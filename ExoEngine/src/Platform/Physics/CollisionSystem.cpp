@@ -23,6 +23,8 @@ namespace EM {
         //assign collider to rigidbody component
     }
     void CollisionSystem::Update(float dt) {
+        Timer::GetInstance().Start(Systems::COLLISION);
+        Timer::GetInstance().GetDT(Systems::COLLISION);
         //iterate through array of entities
         int k = 0;
         for (auto const& i : mEntities) {
@@ -149,6 +151,8 @@ namespace EM {
             }
             k++;
         }
+
+        Timer::GetInstance().Update(Systems::COLLISION);
     }
     void CollisionSystem::End() {
         //remove all entities from array

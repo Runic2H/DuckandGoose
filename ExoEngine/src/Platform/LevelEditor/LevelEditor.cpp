@@ -108,7 +108,6 @@ namespace EM {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        ImGuiIO& io = ImGui::GetIO();
 
         docking();
         MainMenuBar();
@@ -331,7 +330,31 @@ namespace EM {
             ImGui::Text("Indices: %d", Infos.TotalIndexUsed());
 
             ImGui::Checkbox("Show physics colliders", &mDebugDraw);
+
+
             //Todo show the each system consume how much at runtime
+            mSystemRunTime[0] = Timer::GetInstance().GetDT(Systems::COLLISION)/ Timer::GetInstance().GetGlobalDT();
+            mSystemRunTime[1] = Timer::GetInstance().GetDT(Systems::GRAPHIC)/ Timer::GetInstance().GetGlobalDT();
+            mSystemRunTime[2] = Timer::GetInstance().GetDT(Systems::PHYSICS)/ Timer::GetInstance().GetGlobalDT();
+            mSystemRunTime[3] = Timer::GetInstance().GetDT(Systems::LOGIC)/ Timer::GetInstance().GetGlobalDT();
+            mSystemRunTime[4] = Timer::GetInstance().GetDT(Systems::API)/ Timer::GetInstance().GetGlobalDT();
+
+            ImGui::Text("COLLISION");
+            ImGui::SameLine(80);
+            ImGui::ProgressBar(mSystemRunTime[0], ImVec2(-1.0f, 0.0f));
+            ImGui::Text("GRAPHIC");
+            ImGui::SameLine(80);
+            ImGui::ProgressBar(mSystemRunTime[1], ImVec2(-1.0f, 0.0f));
+            ImGui::Text("PHYSICS");
+            ImGui::SameLine(80);
+            ImGui::ProgressBar(mSystemRunTime[2], ImVec2(-1.0f, 0.0f));
+            ImGui::Text("LOGIC");
+            ImGui::SameLine(80);
+            ImGui::ProgressBar(mSystemRunTime[3], ImVec2(-1.0f, 0.0f));
+            ImGui::Text("API");
+            ImGui::SameLine(80);
+            ImGui::ProgressBar(mSystemRunTime[4], ImVec2(-1.0f, 0.0f));
+
             ImGui::End();
 
          
@@ -361,8 +384,11 @@ namespace EM {
             ImGui::SameLine();
             if (ImGui::Button("Clone Entity") /*&& selectedEntity!= 0*/)
             {
-                Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
-                selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
+                if (selectedEntity != MAX_ENTITIES)
+                {
+                    Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
+                    selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
+                }
             }
             Entity e = 0;
             Entity livingCount = 0;
@@ -417,6 +443,17 @@ namespace EM {
                     p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
                     ImGui::CloseCurrentPopup();
                 }
+                if (ImGui::MenuItem("Collider"))
+                {
+                    p_ecs.AddComponent<Collider>(selectedEntity, ColliderComponent);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("RigidBody"))
+                {
+                    p_ecs.AddComponent<RigidBody>(selectedEntity, RigidBodyComponent);
+                    ImGui::CloseCurrentPopup();
+                }
+                
                 ImGui::EndPopup();
             }
             //Check and change the name of the Entity
@@ -495,6 +532,91 @@ namespace EM {
                         ImGui::EndCombo();
                     }
                 }
+            }
+            //Collider Component
+            if (p_ecs.HaveComponent<Collider>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Collider", ImGuiTreeNodeFlags_None))
+                {
+                    auto& collider = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
+                   //if(ImGui::BeginChild())
+                   
+                    int colliderIndex = static_cast<int>(collider);
+                    const char* colliderNames = "none\0circle\0line\0rect";
+                    ImGui::Text("Collider Type"); ImGui::SameLine();
+                    ImGui::Combo("##test", &colliderIndex, colliderNames);
+                    collider = static_cast<Collider::ColliderType>(colliderIndex);
+                }
+            }
+            //Rigid Component
+            if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
+                {
+                    //velocity
+                    auto& velocity = p_ecs.GetComponent<RigidBody>(selectedEntity).GetVel();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Velocity   "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();
+                    ImGui::DragFloat("##Velocity", (float*)&velocity.x, 0.005f); ImGui::SameLine();
+                    ImGui::PushID(3);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Velocity", (float*)&velocity.y, 0.005f);
+                    ImGui::PopID();
+
+                    //Direction
+                    auto& direction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetDir();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Direction  "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();                   
+                    ImGui::DragFloat("##Direction", (float*)&direction.x, 0.005f); ImGui::SameLine(); 
+                    ImGui::PushID(4);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Direction", (float*)&direction.y, 0.005f);
+                    ImGui::PopID();
+
+                    //GetFricition
+                    auto& friction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetFriction();
+                    ImGui::Text("Friction   "); ImGui::SameLine();
+                    ImGui::DragFloat("##Friction", (float*)&friction, 1.0f);
+
+                    //GetRestitution
+                    auto& Restitution = p_ecs.GetComponent<RigidBody>(selectedEntity).GetRestitution();
+                    ImGui::Text("Restitution"); ImGui::SameLine();
+                    ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
+                }
+            }
+            if (ImGui::Button("Delete Component"))
+                ImGui::OpenPopup("Delete Component");
+
+            if (ImGui::BeginPopup("Delete Component"))
+            {
+                if (ImGui::MenuItem("NameTag") && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<NameTag>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Transform") && p_ecs.HaveComponent<Transform>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Transform>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Sprite") && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Sprite>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Collider") && p_ecs.HaveComponent<Collider>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Collider>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("RigidBody") && p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<RigidBody>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
             }
         }
         ImGui::End();

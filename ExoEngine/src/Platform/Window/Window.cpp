@@ -96,14 +96,11 @@ namespace EM{
 	void Window::Update(float frametime)
 	{
 		(void)frametime;
-		Timer::GetInstance().Start(Systems::WINDOWS);
-		Timer::GetInstance().GetDT(Systems::WINDOWS);
 		/* Poll for and process events */
 		glfwPollEvents();
 		/* Swap front and back buffers */
 		glfwSwapBuffers(m_window);
 
-		Timer::GetInstance().Update(Systems::WINDOWS);
 	}
   
 
