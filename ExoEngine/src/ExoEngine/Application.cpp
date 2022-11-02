@@ -57,8 +57,6 @@ namespace EM {
 		p_Editor->Init(m_window);
 		p_Audio->Init();
 
-		
-
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
 			Signature signature;
@@ -94,8 +92,8 @@ namespace EM {
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
-		
-		//SM.DeserializeFromFile("SMTest.json");
+
+		p_Scene->DeserializeFromFile("SMTest.json");
 
 		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
@@ -122,30 +120,28 @@ namespace EM {
 		}
 		*/
 
-		Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
-		Logic logic;
-		Sprite sprite;
-		NameTag name;
-		Player playerID;
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		IScript* base = new PlayerMovement();
-		logic.InsertScript("PlayerMovement", base, player);
-		p_ecs.AddComponent<Transform>(player, TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, ColliderComponent);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		p_ecs.AddComponent<Player>(player, playerID);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//Entity player = p_ecs.CreateEntity();
+		//RigidBody rb;
+		//Logic logic;
+		//Sprite sprite;
+		//NameTag name;
+		//Player playerID;
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//logic.InsertScript(new PlayerMovement(), player);
+		//p_ecs.AddComponent<Transform>(player, TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		//Entity enemy = p_ecs.CloneEntity(player);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//p_ecs.AddComponent<Player>(player, playerID);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 
-		Logic logic2;
-		IScript* enemyLogic = new EnemyMovement();
-		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
-		p_ecs.AddComponent<Logic>(enemy, logic2);
+		/*Logic logic2;
+		logic2.InsertScript(new EnemyMovement(), enemy);
+		p_ecs.AddComponent<Logic>(enemy, logic2);*/
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
@@ -167,7 +163,7 @@ namespace EM {
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
-		
+		mLogic->End();
 		End();
 	}
 
