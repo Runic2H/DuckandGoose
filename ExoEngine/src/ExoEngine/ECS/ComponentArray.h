@@ -6,7 +6,7 @@
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
-\date 28/09/2022
+\date 28/09/2022 - 2/11/2022
 \brief  This file contains a templated class for storing an array of
 components based on the type. This templated class is used for an ECS to map
 each entity to index and each index to entity to ensure a packed array of
@@ -22,7 +22,6 @@ components
 namespace EM
 {
 	//Interface Class for ComponentArray
-
 	class IComponentArray
 	{
 	public:
@@ -51,8 +50,8 @@ namespace EM
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
 		}
+
 		//To insert data into the map so that each entity is mapped to its index and vice versa
-		//via std::unordered_map
 		void InsertData(Entity entity, T component)
 		{
 			assert(mEntityToIndexMap[entity] == MAX_ENTITIES && "Component added to same entity more than once.");
@@ -119,6 +118,7 @@ namespace EM
 			}
 		}
 
+		//To copy component data from 1 entity to another
 		void CopyComponent(Entity entity, Entity entityToCopy) override
 		{
 			T* CopyComponent = &mComponentArray[mEntityToIndexMap[entity]];
@@ -127,21 +127,25 @@ namespace EM
 			delete CloneComponent;
 		}
 
+		//returns the mapping of entity to index
 		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap()
 		{
 			return mEntityToIndexMap;
 		}
 
+		//returns the mapping of index to entity
 		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMap()
 		{
 			return mIndexToEntityMap;
 		}
 
+		//Retrieves the size of the available entities in the array
 		const size_t GetEntitySize()
 		{
 			return mSize;
 		}
 
+		//Clears the Map for World Loading
 		void ClearForWorldBuild()
 		{
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);

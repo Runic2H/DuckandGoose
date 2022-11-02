@@ -9,7 +9,7 @@
 \date 28/09/2022
 \brief  This file contains all the Various Components to be used in the ECS
 in the future. Currently, Every Component is still handling its own data
-by inheriting from an abstract class of the JSONSerializer to serialize and
+by inheriting from an abstract class of IComponent to serialize and
 deserialize its data
 
 ****************************************************************************
@@ -25,6 +25,8 @@ deserialize its data
 #include "Player.h"
 #include "Audio.h"
 
+
+//Macros for creating default values of various components
 #define TransformComponent EM::Transform::Transform()
 #define RigidBodyComponent EM::RigidBody::RigidBody()
 #define ColliderComponent EM::Collider::Collider()

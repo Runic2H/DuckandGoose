@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file PlayerMovement.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief	Script for basic movement for player
+
+****************************************************************************
+***/
+
 #pragma once
 #include "IScript.h"
 #include "ExoEngine/Input/Input.h"

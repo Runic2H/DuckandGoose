@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file SceneManager.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  This file contains all the functions for loading and unloading the
+level data into a JSON file. Currently on application end the ecs will be
+saved into a json file for future loading
+
+****************************************************************************
+***/
+
 #include "SceneManager.h"
 
 namespace EM
@@ -14,6 +30,7 @@ namespace EM
 		return m_instance;
 	}
 
+	//Initialize all registered components
 	void SceneManager::Init()
 	{
 		p_ecs.RegisterComponent<Transform>();
@@ -26,6 +43,8 @@ namespace EM
 		p_ecs.RegisterComponent<Audio>();
 	}
 
+	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
+	//Will work on improving deserialization further
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
 	{
 		p_ecs.ResetEntities();
@@ -113,6 +132,9 @@ namespace EM
 		return true;
 	}
 
+
+	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
+	//Will work on improving serialization further
 	bool SceneManager::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();

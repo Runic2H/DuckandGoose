@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file EnemyMovement.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief	Script for basic pathfinding for Enemy Movement will be expanded
+for more complex pathfinding
+
+****************************************************************************
+***/
+
 #include "EnemyMovement.h"
 
 namespace EM

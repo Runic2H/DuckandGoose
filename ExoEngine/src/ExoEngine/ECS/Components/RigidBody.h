@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file RigidBody.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  RigidBody Component to describe material of object and the forces
+acting on said object.
+
+****************************************************************************
+***/
+
 #pragma once
 #include "ExoEngine/Math/Vmath.h"
 #include "IComponent.h"

@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file Logic.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  Logic Component for all the scripts being used by each entity.
+Contains a vector for scripts which is looped and calls each scripts update
+function
+
+****************************************************************************
+***/
+
 #include "Logic.h"
 #include "ExoEngine/Scripts/PlayerMovement.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
@@ -32,6 +48,7 @@ namespace EM
 		return *this;
 	}
 
+	//Sets the Script's entity to retrieve data only from that entity
 	void Logic::SetScriptEntity(Entity entity)
 	{
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
@@ -78,9 +95,9 @@ namespace EM
 		return true;
 	}
 
+	//Inserts the scripts into the vector to loop through
 	void Logic::InsertScript(IScript* script, Entity entity)
 	{
-
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
 		entityID = entity;

@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file IComponent.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  This file contains the abstract class for IComponent
+
+****************************************************************************
+***/
+
 #pragma once
 #include "Serialization/JSONserialization.h"
 #include "empch.h"

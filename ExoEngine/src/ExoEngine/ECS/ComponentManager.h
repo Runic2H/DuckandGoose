@@ -6,7 +6,7 @@
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
-\date 28/09/2022
+\date 28/09/2022 - 2/11/2022
 \brief  This file contains a templated class for communicating with all
 Component Arrays and allowing for different components to be registerd to
 the ECS. Registered components can then be added to various systems and
@@ -64,6 +64,7 @@ namespace EM
 			return mComponentTypes[typeName];
 		}
 
+		//Retrieves the string of the Class Type via Component ID
 		std::string GetComponentTypeName(ComponentType Type)
 		{
 			std::string TypeName;
@@ -102,7 +103,7 @@ namespace EM
 			return GetComponentArray<T>()->GetData(entity);
 		}
 
-
+		//Boolean to Check for Component's existence
 		template<typename T>
 		bool HaveComponent(Entity entity)
 		{
@@ -121,31 +122,32 @@ namespace EM
 			}
 		}
 
+		//Returns the EntityToIndex Mapping
 		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetEntityToIndexMap();
 		}
-
+		//Returns the IndextoEntity Mapping
 		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMap(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetIndexToEntityMap();
 		}
-
+		//Get total number of components registered
 		const ComponentType GetTotalRegisteredComponents()
 		{
 			return ComponentsRegistered;
 		}
-
+		//Gets the size of entities inside the Component Array
 		const size_t GetEntitySize(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetEntitySize();
 		}
-
+		//Clear the Component mappings for world build
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
 			GetComponentArrayFromType(Type)->ClearForWorldBuild();
 		}
-
+		//Returns the Component Mapping from Component Type to Shared ptr of IComponent
 		inline std::shared_ptr<IComponentArray> GetComponentArrayFromType(ComponentType Type)
 		{
 			return mComponentArraysFromType[Type];
@@ -153,6 +155,7 @@ namespace EM
 
 	private:
 
+		//Static Counter for number of components registered
 		inline static ComponentType ComponentsRegistered{};
 
 		// Map from type string pointer to a component type
@@ -161,6 +164,7 @@ namespace EM
 		// Map from type string pointer to a component array
 		std::unordered_map<const char*, std::shared_ptr<IComponentArray>> mComponentArrays{};
 
+		// Map from type ComponentType to a component array
 		std::unordered_map<ComponentType, std::shared_ptr<IComponentArray>> mComponentArraysFromType{};
 
 		//Initial component type id

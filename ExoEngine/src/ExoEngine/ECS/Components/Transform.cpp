@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file Transform.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  Transform component used to set the pos, scale and rot of the
+entity and used for various systems such as graphics to render images
+
+****************************************************************************
+***/
+
 #include "Transform.h"
 
 namespace EM

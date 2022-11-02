@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file Logic.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  Logic Component for all the scripts being used by each entity.
+Contains a vector for scripts which is looped and calls each scripts update
+function
+
+****************************************************************************
+***/
+
 #pragma once
 #include "IComponent.h"
 #include "ExoEngine/Scripts/IScript.h"

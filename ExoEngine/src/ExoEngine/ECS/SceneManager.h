@@ -1,5 +1,20 @@
-#pragma once
+/*!*************************************************************************
+****
+\file SceneManager.h
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  This file contains all the functions for loading and unloading the
+level data into a JSON file. Currently on application end the ecs will be
+saved into a json file for future loading
 
+****************************************************************************
+***/
+
+#pragma once
 #include "ECS.h"
 #include "ComponentManager.h"
 #include "EntityManager.h"
@@ -21,10 +36,6 @@ namespace EM
 		static std::unique_ptr<SceneManager>& GetInstance();
 
 		void Init();
-		Entity GetEntities()
-		{
-			return p_ecs.GetTotalEntities();
-		}
 
 		virtual bool Deserialize(const rapidjson::Value& obj);
 

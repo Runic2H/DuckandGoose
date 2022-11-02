@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file Nametag.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  NameTag Component for tagging each entity with a string name
+
+****************************************************************************
+***/
+
 #include "NameTag.h"
 
 namespace EM
