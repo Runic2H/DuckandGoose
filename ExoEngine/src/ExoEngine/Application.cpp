@@ -25,9 +25,11 @@
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
 #include "ExoEngine/Scripts/PlayerMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"
+//#include "Platform/GUI/GUI.h"
 
 
 namespace EM {
@@ -55,10 +57,12 @@ namespace EM {
 		
 		Window* m_window = new Window;
 		m_window->Init();
-		p_Editor->Init(m_window);
 		p_Audio->Init();
+		p_Editor->Init(m_window);
 
 		
+		//p_GUI->gui_init();
+		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
@@ -89,40 +93,12 @@ namespace EM {
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
-		
-		//SM.DeserializeFromFile("SMTest.json");
-		//p_GUI->create_button({0,0},5);
 
-		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
-		{
-			Entity player = p_ecs.CreateEntity();
-			NameTag name;
-			
-			name.SetNameTag("Player");
-			if (player % 2)
-			{
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<NameTag>(player, NameTagComponent);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-			}
-			else
-			{
-				name.SetNameTag("Enemy");
-				//transform.DeserializeFromFile("WallTransform.json");
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-				p_ecs.AddComponent<NameTag>(player, name);
-			}
-			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
-		*/
+		p_Scene->DeserializeFromFile("SMTest.json");
 
 		Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
@@ -134,6 +110,8 @@ namespace EM {
 		sprite.SetTexture("Idle");
 		IScript* base = new PlayerMovement();
 		logic.InsertScript("PlayerMovement", base, player);
+		IScript* base2 = new CollisionResponse();
+		logic.InsertScript("CollisionResponse", base2, player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -147,13 +125,16 @@ namespace EM {
 		Logic logic2;
 		IScript* enemyLogic = new EnemyMovement();
 		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
+		logic2.InsertScript("CollisionResponse", base2, enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
+
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
+
 			if (p_GUI->check_pause() == false)
 			{
 				p_Audio->Update();
@@ -165,6 +146,7 @@ namespace EM {
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			}
 			end_state = p_GUI->Update(m_window);
+
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 		
@@ -172,13 +154,8 @@ namespace EM {
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 			
-
-				
-				
-				//mCollision->Update(Timer::GetInstance().GetGlobalDT());
-			
 		}
-		
+		mLogic->End();
 		End();
 	}
 

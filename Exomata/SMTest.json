@@ -1448,8 +1448,8 @@
                 "Rot": 0.0
             },
             {
-                "posX": 0.0,
-                "posY": 0.0,
+                "posX": 1.3736109733581543,
+                "posY": 0.512309730052948,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -1465,10 +1465,10 @@
                 "Restitution": 0.0
             },
             {
-                "velX": 0.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
+                "velX": -0.007006720639765263,
+                "velY": 0.001068359473720193,
+                "dirX": -0.008324816823005676,
+                "dirY": 0.0012693379539996386,
                 "Friction": 0.0,
                 "Restitution": 0.0
             }
@@ -1513,14 +1513,10 @@
         ],
         "Logic": [
             {
-                "ScriptName": [
-                    "PlayerMovement"
-                ]
+                "ScriptName": "PlayerMovement"
             },
             {
-                "ScriptName": [
-                    "EnemyMovement"
-                ]
+                "ScriptName": "EnemyMovement"
             }
         ],
         "Player": [

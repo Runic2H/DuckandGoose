@@ -15,6 +15,7 @@
     <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\Audio.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExoEngine\ECS\Components\Audio.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
@@ -203,6 +206,7 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
