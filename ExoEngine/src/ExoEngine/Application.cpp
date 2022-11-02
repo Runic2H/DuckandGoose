@@ -28,6 +28,7 @@
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
+//#include "Platform/GUI/GUI.h"
 
 
 namespace EM {
@@ -55,8 +56,12 @@ namespace EM {
 		
 		Window* m_window = new Window;
 		m_window->Init();
-		p_Editor->Init(m_window);
 		p_Audio->Init();
+		p_Editor->Init(m_window);
+
+		
+		//p_GUI->gui_init();
+		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
@@ -132,6 +137,7 @@ namespace EM {
 			p_Audio->Update();
 			p_Editor->Update();
 			p_Editor->Draw();
+	
 		
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mLogic->Update(Timer::GetInstance().GetGlobalDT());

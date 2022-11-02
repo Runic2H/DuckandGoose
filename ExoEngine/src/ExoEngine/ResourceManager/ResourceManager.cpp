@@ -5,6 +5,8 @@
 namespace EM {
 	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
 	std::map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
+	std::map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
+	
 	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 	std::shared_ptr<Texture> ResourceManager::LoadTexture(std::string name, const std::string& filepath)
 	{
@@ -47,12 +49,32 @@ namespace EM {
 		return shaders[name];
 	}
 
+
 	std::shared_ptr<Font> ResourceManager::LoadFontFromFile(const std::string& filepath, unsigned int fontsize)
 	{
 		auto m_font = std::make_shared<Font>();
 		m_font->Load(filepath, fontsize);
 		return m_font;
 	}
+
+	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudioFromFile(const std::string& filepath)
+	{
+		auto m_audio = std::make_shared<CAudioEngine>();
+		m_audio->LoadAudio(filepath);
+		return m_audio;
+	}
+
+	std::shared_ptr<CAudioEngine> ResourceManager::GetAudio(std::string name)
+	{
+		return audios[name];
+	}
+
+	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudio(std::string name, const std::string& filepath)
+	{
+		return audios[name] = ResourceManager::LoadAudioFromFile(filepath);
+	}
+
+
 
 	//std::shared_ptr<Font> ResourceManager::LoadFont(std::string name, unsigned int size)
 	//{

@@ -15,12 +15,8 @@
 #ifndef _AUDIO_ENGINE_H_
 #define _AUDIO_ENGINE_H_
 
+#include "empch.h"
 #include "Fmod/fmod/fmod.hpp"
-#include <string>
-#include <map>
-#include <vector>
-#include <math.h>
-#include <iostream>
 
 #define p_Audio CAudioEngine::GetInstance()
 
@@ -50,6 +46,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         void Release();
         void ErrorCheck(FMOD_RESULT result);
 
+        void LoadAudio(std::string filename);
         FMOD::Sound* Loadsound(const std::string& strSoundName, bool bLooping = false);
         //void UnLoadSound(const std::string& strSoundName);
         
@@ -62,7 +59,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         //void SetVolume(float vol);
         void StopChannel(int channelID);
         float GetVolume(int channelID);
-        float ChangeVolume(int channelID, float vol);
+        //float ChangeVolume(int channelID, float vol);
         /* 
         change vol(int channelID, float)
         */
@@ -71,7 +68,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
 
         //void StopAllChannels();
 
-        void SetChannelvolume(int nChannelId, float fVolumedB);
+        //void SetChannelvolume(int nChannelId, float fVolumedB);
         bool IsPlaying(int nChannelId) const;
         //bool IsEventPlaying(const std::string& strEventName) const;
         float dbToVolume(float db);

@@ -5,7 +5,7 @@
 \par DP email: j.cheung@digipen.edu
 \par Course: csd2400
 \par Section: a
-\par Milestone 1
+\par Milestone 2
 \date 28-9-2022
 \brief  This program utilises Dear ImGui and OpenGL to create a editor interface
         to allow us to edit object, create entities and modify the
@@ -27,6 +27,7 @@
 #include "ExoEngine/Log.h"
 #include "ExoEngine/Audio/AudioEngine.h"
 
+#include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/Log.h"
 #include "ExoEngine/ECS/Components/Components.h"
 #include <glm/gtc/type_ptr.hpp>
@@ -48,14 +49,13 @@ namespace EM {
     bool drop_menu = false;
     bool logger = false;
     static bool show_window = true;
-    std::vector<int> soundlist;
+    static int current_sound = 0;
 
     // Init for levelEditor sets context for ImGui 
     void LevelEditor::Init(Window* window)
     {
         m_window = window;
-        /*GLFWwindow* m_window = glfwGetCurrentContext();
-        glfwMakeContextCurrent(m_window);*/
+        
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
@@ -64,40 +64,8 @@ namespace EM {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
-        ////can be removed not important
-        //ImFont* font1 = io.Fonts->AddFontFromFileTTF("Assets/fonts/ArialItalic.ttf", 20); //modify the font in each of the tabs
-
         ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 450");
-
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\FStep1.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\FStep2.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\FStep3.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\FStep4.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\FStep5.wav", 50.f) });
-
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\Whoosh1.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\Whoosh2.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\Whoosh3.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\Whoosh4.wav", 50.f) });
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\metadigger\\Whoosh5.wav", 100.f) });
-
-        soundlist.push_back({ p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\Exomata_X\\Exomata\\Exomata\\Assets\\test.wav", 50.f) });
-
-        p_Audio->PauseSound(soundlist[0]);
-        p_Audio->PauseSound(soundlist[1]);
-        p_Audio->PauseSound(soundlist[2]);
-        p_Audio->PauseSound(soundlist[3]);
-        p_Audio->PauseSound(soundlist[4]);
-
-        p_Audio->PauseSound(soundlist[5]);
-        p_Audio->PauseSound(soundlist[6]);
-        p_Audio->PauseSound(soundlist[7]);
-        p_Audio->PauseSound(soundlist[8]);
-        p_Audio->PauseSound(soundlist[9]);
-
-        p_Audio->PauseSound(soundlist[10]);
-
     }
 
     //  Update loop for level editor, poll events and set new frames
@@ -109,15 +77,16 @@ namespace EM {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        docking();
+        Docking();
         MainMenuBar();
         Profiler();
-        ImGui::ShowDemoWindow();
-        DropDownMenu();
+        //ImGui::ShowDemoWindow();
+        ContentBrowser();
         Logger();
         Hierarchy();
         Inspector();
         Audio();
+
         Timer::GetInstance().Update(Systems::GRAPHIC);
     }
     //  Render interface onto frame
@@ -146,6 +115,7 @@ namespace EM {
         ImGui::DestroyContext();
     }
 
+    //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
     void LevelEditor::MainMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -165,32 +135,18 @@ namespace EM {
                 }
                 ImGui::EndMenu();
             }
-
-            if (ImGui::BeginMenu("Edit"))
-            {
-                if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-                if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
-                ImGui::Separator();
-                if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-                if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-                if (ImGui::MenuItem("Paste", "CTRL+V")) {}
-                ImGui::EndMenu();
-            }
             ImGui::EndMainMenuBar();
         }
     }
 
-
-
-    //  This dropdown menu holds check boxes, sliders dropdown menus etc. This was used to learn how to implement
-    //  Widgets, boxes and other useful tools in ImGui, which will be developed in the future 
-    void LevelEditor::DropDownMenu()
+    //
+    void LevelEditor::ContentBrowser()
     {
         if (show_window)
         {
-            if (ImGui::Begin("Drop down menu")) //main box for color picker window
+            if (ImGui::Begin("Content Browser")) //main box for color picker window
             {
-                ImGui::Text("Hello");
+                ImGui::Text("To be completed in M3");
             }
             ImGui::End();
         }
@@ -235,6 +191,14 @@ namespace EM {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
                     ImGui::Text(Log::GetImguiLog().c_str());
                     ImGui::PopStyleColor();
+
+                    if (current_sound > 0)
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
+                        ImGui::Text("Audio Channel %d is played", current_sound);
+                        ImGui::PopStyleColor();
+                    }
+                    
                 }
 
                 if (warning)
@@ -276,10 +240,10 @@ namespace EM {
         }
     }
 
-    //Docking function is based off of ImGui demo's ShowExampleAppDockSpace function which will allow tools to dock with the sides of the
-    //level editor. However, as of now it is not yet functional as I have yet to fix the frame layering to allow this function to work
-    void LevelEditor::docking()
+    //Docking allows us to dock the ImGui windows to the edges of the scene
+    void LevelEditor::Docking()
     {
+        //Set docking flags
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
             ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
             ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
@@ -305,6 +269,16 @@ namespace EM {
 
     }
 
+    /*
+    Profiler displays information about the users system such as 
+    
+    Renderer and version of renderer (GPU)
+
+    FPS
+    
+    Rendered info e.g. Quads, vertices, indices drawn etc.
+
+    */
     void LevelEditor::Profiler()
     {
         if (show_window)
@@ -361,6 +335,7 @@ namespace EM {
         }
     }
 
+    // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
         ImGui::Begin("Hierarchy");
@@ -417,6 +392,7 @@ namespace EM {
 
     }
 
+    //Inspector allows us to manipulate the entity properties, modifying scale, rotation and position of the object.
     void LevelEditor::Inspector()
     {
         ImGui::Begin("Inspector");
@@ -623,64 +599,143 @@ namespace EM {
 
     }
 
+    //Audio manager allows users to select and play and test different audios in the editor
     void LevelEditor::Audio()
     {
         if (show_window)
         {
             ImGui::Begin("Audio Manager");
-
+            
+            //auto& AudioPath = p_ecs.GetComponent<Audio>()
             const char* items[] = { "FStep1", "FStep2", "FStep3", "FStep4", "FStep5", "Whoosh1", "Whoosh2", "Whoosh3", "Whoosh4", "Whoosh5", "test" };
             static int item_current = 0;
-            //static const char* current_item = NULL;
+            static const char* current_item = NULL;
 
             ImGui::Combo("Load Sound", &item_current, items, IM_ARRAYSIZE(items));
 
             static int play_clicked = 0;
-            static int pause_clicked = 0;
             static int stop_clicked = 0;
 
             //play audio file based on sound selected 
             if (ImGui::Button("Play Sound"))
                 play_clicked++;
 
-            if ((play_clicked & 1))
+            if ((play_clicked & 1) && item_current == 0)
             {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
-                pause_clicked = 0;
                 stop_clicked = 0;
-                p_Audio->UnpauseSound(soundlist[item_current]);
-
+                current_sound = p_Audio->PlaySound("Assets/metadigger/FStep1.wav", 50.f); 
+                play_clicked = 0;
             }
-
-            //pause audio file based on sound selected 
-            if (ImGui::Button("Pause Sound"))
-                pause_clicked++;
-
-            if (pause_clicked & 1)
+            /*std::string filePath = "";
+            p_Audio->Loadsound(filePath);*/
+            if ((play_clicked & 1) && item_current == 1)
             {
                 ImGui::SameLine();
-                ImGui::Text("Paused!");
-                play_clicked = 0;
+                ImGui::Text("Playing!");
                 stop_clicked = 0;
-                p_Audio->PauseSound(soundlist[item_current]);
+                current_sound = p_Audio->PlaySound("Assets/metadigger/FStep2.wav", 50.f);
+                play_clicked = 0;
             }
 
-            if (ImGui::Button("Stop Sound"))
+            if ((play_clicked & 1) && item_current == 2)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/FStep3.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 3)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/FStep4.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 4)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/FStep5.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 5)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/Whoosh1.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 6)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/Whoosh2.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 7)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/Whoosh3.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 8)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/Whoosh4.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 9)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                p_Audio->PlaySound("Assets/metadigger/Whoosh5.wav", 50.f);
+                play_clicked = 0;
+            }
+
+            if ((play_clicked & 1) && item_current == 10)
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                stop_clicked = 0;
+                current_sound = p_Audio->PlaySound("Assets/metadigger/test.wav", 50.f);
+                play_clicked = 0;
+            }
+            //pause audio file based on sound selected 
+            if (ImGui::Button("Pause Sound"))
                 stop_clicked++;
 
             if (stop_clicked & 1)
             {
                 ImGui::SameLine();
-                ImGui::Text("Stopped!");
+                ImGui::Text("Paused!");
                 play_clicked = 0;
-                pause_clicked = 0;
+                //p_Audio->Release();
+               p_Audio->PauseSound(current_sound);
             }
 
             //set voulume slider
             static float f1 = 0.0f;
-            ImGui::SliderFloat("Set Volume", &f1, 0.0f, 1.0f, "%.3f");
-            p_Audio->SetVolume(item_current, f1);
+            ImGui::SliderFloat("Set Volume", &f1, 0.0f, 1.0f, "Max - Min %.3f");
+            p_Audio->SetVolume(current_sound, f1);
             ImGui::End();
 
         }
