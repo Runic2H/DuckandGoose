@@ -2,10 +2,11 @@
 
 namespace EM
 {
-	PlayerMovement::PlayerMovement() {}
-	PlayerMovement* PlayerMovement::Clone() const
+	//PlayerMovement::PlayerMovement() {}
+
+    PlayerMovement* PlayerMovement::Clone() const
 	{
-		 return new PlayerMovement(*this); 
+        return new PlayerMovement(*this);
 	}
 	void PlayerMovement::Start() {}
 
@@ -37,6 +38,8 @@ namespace EM
 	}
 	void PlayerMovement::End()
 	{
-
+        delete this;
 	}
+
+    std::string PlayerMovement::GetScriptName() { return "PlayerMovement"; }
 }

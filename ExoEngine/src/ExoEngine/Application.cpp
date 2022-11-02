@@ -58,8 +58,6 @@ namespace EM {
 		p_Editor->Init(m_window);
 		p_Audio->Init();
 
-		
-
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
 			Signature signature;
@@ -93,33 +91,8 @@ namespace EM {
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
-		
-		//SM.DeserializeFromFile("SMTest.json");
 
-		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
-		{
-			Entity player = p_ecs.CreateEntity();
-			NameTag name;
-			
-			name.SetNameTag("Player");
-			if (player % 2)
-			{
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<NameTag>(player, NameTagComponent);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-			}
-			else
-			{
-				name.SetNameTag("Enemy");
-				//transform.DeserializeFromFile("WallTransform.json");
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-				p_ecs.AddComponent<NameTag>(player, name);
-			}
-			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
-		*/
+		p_Scene->DeserializeFromFile("SMTest.json");
 
 		Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
@@ -148,6 +121,7 @@ namespace EM {
 		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
 		logic2.InsertScript("CollisionResponse", base2, enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
+
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
@@ -169,7 +143,7 @@ namespace EM {
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
-		
+		mLogic->End();
 		End();
 	}
 
