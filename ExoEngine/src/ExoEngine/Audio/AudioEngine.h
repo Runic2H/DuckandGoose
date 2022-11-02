@@ -55,22 +55,9 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         void UnpauseSound(int channelID);
         void StopChannel(channel_groups chan);
         void SetVolume(int channelID, float vol);
-        //void PlayEvent(const std::string& strEventName);
-        //void SetVolume(float vol);
         void StopChannel(int channelID);
         float GetVolume(int channelID);
-        //float ChangeVolume(int channelID, float vol);
-        /* 
-        change vol(int channelID, float)
-        */
-
-        //void StopEvent(const std::string& strEventName, bool bImmediate = false);
-
-        //void StopAllChannels();
-
-        //void SetChannelvolume(int nChannelId, float fVolumedB);
         bool IsPlaying(int nChannelId) const;
-        //bool IsEventPlaying(const std::string& strEventName) const;
         float dbToVolume(float db);
         float VolumeTodB(float volume);
         //FMOD_VECTOR VectorToFmod(const Vector3& vPosition);

@@ -5,7 +5,7 @@
 \par DP email: j.cheung@digipen.edu
 \par Course: csd2400
 \par Section: a
-\par Milestone 1
+\par Milestone 2
 \date 28-9-2022
 \brief  Header file for LevelEditor.cpp
 
