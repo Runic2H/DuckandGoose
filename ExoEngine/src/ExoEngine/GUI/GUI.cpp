@@ -1,33 +1,46 @@
+/*!*************************************************************************
+****
+\file			Gui.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			30-10-2022
+\brief			This file contain the main function for the pause menu 
+				and the functions of the buttons
+
+****************************************************************************
+***/
 #include"Platform/Window/Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
 #include "GUI.h"
 namespace EM
 {
-	std::unique_ptr<gui_system> m_Instance;
+	std::unique_ptr<gui_system> m_Instance; //create a unique pointer to be used outside of this file
 
-	 std::unique_ptr<gui_system>& gui_system::GetInstance()
+	 std::unique_ptr<gui_system>& gui_system::GetInstance()// in the even that no unique pointer is created, create one 
 	{
-		if (!m_Instance)
+		if (!m_Instance)// check if the unique pointer is created
 		{
-			m_Instance = std::make_unique<gui_system>();
+			m_Instance = std::make_unique<gui_system>();// create it, if it doesnt exist
 		}
-		return m_Instance;
+		return m_Instance;//pass it back
 	}
 	 bool gui_system::is_within_box(glm::vec2 cur, button_bb box)
 	 {
 		 //We factor in aspect ration since graphic scale is proportionate to aspect ration instead of screen
-		 if ((cur.x * AR > box.min.x && cur.y > box.min.y) && (cur.x * AR < box.max.x && cur.y < box.max.y))
-			 return true;
+		 if ((cur.x * AspectRatio > box.min.x && cur.y > box.min.y) && (cur.x * AspectRatio < box.max.x && cur.y < box.max.y))
+			 return true;//return true if the position of the cursor is between both of the button minimun and maximum bounding point
 		 else
-			 return false;
+			 return false;// return false if it isnt
 	 }
 	 void gui_system::set_pause_button(vec2D pos, float scaleX, float scaleY)
 	 {
-		 pause_button.max.y = pos.y + scaleY / 2;
-		 pause_button.max.x = (pos.x + (scaleX / 2));
-		 pause_button.min.y = pos.y - scaleY / 2;
-		 pause_button.min.x = (pos.x - (scaleX / 2));
+		 pause_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 pause_button.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 pause_button.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 pause_button.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
 
 
 		
@@ -35,37 +48,36 @@ namespace EM
 
 	 void gui_system::set_continue_button(vec2D pos, float scaleX, float scaleY)
 	 {
-		 continue_button.max.y = pos.y + scaleY / 2;
-		 continue_button.max.x = (pos.x + (scaleX / 2));
-		 continue_button.min.y = pos.y - scaleY / 2;
-		 continue_button.min.x = (pos.x - (scaleX / 2));
+		 continue_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 continue_button.max.x = (pos.x + (scaleX / 2));//create the upper X coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 continue_button.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
+		 continue_button.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
 	 }
 
 	bool  gui_system::Update(Window* screen)
 	{
-		float mouse_posX = static_cast<float>(screen->Getter().mouseX);
-		float mouse_posY = static_cast<float>(screen->Getter().mouseY);
-		float screen_width = static_cast<float>(screen->Getter().m_Width);
-		float screen_height = static_cast<float>(screen->Getter().m_Height);
-		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };
-		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };
-		AR = screen_width / screen_height;
 		
+		
+		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };//store the mouse position into a vector
+		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
+		AspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
+		
+
+		//function to convert mouse to screen position
 		mouse_pos.x /= screen_size.x; 
 		mouse_pos.y /= screen_size.y;	
 		mouse_pos *= 2.0f;
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
-		glm::vec4 temp{  mouse_pos,0,0 };
 
-		if (is_pause == true)
+		if (is_pause == true)//check if the system is pause
 		{	
-			if (is_within_box(mouse_pos, pause_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			if (is_within_box(mouse_pos, pause_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
 			{
 				return true;
 			}
 
-			if (is_within_box(mouse_pos, continue_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			if (is_within_box(mouse_pos, continue_button) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and continue button is pressed, tell the system to resume the game
 			{
 				is_pause = false;
 			}

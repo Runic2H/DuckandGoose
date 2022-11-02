@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Vec3.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			18-10-2022
+\brief			This file contain the Vector3 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
 #include "Vec3.h"
 
 namespace EM

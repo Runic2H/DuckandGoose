@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file			matrix4x4.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			18-10-2022
+\brief			This file contain the matrix4x4 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
+#include"Platform/Window/Window.h"
+
 #include "matrix4x4.h"
 
 
