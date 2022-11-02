@@ -92,8 +92,7 @@ namespace EM
 		//Retrieves Data from the Component Array
 		T& GetData(Entity entity)
 		{
-			//assert(mEntityToIndexMap[entity] != 0 && "Retrieving non-existent component.");
-
+			//assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
 			// Return a reference to the entity's component
 			return mComponentArray[mEntityToIndexMap[entity]];
 		}
@@ -115,7 +114,6 @@ namespace EM
 			{
 				// Remove the entity's component if it existed
 				RemoveData(entity);
-				std::cout << "mf" << std::endl;
 			}
 		}
 

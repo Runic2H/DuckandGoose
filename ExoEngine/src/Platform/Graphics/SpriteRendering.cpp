@@ -1,3 +1,14 @@
+/*!*************************************************************************
+****
+\file			SpriteRendering.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file do rendering for sprite
+****************************************************************************
+***/
 #include "empch.h"
 #include "SpriteRendering.h"
 

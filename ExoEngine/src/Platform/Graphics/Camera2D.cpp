@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Camera2D.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file calculate the projection view matrix and aspect ratio
+				and set our world coordinates to view coordinates
+****************************************************************************
+***/
 #include "empch.h"
 #include "Camera2D.h"
 #include "glm/gtc/matrix_transform.hpp"

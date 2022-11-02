@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Buffer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file contain all the helper function needed for buffer
+				optimatization so that it will be easier to handle the buffer
+				data
+****************************************************************************
+***/
 #pragma once
 #include <GL/glew.h>
 //#include "VertexBuffer.h"

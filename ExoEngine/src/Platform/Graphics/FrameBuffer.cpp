@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			FrameBuffer.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file biind the framebuffer and get the pixel cooridnate
+				and can be used in it in level editor
+****************************************************************************
+***/
 #include "empch.h"
 #include "FrameBuffer.h"
 #include <GL/glew.h>

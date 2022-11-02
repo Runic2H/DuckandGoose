@@ -8,12 +8,11 @@
 \date			28-9-2022
 \brief			This file contain the neccesary Macro that compile important 
 				system to dll
-
-
 ****************************************************************************
 ***/
 #pragma once
 #include <memory>
+
 //Engine into dll
 #ifdef EM_PLATFORM_WINDOWS
 	#ifdef EM_BUILD_DLL
@@ -27,6 +26,7 @@
 
 #define BIT(x) (x << 1)
 #define GETTEXTURE(x) ResourceManager::GetTexture(x)
+
 namespace EM {
 
 	template<typename T>

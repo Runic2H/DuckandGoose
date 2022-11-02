@@ -1,5 +1,16 @@
+/*!*************************************************************************
+****
+\file			FrameBuffer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file header contain all the necessary declaration for 
+				framebuffer
+****************************************************************************
+***/
 #pragma once
-
 
 namespace EM {
 

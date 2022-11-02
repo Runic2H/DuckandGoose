@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Renderer.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file contain all the require draw call function defintion
+				for our graphic. There batch rendering doing in here too.
+				To maintain as less draw call as possible
+****************************************************************************
+***/
 #include "empch.h"
 #include "Renderer.h"
 

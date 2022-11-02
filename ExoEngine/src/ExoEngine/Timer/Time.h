@@ -1,5 +1,18 @@
+/*!*************************************************************************
+****
+\file			Time.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the declare for time which uses chrono
+				to create a timer and use it as a tracker for our system
+				during runtime. It also have a deltatime for update and other
+				math implementation.
+****************************************************************************
+***/
 #pragma once
-//#define p_Timer EM::Timer::GetInstance()
 namespace EM {
 
 #define TotalSystems 6
@@ -10,8 +23,7 @@ namespace EM {
 		GRAPHIC,
 		PHYSICS,
 		LOGIC,
-		API
-		
+		API		
 	};
 
 	class Timer {
