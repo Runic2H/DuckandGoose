@@ -88,8 +88,6 @@ namespace EM {
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}

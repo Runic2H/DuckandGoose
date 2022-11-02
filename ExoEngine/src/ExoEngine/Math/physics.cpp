@@ -231,6 +231,9 @@ namespace EM {
         else {
             ent1colpt = ent1.center + ent1vel * coltime;
             ent2colpt = ent2.center + ent2vel * coltime;
+            std::cout << "Func ColTime: " << coltime << "\n";
+            std::cout << "Func ent1colpt: " << ent1colpt.x << ", " << ent1colpt.y << "\n";
+            std::cout << "Func ent2colpt: " << ent2colpt.x << ", " << ent2colpt.y << "\n";
             return 1;
         }
     }
@@ -341,15 +344,33 @@ namespace EM {
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
     }
-    void accelent(vec2D &entvel, vec2D dir, float mag, float lim) {
-        entvel += (dir * mag);
-        if (length(entvel) >= lim) {
-            entvel = 0.9f * entvel;
+    //simplified collision
+    int simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2) {
+        if (distance(ent1, ent2) <= (rad1+rad2)) {
+            return 1;
+        }
+        else {
+            return 0;
         }
     }
-    void decelent(vec2D &entvel) {
-        if (length(entvel) > 0) {
-            entvel -= entvel * 0.5;
+    int simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) {}
+    int simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
+        vec2D distance = vec2D();
+        distance.x = center.x - ent1.x;
+        distance.y = center.y - ent1.y;
+        if (distance.x > (rad1+max1.x) || distance.x < -(rad1+max1.x) || distance.y > (rad1+max1.y) || distance.y < -(rad1+max1.y)) {
+            return 0;
+        }
+        vec2D topleft = vec2D(min1.x, max1.y);
+        vec2D bottomright = vec2D(max1.x, min1.y);
+        if (distance(ent1, max1) > rad1 || distance(ent1, min1) > rad1 || distance(ent1, topleft) > rad1 || distance(ent1, bottomright) > rad1) {
+            return 0;
+        }
+        return 1;
+    }
+    int simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2) {
+        if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
+            return 1;
         }
     }
 
