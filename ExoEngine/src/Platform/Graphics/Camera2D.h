@@ -23,6 +23,7 @@ namespace EM {
 		
 		float GetZoomLevel()const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
+		void resetZoomLevel();
 
 		bool MouseScrolling();
 	private:

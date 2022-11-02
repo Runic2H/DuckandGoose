@@ -28,11 +28,12 @@
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
+#include "ExoEngine/GUI/GUI.h"
 //#include "Platform/GUI/GUI.h"
 
 
 namespace EM {
-
+	bool end_state{false}; //placeholder
 	Application::Application()
 	{
 		p_ecs.Init();
@@ -128,26 +129,31 @@ namespace EM {
 		p_ecs.AddComponent<Logic>(enemy, logic2);
 
 		
-		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
+		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-		
-			p_Audio->Update();
-			p_Editor->Update();
-			p_Editor->Draw();
-	
-		
+
+			if (p_GUI->check_pause() == false)
+			{
+				p_Audio->Update();
+				p_Editor->Update();
+				p_Editor->Draw();
+				
+				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+				mPosUpdate->Update();
+				mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			}
+			end_state = p_GUI->Update(m_window);
+
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
-			mLogic->Update(Timer::GetInstance().GetGlobalDT());
-			mPosUpdate->Update();
-			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 		
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
+			
 		}
 		mLogic->End();
 		End();

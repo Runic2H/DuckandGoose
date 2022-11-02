@@ -30,6 +30,7 @@
     <ClInclude Include="src\ExoEngine\ECS\EntityManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\SceneManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Types.h" />
+    <ClInclude Include="src\ExoEngine\GUI\GUI.h" />
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
     <ClInclude Include="src\empch.h" />
     <ClInclude Include="src\ExoEngine\EntryPoint.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="src\ExoEngine\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ExoEngine\Audio\AudioEngine.cpp" />
     <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
+    <ClCompile Include="src\ExoEngine\GUI\GUI.cpp" />
     <ClCompile Include="src\ExoEngine\Input\Input.cpp" />
     <ClCompile Include="src\empch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
