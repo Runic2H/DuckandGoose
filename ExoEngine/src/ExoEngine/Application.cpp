@@ -25,6 +25,7 @@
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
 #include "ExoEngine/Scripts/PlayerMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
 
@@ -130,6 +131,8 @@ namespace EM {
 		sprite.SetTexture("Idle");
 		IScript* base = new PlayerMovement();
 		logic.InsertScript("PlayerMovement", base, player);
+		IScript* base2 = new CollisionResponse();
+		logic.InsertScript("CollisionResponse", base2, player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -143,6 +146,7 @@ namespace EM {
 		Logic logic2;
 		IScript* enemyLogic = new EnemyMovement();
 		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
+		logic2.InsertScript("CollisionResponse", base2, enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop

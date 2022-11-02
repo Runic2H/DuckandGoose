@@ -1,5 +1,5 @@
 #include "physics.h"
-
+#include "Vmath.h"
 
 namespace EM {
     //class functions
@@ -345,7 +345,7 @@ namespace EM {
         Normalize(reflectionnorm, reflectionnorm);
     }
     //simplified collision
-    int simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2) {
+    int entityCollision::simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2) {
         if (distance(ent1, ent2) <= (rad1+rad2)) {
             return 1;
         }
@@ -353,12 +353,12 @@ namespace EM {
             return 0;
         }
     }
-    int simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) {}
-    int simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
-        vec2D distance = vec2D();
-        distance.x = center.x - ent1.x;
-        distance.y = center.y - ent1.y;
-        if (distance.x > (rad1+max1.x) || distance.x < -(rad1+max1.x) || distance.y > (rad1+max1.y) || distance.y < -(rad1+max1.y)) {
+    int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) { return 0; }
+    int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
+        vec2D dist = vec2D();
+        dist.x = center.x - ent1.x;
+        dist.y = center.y - ent1.y;
+        if (dist.x > (rad1+max1.x) || dist.x < -(rad1+max1.x) || dist.y > (rad1+max1.y) || dist.y < -(rad1+max1.y)) {
             return 0;
         }
         vec2D topleft = vec2D(min1.x, max1.y);
@@ -368,7 +368,7 @@ namespace EM {
         }
         return 1;
     }
-    int simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2) {
+    int entityCollision::simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2) {
         if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
             return 1;
         }
