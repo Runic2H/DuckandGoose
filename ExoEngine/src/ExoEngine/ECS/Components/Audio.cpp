@@ -6,8 +6,8 @@
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
-\date 28-9-2022
-\brief  
+\date 28-10-2022
+\brief  This file is used to serialize and deserialize audio files
 ****************************************************************************
 ***/
 #include "ExoEngine/ECS/Components/Audio.h"
