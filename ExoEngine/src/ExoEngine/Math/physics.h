@@ -236,5 +236,11 @@ namespace EM {
             normalised direction of the reflected vector
             *//**************************************************************************/
             void obstacleBounce(const vec2D& colnorm, const vec2D& colpt, vec2D& entnextpos, vec2D& reflectionnorm);
+    
+        public:
+            int simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2);
+            int simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1);
+            int simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center);
+            int simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2);
     };
 }
