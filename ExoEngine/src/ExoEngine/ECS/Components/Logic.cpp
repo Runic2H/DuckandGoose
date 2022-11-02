@@ -1,8 +1,10 @@
 #include "Logic.h"
+#include "ExoEngine/Scripts/PlayerMovement.h"
+#include "ExoEngine/Scripts/EnemyMovement.h"
 
 namespace EM
 {
-	Logic::Logic() 
+	Logic::Logic()
 	{
 	}
 
@@ -40,6 +42,17 @@ namespace EM
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
 		mScriptNameVector.push_back(obj["ScriptName"].GetString());
+		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+		{
+			if (mScriptNameVector[i] == "PlayerMovement")
+			{
+				mScriptsVector.push_back(new PlayerMovement());
+			}
+			if (mScriptNameVector[i] == "EnemyMovement")
+			{
+				mScriptsVector.push_back(new EnemyMovement());
+			}
+		}
 		return true;
 	}
 
@@ -47,19 +60,18 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("ScriptName");
-		writer->StartArray();
 		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
 		{
 			writer->String(mScriptNameVector[i].c_str());
 		}
-		writer->EndArray();
 		writer->EndObject();
 		return true;
 	}
 
-	void Logic::InsertScript(std::string name, IScript* script, Entity entity)
+	void Logic::InsertScript(IScript* script, Entity entity)
 	{
-		mScriptNameVector.push_back(name);
+
+		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
 		entityID = entity;
 	}

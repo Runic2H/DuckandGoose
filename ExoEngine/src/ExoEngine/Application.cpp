@@ -25,6 +25,7 @@
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
 #include "ExoEngine/Scripts/PlayerMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
 //#include "Platform/GUI/GUI.h"
@@ -62,8 +63,6 @@ namespace EM {
 		//p_GUI->gui_init();
 		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
-		
-
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
 		{
 			Signature signature;
@@ -93,40 +92,12 @@ namespace EM {
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
-		
-		//SM.DeserializeFromFile("SMTest.json");
 
-		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
-		{
-			Entity player = p_ecs.CreateEntity();
-			if (player % 2)
-			{
-				Sprite sprite;
-				sprite.SetTexture("Idle");
-				nt.SetNameTag("Player");
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<Sprite>(player,sprite);
-				p_ecs.AddComponent<NameTag>(player, nt);
-				
-			}
-			else
-			{
-				Transform transform;
-				nt.SetNameTag("Enemy");
-				transform.DeserializeFromFile("WallTransform.json");
-				p_ecs.AddComponent<Transform>(player, transform);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-				p_ecs.AddComponent<NameTag>(player, nt);
-			}
-			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
-		}
-		*/
+		p_Scene->DeserializeFromFile("SMTest.json");
 
 		Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
@@ -138,6 +109,8 @@ namespace EM {
 		sprite.SetTexture("Idle");
 		IScript* base = new PlayerMovement();
 		logic.InsertScript("PlayerMovement", base, player);
+		IScript* base2 = new CollisionResponse();
+		logic.InsertScript("CollisionResponse", base2, player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -151,7 +124,9 @@ namespace EM {
 		Logic logic2;
 		IScript* enemyLogic = new EnemyMovement();
 		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
+		logic2.InsertScript("CollisionResponse", base2, enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
+
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow())) //game loop
 		{
@@ -174,7 +149,7 @@ namespace EM {
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
-		
+		mLogic->End();
 		End();
 	}
 

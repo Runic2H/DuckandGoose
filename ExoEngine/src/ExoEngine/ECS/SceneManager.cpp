@@ -35,14 +35,14 @@ namespace EM
 			p_ecs.ClearArrayForWorldBuild(i);
 			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
 			{
-				Signature signature(obj["EntitySignatures"][(j-1)].GetString());
+				Signature signature(obj["EntitySignatures"][(j)].GetString());
 				if (signature.test(i))
 				{
 					//ADD COMPONENTS HERE FOR DESERIALIZE
 					if (p_ecs.GetComponentTypeName(i) == "Transform")
 					{
 						Transform transform;
-						if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Transform>(j, transform);
 						}
@@ -50,7 +50,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "RigidBody")
 					{
 						RigidBody rigidbody;
-						if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<RigidBody>(j, rigidbody);
 						}
@@ -58,7 +58,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Collider")
 					{
 						Collider collider;
-						if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Collider>(j, collider);
 						}
@@ -66,7 +66,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "NameTag")
 					{
 						NameTag nametag;
-						if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<NameTag>(j, nametag);
 						}
@@ -74,7 +74,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Sprite")
 					{
 						Sprite sprite;
-						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Sprite>(j, sprite);
 						}
@@ -82,15 +82,15 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Logic")
 					{
 						Logic logic;
-						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Logic>(j, logic);
 						}
 					}
-					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					if (p_ecs.GetComponentTypeName(i) == "Player")
 					{
 						Player player;
-						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Player>(j, player);
 						}

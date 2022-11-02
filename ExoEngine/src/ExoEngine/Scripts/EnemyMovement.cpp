@@ -2,7 +2,7 @@
 
 namespace EM
 {
-	EnemyMovement::EnemyMovement() {}
+	//EnemyMovement::EnemyMovement() {}
 	EnemyMovement* EnemyMovement::Clone() const
 	{
 		return new EnemyMovement(*this);
@@ -29,5 +29,10 @@ namespace EM
 		}
 	}
 
-	void EnemyMovement::End() {}
+	void EnemyMovement::End() 
+	{
+		delete this;
+	}
+
+	std::string EnemyMovement::GetScriptName() { return "EnemyMovement"; }
 }

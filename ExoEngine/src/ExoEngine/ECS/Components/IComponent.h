@@ -17,6 +17,5 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj) = 0;
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const = 0;
 		Entity entityID;
-	//protected:
 	};
 }
