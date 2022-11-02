@@ -2,7 +2,6 @@
 
 namespace EM
 {
-	//PlayerMovement::PlayerMovement() {}
 
     PlayerMovement* PlayerMovement::Clone() const
 	{

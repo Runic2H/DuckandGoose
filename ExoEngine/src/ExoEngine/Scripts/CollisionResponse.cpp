@@ -2,7 +2,6 @@
 
 namespace EM
 {
-	CollisionResponse::CollisionResponse() {}
 	CollisionResponse* CollisionResponse::Clone() const
 	{
 		 return new CollisionResponse(*this); 
@@ -27,6 +26,8 @@ namespace EM
 	}
 	void CollisionResponse::End()
 	{
-
+		delete this;
 	}
+
+	std::string CollisionResponse::GetScriptName() { return "CollisionResponse"; }
 }

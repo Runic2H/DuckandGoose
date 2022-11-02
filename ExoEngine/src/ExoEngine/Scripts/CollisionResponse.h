@@ -10,12 +10,13 @@ namespace EM
 	class CollisionResponse : public IScript
 	{
 	public:
-		CollisionResponse();
+		CollisionResponse() = default;
 		~CollisionResponse() = default;
 		virtual void Start() override;
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
 		virtual CollisionResponse* Clone() const override;
+		virtual std::string GetScriptName() override;
 	private:
 		Entity entityID;
 		entityPhysics mPhys;

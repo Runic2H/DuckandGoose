@@ -82,10 +82,8 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Logic")
 					{
 						Logic logic;
-						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
-						{
-							p_ecs.AddComponent<Logic>(j, logic);
-						}
+						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj())) {}
+						p_ecs.AddComponent<Logic>(j, logic);
 					}
 					if (p_ecs.GetComponentTypeName(i) == "Player")
 					{
@@ -95,18 +93,10 @@ namespace EM
 							p_ecs.AddComponent<Player>(j, player);
 						}
 					}
-					if (p_ecs.GetComponentTypeName(i) == "Logic")
-					{
-						Player player;
-						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
-						{
-							p_ecs.AddComponent<Player>(j, player);
-						}
-					}
 					if (p_ecs.GetComponentTypeName(i) == "Audio")
 					{
 						Audio mAudio;
-						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 						{
 							p_ecs.AddComponent<Audio>(j, mAudio);
 						}

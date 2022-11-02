@@ -2,7 +2,6 @@
 
 namespace EM
 {
-	//EnemyMovement::EnemyMovement() {}
 	EnemyMovement* EnemyMovement::Clone() const
 	{
 		return new EnemyMovement(*this);

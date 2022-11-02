@@ -1,6 +1,7 @@
 #include "Logic.h"
 #include "ExoEngine/Scripts/PlayerMovement.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
 
 namespace EM
 {
@@ -41,7 +42,10 @@ namespace EM
 
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
-		mScriptNameVector.push_back(obj["ScriptName"].GetString());
+		for (auto i = obj["ScriptName"].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
+		{
+			mScriptNameVector.push_back(i->GetString());
+		}
 		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
 		{
 			if (mScriptNameVector[i] == "PlayerMovement")
@@ -52,6 +56,10 @@ namespace EM
 			{
 				mScriptsVector.push_back(new EnemyMovement());
 			}
+			if (mScriptNameVector[i] == "CollisionResponse")
+			{
+				mScriptsVector.push_back(new CollisionResponse());
+			}
 		}
 		return true;
 	}
@@ -60,10 +68,12 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("ScriptName");
+		writer->StartArray();
 		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
 		{
 			writer->String(mScriptNameVector[i].c_str());
 		}
+		writer->EndArray();
 		writer->EndObject();
 		return true;
 	}
