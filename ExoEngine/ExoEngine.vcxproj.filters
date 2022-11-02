@@ -60,6 +60,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Player.cpp" />
     <ClCompile Include="vendor\imgui\ImGuizmo.cpp" />
+    <ClCompile Include="src\ExoEngine\GUI\GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Player.h" />
     <ClInclude Include="vendor\imgui\ImGuizmo.h" />
+    <ClInclude Include="src\ExoEngine\GUI\GUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

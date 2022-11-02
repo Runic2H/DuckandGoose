@@ -237,21 +237,21 @@ namespace EM {
 
 	void RotDeg4x4(Mat4x4& Result, float angle, Vec3 Dir)
 	{
-		if (Dir.x != 0)
+		if (Dir.x >= 0.0f)
 		{
 
 			XRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.y != 0)
+		if (Dir.y >= 0.0f)
 		{
 
 			YRotDeg4x4(Result, angle);
 		}
 
 
-		if (Dir.z != 0)
+		if (Dir.z >= 0.0f)
 		{
 
 			ZRotDeg4x4(Result, angle);

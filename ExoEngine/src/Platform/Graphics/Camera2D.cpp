@@ -36,6 +36,12 @@ namespace EM {
 		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;
 	}
+
+	void Camera2D::resetZoomLevel()
+	{
+		m_ZoomLevel = 1.0f;
+	}
+
 	void Camera2D::RecalculateMatrix()
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) *

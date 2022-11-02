@@ -22,8 +22,13 @@ namespace EM {
 	{
 
 	public:
-
-
+		static enum state
+		{
+			pause,
+			play,
+			quit
+		};
+		
 		Application();
 		virtual ~Application(); // will be override
 		void SystemInput(System* system);
