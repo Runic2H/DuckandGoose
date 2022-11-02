@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			TextRendering.ch
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file header contain all the necessary declaration function
+				for font rendering 
+****************************************************************************
+***/
 #pragma once
 #include <glm/glm.hpp>
 #include "Texture.h"

@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Sprite.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the defintion for Sprite class
+				which set private variables with default value and de/serialize
+				the necessary component variables
+****************************************************************************
+***/
 #include "empch.h"
 #include "Sprite.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"

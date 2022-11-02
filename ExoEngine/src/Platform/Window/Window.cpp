@@ -52,6 +52,7 @@ namespace EM{
 		glfwWindowHint(GLFW_DEPTH_BITS, 24);
 		glfwWindowHint(GLFW_RED_BITS, 8); glfwWindowHint(GLFW_GREEN_BITS, 8);
 		glfwWindowHint(GLFW_BLUE_BITS, 8); glfwWindowHint(GLFW_ALPHA_BITS, 8);
+
 		//we are setting window size able toggle
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); 
 
@@ -119,7 +120,7 @@ namespace EM{
 		data.m_Width = width;
 		data.m_Height = height;
 		glViewport(0, 0, data.m_Width, data.m_Height);
-		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height);//debug purpose tb removed
+		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height); //for debug purpose tb removed
 	}
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
@@ -144,7 +145,7 @@ namespace EM{
 		data.mouseX = xpos;
 		data.mouseY = ypos;
 
-		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//debug purpose tb removed
+		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//for debug purpose tb removed
 	}
 	void Window::ToggleVsync(bool value)
 	{

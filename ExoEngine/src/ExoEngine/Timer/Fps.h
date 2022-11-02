@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Fps.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the declaration and definiton of a fps class
+				It helps to check our frametime during runtime.
+****************************************************************************
+***/
 #pragma once
 #include <GLFW/glfw3.h>
 #include "../Core.h"

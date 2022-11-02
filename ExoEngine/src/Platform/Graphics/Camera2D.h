@@ -1,3 +1,15 @@
+/*!*************************************************************************
+****
+\file			Camera2D.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			02-11-2022
+\brief			This file header contain the declaration for camera function
+****************************************************************************
+***/
+
 #pragma once
 #include "glm/glm.hpp" //for ortho, perspective and other matrices
 #include "Platform/Window/Window.h"

@@ -8,7 +8,6 @@
 \par Milestone 2
 \date 28-9-2022
 \brief  Header file for LevelEditor.cpp
-
 ****************************************************************************
 ***/
 #pragma once
@@ -57,6 +56,6 @@ namespace EM {
 		float m_UpdateTimer = 0.0f;
 		std::array<float, 5> mSystemRunTime = { 0.0f,0.0f,0.0f,0.0f };
 		//for inspector and Hierarchy
-		Entity selectedEntity{ MAX_ENTITIES };
+		Entity selectedEntity{};
 	};
 }

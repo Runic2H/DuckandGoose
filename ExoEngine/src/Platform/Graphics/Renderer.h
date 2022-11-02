@@ -1,10 +1,22 @@
+/*!*************************************************************************
+****
+\file			Renderer.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the declaration for Render class which
+				has all the necessary draw call for our game.		
+****************************************************************************
+***/
 #pragma once
-
 #include <glm/glm.hpp>
 #include "VertexArray.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "SpriteRendering.h"
 #include "Camera2D.h"
+
 namespace EM {
 
 	class Renderer

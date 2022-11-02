@@ -1,3 +1,17 @@
+/*!*************************************************************************
+****
+\file			Time.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the definition for time which uses chrono
+				to create a timer and use it as a tracker for our system
+				during runtime. It also have a deltatime for update and other
+				math implementation.
+****************************************************************************
+***/
 #include "empch.h"
 #include "Time.h"
 

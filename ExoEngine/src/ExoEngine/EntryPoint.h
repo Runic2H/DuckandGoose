@@ -5,9 +5,9 @@
 \par DP email:	h.xinxiang@digipen.edu
 \par Course:	Gam200
 \section		A
-\date			28-9-2022
+\date			02-11-2022
 \brief			This file contain the main entry point for all our functions
-
+				and input an algorithm to check for memory leak 
 ****************************************************************************
 ***/
 #pragma once

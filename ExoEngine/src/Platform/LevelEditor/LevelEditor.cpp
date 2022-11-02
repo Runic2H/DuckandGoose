@@ -12,7 +12,6 @@
         properties of the components and save them accordingly.
 ****************************************************************************
 ***/
-
 #include "empch.h"
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
@@ -338,43 +337,42 @@ namespace EM {
     // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
-        if (show_window)
+        
+        ImGui::Begin("Hierarchy");
+        if (ImGui::Button("Create Entity") && p_ecs.GetTotalEntities() != MAX_ENTITIES)
         {
-            ImGui::Begin("Hierarchy");
-            if (ImGui::Button("Create Entity"))
+             selectedEntity = p_ecs.CreateEntity();
+             p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
+        }
+       
+        if (p_ecs.GetTotalEntities() != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0 )
+        {
+            ImGui::SameLine();
+            if (ImGui::Button("Destroy Entity"))
             {
-                selectedEntity = p_ecs.CreateEntity();
-                p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
+                if (selectedEntity != MAX_ENTITIES)
+                {
+                    p_ecs.DestroyEntity(selectedEntity);
+                }
+                selectedEntity = {}; // when the entity is destroy there is no current selected entity
             }
-
-            if (p_ecs.GetTotalEntities() != 0 && p_ecs.GetTotalRegisteredComponents() != 0)
+            ImGui::SameLine();
+            if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)
             {
-                ImGui::SameLine();
-                if (ImGui::Button("Destroy Entity") /*&& selectedEntity!= 0*/)
+                if (selectedEntity != MAX_ENTITIES)
                 {
-                    if (selectedEntity != MAX_ENTITIES)
-                    {
-                        p_ecs.DestroyEntity(selectedEntity);
-                    }
-                    selectedEntity = MAX_ENTITIES; // when the entity is destroy there is no current selected entity
+                    Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
+                    selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
                 }
-                ImGui::SameLine();
-                if (ImGui::Button("Clone Entity") /*&& selectedEntity!= 0*/)
+            }
+            Entity e{0};
+            Entity livingCount = 0;
+            while (livingCount < p_ecs.GetTotalEntities())
+            {
+                if (p_ecs.HaveComponent<NameTag>(e))
                 {
-                    if (selectedEntity != MAX_ENTITIES)
-                    {
-                        Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
-                        selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
-                    }
-                }
-                Entity e = 0;
-                Entity livingCount = 0;
-                while (livingCount < p_ecs.GetTotalEntities())
-                {
-                    if (p_ecs.HaveComponent<NameTag>(e))
-                    {
-                        ++livingCount;
-                        const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
+                    ++livingCount;
+                    const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
 
                         ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
                         bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
@@ -384,223 +382,211 @@ namespace EM {
 
                         if (opened)
                             ImGui::TreePop();
-                    }
+                 }
                     ++e;
-                }
-            }
-            if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-                selectedEntity = MAX_ENTITIES;
-            ImGui::End();
-        }
+             }
+         }
+    
+        if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+            selectedEntity = {};
+        ImGui::End();
+
     }
 
     //Inspector allows us to manipulate the entity properties, modifying scale, rotation and position of the object.
     void LevelEditor::Inspector()
     {
-        if (show_window)
+        ImGui::Begin("Inspector");
+        if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0)// if the selectedEntityExist
         {
-            ImGui::Begin("Inspector");
-            if (selectedEntity != MAX_ENTITIES)// if the selectedEntityExist
+            //create component for the selected entity 
+            if (ImGui::Button("Add Component"))
+                ImGui::OpenPopup("Add Component");
+
+            if (ImGui::BeginPopup("Add Component"))
             {
-                //create component for the selected entity 
-                if (ImGui::Button("Add Component"))
-                    ImGui::OpenPopup("Add Component");
-
-                if (ImGui::BeginPopup("Add Component"))
+                if (ImGui::MenuItem("Transform"))
                 {
-                    if (ImGui::MenuItem("NameTag"))
-                    {
-                        p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Transform"))
-                    {
-                        p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Sprite"))
-                    {
-                        p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Collider"))
-                    {
-                        p_ecs.AddComponent<Collider>(selectedEntity, ColliderComponent);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("RigidBody"))
-                    {
-                        p_ecs.AddComponent<RigidBody>(selectedEntity, RigidBodyComponent);
-                        ImGui::CloseCurrentPopup();
-                    }
-
-                    ImGui::EndPopup();
+                    p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
+                    ImGui::CloseCurrentPopup();
                 }
-                //Check and change the name of the Entity
-                if (p_ecs.HaveComponent<NameTag>(selectedEntity))
+                if (ImGui::MenuItem("Sprite"))
                 {
-                    if (ImGui::CollapsingHeader("Name", ImGuiTreeNodeFlags_None))
-                    {
-                        auto& name = p_ecs.GetComponent<NameTag>(selectedEntity).GetNameTag();
-                        char buffer[256];
-                        memset(buffer, 0, sizeof(buffer));
-                        strcpy_s(buffer, sizeof(buffer), name.c_str());
-                        if (ImGui::InputText("name", buffer, sizeof(buffer)))
-                        {
-                            name = std::string(buffer);
-                        }
-
-                    }
+                    p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
+                    ImGui::CloseCurrentPopup();
                 }
-                //If Entity have Transform Component
-                if (p_ecs.HaveComponent<Transform>(selectedEntity))
+                if (ImGui::MenuItem("Collider"))
                 {
-                    if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_None))
-                    {
-                        //position
-                        auto& Position = p_ecs.GetComponent<Transform>(selectedEntity).GetPos();
-                        ImGui::PushItemWidth(100.0f);
-                        ImGui::Text("Position"); ImGui::SameLine();
-                        ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
-                        ImGui::DragFloat("##Position", (float*)&Position.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
-                        ImGui::PushID(1);
-                        ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Position", (float*)&Position.y, 0.005f);
-                        ImGui::PopID();
-
-                        //scale
-                        auto& Scale = p_ecs.GetComponent<Transform>(selectedEntity).GetScale();
-                        ImGui::Text("Scale   "); ImGui::SameLine();
-                        ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
-                        ImGui::DragFloat("##Scale", (float*)&Scale.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
-                        ImGui::PushID(2);
-                        ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
-                        ImGui::PopID();
-                        //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
-
-                        //rotation
-                        auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
-                        ImGui::Text("Rotation Z"); ImGui::SameLine();
-                        ImGui::DragFloat("##", (float*)&rotation, 1.0f);
-                        //EM_EXO_INFO("Rotation(z:{0})", rotation);
-                    }
+                    p_ecs.AddComponent<Collider>(selectedEntity, ColliderComponent);
+                    ImGui::CloseCurrentPopup();
                 }
-                //Sprite Component
-                if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+                if (ImGui::MenuItem("RigidBody"))
                 {
-                    if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
-                    {
-                        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
-                        ImGui::PopStyleColor(3);
-                        auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
-                        ImGui::SetNextItemWidth(140.0f);
-
-                        if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
-                        {
-                            for (auto& [str, tex] : ResourceManager::textures)
-                            {
-                                if (ImGui::Selectable(str.c_str()))
-                                {
-                                    texturePath = str;
-                                    EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
-                                }
-                            }
-                            ImGui::EndCombo();
-                        }
-                    }
+                    p_ecs.AddComponent<RigidBody>(selectedEntity, RigidBodyComponent);
+                    ImGui::CloseCurrentPopup();
                 }
-                //Collider Component
-                if (p_ecs.HaveComponent<Collider>(selectedEntity))
+                
+                ImGui::EndPopup();
+            }
+            //Check and change the name of the Entity
+            if (p_ecs.HaveComponent<NameTag>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Name", ImGuiTreeNodeFlags_None))
                 {
-                    if (ImGui::CollapsingHeader("Collider", ImGuiTreeNodeFlags_None))
+                    auto& name = p_ecs.GetComponent<NameTag>(selectedEntity).GetNameTag();
+                    char buffer[256];
+                    memset(buffer, 0, sizeof(buffer));
+                    strcpy_s(buffer, sizeof(buffer), name.c_str());
+                    if (ImGui::InputText("name", buffer, sizeof(buffer)))
                     {
-                        auto& collider = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
-                        //if(ImGui::BeginChild())
-
-                        int colliderIndex = static_cast<int>(collider);
-                        const char* colliderNames = "none\0circle\0line\0rect";
-                        ImGui::Text("Collider Type"); ImGui::SameLine();
-                        ImGui::Combo("##test", &colliderIndex, colliderNames);
-                        collider = static_cast<Collider::ColliderType>(colliderIndex);
+                        name = std::string(buffer);
                     }
-                }
-                //Rigid Component
-                if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                 }
+             }
+            //If Entity have Transform Component
+            if (p_ecs.HaveComponent<Transform>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_None))
                 {
-                    if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
-                    {
-                        //velocity
-                        auto& velocity = p_ecs.GetComponent<RigidBody>(selectedEntity).GetVel();
-                        ImGui::PushItemWidth(100.0f);
-                        ImGui::Text("Velocity   "); ImGui::SameLine();
-                        ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##Velocity", (float*)&velocity.x, 0.005f); ImGui::SameLine();
-                        ImGui::PushID(3);
-                        ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Velocity", (float*)&velocity.y, 0.005f);
-                        ImGui::PopID();
+                    //position
+                    auto& Position = p_ecs.GetComponent<Transform>(selectedEntity).GetPos();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Position"); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                    ImGui::DragFloat("##Position", (float*)&Position.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                    ImGui::PushID(1);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Position", (float*)&Position.y, 0.005f);
+                    ImGui::PopID();
 
-                        //Direction
-                        auto& direction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetDir();
-                        ImGui::PushItemWidth(100.0f);
-                        ImGui::Text("Direction  "); ImGui::SameLine();
-                        ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##Direction", (float*)&direction.x, 0.005f); ImGui::SameLine();
-                        ImGui::PushID(4);
-                        ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Direction", (float*)&direction.y, 0.005f);
-                        ImGui::PopID();
+                    //scale
+                    auto& Scale = p_ecs.GetComponent<Transform>(selectedEntity).GetScale();
+                    ImGui::Text("Scale   "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                    ImGui::DragFloat("##Scale", (float*)&Scale.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                    ImGui::PushID(2);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
+                    ImGui::PopID();
+                    //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
 
-                        //GetFricition
-                        auto& friction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetFriction();
-                        ImGui::Text("Friction   "); ImGui::SameLine();
-                        ImGui::DragFloat("##Friction", (float*)&friction, 1.0f);
-
-                        //GetRestitution
-                        auto& Restitution = p_ecs.GetComponent<RigidBody>(selectedEntity).GetRestitution();
-                        ImGui::Text("Restitution"); ImGui::SameLine();
-                        ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
-                    }
-                }
-                if (ImGui::Button("Delete Component"))
-                    ImGui::OpenPopup("Delete Component");
-
-                if (ImGui::BeginPopup("Delete Component"))
-                {
-                    if (ImGui::MenuItem("NameTag") && p_ecs.HaveComponent<NameTag>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<NameTag>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Transform") && p_ecs.HaveComponent<Transform>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<Transform>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Sprite") && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<Sprite>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("Collider") && p_ecs.HaveComponent<Collider>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<Collider>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    if (ImGui::MenuItem("RigidBody") && p_ecs.HaveComponent<RigidBody>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<RigidBody>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::EndPopup();
+                    //rotation
+                    auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
+                    ImGui::Text("Rotation Z"); ImGui::SameLine();
+                    ImGui::DragFloat("##", (float*)&rotation, 1.0f);
+                    //EM_EXO_INFO("Rotation(z:{0})", rotation);
                 }
             }
-            ImGui::End();
+            //Sprite Component
+            if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
+                {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
+                    ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                    ImGui::PopStyleColor(3);
+                    auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
+                    ImGui::SetNextItemWidth(140.0f);
+
+                    if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                    {
+                        for (auto& [str, tex] : ResourceManager::textures)
+                        {
+                            if (ImGui::Selectable(str.c_str()))
+                            {
+                                texturePath = str;
+                                EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
+                            }
+                        }
+                        ImGui::EndCombo();
+                    }
+                }
+            }
+            //Collider Component
+            if (p_ecs.HaveComponent<Collider>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("Collider", ImGuiTreeNodeFlags_None))
+                {
+                    auto& collider = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
+                    //if(ImGui::BeginChild())
+
+                    int colliderIndex = static_cast<int>(collider);
+                    const char* colliderNames = "none\0circle\0line\0rect";
+                    ImGui::Text("Collider Type"); ImGui::SameLine();
+                    ImGui::Combo("##test", &colliderIndex, colliderNames);
+                    collider = static_cast<Collider::ColliderType>(colliderIndex);
+                }
+            }
+            //Rigid Component
+            if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+            {
+                if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
+                {
+                    //velocity
+                    auto& velocity = p_ecs.GetComponent<RigidBody>(selectedEntity).GetVel();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Velocity   "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();
+                    ImGui::DragFloat("##Velocity", (float*)&velocity.x, 0.005f); ImGui::SameLine();
+                    ImGui::PushID(3);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Velocity", (float*)&velocity.y, 0.005f);
+                    ImGui::PopID();
+
+                    //Direction
+                    auto& direction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetDir();
+                    ImGui::PushItemWidth(100.0f);
+                    ImGui::Text("Direction  "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();
+                    ImGui::DragFloat("##Direction", (float*)&direction.x, 0.005f); ImGui::SameLine();
+                    ImGui::PushID(4);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Direction", (float*)&direction.y, 0.005f);
+                    ImGui::PopID();
+
+                    //GetFricition
+                    auto& friction = p_ecs.GetComponent<RigidBody>(selectedEntity).GetFriction();
+                    ImGui::Text("Friction   "); ImGui::SameLine();
+                    ImGui::DragFloat("##Friction", (float*)&friction, 1.0f);
+
+                    //GetRestitution
+                    auto& Restitution = p_ecs.GetComponent<RigidBody>(selectedEntity).GetRestitution();
+                    ImGui::Text("Restitution"); ImGui::SameLine();
+                    ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
+                }
+            }
+        if (ImGui::Button("Delete Component"))
+              ImGui::OpenPopup("Delete Component");
+
+        if (ImGui::BeginPopup("Delete Component"))
+        {
+            if (ImGui::MenuItem("Transform") && p_ecs.HaveComponent<Transform>(selectedEntity))
+            {
+                p_ecs.RemoveComponent<Transform>(selectedEntity);
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("Sprite") && p_ecs.HaveComponent<Sprite>(selectedEntity))
+            {
+                p_ecs.RemoveComponent<Sprite>(selectedEntity);
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("Collider") && p_ecs.HaveComponent<Collider>(selectedEntity))
+            {
+                p_ecs.RemoveComponent<Collider>(selectedEntity);
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("RigidBody") && p_ecs.HaveComponent<RigidBody>(selectedEntity))
+            {
+                p_ecs.RemoveComponent<RigidBody>(selectedEntity);
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();
         }
+    }
+    ImGui::End();
+
     }
 
     //Audio manager allows users to select and play and test different audios in the editor

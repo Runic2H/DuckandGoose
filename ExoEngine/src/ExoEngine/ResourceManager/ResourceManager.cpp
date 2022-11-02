@@ -1,12 +1,23 @@
+/*!*************************************************************************
+****
+\file			ResourceManager.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			11-2-2022
+\brief			This file contain the defintion for ResourceManager class.
+				For now it can only load textures and shader.
+****************************************************************************
+***/
 #include "empch.h"
 #include "ResourceManager.h"
-
 
 namespace EM {
 	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
 	std::map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
 	std::map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
-	
+	//TODO to load different fonts and maybe audio/music
 	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 	std::shared_ptr<Texture> ResourceManager::LoadTexture(std::string name, const std::string& filepath)
 	{
@@ -71,16 +82,16 @@ namespace EM {
 
 	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudio(std::string name, const std::string& filepath)
 	{
-		return audios[name] = ResourceManager::LoadAudioFromFile(filepath);
+		(void)filepath; //TODO removed when proper resourcemanager for audio
+		return std::shared_ptr<CAudioEngine>();
 	}
 
-
-
+	//TO be implement
+	// 
 	//std::shared_ptr<Font> ResourceManager::LoadFont(std::string name, unsigned int size)
 	//{
 	//	return std::shared_ptr<Font>();
 	//}
-
 	//std::shared_ptr<Font> ResourceManager::GetFont(std::string name)
 	//{
 	//	return std::shared_ptr<Font>();
