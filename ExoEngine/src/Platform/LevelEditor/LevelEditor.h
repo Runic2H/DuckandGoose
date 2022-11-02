@@ -29,7 +29,8 @@ namespace EM {
 		void Update();	//update loop
 		void Draw();
 		void End();
-		void DropDownMenu(); //Menu widget
+
+		void ContentBrowser();
 		void Logger();
 		void Profiler();
 		void Hierarchy();
@@ -39,12 +40,12 @@ namespace EM {
 		static std::unique_ptr<LevelEditor>& GetInstance();
 		//for inspector and Hierarchy
 		bool mDebugDraw{ false };
+	
 	private:
 		void MainMenuBar();
-		void docking();
-		bool dockspaceOpen{};
-		bool fullscreenMode{};
-		bool pad{};
+		void Docking();
+		bool FullScreenMode{};
+		bool Pad{};
 
 	private:
 		ImGuiDockNodeFlags dock_space_flags{};

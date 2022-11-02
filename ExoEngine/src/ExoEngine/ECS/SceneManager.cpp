@@ -23,6 +23,7 @@ namespace EM
 		p_ecs.RegisterComponent<Sprite>();
 		p_ecs.RegisterComponent<Logic>();
 		p_ecs.RegisterComponent<Player>();
+		p_ecs.RegisterComponent<Audio>();
 	}
 
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
@@ -92,6 +93,22 @@ namespace EM
 						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
 						{
 							p_ecs.AddComponent<Player>(j, player);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Logic")
+					{
+						Player player;
+						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Player>(j, player);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Audio")
+					{
+						Audio mAudio;
+						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j - 1].GetObj()))
+						{
+							p_ecs.AddComponent<Audio>(j, mAudio);
 						}
 					}
 					
@@ -190,6 +207,10 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Player")
 					{
 						p_ecs.GetComponent<Player>(j).Serialize(writer);
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Audio")
+					{
+						p_ecs.GetComponent<Audio>(j).Serialize(writer);
 					}
 				}
 			}

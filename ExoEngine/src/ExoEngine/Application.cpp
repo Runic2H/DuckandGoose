@@ -27,6 +27,7 @@
 #include "ExoEngine/Scripts/PlayerMovement.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine//Scripts/EnemyMovement.h"
+//#include "Platform/GUI/GUI.h"
 
 
 namespace EM {
@@ -54,8 +55,12 @@ namespace EM {
 		
 		Window* m_window = new Window;
 		m_window->Init();
-		p_Editor->Init(m_window);
 		p_Audio->Init();
+		p_Editor->Init(m_window);
+
+		
+		//p_GUI->gui_init();
+		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 		
 
@@ -100,23 +105,24 @@ namespace EM {
 		/*while(p_ecs.GetTotalEntities() != MAX_ENTITIES - 1)
 		{
 			Entity player = p_ecs.CreateEntity();
-			NameTag name;
-			
-			name.SetNameTag("Player");
 			if (player % 2)
 			{
+				Sprite sprite;
+				sprite.SetTexture("Idle");
+				nt.SetNameTag("Player");
 				p_ecs.AddComponent<Transform>(player, TransformComponent);
-				p_ecs.AddComponent<NameTag>(player, NameTagComponent);
-				p_ecs.AddComponent<Collider>(player, ColliderComponent);
-				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
+				p_ecs.AddComponent<Sprite>(player,sprite);
+				p_ecs.AddComponent<NameTag>(player, nt);
+				
 			}
 			else
 			{
-				name.SetNameTag("Enemy");
-				//transform.DeserializeFromFile("WallTransform.json");
-				p_ecs.AddComponent<Transform>(player, TransformComponent);
+				Transform transform;
+				nt.SetNameTag("Enemy");
+				transform.DeserializeFromFile("WallTransform.json");
+				p_ecs.AddComponent<Transform>(player, transform);
 				p_ecs.AddComponent<Sprite>(player, SpriteComponent);
-				p_ecs.AddComponent<NameTag>(player, name);
+				p_ecs.AddComponent<NameTag>(player, nt);
 			}
 			p_ecs.AddComponent<RigidBody>(player, RigidBodyComponent);
 		}
@@ -156,6 +162,7 @@ namespace EM {
 			p_Audio->Update();
 			p_Editor->Update();
 			p_Editor->Draw();
+	
 		
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mLogic->Update(Timer::GetInstance().GetGlobalDT());

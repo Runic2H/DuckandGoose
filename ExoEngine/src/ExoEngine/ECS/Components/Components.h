@@ -23,6 +23,7 @@ deserialize its data
 #include "Sprite.h"
 #include "Logic.h"
 #include "Player.h"
+#include "Audio.h"
 
 #define TransformComponent EM::Transform::Transform()
 #define RigidBodyComponent EM::RigidBody::RigidBody()
@@ -31,3 +32,4 @@ deserialize its data
 #define SpriteComponent EM::Sprite::Sprite()
 #define LogicComponent EM::Logic::Logic()
 #define PlayerComponent EM::Player::Player()
+#define AudioComponent EM::Audio::Audio()
