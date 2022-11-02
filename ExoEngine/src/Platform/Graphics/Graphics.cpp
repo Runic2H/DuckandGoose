@@ -115,10 +115,10 @@ namespace EM {
 		}*/
 		if (p_GUI->check_pause() == true)
 		{
-
-			m_Renderer->DrawQuad({ m_cameraposition.x+0.0f, m_cameraposition.y+0.5f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the continue button
+			
+			m_Renderer->DrawQuad({ camera.GetPosition().x +0.0f, camera.GetPosition().y + 0.5f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the continue button
 			p_GUI->set_continue_button({ 0.0f,0.5f }, 1.0f, 0.2f);//assign position and scale into the GUI
-			m_Renderer->DrawQuad({ m_cameraposition.x+0.0f, m_cameraposition.y-0.0f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the quit button 
+			m_Renderer->DrawQuad({ camera.GetPosition().x +0.0f, camera.GetPosition().y-0.0f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the quit button 
 			p_GUI->set_pause_button({ 0.0f,0.0f }, 1.0f, 0.2f);//assign position and scale into the GUI
 			
 		}
@@ -127,9 +127,9 @@ namespace EM {
 		 
 		if (p_GUI->check_pause() == true)
 		{
-			m_Font->RenderText("Continue", { m_cameraposition.x - 0.2f , m_cameraposition.y + 0.5f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the continue button
-			m_Font->RenderText("Quit", { m_cameraposition.x - 0.1f , m_cameraposition.y + 0.0f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the first button
-			m_Font->RenderText("Game Paused", { m_cameraposition.x - 0.32f , m_cameraposition.y + 0.7f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//to render text for the quit button
+			m_Font->RenderText("Continue", { camera.GetPosition().x - 0.2f ,camera.GetPosition().y + 0.5f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the continue button
+			m_Font->RenderText("Quit", { camera.GetPosition().x - 0.1f ,camera.GetPosition().y + 0.0f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the first button
+			m_Font->RenderText("Game Paused", { camera.GetPosition().x - 0.32f , camera.GetPosition().y + 0.7f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//to render text for the quit button
 		}
 																																		
 		
