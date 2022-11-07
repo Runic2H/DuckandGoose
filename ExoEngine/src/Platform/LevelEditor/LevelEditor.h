@@ -56,6 +56,6 @@ namespace EM {
 		float m_UpdateTimer = 0.0f;
 		std::array<float, 5> mSystemRunTime = { 0.0f,0.0f,0.0f,0.0f };
 		//for inspector and Hierarchy
-		Entity selectedEntity{};
+		Entity selectedEntity = {};
 	};
 }

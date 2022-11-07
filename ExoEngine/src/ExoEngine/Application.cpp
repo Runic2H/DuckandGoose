@@ -67,6 +67,8 @@ namespace EM {
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<Sprite>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();

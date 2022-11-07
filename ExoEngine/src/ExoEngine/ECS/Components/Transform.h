@@ -32,7 +32,7 @@ namespace EM
 		vec2D& GetScale() { return mScale; }
 		//const vec2D& GetScale() { return mScale; } const
 		float& GetRot() { return mRot; }
-		const float& GetRotConst() { return mRot; } const
+		//const float& GetRotConst() { return mRot; } const
 
 		void SetPos(vec2D Pos) { mPosition = Pos; }
 		void SetPos(float posX, float posY) { mPosition = vec2D(posX, posY); }

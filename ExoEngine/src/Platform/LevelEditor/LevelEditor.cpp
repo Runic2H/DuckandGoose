@@ -345,7 +345,7 @@ namespace EM {
              p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
         }
        
-        if (p_ecs.GetTotalEntities() != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0 )
+        if ( p_ecs.GetTotalEntities() != 0 )
         {
             ImGui::SameLine();
             if (ImGui::Button("Destroy Entity"))
@@ -357,7 +357,7 @@ namespace EM {
                 selectedEntity = {}; // when the entity is destroy there is no current selected entity
             }
             ImGui::SameLine();
-            if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)
+            if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)// there is entity alive
             {
                 if (selectedEntity != MAX_ENTITIES)
                 {
@@ -365,26 +365,23 @@ namespace EM {
                     selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
                 }
             }
-            Entity e{0};
-            Entity livingCount = 0;
-            while (livingCount < p_ecs.GetTotalEntities())
+         
+            for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
             {
                 if (p_ecs.HaveComponent<NameTag>(e))
                 {
-                    ++livingCount;
                     const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
 
-                        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
-                        bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
+                    ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+                    bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
 
-                        if (ImGui::IsItemClicked())
-                            selectedEntity = e;
+                    if (ImGui::IsItemClicked())
+                        selectedEntity = e;
 
-                        if (opened)
-                            ImGui::TreePop();
-                 }
-                    ++e;
-             }
+                    if (opened)
+                        ImGui::TreePop();
+                }
+            }
          }
     
         if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
@@ -397,7 +394,7 @@ namespace EM {
     void LevelEditor::Inspector()
     {
         ImGui::Begin("Inspector");
-        if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0)// if the selectedEntityExist
+        if (selectedEntity != MAX_ENTITIES)// if the selectedEntityExist
         {
             //create component for the selected entity 
             if (ImGui::Button("Add Component"))
@@ -405,13 +402,16 @@ namespace EM {
 
             if (ImGui::BeginPopup("Add Component"))
             {
+                
                 if (ImGui::MenuItem("Transform"))
                 {
-                    p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
+                    if(!p_ecs.HaveComponent<Transform>(selectedEntity))
+                        p_ecs.AddComponent<Transform>(selectedEntity, TransformComponent);
                     ImGui::CloseCurrentPopup();
                 }
                 if (ImGui::MenuItem("Sprite"))
                 {
+                    if (!p_ecs.HaveComponent<Sprite>(selectedEntity))
                     p_ecs.AddComponent<Sprite>(selectedEntity, SpriteComponent);
                     ImGui::CloseCurrentPopup();
                 }

@@ -76,7 +76,6 @@ namespace EM
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
 			// Update map to point to moved spot
-
 			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
 			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
 			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;

@@ -83,7 +83,7 @@ namespace EM
 
 		void SetTotalEntitiesForWorld(Entity entity)
 		{
-			while(mLivingEntityCount != entity)
+			while(mLivingEntityCount < entity)
 			{
 				CreateEntity();
 			}
@@ -97,7 +97,7 @@ namespace EM
 				DestroyEntity(mLivingEntityCount);
 			}
 			mAvailableEntities = std::queue<Entity>();
-			for (Entity entity = 1; entity < MAX_ENTITIES; ++entity)
+			for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
 			{
 				mAvailableEntities.push(entity);
 			}
