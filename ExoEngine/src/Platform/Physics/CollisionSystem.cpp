@@ -36,48 +36,83 @@ namespace EM {
                 if (i != j && l > k) {
                     auto& col1 = p_ecs.GetComponent<Collider>(i);
                     auto& col2 = p_ecs.GetComponent<Collider>(j);
-                    auto& trans1 = p_ecs.GetComponent<Transform>(i);
-                    auto& trans2 = p_ecs.GetComponent<Transform>(j);
+                    auto& rigid1 = p_ecs.GetComponent<RigidBody>(i);
+                    auto& rigid2 = p_ecs.GetComponent<RigidBody>(j);
                     Collider::ColliderType e1 = col1.GetCollider();
                     Collider::ColliderType e2 = col2.GetCollider();
                     col1.SetHit(0);
                     col2.SetHit(0);
+                    vec2D offset1 = rigid1.GetNextPos() + col1.GetOffset();
+                    vec2D offset2 = rigid2.GetNextPos() + col2.GetOffset();
                     if (e1 == Collider::ColliderType::circle) {
                         if (e2 == Collider::ColliderType::circle) {
-                            if (ecm.simpleCircleCircle(trans1.GetPos(), trans2.GetPos(), col1.GetRad(), col2.GetRad())) {
+                            if (ecm.simpleCircleCircle(offset1, offset2, col1.GetRad(), col2.GetRad())) {
                                 col1.SetHit(1);
+                                vec2D norm1 = offset1 - offset2;
+                                Normalize(norm1, norm1);
+                                col1.SetNormal(norm1);
                                 col2.SetHit(1);
+                                vec2D norm2 = offset2 - offset1;
+                                Normalize(norm2, norm2);
+                                col2.SetNormal(norm2);
                                 std::cout << "hit\n";
                             }
                         }
                         if (e2 == Collider::ColliderType::rect) {
-                            vec2D max = trans2.GetPos() + col2.GetMax();
-                            vec2D min = trans2.GetPos() + col2.GetMin();
-                            if (ecm.simpleCircleRect(trans1.GetPos(), col1.GetRad(), max, min, trans2.GetPos())) {
+                            vec2D max = offset2 + col2.GetMax();
+                            vec2D min = offset2 + col2.GetMin();
+                            if (ecm.simpleCircleRect(offset1, col1.GetRad(), max, min, offset2)) {
                                 col1.SetHit(1);
+                                vec2D norm1 = offset1 - offset2;
+                                Normalize(norm1, norm1);
+                                col1.SetNormal(norm1);
                                 col2.SetHit(1);
+                                vec2D norm2 = offset2 - offset1;
+                                Normalize(norm2, norm2);
+                                col2.SetNormal(norm2);
                                 std::cout << "hit\n";
                             }
                         }
                     }
                     else if (e1 == Collider::ColliderType::rect) {
                         if (e2 == Collider::ColliderType::circle) {
-                            vec2D max = trans1.GetPos() + col1.GetMax();
-                            vec2D min = trans1.GetPos() + col1.GetMin();
-                            if (ecm.simpleCircleRect(trans2.GetPos(), col2.GetRad(), max, min, trans1.GetPos())) {
+                            vec2D max = offset1 + col1.GetMax();
+                            vec2D min = offset1 + col1.GetMin();
+                            if (ecm.simpleCircleRect(offset2, col2.GetRad(), max, min, offset1)) {
                                 col1.SetHit(1);
+                                vec2D norm1 = offset1 - offset2;
+                                Normalize(norm1, norm1);
+                                col1.SetNormal(norm1);
                                 col2.SetHit(1);
+                                vec2D norm2 = offset2 - offset1;
+                                Normalize(norm2, norm2);
+                                col2.SetNormal(norm2);
                                 std::cout << "hit\n";
                             }
                         }
                         if (e2 == Collider::ColliderType::rect) {
-                            vec2D max1 = trans1.GetPos() + col1.GetMax();
-                            vec2D min1 = trans1.GetPos() + col1.GetMin();
-                            vec2D max2 = trans2.GetPos() + col2.GetMax();
-                            vec2D min2 = trans2.GetPos() + col2.GetMin();
+                            vec2D max1 = offset1 + col1.GetMax();
+                            vec2D min1 = offset1 + col1.GetMin();
+                            vec2D max2 = offset2 + col2.GetMax();
+                            vec2D min2 = offset2 + col2.GetMin();
                             if (ecm.simpleRectRect(max1, min1, max2, min2)) {
+                                vec2D line;
+                                if(max1.x >= min2.x && min1.x <= max2.x) {
+                                    line.y = 1;
+                                    if (min1.y <= max2.y) {
+                                        line.y = -1;
+                                    }
+                                }
+                                if(max1.y >= min2.y && min1.y <= max2.y) {
+                                    line.x = 1;
+                                    if (max1.x <= min2.x) {
+                                        line.x = -1;
+                                    }
+                                }
                                 col1.SetHit(1);
+                                col1.SetNormal(line);
                                 col2.SetHit(1);
+                                col2.SetNormal(line * -1);
                                 std::cout << "hit\n";
                             }
                         }
