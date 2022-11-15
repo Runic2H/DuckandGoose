@@ -38,6 +38,8 @@ namespace EM {
 		void resetZoomLevel();
 
 		bool MouseScrolling();
+
+		void Resize(float width, float height);
 	private:
 
 		glm::mat4 m_ProjectionMatrix ;

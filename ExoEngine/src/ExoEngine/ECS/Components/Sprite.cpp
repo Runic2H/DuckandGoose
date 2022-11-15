@@ -15,13 +15,16 @@
 #include "Sprite.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 namespace EM {
-	Sprite::Sprite() : m_texturename("Blank"), m_index({0.0f,0.0f})
+	Sprite::Sprite() : m_texturename("Blank"), m_index({0.0f,0.0f}), mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(1.0f)
 	{
 	}
 	bool Sprite::Deserialize(const rapidjson::Value& obj)
 	{
 		m_texturename = std::string(obj["TextureName"].GetString());
 		m_index = vec2D(obj["Index_X"].GetFloat(), obj["Index_Y"].GetFloat());
+		mIsSpriteSheet = bool(obj["IsSpriteSheet"].GetBool());
+		mIsanimated = bool(obj["IsAnimated"].GetBool());
+		mDisplayTime = float(obj["DisplayTime"].GetFloat());
 		return true;
 	}
 	bool Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
@@ -33,6 +36,12 @@ namespace EM {
 		writer->Double(m_index.x);
 		writer->Key("Index_Y");
 		writer->Double(m_index.y);
+		writer->Key("IsSpriteSheet");
+		writer->Bool(mIsSpriteSheet);
+		writer->Key("IsAnimated");
+		writer->Bool(mIsanimated);
+		writer->Key("DisplayTime");
+		writer->Double(mDisplayTime);
 		writer->EndObject();
 		return true;
 	}

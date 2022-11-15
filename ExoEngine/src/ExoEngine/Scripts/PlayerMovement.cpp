@@ -13,7 +13,6 @@
 ***/
 
 #include "PlayerMovement.h"
-
 namespace EM
 {
 
@@ -31,17 +30,22 @@ namespace EM
             if (p_Input->isKeyPressed(GLFW_KEY_UP)) {
                 vel.y += 100.f;
             }
-            if (p_Input->isKeyPressed(GLFW_KEY_RIGHT)) {
+            else if (p_Input->isKeyPressed(GLFW_KEY_RIGHT)||p_Input->KeyHold(GLFW_KEY_RIGHT)) {
                 vel.x += 100.f;
+                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Running");
+                
             }
-            if (p_Input->isKeyPressed(GLFW_KEY_DOWN)) {
+            else if (p_Input->isKeyPressed(GLFW_KEY_DOWN)) {
                 vel.y -= 100.f;
             }
-            if (p_Input->isKeyPressed(GLFW_KEY_LEFT)) {
+            else if (p_Input->isKeyPressed(GLFW_KEY_LEFT)) {
                 vel.x -= 100.f;
+                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Running");
+                
             }
         else {
             pRigid.SetVel(phys.friction(pRigid.GetVel(), Frametime));
+            p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Idle");
         }
         pRigid.SetVel(phys.accelent(pRigid.GetVel(), vel, Frametime));
 

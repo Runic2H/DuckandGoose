@@ -108,8 +108,8 @@ namespace EM {
 		Player playerID;
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
-		IScript* base = new PlayerMovement();
-		logic.InsertScript("PlayerMovement", base, player);
+		
+		logic.InsertScript(new PlayerMovement(), player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -121,8 +121,8 @@ namespace EM {
 		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 
 		Logic logic2;
-		IScript* enemyLogic = new EnemyMovement();
-		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
+		////IScript* enemyLogic = new EnemyMovement();
+		logic2.InsertScript(new EnemyMovement(), enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);*/
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
@@ -158,7 +158,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("LevelTest.json");
+		p_Scene->SerializeToFile("Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}
