@@ -1,31 +1,55 @@
 #include "empch.h"
 #include "Animation.h"
 
+
 namespace EM {
-	struct FrameData
-	{
-		MultiRefs<SpriteRender> Sprite; // which spritesheet is it using
-		float DisplayTimePerFrame;		// how long does the frame last before changing the next fram
-		vec2D FrameIndex;				// the increment of the frame set to 0 when reach the last frame and y will always remind 0
-		float MaxFrame;					//To check for the last frame
-	};
+	
 
 	Animation::Animation()
-		:CurrentFrameTime(0)
+		:frames(0), CurrentFrameIndex(0), currentFrameTime(0)
 	{
 
+	}
+	void Animation::AddFrameInfo(Sprite& sprite)
+	{
+		FrameData data;
+		data.TextureId = GETTEXTURE(sprite.GetTexture())->GetRendererID();
+		data.DisplayTime = sprite.GetDisplayTime();
+		data.FrameIndex = sprite.GetIndex();
+		sprite.GetIndex().x = CurrentFrameIndex;
+		data.MaxFrame = 8.0f;
+		frames.push_back(data);
 	}
 	void Animation::FrameIncrement()
 	{
-		 
+		CurrentFrameIndex++;
+	}
+	const Animation::FrameData* Animation::GetCurrentFrame() const
+	{
+		if (frames.size() > 0)
+			return &frames[(int)CurrentFrameIndex];
+
+		return nullptr;
 	}
 	bool Animation::UpdateAnimation(float deltatime)
 	{
-		(void)deltatime;
+		if (frames.size() > 0)
+		{
+			currentFrameTime += deltatime;
+			if (currentFrameTime >= frames[(int)CurrentFrameIndex].DisplayTime )
+			{
+				currentFrameTime = 0.0f;
+				FrameIncrement();
+				if (CurrentFrameIndex >= 8.0f)
+					ResetFrame();
+				return true;
+			}
+		}
 		return false;
 	}
 	void Animation::ResetFrame()
 	{
-		//FrameData
+		CurrentFrameIndex = 0;
+		currentFrameTime = 0;
 	}
 }

@@ -16,6 +16,7 @@
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
+#include <imgui/ImGuizmo.h>
 
 #include "LevelEditor.h"
 #include "ExoEngine/Timer/Time.h"
@@ -47,7 +48,7 @@ namespace EM {
     bool color_picker = false;
     bool drop_menu = false;
     bool logger = false;
-    static bool show_window = true;
+    
     static int current_sound = 0;
 
     // Init for levelEditor sets context for ImGui 
@@ -70,30 +71,26 @@ namespace EM {
     //  Update loop for level editor, poll events and set new frames
     void LevelEditor::Update()
     {
-        Timer::GetInstance().Start(Systems::GRAPHIC);
-        Timer::GetInstance().GetDT(Systems::GRAPHIC);
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
+        
         Docking();
         MainMenuBar();
         Profiler();
-        //ImGui::ShowDemoWindow();
+        ImGui::ShowDemoWindow();
         ContentBrowser();
         Logger();
         Hierarchy();
         Inspector();
+        SceneViewer();
         Audio();
-
-        Timer::GetInstance().Update(Systems::GRAPHIC);
     }
     //  Render interface onto frame
 
     void LevelEditor::Draw()
     {
         ImGui::Render();
-        //ImGui::EndFrame();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -138,17 +135,174 @@ namespace EM {
         }
     }
 
+    void LevelEditor::SceneViewer()
+    {
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
+        ImGui::Begin("Scene");
+       
+        float tab_size = (ImGui::GetWindowSize().y - ImGui::GetContentRegionAvail().y) * 2;
+        ImVec2 position = ImGui::GetWindowPos();
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        camera.Resize(size.x, size.y);
+        //camera.MouseScrolling();
+        
+        ImVec2 offset{
+           position.x - (mwindata.GetWidth() - position.x - size.x) + (ImGui::GetContentRegionAvail().x - size.x),
+           position.y - (mwindata.GetHeight() - position.y - size.y) + (ImGui::GetContentRegionAvail().y - size.y) + tab_size
+        };
+
+        _gameWindowSpecs = {
+            position.x + 0.5f * (ImGui::GetContentRegionAvail().x - size.x),
+            position.y + 0.5f * (ImGui::GetContentRegionAvail().y - size.y + tab_size),
+            size.x,
+            size.y
+        };
+
+        unsigned int textureID = p_FrameBuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void*)(intptr_t)textureID, ImGui::GetContentRegionAvail(),
+            ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+        
+        //gizmos
+        mGizmoType = ImGuizmo::OPERATION::TRANSLATE; // for now just having translation for guizmo
+        ImGuizmo::BeginFrame();
+        if (selectedEntity >= 0)//have selected entity
+        {
+            ImGuizmo::SetOrthographic(true);
+            
+   
+
+            ImGuizmo::SetRect(
+                _gameWindowSpecs.x,
+                _gameWindowSpecs.y,
+                _gameWindowSpecs.z,
+                _gameWindowSpecs.w
+            );
+
+            glm::mat4 cameraProj = camera.GetProjectionMatrix();
+            glm::mat4 cameraView = camera.GetViewMatrix();
+            //std::cout << cameraView[0].x << std::endl;
+            glm::mat4 transform{ 1.0f }; // identity matrix
+
+            auto& trans = p_ecs.GetComponent<Transform>(selectedEntity);
+
+            transform = glm::translate(glm::mat4{ 1.0f },glm::vec3(trans.GetPos().x, trans.GetPos().y, 0.0f))
+                * glm::rotate(glm::mat4(1.f), trans.GetRot(), glm::vec3(0.f, 0.f, 1.f))
+                * glm::scale(glm::mat4(1.f), { trans.GetScale().x,trans.GetScale().y ,1.f });
+
+            ImGuizmo::SetDrawlist();
+            // Draw ImGuizmo (renders every frame)
+            ImGuizmo::Manipulate(glm::value_ptr(glm::inverse(transform))
+                , glm::value_ptr(cameraProj), (ImGuizmo::OPERATION)mGizmoType,
+                ImGuizmo::WORLD, glm::value_ptr(transform));
+
+            if (ImGuizmo::IsUsing())
+            {
+                float decompTrans[3], decompRot[3], decompScale[3];
+
+                ImGuizmo::DecomposeMatrixToComponents(glm::value_ptr(transform), decompTrans, decompRot, decompScale);
+                // change size 
+                trans.SetPos(decompTrans[0], decompTrans[1]);
+            }
+        }
+
+        ImGui::End();
+        ImGui::PopStyleVar();
+    }
+
     // Content browser to be implemented in M3
     void LevelEditor::ContentBrowser()
     {
-        if (show_window)
-        {
-            if (ImGui::Begin("Content Browser")) //main box for color picker window
-            {
-                ImGui::Text("To be completed in M3");
-            }
-            ImGui::End();
-        }
+      ImGui::Begin("Content Browser");
+      if (m_CurrentDirectory != std::filesystem::path(mAssetsPath))
+      {
+          if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("BackIcon")->GetRendererID(),
+                  { 25.f,25.f }, { 0, 1 }, { 1, 0 }))
+          {
+              m_CurrentDirectory = m_CurrentDirectory.parent_path();
+          }
+      }
+
+      for (auto& Directory : std::filesystem::directory_iterator(m_CurrentDirectory))
+      {
+          const auto& directorypath = Directory.path(); //the path for folders in Assets(assets/fonts)
+        
+          std::string filename = directorypath.filename().string(); //just the name of the folders(fonts, icons, metadigger etc)
+          ImGui::PushID(filename.c_str());
+          ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+          
+          if (Directory.is_directory())
+          {
+              ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("FolderIcon")->GetRendererID(),
+                  { 128.f,128.f }, { 0, 1 }, { 1, 0 });
+          }
+      
+          //Press into the folder
+          ImGui::PopStyleColor();
+          if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+          {
+              if (Directory.is_directory())
+                  m_CurrentDirectory /= directorypath.filename();
+          }
+          
+          ImGui::TextWrapped(filename.c_str()); ImGui::NextColumn(); //indicate the folder name
+          ImGui::PopID();   
+      }
+      
+      ImGui::End();
+
+      ImGui::Begin(m_CurrentDirectory.filename().string().c_str(),(bool*)0, ImGuiWindowFlags_HorizontalScrollbar);
+      if (m_CurrentDirectory.filename() == "Textures")
+      {
+          for (auto& [name, texObj] : ResourceManager::textures)
+          {
+              ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
+                  ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                  ImVec2(0.0f, 1.0f),
+                  ImVec2(1.0f, 0.0f));
+
+              if (ImGui::IsItemHovered())
+              {
+                  ImGui::BeginTooltip();
+                  std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" + 
+                                    std::to_string(texObj->GetHeight()) + ")";
+                  ImGui::Text(str.c_str());
+                  ImGui::EndTooltip();
+              }
+
+              if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+              {
+                  ImGui::SetDragDropPayload("Textures", &name, sizeof(name));
+                  ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
+                      ImVec2(128* static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                      ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+                  ImGui::EndDragDropSource();
+              }
+          }
+      }
+      else if (m_CurrentDirectory.filename() == "Icons")
+      {
+          for (auto& [name, texObj] : ResourceManager::Icons)
+          {
+              ImGui::SameLine();
+              ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
+                  ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                  ImVec2(0.0f, 1.0f),
+                  ImVec2(1.0f, 0.0f));
+
+              if (ImGui::IsItemHovered())
+              {
+                  ImGui::BeginTooltip();
+                  std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" +
+                      std::to_string(texObj->GetHeight()) + ")";
+                  ImGui::Text(str.c_str());
+                  ImGui::EndTooltip();
+              }
+          }
+
+      }
+      ImGui::End();
+
     }
 
     // Logger, can toggle between types of messages you want to view
@@ -304,7 +458,6 @@ namespace EM {
 
             ImGui::Checkbox("Show physics colliders", &mDebugDraw);
 
-
             //Todo show the each system consume how much at runtime
             mSystemRunTime[0] = Timer::GetInstance().GetDT(Systems::COLLISION)/ Timer::GetInstance().GetGlobalDT();
             mSystemRunTime[1] = Timer::GetInstance().GetDT(Systems::GRAPHIC)/ Timer::GetInstance().GetGlobalDT();
@@ -337,15 +490,13 @@ namespace EM {
     // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
-        
         ImGui::Begin("Hierarchy");
         if (ImGui::Button("Create Entity") && p_ecs.GetTotalEntities() != MAX_ENTITIES)
-        {
-             selectedEntity = p_ecs.CreateEntity();
-             p_ecs.AddComponent<NameTag>(selectedEntity, NameTagComponent);
+        {  
+            p_ecs.AddComponent<NameTag>(p_ecs.CreateEntity(), NameTagComponent);
         }
-       
-        if ( p_ecs.GetTotalEntities() != 0 )
+
+        if (p_ecs.GetTotalEntities() > 0)
         {
             ImGui::SameLine();
             if (ImGui::Button("Destroy Entity"))
@@ -354,7 +505,7 @@ namespace EM {
                 {
                     p_ecs.DestroyEntity(selectedEntity);
                 }
-                selectedEntity = {}; // when the entity is destroy there is no current selected entity
+                //selectedEntity = {}; // when the entity is destroy there is no current selected entity
             }
             ImGui::SameLine();
             if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)// there is entity alive
@@ -389,8 +540,8 @@ namespace EM {
 
                 iterEntity++;
             }
-         }
-    
+        }
+
         if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
             selectedEntity = {};
         ImGui::End();
@@ -487,8 +638,12 @@ namespace EM {
             //Sprite Component
             if (p_ecs.HaveComponent<Sprite>(selectedEntity))
             {
+                
                 if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
                 {
+                    auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
+                    ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet);
+                    ImGui::Checkbox("Animation", &sprite.mIsanimated);
                     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
                     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
                     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
@@ -509,6 +664,7 @@ namespace EM {
                         }
                         ImGui::EndCombo();
                     }
+
                 }
             }
             //Collider Component
@@ -595,6 +751,8 @@ namespace EM {
     ImGui::End();
 
     }
+
+   
 
     //Audio manager allows users to select and play and test different audios in the editor
     //Need to shift loading of audio files into asset manager in M3

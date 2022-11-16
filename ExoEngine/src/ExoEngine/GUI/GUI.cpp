@@ -29,7 +29,7 @@ namespace EM
 	}
 	 bool gui_system::is_within_box(glm::vec2 cur, button_bb box)
 	 {
-		 //We factor in aspect ration since graphic scale is proportionate to aspect ration instead of screen
+		 //We factor in aspect ratio since graphic scale is proportionate to aspect ratio instead of screen
 		 if ((cur.x * AspectRatio > box.min.x && cur.y > box.min.y) && (cur.x * AspectRatio < box.max.x && cur.y < box.max.y))
 			 return true;//return true if the position of the cursor is between both of the button minimun and maximum bounding point
 		 else

@@ -15,6 +15,16 @@
 #include <GL/glew.h>
 namespace EM {
 
+	std::unique_ptr<FrameBuffer> FrameBuffer::_finstance{ nullptr };
+
+	std::unique_ptr<FrameBuffer>& FrameBuffer::GetInstance()
+	{
+		if (_finstance == nullptr)
+		{
+			_finstance = std::make_unique<FrameBuffer>();
+		}
+		return _finstance;
+	}
 	int FrameBuffer::ReadPixel(uint32_t attachmentIndex, int x, int y)
 	{
 		glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);

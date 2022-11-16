@@ -29,6 +29,7 @@ namespace EM {
 		void SetTextureData(void* data, unsigned int size);
 
 		inline unsigned int GetWidth() const { return _width; }
+		/*void SetWidth(unsigned int width) { _width *= width; }*/
 		inline unsigned int GetHeight() const { return _height; }
 		inline unsigned int GetRendererID() const { return m_RendererID; }
 
