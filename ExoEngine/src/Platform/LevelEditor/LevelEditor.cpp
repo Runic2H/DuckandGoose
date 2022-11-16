@@ -166,7 +166,7 @@ namespace EM {
         //gizmos
         mGizmoType = ImGuizmo::OPERATION::TRANSLATE; // for now just having translation for guizmo
         ImGuizmo::BeginFrame();
-        if (selectedEntity >= 0)//have selected entity
+        if (selectedEntity >= 0 && p_ecs.HaveComponent<Transform>(selectedEntity))//have selected entity
         {
             ImGuizmo::SetOrthographic(true);
             
