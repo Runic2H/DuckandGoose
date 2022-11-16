@@ -25,13 +25,17 @@ namespace EM {
 		static std::map<std::string, std::shared_ptr<Shader>> shaders;
 		static std::map<std::string, std::shared_ptr<Font>> fonts;
 		static std::map<std::string, std::shared_ptr<CAudioEngine>> audios;
-		
+		static std::map<std::string, std::shared_ptr<Texture>> Icons;
 	public:
 		//load texture from file
 		static std::shared_ptr<Texture> LoadTexture(std::string name, const std::string& filepath);
 		static std::shared_ptr<Texture> GetTexture(std::string name);
 		static std::shared_ptr<Texture> GenTexture(unsigned int width, unsigned int height);
 		
+		// load Icon texture from file to differentiate the sprite, background and icons texture
+		static std::shared_ptr<Texture> LoadIcons(std::string name, const std::string& filepath);
+		static std::shared_ptr<Texture> GetIcon(std::string name);
+
 		//load shader from file
 		static std::shared_ptr<Shader> LoadShader(std::string name, const std::string& filepath);
 		static std::shared_ptr<Shader> GetShader(std::string name);
@@ -58,5 +62,8 @@ namespace EM {
 
 		// generates font from file
 		static std::shared_ptr<Font> LoadFontFromFile(const std::string& filepath, unsigned int fontsize);
+
+		//loads Icons texture
+		static std::shared_ptr<Texture> LoadIconsFromFile(const std::string& filepath);
 	};
 }

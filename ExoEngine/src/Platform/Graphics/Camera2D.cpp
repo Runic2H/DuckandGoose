@@ -49,6 +49,12 @@ namespace EM {
 		return false;
 	}
 
+	void Camera2D::Resize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+	}
+
 	void Camera2D::resetZoomLevel()
 	{
 		m_ZoomLevel = 1.0f;

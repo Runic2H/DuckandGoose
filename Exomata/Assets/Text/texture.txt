@@ -10,4 +10,3 @@ CA3 Assets/Textures/EXOMATA_CA3_SPRITESHEET.png
 CA4 Assets/Textures/EXOMATA_CA4_SPRITESHEET.png
 Damage Assets/Textures/EXOMATA_DAMAGED_SPRITESHEET.png
 Dashing Assets/Textures/EXOMATA_DASHING_SPRITESHEET.png
-

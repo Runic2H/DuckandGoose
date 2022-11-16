@@ -31,7 +31,6 @@ namespace EM
 
 	void LogicSystem::Update(float Frametime)
 	{
-
 		Timer::GetInstance().Start(Systems::LOGIC);
 		Timer::GetInstance().GetDT(Systems::LOGIC);
 		for (const auto& entity : mEntities)

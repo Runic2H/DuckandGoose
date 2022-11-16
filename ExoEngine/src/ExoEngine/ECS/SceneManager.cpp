@@ -51,77 +51,86 @@ namespace EM
 		p_ecs.SetTotalEntitiesForWorldBuild(obj["Number of Entities"]["Entities"].GetUint());
 		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
 		{
+			auto aliveTotal = p_ecs.GetTotalEntities();
+			Entity aliveCount = 0;
+			Entity j = 0;
 			p_ecs.ClearArrayForWorldBuild(i);
-			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
+			
+			while(aliveCount < aliveTotal)
 			{
 				Signature signature(obj["EntitySignatures"][(j)].GetString());
-				if (signature.test(i))
+				if (signature.any())
 				{
-					//ADD COMPONENTS HERE FOR DESERIALIZE
-					if (p_ecs.GetComponentTypeName(i) == "Transform")
+					++aliveCount;
+					if (signature.test(i))
 					{
-						Transform transform;
-						if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						//ADD COMPONENTS HERE FOR DESERIALIZE
+						if (p_ecs.GetComponentTypeName(i) == "Transform")
 						{
-							p_ecs.AddComponent<Transform>(j, transform);
+							Transform transform;
+							if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Transform>(j, transform);
+							}
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "RigidBody")
-					{
-						RigidBody rigidbody;
-						if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "RigidBody")
 						{
-							p_ecs.AddComponent<RigidBody>(j, rigidbody);
+							RigidBody rigidbody;
+							if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<RigidBody>(j, rigidbody);
+							}
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Collider")
-					{
-						Collider collider;
-						if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "Collider")
 						{
-							p_ecs.AddComponent<Collider>(j, collider);
+							Collider collider;
+							if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Collider>(j, collider);
+							}
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "NameTag")
-					{
-						NameTag nametag;
-						if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "NameTag")
 						{
-							p_ecs.AddComponent<NameTag>(j, nametag);
+							NameTag nametag;
+							if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<NameTag>(j, nametag);
+							}
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Sprite")
-					{
-						Sprite sprite;
-						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "Sprite")
 						{
-							p_ecs.AddComponent<Sprite>(j, sprite);
+							Sprite sprite;
+							if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Sprite>(j, sprite);
+							}
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Logic")
-					{
-						Logic logic;
-						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj())) {}
-						p_ecs.AddComponent<Logic>(j, logic);
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Player")
-					{
-						Player player;
-						if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "Logic")
 						{
-							p_ecs.AddComponent<Player>(j, player);
+							Logic logic;
+							if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj())) {}
+							p_ecs.AddComponent<Logic>(j, logic);
 						}
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Audio")
-					{
-						Audio mAudio;
-						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+						if (p_ecs.GetComponentTypeName(i) == "Player")
 						{
-							p_ecs.AddComponent<Audio>(j, mAudio);
+							Player player;
+							if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Player>(j, player);
+							}
 						}
+						if (p_ecs.GetComponentTypeName(i) == "Audio")
+						{
+							Audio mAudio;
+							if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Audio>(j, mAudio);
+							}
+						}
+
 					}
-					
 				}
+				++j;
 			}
 			for (Entity j = 0; j < MAX_ENTITIES; ++j)
 			{
@@ -175,9 +184,15 @@ namespace EM
 
 		writer->Key("EntitySignatures");
 		writer->StartArray();
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		auto aliveTotal = p_ecs.GetTotalEntities();
+		Entity aliveCount = 0;
+		Entity iterEntity = 0;
+		while (aliveCount < aliveTotal)
 		{
-			writer->String(p_ecs.GetEntitySignature(i).to_string().c_str());
+			writer->String(p_ecs.GetEntitySignature(iterEntity).to_string().c_str());
+			if (p_ecs.GetEntitySignature(iterEntity).any())
+				aliveCount++;
+			iterEntity++;
 		}
 		writer->EndArray();
 
@@ -187,8 +202,13 @@ namespace EM
 		{
 			writer->Key(p_ecs.GetComponentTypeName(i).c_str());
 			writer->StartArray();
-			for (Entity j = 0; j < p_ecs.GetTotalEntities(); ++j)
+			auto aliveTotal = p_ecs.GetTotalEntities();
+			Entity aliveCount = 0;
+			Entity j = 0;
+			while (aliveCount < aliveTotal)
 			{
+				if(p_ecs.GetEntitySignature(j).any())
+					aliveCount++;
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{
 					//ADD COMPONENTS HERE FOR SERIALIZE
@@ -225,6 +245,7 @@ namespace EM
 						p_ecs.GetComponent<Audio>(j).Serialize(writer);
 					}
 				}
+				j++;
 			}
 			writer->EndArray();
 		}

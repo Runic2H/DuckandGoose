@@ -13,7 +13,6 @@
 ***/
 
 #include "PlayerMovement.h"
-
 namespace EM
 {
 

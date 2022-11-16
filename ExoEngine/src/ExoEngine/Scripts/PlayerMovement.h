@@ -24,6 +24,7 @@ namespace EM
 	class PlayerMovement : public IScript
 	{
 	public:
+
 		PlayerMovement() = default;
 		~PlayerMovement() = default;
 		virtual PlayerMovement* Clone() const override;
