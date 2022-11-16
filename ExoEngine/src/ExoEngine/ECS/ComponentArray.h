@@ -74,12 +74,17 @@ namespace EM
 			size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
 			size_t indexOfLastElement = mSize - 1;
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
-
+			std::cout << "Index of removed  entity " << indexOfRemovedEntity << std::endl;
+			std::cout << "Index of Last Element " << indexOfLastElement << std::endl;
+		
+			
+		
+			
 			// Update map to point to moved spot
 			Entity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
 			mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
 			mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
-
+			std::cout << "entity Of Last Element " << entityOfLastElement << std::endl;
 			mEntityToIndexMap[entity] = MAX_ENTITIES;
 			mIndexToEntityMap[indexOfLastElement] = MAX_ENTITIES;
 
@@ -153,10 +158,10 @@ namespace EM
 
 		std::array<T, MAX_ENTITIES> mComponentArray{};
 
-		// Map from an entity ID to an array index.
+		// Array from an entity ID to an array index.
 		std::array<size_t, MAX_ENTITIES> mEntityToIndexMap;
 
-		// Map from an array index to an entity ID.
+		// Array from an array index to an entity ID.
 		std::array<Entity, MAX_ENTITIES> mIndexToEntityMap;
 
 		// Total size of valid entries in the array.

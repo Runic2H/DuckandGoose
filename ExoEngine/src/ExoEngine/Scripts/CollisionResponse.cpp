@@ -24,7 +24,7 @@ namespace EM
 				rigidbody.SetVel(response);
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			std::cout << "Adjusted velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
+			//std::cout << "Adjusted velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			rigidbody.SetNextPos(nextPos);
 		}
 	}

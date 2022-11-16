@@ -27,13 +27,20 @@ namespace EM {
 		void SetTexture(const std::string& name) { m_texturename = name; }
 		std::string &GetTexture() { return m_texturename; }
 
-		void SetIndex(float& x) { m_index.x = x; }
+		void SetIndex(float& x) { m_index.x = x; } // y will always remind as zero
 		vec2D& GetIndex() { return m_index; }
-		//boolean isanimated
+
+		void SetDisplayTime(float displaytime) { mDisplayTime = displaytime; };
+		float& GetDisplayTime() { return mDisplayTime; }
+
+	public:
+		bool mIsSpriteSheet; // to tell whether we are using a spritesheet
+		bool mIsanimated;	// if is a spritesheet do we want it to be animated 
 		//altas 
 	private:
 		std::string m_texturename;
 		vec2D m_index;
+		float mDisplayTime;
 		//TODO insert a increment for mIndex so that it can lease with the animator
 	};
 }

@@ -17,6 +17,7 @@ namespace EM {
 	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::textures;
 	std::map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
 	std::map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
+	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::Icons;
 	//TODO to load different fonts and maybe audio/music
 	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 	std::shared_ptr<Texture> ResourceManager::LoadTexture(std::string name, const std::string& filepath)
@@ -43,6 +44,17 @@ namespace EM {
 		return m_texture;
 	}
 
+	std::shared_ptr<Texture> ResourceManager::LoadIcons(std::string name, const std::string& filepath)
+	{
+
+		return Icons[name] = ResourceManager::LoadIconsFromFile(filepath);
+	}
+
+	std::shared_ptr<Texture> ResourceManager::GetIcon(std::string name)
+	{
+		return Icons[name];
+	}
+
 	std::shared_ptr<Shader> ResourceManager::LoadShaderFromFile(const std::string& filepath)
 	{
 		auto m_shader = std::make_shared<Shader>(filepath);
@@ -66,6 +78,13 @@ namespace EM {
 		auto m_font = std::make_shared<Font>();
 		m_font->Load(filepath, fontsize);
 		return m_font;
+	}
+
+	std::shared_ptr<Texture> ResourceManager::LoadIconsFromFile(const std::string& filepath)
+	{
+		auto mIcons = std::make_shared<Texture>();
+		mIcons->GenTexture(filepath);
+		return mIcons;
 	}
 
 	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudioFromFile(const std::string& filepath)
@@ -99,11 +118,19 @@ namespace EM {
 
 	void EM::ResourceManager::clear()
 	{
-		for (auto iter : textures)
+		/*for (auto iter : textures)
+		{
 			iter.second->~Texture();
+		}
 
 		for (auto iter : shaders)
 			iter.second->~Shader();
+
+		for (auto iter : Icons)
+			iter.second->~Texture();*/
+		textures.clear();
+		Icons.clear();
+		shaders.clear();
 	}
 
 	

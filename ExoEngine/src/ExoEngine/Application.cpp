@@ -93,37 +93,38 @@ namespace EM {
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
 
-		p_Scene->DeserializeFromFile("Level.json");
+		p_Scene->DeserializeFromFile("Level2.json");
 
-		/*Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
-		Logic logic;
-		Sprite sprite;
-		NameTag name;
-		Player playerID;
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		IScript* base = new PlayerMovement();
-		logic.InsertScript("PlayerMovement", base, player);
-		p_ecs.AddComponent<Transform>(player, TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, ColliderComponent);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		p_ecs.AddComponent<Player>(player, playerID);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//p_ecs.DestroyEntity(0);
 
-		Logic logic2;
-		IScript* enemyLogic = new EnemyMovement();
-		logic2.InsertScript("EnemyMovement", enemyLogic, enemy);
-		p_ecs.AddComponent<Logic>(enemy, logic2);*/
+		//Entity player = p_ecs.CreateEntity();
+		//RigidBody rb;
+		//Logic logic;
+		//Sprite sprite;
+		//NameTag name;
+		//Player playerID;
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//logic.InsertScript(new PlayerMovement(), player);
+		//p_ecs.AddComponent<Transform>(player, TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		//Entity enemy = p_ecs.CloneEntity(player);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//p_ecs.AddComponent<Player>(player, playerID);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+
+		//Logic logic2;
+		//logic2.InsertScript(new EnemyMovement(), enemy);
+		//p_ecs.AddComponent<Logic>(enemy, logic2);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -158,7 +159,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("LevelTest.json");
+		p_Scene->SerializeToFile("Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}
