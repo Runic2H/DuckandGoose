@@ -39,7 +39,7 @@ namespace EM
 			assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.");
 			//EM_EXO_ASSERT(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.")
 			// Take an ID from the front of the queue
-			Entity id = mAvailableEntities.front();
+			Entity id = mAvailableEntities.top();
 			mAvailableEntities.pop();	//Removes elements from the front of the queue
 			++mLivingEntityCount;	//Dictates how many entities are alive
 
@@ -51,7 +51,17 @@ namespace EM
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
 
 			// Invalidate the destroyed entity's signature
+			for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			{
+				std::cout << mSignatures[i] << std::endl;
+			}
 			mSignatures[entity].reset();
+			std::cout << "--------------------------------------" << std::endl;
+			for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			{
+				std::cout << mSignatures[i] << std::endl;
+			}
+
 
 			// Put the destroyed ID at the back of the queue
 			mAvailableEntities.push(entity);
@@ -96,7 +106,7 @@ namespace EM
 			{
 				DestroyEntity(mLivingEntityCount);
 			}
-			mAvailableEntities = std::queue<Entity>();
+			mAvailableEntities = std::priority_queue<Entity, std::vector<Entity>, std::greater<Entity>>();
 			for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
 			{
 				mAvailableEntities.push(entity);
@@ -107,7 +117,8 @@ namespace EM
 	private:
 
 		// Queue of unused entity IDs
-		std::queue<Entity> mAvailableEntities{};
+		//std::queue<Entity> mAvailableEntities{};
+		std::priority_queue<Entity, std::vector<Entity>, std::greater<Entity>> mAvailableEntities{};
 
 		// Array of signatures where the index corresponds to the entity ID
 		//std::array<SignatureID, MAX_ENTITIES> mSignatures{};

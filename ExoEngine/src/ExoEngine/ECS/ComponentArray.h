@@ -153,10 +153,10 @@ namespace EM
 
 		std::array<T, MAX_ENTITIES> mComponentArray{};
 
-		// Map from an entity ID to an array index.
+		// Array from an entity ID to an array index.
 		std::array<size_t, MAX_ENTITIES> mEntityToIndexMap;
 
-		// Map from an array index to an entity ID.
+		// Array from an array index to an entity ID.
 		std::array<Entity, MAX_ENTITIES> mIndexToEntityMap;
 
 		// Total size of valid entries in the array.

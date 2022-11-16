@@ -365,22 +365,29 @@ namespace EM {
                     selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
                 }
             }
-         
-            for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
-            {
-                if (p_ecs.HaveComponent<NameTag>(e))
+            
+            auto aliveTotal = p_ecs.GetTotalEntities();
+            Entity aliveCount = 0;
+            Entity iterEntity = 0;
+            while (aliveCount < aliveTotal)
+            { 
+                if (p_ecs.HaveComponent<NameTag>(iterEntity))
                 {
-                    const auto& tag = p_ecs.GetComponent<NameTag>(e).GetNameTag();
+                    const auto& tag = p_ecs.GetComponent<NameTag>(iterEntity).GetNameTag();
 
                     ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
-                    bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)e, flags, tag.c_str());
+                    bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)iterEntity, flags, tag.c_str());
 
                     if (ImGui::IsItemClicked())
-                        selectedEntity = e;
+                        selectedEntity = iterEntity;
 
                     if (opened)
                         ImGui::TreePop();
+
+                    aliveCount++;
                 }
+
+                iterEntity++;
             }
          }
     
