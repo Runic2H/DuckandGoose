@@ -14,7 +14,6 @@ namespace EM
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetEntityID());
 		if (col.GetHit()) {
-			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			vec2D response = rigidbody.GetVel(); 
 			vec2D normal = col.GetNormal();
 			float dotProd = dotProduct(normal, response);
@@ -24,7 +23,6 @@ namespace EM
 				rigidbody.SetVel(response);
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			std::cout << "Adjusted velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			rigidbody.SetNextPos(nextPos);
 		}
 	}
