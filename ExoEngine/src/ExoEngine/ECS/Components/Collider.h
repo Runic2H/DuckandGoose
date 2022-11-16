@@ -34,6 +34,7 @@ namespace EM
 		void SetMax(vec2D input) { mMax = input; }
 		void SetRad(float input) { mRadius = input; }
 		void SetHit(int input) { hit = input; }
+		void SetNormal(vec2D input) { CollisionNormal = input; }
 
 		ColliderType& GetCollider() { return mCol; }
 		vec2D GetOffset() { return offset; }
@@ -41,8 +42,10 @@ namespace EM
 		vec2D GetMax() { return mMax; }
 		float GetRad() { return mRadius; }
 		int GetHit() { return hit; }
+		vec2D GetNormal() { return CollisionNormal; }
 	private:
 		ColliderType mCol{};
+		vec2D CollisionNormal;
 		vec2D mMin;
 		vec2D mMax;
 		vec2D offset;

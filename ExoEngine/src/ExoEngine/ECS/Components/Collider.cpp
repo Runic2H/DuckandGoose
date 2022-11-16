@@ -2,7 +2,7 @@
 
 namespace EM
 {
-	Collider::Collider() : mCol{ColliderType::none}, mMin{vec2D()}, mMax{vec2D()}, mRadius{0.3f}, hit{0} {}
+	Collider::Collider() : mCol{ColliderType::none}, mMin{vec2D()}, mMax{vec2D()}, mRadius{0.3f}, hit{0}, CollisionNormal{vec2D()} {}
 
 	bool Collider::Deserialize(const rapidjson::Value& obj)
 	{

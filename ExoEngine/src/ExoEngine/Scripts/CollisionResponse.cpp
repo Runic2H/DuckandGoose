@@ -15,10 +15,14 @@ namespace EM
 		auto& col = p_ecs.GetComponent<Collider>(GetEntityID());
 		if (col.GetHit()) {
 			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
-			vec2D inverse = rigidbody.GetDir(); 
-			inverse.x *= -25;
-			inverse.y *= -25;
-			rigidbody.SetVel(mPhys.accelent(inverse, rigidbody.GetVel(), Frametime));
+			vec2D response = rigidbody.GetVel(); 
+			vec2D normal = col.GetNormal();
+			float dotProd = dotProduct(normal, response);
+			if (dotProd <= 0) {
+				normal = normal * dotProd;
+				response -= normal;
+				rigidbody.SetVel(response);
+			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			std::cout << "Adjusted velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			rigidbody.SetNextPos(nextPos);
