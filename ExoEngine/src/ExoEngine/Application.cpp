@@ -99,32 +99,32 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		p_Scene->DeserializeFromFile("Level2.json");
+		//p_Scene->DeserializeFromFile("Level2.json");
 
 		//p_ecs.DestroyEntity(0);
 
-		//Entity player = p_ecs.CreateEntity();
-		//RigidBody rb;
-		//Logic logic;
-		//Sprite sprite;
-		//NameTag name;
-		//Player playerID;
-		//name.SetNameTag("Player");
-		//sprite.SetTexture("Idle");
-		//logic.InsertScript(new PlayerMovement(), player);
-		//p_ecs.AddComponent<Transform>(player, TransformComponent);
-		//p_ecs.AddComponent<RigidBody>(player, rb);
-		//p_ecs.AddComponent<Sprite>(player, sprite);
-		//p_ecs.AddComponent<NameTag>(player, name);
-		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
-		//Entity enemy = p_ecs.CloneEntity(player);
-		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		//p_ecs.AddComponent<Player>(player, playerID);
-		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		Entity player = p_ecs.CreateEntity();
+		RigidBody rb;
+		Logic logic;
+		Sprite sprite;
+		NameTag name;
+		Player playerID;
+		name.SetNameTag("Player");
+		sprite.SetTexture("Idle");
+		logic.InsertScript(new PlayerMovement(), player);
+		p_ecs.AddComponent<Transform>(player, TransformComponent);
+		p_ecs.AddComponent<RigidBody>(player, rb);
+		p_ecs.AddComponent<Sprite>(player, sprite);
+		p_ecs.AddComponent<NameTag>(player, name);
+		p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		Entity enemy = p_ecs.CloneEntity(player);
+		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		p_ecs.AddComponent<Player>(player, playerID);
+		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 
-		//Logic logic2;
-		//logic2.InsertScript(new EnemyMovement(), enemy);
-		//p_ecs.AddComponent<Logic>(enemy, logic2);
+		Logic logic2;
+		logic2.InsertScript(new EnemyMovement(), enemy);
+		p_ecs.AddComponent<Logic>(enemy, logic2);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -159,7 +159,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("Level.json");
+		p_Scene->SerializeToFile("LevelTest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}
