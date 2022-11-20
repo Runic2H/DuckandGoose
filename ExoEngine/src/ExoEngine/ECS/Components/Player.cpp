@@ -17,7 +17,7 @@ camera to the player component or enemy pathfinding
 
 namespace EM
 {
-	Player::Player() : mHealth{ 100 } {}
+	Player::Player() : mHealth{ 100 }, ccGodMode{false}, ccNoclip{false}, ccInfHP{false}, ccBerserk{false}, ccNoChill{false}, ccSanic{false} {}
 
 	bool Player::Deserialize(const rapidjson::Value& obj)
 	{

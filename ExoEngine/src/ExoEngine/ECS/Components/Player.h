@@ -28,8 +28,26 @@ namespace EM
 
 		void SetHealth(int health) { mHealth = health; }
 		int& GetHealth() { return mHealth; }
+		void SetGod(bool tog) { ccGodMode = tog; }
+		bool GetGod() { return ccGodMode; }
+		void SetNoclip(bool tog) { ccNoclip = tog; }
+		bool GetNoclip() { return ccNoclip; }
+		void SetInfHP(bool tog) { ccInfHP = tog; }
+		bool GetInfHP() { return ccInfHP; }
+		void SetBerserk(bool tog) { ccBerserk = tog; }
+		bool GetBerserk() { return ccBerserk; }
+		void SetNoChill(bool tog) { ccNoChill = tog; }
+		bool GetNoChill() { return ccNoChill; }
+		void SetSanic(bool tog) { ccSanic = tog; }
+		bool GetSanic() { return ccSanic; }
 
 	private:
 		int mHealth;
+		bool ccGodMode; //all cheats on
+		bool ccNoclip; //No collision with anything
+		bool ccInfHP; //Infinite HP
+		bool ccBerserk; //Extra damage
+		bool ccNoChill; //No skill cooldowns
+		bool ccSanic; //Go very fastk
 	};
 }
