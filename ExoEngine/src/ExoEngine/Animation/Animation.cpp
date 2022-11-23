@@ -16,9 +16,10 @@ namespace EM {
 		data.TextureId = GETTEXTURE(sprite.GetTexture())->GetRendererID();
 		data.DisplayTime = sprite.GetDisplayTime();
 		data.FrameIndex = sprite.GetIndex();
-		sprite.GetIndex().x = CurrentFrameIndex;
+		sprite.SetIndex(CurrentFrameIndex);
 		data.MaxFrame = 8.0f;
 		frames.push_back(data);
+		//std::cout <<"Addframeinfo" << data.DisplayTime << std::endl;
 	}
 	void Animation::FrameIncrement()
 	{
@@ -36,10 +37,13 @@ namespace EM {
 		if (frames.size() > 0)
 		{
 			currentFrameTime += deltatime;
+			
 			if (currentFrameTime >= frames[(int)CurrentFrameIndex].DisplayTime )
 			{
+				//std::cout <<"Updateanimation" << frames[(int)CurrentFrameIndex].DisplayTime << std::endl;
 				currentFrameTime = 0.0f;
 				FrameIncrement();
+
 				if (CurrentFrameIndex >= 8.0f)
 					ResetFrame();
 				return true;

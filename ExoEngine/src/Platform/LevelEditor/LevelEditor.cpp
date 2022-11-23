@@ -22,15 +22,19 @@
 #include "ExoEngine/Timer/Time.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "Platform/Graphics/Renderer.h"
+#include "Platform/Graphics/Graphics.h"
+#include "Picker.h"
 
 #include "Platform/Graphics/FrameBuffer.h"
 #include "ExoEngine/Log.h"
 #include "ExoEngine/Audio/AudioEngine.h"
 
 #include "ExoEngine/ECS/Components/Components.h"
+#include "ExoEngine/ECS/SceneManager.h"
 #include "ExoEngine/Log.h"
-#include "ExoEngine/ECS/Components/Components.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/quaternion.hpp>
+
 
 namespace EM {
 
@@ -66,6 +70,8 @@ namespace EM {
 
         ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 450");
+
+        LoadSceneFromFile();
     }
 
     //  Update loop for level editor, poll events and set new frames
@@ -77,6 +83,7 @@ namespace EM {
         
         Docking();
         MainMenuBar();
+        LoadSaveScene();
         Profiler();
         ImGui::ShowDemoWindow();
         ContentBrowser();
@@ -111,6 +118,22 @@ namespace EM {
         ImGui::DestroyContext();
     }
 
+    void LevelEditor::LoadSceneFromFile()
+    {
+        std::string path = "Assets/Scene";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ path })
+        {
+            //Checks if the given file status or path corresponds to a regular file
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+
+            mFileList.emplace_back(dir_entry);
+            // used to Load Scene
+            mScenefile.emplace_back(dir_entry.path().filename().string());
+        }
+    }
     //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
     void LevelEditor::MainMenuBar()
     {
@@ -135,31 +158,65 @@ namespace EM {
         }
     }
 
+    void LevelEditor::LoadSaveScene()
+    {
+        std::vector<const char*> filenames;
+        const size_t arrSize = 100;
+        const char* fileList[arrSize];
+        std::string path = "Assets/Scene/";
+        for (auto& item : mScenefile)
+        {
+            filenames.push_back(item.c_str());
+        }
+
+        std::copy(filenames.begin(), filenames.end(), fileList);
+
+        for (size_t i = filenames.size(); i < arrSize; i++)
+        {
+            fileList[i] = "EMPTY";
+        }
+
+        ImGui::Begin("Save / Load");
+        ImGui::Combo("##LoadFile", &mSelectedFile, fileList, static_cast<int>(filenames.size()), static_cast<int>(filenames.size()));
+        if (mSelectedFile < 0)
+        {
+            ImGui::End();
+            return;
+        }
+        if (ImGui::Button("LOAD"))
+        {
+            p_Scene->DeserializeFromFile(path + mFileList[mSelectedFile].path().filename().string());
+        }
+        ImGui::SameLine();
+        ImGui::Button("SAVE");
+        if (ImGui::IsItemClicked())
+        {
+            p_Scene->SerializeToFile(path + mFileList[mSelectedFile].path().filename().string());
+        }
+
+        ImGui::End();
+    }
+
     void LevelEditor::SceneViewer()
     {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
         ImGui::Begin("Scene");
        
-        float tab_size = (ImGui::GetWindowSize().y - ImGui::GetContentRegionAvail().y) * 2;
-        ImVec2 position = ImGui::GetWindowPos();
-        ImVec2 size = ImGui::GetContentRegionAvail();
-        camera.Resize(size.x, size.y);
-        //camera.MouseScrolling();
-        
-        ImVec2 offset{
-           position.x - (mwindata.GetWidth() - position.x - size.x) + (ImGui::GetContentRegionAvail().x - size.x),
-           position.y - (mwindata.GetHeight() - position.y - size.y) + (ImGui::GetContentRegionAvail().y - size.y) + tab_size
-        };
+        //vp = viewport
+        auto vpMinRegion = ImGui::GetWindowContentRegionMin();
+        auto vpMaxRegion = ImGui::GetWindowContentRegionMax();
+        auto vpOffset = ImGui::GetWindowPos();
 
-        _gameWindowSpecs = {
-            position.x + 0.5f * (ImGui::GetContentRegionAvail().x - size.x),
-            position.y + 0.5f * (ImGui::GetContentRegionAvail().y - size.y + tab_size),
-            size.x,
-            size.y
-        };
+        mViewportBounds[0] = { vpMinRegion.x + vpOffset.x, vpMinRegion.y + vpOffset.y };
+        mViewportBounds[1] = { vpMaxRegion.x + vpOffset.x, vpMaxRegion.y + vpOffset.y };
 
-        unsigned int textureID = p_FrameBuffer->GetColorAttachmentRendererID();
-        ImGui::Image((void*)(intptr_t)textureID, ImGui::GetContentRegionAvail(),
+        //for scrolling purpose
+        mViewportFocused = ImGui::IsWindowFocused();
+        mViewportSize = { ImGui::GetContentRegionAvail() };
+
+
+        uint64_t textureID = p_FrameBuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void*)(intptr_t)textureID, mViewportSize,
             ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
         
@@ -170,37 +227,38 @@ namespace EM {
         {
             ImGuizmo::SetOrthographic(true);
             
-   
-
+ 
             ImGuizmo::SetRect(
-                _gameWindowSpecs.x,
-                _gameWindowSpecs.y,
-                _gameWindowSpecs.z,
-                _gameWindowSpecs.w
+                mViewportBounds[0].x, 
+                mViewportBounds[0].y,
+                mViewportBounds[1].x - mViewportBounds[0].x, 
+                mViewportBounds[1].y - mViewportBounds[0].y
             );
 
-            glm::mat4 cameraProj = camera.GetProjectionMatrix();
-            glm::mat4 cameraView = camera.GetViewMatrix();
-            //std::cout << cameraView[0].x << std::endl;
+            glm::mat4 cameraProj = EM::Graphic::camera.GetProjectionMatrix();
+            glm::mat4 cameraView = EM::Graphic::camera.GetViewMatrix();
             glm::mat4 transform{ 1.0f }; // identity matrix
 
             auto& trans = p_ecs.GetComponent<Transform>(selectedEntity);
-
+            
             transform = glm::translate(glm::mat4{ 1.0f },glm::vec3(trans.GetPos().x, trans.GetPos().y, 0.0f))
-                * glm::rotate(glm::mat4(1.f), trans.GetRot(), glm::vec3(0.f, 0.f, 1.f))
-                * glm::scale(glm::mat4(1.f), { trans.GetScale().x,trans.GetScale().y ,1.f });
+                * glm::rotate(glm::mat4(1.0f), glm::radians(trans.GetRot()), glm::vec3(0.0f, 0.0f, 1.0f))
+                * glm::scale(glm::mat4(1.f), { trans.GetScale().x,trans.GetScale().y ,0.0f });
 
             ImGuizmo::SetDrawlist();
             // Draw ImGuizmo (renders every frame)
-            ImGuizmo::Manipulate(glm::value_ptr(glm::inverse(transform))
+            ImGuizmo::Manipulate(glm::value_ptr(cameraView)
                 , glm::value_ptr(cameraProj), (ImGuizmo::OPERATION)mGizmoType,
                 ImGuizmo::WORLD, glm::value_ptr(transform));
 
             if (ImGuizmo::IsUsing())
             {
-                float decompTrans[3], decompRot[3], decompScale[3];
+                glm::vec2 decompTrans, decompRot, decompScale;
 
-                ImGuizmo::DecomposeMatrixToComponents(glm::value_ptr(transform), decompTrans, decompRot, decompScale);
+                ImGuizmo::DecomposeMatrixToComponents(glm::value_ptr(transform), 
+                    glm::value_ptr(decompTrans), 
+                    glm::value_ptr(decompRot),
+                    glm::value_ptr(decompScale));
                 // change size 
                 trans.SetPos(decompTrans[0], decompTrans[1]);
             }
@@ -208,6 +266,24 @@ namespace EM {
 
         ImGui::End();
         ImGui::PopStyleVar();
+        if (ImGui::IsWindowFocused() &&  p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver())
+        {
+
+            std::multimap<float, Transform*> sortedMultimap;
+            for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
+            {
+                if (p_ecs.HaveComponent<Transform>(entity)) {
+                    sortedMultimap.insert({ p_ecs.GetComponent<Transform>(entity).GetRot(), 
+                                  &p_ecs.GetComponent<Transform>(entity)});
+                }
+                //std::cout << "yo";
+            }
+              
+            selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
+            std::cout << selectedEntity << std::endl;
+         /*   if (selectedEntity == -1)
+                selectedEntity = {};*/
+        }   
     }
 
     // Content browser to be implemented in M3
@@ -458,7 +534,6 @@ namespace EM {
 
             ImGui::Checkbox("Show physics colliders", &mDebugDraw);
 
-            //Todo show the each system consume how much at runtime
             mSystemRunTime[0] = Timer::GetInstance().GetDT(Systems::COLLISION)/ Timer::GetInstance().GetGlobalDT();
             mSystemRunTime[1] = Timer::GetInstance().GetDT(Systems::GRAPHIC)/ Timer::GetInstance().GetGlobalDT();
             mSystemRunTime[2] = Timer::GetInstance().GetDT(Systems::PHYSICS)/ Timer::GetInstance().GetGlobalDT();
@@ -552,10 +627,10 @@ namespace EM {
     void LevelEditor::Inspector()
     {
         ImGui::Begin("Inspector");
-        if (selectedEntity != MAX_ENTITIES)// if the selectedEntityExist
+        if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0 )// if the selectedEntityExist
         {
             //create component for the selected entity 
-            if (ImGui::Button("Add Component"))
+            if (ImGui::Button("Add Component") )
                 ImGui::OpenPopup("Add Component");
 
             if (ImGui::BeginPopup("Add Component"))
@@ -575,11 +650,13 @@ namespace EM {
                 }
                 if (ImGui::MenuItem("Collider"))
                 {
+                    if (!p_ecs.HaveComponent<Collider>(selectedEntity))
                     p_ecs.AddComponent<Collider>(selectedEntity, ColliderComponent);
                     ImGui::CloseCurrentPopup();
                 }
                 if (ImGui::MenuItem("RigidBody"))
                 {
+                    if (!p_ecs.HaveComponent<RigidBody>(selectedEntity))
                     p_ecs.AddComponent<RigidBody>(selectedEntity, RigidBodyComponent);
                     ImGui::CloseCurrentPopup();
                 }
@@ -611,10 +688,10 @@ namespace EM {
                     ImGui::PushItemWidth(100.0f);
                     ImGui::Text("Position"); ImGui::SameLine();
                     ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
-                    ImGui::DragFloat("##Position", (float*)&Position.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                    ImGui::DragFloat("##PositionX", (float*)&Position.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
                     ImGui::PushID(1);
                     ImGui::Text("Y"); ImGui::SameLine();
-                    ImGui::DragFloat("##Position", (float*)&Position.y, 0.005f);
+                    ImGui::DragFloat("##PositionY", (float*)&Position.y, 0.005f);
                     ImGui::PopID();
 
                     //scale
@@ -665,6 +742,16 @@ namespace EM {
                         ImGui::EndCombo();
                     }
 
+                    if (ImGui::BeginDragDropTarget())
+                    {
+                        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Textures"))
+                        {
+                            texturePath = *(const std::string*)payload->Data;
+                        }
+                        ImGui::EndDragDropTarget();
+                    }
+                    ImGui::Text("DisplayTime"); ImGui::SameLine();
+                    ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
                 }
             }
             //Collider Component
@@ -672,18 +759,54 @@ namespace EM {
             {
                 if (ImGui::CollapsingHeader("Collider", ImGuiTreeNodeFlags_None))
                 {
-                    auto& collider = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
-                    //if(ImGui::BeginChild())
+                    //selection for collider type
+                    auto& colliderType = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
 
-                    int colliderIndex = static_cast<int>(collider);
+                    int colliderTypeIndex = static_cast<int>(colliderType);
                     const char* colliderNames = "none\0circle\0line\0rect";
                     ImGui::Text("Collider Type"); ImGui::SameLine();
-                    ImGui::Combo("##test", &colliderIndex, colliderNames);
-                    collider = static_cast<Collider::ColliderType>(colliderIndex);
+                    ImGui::Combo("##test", &colliderTypeIndex, colliderNames);
+                    colliderType = static_cast<Collider::ColliderType>(colliderTypeIndex);
+
+                    //positioning the offset
+                    auto& colliderOffset = p_ecs.GetComponent<Collider>(selectedEntity).GetOffset();
+                    ImGui::PushItemWidth(100.0f);
+                   
+                    ImGui::Text("OffSet   "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();  
+                    
+                    ImGui::DragFloat("##colliderOffsetX", (float*)&colliderOffset.x, 0.05f); ImGui::SameLine(); 
+                    ImGui::PushID(1);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##colliderOffsetY", (float*)&colliderOffset.y, 0.05f);
+                    ImGui::PopID();
+
+                    //size of the collider
+                    if (p_ecs.GetComponent<Collider>(selectedEntity).GetCollider() == Collider::ColliderType::circle)
+                    {
+                        auto& colliderSize = p_ecs.GetComponent<Collider>(selectedEntity).GetRad();
+                        ImGui::Text("Radius   "); ImGui::SameLine();
+                        ImGui::DragFloat("##Radius", (float*)&colliderSize, 0.05f);
+                    }
+                    else if (p_ecs.GetComponent<Collider>(selectedEntity).GetCollider() == Collider::ColliderType::rect)
+                    {
+                        auto& colliderSize = p_ecs.GetComponent<Collider>(selectedEntity);
+                        ImGui::Text("Minimum "); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();
+                        ImGui::DragFloat("##MinimumX", (float*)&colliderSize.GetMin().x, 0.05f); ImGui::SameLine();
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("##MininmumY", (float*)&colliderSize.GetMin().y, 0.05f);
+
+                        ImGui::Text("Maximum "); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();
+                        ImGui::DragFloat("##MaximumX", (float*)&colliderSize.GetMax().x, 0.05f); ImGui::SameLine();
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("##MaximumY", (float*)&colliderSize.GetMax().y, 0.05f);
+                    }
                 }
             }
             //Rigid Component
-            if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+           /* if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
             {
                 if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
                 {
@@ -692,10 +815,10 @@ namespace EM {
                     ImGui::PushItemWidth(100.0f);
                     ImGui::Text("Velocity   "); ImGui::SameLine();
                     ImGui::Text("X"); ImGui::SameLine();
-                    ImGui::DragFloat("##Velocity", (float*)&velocity.x, 0.005f); ImGui::SameLine();
+                    ImGui::DragFloat("##VelocityX", (float*)&velocity.x, 0.005f); ImGui::SameLine();
                     ImGui::PushID(3);
                     ImGui::Text("Y"); ImGui::SameLine();
-                    ImGui::DragFloat("##Velocity", (float*)&velocity.y, 0.005f);
+                    ImGui::DragFloat("##VelocityY", (float*)&velocity.y, 0.005f);
                     ImGui::PopID();
 
                     //Direction
@@ -703,10 +826,10 @@ namespace EM {
                     ImGui::PushItemWidth(100.0f);
                     ImGui::Text("Direction  "); ImGui::SameLine();
                     ImGui::Text("X"); ImGui::SameLine();
-                    ImGui::DragFloat("##Direction", (float*)&direction.x, 0.005f); ImGui::SameLine();
+                    ImGui::DragFloat("##DirectionX", (float*)&direction.x, 0.005f); ImGui::SameLine();
                     ImGui::PushID(4);
                     ImGui::Text("Y"); ImGui::SameLine();
-                    ImGui::DragFloat("##Direction", (float*)&direction.y, 0.005f);
+                    ImGui::DragFloat("##DirectionY", (float*)&direction.y, 0.005f);
                     ImGui::PopID();
 
                     //GetFricition
@@ -719,7 +842,7 @@ namespace EM {
                     ImGui::Text("Restitution"); ImGui::SameLine();
                     ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
                 }
-            }
+            }*/
         if (ImGui::Button("Delete Component"))
               ImGui::OpenPopup("Delete Component");
 
@@ -751,8 +874,6 @@ namespace EM {
     ImGui::End();
 
     }
-
-   
 
     //Audio manager allows users to select and play and test different audios in the editor
     //Need to shift loading of audio files into asset manager in M3

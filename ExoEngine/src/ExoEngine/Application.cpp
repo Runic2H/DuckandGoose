@@ -67,7 +67,7 @@ namespace EM {
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<Sprite>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
+			//signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
@@ -94,16 +94,17 @@ namespace EM {
 		{
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();
 
-		//p_Scene->DeserializeFromFile("Level2.json");
+		//p_Scene->DeserializeFromFile("LevelTest.json");
 
 		//p_ecs.DestroyEntity(0);
 
-		Entity player = p_ecs.CreateEntity();
+		/*Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
 		Logic logic;
 		Sprite sprite;
@@ -112,6 +113,7 @@ namespace EM {
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
 		logic.InsertScript(new PlayerMovement(), player);
+		logic.InsertScript(new CollisionResponse(), player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -124,7 +126,8 @@ namespace EM {
 
 		Logic logic2;
 		logic2.InsertScript(new EnemyMovement(), enemy);
-		p_ecs.AddComponent<Logic>(enemy, logic2);
+		logic2.InsertScript(new CollisionResponse(), enemy);
+		p_ecs.AddComponent<Logic>(enemy, logic2);*/
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -159,7 +162,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("LevelTest.json");
+		//p_Scene->SerializeToFile("LevelTest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

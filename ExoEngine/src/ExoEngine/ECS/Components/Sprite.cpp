@@ -15,7 +15,7 @@
 #include "Sprite.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 namespace EM {
-	Sprite::Sprite() : m_texturename("Blank"), m_index({0.0f,0.0f}), mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(1.0f)
+	Sprite::Sprite() : m_texturename("Blank"), m_index({0.0f,0.0f}), mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(0.1667f)
 	{
 	}
 	bool Sprite::Deserialize(const rapidjson::Value& obj)

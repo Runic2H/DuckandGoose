@@ -104,7 +104,14 @@ namespace EM
 		//Resets all the entities for World build
 		void ResetEntities()
 		{
-			mEntityManager->ResetEntities();
+			auto aliveset = mEntityManager->GetAliveEntities();
+			
+			for (const auto& iter : aliveset)
+			{
+				DestroyEntity(iter);
+			}
+			
+			
 		}
 
 		// Component methods

@@ -1,5 +1,7 @@
-Blank Assets/Textures/Blank.png
 BackGround Assets/Textures/BackGround.png
+Blank Assets/Textures/Blank.png
+HealthUI Assets/Textures/HealthUI_4.png
+ShieldUI Assets/Textures/Shield.png
 Splash Assets/Textures/HitSplash.png
 Running Assets/Textures/Running.png
 Idle Assets/Textures/EXOMATA_IDLE_SPRITESHEET.png
@@ -10,3 +12,4 @@ CA3 Assets/Textures/EXOMATA_CA3_SPRITESHEET.png
 CA4 Assets/Textures/EXOMATA_CA4_SPRITESHEET.png
 Damage Assets/Textures/EXOMATA_DAMAGED_SPRITESHEET.png
 Dashing Assets/Textures/EXOMATA_DASHING_SPRITESHEET.png
+Laser Assets/Textures/Laser_animation-14-13.png

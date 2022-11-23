@@ -37,13 +37,13 @@ namespace EM {
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
 		
+		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
 	private:
 		//for testing
 		std::shared_ptr<Texture> m_Texture = std::make_shared<Texture>();
 		std::unique_ptr<Renderer> m_Renderer = std::make_unique<Renderer>();
 		std::unique_ptr<Font> m_Font = std::make_unique<Font>();
 		MultiRefs<SpriteRender> index1;
-		Camera2D camera = { -1.0f, 1.0f, -1.0f , 1.0f };
 		WinData mwindow{};
 		Animation animator;
 	private:

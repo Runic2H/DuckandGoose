@@ -5,9 +5,9 @@
     "EntityToIndexMap": {
         "Transform": [
             0,
-            100,
-            100,
             1,
+            2,
+            100,
             100,
             100,
             100,
@@ -106,10 +106,10 @@
             100
         ],
         "RigidBody": [
-            0,
             100,
             100,
-            1,
+            100,
+            100,
             100,
             100,
             100,
@@ -209,9 +209,9 @@
         ],
         "Collider": [
             0,
-            100,
-            100,
             1,
+            2,
+            100,
             100,
             100,
             100,
@@ -311,9 +311,9 @@
         ],
         "NameTag": [
             0,
-            100,
             1,
             2,
+            100,
             100,
             100,
             100,
@@ -413,9 +413,9 @@
         ],
         "Sprite": [
             0,
-            100,
-            100,
             1,
+            2,
+            100,
             100,
             100,
             100,
@@ -514,10 +514,10 @@
             100
         ],
         "Logic": [
-            0,
             100,
             100,
-            1,
+            100,
+            100,
             100,
             100,
             100,
@@ -616,10 +616,10 @@
             100
         ],
         "Player": [
-            0,
             100,
             100,
-            1,
+            100,
+            100,
             100,
             100,
             100,
@@ -823,8 +823,8 @@
     "IndexToEntityMap": {
         "Transform": [
             0,
-            3,
-            100,
+            1,
+            2,
             100,
             100,
             100,
@@ -924,8 +924,8 @@
             100
         ],
         "RigidBody": [
-            0,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1027,8 +1027,8 @@
         ],
         "Collider": [
             0,
-            3,
-            100,
+            1,
+            2,
             100,
             100,
             100,
@@ -1129,8 +1129,8 @@
         ],
         "NameTag": [
             0,
+            1,
             2,
-            3,
             100,
             100,
             100,
@@ -1231,8 +1231,8 @@
         ],
         "Sprite": [
             0,
-            3,
-            100,
+            1,
+            2,
             100,
             100,
             100,
@@ -1332,8 +1332,8 @@
             100
         ],
         "Logic": [
-            0,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1434,8 +1434,8 @@
             100
         ],
         "Player": [
-            0,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1639,49 +1639,48 @@
         ]
     },
     "EntitySignatures": [
-        "00000000000000000000000001111111",
-        "00000000000000000000000000000000",
-        "00000000000000000000000000001000",
-        "00000000000000000000000001111111"
+        "00000000000000000000000000011101",
+        "00000000000000000000000000011101",
+        "00000000000000000000000000011101"
     ],
     "Components": {
         "Transform": [
             {
-                "posX": 0.0,
-                "posY": 0.0,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
+                "posX": 0.7659852504730225,
+                "posY": -0.053293950855731964,
+                "scaleX": 1.2899999618530273,
+                "scaleY": 1.1150000095367432,
                 "Rot": 0.0
             },
             {
-                "posX": 0.0,
-                "posY": 0.0,
+                "posX": 0.529921293258667,
+                "posY": -0.16074329614639282,
+                "scaleX": 1.0,
+                "scaleY": 1.0549999475479126,
+                "Rot": 8.0
+            },
+            {
+                "posX": -0.6604995727539063,
+                "posY": -0.2594752311706543,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
             }
         ],
-        "RigidBody": [
-            {
-                "velX": 0.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 0.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            }
-        ],
+        "RigidBody": [],
         "Collider": [
             {
-                "ColliderType": 0,
+                "ColliderType": 3,
+                "minX": 0.0,
+                "minY": 0.0,
+                "maxX": 0.5,
+                "maxY": 0.5,
+                "offsetX": 0.05000000074505806,
+                "offsetY": 0.0,
+                "radius": 0.30000001192092896
+            },
+            {
+                "ColliderType": 1,
                 "minX": 0.0,
                 "minY": 0.0,
                 "maxX": 0.0,
@@ -1703,47 +1702,43 @@
         ],
         "NameTag": [
             {
-                "NameTag": "Player"
+                "NameTag": "0"
             },
             {
-                "NameTag": "none"
+                "NameTag": "1"
             },
             {
-                "NameTag": "Player"
+                "NameTag": "2"
             }
         ],
         "Sprite": [
             {
-                "TextureName": "Idle",
+                "TextureName": "Blocking",
                 "Index_X": 0.0,
-                "Index_Y": 0.0
+                "Index_Y": 0.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "DisplayTime": 0.16670000553131104
             },
             {
-                "TextureName": "Idle",
+                "TextureName": "Laser",
                 "Index_X": 0.0,
-                "Index_Y": 0.0
-            }
-        ],
-        "Logic": [
-            {
-                "ScriptName": [
-                    "PlayerMovement"
-                ]
+                "Index_Y": 0.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "DisplayTime": 0.16670000553131104
             },
             {
-                "ScriptName": [
-                    "PlayerMovement"
-                ]
+                "TextureName": "Damage",
+                "Index_X": 0.0,
+                "Index_Y": 0.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "DisplayTime": 0.16670000553131104
             }
         ],
-        "Player": [
-            {
-                "Health": 100
-            },
-            {
-                "Health": 100
-            }
-        ],
+        "Logic": [],
+        "Player": [],
         "Audio": []
     }
 }

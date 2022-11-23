@@ -37,10 +37,10 @@ namespace EM
 		void SetNormal(vec2D input) { CollisionNormal = input; }
 
 		ColliderType& GetCollider() { return mCol; }
-		vec2D GetOffset() { return offset; }
-		vec2D GetMin() { return mMin; }
-		vec2D GetMax() { return mMax; }
-		float GetRad() { return mRadius; }
+		vec2D& GetOffset() { return offset; }
+		vec2D &GetMin() { return mMin; }
+		vec2D &GetMax() { return mMax; }
+		float &GetRad() { return mRadius; }
 		int GetHit() { return hit; }
 		vec2D GetNormal() { return CollisionNormal; }
 	private:

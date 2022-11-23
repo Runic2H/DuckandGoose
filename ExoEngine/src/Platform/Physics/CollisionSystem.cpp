@@ -55,7 +55,7 @@ namespace EM {
                                 vec2D norm2 = offset2 - offset1;
                                 Normalize(norm2, norm2);
                                 col2.SetNormal(norm2);
-                                std::cout << "hit\n";
+                               // std::cout << "hit\n";
                             }
                         }
                         if (e2 == Collider::ColliderType::rect) {
@@ -70,7 +70,7 @@ namespace EM {
                                 vec2D norm2 = offset2 - offset1;
                                 Normalize(norm2, norm2);
                                 col2.SetNormal(norm2);
-                                std::cout << "hit\n";
+                               // std::cout << "hit\n";
                             }
                         }
                     }
@@ -87,7 +87,7 @@ namespace EM {
                                 vec2D norm2 = offset2 - offset1;
                                 Normalize(norm2, norm2);
                                 col2.SetNormal(norm2);
-                                std::cout << "hit\n";
+                               // std::cout << "hit\n";
                             }
                         }
                         if (e2 == Collider::ColliderType::rect) {
@@ -113,7 +113,7 @@ namespace EM {
                                 col1.SetNormal(line);
                                 col2.SetHit(1);
                                 col2.SetNormal(line * -1);
-                                std::cout << "hit\n";
+                                //std::cout << "hit\n";
                             }
                         }
                     }
