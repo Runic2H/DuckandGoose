@@ -63,6 +63,8 @@
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Animation\Animation.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
+    <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -232,6 +234,9 @@
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Animation\Animation.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
+    <ClInclude Include="src\Platform\Graphics\Camera.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

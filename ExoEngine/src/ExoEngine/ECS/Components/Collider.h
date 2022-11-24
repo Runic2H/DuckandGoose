@@ -39,10 +39,10 @@ namespace EM
 		void ToggleAlive() { mAlive = mAlive ? false : true; }
 
 		ColliderType& GetCollider() { return mCol; }
-		vec2D GetOffset() { return offset; }
-		vec2D GetMin() { return mMin; }
-		vec2D GetMax() { return mMax; }
-		float GetRad() { return mRadius; }
+		vec2D& GetOffset() { return offset; }
+		vec2D &GetMin() { return mMin; }
+		vec2D &GetMax() { return mMax; }
+		float &GetRad() { return mRadius; }
 		int GetHit() { return hit; }
 		vec2D GetNormal() { return CollisionNormal; }
 		bool GetAlive() { return mAlive; }

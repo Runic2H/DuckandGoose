@@ -29,9 +29,9 @@ namespace EM {
 		float GetRotation() const { return m_Rotation; }
 		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateMatrix(); }
 
-		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+		glm::mat4& GetProjectionMatrix() { return m_ProjectionMatrix; }
+		glm::mat4& GetViewMatrix(){ return m_ViewMatrix; }
+		 glm::mat4& GetViewProjectionMatrix() { return m_ViewProjectionMatrix; }
 		
 		float GetZoomLevel()const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }

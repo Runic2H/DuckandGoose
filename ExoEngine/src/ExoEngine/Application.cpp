@@ -67,7 +67,7 @@ namespace EM {
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<Sprite>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
+			//signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
@@ -94,6 +94,7 @@ namespace EM {
 		{
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
 			signature.set(p_ecs.GetComponentType<RigidBody>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
@@ -102,7 +103,7 @@ namespace EM {
 
 		//p_Scene->DeserializeFromFile("Level.json");
 
-		Entity player = p_ecs.CreateEntity();
+		/*Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
 		Logic logic;
 		Sprite sprite;
@@ -161,7 +162,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("LevelTest.json");
+		//p_Scene->SerializeToFile("LevelTest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

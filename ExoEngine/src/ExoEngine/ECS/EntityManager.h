@@ -41,6 +41,7 @@ namespace EM
 			// Take an ID from the front of the queue
 			Entity id = mAvailableEntities.top();
 			mAvailableEntities.pop();	//Removes elements from the front of the queue
+			mAliveEntities.insert(id);
 			++mLivingEntityCount;	//Dictates how many entities are alive
 
 			return id;
@@ -65,6 +66,7 @@ namespace EM
 
 			// Put the destroyed ID at the back of the queue
 			mAvailableEntities.push(entity);
+			mAliveEntities.erase(entity);
 			--mLivingEntityCount;
 		}
 
@@ -99,18 +101,9 @@ namespace EM
 			}
 		}
 
-		void ResetEntities()
+		const std::set<Entity> GetAliveEntities()
 		{
-			std::fill(mSignatures.begin(), mSignatures.end(), 0);
-			while (mLivingEntityCount != 0)
-			{
-				DestroyEntity(mLivingEntityCount);
-			}
-			mAvailableEntities = std::priority_queue<Entity, std::vector<Entity>, std::greater<Entity>>();
-			for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
-			{
-				mAvailableEntities.push(entity);
-			}
+			return mAliveEntities;
 		}
 
 		
@@ -126,5 +119,7 @@ namespace EM
 
 		// Total living entities - used to keep limits on how many exist
 		Entity mLivingEntityCount{};
+
+		std::set<Entity> mAliveEntities;
 	};
 }

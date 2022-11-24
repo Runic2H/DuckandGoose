@@ -16,6 +16,7 @@
     <ClInclude Include="src\ExoEngine\ECS\ComponentArray.h" />
     <ClInclude Include="src\ExoEngine\ECS\ComponentManager.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Audio.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
@@ -40,6 +41,8 @@
     <ClInclude Include="src\ExoEngine\Core.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
+    <ClInclude Include="src\Platform\Graphics\Camera.h" />
+    <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
@@ -186,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ExoEngine\ECS\Components\Audio.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
@@ -208,6 +212,7 @@
     <ClCompile Include="src\ExoEngine\Application.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
+    <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
