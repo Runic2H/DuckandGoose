@@ -36,7 +36,6 @@ namespace EM {
 	{
 		p_ecs.Init();
 		p_Scene->Init();
-		//p_Scene->DeserializeFromFile("SMTest.json");
 		FramePerSec::GetInstance().InitFrame();
 	}
 
@@ -103,7 +102,7 @@ namespace EM {
 
 		//p_Scene->DeserializeFromFile("Level.json");
 
-		/*Entity player = p_ecs.CreateEntity();
+		Entity player = p_ecs.CreateEntity();
 		RigidBody rb;
 		Logic logic;
 		Sprite sprite;
@@ -162,7 +161,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("LevelTest.json");
+		p_Scene->SerializeToFile("Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

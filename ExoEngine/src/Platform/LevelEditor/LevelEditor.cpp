@@ -762,11 +762,11 @@ namespace EM {
                     //selection for collider type
                     auto& colliderType = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
 
-                    int colliderIndex = static_cast<int>(collider);
+                    int colliderIndex = static_cast<int>(colliderType);
                     const char* colliderNames = "none\0circle\0line\0rect\0button";
                     ImGui::Text("Collider Type"); ImGui::SameLine();
-                    ImGui::Combo("##test", &colliderTypeIndex, colliderNames);
-                    colliderType = static_cast<Collider::ColliderType>(colliderTypeIndex);
+                    ImGui::Combo("##test", &colliderIndex, colliderNames);
+                    colliderType = static_cast<Collider::ColliderType>(colliderIndex);
 
                     //positioning the offset
                     auto& colliderOffset = p_ecs.GetComponent<Collider>(selectedEntity).GetOffset();
