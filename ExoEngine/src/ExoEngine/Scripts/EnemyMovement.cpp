@@ -29,7 +29,7 @@ namespace EM
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<Player>(i))
+			if (p_ecs.HaveComponent<Tag>(i) && !std::strcmp(p_ecs.GetComponent<Tag>(i).GetTag().c_str(), "Player"))
 			{
 				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 			}

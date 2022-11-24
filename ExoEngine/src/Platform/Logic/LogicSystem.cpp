@@ -27,6 +27,18 @@ namespace EM
 			signature.set(p_ecs.GetComponentType<Logic>());
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}*/
+		for (const auto& entity : mEntities)
+		{
+			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
+			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
+			{
+				if ((*i)->GetEntityID() != entity)
+				{
+					LogicComp.SetScriptEntity(entity);
+				}
+				(*i)->Start();
+			}
+		}
 	}
 
 	void LogicSystem::Update(float Frametime)

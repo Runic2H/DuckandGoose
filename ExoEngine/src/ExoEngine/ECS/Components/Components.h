@@ -22,7 +22,7 @@ deserialize its data
 #include "NameTag.h"
 #include "Sprite.h"
 #include "Logic.h"
-#include "Player.h"
+#include "Tag.h"
 #include "Audio.h"
 
 
@@ -33,5 +33,5 @@ deserialize its data
 #define NameTagComponent EM::NameTag::NameTag()
 #define SpriteComponent EM::Sprite::Sprite()
 #define LogicComponent EM::Logic::Logic()
-#define PlayerComponent EM::Player::Player()
+#define TagComponent EM::Player::Tag()
 #define AudioComponent EM::Audio::Audio()

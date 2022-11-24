@@ -13,7 +13,8 @@ namespace EM
 			none,
 			circle, //-------Circle
 			line, //---------LineSegment
-			rect //----------AABB
+			rect, //----------AABB
+			button
 		};
 		Collider();
 		~Collider() = default;
@@ -23,7 +24,7 @@ namespace EM
 		void SetCollider(ColliderType type) { mCol = type; }
 		void SetCollider(int type) 
 		{
-			if (static_cast<ColliderType>(type) < ColliderType::none || static_cast<ColliderType>(type) > ColliderType::rect)
+			if (static_cast<ColliderType>(type) < ColliderType::none || static_cast<ColliderType>(type) > ColliderType::button)
 			{
 				assert("Not a Valid Collider");
 			}
@@ -35,6 +36,7 @@ namespace EM
 		void SetRad(float input) { mRadius = input; }
 		void SetHit(int input) { hit = input; }
 		void SetNormal(vec2D input) { CollisionNormal = input; }
+		void ToggleAlive() { mAlive = mAlive ? false : true; }
 
 		ColliderType& GetCollider() { return mCol; }
 		vec2D GetOffset() { return offset; }
@@ -43,6 +45,8 @@ namespace EM
 		float GetRad() { return mRadius; }
 		int GetHit() { return hit; }
 		vec2D GetNormal() { return CollisionNormal; }
+		bool GetAlive() { return mAlive; }
+
 	private:
 		ColliderType mCol{};
 		vec2D CollisionNormal;
@@ -51,5 +55,6 @@ namespace EM
 		vec2D offset;
 		int hit;
 		float mRadius;
+		bool mAlive;
 	};
 }

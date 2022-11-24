@@ -676,7 +676,7 @@ namespace EM {
                     //if(ImGui::BeginChild())
 
                     int colliderIndex = static_cast<int>(collider);
-                    const char* colliderNames = "none\0circle\0line\0rect";
+                    const char* colliderNames = "none\0circle\0line\0rect\0button";
                     ImGui::Text("Collider Type"); ImGui::SameLine();
                     ImGui::Combo("##test", &colliderIndex, colliderNames);
                     collider = static_cast<Collider::ColliderType>(colliderIndex);
