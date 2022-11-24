@@ -34,12 +34,14 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
+		vec2D& GetAccel() { return mAccel; }
 		vec2D& GetVel() { return mVelocity; }
 		vec2D& GetDir() { return mDirection; }
 		vec2D& GetNextPos() { return NextPos; }
 		float& GetFriction() { return mFriction; }
 		float& GetRestitution() { return mRestitution; }
 
+		void SetAccel(vec2D vel) { mAccel = vel; }
 		void SetVel(vec2D vel) { mVelocity = vel; }
 		void SetDir(vec2D dir) { mDirection = dir; }
 		void SetNextPos(vec2D vec) { NextPos = vec; }
@@ -49,6 +51,7 @@ namespace EM
 		void SetRestitution(float value) { mRestitution = value; }
     
 	private:
+		vec2D mAccel;
 		vec2D mVelocity;
 		vec2D mDirection;
 		vec2D NextPos;

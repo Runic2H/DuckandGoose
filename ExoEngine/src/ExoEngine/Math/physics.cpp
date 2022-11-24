@@ -9,7 +9,7 @@ namespace EM {
         return entvel;
     }
     vec2D entityPhysics::friction(vec2D& entvel, float dt) {
-        entvel -= entvel * 9.5f * dt;
+        entvel -= entvel * 8.5f * dt;
         return entvel;
     }
     vec2D entityPhysics::gravity(vec2D& entvel, float dt) {
