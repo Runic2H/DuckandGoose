@@ -37,12 +37,15 @@ namespace EM {
 		void Profiler();
 		void Hierarchy();
 		void Inspector();
-
+		//for audio loading from files
 		void LoadAudioFromFile();
 		//void LoadSaveAudio();
 		void AudioManager();
 		void insertAudioFilePath(std::string in);
+		void insertTextureFilePath(std::string on);
 
+		//for textures loading from files
+		void LoadTextureFromFile();
 	public:
 		bool show_window = true;
 		static std::unique_ptr<LevelEditor>& GetInstance();
@@ -102,6 +105,8 @@ namespace EM {
 		std::vector<std::filesystem::directory_entry> mAudioFileList;
 		//for displaying of audio channels
 		
-
+		//load texture from file
+		std::vector<std::string> mTextureFile;
+		std::vector<std::filesystem::directory_entry> mTextureFileList;
 	};
 }

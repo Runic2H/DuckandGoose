@@ -125,6 +125,15 @@ namespace EM{
 				//insert entry into audio file paths
 				p_Editor->insertAudioFilePath(paths[i]);
 			}
+
+			else if (std::filesystem::path(paths[i]).extension() == ".png")
+			{
+				auto folder = std::filesystem::path("Assets/Textures");
+				auto filename = std::filesystem::path(paths[i]).filename();
+				std::filesystem::copy(std::filesystem::path(paths[i]), folder / filename);
+				//insert entry into audio file paths
+				p_Editor->insertTextureFilePath(paths[i]);
+			}
 			else
 			{
 				EM_EXO_INFO("Error Detected The extenstion is {0}", std::filesystem::path(paths[i]).extension().string().c_str());

@@ -137,6 +137,40 @@ namespace EM {
             mScenefile.emplace_back(dir_entry.path().filename().string());
         }
     }
+    void LevelEditor::LoadTextureFromFile()
+    {
+        std::string path = "Assets/Textures";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ path })
+        {
+            //Checks if the given file status or path corresponds to a regular file
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+
+            mTextureFileList.emplace_back(dir_entry);
+            // used to Load Scene
+            mTextureFile.emplace_back(dir_entry.path().filename().string());
+        }
+    }
+    //loads audio filepaths from assets folder
+    void LevelEditor::LoadAudioFromFile()
+    {
+        std::string audio_path = "Assets/metadigger";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
+        {
+            //checks if given file status or path corresponds to a regular file
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+
+            mAudioFileList.emplace_back(dir_entry);
+            // used to load audio
+            mAudioFile.emplace_back(dir_entry.path().filename().string());
+
+        }
+    }
     //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
     void LevelEditor::MainMenuBar()
     {
@@ -890,24 +924,7 @@ namespace EM {
 
     }
 
-    //loads audio filepaths from assets folder
-    void LevelEditor::LoadAudioFromFile()
-    {
-        std::string audio_path = "Assets/metadigger";
-        for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
-        {
-            //checks if given file status or path corresponds to a regular file
-            if (!dir_entry.is_regular_file())
-            {
-                continue;
-            }
-
-            mAudioFileList.emplace_back(dir_entry);
-            // used to load audio
-            mAudioFile.emplace_back(dir_entry.path().filename().string());
-
-        }
-    }
+   
 
     //Audio manager allows users to select and play and test different audios in the editor
     void LevelEditor::AudioManager()
@@ -967,6 +984,15 @@ namespace EM {
                 {
                     p_Audio->StopChannel(i->first);
                 }
+
+            }
+            
+            if (ImGui::Button("Delete Audio"))
+            {
+                    std::filesystem::remove(mAudioFileList[currentfile].path());
+                    mAudioFileList.erase(mAudioFileList.begin() + currentfile);
+                    // used to load audio
+                    mAudioFile.erase(mAudioFile.begin() + currentfile);
             }
 
             static int item_current = 1;
@@ -1002,5 +1028,12 @@ namespace EM {
         auto const& dir_entry = std::filesystem::directory_entry{ in };
         mAudioFileList.emplace_back(dir_entry);
         mAudioFile.emplace_back(dir_entry.path().filename().string());
+    }
+
+    void LevelEditor::insertTextureFilePath(std::string in)
+    {
+        auto const& dir_entry = std::filesystem::directory_entry{ in };
+        mTextureFileList.emplace_back(dir_entry);
+        mTextureFile.emplace_back(dir_entry.path().filename().string());
     }
 }

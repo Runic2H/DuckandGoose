@@ -216,9 +216,13 @@ void CAudioEngine::Release()
     
     // release every channel group
     // release systems
-    Master->release();
+    BGM->stop();
+    SFX->stop();
+    Master->stop();
+
     BGM->release();
     SFX->release();
+    Master->release();
 
     mpSystem->release();
 }
