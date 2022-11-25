@@ -17,7 +17,7 @@
 #include "AudioEngine.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 
-std::unique_ptr< CAudioEngine> m_Instance;
+std::unique_ptr<CAudioEngine> m_Instance;
 
 std::unique_ptr<CAudioEngine>& CAudioEngine::GetInstance()
 {
