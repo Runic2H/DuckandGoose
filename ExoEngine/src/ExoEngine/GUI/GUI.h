@@ -40,9 +40,9 @@ namespace EM
 			glm::vec2 min{ 0,0 };//buttom left of thr button
 		};
 
-		button_bb pause_button; //bounding box of the pause button (to be replace with factory)
-		button_bb continue_button;//bounding box of the continue button (to be replace with factory)
-		float AspectRatio; //hold local value of aspecrt ratio
+		button_bb pause_button{}; //bounding box of the pause button (to be replace with factory)
+		button_bb continue_button{};//bounding box of the continue button (to be replace with factory)
+		float AspectRatio{}; //hold local value of aspecrt ratio
 
 	public:
 		static std::unique_ptr<gui_system>& GetInstance(); //used to create an instance to work alongside the game during it's lifetime

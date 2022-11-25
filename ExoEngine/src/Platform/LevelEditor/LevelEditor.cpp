@@ -77,21 +77,38 @@ namespace EM {
     //  Update loop for level editor, poll events and set new frames
     void LevelEditor::Update()
     {
+
+        //MainMenuBar();
+        if (p_Input->isKeyPressed(GLFW_KEY_P))
+        {
+            if (show_window == false)
+            {
+               
+                show_window = true;
+            }
+            else 
+            {
+                show_window = false;
+            }
+        }
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         
-        Docking();
-        MainMenuBar();
-        LoadSaveScene();
-        Profiler();
-        ImGui::ShowDemoWindow();
-        ContentBrowser();
-        Logger();
-        Hierarchy();
-        Inspector();
-        SceneViewer();
-        Audio();
+
+        if (show_window)
+        {
+            Docking();
+            LoadSaveScene();
+            Profiler();
+            ImGui::ShowDemoWindow();
+            ContentBrowser();
+            Logger();
+            Hierarchy();
+            Inspector();
+            SceneViewer();
+            Audio();
+        }
     }
     //  Render interface onto frame
 
@@ -221,7 +238,18 @@ namespace EM {
 
         
         //gizmos
-        mGizmoType = ImGuizmo::OPERATION::TRANSLATE; // for now just having translation for guizmo
+        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing())
+        {
+            mGizmoType = ImGuizmo::OPERATION::TRANSLATE; 
+        }
+        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing())
+        {
+            mGizmoType = ImGuizmo::OPERATION::ROTATE;
+        }
+        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing())
+        {
+            mGizmoType = ImGuizmo::OPERATION::SCALE;
+        }
         ImGuizmo::BeginFrame();
         if (selectedEntity >= 0 && p_ecs.HaveComponent<Transform>(selectedEntity))//have selected entity
         {
@@ -243,7 +271,7 @@ namespace EM {
             
             transform = glm::translate(glm::mat4{ 1.0f },glm::vec3(trans.GetPos().x, trans.GetPos().y, 0.0f))
                 * glm::rotate(glm::mat4(1.0f), glm::radians(trans.GetRot()), glm::vec3(0.0f, 0.0f, 1.0f))
-                * glm::scale(glm::mat4(1.f), { trans.GetScale().x,trans.GetScale().y ,0.0f });
+                * glm::scale(glm::mat4(1.f), { trans.GetScale().x,trans.GetScale().y ,1.0f });
 
             ImGuizmo::SetDrawlist();
             // Draw ImGuizmo (renders every frame)
@@ -253,7 +281,7 @@ namespace EM {
 
             if (ImGuizmo::IsUsing())
             {
-                glm::vec2 decompTrans, decompRot, decompScale;
+                glm::vec3 decompTrans, decompRot, decompScale;
 
                 ImGuizmo::DecomposeMatrixToComponents(glm::value_ptr(transform), 
                     glm::value_ptr(decompTrans), 
@@ -261,12 +289,15 @@ namespace EM {
                     glm::value_ptr(decompScale));
                 // change size 
                 trans.SetPos(decompTrans[0], decompTrans[1]);
+                trans.SetRot(decompRot[2]);
+                trans.SetScale(decompScale[0], decompScale[1]);
+                
             }
         }
 
         ImGui::End();
         ImGui::PopStyleVar();
-        if (ImGui::IsWindowFocused() &&  p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver())
+        if (p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver() && mViewportFocused)
         {
 
             std::multimap<float, Transform*> sortedMultimap;
@@ -276,13 +307,16 @@ namespace EM {
                     sortedMultimap.insert({ p_ecs.GetComponent<Transform>(entity).GetRot(), 
                                   &p_ecs.GetComponent<Transform>(entity)});
                 }
-                //std::cout << "yo";
+
             }
-              
+            
             selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
+
             std::cout << selectedEntity << std::endl;
-         /*   if (selectedEntity == -1)
-                selectedEntity = {};*/
+            if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
+            {
+                selectedEntity = MAX_ENTITIES - 1; //to be fixed
+            }
         }   
     }
 
@@ -497,6 +531,7 @@ namespace EM {
         ImGui::End();
 
     }
+
 
     /*
     Profiler displays information about the users system such as 

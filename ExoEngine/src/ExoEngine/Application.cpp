@@ -58,8 +58,6 @@ namespace EM {
 		p_Audio->Init();
 		p_Editor->Init(m_window);
 
-		
-		//p_GUI->gui_init();
 		//p_Audio->PlaySound("C:\\Users\\mattc\\Downloads\\DuckandGoose\\Exomata\\Assets\\test.wav", 50.f);
 
 		auto mGraphics = p_ecs.RegisterSystem<Graphic>();
@@ -67,8 +65,6 @@ namespace EM {
 			Signature signature;
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<Sprite>());
-			//signature.set(p_ecs.GetComponentType<RigidBody>());
-			signature.set(p_ecs.GetComponentType<Collider>());
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();

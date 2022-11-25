@@ -1646,22 +1646,22 @@
     "Components": {
         "Transform": [
             {
-                "posX": 0.7659852504730225,
-                "posY": -0.053293950855731964,
-                "scaleX": 1.2899999618530273,
-                "scaleY": 1.1150000095367432,
+                "posX": 2.8406903743743896,
+                "posY": 0.5857126712799072,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
                 "Rot": 0.0
             },
             {
-                "posX": 0.529921293258667,
-                "posY": -0.16074329614639282,
+                "posX": 0.4340704083442688,
+                "posY": -0.5542393326759338,
                 "scaleX": 1.0,
                 "scaleY": 1.0549999475479126,
                 "Rot": 8.0
             },
             {
-                "posX": -0.6604995727539063,
-                "posY": -0.2594752311706543,
+                "posX": 0.47473230957984924,
+                "posY": 0.3729470670223236,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -1714,7 +1714,7 @@
         "Sprite": [
             {
                 "TextureName": "Blocking",
-                "Index_X": 0.0,
+                "Index_X": 5.0,
                 "Index_Y": 0.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
@@ -1722,7 +1722,7 @@
             },
             {
                 "TextureName": "Laser",
-                "Index_X": 0.0,
+                "Index_X": 5.0,
                 "Index_Y": 0.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
@@ -1730,7 +1730,7 @@
             },
             {
                 "TextureName": "Damage",
-                "Index_X": 0.0,
+                "Index_X": 5.0,
                 "Index_Y": 0.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,

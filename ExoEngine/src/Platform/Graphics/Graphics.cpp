@@ -69,40 +69,42 @@ namespace EM {
 
 	void Graphic::Update(float frametime)
 	{
-		//(void)frametime;
 		Timer::GetInstance().Start(Systems::GRAPHIC);
 		Timer::GetInstance().GetDT(Systems::GRAPHIC);
 		
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
 			p_Editor->mViewportSize.x > 0.0f && p_Editor->mViewportSize.y > 0.0f && // zero sized framebuffer is invalid
-			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y))
+			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y)
+			&& p_Editor->show_window)
 		{
 			p_FrameBuffer->Resize((uint32_t)p_Editor->mViewportSize.x, (uint32_t)p_Editor->mViewportSize.y);
 			camera.Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
-			/*m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);*/
+		}
+		if(!p_Editor->show_window)
+		{
+		
 		}
 		
+	
 		m_Renderer->ResetInfo();
 		m_Renderer->Clear();
-		p_FrameBuffer->Bind();
-		glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RED_INTEGER, GL_INT, 0);
-
+		if (p_Editor->show_window)
+		{
+			p_FrameBuffer->Bind();
+			glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RED_INTEGER, GL_INT, 0);
+		}
+		
 		m_Renderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		m_Renderer->Clear();
 		m_Renderer->Begin(camera);// begin of the renderer 
 		p_GUI->VPmat = camera.GetViewProjectionMatrix();
 		
 
-		//m_Renderer->DrawQuad({ 0.0f, 0.0f }, { 10.0f, 4.0f, }, GETTEXTURE("BackGround"));
-
 		for (auto const& entity : mEntities)
 		{
 			auto& transform = p_ecs.GetComponent<Transform>(entity);
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
-			//auto& velocity = p_ecs.GetComponent<RigidBody>(entity);
-			auto& collider = p_ecs.GetComponent<Collider>(entity);
 			if (sprite.mIsanimated)
 			{
 				animator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
@@ -113,31 +115,32 @@ namespace EM {
 				index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y });
 				m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
 					transform.GetRot(), index1);
-				//std::cout << sprite.GetIndex().x << std::endl;
 			}
 			else
 			{
 				m_Renderer->DrawQuad({ transform.GetPos().x, transform.GetPos().y }, { transform.GetScale().x, transform.GetScale().y },
-					GETTEXTURE(sprite.GetTexture()));
+					 transform.GetRot(),GETTEXTURE(sprite.GetTexture()));
 			}
 
 			if (p_Editor->mDebugDraw)
 			{
-				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::rect))
-					m_Renderer->DrawRect({ transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f }, 
-						{ collider.GetMin().x - collider.GetMax().x , collider.GetMin().y - collider.GetMax().y  },
-						{ 1.0f, 0.0f, 0.0f,1.0f });
 
-				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
-					m_Renderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
-						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
-						{ 0.0f, 1.0f, 0.0f, 1.0f });*/
-
-				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::circle))
+				if (p_ecs.HaveComponent<Collider>(entity))
 				{
-					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
-						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
-					m_Renderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+					auto& havecollider = p_ecs.GetComponent<Collider>(entity);
+					if (havecollider.GetCollider() == Collider::ColliderType::rect)
+					{
+						m_Renderer->DrawRect({ transform.GetPos().x + havecollider.GetOffset().x , transform.GetPos().y + havecollider.GetOffset().y, 0.0f },
+							{ havecollider.GetMin().x - havecollider.GetMax().x , havecollider.GetMin().y - havecollider.GetMax().y },
+							{ 1.0f, 0.0f, 0.0f,1.0f });
+					}
+					
+					if (havecollider.GetCollider() == Collider::ColliderType::circle)
+					{
+						glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + havecollider.GetOffset().x, transform.GetPos().y + havecollider.GetOffset().y, 0.0f }) *
+							glm::scale(glm::mat4(1.0f), glm::vec3(havecollider.GetRad() * 2));
+						m_Renderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+					}
 				}
 			}
 			if (p_Editor->selectedEntity == entity)
@@ -166,22 +169,27 @@ namespace EM {
 		vpSize.x = p_Editor->mViewportBounds[1].x - p_Editor->mViewportBounds[0].x;
 		vpSize.y = p_Editor->mViewportBounds[1].y - p_Editor->mViewportBounds[0].y;
 		p_Editor->mGameMousePosition.y = vpSize.y - p_Editor->mGameMousePosition.y;
+
+		p_Editor->mGameMousePosition.x = ((p_Editor->mGameMousePosition.x / p_Editor->mViewportSize.x) * 2.0f) - 1.0f;
+		p_Editor->mGameMousePosition.y = ((p_Editor->mGameMousePosition.y / p_Editor->mViewportSize.y) * 2.0f) - 1.0f;
+		p_Editor->mGameMousePosition.x *= camera.GetZoomLevel();
+		p_Editor->mGameMousePosition.y *= camera.GetZoomLevel();
 		//std::cout << "Camera Zoom:" << camera.GetZoomLevel() << std::endl;
-		
-		if (p_Editor->mGameMousePosition.x >= 0 && p_Editor->mGameMousePosition.y >= 0 &&
-			p_Editor->mGameMousePosition.x < (int)vpSize.x && p_Editor->mGameMousePosition.y < (int)vpSize.y)
-		{
-			/*for (auto const& entity : mEntities)
-			{
-				auto& getTransform = p_ecs.GetComponent<Transform>(entity);
-				getTransform.
-			}**/
-			//int pixelData = p_FrameBuffer->ReadPixel(1, p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
-			EM_EXO_INFO("Mouse = {0}, {1}", p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
-			
-			//if(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
-				//p_Editor->selectedEntity = pixelData;
-		}
+		//
+		//if (p_Editor->mGameMousePosition.x >= -1 && p_Editor->mGameMousePosition.y >= -1 &&
+		//	p_Editor->mGameMousePosition.x < 2 && p_Editor->mGameMousePosition.y < 2)
+		//{
+		//	/*for (auto const& entity : mEntities)
+		//	{
+		//		auto& getTransform = p_ecs.GetComponent<Transform>(entity);
+		//		getTransform.
+		//	}**/
+		//	//int pixelData = p_FrameBuffer->ReadPixel(1, p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
+		//	EM_EXO_INFO("Mouse = {0}, {1}", p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
+		//	
+		//	//if(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+		//		//p_Editor->selectedEntity = pixelData;
+		//}
 
 		if (p_GUI->check_pause() == true)
 		{
@@ -193,6 +201,7 @@ namespace EM {
 
 		}
 		m_Renderer->End();
+	
 		p_FrameBuffer->UnBind();
 		
 
@@ -215,8 +224,14 @@ namespace EM {
 			p_GUI->pause_switch = false;//set pause to false, exit pause menu
 		}
 		
-		if(p_Editor->mViewportFocused)// mouse able to scroll only when is in Viewport
+		if (p_Editor->mViewportFocused && p_Editor->show_window)
+		{
 			camera.MouseScrolling();
+		}
+		else
+		{
+			camera.MouseScrolling();
+		}
 		Timer::GetInstance().Update(Systems::GRAPHIC);
 		
 		
