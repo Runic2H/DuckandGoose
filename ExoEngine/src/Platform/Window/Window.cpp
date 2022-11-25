@@ -93,6 +93,7 @@ namespace EM{
 		glfwSetMouseButtonCallback(m_window, Mousebutton_callback);
 		glfwSetFramebufferSizeCallback(m_window, Window_size_callback);
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		glfwSetDropCallback(m_window, drop_callback);
 	}
 	void Window::Update(float frametime)
 	{
@@ -109,6 +110,29 @@ namespace EM{
 	{
 		glfwDestroyWindow(m_window);
 		glfwTerminate();
+	}
+	void Window::drop_callback(GLFWwindow* window, int count, const char** paths)
+	{
+		UNREFERENCED_PARAMETER(window);
+		for (int i = 0; i < count; i++)
+		{
+			if (std::filesystem::path(paths[i]).extension() == ".wav")
+			{
+				//copy the wav file to metadigger folder
+				auto folder = std::filesystem::path("Assets/metadigger");
+				auto filename = std::filesystem::path(paths[i]).filename();
+				std::filesystem::copy(std::filesystem::path(paths[i]), folder / filename);
+				//insert entry into audio file paths
+				p_Editor->insertAudioFilePath(paths[i]);
+			}
+			else
+			{
+				EM_EXO_INFO("Error Detected The extenstion is {0}", std::filesystem::path(paths[i]).extension().string().c_str());
+			}
+			//sort by extension
+			//use filesystem to copy filepathing to editor
+			//use filesystem to copy files into relevant asset folders
+		}
 	}
 	void Window::ErrorCallback(int error, const char* description)
 	{

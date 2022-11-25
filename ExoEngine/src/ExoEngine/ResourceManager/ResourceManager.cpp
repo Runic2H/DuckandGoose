@@ -90,7 +90,7 @@ namespace EM {
 	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudioFromFile(const std::string& filepath)
 	{
 		auto m_audio = std::make_shared<CAudioEngine>();
-		m_audio->LoadAudio(filepath);
+		m_audio->Loadsound(filepath);
 		return m_audio;
 	}
 

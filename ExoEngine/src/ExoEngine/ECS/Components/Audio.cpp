@@ -12,13 +12,18 @@
 ***/
 #include "ExoEngine/ECS/Components/Audio.h"
 
-EM::Audio::Audio(): mAudiopath("")
+EM::Audio::Audio() : mAudiopath{ "" }, channelgroup{ AudioType::NONE }, is_looping{ false }
 {
+
 }
 
 bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 {
 	mAudiopath = std::string(obj["Audioname"].GetString());
+	channelgroup = static_cast<AudioType>(obj["AudioType"].GetInt());
+	is_looping = obj["Looping"].GetInt();
+	volume = obj["Volume"].GetFloat();
+
 	return true;
 }
 
@@ -27,6 +32,13 @@ bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writ
 	writer->StartObject();
 	writer->Key("Audioname");
 	writer->String(mAudiopath.c_str());
+	writer->Key("AudioType");
+	writer->Int(static_cast<int>(channelgroup));
+	writer->Key("Looping");
+	writer->Int(is_looping);
 	writer->EndObject();
+	writer->Key("Volume");
+	writer->Double(static_cast<double>(volume));
+
 	return true;
 }
