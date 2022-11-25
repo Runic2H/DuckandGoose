@@ -60,11 +60,9 @@ namespace EM {
                             }
                         }
                         if (e2 == Collider::ColliderType::rect) {
-                            vec2D max1 = offset1 + col1.GetMax();
-                            vec2D min1 = offset1 - col1.GetMin();
                             vec2D max2 = offset2 + col2.GetMax();
                             vec2D min2 = offset2 - col2.GetMin();
-                            if (ecm.simpleRectRect(max1, min1, max2, min2)) {
+                            if (ecm.simpleCircleRect(offset1, col1.GetRad(), max2, min2, offset2)) {
                                 std::cout << "Collision Circle-Rect\n";
                                 col1.SetHit(1);
                                 vec2D norm1 = offset1 - offset2;
@@ -82,9 +80,7 @@ namespace EM {
                         if (e2 == Collider::ColliderType::circle) {
                             vec2D max1 = offset1 + col1.GetMax();
                             vec2D min1 = offset1 - col1.GetMin();
-                            vec2D max2 = offset2 + col2.GetMax();
-                            vec2D min2 = offset2 - col2.GetMin();
-                            if (ecm.simpleRectRect(max1, min1, max2, min2)) {
+                            if (ecm.simpleCircleRect(offset2, col2.GetRad(), max1, min1, offset1)) {
                                 std::cout << "Collision Rect-Circle\n";
                                 col1.SetHit(1);
                                 vec2D norm1 = offset1 - offset2;
