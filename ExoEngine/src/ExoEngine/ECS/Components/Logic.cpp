@@ -15,9 +15,9 @@ function
 ***/
 
 #include "Logic.h"
-#include "ExoEngine/Scripts/PlayerMovement.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
+#include "ExoEngine/Scripts/PlayerController.h"
 
 namespace EM
 {
@@ -65,9 +65,9 @@ namespace EM
 		}
 		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
 		{
-			if (mScriptNameVector[i] == "PlayerMovement")
+			if (mScriptNameVector[i] == "PlayerController")
 			{
-				mScriptsVector.push_back(new PlayerMovement());
+				mScriptsVector.push_back(new PlayerController());
 			}
 			if (mScriptNameVector[i] == "EnemyMovement")
 			{

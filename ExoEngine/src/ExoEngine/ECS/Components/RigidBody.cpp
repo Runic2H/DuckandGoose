@@ -18,11 +18,11 @@ acting on said object.
 namespace EM
 {
 	//RigidBody
-	RigidBody::RigidBody() : mVelocity{vec2D()}, mDirection{vec2D()}, mFriction{0.0f}, mRestitution{0.0f} {}
+	RigidBody::RigidBody() : mAccel{vec2D(100.f,0.f)}, mVelocity{vec2D()}, mDirection{vec2D()}, mFriction{0.0f}, mRestitution{0.0f} {}
 
 	bool RigidBody::Deserialize(const rapidjson::Value& obj)
 	{
-		mVelocity = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
+		mAccel = vec2D(obj["velX"].GetFloat(), obj["velY"].GetFloat());
 		mDirection = vec2D(obj["dirX"].GetFloat(), obj["dirY"].GetFloat());
 		mFriction = obj["Friction"].GetFloat();
 		mRestitution = obj["Restitution"].GetFloat();
@@ -32,9 +32,9 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("velX");
-		writer->Double(mVelocity.x);
+		writer->Double(mAccel.x);
 		writer->Key("velY");
-		writer->Double(mVelocity.y);
+		writer->Double(mAccel.y);
 		writer->Key("dirX");
 		writer->Double(mDirection.x);
 		writer->Key("dirY");

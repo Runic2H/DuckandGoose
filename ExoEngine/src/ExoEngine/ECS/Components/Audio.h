@@ -31,7 +31,26 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 		
+		void SetAudioPath(std::string input) { mAudiopath = input; }
+		void SetChannelGroup(AudioType input) { channelgroup = input; }
+		void SetLooping(bool isplayed) { is_looping = isplayed; }
+		void SetVolume(float vol) { volume = vol; }
+
+		std::string GetAudioPath() { return mAudiopath; }
+		AudioType GetChannelGroup() { return channelgroup; }
+		bool GetLooping() { return is_looping; }
+		float GetVolume() { return volume; }
+
+		//Audio component
+		//	Singular piece of audio that can be set to play upon a specific event.
+		//	Toggle looping.
+		
+
 	private:
 		std::string mAudiopath; 
+		AudioType channelgroup;
+		bool is_looping;
+		float volume;
+
 	};
 }

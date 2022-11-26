@@ -29,18 +29,26 @@ namespace EM
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<Player>(i))
+			if (p_ecs.HaveComponent<Tag>(i) && !std::strcmp(p_ecs.GetComponent<Tag>(i).GetTag().c_str(), "Player"))
 			{
 				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 			}
 		}
+		vec2D newVel = vec2D(0,0);
+		newVel = rigidbody.GetVel();
 		if (squarelength(rigidbody.GetDir()) < 3.0f)
 		{
-			rigidbody.SetVel(mPhys.accelent(rigidbody.GetDir(), rigidbody.GetVel(), Frametime));
-			rigidbody.SetVel(mPhys.friction(rigidbody.GetVel(), Frametime));
-			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			rigidbody.SetNextPos(nextPos);
+			newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+			newVel = mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 		}
+		else {
+			newVel = (mPhys.friction(newVel, Frametime));
+		}
+		if (newVel.x > -99 && newVel.y < 99) {
+			rigidbody.SetVel(newVel);
+		}
+		vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
+		rigidbody.SetNextPos(nextPos);
 	}
 
 	void EnemyMovement::End() 

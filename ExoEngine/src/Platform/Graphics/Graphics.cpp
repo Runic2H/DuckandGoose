@@ -155,7 +155,7 @@ namespace EM {
 		
 		/*for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<Transform>(entity))
+			if (p_ecs.HaveComponent<Tag>(entity) && std::strcmp(p_ecs.GetComponent<Tag>(entity).GetTag().c_str(),"Player"))
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });

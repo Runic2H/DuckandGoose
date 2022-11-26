@@ -1,12 +1,12 @@
 {
     "Number of Entities": {
-        "Entities": 3
+        "Entities": 2
     },
     "EntityToIndexMap": {
         "Transform": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -106,8 +106,8 @@
             100
         ],
         "RigidBody": [
-            100,
-            100,
+            0,
+            1,
             100,
             100,
             100,
@@ -210,7 +210,7 @@
         "Collider": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -312,7 +312,7 @@
         "NameTag": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -414,7 +414,7 @@
         "Sprite": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -514,8 +514,8 @@
             100
         ],
         "Logic": [
-            100,
-            100,
+            0,
+            1,
             100,
             100,
             100,
@@ -615,8 +615,8 @@
             100,
             100
         ],
-        "Player": [
-            100,
+        "Tag": [
+            0,
             100,
             100,
             100,
@@ -824,7 +824,7 @@
         "Transform": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -924,8 +924,8 @@
             100
         ],
         "RigidBody": [
-            100,
-            100,
+            0,
+            1,
             100,
             100,
             100,
@@ -1028,7 +1028,7 @@
         "Collider": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -1130,7 +1130,7 @@
         "NameTag": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -1232,7 +1232,7 @@
         "Sprite": [
             0,
             1,
-            2,
+            100,
             100,
             100,
             100,
@@ -1332,8 +1332,8 @@
             100
         ],
         "Logic": [
-            100,
-            100,
+            0,
+            1,
             100,
             100,
             100,
@@ -1433,8 +1433,8 @@
             100,
             100
         ],
-        "Player": [
-            100,
+        "Tag": [
+            0,
             100,
             100,
             100,
@@ -1639,9 +1639,8 @@
         ]
     },
     "EntitySignatures": [
-        "00000000000000000000000000011101",
-        "00000000000000000000000000011101",
-        "00000000000000000000000000011101"
+        "00000000000000000000000001111111",
+        "00000000000000000000000000111111"
     ],
     "Components": {
         "Transform": [
@@ -1656,8 +1655,8 @@
                 "posX": 0.4340704083442688,
                 "posY": -0.5542393326759338,
                 "scaleX": 1.0,
-                "scaleY": 1.0549999475479126,
-                "Rot": 8.0
+                "scaleY": 1.0,
+                "Rot": 0.0
             },
             {
                 "posX": 0.47473230957984924,
@@ -1667,34 +1666,41 @@
                 "Rot": 0.0
             }
         ],
-        "RigidBody": [],
+        "RigidBody": [
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0000995248556137085,
+                "dirY": 0.00006923079490661621,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            }
+        ],
         "Collider": [
             {
                 "ColliderType": 3,
-                "minX": 0.0,
-                "minY": 0.0,
-                "maxX": 0.5,
-                "maxY": 0.5,
-                "offsetX": 0.05000000074505806,
-                "offsetY": 0.0,
-                "radius": 0.30000001192092896
-            },
-            {
-                "ColliderType": 1,
-                "minX": 0.0,
-                "minY": 0.0,
-                "maxX": 0.0,
-                "maxY": 0.0,
+                "minX": 1.0,
+                "minY": 1.0,
+                "maxX": 1.0,
+                "maxY": 1.0,
                 "offsetX": 0.0,
                 "offsetY": 0.0,
                 "radius": 0.30000001192092896
             },
             {
-                "ColliderType": 0,
-                "minX": 0.0,
-                "minY": 0.0,
-                "maxX": 0.0,
-                "maxY": 0.0,
+                "ColliderType": 3,
+                "minX": 1.0,
+                "minY": 1.0,
+                "maxX": 1.0,
+                "maxY": 1.0,
                 "offsetX": 0.0,
                 "offsetY": 0.0,
                 "radius": 0.30000001192092896
@@ -1702,43 +1708,51 @@
         ],
         "NameTag": [
             {
-                "NameTag": "0"
+                "NameTag": "Player"
             },
             {
-                "NameTag": "1"
-            },
-            {
-                "NameTag": "2"
+                "NameTag": "Enemy"
             }
         ],
         "Sprite": [
             {
-                "TextureName": "Blocking",
-                "Index_X": 5.0,
+
+                "TextureName": "Idle",
+                "Index_X": 4.0,
                 "Index_Y": 0.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
+                "DisplayTime": 1.4420000314712524
             },
             {
-                "TextureName": "Laser",
-                "Index_X": 5.0,
+                "TextureName": "Idle",
+                "Index_X": 0.0,
                 "Index_Y": 0.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "Damage",
-                "Index_X": 5.0,
-                "Index_Y": 0.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "DisplayTime": 0.16670000553131104
             }
         ],
-        "Logic": [],
-        "Player": [],
+        "Logic": [
+            {
+                "ScriptName": [
+                    "PlayerController",
+                    "CollisionResponse"
+                ]
+            },
+            {
+                "ScriptName": [
+                    "EnemyMovement",
+                    "CollisionResponse"
+                ]
+            }
+        ],
+        "Tag": [
+            {
+                "Tag": "Player",
+                "TargetTag": ""
+            }
+        ],
         "Audio": []
     }
 }

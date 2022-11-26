@@ -39,7 +39,7 @@ namespace EM
 		p_ecs.RegisterComponent<NameTag>();
 		p_ecs.RegisterComponent<Sprite>();
 		p_ecs.RegisterComponent<Logic>();
-		p_ecs.RegisterComponent<Player>();
+		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
 	}
 
@@ -111,12 +111,12 @@ namespace EM
 							if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj())) {}
 							p_ecs.AddComponent<Logic>(j, logic);
 						}
-						if (p_ecs.GetComponentTypeName(i) == "Player")
+						if (p_ecs.GetComponentTypeName(i) == "Tag")
 						{
-							Player player;
-							if (player.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							Tag tag;
+							if (tag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 							{
-								p_ecs.AddComponent<Player>(j, player);
+								p_ecs.AddComponent<Tag>(j, tag);
 							}
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Audio")
@@ -202,8 +202,8 @@ namespace EM
 		{
 			writer->Key(p_ecs.GetComponentTypeName(i).c_str());
 			writer->StartArray();
-			auto aliveTotal = p_ecs.GetTotalEntities();
-			Entity aliveCount = 0;
+			aliveTotal = p_ecs.GetTotalEntities();
+			aliveCount = 0;
 			Entity j = 0;
 			while (aliveCount < aliveTotal)
 			{
@@ -236,9 +236,9 @@ namespace EM
 					{
 						p_ecs.GetComponent<Logic>(j).Serialize(writer);
 					}
-					if (p_ecs.GetComponentTypeName(i) == "Player")
+					if (p_ecs.GetComponentTypeName(i) == "Tag")
 					{
-						p_ecs.GetComponent<Player>(j).Serialize(writer);
+						p_ecs.GetComponent<Tag>(j).Serialize(writer);
 					}
 					if (p_ecs.GetComponentTypeName(i) == "Audio")
 					{

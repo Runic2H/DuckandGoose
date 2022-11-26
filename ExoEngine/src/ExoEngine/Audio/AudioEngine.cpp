@@ -17,7 +17,7 @@
 #include "AudioEngine.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 
-std::unique_ptr< CAudioEngine> m_Instance;
+std::unique_ptr<CAudioEngine> m_Instance;
 
 std::unique_ptr<CAudioEngine>& CAudioEngine::GetInstance()
 {
@@ -34,17 +34,6 @@ void CAudioEngine::ErrorCheck(FMOD_RESULT result)
 	if (result != FMOD_OK) {
 		//cout << "FMOD ERROR " << result << endl;
 	}
-}
-
-//this audio load will be used by the asset manager in M3
-void CAudioEngine::LoadAudio(std::string filename)
-{
-    std::ifstream ifs(filename.c_str());
-    std::string name, textPath;
-    while (ifs >> name >> textPath)
-    EM::ResourceManager::LoadAudio(name.c_str(), textPath.c_str());
-
-    ifs.close();
 }
 
 //Load sound function stores the audio selected into a map and calls the FMOD API create sound
@@ -69,7 +58,7 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
 //Play sound searches for the audio laoaded into the soumd map, then calls FMOD API play sound using loaded audio
 int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
 {
-    int nChannelId = mnNextChannelId++;
+
     auto tFoundIt = SoundMap.find(strSoundName);
     FMOD::Sound* pSound;
     
@@ -84,6 +73,8 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     
     FMOD::Channel* pChannel = nullptr;
 
+    //create new channel if no empty channels found
+    int nChannelId = mnNextChannelId++;
     ErrorCheck(mpSystem->playSound(pSound, nullptr, false, &pChannel));
     if (pChannel)
     {
@@ -92,6 +83,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
         CAudioEngine::ErrorCheck(pChannel->setVolume(VolumeTodB(fVolumedB)));
         ChannelMap[nChannelId] = pChannel;
     }
+    std::cout << ChannelMap.size() << std::endl;
     return nChannelId;
 }
 
@@ -177,7 +169,7 @@ void CAudioEngine::Init()
 {
 	ErrorCheck(FMOD::System_Create(&mpSystem));
 
-    LoadAudio("Assets/audios.txt");
+    //LoadAudio("Assets/audios.txt");
 
 	mpSystem->init(1024, FMOD_INIT_NORMAL, NULL);
 	mpSystem->createChannelGroup("Master", &Master);
@@ -196,7 +188,6 @@ void CAudioEngine::Update()
         bool bIsPlaying = false;
         it->second->isPlaying(&bIsPlaying);
         
-
         if (!bIsPlaying)
         {
             pStoppedChannels.push_back(it);
@@ -205,6 +196,9 @@ void CAudioEngine::Update()
     for (auto& it : pStoppedChannels)
     {
         ChannelMap.erase(it);
+    }
+    if (ChannelMap.begin() == ChannelMap.end()) {
+        mnNextChannelId = 0;
     }
     CAudioEngine::ErrorCheck(mpSystem->update());
 }
@@ -222,9 +216,13 @@ void CAudioEngine::Release()
     
     // release every channel group
     // release systems
-    Master->release();
+    BGM->stop();
+    SFX->stop();
+    Master->stop();
+
     BGM->release();
     SFX->release();
+    Master->release();
 
     mpSystem->release();
 }
@@ -235,11 +233,11 @@ bool CAudioEngine::IsPlaying(int nChannelId) const
     bool is_playing = false;
     auto it = ChannelMap.find(nChannelId);
     //if not found return false
-    if (it->second->isPlaying(&is_playing))
+    if (it != ChannelMap.end())
     {
-        return true;
+        return it->second->isPlaying(&is_playing);
     }
- 
+
     return false;
 }
 
@@ -262,4 +260,5 @@ float  CAudioEngine::VolumeTodB(float volume)
 
     return dec;
 }
+
 

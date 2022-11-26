@@ -18,7 +18,6 @@ namespace EM
 		virtual CollisionResponse* Clone() const override;
 		virtual std::string GetScriptName() override;
 	private:
-		Entity entityID;
 		entityPhysics mPhys;
 	};
 }
