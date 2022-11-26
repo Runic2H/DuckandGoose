@@ -54,7 +54,7 @@ namespace EM {
     bool logger = false;
     
     static int current_sound = 0;
-
+    
     // Init for levelEditor sets context for ImGui 
     void LevelEditor::Init(Window* window)
     {
@@ -70,6 +70,8 @@ namespace EM {
 
         ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 450");
+        
+        LoadAudioFromFile();
 
         LoadSceneFromFile();
     }
@@ -85,13 +87,13 @@ namespace EM {
         MainMenuBar();
         LoadSaveScene();
         Profiler();
-        ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
         ContentBrowser();
         Logger();
         Hierarchy();
         Inspector();
         SceneViewer();
-        Audio();
+        AudioManager();
     }
     //  Render interface onto frame
 
@@ -116,6 +118,7 @@ namespace EM {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
+        p_Audio->Release();
     }
 
     void LevelEditor::LoadSceneFromFile()
@@ -132,6 +135,40 @@ namespace EM {
             mFileList.emplace_back(dir_entry);
             // used to Load Scene
             mScenefile.emplace_back(dir_entry.path().filename().string());
+        }
+    }
+    void LevelEditor::LoadTextureFromFile()
+    {
+        std::string path = "Assets/Textures";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ path })
+        {
+            //Checks if the given file status or path corresponds to a regular file
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+
+            mTextureFileList.emplace_back(dir_entry);
+            // used to Load Scene
+            mTextureFile.emplace_back(dir_entry.path().filename().string());
+        }
+    }
+    //loads audio filepaths from assets folder
+    void LevelEditor::LoadAudioFromFile()
+    {
+        std::string audio_path = "Assets/metadigger";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
+        {
+            //checks if given file status or path corresponds to a regular file
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+
+            mAudioFileList.emplace_back(dir_entry);
+            // used to load audio
+            mAudioFile.emplace_back(dir_entry.path().filename().string());
+
         }
     }
     //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
@@ -289,95 +326,98 @@ namespace EM {
     // Content browser to be implemented in M3
     void LevelEditor::ContentBrowser()
     {
-      ImGui::Begin("Content Browser");
-      if (m_CurrentDirectory != std::filesystem::path(mAssetsPath))
-      {
-          if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("BackIcon")->GetRendererID(),
-                  { 25.f,25.f }, { 0, 1 }, { 1, 0 }))
+        if (show_window)
+        {
+          ImGui::Begin("Content Browser");
+          if (m_CurrentDirectory != std::filesystem::path(mAssetsPath))
           {
-              m_CurrentDirectory = m_CurrentDirectory.parent_path();
+              if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("BackIcon")->GetRendererID(),
+                      { 25.f,25.f }, { 0, 1 }, { 1, 0 }))
+              {
+                  m_CurrentDirectory = m_CurrentDirectory.parent_path();
+              }
           }
-      }
 
-      for (auto& Directory : std::filesystem::directory_iterator(m_CurrentDirectory))
-      {
-          const auto& directorypath = Directory.path(); //the path for folders in Assets(assets/fonts)
+          for (auto& Directory : std::filesystem::directory_iterator(m_CurrentDirectory))
+          {
+              const auto& directorypath = Directory.path(); //the path for folders in Assets(assets/fonts)
         
-          std::string filename = directorypath.filename().string(); //just the name of the folders(fonts, icons, metadigger etc)
-          ImGui::PushID(filename.c_str());
-          ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+              std::string filename = directorypath.filename().string(); //just the name of the folders(fonts, icons, metadigger etc)
+              ImGui::PushID(filename.c_str());
+              ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
           
-          if (Directory.is_directory())
-          {
-              ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("FolderIcon")->GetRendererID(),
-                  { 128.f,128.f }, { 0, 1 }, { 1, 0 });
-          }
-      
-          //Press into the folder
-          ImGui::PopStyleColor();
-          if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
-          {
               if (Directory.is_directory())
-                  m_CurrentDirectory /= directorypath.filename();
-          }
-          
-          ImGui::TextWrapped(filename.c_str()); ImGui::NextColumn(); //indicate the folder name
-          ImGui::PopID();   
-      }
+              {
+                  ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetIcon("FolderIcon")->GetRendererID(),
+                      { 128.f,128.f }, { 0, 1 }, { 1, 0 });
+              }
       
-      ImGui::End();
-
-      ImGui::Begin(m_CurrentDirectory.filename().string().c_str(),(bool*)0, ImGuiWindowFlags_HorizontalScrollbar);
-      if (m_CurrentDirectory.filename() == "Textures")
-      {
-          for (auto& [name, texObj] : ResourceManager::textures)
-          {
-              ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
-                  ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
-                  ImVec2(0.0f, 1.0f),
-                  ImVec2(1.0f, 0.0f));
-
-              if (ImGui::IsItemHovered())
+              //Press into the folder
+              ImGui::PopStyleColor();
+              if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
               {
-                  ImGui::BeginTooltip();
-                  std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" + 
-                                    std::to_string(texObj->GetHeight()) + ")";
-                  ImGui::Text(str.c_str());
-                  ImGui::EndTooltip();
+                  if (Directory.is_directory())
+                      m_CurrentDirectory /= directorypath.filename();
               }
+          
+              ImGui::TextWrapped(filename.c_str()); ImGui::NextColumn(); //indicate the folder name
+              ImGui::PopID();   
+          }
+      
+          ImGui::End();
 
-              if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+          ImGui::Begin(m_CurrentDirectory.filename().string().c_str(),(bool*)0, ImGuiWindowFlags_HorizontalScrollbar);
+          if (m_CurrentDirectory.filename() == "Textures")
+          {
+              for (auto& [name, texObj] : ResourceManager::textures)
               {
-                  ImGui::SetDragDropPayload("Textures", &name, sizeof(name));
                   ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
-                      ImVec2(128* static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
-                      ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
-                  ImGui::EndDragDropSource();
+                      ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                      ImVec2(0.0f, 1.0f),
+                      ImVec2(1.0f, 0.0f));
+
+                  if (ImGui::IsItemHovered())
+                  {
+                      ImGui::BeginTooltip();
+                      std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" + 
+                                        std::to_string(texObj->GetHeight()) + ")";
+                      ImGui::Text(str.c_str());
+                      ImGui::EndTooltip();
+                  }
+
+                  if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+                  {
+                      ImGui::SetDragDropPayload("Textures", &name, sizeof(name));
+                      ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
+                          ImVec2(128* static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                          ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+                      ImGui::EndDragDropSource();
+                  }
               }
           }
-      }
-      else if (m_CurrentDirectory.filename() == "Icons")
-      {
-          for (auto& [name, texObj] : ResourceManager::Icons)
+          else if (m_CurrentDirectory.filename() == "Icons")
           {
-              ImGui::SameLine();
-              ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
-                  ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
-                  ImVec2(0.0f, 1.0f),
-                  ImVec2(1.0f, 0.0f));
-
-              if (ImGui::IsItemHovered())
+              for (auto& [name, texObj] : ResourceManager::Icons)
               {
-                  ImGui::BeginTooltip();
-                  std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" +
-                      std::to_string(texObj->GetHeight()) + ")";
-                  ImGui::Text(str.c_str());
-                  ImGui::EndTooltip();
-              }
-          }
+                  ImGui::SameLine();
+                  ImGui::Image((void*)(intptr_t)texObj->GetRendererID(),
+                      ImVec2(128 * static_cast<float>(texObj->GetWidth()) / static_cast<float>(texObj->GetHeight()), 128),
+                      ImVec2(0.0f, 1.0f),
+                      ImVec2(1.0f, 0.0f));
 
-      }
-      ImGui::End();
+                  if (ImGui::IsItemHovered())
+                  {
+                      ImGui::BeginTooltip();
+                      std::string str = name + " " + "(" + std::to_string(texObj->GetWidth()) + "x" +
+                          std::to_string(texObj->GetHeight()) + ")";
+                      ImGui::Text(str.c_str());
+                      ImGui::EndTooltip();
+                  }
+              }
+
+          }
+          ImGui::End();
+        }
 
     }
 
@@ -421,12 +461,7 @@ namespace EM {
                     ImGui::Text(Log::GetImguiLog().c_str());
                     ImGui::PopStyleColor();
 
-                    if (current_sound > 0)
-                    {
-                        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
-                        ImGui::Text("Audio Channel %d is played", current_sound);
-                        ImGui::PopStyleColor();
-                    }
+
                     
                 }
 
@@ -449,6 +484,13 @@ namespace EM {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(52, 67, 235, 255));
                     ImGui::Text("This is an System Message");
                     ImGui::PopStyleColor();
+                    
+                    if (p_Audio->GetPlayingChannels() > 0)
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
+                        ImGui::Text("Audio Channel %d is played", p_Audio->GetPlayingChannels());
+                        ImGui::PopStyleColor();
+                    }
                 }
 
                 if (log)
@@ -463,6 +505,7 @@ namespace EM {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
                     ImGui::Text("This is an Fatal Message");
                     ImGui::PopStyleColor();
+
                 }
             }
             ImGui::End();
@@ -565,67 +608,72 @@ namespace EM {
     // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
-        ImGui::Begin("Hierarchy");
-        if (ImGui::Button("Create Entity") && p_ecs.GetTotalEntities() != MAX_ENTITIES)
-        {  
-            p_ecs.AddComponent<NameTag>(p_ecs.CreateEntity(), NameTagComponent);
-        }
-
-        if (p_ecs.GetTotalEntities() > 0)
+        if (show_window)
         {
-            ImGui::SameLine();
-            if (ImGui::Button("Destroy Entity"))
-            {
-                if (selectedEntity != MAX_ENTITIES)
-                {
-                    p_ecs.DestroyEntity(selectedEntity);
-                }
-                //selectedEntity = {}; // when the entity is destroy there is no current selected entity
+            ImGui::Begin("Hierarchy");
+            if (ImGui::Button("Create Entity") && p_ecs.GetTotalEntities() != MAX_ENTITIES)
+            {  
+                p_ecs.AddComponent<NameTag>(p_ecs.CreateEntity(), NameTagComponent);
             }
-            ImGui::SameLine();
-            if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)// there is entity alive
+
+            if (p_ecs.GetTotalEntities() > 0)
             {
-                if (selectedEntity != MAX_ENTITIES)
+                ImGui::SameLine();
+                if (ImGui::Button("Destroy Entity"))
                 {
-                    Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
-                    selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
+                    if (selectedEntity != MAX_ENTITIES)
+                    {
+                        p_ecs.DestroyEntity(selectedEntity);
+                    }
+                    //selectedEntity = {}; // when the entity is destroy there is no current selected entity
                 }
-            }
+                ImGui::SameLine();
+                if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)// there is entity alive
+                {
+                    if (selectedEntity != MAX_ENTITIES)
+                    {
+                        Entity CloneEntity = p_ecs.CloneEntity(selectedEntity);
+                        selectedEntity = CloneEntity; // when the entity is destroy there is no current selected entity
+                    }
+                }
             
-            auto aliveTotal = p_ecs.GetTotalEntities();
-            Entity aliveCount = 0;
-            Entity iterEntity = 0;
-            while (aliveCount < aliveTotal)
-            { 
-                if (p_ecs.HaveComponent<NameTag>(iterEntity))
-                {
-                    const auto& tag = p_ecs.GetComponent<NameTag>(iterEntity).GetNameTag();
+                auto aliveTotal = p_ecs.GetTotalEntities();
+                Entity aliveCount = 0;
+                Entity iterEntity = 0;
+                while (aliveCount < aliveTotal)
+                { 
+                    if (p_ecs.HaveComponent<NameTag>(iterEntity))
+                    {
+                        const auto& tag = p_ecs.GetComponent<NameTag>(iterEntity).GetNameTag();
 
-                    ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
-                    bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)iterEntity, flags, tag.c_str());
+                        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+                        bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)iterEntity, flags, tag.c_str());
 
-                    if (ImGui::IsItemClicked())
-                        selectedEntity = iterEntity;
+                        if (ImGui::IsItemClicked())
+                            selectedEntity = iterEntity;
 
-                    if (opened)
-                        ImGui::TreePop();
+                        if (opened)
+                            ImGui::TreePop();
 
-                    aliveCount++;
+                        aliveCount++;
+                    }
+
+                    iterEntity++;
                 }
-
-                iterEntity++;
             }
-        }
 
-        if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-            selectedEntity = {};
-        ImGui::End();
+            if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+                selectedEntity = {};
+            ImGui::End();
+        }
 
     }
 
     //Inspector allows us to manipulate the entity properties, modifying scale, rotation and position of the object.
     void LevelEditor::Inspector()
     {
+        if(show_window)
+        {
         ImGui::Begin("Inspector");
         if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0 )// if the selectedEntityExist
         {
@@ -633,8 +681,8 @@ namespace EM {
             if (ImGui::Button("Add Component") )
                 ImGui::OpenPopup("Add Component");
 
-            if (ImGui::BeginPopup("Add Component"))
-            {
+                if (ImGui::BeginPopup("Add Component"))
+                {
                 
                 if (ImGui::MenuItem("Transform"))
                 {
@@ -694,53 +742,53 @@ namespace EM {
                     ImGui::DragFloat("##PositionY", (float*)&Position.y, 0.005f);
                     ImGui::PopID();
 
-                    //scale
-                    auto& Scale = p_ecs.GetComponent<Transform>(selectedEntity).GetScale();
-                    ImGui::Text("Scale   "); ImGui::SameLine();
-                    ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
-                    ImGui::DragFloat("##Scale", (float*)&Scale.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
-                    ImGui::PushID(2);
-                    ImGui::Text("Y"); ImGui::SameLine();
-                    ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
-                    ImGui::PopID();
-                    //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
+                        //scale
+                        auto& Scale = p_ecs.GetComponent<Transform>(selectedEntity).GetScale();
+                        ImGui::Text("Scale   "); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                        ImGui::DragFloat("##Scale", (float*)&Scale.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                        ImGui::PushID(2);
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
+                        ImGui::PopID();
+                        //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
 
-                    //rotation
-                    auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
-                    ImGui::Text("Rotation Z"); ImGui::SameLine();
-                    ImGui::DragFloat("##", (float*)&rotation, 1.0f);
-                    //EM_EXO_INFO("Rotation(z:{0})", rotation);
-                }
-            }
-            //Sprite Component
-            if (p_ecs.HaveComponent<Sprite>(selectedEntity))
-            {
-                
-                if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
-                {
-                    auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
-                    ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet);
-                    ImGui::Checkbox("Animation", &sprite.mIsanimated);
-                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
-                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                    ImGui::Button("Image : "); ImGui::SameLine(80.0f);
-                    ImGui::PopStyleColor(3);
-                    auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
-                    ImGui::SetNextItemWidth(140.0f);
-
-                    if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
-                    {
-                        for (auto& [str, tex] : ResourceManager::textures)
-                        {
-                            if (ImGui::Selectable(str.c_str()))
-                            {
-                                texturePath = str;
-                                EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
-                            }
-                        }
-                        ImGui::EndCombo();
+                        //rotation
+                        auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
+                        ImGui::Text("Rotation Z"); ImGui::SameLine();
+                        ImGui::DragFloat("##", (float*)&rotation, 1.0f);
+                        //EM_EXO_INFO("Rotation(z:{0})", rotation);
                     }
+                }
+                //Sprite Component
+                if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+                {
+                
+                    if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
+                        ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet);
+                        ImGui::Checkbox("Animation", &sprite.mIsanimated);
+                        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
+                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                        ImGui::PopStyleColor(3);
+                        auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
+                        ImGui::SetNextItemWidth(140.0f);
+
+                        if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                        {
+                            for (auto& [str, tex] : ResourceManager::textures)
+                            {
+                                if (ImGui::Selectable(str.c_str()))
+                                {
+                                    texturePath = str;
+                                    EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
+                                }
+                            }
+                            ImGui::EndCombo();
+                        }
 
                     if (ImGui::BeginDragDropTarget())
                     {
@@ -846,176 +894,146 @@ namespace EM {
         if (ImGui::Button("Delete Component"))
               ImGui::OpenPopup("Delete Component");
 
-        if (ImGui::BeginPopup("Delete Component"))
-        {
-            if (ImGui::MenuItem("Transform") && p_ecs.HaveComponent<Transform>(selectedEntity))
+            if (ImGui::BeginPopup("Delete Component"))
             {
-                p_ecs.RemoveComponent<Transform>(selectedEntity);
-                ImGui::CloseCurrentPopup();
+                if (ImGui::MenuItem("Transform") && p_ecs.HaveComponent<Transform>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Transform>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Sprite") && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Sprite>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("Collider") && p_ecs.HaveComponent<Collider>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<Collider>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (ImGui::MenuItem("RigidBody") && p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                {
+                    p_ecs.RemoveComponent<RigidBody>(selectedEntity);
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
             }
-            if (ImGui::MenuItem("Sprite") && p_ecs.HaveComponent<Sprite>(selectedEntity))
-            {
-                p_ecs.RemoveComponent<Sprite>(selectedEntity);
-                ImGui::CloseCurrentPopup();
-            }
-            if (ImGui::MenuItem("Collider") && p_ecs.HaveComponent<Collider>(selectedEntity))
-            {
-                p_ecs.RemoveComponent<Collider>(selectedEntity);
-                ImGui::CloseCurrentPopup();
-            }
-            if (ImGui::MenuItem("RigidBody") && p_ecs.HaveComponent<RigidBody>(selectedEntity))
-            {
-                p_ecs.RemoveComponent<RigidBody>(selectedEntity);
-                ImGui::CloseCurrentPopup();
-            }
-            ImGui::EndPopup();
         }
-    }
-    ImGui::End();
+        ImGui::End();
+        } //end of show_window
 
     }
+
+   
 
     //Audio manager allows users to select and play and test different audios in the editor
-    //Need to shift loading of audio files into asset manager in M3
-    void LevelEditor::Audio()
+    void LevelEditor::AudioManager()
     {
         if (show_window)
         {
-            ImGui::Begin("Audio Manager");
-            
-            //auto& AudioPath = p_ecs.GetComponent<Audio>()
-            const char* items[] = { "FStep1", "FStep2", "FStep3", "FStep4", "FStep5", "Whoosh1", "Whoosh2", "Whoosh3", "Whoosh4", "Whoosh5", "test" };
-            static int item_current = 0;
-            static const char* current_item = NULL;
+            std::vector<const char*> audiofilenames;
+            const size_t arraysize = 100;
+            const char* audioFileList[arraysize];
+            std::string audioPath = "Assets/metadigger/";
+            static int currentfile = 0;
 
-            ImGui::Combo("Load Sound", &item_current, items, IM_ARRAYSIZE(items));
-
-            static int play_clicked = 0;
-            static int stop_clicked = 0;
-
-            //play audio file based on sound selected 
-            if (ImGui::Button("Play Sound"))
-                play_clicked++;
-
-            if ((play_clicked & 1) && item_current == 0)
+            for (auto& item : mAudioFile)
             {
+                audiofilenames.push_back(item.c_str());
+            }
+
+            std::copy(audiofilenames.begin(), audiofilenames.end(), audioFileList);
+
+            for (size_t i = audiofilenames.size(); i < arraysize; i++)
+            {
+                audioFileList[i] = "EMPTY";
+            }
+
+            ImGui::Begin("Audio Manager");
+
+            ImGui::Combo("##LoadFile", &currentfile, audioFileList, static_cast<int>(audiofilenames.size()), static_cast<int>(audiofilenames.size()) );
+
+            static bool pauseButton = false;
+
+            if (ImGui::Button("Play Audio"))
+            {
+                ImGui::SameLine();
+                ImGui::Text("Playing!");
+                current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), 50.f);
+                //playinglist.emplace_back(std::to_string(current_sound).c_str());
+            }
+
+            for (auto i = p_Audio->ChannelMap.begin(); i != p_Audio->ChannelMap.end(); i++) 
+            {
+                //print out text indicating channel number
+                ImGui::Text("Playing Channel %s", std::to_string(i->first).c_str());
+                
+                if (ImGui::Button("Pause Audio"))
+                {
+                    p_Audio->PauseSound(i->first);
+                }
                 
                 ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                current_sound = p_Audio->PlaySound("Assets/metadigger/FStep1.wav", 50.f); 
-                play_clicked = 0;
+                
+                if (ImGui::Button("Unpause Audio"))
+                {
+                    p_Audio->UnpauseSound(i->first);
+                }
+                
+                if (ImGui::Button("Stop Audio"))
+                {
+                    p_Audio->StopChannel(i->first);
+                }
+
             }
-            /*std::string filePath = "";
-            p_Audio->Loadsound(filePath);*/
-            if ((play_clicked & 1) && item_current == 1)
+            
+            if (ImGui::Button("Delete Audio"))
             {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                current_sound = p_Audio->PlaySound("Assets/metadigger/FStep2.wav", 50.f);
-                play_clicked = 0;
+                    std::filesystem::remove(mAudioFileList[currentfile].path());
+                    mAudioFileList.erase(mAudioFileList.begin() + currentfile);
+                    // used to load audio
+                    mAudioFile.erase(mAudioFile.begin() + currentfile);
             }
 
-            if ((play_clicked & 1) && item_current == 2)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/FStep3.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 3)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/FStep4.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 4)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/FStep5.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 5)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/Whoosh1.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 6)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/Whoosh2.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 7)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/Whoosh3.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 8)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/Whoosh4.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 9)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                p_Audio->PlaySound("Assets/metadigger/Whoosh5.wav", 50.f);
-                play_clicked = 0;
-            }
-
-            if ((play_clicked & 1) && item_current == 10)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Playing!");
-                stop_clicked = 0;
-                current_sound = p_Audio->PlaySound("Assets/metadigger/test.wav", 50.f);
-                play_clicked = 0;
-            }
-            //pause audio file based on sound selected 
-            if (ImGui::Button("Pause Sound"))
-                stop_clicked++;
-
-            if (stop_clicked & 1)
-            {
-                ImGui::SameLine();
-                ImGui::Text("Paused!");
-                play_clicked = 0;
-                //p_Audio->Release();
-               p_Audio->PauseSound(current_sound);
-            }
+            static int item_current = 1;
 
             //set voulume slider
             static float f1 = 0.0f;
-            ImGui::SliderFloat("Set Volume", &f1, 0.0f, 1.0f, "Max - Min %.3f");
-            p_Audio->SetVolume(current_sound, f1);
-            ImGui::End();
+            ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
+            p_Audio->SetVolume(current_sound, 1 / (f1+1));
 
+            static float f2 = 0.0f;
+            ImGui::SliderFloat("BGM Volume", &f2, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f2 > f1)
+            {
+                f2 = f1;
+            }
+  
+            static float f3 = 0.0f;
+            ImGui::SliderFloat("SFX Volume", &f3, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f3 > f1)
+            {
+                f3 = f1;
+            }
+
+            ImGui::End();
         }
+    }
+
+    void LevelEditor::insertAudioFilePath(std::string in)
+    {
+        //create new directory entry
+        //insert entry into mAudioFileList
+        //insert path into mAudioFile
+        auto const& dir_entry = std::filesystem::directory_entry{ in };
+        mAudioFileList.emplace_back(dir_entry);
+        mAudioFile.emplace_back(dir_entry.path().filename().string());
+    }
+
+    void LevelEditor::insertTextureFilePath(std::string in)
+    {
+        auto const& dir_entry = std::filesystem::directory_entry{ in };
+        mTextureFileList.emplace_back(dir_entry);
+        mTextureFile.emplace_back(dir_entry.path().filename().string());
     }
 }

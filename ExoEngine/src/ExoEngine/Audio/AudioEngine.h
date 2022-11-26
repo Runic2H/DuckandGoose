@@ -26,10 +26,10 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
 
         FMOD::System* mpSystem;
 
-        int mnNextChannelId;
+        int mnNextChannelId = 0;
 
         std::map<std::string, FMOD::Sound*> SoundMap;
-        std::map<int, FMOD::Channel*> ChannelMap;
+        
 
         FMOD::ChannelGroup *BGM, *SFX, *Master;
         //FMOD::Channel*;
@@ -38,6 +38,8 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         //SoundMap mSounds;
         //ChannelMap mChannels;
     public:
+        std::map<int, FMOD::Channel*> ChannelMap;
+
         enum class channel_groups { master, bgm, sfx };
         static std::unique_ptr<CAudioEngine>& GetInstance();
 
@@ -46,7 +48,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         void Release();
         void ErrorCheck(FMOD_RESULT result);
 
-        void LoadAudio(std::string filename);
+        //void LoadAudio(std::string filename);
         FMOD::Sound* Loadsound(const std::string& strSoundName, bool bLooping = false);
         //void UnLoadSound(const std::string& strSoundName);
         
@@ -60,7 +62,17 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         bool IsPlaying(int nChannelId) const;
         float dbToVolume(float db);
         float VolumeTodB(float volume);
+        int GetPlayingChannels() { return (int)ChannelMap.size(); }
         //FMOD_VECTOR VectorToFmod(const Vector3& vPosition);
+
+    /*private:
+        struct displaychannelitem
+        {
+            int channel_num;
+            bool is_playing;
+        };
+
+        std::vector<displaychannelitem>playinglist;*/
 
 };
 

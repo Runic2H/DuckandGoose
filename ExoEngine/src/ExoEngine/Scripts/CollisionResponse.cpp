@@ -10,6 +10,9 @@ namespace EM
 
 	void CollisionResponse::Update(float Frametime)
 	{
+		if (Frametime) {
+
+		}
         auto& transform = p_ecs.GetComponent<Transform>(GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetEntityID());
