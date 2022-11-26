@@ -240,6 +240,7 @@ namespace EM {
         public:
             int simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2);
             int simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1);
+            int simpleCirclePoint(vec2D ent1, float rad1, vec2D pt1);
             int simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center);
             int simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2);
     };

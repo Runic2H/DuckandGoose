@@ -353,27 +353,48 @@ namespace EM {
             return 0;
         }
     }
-    int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) { (void)rad1; (void)min1; (void)max1; (void)ent1; return 0; }
+    int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) {
+        vec2D lineNormal = vec2D();
+        lineNormal.x = max1.y - min1.y;
+        lineNormal.y = min1.x - max1.x;
+        vec2D straightLine = ent1 - min1;
+        float straightDist = dotProduct(straightLine, lineNormal);
+        if (straightDist <= rad1) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    int entityCollision::simpleCirclePoint(vec2D ent1, float rad1, vec2D pt1) {
+        if (distance(ent1, pt1) <= rad1) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
     int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
         vec2D dist = vec2D();
         dist.x = center.x - ent1.x;
         dist.y = center.y - ent1.y;
-        if (dist.x > (rad1+max1.x) || dist.x < -(rad1+max1.x) || dist.y > (rad1+max1.y) || dist.y < -(rad1+max1.y)) {
+        if (dist.x > (rad1+max1.x-center.x) || dist.x < -(rad1+max1.x-center.x) || dist.y > (rad1+max1.y-center.y) || dist.y < -(rad1+max1.y-center.y)) {
             return 0;
         }
-        vec2D topleft = vec2D(min1.x, max1.y);
+        /*vec2D topleft = vec2D(min1.x, max1.y);
         vec2D bottomright = vec2D(max1.x, min1.y);
         if (distance(ent1, max1) > rad1 || distance(ent1, min1) > rad1 || distance(ent1, topleft) > rad1 || distance(ent1, bottomright) > rad1) {
             return 0;
-        }
+        }*/
         return 1;
     }
     int entityCollision::simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2) {
+        
         if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
-            return 1;
+            return true;
         }
         else
-            return 0;
+            return false;
     }
 
     void Knockback()
