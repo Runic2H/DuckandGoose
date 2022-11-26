@@ -89,7 +89,6 @@ namespace EM {
 		std::filesystem::path m_CurrentDirectory = mAssetsPath;
 		
 		//Scene/guizmo
-		//Camera2D camera{ -1.0f, 1.0f, -1.0f , 1.0f };
 		int mGizmoType = -1;
 		WinData mwindata;
 

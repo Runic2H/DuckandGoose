@@ -68,7 +68,7 @@ namespace EM {
 		glm::vec3 worldup = glm::vec3(0.0f, 1.0f, 0.0f);
 		glm::vec3 right = glm::normalize(glm::cross(front, worldup));
 		glm::vec3 up = glm::normalize(glm::cross(right, front));
-		m_ViewMatrix = glm::lookAt(m_Position, m_Position + front, up); //glm::inverse(transform);
+		m_ViewMatrix = glm::lookAt(m_Position, m_Position + front, up);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 }

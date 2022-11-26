@@ -12,7 +12,7 @@ namespace EM {
 			return p_Editor->selectedEntity;
 
 		glm::vec4 clip{ x_ndc, y_ndc, 0.0f, 1.0f };
-		auto projMatrix = camera->GetProjectionMatrix();
+		
 		glm::vec4 Eye = glm::inverse(camera->GetProjectionMatrix()) * clip;
 		glm::vec4 World = glm::inverse(camera->GetViewMatrix()) * Eye;
 
