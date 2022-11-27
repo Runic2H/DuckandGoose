@@ -3,8 +3,7 @@
 \file			Renderer.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
+\par Course:	CSD2400 / GAM200
 \date			02-11-2022
 \brief			This file contain all the require draw call function defintion
 				for our graphic. There batch rendering doing in here too.
@@ -105,16 +104,25 @@ namespace EM {
 
 	}static r_Data;
 
+	/*!*************************************************************************
+	Set Clear Color
+	****************************************************************************/
 	void Renderer::SetClearColor(const glm::vec4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+	/*!*************************************************************************
+	Clear buffer
+	****************************************************************************/
 	void Renderer::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	/*!*************************************************************************
+	Init loop of Renderer
+	****************************************************************************/
 	void Renderer::Init()
 	{
 		glEnable(GL_BLEND);
@@ -234,6 +242,10 @@ namespace EM {
 		r_Data.CircleVertexBufferBase = new CircleVertex[r_Data.MaxVertices];
 		r_Data.CircleShader = ResourceManager::GetShader("CircleShader");
 	}
+
+	/*!*************************************************************************
+	Start rendering
+	****************************************************************************/
 	void Renderer::Begin(Camera2D& camera)
 	{
 		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
@@ -241,11 +253,18 @@ namespace EM {
 		StartBatch();
 	
 	}
+
+	/*!*************************************************************************
+	End loop of Renderer
+	****************************************************************************/
 	void Renderer::End()
 	{
 		Flush();
 	}
 
+	/*!*************************************************************************
+	Start batch rendering
+	****************************************************************************/
 	void Renderer::StartBatch()
 	{
 		//quad
@@ -266,6 +285,10 @@ namespace EM {
 		r_Data.CircleVertexBufferPtr = r_Data.CircleVertexBufferBase;
 		
 	}
+
+	/*!*************************************************************************
+	Reset
+	****************************************************************************/
 	void Renderer::Flush()
 	{
 		//Quads
@@ -320,11 +343,19 @@ namespace EM {
 			r_Data.Infos.n_DrawCalls++;
 		}
 	}
+
+	/*!*************************************************************************
+	Set next batch to be rendered
+	****************************************************************************/
 	void Renderer::NextBatch()
 	{
 		Flush();
 		StartBatch();
 	}
+
+	/*!*************************************************************************
+	Renderer shutdown
+	****************************************************************************/
 	void Renderer::ShutDown()
 	{
 		delete[] r_Data.QuadVertexBufferBase;

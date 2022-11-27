@@ -3,8 +3,7 @@
 \file			Time.h
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
+\par Course:	CSD2400 / GAM200
 \date			11-2-2022
 \brief			This file contain the declare for time which uses chrono
 				to create a timer and use it as a tracker for our system

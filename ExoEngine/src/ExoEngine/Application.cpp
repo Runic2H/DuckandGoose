@@ -5,7 +5,7 @@
 \par DP email:	h.xinxiang@digipen.edu
 \par Course:	Gam200
 \section		A
-\date			28-9-2022
+\date			9-28-2022
 \brief			This file contain the main game loop
 ****************************************************************************
 ***/
@@ -32,6 +32,10 @@
 
 namespace EM {
 	bool end_state{false}; //placeholder
+
+/*!*************************************************************************
+Application constructor
+****************************************************************************/
 	Application::Application()
 	{
 		p_ecs.Init();
@@ -39,15 +43,24 @@ namespace EM {
 		FramePerSec::GetInstance().InitFrame();
 	}
 
+/*!*************************************************************************
+Application destructor
+****************************************************************************/
 	Application::~Application()
 	{
 	}
 
+/*!*************************************************************************
+System input
+****************************************************************************/
 	void Application::SystemInput(System* system)
 	{
 		(void)system;
 	}
 
+/*!*************************************************************************
+Run loop for application
+****************************************************************************/
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
@@ -154,7 +167,9 @@ namespace EM {
 		End();
 	}
 
-
+/*!*************************************************************************
+End loop for application
+****************************************************************************/
 	void Application::End()
 	{
 		p_Scene->SerializeToFile("Level.json");

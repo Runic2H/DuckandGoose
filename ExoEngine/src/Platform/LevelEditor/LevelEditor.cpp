@@ -55,7 +55,10 @@ namespace EM {
     
     static int current_sound = 0;
     
-    // Init for levelEditor sets context for ImGui 
+     
+    /*!*************************************************************************
+    Init loop for levelEditor sets context for ImGui
+    ****************************************************************************/
     void LevelEditor::Init(Window* window)
     {
         m_window = window;
@@ -76,7 +79,9 @@ namespace EM {
         LoadSceneFromFile();
     }
 
-    //  Update loop for level editor, poll events and set new frames
+    /*!*************************************************************************
+    Update loop for level editor, poll events and set new frames
+    ****************************************************************************/
     void LevelEditor::Update()
     {
 
@@ -114,8 +119,10 @@ namespace EM {
         }
         
     }
-    //  Render interface onto frame
-
+   
+    /*!*************************************************************************
+    Render interface onto frame
+    ****************************************************************************/
     void LevelEditor::Draw()
     {
         ImGui::Render();
@@ -131,7 +138,10 @@ namespace EM {
 
     }
 
-    //  End instance
+   
+    /*!*************************************************************************
+    End instance of the level editor 
+    ****************************************************************************/
     void LevelEditor::End()
     {
         ImGui_ImplOpenGL3_Shutdown();
@@ -140,6 +150,9 @@ namespace EM {
         p_Audio->Release();
     }
 
+    /*!*************************************************************************
+    Load file paths for scene from assets folder
+    ****************************************************************************/
     void LevelEditor::LoadSceneFromFile()
     {
         std::string path = "Assets/Scene";
@@ -156,6 +169,10 @@ namespace EM {
             mScenefile.emplace_back(dir_entry.path().filename().string());
         }
     }
+
+    /*!*************************************************************************
+    Load file paths for textures from assets folder
+    ****************************************************************************/
     void LevelEditor::LoadTextureFromFile()
     {
         std::string path = "Assets/Textures";
@@ -172,7 +189,10 @@ namespace EM {
             mTextureFile.emplace_back(dir_entry.path().filename().string());
         }
     }
-    //loads audio filepaths from assets folder
+    
+    /*!*************************************************************************
+    Loads audio filepaths for audio files from assets folder
+    ****************************************************************************/
     void LevelEditor::LoadAudioFromFile()
     {
         std::string audio_path = "Assets/metadigger";
@@ -190,7 +210,11 @@ namespace EM {
 
         }
     }
-    //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
+    
+    /*!*************************************************************************
+    Menu bar located in the top left side of the window is used to toggle between 
+    opening and closing the editor    
+    ****************************************************************************/
     void LevelEditor::MainMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -214,6 +238,9 @@ namespace EM {
         }
     }
 
+    /*!*************************************************************************
+    Load and save scenes by serialising and deserializing data from JSON files
+    ****************************************************************************/
     void LevelEditor::LoadSaveScene()
     {
         std::vector<const char*> filenames;
@@ -253,6 +280,9 @@ namespace EM {
         ImGui::End();
     }
 
+    /*!*************************************************************************
+    Scene viewer
+    ****************************************************************************/
     void LevelEditor::SceneViewer()
     {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
@@ -359,7 +389,9 @@ namespace EM {
         }   
     }
 
-    // Content browser to be implemented in M3
+    /*!*************************************************************************
+    View various assets from the assets folders from the level editor
+    ****************************************************************************/
     void LevelEditor::ContentBrowser()
     {
         if (show_window)
@@ -457,7 +489,9 @@ namespace EM {
 
     }
 
-    // Logger, can toggle between types of messages you want to view
+    /*!*************************************************************************
+    Logger, can toggle between types of messages you want to view
+    ****************************************************************************/
     void LevelEditor::Logger()
     {
         if (show_window)
@@ -491,31 +525,29 @@ namespace EM {
                 static bool fatal = true;
                 ImGui::Checkbox("fatal", &fatal);
 
-                if (info)
+                if (info) //if info checkbox is clicked info log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
                     ImGui::Text(Log::GetImguiLog().c_str());
                     ImGui::PopStyleColor();
-
-
                     
                 }
 
-                if (warning)
+                if (warning) //if warning checkbox is clicked warning log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 0, 255));
                     ImGui::Text("This is an Warning Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (error)
+                if (error) //if error checkbox is clicked error log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
                     ImGui::Text("This is an Error Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (system)
+                if (system) //if system checkbox is clicked system log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(52, 67, 235, 255));
                     ImGui::Text("This is an System Message");
@@ -529,14 +561,14 @@ namespace EM {
                     }
                 }
 
-                if (log)
+                if (log) //if log checkbox is clicked log log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(52, 222, 235, 255));
                     ImGui::Text("This is an Log Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (fatal)
+                if (fatal) //if fatal checkbox is clicked fatal log will be displayed
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
                     ImGui::Text("This is an Fatal Message");
@@ -548,7 +580,10 @@ namespace EM {
         }
     }
 
-    //Docking allows us to dock the ImGui windows to the edges of the scene
+    
+    /*!*************************************************************************
+    Docking allows us to dock the ImGui windows to the edges of the scene
+    ****************************************************************************/
     void LevelEditor::Docking()
     {
         //Set docking flags
@@ -577,8 +612,7 @@ namespace EM {
 
     }
 
-
-    /*
+    /*!*************************************************************************
     Profiler displays information about the users system such as 
     
     Renderer and version of renderer (GPU)
@@ -587,7 +621,7 @@ namespace EM {
     
     Rendered info e.g. Quads, vertices, indices drawn etc.
 
-    */
+    ****************************************************************************/
     void LevelEditor::Profiler()
     {
         if (show_window)
@@ -642,7 +676,9 @@ namespace EM {
         }
     }
 
-    // Create, destroy and clone entities
+    /*!*************************************************************************
+    // Create, destroy and clone entities in the hirarchy window
+    ****************************************************************************/
     void LevelEditor::Hierarchy()
     {
         if (show_window)
@@ -706,7 +742,10 @@ namespace EM {
 
     }
 
-    //Inspector allows us to manipulate the entity properties, modifying scale, rotation and position of the object.
+    /*!*************************************************************************
+    Inspector allows us to manipulate the entity properties, modifying scale, 
+    rotation and position of the object.
+    ****************************************************************************/
     void LevelEditor::Inspector()
     {
         if(show_window)
@@ -961,9 +1000,10 @@ namespace EM {
 
     }
 
-   
-
-    //Audio manager allows users to select and play and test different audios in the editor
+    /*!*************************************************************************
+     Audio manager allows users to select and play, pause and test different 
+     audios in the editor
+    ****************************************************************************/
     void LevelEditor::AudioManager()
     {
         if (show_window)
@@ -1057,6 +1097,9 @@ namespace EM {
         }
     }
 
+    /*!*************************************************************************
+    using std::filesystem we insert the file path if audio assets into the editor
+    ****************************************************************************/
     void LevelEditor::insertAudioFilePath(std::string in)
     {
         //create new directory entry
@@ -1067,6 +1110,9 @@ namespace EM {
         mAudioFile.emplace_back(dir_entry.path().filename().string());
     }
 
+    /*!*************************************************************************
+    using std::filesystem we insert the file path if texture assets into the editor
+    ****************************************************************************/
     void LevelEditor::insertTextureFilePath(std::string in)
     {
         auto const& dir_entry = std::filesystem::directory_entry{ in };

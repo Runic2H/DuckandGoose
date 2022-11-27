@@ -1,3 +1,13 @@
+/*!*************************************************************************
+****
+\file			ResourceManager.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-11-2022
+\brief			Header file for animation.cpp
+****************************************************************************
+***/
 #pragma once
 #include "Platform/Graphics/Renderer.h"
 #include "Platform/Graphics/SpriteRendering.h"

@@ -3,9 +3,8 @@
 \file			Graphic.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			28-9-2022
+\par Course:	CSD2400 /GAM200
+\date			9-28-2022
 \brief			This file contain a temporarily rendering class which will be bring over
 				once render class is up.
 
@@ -25,7 +24,9 @@
 namespace EM {
 
 	//extern ECS ecs;
-
+	/*!*************************************************************************
+	Load Icon from filepath using resource manager
+	****************************************************************************/
 	void Graphic::LoadIconsTexture(std::string filename)
 	{
 		std::ifstream ifs(filename.c_str());
@@ -35,6 +36,10 @@ namespace EM {
 
 		ifs.close();
 	}
+
+	/*!*************************************************************************
+	Load texture from filename using resource manager
+	****************************************************************************/
 	void Graphic::LoadTexture(std::string filename)
 	{
 		std::ifstream ifs(filename.c_str());
@@ -46,6 +51,9 @@ namespace EM {
 	}
 
 	//for testing purpose
+	/*!*************************************************************************
+	Init loop for Graphics
+	****************************************************************************/
 	void Graphic::Init()
 	{
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
@@ -66,7 +74,9 @@ namespace EM {
 		m_Font->Init();
 	}
 
-
+	/*!*************************************************************************
+	Update loop for Graphics
+	****************************************************************************/
 	void Graphic::Update(float frametime)
 	{
 		Timer::GetInstance().Start(Systems::GRAPHIC);
@@ -236,6 +246,10 @@ namespace EM {
 		
 		
 	}
+
+	/*!*************************************************************************
+	End loop for Graphics
+	****************************************************************************/
 	void Graphic::End()
 	{
 		ResourceManager::clear();
