@@ -96,18 +96,21 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		//p_Scene->DeserializeFromFile("Level.json");
+		//FOR DEBUGGING ECS 
 
-		Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
+		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
 		Tag tag;
+
+		Entity Background = p_ecs.CreateEntity();
+		name.SetNameTag("BackGround");
+		p_ecs.AddComponent<NameTag>(Background, name);
+
+		Entity player = p_ecs.CreateEntity();
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
-		logic.InsertScript(new PlayerController(), player);
-		logic.InsertScript(new CollisionResponse(), player);
 		p_ecs.AddComponent<Transform>(player, TransformComponent);
 		p_ecs.AddComponent<RigidBody>(player, rb);
 		p_ecs.AddComponent<Sprite>(player, sprite);
@@ -118,11 +121,27 @@ namespace EM {
 		tag.SetTag("Player");
 		p_ecs.AddComponent<Tag>(player, tag);
 		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+
 
 		Logic logic2;
-		logic2.InsertScript(new EnemyMovement(), enemy);
-		logic2.InsertScript(new CollisionResponse(), enemy);
 		p_ecs.AddComponent<Logic>(enemy, logic2);
+		p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
+		p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
+
+		Entity col = p_ecs.CreateEntity();
+		p_ecs.AddComponent<Tag>(col, TagComponent);
+		p_ecs.GetComponent<Tag>(col).SetTag("PlayerAttack");
+		p_ecs.GetComponent<Tag>(col).SetTargetTag("Enemy");
+		p_ecs.AddComponent<Sprite>(col, SpriteComponent);
+		p_ecs.AddComponent<Transform>(col, TransformComponent);
+		p_ecs.GetComponent<Transform>(col).SetComponentEntityID(player);
+		p_ecs.GetComponent<Transform>(col).GetComponentEntityID();
+		p_ecs.AddComponent<RigidBody>(col, rb);
+		p_ecs.AddComponent<NameTag>(col, name);
+		p_ecs.GetComponent<NameTag>(col).SetNameTag("PlayerAttackCollider");
+		p_ecs.AddComponent<Collider>(col, ColliderComponent);*/
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -130,11 +149,12 @@ namespace EM {
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
 
+			p_Audio->Update();
+			p_Editor->Update();
+			p_Editor->Draw();
+
 			if (p_GUI->check_pause() == false)
 			{
-				p_Audio->Update();
-				p_Editor->Update();
-				p_Editor->Draw();
 				
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
@@ -157,7 +177,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("Level.json");
+		//p_Scene->SerializeToFile("Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

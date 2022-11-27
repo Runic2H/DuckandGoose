@@ -84,6 +84,7 @@ namespace EM
 		void AddComponent(Entity entity, T component)
 		{
 			// Add a component to the array for an entity
+			component.SetComponentEntityID(entity);
 			GetComponentArray<T>()->InsertData(entity, component);
 		}
 
@@ -117,7 +118,6 @@ namespace EM
 			for (auto const& pair : mComponentArrays)
 			{
 				auto const& component = pair.second;
-
 				component->EntityDestroyed(entity);
 			}
 		}

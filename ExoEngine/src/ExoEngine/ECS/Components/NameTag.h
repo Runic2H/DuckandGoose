@@ -29,6 +29,9 @@ namespace EM
 		void SetNameTag(std::string name) { mName = name; }
 		std::string& GetNameTag() { return mName; }
 
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
+
 	private:
 		std::string mName;
 	};

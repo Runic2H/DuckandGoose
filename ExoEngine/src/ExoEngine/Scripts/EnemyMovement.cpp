@@ -17,6 +17,8 @@ for more complex pathfinding
 
 namespace EM
 {
+	EnemyMovement::EnemyMovement() : mAttackCooldown{ 0.0f } {};
+
 	EnemyMovement* EnemyMovement::Clone() const
 	{
 		return new EnemyMovement(*this);
@@ -25,8 +27,8 @@ namespace EM
 
 	void EnemyMovement::Update(float Frametime)
 	{
-		auto& transform = p_ecs.GetComponent<Transform>(GetEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
+		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			if (p_ecs.HaveComponent<Tag>(i) && !std::strcmp(p_ecs.GetComponent<Tag>(i).GetTag().c_str(), "Player"))
@@ -36,10 +38,27 @@ namespace EM
 		}
 		vec2D newVel = vec2D(0,0);
 		newVel = rigidbody.GetVel();
+		if (mAttackCooldown <= 0.0f)
+		{
+			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Idle");
+		}
 		if (squarelength(rigidbody.GetDir()) < 3.0f)
 		{
+			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Running");
 			newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 			newVel = mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+			//Attack Range
+			if (squarelength(rigidbody.GetDir()) < 0.1f)
+			{
+				//Attack Logic Here
+				mAttackCooldown = 2.5f;
+				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("CA1");
+			}
+		}
+		if (mAttackCooldown > 0.0f)
+		{
+			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Running");
+			newVel -= newVel * 2;
 		}
 		else {
 			newVel = (mPhys.friction(newVel, Frametime));
@@ -49,6 +68,7 @@ namespace EM
 		}
 		vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 		rigidbody.SetNextPos(nextPos);
+		mAttackCooldown -= Frametime;
 	}
 
 	void EnemyMovement::End() 

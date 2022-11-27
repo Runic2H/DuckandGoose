@@ -20,7 +20,7 @@ height and width of the window
 namespace EM
 {
 	//Window Component
-	class WinData : public IComponent
+	class WinData : public JSONSerializer
 	{
 	public:
 		WinData();

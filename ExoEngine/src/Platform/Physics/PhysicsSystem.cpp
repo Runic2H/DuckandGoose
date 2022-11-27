@@ -14,11 +14,19 @@ namespace EM {
 	{
 		Timer::GetInstance().Start(Systems::PHYSICS);
 		Timer::GetInstance().GetDT(Systems::PHYSICS);
-		for (auto& Entity : mEntities)
+		for (const auto& entity : mEntities)
 		{
-			auto& mTrans = p_ecs.GetComponent<Transform>(Entity);
-			auto& mRigid = p_ecs.GetComponent<RigidBody>(Entity);
-			mTrans.SetPos(mRigid.GetNextPos());
+			auto& mTrans = p_ecs.GetComponent<Transform>(entity);
+			auto& mRigid = p_ecs.GetComponent<RigidBody>(entity);
+
+			if (entity == mTrans.GetComponentEntityID())
+			{
+				mTrans.SetPos(mRigid.GetNextPos());
+			}
+			else
+			{
+				mTrans.SetPos(p_ecs.GetComponent<RigidBody>(mTrans.GetComponentEntityID()).GetNextPos());
+			}
 		}
 		Timer::GetInstance().Update(Systems::PHYSICS);
 	}

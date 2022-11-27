@@ -36,7 +36,7 @@ namespace EM
 		void SetRad(float input) { mRadius = input; }
 		void SetHit(int input) { hit = input; }
 		void SetNormal(vec2D input) { CollisionNormal = input; }
-		void ToggleAlive() { mAlive = mAlive ? false : true; }
+		void ToggleAlive() { mAlive = (mAlive == true) ? false : true; }
 
 		ColliderType& GetCollider() { return mCol; }
 		vec2D& GetOffset() { return offset; }
@@ -46,6 +46,9 @@ namespace EM
 		int GetHit() { return hit; }
 		vec2D GetNormal() { return CollisionNormal; }
 		bool GetAlive() { return mAlive; }
+
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		ColliderType mCol{};

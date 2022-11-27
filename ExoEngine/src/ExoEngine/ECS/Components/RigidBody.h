@@ -49,6 +49,9 @@ namespace EM
 		void SetDir(float dirX, float dirY) { mDirection = vec2D(dirX, dirY); }
 		void SetFriction(float value) { mFriction = value; }
 		void SetRestitution(float value) { mRestitution = value; }
+
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
     
 	private:
 		vec2D mAccel;

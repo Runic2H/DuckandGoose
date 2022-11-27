@@ -40,10 +40,13 @@ namespace EM
 		void SetScale(float X, float Y) { mScale = vec2D(X, Y); }
 		void SetRot(float value) { mRot = value; }
 
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		vec2D mPosition;
 		vec2D mScale;
 		float mRot;
+
 	};
 }

@@ -15,9 +15,10 @@ namespace EM
 			Moving,
 			Attacking,
 			Dash,
-			Block
+			Block,
+			Stunned
 		};
-		PlayerController() = default;
+		PlayerController();
 		~PlayerController() = default;
 		virtual PlayerController* Clone() const override;
 		virtual void Start() override;
@@ -25,11 +26,25 @@ namespace EM
 		virtual void End() override;
 		virtual std::string GetScriptName() override;
 
+		void UpdateState();
+		void UpdatePhysics(float Frametime);
+
 		void Animate(PlayerState state);
+
 	private:
 		PlayerState mState;
-		int mAttackCounter{ 0 };
-		float mCooldownTimer{ 0.0f };
+		int mAttackCounter;
+		float mCooldownTimer;
+		float mChargedAttackTimer;
+		float mDashTimer;
+		float mBlockTimer;
+		bool mIsBlocking;
+		bool mIsAttacking;
+		bool mIsStunned;
+		bool mIsIdle;
+		bool mIsMoving;
+		bool mIsDashing;
+		vec2D mVel;
 		entityPhysics mPhys;
 	};
 }

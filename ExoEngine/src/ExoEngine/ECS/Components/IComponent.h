@@ -30,6 +30,11 @@ namespace EM
 		virtual void ToEditor() {}
 		virtual bool Deserialize(const rapidjson::Value& obj) = 0;
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const = 0;
+
+		virtual Entity& GetComponentEntityID() = 0;
+		virtual void SetComponentEntityID(Entity& entity) = 0;
+
+	protected:
 		Entity entityID;
 	};
 }

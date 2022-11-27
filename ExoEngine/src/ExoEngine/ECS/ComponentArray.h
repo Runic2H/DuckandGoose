@@ -60,7 +60,7 @@ namespace EM
 			mEntityToIndexMap[entity] = newIndex;
 			mIndexToEntityMap[newIndex] = entity;
 			mComponentArray[newIndex] = component;
-			component.entityID = entity;
+			component.SetComponentEntityID(entity);
 			++mSize;
 			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
@@ -76,8 +76,6 @@ namespace EM
 			mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 			std::cout << "Index of removed  entity " << indexOfRemovedEntity << std::endl;
 			std::cout << "Index of Last Element " << indexOfLastElement << std::endl;
-		
-			
 		
 			
 			// Update map to point to moved spot
@@ -125,6 +123,7 @@ namespace EM
 		{
 			T* CopyComponent = &mComponentArray[mEntityToIndexMap[entity]];
 			T* CloneComponent = new T(*CopyComponent);
+			CloneComponent->SetComponentEntityID(entityToCopy);
 			InsertData(entityToCopy, *CloneComponent);
 			delete CloneComponent;
 		}
