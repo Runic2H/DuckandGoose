@@ -1,16 +1,14 @@
-/*!*************************************************************************
-****
-\file			CollisionSystem.cpp
-\author			Tan Ek Hern
-\par DP email:	t.ekhern@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			14-10-2022
-\brief			This file contains the necessary function definitions for
-                collision
-
-****************************************************************************
-***/
+/*!*****************************************************************************
+\file CollisionSystem.cpp
+\author Tan Ek Hern
+\par DP email: t.ekhern@digipen.edu
+\par Course: csd2125
+\par Section: a
+\par 
+\date 14-10-2022
+\brief  This file contains the function definitions for the collision system
+ 
+*******************************************************************************/
 #include "empch.h"
 #include "CollisionSystem.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
@@ -18,11 +16,17 @@
 #include "ExoEngine/Math/Physics.h"
 
 namespace EM {
-    //extern ECS ecs;
-    void CollisionSystem::Init() {
-        //check which component has collision and add it to array
-        //assign collider to rigidbody component
-    }
+    /*!*************************************************************************
+	This function initialises the system. As there are no data members that require
+	initialization, this function is empty
+	****************************************************************************/
+    void CollisionSystem::Init() {}
+    /*!*************************************************************************
+	This function runs the logic of the system. It checks the list of entities with
+    a collision component in pairs to see which of them are colliding. If two objects
+    are colliding, collision response is dictated by the type of collider the object
+    has
+	****************************************************************************/
     void CollisionSystem::Update(float dt) {
         (void)dt;
         Timer::GetInstance().Start(Systems::COLLISION);
@@ -30,7 +34,6 @@ namespace EM {
         //iterate through array of entities
         int k = 0;
         for (auto const& i : mEntities) {
-            //make j index i+1
             int l = 0;
             for (auto const& j : mEntities) {
                 if (i != j && l > k) {
@@ -127,15 +130,21 @@ namespace EM {
                             }
                         }
                     }
+                    //playable area bounding box to be implemented
+                    else if (e1 == Collider::ColliderType::box) {
+
+                    }
                 }
                 l++;
             }
             k++;
         }
-
         Timer::GetInstance().Update(Systems::COLLISION);
     }
-    void CollisionSystem::End() {
-        //remove all entities from array
-    }
+    /*!*************************************************************************
+	This function ends the system. As there are no data members that require
+	initialization, there are no data members that need to be un-initialised. 
+	Therefore this function is empty
+	****************************************************************************/
+    void CollisionSystem::End() {}
 }
