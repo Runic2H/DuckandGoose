@@ -168,12 +168,19 @@ Run loop for application
 
 			if (p_GUI->check_pause() == false)
 			{
-				
+				p_Audio->Update();
+				p_Editor->Update();
+				if (p_Editor->show_window)
+				{
+					p_Editor->Draw();
+				}
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			}
 			end_state = p_GUI->Update(m_window);
+
+			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());

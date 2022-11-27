@@ -11,10 +11,12 @@
 
 ****************************************************************************
 ***/
+#include "empch.h"
 #include"Platform/Window/Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
 #include "GUI.h"
+
 namespace EM
 {
 	std::unique_ptr<gui_system> m_Instance; //create a unique pointer to be used outside of this file

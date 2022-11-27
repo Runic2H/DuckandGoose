@@ -13,7 +13,7 @@ saved into a json file for future loading
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "SceneManager.h"
 
 namespace EM

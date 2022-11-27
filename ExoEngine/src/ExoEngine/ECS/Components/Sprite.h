@@ -33,6 +33,10 @@ namespace EM {
 		void SetDisplayTime(float displaytime) { mDisplayTime = displaytime; };
 		float& GetDisplayTime() { return mDisplayTime; }
 
+
+		void SetUVCoor(float& u, float& v) { mUVcooridnates.x = u; mUVcooridnates.y = v; } 
+		vec2D& GetUVCoor() { return mUVcooridnates; }
+
 		Entity& GetComponentEntityID() { return entityID; }
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
@@ -42,7 +46,7 @@ namespace EM {
 		//altas 
 	private:
 		std::string m_texturename;
-		vec2D m_index;
+		vec2D m_index, mUVcooridnates;
 		float mDisplayTime;
 		//TODO insert a increment for mIndex so that it can lease with the animator
 	};

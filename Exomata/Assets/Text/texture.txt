@@ -13,3 +13,10 @@ CA4 Assets/Textures/EXOMATA_CA4_SPRITESHEET.png
 Damage Assets/Textures/EXOMATA_DAMAGED_SPRITESHEET.png
 Dashing Assets/Textures/EXOMATA_DASHING_SPRITESHEET.png
 Laser Assets/Textures/Laser_animation-14-13.png
+MainBackGround Assets/Textures/Main_Background.png
+ExomataLogo Assets/Textures/ExomataLogo.png
+Avatar Assets/Textures/UI/AvatarUI.png
+EndGameUI Assets/Textures/UI/EndGameUI.png
+SmallButton Assets/Textures/UI/SmallButton.png
+ResumeButton Assets/Textures/UI/ResumeButton.png
+MenuPanel Assets/Textures/UI/MenuPanel.png

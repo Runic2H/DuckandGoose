@@ -24,7 +24,7 @@ namespace EM {
 	void Font::Init()
 	{
 		TextShader = ResourceManager::LoadShader("text", "Assets/Shaders/text.shader");;
-        Load("Assets/fonts/ArialItalic.ttf");
+        Load("Assets/fonts/hackdaddy.regular.otf");
         
      
 		glGenVertexArrays(1, &VAO);

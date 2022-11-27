@@ -12,7 +12,7 @@ acting on said object.
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "RigidBody.h"
 
 namespace EM

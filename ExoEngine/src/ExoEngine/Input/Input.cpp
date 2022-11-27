@@ -35,7 +35,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyPressed(const int& key)
     {
-        m_reset.push_back(key);
+       // m_reset.push_back(key);
 
         return m_KeyStatus[key] == GLFW_PRESS;
     }
@@ -53,7 +53,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyReleased(const int& key)
     {
-        m_reset.push_back(key);
+       // m_reset.push_back(key);
         return m_KeyStatus[key] == GLFW_RELEASE;
     }
 
@@ -62,6 +62,7 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::SetKeyStatus(keycode key, keystatus status)
     {
+        m_reset.emplace_back(key);
         m_KeyStatus[key] = status;
     }
 
@@ -70,8 +71,12 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::ResetPressedKey()
     {
-        for (auto& key : m_reset)
-            m_KeyStatus[key] = -1;
+        for (auto& key : m_reset) 
+        {
+            if (m_KeyStatus[key] == GLFW_PRESS)
+                m_KeyStatus[key] = GLFW_REPEAT;
+        }
+
 
         m_reset.clear();
     }
@@ -124,7 +129,7 @@ namespace EM {
     {
         auto it = m_KeyStatus.find(key);
         if (it != m_KeyStatus.end())
-            return it->second; //find the key in the map and execute the order
+            return it->second == GLFW_PRESS; //find the key in the map and execute the order
         
         return false;
     }

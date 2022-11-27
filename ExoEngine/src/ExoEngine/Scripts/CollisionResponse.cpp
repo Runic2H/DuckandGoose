@@ -10,6 +10,7 @@
 		script
  
 *******************************************************************************/
+#include "empch.h"
 #include "CollisionResponse.h"
 
 namespace EM

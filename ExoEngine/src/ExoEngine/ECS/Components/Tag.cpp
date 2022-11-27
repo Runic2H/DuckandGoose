@@ -12,7 +12,7 @@ camera to the player component or enemy pathfinding
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "Tag.h"
 
 namespace EM

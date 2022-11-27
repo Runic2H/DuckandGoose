@@ -12,7 +12,7 @@ for more complex pathfinding
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "EnemyMovement.h"
 
 namespace EM

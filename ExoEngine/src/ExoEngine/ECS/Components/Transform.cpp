@@ -12,7 +12,7 @@ entity and used for various systems such as graphics to render images
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "Transform.h"
 
 namespace EM

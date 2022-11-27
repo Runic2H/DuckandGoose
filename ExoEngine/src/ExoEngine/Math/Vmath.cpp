@@ -10,7 +10,7 @@
 				and its corresponding functions for creation and computation
 
 ****************************************************************************/
-
+#include "empch.h"
 #include "Vmath.h"
 
 

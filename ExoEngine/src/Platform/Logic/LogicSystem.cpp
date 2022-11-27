@@ -13,7 +13,7 @@ iterating through each script to call its update functions
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "LogicSystem.h"
 #include "ExoEngine/Timer/Time.h"
 

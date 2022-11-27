@@ -12,7 +12,7 @@ class which allows child classes of this class to define the data type they
 serialize and deserialize using virtual functions.
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "JSONserialization.h"
 
 namespace EM

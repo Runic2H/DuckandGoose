@@ -10,6 +10,7 @@
         and deceleration as well as detecting collision
  
 *******************************************************************************/
+#include "empch.h"
 #include "physics.h"
 #include "Vmath.h"
 

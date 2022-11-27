@@ -82,8 +82,6 @@ namespace EM {
 	****************************************************************************/
 	void Camera2D::RecalculateMatrix()
 	{
-		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) *
-			glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));*/
 		glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
 		glm::vec3 worldup = glm::vec3(0.0f, 1.0f, 0.0f);
 		glm::vec3 right = glm::normalize(glm::cross(front, worldup));
