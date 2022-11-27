@@ -33,10 +33,11 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		std::string mTag;
 		std::string mTargetTag;
-		std::bitset<8> mCheatsToggle;
 	};
 }

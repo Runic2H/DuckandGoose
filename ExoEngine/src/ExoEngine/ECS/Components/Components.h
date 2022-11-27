@@ -33,5 +33,5 @@ deserialize its data
 #define NameTagComponent EM::NameTag::NameTag()
 #define SpriteComponent EM::Sprite::Sprite()
 #define LogicComponent EM::Logic::Logic()
-#define TagComponent EM::Player::Tag()
+#define TagComponent EM::Tag::Tag()
 #define AudioComponent EM::Audio::Audio()
