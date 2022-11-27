@@ -33,6 +33,9 @@ namespace EM {
 		void SetDisplayTime(float displaytime) { mDisplayTime = displaytime; };
 		float& GetDisplayTime() { return mDisplayTime; }
 
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
+
 	public:
 		bool mIsSpriteSheet; // to tell whether we are using a spritesheet
 		bool mIsanimated;	// if is a spritesheet do we want it to be animated 

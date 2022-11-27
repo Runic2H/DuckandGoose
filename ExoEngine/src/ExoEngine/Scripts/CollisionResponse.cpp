@@ -34,13 +34,15 @@ namespace EM
 	****************************************************************************/
 	void CollisionResponse::Update(float Frametime)
 	{
-		if (Frametime) {}
-        auto& transform = p_ecs.GetComponent<Transform>(GetEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
-		auto& col = p_ecs.GetComponent<Collider>(GetEntityID());
-		if (col.GetHit()) {
+		if (Frametime) {
+
+		}
+        auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
+		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+		if (col.GetAlive() &&col.GetHit()) {
 			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
-			vec2D response = rigidbody.GetVel(); 
+			vec2D response = rigidbody.GetVel();
 			vec2D normal = col.GetNormal();
 			float dotProd = dotProduct(normal, response);
 			if (dotProd <= 0) {

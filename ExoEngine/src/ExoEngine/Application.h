@@ -36,7 +36,6 @@ namespace EM {
 		void End();
 
 	private:
-		//SystemManager m_Systems;
 		
 	};
 	 

@@ -33,8 +33,12 @@ namespace EM
 		std::vector<IScript*>& GetScript() { return mScriptsVector; }
 		void SetScriptEntity(Entity entity);
 		void InsertScript(IScript* script, Entity entity);
+		void ClearAllScripts();
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
+
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		std::vector<std::string> mScriptNameVector;

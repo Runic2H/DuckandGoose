@@ -35,8 +35,8 @@ namespace EM
 		//	p_ecs.GetComponent<T>(entity);
 		//};
 
-		void SetEntityID(Entity entity) { entityID = entity; }
-		Entity GetEntityID() { return entityID; }
+		void SetScriptEntityID(Entity& entity) { entityID = entity; }
+		Entity& GetScriptEntityID() { return entityID; }
 	private:
 		Entity entityID;
 	};

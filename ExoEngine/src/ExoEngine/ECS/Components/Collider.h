@@ -93,10 +93,12 @@ namespace EM
 		counter-force. 
 		****************************************************************************/
 		void SetNormal(vec2D input) { CollisionNormal = input; }
+
 		/*!*************************************************************************
 		This function sets the active state of the collision component
 		****************************************************************************/
 		void ToggleAlive() { mAlive = mAlive ? false : true; }
+
 
 		/*!*************************************************************************
 		This function returns the collider type data member
@@ -130,6 +132,9 @@ namespace EM
 		This function returns the collider acctive state data member
 		****************************************************************************/
 		bool GetAlive() { return mAlive; }
+
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
 		ColliderType mCol{};
