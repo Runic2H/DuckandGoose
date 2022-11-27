@@ -1,18 +1,40 @@
+/*!*****************************************************************************
+\file CollisionResponse.cpp
+\author Tan Ek Hern
+\par DP email: t.ekhern@digipen.edu
+\par Course: csd2125
+\par Section: a
+\par 
+\date 27-11-2022
+\brief  This file contains the function definitions for the collision response
+		script
+ 
+*******************************************************************************/
 #include "CollisionResponse.h"
 
 namespace EM
 {
+	/*!*************************************************************************
+	This function clones the script by allocating and constructing a copy of this 
+	script and returning it
+	****************************************************************************/
 	CollisionResponse* CollisionResponse::Clone() const
 	{
 		 return new CollisionResponse(*this); 
 	}
+	/*!*************************************************************************
+	This function initialises the script. As there are no data members that require
+	initialization, this function is empty
+	****************************************************************************/
 	void CollisionResponse::Start() {}
-
+	/*!*************************************************************************
+	This function runs the logic of the script to check for collision and apply
+    a counter-force to the entity's current velocity which is calculated based on
+    the current velocity and the collision normal
+	****************************************************************************/
 	void CollisionResponse::Update(float Frametime)
 	{
-		if (Frametime) {
-
-		}
+		if (Frametime) {}
         auto& transform = p_ecs.GetComponent<Transform>(GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetEntityID());
@@ -30,10 +52,15 @@ namespace EM
 			rigidbody.SetNextPos(nextPos);
 		}
 	}
+	/*!*************************************************************************
+	This function ends the script by deleting the pointer to this script
+	****************************************************************************/
 	void CollisionResponse::End()
 	{
 		delete this;
 	}
-
+	/*!*************************************************************************
+	This function returns the purpose of the script as a flag for when it is called
+	****************************************************************************/
 	std::string CollisionResponse::GetScriptName() { return "CollisionResponse"; }
 }
