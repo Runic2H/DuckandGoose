@@ -3,9 +3,8 @@
 \file			EntryPoint.h
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			02-11-2022
+\par Course:	CSD2400 / GAM200
+\date			11-2-2022
 \brief			This file contain the main entry point for all our functions
 				and input an algorithm to check for memory leak 
 ****************************************************************************

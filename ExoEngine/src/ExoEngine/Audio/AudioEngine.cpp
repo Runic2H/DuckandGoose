@@ -6,7 +6,7 @@
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
-\date 10-10-2022
+\date 11-15-2022
 \brief  AudioEngine.cpp utilises FMOD API calls to load, play, pause, stop and set
         volume.
 
@@ -28,7 +28,9 @@ std::unique_ptr<CAudioEngine>& CAudioEngine::GetInstance()
         return m_Instance;
 }
 
-//error check
+/*!*************************************************************************
+Error check for FMOD audio
+****************************************************************************/
 void CAudioEngine::ErrorCheck(FMOD_RESULT result)
 {
 	if (result != FMOD_OK) {
@@ -36,7 +38,10 @@ void CAudioEngine::ErrorCheck(FMOD_RESULT result)
 	}
 }
 
-//Load sound function stores the audio selected into a map and calls the FMOD API create sound
+/*!*************************************************************************
+Load sound function stores the audio selected into a map and calls the FMOD 
+API create sound
+****************************************************************************/
 FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Looping)
 {
     auto tFoundIt = SoundMap.find(strSoundName); //find if sound is loaded
@@ -55,7 +60,10 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
     return pSound;
 }
 
-//Play sound searches for the audio laoaded into the soumd map, then calls FMOD API play sound using loaded audio
+/*!*************************************************************************
+Play sound searches for the audio laoaded into the soumd map, then calls 
+FMOD API play sound using loaded audio
+****************************************************************************/
 int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
 {
 
@@ -87,7 +95,9 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     return nChannelId;
 }
 
-//Pause audio
+/*!*************************************************************************
+Uses FMOD setPaused() to pause audio
+****************************************************************************/
 void CAudioEngine::PauseSound(int channelID)
 {
     auto it = ChannelMap.find(channelID);
@@ -98,7 +108,9 @@ void CAudioEngine::PauseSound(int channelID)
     }
 }
 
-//Unpause aduio
+/*!*************************************************************************
+Uses FMOD setPaused() and sets to false to unpause audio
+****************************************************************************/
 void CAudioEngine::UnpauseSound(int channelID)
 {
     auto it = ChannelMap.find(channelID);
@@ -109,7 +121,9 @@ void CAudioEngine::UnpauseSound(int channelID)
     }
 }
 
-//Stops audio groups
+/*!*************************************************************************
+Stops audio channel groups
+****************************************************************************/
 void CAudioEngine::StopChannel(channel_groups chan)
 {
     if (chan == channel_groups::master)
@@ -128,7 +142,9 @@ void CAudioEngine::StopChannel(channel_groups chan)
     }
 }
 
-//Set audio volume
+/*!*************************************************************************
+Sets audio volume
+****************************************************************************/
 void CAudioEngine::SetVolume(int channelID, float vol)
 {
     auto it = ChannelMap.find(channelID);
@@ -139,7 +155,9 @@ void CAudioEngine::SetVolume(int channelID, float vol)
     }
 }
 
-//Stop all audio channels
+/*!*************************************************************************
+Stop all audio channels
+****************************************************************************/
 void CAudioEngine::StopChannel(int channelID)
 {
     auto it = ChannelMap.find(channelID); 
@@ -150,7 +168,9 @@ void CAudioEngine::StopChannel(int channelID)
     }   
 }
 
-//returns the current volume level
+/*!*************************************************************************
+Returns the current volume level
+****************************************************************************/
 float CAudioEngine::GetVolume(int channelID)
 {
     float audio_volume = 0.0f;
@@ -165,6 +185,9 @@ float CAudioEngine::GetVolume(int channelID)
 
 }
 
+/*!*************************************************************************
+Init loop of CAudioEngine
+****************************************************************************/
 void CAudioEngine::Init()
 {
 	ErrorCheck(FMOD::System_Create(&mpSystem));
@@ -180,6 +203,9 @@ void CAudioEngine::Init()
 	Master->addGroup(SFX);
 }
 
+/*!*************************************************************************
+Update loop of CAudioEngine
+****************************************************************************/
 void CAudioEngine::Update()
 {
     std::vector<std::map<int, FMOD::Channel*>::iterator> pStoppedChannels;
@@ -203,7 +229,10 @@ void CAudioEngine::Update()
     CAudioEngine::ErrorCheck(mpSystem->update());
 }
 
-//Release all audio file
+
+/*!*************************************************************************
+Release loop of CAudioEngine, releases all audio files
+****************************************************************************/
 void CAudioEngine::Release()
 {
     //std::map<std::string, FMOD::Sound*>::iterator sound_it;
@@ -227,7 +256,9 @@ void CAudioEngine::Release()
     mpSystem->release();
 }
 
-//Checks if audio is playing
+/*!*************************************************************************
+Checks if audio is playing
+****************************************************************************/
 bool CAudioEngine::IsPlaying(int nChannelId) const
 {
     bool is_playing = false;
@@ -241,13 +272,17 @@ bool CAudioEngine::IsPlaying(int nChannelId) const
     return false;
 }
 
-//converts decibels to volume
+/*!*************************************************************************
+Converts decibels to volume
+****************************************************************************/
 float  CAudioEngine::dbToVolume(float dB)
 {
     return powf(10.0f, 0.05f * dB);
 }
 
-//converts volume to decibels
+/*!*************************************************************************
+Converts volume to decibels
+****************************************************************************/
 float  CAudioEngine::VolumeTodB(float volume)
 {
     float dec = 20.0f * log10f(volume);

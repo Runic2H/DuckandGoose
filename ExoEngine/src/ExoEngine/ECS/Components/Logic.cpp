@@ -32,7 +32,7 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->entityID);
 		}
 	}
 
@@ -43,7 +43,7 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->entityID);
 		}
 		return *this;
 	}
@@ -53,7 +53,7 @@ namespace EM
 	{
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
 		{
-			(*i)->SetEntityID(entity);
+			(*i)->SetScriptEntityID(entity);
 		}
 	}
 
@@ -100,6 +100,15 @@ namespace EM
 	{
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
-		entityID = entity;
+		script->SetScriptEntityID(entity);
+	}
+
+	void Logic::ClearAllScripts()
+	{
+		mScriptNameVector.clear();
+		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
+		{
+			(*i)->End();
+		}
 	}
 }

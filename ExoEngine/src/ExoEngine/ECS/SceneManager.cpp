@@ -147,7 +147,6 @@ namespace EM
 	bool SceneManager::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
-
 		writer->Key("Number of Entities");
 		writer->StartObject();
 		writer->Key("Entities");

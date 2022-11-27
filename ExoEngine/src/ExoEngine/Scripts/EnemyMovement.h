@@ -23,7 +23,7 @@ namespace EM
 	class EnemyMovement : public IScript
 	{
 	public:
-		EnemyMovement() = default;
+		EnemyMovement();
 		~EnemyMovement() = default;
 		virtual EnemyMovement* Clone() const override;
 		virtual void Start() override;
@@ -31,6 +31,7 @@ namespace EM
 		virtual void End() override;
 		virtual std::string GetScriptName() override;
 	private:
+		float mAttackCooldown;
 		entityPhysics mPhys;
 	};
 }

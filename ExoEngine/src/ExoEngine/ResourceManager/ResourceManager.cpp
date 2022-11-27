@@ -3,11 +3,11 @@
 \file			ResourceManager.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
+\par Course:	CSD2400 / GAM200
 \date			11-2-2022
 \brief			This file contain the defintion for ResourceManager class.
-				For now it can only load textures and shader.
+				Resource manager can load textures, shader, fonts, icons
+				and audios.
 ****************************************************************************
 ***/
 #include "empch.h"
@@ -20,16 +20,26 @@ namespace EM {
 	std::map <std::string, std::shared_ptr<Texture>> ResourceManager::Icons;
 	//TODO to load different fonts and maybe audio/music
 	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
+
+	/*!*************************************************************************
+	Load texture
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::LoadTexture(std::string name, const std::string& filepath)
 	{
 		return textures[name] = ResourceManager::LoadTextureFromFile(filepath);
 	}
 
+	/*!*************************************************************************
+	Retrieve texture based on filename
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::GetTexture(std::string name)
 	{
 		return textures[name];
 	}
 
+	/*!*************************************************************************
+	Load texture from filepath
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::LoadTextureFromFile(const std::string& filepath)
 	{
 		auto m_texture = std::make_shared<Texture>();
@@ -37,6 +47,9 @@ namespace EM {
 		return m_texture;
 	}
 
+	/*!*************************************************************************
+	Generate texture
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::GenTexture(unsigned int width, unsigned int height)
 	{
 		auto m_texture = std::make_shared<Texture>();
@@ -44,17 +57,26 @@ namespace EM {
 		return m_texture;
 	}
 
+	/*!*************************************************************************
+	Load Icons from file
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::LoadIcons(std::string name, const std::string& filepath)
 	{
 
 		return Icons[name] = ResourceManager::LoadIconsFromFile(filepath);
 	}
 
+	/*!*************************************************************************
+	Retrieve icons based on filename
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::GetIcon(std::string name)
 	{
 		return Icons[name];
 	}
 
+	/*!*************************************************************************
+	Load shader based on filepath
+	****************************************************************************/
 	std::shared_ptr<Shader> ResourceManager::LoadShaderFromFile(const std::string& filepath)
 	{
 		auto m_shader = std::make_shared<Shader>(filepath);
@@ -62,17 +84,25 @@ namespace EM {
 		return m_shader;
 	}
 
+	/*!*************************************************************************
+	Retrieve texture based on filename and filepath
+	****************************************************************************/
 	std::shared_ptr<Shader> ResourceManager::LoadShader(std::string name, const std::string& filepath)
 	{
 		return shaders[name] = ResourceManager::LoadShaderFromFile(filepath);
 	}
 
+	/*!*************************************************************************
+	Retrieve shader on filename 
+	****************************************************************************/
 	std::shared_ptr<Shader> ResourceManager::GetShader(std::string name)
 	{
 		return shaders[name];
 	}
 
-
+	/*!*************************************************************************
+	Load font based on filepath
+	****************************************************************************/
 	std::shared_ptr<Font> ResourceManager::LoadFontFromFile(const std::string& filepath, unsigned int fontsize)
 	{
 		auto m_font = std::make_shared<Font>();
@@ -80,6 +110,9 @@ namespace EM {
 		return m_font;
 	}
 
+	/*!*************************************************************************
+	Load icons based on filepath
+	****************************************************************************/
 	std::shared_ptr<Texture> ResourceManager::LoadIconsFromFile(const std::string& filepath)
 	{
 		auto mIcons = std::make_shared<Texture>();
@@ -87,6 +120,9 @@ namespace EM {
 		return mIcons;
 	}
 
+	/*!*************************************************************************
+	Load audio based on filepath
+	****************************************************************************/
 	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudioFromFile(const std::string& filepath)
 	{
 		auto m_audio = std::make_shared<CAudioEngine>();
@@ -94,14 +130,20 @@ namespace EM {
 		return m_audio;
 	}
 
+	/*!*************************************************************************
+	Retrieve audio based on filename
+	****************************************************************************/
 	std::shared_ptr<CAudioEngine> ResourceManager::GetAudio(std::string name)
 	{
 		return audios[name];
 	}
 
+	/*!*************************************************************************
+	Load audio
+	****************************************************************************/
 	std::shared_ptr<CAudioEngine> ResourceManager::LoadAudio(std::string name, const std::string& filepath)
 	{
-		(void)filepath; //TODO removed when proper resourcemanager for audio
+		(void)filepath; 
 		return std::shared_ptr<CAudioEngine>();
 	}
 
@@ -116,6 +158,9 @@ namespace EM {
 	//	return std::shared_ptr<Font>();
 	//}
 
+	/*!*************************************************************************
+	Clear various maps for resources being managed
+	****************************************************************************/
 	void EM::ResourceManager::clear()
 	{
 		/*for (auto iter : textures)

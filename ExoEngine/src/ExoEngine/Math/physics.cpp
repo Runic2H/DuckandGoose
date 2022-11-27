@@ -1,45 +1,49 @@
+/*!*****************************************************************************
+\file physics.h
+\author Tan Ek Hern, Lau Yong Hui
+\par DP email: t.ekhern@digipen.edu, l.yonghui@digipen.edu
+\par Course: csd2125
+\par Section: a
+\par 
+\date 14-10-2022
+\brief  This file contains the function definitions for calculating acceleration
+        and deceleration as well as detecting collision
+ 
+*******************************************************************************/
 #include "empch.h"
 #include "physics.h"
 #include "Vmath.h"
 
 namespace EM {
-    //class functions
+    /*!*************************************************************************
+    This function takes in the current velocity of the object and applies acceleration
+    to it and multiplying said acceleration by the frame time to ensure consistent
+    acceleration regardless of frame rate
+    ****************************************************************************/
     vec2D entityPhysics::accelent(vec2D& entvel, vec2D applied, float dt) {
         entvel += applied * dt;
         entvel = entvel * 0.99f * dt;
         return entvel;
     }
+    /*!*************************************************************************
+    This function takes in the current velocity of the object and applies deceleration
+    to it and multiplying said deceleration by the frame time to ensure consistent
+    acceleration regardless of frame rate
+    ****************************************************************************/
     vec2D entityPhysics::friction(vec2D& entvel, float dt) {
         entvel -= entvel * 8.5f * dt;
         return entvel;
     }
+    /*!*************************************************************************
+    This function takes in the current velocity of the object and applies gravity
+    to it and multiplying said acceleration by the frame time to ensure consistent
+    acceleration regardless of frame rate
+    ****************************************************************************/
     vec2D entityPhysics::gravity(vec2D& entvel, float dt) {
         entvel.y -= 9.8f * dt;
         return entvel;
     }
-    /*wall entityCollision::buildWall(vec2D pt1, vec2D pt2) {
-        wall newWall;
-        newWall.p0 = pt1;
-        newWall.p1 = pt2;
-        vec2D temp = newWall.p0 - newWall.p1;
-        newWall.normal.x = -temp.y;
-        newWall.normal.y = temp.x;
-        Normalize(newWall.normal, newWall.normal);
-        return newWall;
-    }
-    circle entityCollision::buildCircle(vec2D pos, float radius) {
-        circle newCirc;
-        newCirc.center = pos;
-        newCirc.radius = radius;
-        return newCirc;
-    }
-    castRay entityCollision::buildRay(vec2D pos, vec2D dir) {
-        castRay newCast;
-        newCast.pt0 = pos;
-        newCast.dir = dir;
-        return newCast;
-    } NOT FUNCTIONING CURRENTLY--------------------------------------------------------------------------------------------*/
-    //circle to wall
+    /*Dynamic collision set no longer in use
     bool entityCollision::wallCollision(const circle_bound&circle, const vec2D &entnextpos, const wall &wall, vec2D &colpt, vec2D &colnorm, float &coltime) {
         float circdot = dotProduct(wall.normal, circle.center);
         float normaldot = dotProduct(wall.normal, wall.p0);
@@ -344,8 +348,11 @@ namespace EM {
         entnextpos = colpt + penPoint - (dotprod * colnorm);
         reflectionnorm = entnextpos - colpt;
         Normalize(reflectionnorm, reflectionnorm);
-    }
-    //simplified collision
+    }*/
+    /*!*************************************************************************
+    This function is a simple static circle to circle collision detection function
+    that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
     int entityCollision::simpleCircleCircle(vec2D ent1, vec2D ent2, float rad1, float rad2) {
         if (distance(ent1, ent2) <= (rad1+rad2)) {
             return 1;
@@ -354,6 +361,10 @@ namespace EM {
             return 0;
         }
     }
+    /*!*************************************************************************
+    This function is a simple static circle to line collision detection function
+    that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
     int entityCollision::simpleCircleLine(vec2D ent1, float rad1, vec2D max1, vec2D min1) {
         vec2D lineNormal = vec2D();
         lineNormal.x = max1.y - min1.y;
@@ -367,6 +378,10 @@ namespace EM {
             return 0;
         }
     }
+    /*!*************************************************************************
+    This function is a simple static circle to point collision detection function
+    that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
     int entityCollision::simpleCirclePoint(vec2D ent1, float rad1, vec2D pt1) {
         if (distance(ent1, pt1) <= rad1) {
             return 1;
@@ -375,6 +390,10 @@ namespace EM {
             return 0;
         }
     }
+    /*!*************************************************************************
+    This function is a simple static circle to AABB collision detection function
+    that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
     int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
         vec2D dist = vec2D();
         dist.x = center.x - ent1.x;
@@ -389,6 +408,10 @@ namespace EM {
         }*/
         return 1;
     }
+    /*!*************************************************************************
+    This function is a simple static AABB to AABB collision detection function
+    that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
     int entityCollision::simpleRectRect(vec2D max1, vec2D min1, vec2D max2, vec2D min2) {
         
         if (!(min1.x > max2.x || min2.x > max1.x || max1.y < min2.y || max2.y < min1.y)) {
@@ -397,7 +420,22 @@ namespace EM {
         else
             return false;
     }
-
+    /*!*************************************************************************
+    This function is a simple static circle to playable area AABB collision detection 
+    function that returns a boolean inditating whether collision was detected or not
+    ****************************************************************************/
+    int entityCollision::simpleBoxCircle(vec2D ent1, float rad1, vec2D min1, vec2D max1) {
+        if ((ent1.x - min1.x) <= rad1 || (max1.x - ent1.x) <= rad1 || (ent1.y - min1.y) <= rad1 || (max1.y - ent1.y) <= rad1) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    /*!*************************************************************************
+    This function is a possible function to declare in the event that the game 
+    requires the calculation of knockback upon some event.
+    ****************************************************************************/
     void Knockback()
     {
 

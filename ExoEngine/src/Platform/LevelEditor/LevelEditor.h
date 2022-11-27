@@ -3,10 +3,8 @@
 \file LevelEditor.h
 \author Cheung Jun Yin Matthew
 \par DP email: j.cheung@digipen.edu
-\par Course: csd2400
-\par Section: a
-\par Milestone 2
-\date 28-9-2022
+\par Course: CSD2400 / GAM200
+\date 9-28-2022
 \brief  Header file for LevelEditor.cpp
 ****************************************************************************
 ***/
@@ -37,9 +35,9 @@ namespace EM {
 		void Profiler();
 		void Hierarchy();
 		void Inspector();
+
 		//for audio loading from files
 		void LoadAudioFromFile();
-		//void LoadSaveAudio();
 		void AudioManager();
 		void insertAudioFilePath(std::string in);
 		void insertTextureFilePath(std::string on);

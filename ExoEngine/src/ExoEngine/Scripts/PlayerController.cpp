@@ -3,6 +3,10 @@
 
 namespace EM
 {
+    PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mBlockTimer{0.0f},
+        mIsBlocking{ false }, mIsAttacking{ false }, mIsStunned{ false }, mIsIdle{ false }, mIsMoving{ false }, mIsDashing{ false }, mVel{ vec2D() } {};
+
+
 	PlayerController* PlayerController::Clone() const
 	{
 		return new PlayerController(*this);
@@ -15,55 +19,91 @@ namespace EM
 
 	void PlayerController::Update(float Frametime)
 	{
-        auto& pRigid = p_ecs.GetComponent<RigidBody>(GetEntityID());
-        auto& pTrans = p_ecs.GetComponent<Transform>(GetEntityID());
-        vec2D vel = vec2D();
+        mCooldownTimer -= Frametime;
+        mDashTimer -= Frametime;
+        mBlockTimer -= Frametime;
+        mVel.x = 0.0f;
+        mVel.y = 0.0f;
+
+        if ((p_Input->isKeyPressed(GLFW_KEY_W) || p_Input->isKeyPressed(GLFW_KEY_D)
+            || p_Input->isKeyPressed(GLFW_KEY_S) || p_Input->isKeyPressed(GLFW_KEY_A)) && !mIsStunned)
+        {   
+            mCooldownTimer = 0.1f;
+            if (p_Input->isKeyPressed(GLFW_KEY_W)) {
+                mVel.y += 100.0f;
+                mIsMoving = true;
+                mIsAttacking = false;
+                mIsIdle = false;
+            }
+            else if (p_Input->isKeyPressed(GLFW_KEY_S)) {
+                mVel.y -= 100.f;
+                mIsMoving = true;
+                mIsAttacking = false;
+                mIsIdle = false;
+            }
+            else if (p_Input->isKeyPressed(GLFW_KEY_D)) {
+                mVel.x += 100.f;
+                mIsMoving = true;
+                mIsAttacking = false;
+                mIsIdle = false;
+                if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && !mIsStunned && mDashTimer <= 0.0f)
+                {
+                    mVel.x += 2000.f;
+                    mCooldownTimer = 0.5f;
+                    mDashTimer = 5.0f;
+                    mIsDashing = true;
+                    mIsMoving = false;
+                    mIsAttacking = false;
+                    mIsIdle = false;
+                }
+            }
+            else if (p_Input->isKeyPressed(GLFW_KEY_A)) {
+                mVel.x -= 100.f;
+                mIsMoving = true;
+                mIsAttacking = false;
+                mIsIdle = false;
+                if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && !mIsStunned && mDashTimer <= 0.0f)
+                {
+                    mVel.x -= 2000.f;
+                    mCooldownTimer = 0.5f;
+                    mDashTimer = 5.0f;
+                    mIsDashing = true;
+                    mIsMoving = false;
+                    mIsAttacking = false;
+                    mIsIdle = false;
+                }
+            }
+        }
+
+        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !mIsStunned && mCooldownTimer <= 0.0f)
+        {
+            ++mAttackCounter;
+            mCooldownTimer = 0.5f;
+            mIsAttacking = true;
+            mIsMoving = false;
+            mIsIdle = false;
+        }
+
+        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT) && !mIsStunned && mBlockTimer <= 0.0f)
+        {
+            mCooldownTimer = 0.5f;
+            mBlockTimer = 5.0f;
+            mIsBlocking = true;
+            mIsMoving = false;
+            mIsIdle = false;
+        }
 
         if (mCooldownTimer <= 0.0f)
         {
-            mState = PlayerState::Idle;
-            pRigid.SetVel(mPhys.friction(pRigid.GetVel(), Frametime));
+            mIsIdle = true;
+            mIsBlocking = false;
+            mIsAttacking = false;
+            mIsDashing = false;
         }
 
-        if (mState == PlayerState::Idle)
-        {
-            if (p_Input->isKeyPressed(GLFW_KEY_W)) {
-                vel.y += 100.f;
-                mState = PlayerState::Moving;
-            }
-            else if (p_Input->isKeyPressed(GLFW_KEY_D)) {
-                vel.x += 100.f;
-                mState = PlayerState::Moving;
-            }
-            else if (p_Input->isKeyPressed(GLFW_KEY_S)) {
-                vel.y -= 100.f;
-                mState = PlayerState::Moving;
-            }
-            else if (p_Input->isKeyPressed(GLFW_KEY_A)) {
-                vel.x -= 100.f;
-                mState = PlayerState::Moving;
-            }
-        }
-
-        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && mCooldownTimer <= 0.0f)
-        {
-            ++mAttackCounter;
-            mCooldownTimer = 0.3f;
-            mState = PlayerState::Attacking;
-        }
-        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT) && mCooldownTimer <= 0.0f)
-        {
-            mCooldownTimer = 0.3f;
-            mState = PlayerState::Block;
-        }
-
-
-        pRigid.SetVel(mPhys.accelent(pRigid.GetVel(), vel, Frametime));
-        vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
-        pRigid.SetNextPos(nextPos);
-
+        UpdateState();
+        UpdatePhysics(Frametime);
         Animate(mState);
-        mCooldownTimer -= Frametime;
 	}
 
     void PlayerController::End()
@@ -76,37 +116,80 @@ namespace EM
         return "PlayerController";
     }
 
+
+    void PlayerController::UpdateState()
+    {
+        if (mIsBlocking)
+        {
+            mState = PlayerState::Block;
+        }
+        if (mIsAttacking)
+        {
+            mState = PlayerState::Attacking;
+        }
+        if (mIsStunned)
+        {
+            mState = PlayerState::Stunned;
+        }
+        if (mIsMoving)
+        {
+            mState = PlayerState::Moving;
+        }
+        if (mIsDashing)
+        {
+            mState = PlayerState::Dash;
+        }
+        if (mIsIdle)
+        {
+            mState = PlayerState::Idle;
+        }
+    }
+
+    void PlayerController::UpdatePhysics(float Frametime)
+    {
+        auto& pRigid = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
+        auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+
+
+        pRigid.SetVel(mPhys.friction(pRigid.GetVel(), Frametime));
+        pRigid.SetVel(mPhys.accelent(pRigid.GetVel(), mVel, Frametime));
+        vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
+        pRigid.SetNextPos(nextPos);
+    }
+
     void PlayerController::Animate(PlayerState state)
     {
         switch (state)
         {
         case PlayerState::Idle:
-            p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Idle");
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Idle");
             break;
         case PlayerState::Moving:
-            p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Running");
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Running");
             break;
         case PlayerState::Attacking:
-            if (mAttackCounter == 1)
+            switch (mAttackCounter)
             {
-                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("CA1");
-            }
-            else if (mAttackCounter == 2)
-            {
-                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("CA2");
-            }
-            else if (mAttackCounter == 3)
-            {
-                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("CA3");
-            }
-            else if (mAttackCounter == 4)
-            {
-                p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("CA4");
+            case 1:
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("CA1");
+                break;
+            case 2:
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("CA2");
+                break;
+            case 3:
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("CA3");
+                break;
+            case 4:
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("CA4");
                 mAttackCounter = 0;
+                break;
             }
             break;
+        case PlayerState::Dash:
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Dashing");
+            break;
         case PlayerState::Block:
-            p_ecs.GetComponent<Sprite>(GetEntityID()).SetTexture("Blocking");
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blocking");
             break;
         }
     }

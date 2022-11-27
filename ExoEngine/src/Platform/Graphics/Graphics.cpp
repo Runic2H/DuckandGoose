@@ -3,9 +3,8 @@
 \file			Graphic.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			28-9-2022
+\par Course:	CSD2400 /GAM200
+\date			9-28-2022
 \brief			This file contain a temporarily rendering class which will be bring over
 				once render class is up.
 
@@ -26,7 +25,9 @@
 namespace EM {
 
 	//extern ECS ecs;
-
+	/*!*************************************************************************
+	Load Icon from filepath using resource manager
+	****************************************************************************/
 	void Graphic::LoadIconsTexture(std::string filename)
 	{
 		std::ifstream ifs(filename.c_str());
@@ -36,6 +37,10 @@ namespace EM {
 
 		ifs.close();
 	}
+
+	/*!*************************************************************************
+	Load texture from filename using resource manager
+	****************************************************************************/
 	void Graphic::LoadTexture(std::string filename)
 	{
 		std::ifstream ifs(filename.c_str());
@@ -47,6 +52,9 @@ namespace EM {
 	}
 
 	//for testing purpose
+	/*!*************************************************************************
+	Init loop for Graphics
+	****************************************************************************/
 	void Graphic::Init()
 	{
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
@@ -67,7 +75,9 @@ namespace EM {
 		m_Font->Init();
 	}
 
-
+	/*!*************************************************************************
+	Update loop for Graphics
+	****************************************************************************/
 	void Graphic::Update(float frametime)
 	{
 		Timer::GetInstance().Start(Systems::GRAPHIC);
@@ -123,23 +133,25 @@ namespace EM {
 
 			if (p_Editor->mDebugDraw)
 			{
-
-				if (p_ecs.HaveComponent<Collider>(entity))
+				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::rect) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
 				{
-					auto& havecollider = p_ecs.GetComponent<Collider>(entity);
-					if (havecollider.GetCollider() == Collider::ColliderType::rect)
-					{
-						m_Renderer->DrawRect({ transform.GetPos().x + havecollider.GetOffset().x , transform.GetPos().y + havecollider.GetOffset().y, 0.0f },
-							{ havecollider.GetMin().x - havecollider.GetMax().x , havecollider.GetMin().y - havecollider.GetMax().y },
-							{ 1.0f, 0.0f, 0.0f,1.0f });
-					}
-					
-					if (havecollider.GetCollider() == Collider::ColliderType::circle)
-					{
-						glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + havecollider.GetOffset().x, transform.GetPos().y + havecollider.GetOffset().y, 0.0f }) *
-							glm::scale(glm::mat4(1.0f), glm::vec3(havecollider.GetRad() * 2));
-						m_Renderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
-					}
+					auto& collider = p_ecs.GetComponent<Collider>(entity);
+					m_Renderer->DrawRect({ transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
+						{ collider.GetMin().x - collider.GetMax().x , collider.GetMin().y - collider.GetMax().y },
+						{ 1.0f, 0.0f, 0.0f,1.0f });
+				}
+
+				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
+					m_Renderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
+						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
+						{ 0.0f, 1.0f, 0.0f, 1.0f });*/
+
+				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::circle) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
+				{
+					auto& collider = p_ecs.GetComponent<Collider>(entity);
+					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
+						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
+					m_Renderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 				}
 			}
 			if (p_Editor->selectedEntity == entity && p_Editor->show_window)
@@ -230,6 +242,10 @@ namespace EM {
 		
 		
 	}
+
+	/*!*************************************************************************
+	End loop for Graphics
+	****************************************************************************/
 	void Graphic::End()
 	{
 		ResourceManager::clear();

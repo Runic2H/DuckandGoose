@@ -41,6 +41,9 @@ namespace EM
 		bool GetLooping() { return is_looping; }
 		float GetVolume() { return volume; }
 
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
+
 		//Audio component
 		//	Singular piece of audio that can be set to play upon a specific event.
 		//	Toggle looping.

@@ -46,6 +46,7 @@ namespace EM
 
 			return id;
 		}
+
 		//Destroy the entities id and push it to end of queue;
 		void DestroyEntity(Entity entity)
 		{

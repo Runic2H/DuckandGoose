@@ -13,11 +13,15 @@
 #include "empch.h"
 #include "ExoEngine/ECS/Components/Audio.h"
 
-EM::Audio::Audio() : mAudiopath{ "" }, channelgroup{ AudioType::NONE }, is_looping{ false }
-{
+/*!*************************************************************************
+Constructor for audio component
+****************************************************************************/
+EM::Audio::Audio() : mAudiopath{ "" }, channelgroup{ AudioType::NONE }, is_looping{ false } {}
 
-}
 
+/*!*************************************************************************
+Deserialize audio component
+****************************************************************************/
 bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 {
 	mAudiopath = std::string(obj["Audioname"].GetString());
@@ -28,6 +32,9 @@ bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 	return true;
 }
 
+/*!*************************************************************************
+Serialise audio component
+****************************************************************************/
 bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 {
 	writer->StartObject();

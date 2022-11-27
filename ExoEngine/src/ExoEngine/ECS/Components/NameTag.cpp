@@ -3,7 +3,7 @@
 \file Nametag.cpp
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
-\par Course: CSD2400
+\par Course: CSD2400 / GAM200
 \par Section: a
 \par Assignment GAM200
 \date 2/11/2022
@@ -17,12 +17,12 @@
 namespace EM
 {
 	NameTag::NameTag() : mName{"none"} {}
-
 	bool NameTag::Deserialize(const rapidjson::Value& obj)
 	{
 		mName = obj["NameTag"].GetString();
 		return true;
 	}
+
 
 	bool NameTag::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{

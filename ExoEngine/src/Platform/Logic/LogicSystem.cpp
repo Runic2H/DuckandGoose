@@ -32,7 +32,7 @@ namespace EM
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
 			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 			{
-				if ((*i)->GetEntityID() != entity)
+				if ((*i)->GetScriptEntityID() != entity)
 				{
 					LogicComp.SetScriptEntity(entity);
 				}
@@ -50,7 +50,7 @@ namespace EM
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
 			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 			{
-				if ((*i)->GetEntityID() != entity)
+				if ((*i)->GetScriptEntityID() != entity)
 				{
 					LogicComp.SetScriptEntity(entity);
 				}
@@ -70,6 +70,5 @@ namespace EM
 				(*i)->End();
 			}
 		}
-	}
-		
+	}	
 }

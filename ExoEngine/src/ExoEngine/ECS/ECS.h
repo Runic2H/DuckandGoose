@@ -111,7 +111,6 @@ namespace EM
 				DestroyEntity(iter);
 			}
 			
-			
 		}
 
 		// Component methods
@@ -124,6 +123,7 @@ namespace EM
 		template<typename T>
 		void AddComponent(Entity entity, T component)
 		{
+			component.SetComponentEntityID(entity);
 			mComponentManager->AddComponent<T>(entity, component);
 
 			auto signature = mEntityManager->GetSignature(entity);
@@ -131,25 +131,6 @@ namespace EM
 			mEntityManager->SetSignature(entity, signature);
 			mSystemManager->EntitySignatureChanged(entity, signature);
 		}
-
-		/*void AddComponentsSignature(Entity entity, Signature signature)
-		{
-			if (signature.test(GetComponentType<Transform>()))
-			{
-				Transform transform;
-				AddComponent<Transform>(entity, transform);
-			}
-			if (signature.test(GetComponentType<RigidBody>()))
-			{
-				RigidBody rigidbody;
-				AddComponent<RigidBody>(entity, rigidbody);
-			}
-			if (signature.test(GetComponentType<Sprite>()))
-			{
-				Sprite sprite;
-				AddComponent<Sprite>(entity, sprite);
-			}
-		}*/
 
 		template<typename T>
 		void RemoveComponent(Entity entity)

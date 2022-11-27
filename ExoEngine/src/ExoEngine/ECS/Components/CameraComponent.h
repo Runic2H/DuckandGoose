@@ -1,3 +1,14 @@
+/*!*************************************************************************
+****
+\file			CameraComponent.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-18-2022
+\brief			This file contains the class definitions for camera component
+
+****************************************************************************
+***/
 #pragma once
 #include "IComponent.h"
 #include "glm/glm.hpp"
@@ -11,6 +22,9 @@ namespace EM {
 		~CameraComponent() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
+
+		Entity& GetComponentEntityID() { return entityID; }
+		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 	private:
 	};
 }

@@ -31,6 +31,9 @@ namespace EM{
 		windowData.SerializeToFile("Window.json");
 	};
 
+	/*!*************************************************************************
+	Init loop of window, uses glfw to set and create window
+	****************************************************************************/
 	void Window::Init()
 	{
 
@@ -95,6 +98,10 @@ namespace EM{
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		glfwSetDropCallback(m_window, drop_callback);
 	}
+
+	/*!*************************************************************************
+	Update loop of window
+	****************************************************************************/
 	void Window::Update(float frametime)
 	{
 		(void)frametime;
@@ -105,12 +112,20 @@ namespace EM{
 
 	}
   
-
+	/*!*************************************************************************
+	End loop of window
+	****************************************************************************/
 	void Window::End()
 	{
 		glfwDestroyWindow(m_window);
 		glfwTerminate();
 	}
+
+	/*!*************************************************************************
+	drop_callback function is the function definition for the glfwSetDropCallback
+	function parameter to enable drag and drop functionality to drag and drop
+	files from external folders to the game engine.  
+	****************************************************************************/
 	void Window::drop_callback(GLFWwindow* window, int count, const char** paths)
 	{
 		UNREFERENCED_PARAMETER(window);
@@ -143,10 +158,18 @@ namespace EM{
 			//use filesystem to copy files into relevant asset folders
 		}
 	}
+
+	/*!*************************************************************************
+	spdlog assert for window error
+	****************************************************************************/
 	void Window::ErrorCallback(int error, const char* description)
 	{
 		EM_EXO_ERROR("GLFW ERROR {0} : {1}", error, description);
 	}
+
+	/*!*************************************************************************
+	Window size callback function
+	****************************************************************************/
 	void Window::Window_size_callback(GLFWwindow* window, int width, int height)
 	{
 		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
@@ -155,22 +178,38 @@ namespace EM{
 		glViewport(0, 0, data.m_Width, data.m_Height);
 		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height); //for debug purpose tb removed
 	}
+
+	/*!*************************************************************************
+	Window key callback function
+	****************************************************************************/
 	void Window::Key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
 		UNREFERENCED_PARAMETER(window);
 		(void)scancode, (void)mode;
 		InputSystem::GetInstance()->SetKeyStatus(key, action);
 	}
+
+	/*!*************************************************************************
+	Window mouse button callback function
+	****************************************************************************/
 	void Window::Mousebutton_callback(GLFWwindow* window, int button, int action, int mode)
 	{
 		(void)window, (void)mode;
 		InputSystem::GetInstance()->SetMouseStatus(button, action);
 	}
+
+	/*!*************************************************************************
+	Window mousescroll callback function
+	****************************************************************************/
 	void Window::Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		(void)window, (void)xoffset, (void)yoffset;
 		InputSystem::GetInstance()->MouseScrollStatus = static_cast<int>(yoffset);
 	}
+
+	/*!*************************************************************************
+	Window mouse position callback function
+	****************************************************************************/
 	void Window::Mouseposition_callback(GLFWwindow* window, double xpos, double ypos)
 	{
 		
@@ -180,6 +219,10 @@ namespace EM{
 
 		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//for debug purpose tb removed
 	}
+
+	/*!*************************************************************************
+	Toggle vsync function
+	****************************************************************************/
 	void Window::ToggleVsync(bool value)
 	{
 		if (value)

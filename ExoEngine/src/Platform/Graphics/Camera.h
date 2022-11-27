@@ -1,3 +1,13 @@
+/*!*************************************************************************
+****
+\file			Camera.h
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			02-11-2022
+\brief			Class declarations and definitions for camera projection
+****************************************************************************
+***/
 #pragma once
 #include <glm/glm.hpp>
 
