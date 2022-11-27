@@ -96,33 +96,33 @@ namespace EM {
 		}
 		mCollision->Init();
 
-		//p_Scene->DeserializeFromFile("Level.json");
+		//p_Scene->DeserializeFromFile("MainMenu.json");
 
-		Entity player = p_ecs.CreateEntity();
-		RigidBody rb;
-		Logic logic;
-		Sprite sprite;
-		NameTag name;
-		Tag tag;
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		logic.InsertScript(new PlayerController(), player);
-		logic.InsertScript(new CollisionResponse(), player);
-		p_ecs.AddComponent<Transform>(player, TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, ColliderComponent);
-		Entity enemy = p_ecs.CloneEntity(player);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		tag.SetTag("Player");
-		p_ecs.AddComponent<Tag>(player, tag);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//Entity player = p_ecs.CreateEntity();
+		//RigidBody rb;
+		//Logic logic;
+		//Sprite sprite;
+		//NameTag name;
+		//Tag tag;
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//logic.InsertScript(new PlayerController(), player);
+		//logic.InsertScript(new CollisionResponse(), player);
+		//p_ecs.AddComponent<Transform>(player, TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		//Entity enemy = p_ecs.CloneEntity(player);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//tag.SetTag("Player");
+		//p_ecs.AddComponent<Tag>(player, tag);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 
-		Logic logic2;
-		logic2.InsertScript(new EnemyMovement(), enemy);
-		logic2.InsertScript(new CollisionResponse(), enemy);
-		p_ecs.AddComponent<Logic>(enemy, logic2);
+		//Logic logic2;
+		//logic2.InsertScript(new EnemyMovement(), enemy);
+		//logic2.InsertScript(new CollisionResponse(), enemy);
+		//p_ecs.AddComponent<Logic>(enemy, logic2);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -134,13 +134,17 @@ namespace EM {
 			{
 				p_Audio->Update();
 				p_Editor->Update();
-				p_Editor->Draw();
-				
+				if (p_Editor->show_window)
+				{
+					p_Editor->Draw();
+				}
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			}
 			end_state = p_GUI->Update(m_window);
+
+			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
@@ -157,7 +161,7 @@ namespace EM {
 
 	void Application::End()
 	{
-		p_Scene->SerializeToFile("Level.json");
+		//p_Scene->SerializeToFile("Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

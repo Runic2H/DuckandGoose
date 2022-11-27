@@ -13,7 +13,7 @@ function
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "Logic.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"

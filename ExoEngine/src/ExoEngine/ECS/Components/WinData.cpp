@@ -12,7 +12,7 @@ height and width of the window
 
 ****************************************************************************
 ***/
-
+#include "empch.h"
 #include "WinData.h"
 
 namespace EM

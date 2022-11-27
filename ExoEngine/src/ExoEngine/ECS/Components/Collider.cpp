@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "Collider.h"
 
 namespace EM

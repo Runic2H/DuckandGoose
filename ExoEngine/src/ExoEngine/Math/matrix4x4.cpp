@@ -10,8 +10,8 @@
 				and its corresponding functions for creation and computation
 
 ****************************************************************************/
+#include "empch.h"
 #include"Platform/Window/Window.h"
-
 #include "matrix4x4.h"
 
 

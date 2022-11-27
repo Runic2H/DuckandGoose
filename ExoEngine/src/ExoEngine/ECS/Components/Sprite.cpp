@@ -15,13 +15,15 @@
 #include "Sprite.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
 namespace EM {
-	Sprite::Sprite() : m_texturename("Blank"), m_index({0.0f,0.0f}), mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(0.1667f)
+	Sprite::Sprite() : m_texturename("Blank"), m_index({ 0.0f,0.0f }), mUVcooridnates({ 512.0f, 512.0f }),
+		mIsSpriteSheet(false), mIsanimated(false), mDisplayTime(0.1667f)
 	{
 	}
 	bool Sprite::Deserialize(const rapidjson::Value& obj)
 	{
 		m_texturename = std::string(obj["TextureName"].GetString());
 		m_index = vec2D(obj["Index_X"].GetFloat(), obj["Index_Y"].GetFloat());
+		mUVcooridnates = vec2D(obj["Ucoordinates"].GetFloat(), obj["Vcoordinates"].GetFloat());
 		mIsSpriteSheet = bool(obj["IsSpriteSheet"].GetBool());
 		mIsanimated = bool(obj["IsAnimated"].GetBool());
 		mDisplayTime = float(obj["DisplayTime"].GetFloat());
@@ -36,6 +38,10 @@ namespace EM {
 		writer->Double(m_index.x);
 		writer->Key("Index_Y");
 		writer->Double(m_index.y);
+		writer->Key("Ucoordinates");
+		writer->Double(mUVcooridnates.x);
+		writer->Key("Vcoordinates");
+		writer->Double(mUVcooridnates.y);
 		writer->Key("IsSpriteSheet");
 		writer->Bool(mIsSpriteSheet);
 		writer->Key("IsAnimated");

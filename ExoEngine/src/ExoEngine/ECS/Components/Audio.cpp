@@ -10,6 +10,7 @@
 \brief  This file is used to serialize and deserialize audio files
 ****************************************************************************
 ***/
+#include "empch.h"
 #include "ExoEngine/ECS/Components/Audio.h"
 
 EM::Audio::Audio() : mAudiopath{ "" }, channelgroup{ AudioType::NONE }, is_looping{ false }

@@ -22,6 +22,7 @@
 #include "ExoEngine/Math/Math.h"
 #include "FrameBuffer.h"
 #include "ExoEngine/Timer/Fps.h"
+#include "ExoEngine/ECS/SceneManager.h"
 namespace EM {
 
 	//extern ECS ecs;
@@ -81,10 +82,6 @@ namespace EM {
 			p_FrameBuffer->Resize((uint32_t)p_Editor->mViewportSize.x, (uint32_t)p_Editor->mViewportSize.y);
 			camera.Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
 		}
-		if(!p_Editor->show_window)
-		{
-		
-		}
 		
 	
 		m_Renderer->ResetInfo();
@@ -112,7 +109,9 @@ namespace EM {
 			}
 			if (sprite.mIsSpriteSheet)
 			{
-				index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y });
+				index1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y }, 
+					{sprite.GetUVCoor().x, sprite.GetUVCoor().y});
+
 				m_Renderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
 					transform.GetRot(), index1);
 			}
@@ -143,7 +142,7 @@ namespace EM {
 					}
 				}
 			}
-			if (p_Editor->selectedEntity == entity)
+			if (p_Editor->selectedEntity == entity && p_Editor->show_window)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
 				m_Renderer->DrawRect({ trans.GetPos().x , trans.GetPos().y, 0.0f },
@@ -152,7 +151,6 @@ namespace EM {
 			}
 		}
 
-		
 		/*for (auto const& entity : mEntities)
 		{
 			if (p_ecs.HaveComponent<Tag>(entity) && std::strcmp(p_ecs.GetComponent<Tag>(entity).GetTag().c_str(),"Player"))
@@ -160,6 +158,7 @@ namespace EM {
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
 		}*/
+
 		p_Editor->mGameMousePosition = ImGui::GetMousePos();
 
 		p_Editor->mGameMousePosition.x -= p_Editor->mViewportBounds[0].x;
@@ -174,49 +173,48 @@ namespace EM {
 		p_Editor->mGameMousePosition.y = ((p_Editor->mGameMousePosition.y / p_Editor->mViewportSize.y) * 2.0f) - 1.0f;
 		p_Editor->mGameMousePosition.x *= camera.GetZoomLevel();
 		p_Editor->mGameMousePosition.y *= camera.GetZoomLevel();
-		//std::cout << "Camera Zoom:" << camera.GetZoomLevel() << std::endl;
-		//
-		//if (p_Editor->mGameMousePosition.x >= -1 && p_Editor->mGameMousePosition.y >= -1 &&
-		//	p_Editor->mGameMousePosition.x < 2 && p_Editor->mGameMousePosition.y < 2)
-		//{
-		//	/*for (auto const& entity : mEntities)
-		//	{
-		//		auto& getTransform = p_ecs.GetComponent<Transform>(entity);
-		//		getTransform.
-		//	}**/
-		//	//int pixelData = p_FrameBuffer->ReadPixel(1, p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
-		//	EM_EXO_INFO("Mouse = {0}, {1}", p_Editor->mGameMousePosition.x, p_Editor->mGameMousePosition.y);
-		//	
-		//	//if(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
-		//		//p_Editor->selectedEntity = pixelData;
-		//}
 
 		if (p_GUI->check_pause() == true)
 		{
-
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.0f, camera.GetPosition().y + 0.5f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the continue button
-			p_GUI->set_continue_button({ 0.0f,0.5f }, 1.0f, 0.2f);//assign position and scale into the GUI
-			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.0f, camera.GetPosition().y - 0.0f,0.0f }, { 1.0f, 0.2f }, { 0.3f, 0.4f, 0.5f, 1.0f });//to create the quit button 
-			p_GUI->set_pause_button({ 0.0f,0.0f }, 1.0f, 0.2f);//assign position and scale into the GUI
+			//UI background
+			m_Renderer->DrawQuad({ 0.0f, 0.0f }, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
+			m_Renderer->DrawQuad({ -0.89f, -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
+			m_Renderer->DrawQuad({ 0.522f, 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
+			m_Renderer->DrawQuad({ 0.526f, 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ 0.526f, 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ 0.526f, -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ 0.526f, -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ 0.526f, -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
 
 		}
 		m_Renderer->End();
 	
 		p_FrameBuffer->UnBind();
 		
-
+		
 		if (p_GUI->check_pause() == true)
 		{
-			m_Font->RenderText("Continue", { camera.GetPosition().x - 0.2f ,camera.GetPosition().y + 0.5f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the continue button
-			m_Font->RenderText("Quit", { camera.GetPosition().x - 0.1f ,camera.GetPosition().y + 0.0f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//render the text for the first button
-			m_Font->RenderText("Game Paused", { camera.GetPosition().x - 0.32f , camera.GetPosition().y + 0.7f }, 0.002f, camera, { 1.0f, -0.5f, 1.0f });//to render text for the quit button
+			m_Font->RenderText("VOLUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the continue button
+
+			m_Font->RenderText("CONTROL", { camera.GetPosition().x + 0.296f, camera.GetPosition().y + 0.156f },
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the first button
+
+			m_Font->RenderText("MAIN MENU", { camera.GetPosition().x + 0.236f, camera.GetPosition().y + -0.037f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+			
+			m_Font->RenderText("QUIT", { camera.GetPosition().x + 0.426f, camera.GetPosition().y + -0.24f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+			
+			m_Font->RenderText("RESUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + -0.586f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
+
+			p_GUI->set_continue_button({ 0.526f, -0.556f }, 1.350f, 0.175f);//assign position and scale into the GUI
+			p_GUI->set_pause_button({ 0.526f, -0.198f }, 0.802f, 0.123f);//assign position and scale into the GUI
 		}
 
 
 		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->pause_switch == false)//toggle menu with escape
 		{
 			p_GUI->pause_switch = true;//set first boolean to true to prevent flickering
-			camera.resetZoomLevel();//reset zoom back to default
+			//camera.resetZoomLevel();//reset zoom back to default
 			p_GUI->toggle_pause();//set pause to true thus pausing the game
 		}
 		if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
@@ -225,13 +223,9 @@ namespace EM {
 		}
 		
 		if (p_Editor->mViewportFocused && p_Editor->show_window)
-		{
 			camera.MouseScrolling();
-		}
-		else
-		{
-			camera.MouseScrolling();
-		}
+		
+
 		Timer::GetInstance().Update(Systems::GRAPHIC);
 		
 		

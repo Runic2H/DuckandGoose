@@ -81,30 +81,25 @@ namespace EM {
     {
 
         //MainMenuBar();
-        if (p_Input->isKeyPressed(GLFW_KEY_P))
+        if (p_Input->KeyPressed(GLFW_KEY_P))
         {
-            if (show_window == false)
-            {
-               
-                show_window = true;
-            }
-            else 
-            {
-                show_window = false;
-            }
+            show_window = !show_window;
         }
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        
-
+        if (!p_Editor->show_window)
+        {
+            glViewport(0, 0, m_window->Getter().m_Width, m_window->Getter().m_Height);
+            EM::Graphic::camera.Resize(m_window->Getter().m_Width, m_window->Getter().m_Height);
+        }
         if (show_window)
         {
+          ImGui_ImplOpenGL3_NewFrame();
+          ImGui_ImplGlfw_NewFrame();
+          ImGui::NewFrame();
           Docking();
           MainMenuBar();
           LoadSaveScene();
           Profiler();
-          //ImGui::ShowDemoWindow();
+          //ImGui::ShowDemoWindow(); //keep it for now as we need it for future reference
           ContentBrowser();
           Logger();
           Hierarchy();
@@ -351,7 +346,7 @@ namespace EM {
             
             selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
 
-            std::cout << selectedEntity << std::endl;
+            //std::cout << selectedEntity << std::endl;
             if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
             {
                 selectedEntity = MAX_ENTITIES - 1; //to be fixed
@@ -795,37 +790,44 @@ namespace EM {
                         ImGui::Text("Rotation Z"); ImGui::SameLine();
                         ImGui::DragFloat("##", (float*)&rotation, 1.0f);
                         //EM_EXO_INFO("Rotation(z:{0})", rotation);
-                    }
-                }
-                //Sprite Component
-                if (p_ecs.HaveComponent<Sprite>(selectedEntity))
-                {
+                 }
+             }
+            //Sprite Component
+            if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+            {
                 
-                    if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
-                    {
-                        auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
-                        ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet);
-                        ImGui::Checkbox("Animation", &sprite.mIsanimated);
-                        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
-                        ImGui::PopStyleColor(3);
-                        auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
-                        ImGui::SetNextItemWidth(140.0f);
+                if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
+                {
+                    auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
+                    ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet); ImGui::SameLine();
+                    ImGui::Checkbox("Animation", &sprite.mIsanimated);
+                    ImGui::Text("Coordinates: "); ImGui::SameLine();
+                    ImGui::Text("X"); ImGui::SameLine();
+                    ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
+                    ImGui::PushID(2);
+                    ImGui::Text("Y"); ImGui::SameLine();
+                    ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
+                    ImGui::PopID();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
+                    ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                    ImGui::PopStyleColor(3);
+                    auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
+                    ImGui::SetNextItemWidth(140.0f);
 
-                        if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                    if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                    {
+                        for (auto& [str, tex] : ResourceManager::textures)
                         {
-                            for (auto& [str, tex] : ResourceManager::textures)
+                            if (ImGui::Selectable(str.c_str()))
                             {
-                                if (ImGui::Selectable(str.c_str()))
-                                {
-                                    texturePath = str;
-                                    EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
-                                }
+                                texturePath = str;
+                                EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
                             }
-                            ImGui::EndCombo();
                         }
+                        ImGui::EndCombo();
+                    }
 
                     if (ImGui::BeginDragDropTarget())
                     {
@@ -835,8 +837,21 @@ namespace EM {
                         }
                         ImGui::EndDragDropTarget();
                     }
-                    ImGui::Text("DisplayTime"); ImGui::SameLine();
-                    ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                    if (sprite.mIsanimated)
+                    {
+                        ImGui::Text("DisplayTime"); ImGui::SameLine();
+                        ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                    }
+                    if (sprite.mIsSpriteSheet)
+                    {
+                        ImGui::Text("UVCoordinates: "); ImGui::SameLine();
+                        ImGui::Text("U"); ImGui::SameLine();                   
+                        ImGui::DragFloat("##U", (float*)&sprite.GetUVCoor().x, 0.5f); ImGui::SameLine();
+                        ImGui::PushID(2);
+                        ImGui::Text("V"); ImGui::SameLine();
+                        ImGui::DragFloat("##V", (float*)&sprite.GetUVCoor().y, 0.5f);
+                        ImGui::PopID();
+                    }
                 }
             }
             //Collider Component
