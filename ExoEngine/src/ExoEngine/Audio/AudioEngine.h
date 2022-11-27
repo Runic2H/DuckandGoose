@@ -63,16 +63,6 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         float dbToVolume(float db);
         float VolumeTodB(float volume);
         int GetPlayingChannels() { return (int)ChannelMap.size(); }
-        //FMOD_VECTOR VectorToFmod(const Vector3& vPosition);
-
-    /*private:
-        struct displaychannelitem
-        {
-            int channel_num;
-            bool is_playing;
-        };
-
-        std::vector<displaychannelitem>playinglist;*/
 
 };
 

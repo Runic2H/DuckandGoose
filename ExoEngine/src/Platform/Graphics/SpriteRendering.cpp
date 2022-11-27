@@ -3,9 +3,8 @@
 \file			SpriteRendering.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
-\date			02-11-2022
+\par Course:	CSD2400 / GAM200
+\date			11-02-2022
 \brief			This file do rendering for sprite
 ****************************************************************************
 ***/
@@ -14,6 +13,9 @@
 
 namespace EM {
 
+	/*!*************************************************************************
+	Render sprite using glm
+	****************************************************************************/
 	SpriteRender::SpriteRender(const MultiRefs<Texture>& texture, const glm::vec2& min, const glm::vec2& max)
 		:m_Texture(texture)
 	{
@@ -22,6 +24,10 @@ namespace EM {
 		m_TexCoords[2] = { max.x, max.y }; //top right
 		m_TexCoords[3] = { min.x, max.y }; //top left
 	}
+
+	/*!*************************************************************************
+	Create sprite using glm
+	****************************************************************************/
 	MultiRefs<SpriteRender> SpriteRender::CreateSprite(const MultiRefs<Texture>& texture, const glm::vec2& Coordinates, const glm::vec2& SpriteSize)
 	{
 		glm::vec2 min = { (Coordinates.x * SpriteSize.x) / texture->GetWidth(), (Coordinates.y * SpriteSize.y) / texture->GetHeight() };

@@ -3,8 +3,7 @@
 \file			Camera2D.cpp
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
-\par Course:	Gam200
-\section		A
+\par Course:	CSD2400 / GAM200
 \date			02-11-2022
 \brief			This file calculate the projection view matrix and aspect ratio
 				and set our world coordinates to view coordinates
@@ -16,6 +15,10 @@
 #include "ExoEngine/Timer/Time.h"
 
 namespace EM {
+
+	/*!*************************************************************************
+	Constructor for Camera2D
+	****************************************************************************/
 	Camera2D::Camera2D(float left, float right, float bottom, float top)//left, right, bottom and top
 		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f),
 		m_Position{ 0.0f, 0.0f, 0.0f }
@@ -24,11 +27,19 @@ namespace EM {
 		m_viewportHeight = m_window.Getter().m_Height;
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
+
+	/*!*************************************************************************
+	Set projection matrix
+	****************************************************************************/
 	void Camera2D::SetProjection(float left, float right, float bottom, float top)
 	{
 		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
+
+	/*!*************************************************************************
+	Use input mouse scroll wheel to adjust camera
+	****************************************************************************/
 	bool Camera2D::MouseScrolling()
 	{
 		
@@ -49,17 +60,26 @@ namespace EM {
 		return false;
 	}
 
+	/*!*************************************************************************
+	Resize camera
+	****************************************************************************/
 	void Camera2D::Resize(float width, float height)
 	{
 		m_AspectRatio = width / height;
 		SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 	}
 
+	/*!*************************************************************************
+	Reset zoom level
+	****************************************************************************/
 	void Camera2D::resetZoomLevel()
 	{
 		m_ZoomLevel = 1.0f;
 	}
 
+	/*!*************************************************************************
+	Recalculate Camera2D matrix
+	****************************************************************************/
 	void Camera2D::RecalculateMatrix()
 	{
 		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) *

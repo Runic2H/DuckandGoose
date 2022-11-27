@@ -1,3 +1,14 @@
+/*!*************************************************************************
+****
+\file			CameraComponent.cpp
+\author			Huang Xin Xiang
+\par DP email:	h.xinxiang@digipen.edu
+\par Course:	CSD2400 / GAM200
+\date			11-18-2022
+\brief			This file contains the class definitions for camera component
+
+****************************************************************************
+***/
 #pragma once
 #include "IComponent.h"
 #include "glm/glm.hpp"
