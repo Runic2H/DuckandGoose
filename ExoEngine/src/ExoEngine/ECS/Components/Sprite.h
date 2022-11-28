@@ -37,7 +37,14 @@ namespace EM {
 		void SetUVCoor(float& u, float& v) { mUVcooridnates.x = u; mUVcooridnates.y = v; } 
 		vec2D& GetUVCoor() { return mUVcooridnates; }
 
+
+		/*!*************************************************************************
+		Retrieves Component Entity ID
+		****************************************************************************/
 		Entity& GetComponentEntityID() { return entityID; }
+		/*!*************************************************************************
+		Sets Components Entity ID
+		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	public:

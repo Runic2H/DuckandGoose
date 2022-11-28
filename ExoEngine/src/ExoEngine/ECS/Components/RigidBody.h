@@ -50,7 +50,13 @@ namespace EM
 		void SetFriction(float value) { mFriction = value; }
 		void SetRestitution(float value) { mRestitution = value; }
 
+		/*!*************************************************************************
+		Retrieves Component Entity ID
+		****************************************************************************/
 		Entity& GetComponentEntityID() { return entityID; }
+		/*!*************************************************************************
+		Sets Components Entity ID
+		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
     
 	private:

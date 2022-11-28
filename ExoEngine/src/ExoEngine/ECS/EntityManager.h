@@ -24,7 +24,10 @@ namespace EM
 	class EntityManager
 	{
 	public:
-		//Initializes the queue for for all available entity IDs
+		
+		/*!*************************************************************************
+		Initializes the queue for for all available entity IDs
+		****************************************************************************/
 		EntityManager()
 		{
 			// Initialize the queue with all possible entity IDs up to the max number of entities
@@ -33,7 +36,10 @@ namespace EM
 				mAvailableEntities.push(entity);
 			}
 		}
-		//Grabs a new id from the queue and return it
+
+		/*!*************************************************************************
+		Grabs a new id from the queue and return it
+		****************************************************************************/
 		Entity CreateEntity()
 		{
 			assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.");
@@ -47,7 +53,9 @@ namespace EM
 			return id;
 		}
 
-		//Destroy the entities id and push it to end of queue;
+		/*!*************************************************************************
+		Destroy the entities id and push it to end of queue
+		****************************************************************************/
 		void DestroyEntity(Entity entity)
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
@@ -71,7 +79,9 @@ namespace EM
 			--mLivingEntityCount;
 		}
 
-		//Parse the entity's signature into an array of Signatures
+		/*!*************************************************************************
+		Parse the entity's signature into an array of Signatures
+		****************************************************************************/
 		void SetSignature(Entity entity, Signature signature)
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
@@ -80,7 +90,9 @@ namespace EM
 			mSignatures[entity] = signature;
 		}
 
-		//Get the Signature of the entity
+		/*!*************************************************************************
+		Get the Signature of the entity
+		****************************************************************************/
 		Signature GetSignature(Entity entity)
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
@@ -89,11 +101,17 @@ namespace EM
 			return mSignatures[entity];
 		}
 
+		/*!*************************************************************************
+		Returns the Total Entities in existence (both destroyed + alive)
+		****************************************************************************/
 		Entity GetTotalEntities()
 		{
 			return mLivingEntityCount;
 		}
 
+		/*!*************************************************************************
+		Builds the Total entities for Scene Build
+		****************************************************************************/
 		void SetTotalEntitiesForWorld(Entity entity)
 		{
 			while(mLivingEntityCount < entity)
@@ -102,6 +120,9 @@ namespace EM
 			}
 		}
 
+		/*!*************************************************************************
+		Returns the live entities
+		****************************************************************************/
 		const std::set<Entity> GetAliveEntities()
 		{
 			return mAliveEntities;
@@ -121,6 +142,7 @@ namespace EM
 		// Total living entities - used to keep limits on how many exist
 		Entity mLivingEntityCount{};
 
+		// Alive entities that are still in use
 		std::set<Entity> mAliveEntities;
 	};
 }

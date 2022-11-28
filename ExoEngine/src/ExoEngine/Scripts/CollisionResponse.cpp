@@ -40,8 +40,10 @@ namespace EM
 		}
         auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
+		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		if (col.GetAlive() &&col.GetHit()) {
+		if (col.GetAlive() && col.GetHit()) {
 			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			vec2D response = rigidbody.GetVel();
 			vec2D normal = col.GetNormal();
@@ -53,6 +55,11 @@ namespace EM
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			rigidbody.SetNextPos(nextPos);
+
+			if (tag.GetNameTag() == "Player")
+			{
+				logic.GetScript()[0]->Update(Frametime);
+			}
 		}
 	}
 	/*!*************************************************************************
