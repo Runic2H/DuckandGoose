@@ -20,7 +20,9 @@
 namespace EM
 {
 	std::unique_ptr<gui_system> m_Instance; //create a unique pointer to be used outside of this file
-
+	/*!*************************************************************************
+	Create the instance for Class GUI
+	****************************************************************************/
 	 std::unique_ptr<gui_system>& gui_system::GetInstance()// in the even that no unique pointer is created, create one 
 	{
 		if (!m_Instance)// check if the unique pointer is created
@@ -29,6 +31,9 @@ namespace EM
 		}
 		return m_Instance;//pass it back
 	}
+	 /*!*************************************************************************
+	Check the mouse cursor is in the bounding box
+	****************************************************************************/
 	 bool gui_system::is_within_box(glm::vec2 cur, button_bb box)
 	 {
 		 //We factor in aspect ratio since graphic scale is proportionate to aspect ratio instead of screen
@@ -37,6 +42,9 @@ namespace EM
 		 else
 			 return false;// return false if it isnt
 	 }
+	 /*!*************************************************************************
+	Set the bounding box for the button
+	****************************************************************************/
 	 void gui_system::set_pause_button(vec2D pos, float scaleX, float scaleY)
 	 {
 		 pause_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
@@ -47,7 +55,9 @@ namespace EM
 
 		
 	 }
-
+	 /*!*************************************************************************
+	Set the bounding box for the continue button
+	****************************************************************************/
 	 void gui_system::set_continue_button(vec2D pos, float scaleX, float scaleY)
 	 {
 		 continue_button.max.y = pos.y + scaleY / 2;//create the upper Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
@@ -55,7 +65,9 @@ namespace EM
 		 continue_button.min.y = pos.y - scaleY / 2;//create the lower Y coordinate bounding box by dividing the scale by 2 and adding it to the center position
 		 continue_button.min.x = (pos.x - (scaleX / 2));//create the lower X coordinate bounding box by dividing the scale by 2 and adding it to the center position
 	 }
-
+	 /*!*************************************************************************
+	Update the GUI system
+	****************************************************************************/
 	bool  gui_system::Update(Window* screen)
 	{
 		
@@ -90,12 +102,16 @@ namespace EM
 	}
 
 	
-
+	/*!*************************************************************************
+	Check pause states
+	****************************************************************************/
 	bool gui_system::check_pause()//getter function for pause state
 	{
 		return is_pause;
 	}
-
+	/*!*************************************************************************
+	Pause states toggling
+	****************************************************************************/
 	void gui_system::toggle_pause()//if game is pause,unpause it. Or pause it if it is unpause.
 	{
 		if (is_pause == false)

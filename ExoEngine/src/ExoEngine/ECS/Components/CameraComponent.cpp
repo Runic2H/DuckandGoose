@@ -26,6 +26,7 @@ namespace EM {
 	****************************************************************************/
 	bool CameraComponent::Deserialize(const rapidjson::Value& obj)
 	{
+		UNREFERENCED_PARAMETER(obj);
 		return false;
 	}
 
@@ -34,6 +35,7 @@ namespace EM {
 	****************************************************************************/
 	bool CameraComponent::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
+		UNREFERENCED_PARAMETER(writer);
 		return false;
 	}
 }
