@@ -18,9 +18,12 @@ saved into a json file for future loading
 
 namespace EM
 {
-
+	// Unique pointer to instance of Scene
 	std::unique_ptr<SceneManager> SceneManager::m_instance;
 
+	/*!*************************************************************************
+	Returns an instance of the SceneManager
+	****************************************************************************/
 	std::unique_ptr<SceneManager>& SceneManager::GetInstance()
 	{
 		if (m_instance == nullptr)
@@ -30,7 +33,9 @@ namespace EM
 		return m_instance;
 	}
 
-	//Initialize all registered components
+	/*!*************************************************************************
+	Initialize all registered components
+	****************************************************************************/
 	void SceneManager::Init()
 	{
 		p_ecs.RegisterComponent<Transform>();
@@ -45,6 +50,9 @@ namespace EM
 
 	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
 	//Will work on improving deserialization further
+	/*!*************************************************************************
+	Deserializes ECS entities and data from JSON file to build ECS (File loading)
+	****************************************************************************/
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
 	{
 		p_ecs.ResetEntities();
@@ -143,6 +151,9 @@ namespace EM
 
 	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
 	//Will work on improving serialization further
+	/*!*************************************************************************
+	Serializes ECS entities and data to JSON file to save ECS (File saving)
+	****************************************************************************/
 	bool SceneManager::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();

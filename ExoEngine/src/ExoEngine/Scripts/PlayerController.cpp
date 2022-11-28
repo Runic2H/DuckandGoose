@@ -1,22 +1,46 @@
+/*!*************************************************************************
+****
+\file PlayerController.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief	Script for Player Controller
+****************************************************************************
+***/
 #include "empch.h"
 #include "PlayerController.h"
 
 namespace EM
 {
+
+    /*!*************************************************************************
+    Default constructor for Player Controller
+    ****************************************************************************/
     PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mBlockTimer{0.0f},
         mIsBlocking{ false }, mIsAttacking{ false }, mIsStunned{ false }, mIsIdle{ false }, mIsMoving{ false }, mIsDashing{ false }, mVel{ vec2D() } {};
 
-
+    /*!*************************************************************************
+    Returns a new copy of PlayerController Script
+    ****************************************************************************/
 	PlayerController* PlayerController::Clone() const
 	{
 		return new PlayerController(*this);
 	}
 
+    /*!*************************************************************************
+    Start State of PlayerController Script
+    ****************************************************************************/
 	void PlayerController::Start()
 	{
 		mState = PlayerState::Idle;
 	}
 
+    /*!*************************************************************************
+    Update Loop of Player Controller Script
+    ****************************************************************************/
 	void PlayerController::Update(float Frametime)
 	{
         mCooldownTimer -= Frametime;
@@ -106,17 +130,25 @@ namespace EM
         Animate(mState);
 	}
 
+    /*!*************************************************************************
+    End State for Player Controller
+    ****************************************************************************/
     void PlayerController::End()
     {
         delete this;
     }
 
+    /*!*************************************************************************
+    Returns the name of Script
+    ****************************************************************************/
     std::string PlayerController::GetScriptName()
     {
         return "PlayerController";
     }
 
-
+    /*!*************************************************************************
+    Function to update current player state
+    ****************************************************************************/
     void PlayerController::UpdateState()
     {
         if (mIsBlocking)
@@ -145,6 +177,9 @@ namespace EM
         }
     }
 
+    /*!*************************************************************************
+    Update Physics for Player
+    ****************************************************************************/
     void PlayerController::UpdatePhysics(float Frametime)
     {
         auto& pRigid = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
@@ -157,6 +192,9 @@ namespace EM
         pRigid.SetNextPos(nextPos);
     }
 
+    /*!*************************************************************************
+    Animate Player base on Texture set during player state
+    ****************************************************************************/
     void PlayerController::Animate(PlayerState state)
     {
         switch (state)

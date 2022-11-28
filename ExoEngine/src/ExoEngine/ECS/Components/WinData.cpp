@@ -17,9 +17,14 @@ height and width of the window
 
 namespace EM
 {
-	//Window
+	/*!*************************************************************************
+	Ctor for Window Data
+	****************************************************************************/
 	WinData::WinData() : mTitle{ "Exomata" }, mWidth{ 1920 }, mHeight{ 1080 }, mCurrentWidth{ 1920 }, mCurrentHeight{ 1080 } {}
 
+	/*!*************************************************************************
+	Deserialize for Window Data
+	****************************************************************************/
 	bool WinData::Deserialize(const rapidjson::Value& obj)
 	{
 		mTitle = obj["Title"].GetString();
@@ -29,6 +34,9 @@ namespace EM
 		mCurrentHeight = obj["Cheight"].GetUint();
 		return true;
 	}
+	/*!*************************************************************************
+	Serialize for Window Data
+	****************************************************************************/
 	bool WinData::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();

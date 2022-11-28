@@ -188,7 +188,7 @@ namespace EM
 
 	private:
 
-		//Static Counter for number of components registered
+		// Static Counter for number of components registered
 		inline static ComponentType ComponentsRegistered{};
 
 		// Map from type string pointer to a component type
@@ -200,7 +200,7 @@ namespace EM
 		// Map from type ComponentType to a component array
 		std::unordered_map<ComponentType, std::shared_ptr<IComponentArray>> mComponentArraysFromType{};
 
-		//Initial component type id
+		// Initial component type id
 		ComponentType mNextComponentType{};
 
 		// Convenience function to get the statically casted pointer to the ComponentArray of type T.

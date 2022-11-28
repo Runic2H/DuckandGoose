@@ -21,10 +21,14 @@ function
 
 namespace EM
 {
-	Logic::Logic()
-	{
-	}
+	/*!*************************************************************************
+	Ctor for Logic Component
+	****************************************************************************/
+	Logic::Logic() { }
 
+	/*!*************************************************************************
+	Copy Ctor
+	****************************************************************************/
 	Logic::Logic(const Logic& rhs)
 	{
 		mScriptNameVector = rhs.mScriptNameVector;
@@ -35,7 +39,9 @@ namespace EM
 			mScriptsVector[i]->SetScriptEntityID(this->entityID);
 		}
 	}
-
+	/*!*************************************************************************
+	Copy Assignment for operator overload
+	****************************************************************************/
 	Logic& Logic::operator= (const Logic& rhs)
 	{
 		mScriptNameVector = rhs.mScriptNameVector;
@@ -48,7 +54,9 @@ namespace EM
 		return *this;
 	}
 
-	//Sets the Script's entity to retrieve data only from that entity
+	/*!*************************************************************************
+	Sets the Script's entity to retrieve data only from that entity
+	****************************************************************************/
 	void Logic::SetScriptEntity(Entity entity)
 	{
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
@@ -57,6 +65,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Deserialize for Logic Component
+	****************************************************************************/
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
 		for (auto i = obj["ScriptName"].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
@@ -81,6 +92,9 @@ namespace EM
 		return true;
 	}
 
+	/*!*************************************************************************
+	Serialize for Logic Component
+	****************************************************************************/
 	bool Logic::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
@@ -95,7 +109,9 @@ namespace EM
 		return true;
 	}
 
-	//Inserts the scripts into the vector to loop through
+	/*!*************************************************************************
+	Inserts the scripts into the vector to loop through
+	****************************************************************************/
 	void Logic::InsertScript(IScript* script, Entity entity)
 	{
 		mScriptNameVector.push_back(script->GetScriptName());
@@ -103,6 +119,9 @@ namespace EM
 		script->SetScriptEntityID(entity);
 	}
 
+	/*!*************************************************************************
+	Clear all Scripts inside the Vector
+	****************************************************************************/
 	void Logic::ClearAllScripts()
 	{
 		mScriptNameVector.clear();

@@ -17,8 +17,14 @@ camera to the player component or enemy pathfinding
 
 namespace EM
 {
+	/*!*************************************************************************
+	Ctor for Tag Component
+	****************************************************************************/
 	Tag::Tag() : mTag{"Untagged"}, mTargetTag{""} {}
 
+	/*!*************************************************************************
+	Deserialize for Tag Component
+	****************************************************************************/
 	bool Tag::Deserialize(const rapidjson::Value& obj)
 	{
 		mTag = obj["Tag"].GetString();
@@ -26,6 +32,9 @@ namespace EM
 		return true;
 	}
 
+	/*!*************************************************************************
+	Serialize for Tag Component
+	****************************************************************************/
 	bool Tag::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
