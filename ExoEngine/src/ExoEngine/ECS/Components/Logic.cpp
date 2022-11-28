@@ -1,8 +1,27 @@
+/*!*************************************************************************
+****
+\file Logic.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2400
+\par Section: a
+\par Assignment GAM200
+\date 2/11/2022
+\brief  Logic Component for all the scripts being used by each entity.
+Contains a vector for scripts which is looped and calls each scripts update
+function
+
+****************************************************************************
+***/
+#include "empch.h"
 #include "Logic.h"
+#include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
+#include "ExoEngine/Scripts/PlayerController.h"
 
 namespace EM
 {
-	Logic::Logic() 
+	Logic::Logic()
 	{
 	}
 
@@ -13,7 +32,7 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->entityID);
 		}
 	}
 
@@ -24,22 +43,41 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->entityID);
 		}
 		return *this;
 	}
 
+	//Sets the Script's entity to retrieve data only from that entity
 	void Logic::SetScriptEntity(Entity entity)
 	{
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
 		{
-			(*i)->SetEntityID(entity);
+			(*i)->SetScriptEntityID(entity);
 		}
 	}
 
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
-		mScriptNameVector.push_back(obj["ScriptName"].GetString());
+		for (auto i = obj["ScriptName"].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
+		{
+			mScriptNameVector.push_back(i->GetString());
+		}
+		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+		{
+			if (mScriptNameVector[i] == "PlayerController")
+			{
+				mScriptsVector.push_back(new PlayerController());
+			}
+			if (mScriptNameVector[i] == "EnemyMovement")
+			{
+				mScriptsVector.push_back(new EnemyMovement());
+			}
+			if (mScriptNameVector[i] == "CollisionResponse")
+			{
+				mScriptsVector.push_back(new CollisionResponse());
+			}
+		}
 		return true;
 	}
 
@@ -57,10 +95,20 @@ namespace EM
 		return true;
 	}
 
-	void Logic::InsertScript(std::string name, IScript* script, Entity entity)
+	//Inserts the scripts into the vector to loop through
+	void Logic::InsertScript(IScript* script, Entity entity)
 	{
-		mScriptNameVector.push_back(name);
+		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
-		entityID = entity;
+		script->SetScriptEntityID(entity);
+	}
+
+	void Logic::ClearAllScripts()
+	{
+		mScriptNameVector.clear();
+		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
+		{
+			(*i)->End();
+		}
 	}
 }

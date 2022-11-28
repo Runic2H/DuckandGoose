@@ -1,3 +1,16 @@
+/*!*************************************************************************
+****
+\file			Vmath.cpp
+\author			Lau Yong Hui
+\par DP email:	l.yonghui@digipen.edu
+\par Course:	Gam200
+\section		A
+\date			16-09-2022
+\brief			This file contain the Vector2 liabry
+				and its corresponding functions for creation and computation
+
+****************************************************************************/
+#include "empch.h"
 #include "Vmath.h"
 
 

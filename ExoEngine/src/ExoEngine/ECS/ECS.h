@@ -6,7 +6,7 @@
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
-\date 28/09/2022
+\date 28/09/2022 - 2/11/2022
 \brief  This file contains the coordinator for the three systems in place
 that manages the ECS, the component, entity and system manager communicates
 with each other using this class
@@ -29,6 +29,7 @@ namespace EM
 	{
 	public:
 
+		//Returns an instance of the ECS
 		static ECS& GetInstance()
 		{
 			static ECS instance;
@@ -43,11 +44,14 @@ namespace EM
 		}
 
 		// Entity methods
+
+		//Pulls a new entity ID from queue and return it
 		Entity CreateEntity()
 		{
 			return mEntityManager->CreateEntity();
 		}
 
+		//Destroys the Entity ID and push it back into the back of the queue
 		void DestroyEntity(Entity entity)
 		{
 			mEntityManager->DestroyEntity(entity);
@@ -55,6 +59,7 @@ namespace EM
 			mSystemManager->EntityDestroyed(entity);
 		}
 
+		//Clones the Entity and all its available components 
 		Entity CloneEntity(Entity entity)
 		{
 			Entity newEntity = mEntityManager->CreateEntity();
@@ -72,29 +77,40 @@ namespace EM
 			return newEntity;
 		}
 
+		//Retrieves the entity's signature
 		Signature GetEntitySignature(Entity entity)
 		{
 			return mEntityManager->GetSignature(entity);
 		}
 
+		//Sets the Entity's signature for cloneing
 		void SetEntitySignature(Entity entity, Signature signature)
 		{
 			mEntityManager->SetSignature(entity, signature);
 		}
 
+		//Returns the number of live entities
 		Entity GetTotalEntities()
 		{
 			return mEntityManager->GetTotalEntities();
 		}
 
+		//Sets the total entities for world build 
 		void SetTotalEntitiesForWorldBuild(Entity entity)
 		{
 			mEntityManager->SetTotalEntitiesForWorld(entity);
 		}
 
+		//Resets all the entities for World build
 		void ResetEntities()
 		{
-			mEntityManager->ResetEntities();
+			auto aliveset = mEntityManager->GetAliveEntities();
+			
+			for (const auto& iter : aliveset)
+			{
+				DestroyEntity(iter);
+			}
+			
 		}
 
 		// Component methods
@@ -107,31 +123,13 @@ namespace EM
 		template<typename T>
 		void AddComponent(Entity entity, T component)
 		{
+			component.SetComponentEntityID(entity);
 			mComponentManager->AddComponent<T>(entity, component);
 
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);
 			mSystemManager->EntitySignatureChanged(entity, signature);
-		}
-
-		void AddComponentsSignature(Entity entity, Signature signature)
-		{
-			if (signature.test(GetComponentType<Transform>()))
-			{
-				Transform transform;
-				AddComponent<Transform>(entity, transform);
-			}
-			if (signature.test(GetComponentType<RigidBody>()))
-			{
-				RigidBody rigidbody;
-				AddComponent<RigidBody>(entity, rigidbody);
-			}
-			if (signature.test(GetComponentType<Sprite>()))
-			{
-				Sprite sprite;
-				AddComponent<Sprite>(entity, sprite);
-			}
 		}
 
 		template<typename T>
