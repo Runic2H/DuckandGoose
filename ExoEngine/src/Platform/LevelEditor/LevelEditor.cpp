@@ -57,7 +57,6 @@ namespace EM {
     /*!*************************************************************************
     Init loop for levelEditor sets context for ImGui
     ****************************************************************************/
-    // Init for levelEditor sets context for ImGui 
     void LevelEditor::Init(Window* window)
     {
         m_window = window;
@@ -78,9 +77,8 @@ namespace EM {
         LoadSceneFromFile();
     }
     /*!*************************************************************************
-   Update loop for level editor, poll events and set new frames
-   ****************************************************************************/
-   //  Update loop for level editor, poll events and set new frames
+    Update loop for level editor, poll events and set new frames
+    ****************************************************************************/
     void LevelEditor::Update()
     {
 
@@ -92,7 +90,7 @@ namespace EM {
         if (!p_Editor->show_window)
         {
             glViewport(0, 0, m_window->Getter().m_Width, m_window->Getter().m_Height);
-            EM::Graphic::camera.Resize(m_window->Getter().m_Width, m_window->Getter().m_Height);
+            EM::Graphic::camera.Resize(static_cast<float>(m_window->Getter().m_Width), static_cast<float>(m_window->Getter().m_Height));
         }
         if (show_window)
         {
@@ -117,7 +115,6 @@ namespace EM {
     /*!*************************************************************************
    Render interface onto frame
    ****************************************************************************/
-   //  Render interface onto frame
 
     void LevelEditor::Draw()
     {
@@ -137,7 +134,6 @@ namespace EM {
     /*!*************************************************************************
     End instance of the level editor
     ****************************************************************************/
-    //  End instance
     void LevelEditor::End()
     {
         ImGui_ImplOpenGL3_Shutdown();
@@ -189,7 +185,6 @@ namespace EM {
     /*!*************************************************************************
    Loads audio filepaths for audio files from assets folder
    ****************************************************************************/
-   //loads audio filepaths from assets folder
     void LevelEditor::LoadAudioFromFile()
     {
         std::string audio_path = "Assets/metadigger";
@@ -211,7 +206,6 @@ namespace EM {
     Menu bar located in the top left side of the window is used to toggle between
     opening and closing the editor
     ****************************************************************************/
-    //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
     void LevelEditor::MainMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -389,7 +383,6 @@ namespace EM {
     /*!*************************************************************************
    View various assets from the assets folders from the level editor
    ****************************************************************************/
-   // Content browser to be implemented in M3
     void LevelEditor::ContentBrowser()
     {
         if (show_window)
@@ -489,7 +482,6 @@ namespace EM {
     /*!*************************************************************************
    Logger, can toggle between types of messages you want to view
    ****************************************************************************/
-   // Logger, can toggle between types of messages you want to view
     void LevelEditor::Logger()
     {
         if (show_window)
@@ -583,7 +575,6 @@ namespace EM {
     /*!*************************************************************************
    Docking allows us to dock the ImGui windows to the edges of the scene
    ****************************************************************************/
-   //Docking allows us to dock the ImGui windows to the edges of the scene
     void LevelEditor::Docking()
     {
         //Set docking flags
@@ -679,7 +670,6 @@ namespace EM {
     /*!*************************************************************************
   // Create, destroy and clone entities in the hirarchy window
   ****************************************************************************/
-  // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
         if (show_window)

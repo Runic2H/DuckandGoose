@@ -3,7 +3,9 @@
 #include "LevelEditor.h"
 
 namespace EM {
-
+	/*!*************************************************************************
+	Set the AABB box for the entity in the scene viewer
+	****************************************************************************/
 	int Picker::Pick(Camera2D* camera, std::multimap<float, Transform*> scene)
 	{
 		const float x_ndc = p_Editor->mGameMousePosition.x;
