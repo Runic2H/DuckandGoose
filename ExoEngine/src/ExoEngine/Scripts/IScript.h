@@ -18,7 +18,9 @@
 
 namespace EM
 {
-
+	/*!*************************************************************************
+	Interface for Script
+	****************************************************************************/
 	class IScript
 	{
 	public:
@@ -28,12 +30,6 @@ namespace EM
 		virtual void End() {};
 		virtual IScript* Clone() const = 0;
 		virtual std::string GetScriptName() = 0;
-
-		//template<typename T>
-		//T& GetComponent(Entity entity) 
-		//{
-		//	p_ecs.GetComponent<T>(entity);
-		//};
 
 		void SetScriptEntityID(Entity& entity) { entityID = entity; }
 		Entity& GetScriptEntityID() { return entityID; }

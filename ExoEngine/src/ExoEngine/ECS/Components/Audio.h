@@ -41,7 +41,13 @@ namespace EM
 		bool GetLooping() { return is_looping; }
 		float GetVolume() { return volume; }
 
+		/*!*************************************************************************
+		Retrieves Component Entity ID
+		****************************************************************************/
 		Entity& GetComponentEntityID() { return entityID; }
+		/*!*************************************************************************
+		Sets Components Entity ID
+		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 		//Audio component

@@ -19,6 +19,9 @@ iterating through each script to call its update functions
 
 namespace EM
 {
+	/*!*************************************************************************
+	Initialize Logic System
+	****************************************************************************/
 	void LogicSystem::Init()
 	{
 		/*auto mLogic = p_ecs.RegisterSystem<LogicSystem>();
@@ -41,6 +44,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Update Loop for Logic System
+	****************************************************************************/
 	void LogicSystem::Update(float Frametime)
 	{
 		Timer::GetInstance().Start(Systems::LOGIC);
@@ -60,6 +66,9 @@ namespace EM
 		Timer::GetInstance().Update(Systems::LOGIC);
 	}
 
+	/*!*************************************************************************
+	End State for Logic System which will delete all script data
+	****************************************************************************/
 	void LogicSystem::End()
 	{
 		for (const auto& entity : mEntities)

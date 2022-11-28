@@ -132,8 +132,13 @@ namespace EM
 		This function returns the collider acctive state data member
 		****************************************************************************/
 		bool GetAlive() { return mAlive; }
-
+		/*!*************************************************************************
+		Retrieves Component Entity ID
+		****************************************************************************/
 		Entity& GetComponentEntityID() { return entityID; }
+		/*!*************************************************************************
+		Sets Components Entity ID
+		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
