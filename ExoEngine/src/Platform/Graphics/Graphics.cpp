@@ -163,13 +163,13 @@ namespace EM {
 			}
 		}
 
-		/*for (auto const& entity : mEntities)
+		for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<Tag>(entity) && std::strcmp(p_ecs.GetComponent<Tag>(entity).GetTag().c_str(),"Player"))
+			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Player")
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
-		}*/
+		}
 
 		p_Editor->mGameMousePosition = ImGui::GetMousePos();
 
@@ -189,14 +189,14 @@ namespace EM {
 		if (p_GUI->check_pause() == true)
 		{
 			//UI background
-			m_Renderer->DrawQuad({ 0.0f, 0.0f }, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
-			m_Renderer->DrawQuad({ -0.89f, -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
-			m_Renderer->DrawQuad({ 0.522f, 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
-			m_Renderer->DrawQuad({ 0.526f, 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ 0.526f, 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ 0.526f, -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ 0.526f, -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-			m_Renderer->DrawQuad({ 0.526f, -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + -0.89f, camera.GetPosition().y + -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.522f, camera.GetPosition().y + 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f,camera.GetPosition().y + 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			m_Renderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
 
 		}
 		m_Renderer->End();

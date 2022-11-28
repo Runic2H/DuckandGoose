@@ -381,7 +381,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Debug-x64\Exomata"</Command>
+      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Release-x64\Exomata"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

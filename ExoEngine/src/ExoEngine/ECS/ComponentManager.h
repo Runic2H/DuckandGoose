@@ -27,7 +27,9 @@ namespace EM
 	class ComponentManager
 	{
 	public:
-		//Registers Components for use within the ECS
+		/*!*************************************************************************
+		Register Component for use in ECS
+		****************************************************************************/
 		template <typename T>
 		void RegisterComponent()
 		{
@@ -52,7 +54,9 @@ namespace EM
 			++ComponentsRegistered;
 		}
 
-		//Returns the ComponentType;
+		/*!*************************************************************************
+		Get unique ID of component type
+		****************************************************************************/
 		template <typename T>
 		ComponentType GetComponentType()
 		{
@@ -64,7 +68,9 @@ namespace EM
 			return mComponentTypes[typeName];
 		}
 
-		//Retrieves the string of the Class Type via Component ID
+		/*!*************************************************************************
+		Gets the component name in type string
+		****************************************************************************/
 		std::string GetComponentTypeName(ComponentType Type)
 		{
 			std::string TypeName;
@@ -79,7 +85,9 @@ namespace EM
 			return TypeName;
 		}
 
-		//Add Components to the ComponentArray
+		/*!*************************************************************************
+		Add Component to Entity via the ECS
+		****************************************************************************/
 		template<typename T>
 		void AddComponent(Entity entity, T component)
 		{
@@ -88,7 +96,9 @@ namespace EM
 			GetComponentArray<T>()->InsertData(entity, component);
 		}
 
-		//Remove Components to the ComponentArray
+		/*!*************************************************************************
+		Remove Component from entity
+		****************************************************************************/
 		template<typename T>
 		void RemoveComponent(Entity entity)
 		{
@@ -96,7 +106,9 @@ namespace EM
 			GetComponentArray<T>()->RemoveData(entity);
 		}
 
-		//Retrieve Component Data from the Respective ComponentArray
+		/*!*************************************************************************
+		Retrieve Component from entity based on T type
+		****************************************************************************/
 		template<typename T>
 		T& GetComponent(Entity entity)
 		{
@@ -104,15 +116,18 @@ namespace EM
 			return GetComponentArray<T>()->GetData(entity);
 		}
 
-		//Boolean to Check for Component's existence
+		/*!*************************************************************************
+		Checks if Entity has Component
+		****************************************************************************/
 		template<typename T>
 		bool HaveComponent(Entity entity)
 		{
 			return GetComponentArray<T>()->HaveComponent(entity);
 		}
 
-		// Notify each component array that an entity has been destroyed
-		// If it has a component for that entity, it will remove it
+		/*!*************************************************************************
+		If Entity is destroyed, Remove the data associated with it
+		****************************************************************************/
 		void EntityDestroyed(Entity entity)
 		{
 			for (auto const& pair : mComponentArrays)
@@ -122,32 +137,50 @@ namespace EM
 			}
 		}
 
-		//Returns the EntityToIndex Mapping
+		
+		/*!*************************************************************************
+		Returns the EntityToIndex Mapping
+		****************************************************************************/
 		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetEntityToIndexMap();
 		}
-		//Returns the IndextoEntity Mapping
+
+		/*!*************************************************************************
+		Returns the IndextoEntity Mapping
+		****************************************************************************/
 		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMap(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetIndexToEntityMap();
 		}
-		//Get total number of components registered
+
+		/*!*************************************************************************
+		Get total number of components registered
+		****************************************************************************/
 		const ComponentType GetTotalRegisteredComponents()
 		{
 			return ComponentsRegistered;
 		}
-		//Gets the size of entities inside the Component Array
+
+		/*!*************************************************************************
+		Gets the size of entities inside the Component Array
+		****************************************************************************/
 		const size_t GetEntitySize(ComponentType Type)
 		{
 			return GetComponentArrayFromType(Type)->GetEntitySize();
 		}
-		//Clear the Component mappings for world build
+
+		/*!*************************************************************************
+		Clear the Component mappings for world build
+		****************************************************************************/
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
 			GetComponentArrayFromType(Type)->ClearForWorldBuild();
 		}
-		//Returns the Component Mapping from Component Type to Shared ptr of IComponent
+
+		/*!*************************************************************************
+		Returns the Component Mapping from Component Type to Shared ptr of IComponent
+		****************************************************************************/
 		inline std::shared_ptr<IComponentArray> GetComponentArrayFromType(ComponentType Type)
 		{
 			return mComponentArraysFromType[Type];

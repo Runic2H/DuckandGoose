@@ -25,23 +25,23 @@ namespace EM
         mVel.x = 0.0f;
         mVel.y = 0.0f;
 
-        if ((p_Input->isKeyPressed(GLFW_KEY_W) || p_Input->isKeyPressed(GLFW_KEY_D)
-            || p_Input->isKeyPressed(GLFW_KEY_S) || p_Input->isKeyPressed(GLFW_KEY_A)) && !mIsStunned)
+        if ((p_Input->KeyHold(GLFW_KEY_W) || p_Input->KeyHold(GLFW_KEY_D)
+            || p_Input->KeyHold(GLFW_KEY_S) || p_Input->KeyHold(GLFW_KEY_A)) && !mIsStunned)
         {   
             mCooldownTimer = 0.1f;
-            if (p_Input->isKeyPressed(GLFW_KEY_W)) {
+            if (p_Input->KeyHold(GLFW_KEY_W)) {
                 mVel.y += 100.0f;
                 mIsMoving = true;
                 mIsAttacking = false;
                 mIsIdle = false;
             }
-            else if (p_Input->isKeyPressed(GLFW_KEY_S)) {
+            else if (p_Input->KeyHold(GLFW_KEY_S)) {
                 mVel.y -= 100.f;
                 mIsMoving = true;
                 mIsAttacking = false;
                 mIsIdle = false;
             }
-            else if (p_Input->isKeyPressed(GLFW_KEY_D)) {
+            else if (p_Input->KeyHold(GLFW_KEY_D)) {
                 mVel.x += 100.f;
                 mIsMoving = true;
                 mIsAttacking = false;
@@ -57,7 +57,7 @@ namespace EM
                     mIsIdle = false;
                 }
             }
-            else if (p_Input->isKeyPressed(GLFW_KEY_A)) {
+            else if (p_Input->KeyHold(GLFW_KEY_A)) {
                 mVel.x -= 100.f;
                 mIsMoving = true;
                 mIsAttacking = false;

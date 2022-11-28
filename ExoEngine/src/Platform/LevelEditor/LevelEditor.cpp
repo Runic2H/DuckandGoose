@@ -54,10 +54,10 @@ namespace EM {
     bool logger = false;
 
     static int current_sound = 0;
-
     /*!*************************************************************************
     Init loop for levelEditor sets context for ImGui
     ****************************************************************************/
+    // Init for levelEditor sets context for ImGui 
     void LevelEditor::Init(Window* window)
     {
         m_window = window;
@@ -74,14 +74,16 @@ namespace EM {
         ImGui_ImplOpenGL3_Init("#version 450");
 
         LoadAudioFromFile();
+
         LoadSceneFromFile();
     }
-
     /*!*************************************************************************
-    Update loop for level editor, poll events and set new frames
-    ****************************************************************************/
+   Update loop for level editor, poll events and set new frames
+   ****************************************************************************/
+   //  Update loop for level editor, poll events and set new frames
     void LevelEditor::Update()
     {
+
         //MainMenuBar();
         if (p_Input->KeyPressed(GLFW_KEY_P))
         {
@@ -94,26 +96,29 @@ namespace EM {
         }
         if (show_window)
         {
-          ImGui_ImplOpenGL3_NewFrame();
-          ImGui_ImplGlfw_NewFrame();
-          ImGui::NewFrame();
-          Docking();
-          MainMenuBar();
-          LoadSaveScene();
-          Profiler();
-          //ImGui::ShowDemoWindow(); //keep it for now as we need it for future reference
-          ContentBrowser();
-          Logger();
-          Hierarchy();
-          Inspector();
-          SceneViewer();
-          AudioManager();
-         }
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+            Docking();
+            MainMenuBar();
+            LoadSaveScene();
+            Profiler();
+            //ImGui::ShowDemoWindow(); //keep it for now as we need it for future reference
+            ContentBrowser();
+            Logger();
+            Hierarchy();
+            Inspector();
+            SceneViewer();
+            AudioManager();
+        }
+
     }
-   
+
     /*!*************************************************************************
-    Render interface onto frame
-    ****************************************************************************/
+   Render interface onto frame
+   ****************************************************************************/
+   //  Render interface onto frame
+
     void LevelEditor::Draw()
     {
         ImGui::Render();
@@ -129,10 +134,10 @@ namespace EM {
 
     }
 
-   
     /*!*************************************************************************
-    End instance of the level editor 
+    End instance of the level editor
     ****************************************************************************/
+    //  End instance
     void LevelEditor::End()
     {
         ImGui_ImplOpenGL3_Shutdown();
@@ -180,10 +185,11 @@ namespace EM {
             mTextureFile.emplace_back(dir_entry.path().filename().string());
         }
     }
-    
+
     /*!*************************************************************************
-    Loads audio filepaths for audio files from assets folder
-    ****************************************************************************/
+   Loads audio filepaths for audio files from assets folder
+   ****************************************************************************/
+   //loads audio filepaths from assets folder
     void LevelEditor::LoadAudioFromFile()
     {
         std::string audio_path = "Assets/metadigger";
@@ -201,11 +207,11 @@ namespace EM {
 
         }
     }
-    
     /*!*************************************************************************
-    Menu bar located in the top left side of the window is used to toggle between 
-    opening and closing the editor    
+    Menu bar located in the top left side of the window is used to toggle between
+    opening and closing the editor
     ****************************************************************************/
+    //Menu bar located in the top left side of the window is used to toggle between opening and closing the editor
     void LevelEditor::MainMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -230,8 +236,8 @@ namespace EM {
     }
 
     /*!*************************************************************************
-    Load and save scenes by serialising and deserializing data from JSON files
-    ****************************************************************************/
+   Load and save scenes by serialising and deserializing data from JSON files
+   ****************************************************************************/
     void LevelEditor::LoadSaveScene()
     {
         std::vector<const char*> filenames;
@@ -381,8 +387,9 @@ namespace EM {
     }
 
     /*!*************************************************************************
-    View various assets from the assets folders from the level editor
-    ****************************************************************************/
+   View various assets from the assets folders from the level editor
+   ****************************************************************************/
+   // Content browser to be implemented in M3
     void LevelEditor::ContentBrowser()
     {
         if (show_window)
@@ -479,10 +486,10 @@ namespace EM {
         }
 
     }
-
     /*!*************************************************************************
-    Logger, can toggle between types of messages you want to view
-    ****************************************************************************/
+   Logger, can toggle between types of messages you want to view
+   ****************************************************************************/
+   // Logger, can toggle between types of messages you want to view
     void LevelEditor::Logger()
     {
         if (show_window)
@@ -516,29 +523,31 @@ namespace EM {
                 static bool fatal = true;
                 ImGui::Checkbox("fatal", &fatal);
 
-                if (info) //if info checkbox is clicked info log will be displayed
+                if (info)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
                     ImGui::Text(Log::GetImguiLog().c_str());
                     ImGui::PopStyleColor();
 
+
+
                 }
 
-                if (warning) //if warning checkbox is clicked warning log will be displayed
+                if (warning)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 0, 255));
                     ImGui::Text("This is an Warning Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (error) //if error checkbox is clicked error log will be displayed
+                if (error)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
                     ImGui::Text("This is an Error Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (system) //if system checkbox is clicked system log will be displayed
+                if (system)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(52, 67, 235, 255));
                     ImGui::Text("This is an System Message");
@@ -552,14 +561,14 @@ namespace EM {
                     }
                 }
 
-                if (log) //if log checkbox is clicked log log will be displayed
+                if (log)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(52, 222, 235, 255));
                     ImGui::Text("This is an Log Message");
                     ImGui::PopStyleColor();
                 }
 
-                if (fatal) //if fatal checkbox is clicked fatal log will be displayed
+                if (fatal)
                 {
                     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
                     ImGui::Text("This is an Fatal Message");
@@ -571,10 +580,10 @@ namespace EM {
         }
     }
 
-    
     /*!*************************************************************************
-    Docking allows us to dock the ImGui windows to the edges of the scene
-    ****************************************************************************/
+   Docking allows us to dock the ImGui windows to the edges of the scene
+   ****************************************************************************/
+   //Docking allows us to dock the ImGui windows to the edges of the scene
     void LevelEditor::Docking()
     {
         //Set docking flags
@@ -603,6 +612,7 @@ namespace EM {
 
     }
 
+
     /*!*************************************************************************
     Profiler displays information about the users system such as
 
@@ -611,7 +621,6 @@ namespace EM {
     FPS
 
     Rendered info e.g. Quads, vertices, indices drawn etc.
-
     ****************************************************************************/
     void LevelEditor::Profiler()
     {
@@ -668,8 +677,9 @@ namespace EM {
     }
 
     /*!*************************************************************************
-    // Create, destroy and clone entities in the hirarchy window
-    ****************************************************************************/
+  // Create, destroy and clone entities in the hirarchy window
+  ****************************************************************************/
+  // Create, destroy and clone entities
     void LevelEditor::Hierarchy()
     {
         if (show_window)
@@ -687,11 +697,6 @@ namespace EM {
                 {
                     if (selectedEntity != MAX_ENTITIES)
                     {
-                        //Will break Cloned Entities
-                        /*if (p_ecs.HaveComponent<Logic>(selectedEntity))
-                        {
-                            p_ecs.GetComponent<Logic>(selectedEntity).ClearAllScripts();
-                        }*/
                         p_ecs.DestroyEntity(selectedEntity);
                     }
                     //selectedEntity = {}; // when the entity is destroy there is no current selected entity
@@ -739,9 +744,9 @@ namespace EM {
     }
 
     /*!*************************************************************************
-    Inspector allows us to manipulate the entity properties, modifying scale, 
-    rotation and position of the object.
-    ****************************************************************************/
+   Inspector allows us to manipulate the entity properties, modifying scale,
+   rotation and position of the object.
+   ****************************************************************************/
     void LevelEditor::Inspector()
     {
         if (show_window)
@@ -830,99 +835,70 @@ namespace EM {
                         ImGui::Text("Rotation Z"); ImGui::SameLine();
                         ImGui::DragFloat("##", (float*)&rotation, 1.0f);
                         //EM_EXO_INFO("Rotation(z:{0})", rotation);
-                 }
-             }
-              //Sprite Component
-              if (p_ecs.HaveComponent<Sprite>(selectedEntity))
-              {
-                  if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
-                  {
-                      auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
-                      ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet); ImGui::SameLine();
-                      ImGui::Checkbox("Animation", &sprite.mIsanimated);
-                      ImGui::Text("Coordinates: "); ImGui::SameLine();
-                      ImGui::Text("X"); ImGui::SameLine();
-                      ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
-                      ImGui::PushID(2);
-                      ImGui::Text("Y"); ImGui::SameLine();
-                      ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
-                      ImGui::PopID();
-                      ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                      ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
-                      ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                      ImGui::Button("Image : "); ImGui::SameLine(80.0f);
-                      ImGui::PopStyleColor(3);
-                      auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
-                      ImGui::SetNextItemWidth(140.0f);
+                    }
+                }
+                //Sprite Component
+                if (p_ecs.HaveComponent<Sprite>(selectedEntity))
+                {
 
-                      if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
-                      {
-                          Entity TransformEntity = p_ecs.GetComponent<Transform>(selectedEntity).GetComponentEntityID();
-                          ImGui::Text("Entity: "); ImGui::SameLine();
-                          ImGui::Text(std::to_string(TransformEntity).c_str());
-                      }
-                  }
-                  if (p_ecs.HaveComponent<Sprite>(selectedEntity))
-              {
+                    if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
+                        ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet); ImGui::SameLine();
+                        ImGui::Checkbox("Animation", &sprite.mIsanimated);
+                        ImGui::Text("Coordinates: "); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();
+                        ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
+                        ImGui::PushID(2);
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
+                        ImGui::PopID();
+                        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
+                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                        ImGui::PopStyleColor(3);
+                        auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
+                        ImGui::SetNextItemWidth(140.0f);
 
-                  if (ImGui::CollapsingHeader("Sprite", ImGuiTreeNodeFlags_None))
-                  {
-                      auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
-                      ImGui::Checkbox("SpriteSheet", &sprite.mIsSpriteSheet); ImGui::SameLine();
-                      ImGui::Checkbox("Animation", &sprite.mIsanimated);
-                      ImGui::Text("Coordinates: "); ImGui::SameLine();
-                      ImGui::Text("X"); ImGui::SameLine();
-                      ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
-                      ImGui::PushID(2);
-                      ImGui::Text("Y"); ImGui::SameLine();
-                      ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
-                      ImGui::PopID();
-                      ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
-                      ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
-                      ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                      ImGui::Button("Image : "); ImGui::SameLine(80.0f);
-                      ImGui::PopStyleColor(3);
-                      auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
-                      ImGui::SetNextItemWidth(140.0f);
+                        if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
+                        {
+                            for (auto& [str, tex] : ResourceManager::textures)
+                            {
+                                if (ImGui::Selectable(str.c_str()))
+                                {
+                                    texturePath = str;
+                                    EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
+                                }
+                            }
+                            ImGui::EndCombo();
+                        }
 
-                      if (ImGui::BeginCombo("##sprite", texturePath.c_str()))
-                      {
-                          for (auto& [str, tex] : ResourceManager::textures)
-                          {
-                              if (ImGui::Selectable(str.c_str()))
-                              {
-                                  texturePath = str;
-                                  EM_EXO_INFO("Loaded {0} Sprite", texturePath.c_str());
-                              }
-                          }
-                          ImGui::EndCombo();
-                      }
-
-                      if (ImGui::BeginDragDropTarget())
-                      {
-                          if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Textures"))
-                          {
-                              texturePath = *(const std::string*)payload->Data;
-                          }
-                          ImGui::EndDragDropTarget();
-                      }
-                      if (sprite.mIsanimated)
-                      {
-                          ImGui::Text("DisplayTime"); ImGui::SameLine();
-                          ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
-                      }
-                      if (sprite.mIsSpriteSheet)
-                      {
-                          ImGui::Text("UVCoordinates: "); ImGui::SameLine();
-                          ImGui::Text("U"); ImGui::SameLine();                   
-                          ImGui::DragFloat("##U", (float*)&sprite.GetUVCoor().x, 0.5f); ImGui::SameLine();
-                          ImGui::PushID(2);
-                          ImGui::Text("V"); ImGui::SameLine();
-                          ImGui::DragFloat("##V", (float*)&sprite.GetUVCoor().y, 0.5f);
-                          ImGui::PopID();
-                      }
-                  }
-              }
+                        if (ImGui::BeginDragDropTarget())
+                        {
+                            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Textures"))
+                            {
+                                texturePath = *(const std::string*)payload->Data;
+                            }
+                            ImGui::EndDragDropTarget();
+                        }
+                        if (sprite.mIsanimated)
+                        {
+                            ImGui::Text("DisplayTime"); ImGui::SameLine();
+                            ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                        }
+                        if (sprite.mIsSpriteSheet)
+                        {
+                            ImGui::Text("UVCoordinates: "); ImGui::SameLine();
+                            ImGui::Text("U"); ImGui::SameLine();
+                            ImGui::DragFloat("##U", (float*)&sprite.GetUVCoor().x, 0.5f); ImGui::SameLine();
+                            ImGui::PushID(2);
+                            ImGui::Text("V"); ImGui::SameLine();
+                            ImGui::DragFloat("##V", (float*)&sprite.GetUVCoor().y, 0.5f);
+                            ImGui::PopID();
+                        }
+                    }
+                }
                 //Collider Component
                 if (p_ecs.HaveComponent<Collider>(selectedEntity))
                 {
@@ -1045,8 +1021,10 @@ namespace EM {
 
     }
 
+
+
     /*!*************************************************************************
-     Audio manager allows users to select and play, pause and test different 
+     Audio manager allows users to select and play, pause and test different
      audios in the editor
     ****************************************************************************/
     void LevelEditor::AudioManager()
@@ -1156,8 +1134,8 @@ namespace EM {
     }
 
     /*!*************************************************************************
-    using std::filesystem we insert the file path if texture assets into the editor
-    ****************************************************************************/
+   using std::filesystem we insert the file path if texture assets into the editor
+   ****************************************************************************/
     void LevelEditor::insertTextureFilePath(std::string in)
     {
         auto const& dir_entry = std::filesystem::directory_entry{ in };

@@ -51,10 +51,10 @@ namespace EM
 		p_ecs.SetTotalEntitiesForWorldBuild(obj["Number of Entities"]["Entities"].GetUint());
 		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
 		{
+			p_ecs.ClearArrayForWorldBuild(i);
 			auto aliveTotal = p_ecs.GetTotalEntities();
 			Entity aliveCount = 0;
 			Entity j = 0;
-			p_ecs.ClearArrayForWorldBuild(i);
 			
 			while(aliveCount < aliveTotal)
 			{
@@ -127,7 +127,6 @@ namespace EM
 								p_ecs.AddComponent<Audio>(j, mAudio);
 							}
 						}
-
 					}
 				}
 				++j;
@@ -206,8 +205,10 @@ namespace EM
 			Entity j = 0;
 			while (aliveCount < aliveTotal)
 			{
-				if(p_ecs.GetEntitySignature(j).any())
+				if (p_ecs.GetEntitySignature(j).any())
+				{
 					aliveCount++;
+				}
 				if (p_ecs.GetEntitySignature(j).test(i))
 				{
 					//ADD COMPONENTS HERE FOR SERIALIZE

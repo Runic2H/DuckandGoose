@@ -21,7 +21,9 @@ components
 
 namespace EM
 {
-	//Interface Class for ComponentArray
+	/*!*************************************************************************
+	Interface Class for Component Array
+	****************************************************************************/
 	class IComponentArray
 	{
 	public:
@@ -45,13 +47,19 @@ namespace EM
 	class ComponentArray : public IComponentArray
 	{
 	public:
+		/*!*************************************************************************
+		inline Function for filling Entity and Index Arrays with empty entities,
+		MAX_ENTITIES is being used to denote invalid entity
+		****************************************************************************/
 		inline ComponentArray()
 		{
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
 		}
 
-		//To insert data into the map so that each entity is mapped to its index and vice versa
+		/*!*************************************************************************
+		Inserts Component Data into mComponentArray and Update mappings 
+		****************************************************************************/
 		void InsertData(Entity entity, T component)
 		{
 			assert(mEntityToIndexMap[entity] == MAX_ENTITIES && "Component added to same entity more than once.");
@@ -65,7 +73,11 @@ namespace EM
 			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
-		//To remove data from the std::unordered_map and keep data packed within the array
+		/*!*************************************************************************
+		Remove the data from the mComponentArray by shifting the data from the last
+		element to the removed element to keep density, mappings for the position in
+		the 2 arrays are then updated accordingly
+		****************************************************************************/
 		void RemoveData(Entity entity)
 		{
 			assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Removing non-existent component.");
@@ -90,7 +102,9 @@ namespace EM
 			EM_EXO_INFO("Size of m_size{0}", mSize);
 		}
 
-		//Retrieves Data from the Component Array
+		/*!*************************************************************************
+		Retrieves the Data from the mComponentArray
+		****************************************************************************/
 		T& GetData(Entity entity)
 		{
 			//assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
@@ -98,7 +112,10 @@ namespace EM
 			return mComponentArray[mEntityToIndexMap[entity]];
 		}
 
-		//Checks if Component is attached to entity
+		/*!*************************************************************************
+		Checks if Component exist by checking if there is an entity inside the
+		mEntityToIndexMap array
+		****************************************************************************/
 		bool HaveComponent(Entity entity)
 		{
 			if (mEntityToIndexMap[entity] != MAX_ENTITIES)
@@ -108,7 +125,9 @@ namespace EM
 			return false;
 		}
 
-		//Ensure that the entity is destroyed and component data is removed
+		/*!*************************************************************************
+		If Entity is destroyed, Remove the data associated with it
+		****************************************************************************/
 		void EntityDestroyed(Entity entity) override
 		{
 			if (mEntityToIndexMap[entity] != MAX_ENTITIES)
@@ -118,7 +137,9 @@ namespace EM
 			}
 		}
 
-		//To copy component data from 1 entity to another
+		/*!*************************************************************************
+		Copy Component from another entity
+		****************************************************************************/
 		void CopyComponent(Entity entity, Entity entityToCopy) override
 		{
 			T* CopyComponent = &mComponentArray[mEntityToIndexMap[entity]];
@@ -128,25 +149,33 @@ namespace EM
 			delete CloneComponent;
 		}
 
-		//returns the mapping of entity to index
+		/*!*************************************************************************
+		If Entity is destroyed, Remove the data associated with it
+		****************************************************************************/
 		std::array<size_t, MAX_ENTITIES>& GetEntityToIndexMap()
 		{
 			return mEntityToIndexMap;
 		}
 
-		//returns the mapping of index to entity
+		/*!*************************************************************************
+		If Entity is destroyed, Remove the data associated with it
+		****************************************************************************/
 		std::array<Entity, MAX_ENTITIES>& GetIndexToEntityMap()
 		{
 			return mIndexToEntityMap;
 		}
 
-		//Retrieves the size of the available entities in the array
+		/*!*************************************************************************
+		Return size of array
+		****************************************************************************/
 		const size_t GetEntitySize()
 		{
 			return mSize;
 		}
 
-		//Clears the Map for World Loading
+		/*!*************************************************************************
+		Clears Mapping for Scene Manager File Loading
+		****************************************************************************/
 		void ClearForWorldBuild()
 		{
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
@@ -155,6 +184,7 @@ namespace EM
 
 	private:
 
+		// Array containing Component's Data
 		std::array<T, MAX_ENTITIES> mComponentArray{};
 
 		// Array from an entity ID to an array index.
