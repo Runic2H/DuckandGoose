@@ -142,13 +142,13 @@ namespace EM
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
 	private:
-		std::vector<ColliderType> mCol{};
-		std::vector<vec2D> mCollisionNormal;
-		std::vector<vec2D> mMin;
-		std::vector<vec2D> mMax;
-		std::vector<vec2D> mOffset;
-		std::vector<int> mHit;
-		std::vector<float> mRadius;
-		std::vector<bool> is_Alive;
+		ColliderType mCol{};
+		vec2D mCollisionNormal;
+		vec2D mMin;
+		vec2D mMax;
+		vec2D mOffset;
+		int mHit;
+		float mRadius;
+		bool is_Alive;
 	};
 }

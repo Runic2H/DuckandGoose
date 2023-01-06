@@ -22,41 +22,17 @@ namespace EM
 	Data members will be changed during the de-serialization function call if the
 	specific entity has serialized collider information
 	****************************************************************************/
-	Collider::Collider() {}
+	Collider::Collider() : mCol{ ColliderType::none }, mMin{ vec2D(1.0f,1.0f) }, mMax{ vec2D(1.0f,1.0f) }, mRadius{ 0.3f }, mHit{ 0 }, mCollisionNormal{ vec2D() }, is_Alive{true} {}
 	/*!*************************************************************************
 	This function de-serializes the level colliders from the given level json file
 	****************************************************************************/
 	bool Collider::Deserialize(const rapidjson::Value& obj)
 	{
-		for (auto i = obj["ColliderType"].GetArray().Begin(); i != obj["ColliderType"].GetArray().End(); ++i)
-		{
-			mCol.push_back(static_cast<ColliderType>(i->GetInt()))
-		}
-		for (auto i = obj["min"].GetArray().Begin(); i != obj["min"].GetArray().End(); ++i)
-		{
-			vec2D in = vec2D(i->GetFloat(), 0);
-			++i;
-			in.y = i->GetFloat();
-			mMin.push_back(in);
-		}
-		for (auto i = obj["max"].GetArray().Begin(); i != obj["max"].GetArray().End(); ++i)
-		{
-			vec2D in = vec2D(i->GetFloat(), 0);
-			++i;
-			in.y = i->GetFloat();
-			mMax.push_back(in);
-		}
-		for (auto i = obj["offset"].GetArray().Begin(); i != obj["offset"].GetArray().End(); ++i)
-		{
-			vec2D in = vec2D(i->GetFloat(), 0);
-			++i;
-			in.y = i->GetFloat();
-			mOffset.push_back(in);
-		}
-		for (auto i = obj["radius"].GetArray().Begin(); i != obj["radius"].GetArray().End(); ++i)
-		{
-			 mRadius.push_back(i->GetFloat());
-		}
+		mCol = static_cast<ColliderType>(obj["ColliderType"].GetInt());
+		mMin = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
+		mMax = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
+		mOffset = vec2D(obj["offsetX"].GetFloat(), obj["offsetY"].GetFloat());
+		mRadius = obj["radius"].GetFloat();
 		return true;
 	}
 	/*!*************************************************************************
@@ -67,43 +43,21 @@ namespace EM
 	{
 		writer->StartObject();
 		writer->Key("ColliderType");
-		writer->StartArray();
-		for (size_t i = 0; i < mCol.size(); ++i)
-		{
-			writer->Int(static_cast<int>(mCol[i]));
-		}
-		writer->EndArray();
-		writer->Key("min");
-		writer->StartArray();
-		for (size_t i = 0; i < mMin.size(); ++i)
-		{
-			writer->Double(mMin[i].x);
-			writer->Double(mMin[i].y);
-		}
-		writer->EndArray();
-		writer->Key("max");
-		writer->StartArray();
-		for (size_t i = 0; i < mMax.size(); ++i)
-		{
-			writer->Double(mMax[i].x);
-			writer->Double(mMax[i].y);
-		}
-		writer->EndArray();
-		writer->Key("offset");
-		writer->StartArray();
-		for (size_t i = 0; i < mOffset.size(); ++i)
-		{
-			writer->Double(mOffset[i].x);
-			writer->Double(mOffset[i].y);
-		}
-		writer->EndArray();
+		writer->Int(static_cast<int>(mCol));
+		writer->Key("minX");
+		writer->Double(mMin.x);
+		writer->Key("minY");
+		writer->Double(mMin.y);
+		writer->Key("maxX");
+		writer->Double(mMax.x);
+		writer->Key("maxY");
+		writer->Double(mMax.y);
+		writer->Key("offsetX");
+		writer->Double(mOffset.x);
+		writer->Key("offsetY");
+		writer->Double(mOffset.y);
 		writer->Key("radius");
-		writer->StartArray();
-		for (size_t i = 0; i < mRadius.size(); ++i)
-		{
-			writer->Double(mRadius[i]);
-		}
-		writer->EndArray();
+		writer->Double(mRadius);
 		writer->EndObject();
 		return true;
 	}
