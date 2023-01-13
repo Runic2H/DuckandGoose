@@ -45,10 +45,16 @@ namespace EM
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		if (col.GetAlive() && col.GetHit()) {
+		if (col[0].is_Alive || col[1].is_Alive) {
 			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			vec2D response = rigidbody.GetVel();
-			vec2D normal = col.GetNormal();
+			vec2D normal = vec2D();
+			for (int i = 0; i < 2; i++) {
+				if (col[i].is_Alive) {
+					normal += col[i].mCollisionNormal;
+				}
+			}
+			Normalize(normal, normal);
 			float dotProd = dotProduct(normal, response);
 			if (dotProd <= 0) {
 				normal = normal * dotProd;

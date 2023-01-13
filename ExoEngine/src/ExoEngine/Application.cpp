@@ -112,22 +112,21 @@ Run loop for application
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
+
 		//RigidBody rb;
 		//Logic logic;
 		//Sprite sprite;
 		//NameTag name;
 		//Tag tag;
-
 		//Entity Background = p_ecs.CreateEntity();
 		//name.SetNameTag("BackGround");
 		//p_ecs.AddComponent<NameTag>(Background, name);
 		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Background, SpriteComponent);
+		//p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
 		//p_ecs.AddComponent<RigidBody>(Background, rb);
-		//p_ecs.AddComponent<Collider>(Background, ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Background, TagComponent);
-		//p_ecs.AddComponent<Logic>(Background, LogicComponent);
-
+		//p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(Background, C_TagComponent);
+		//p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
@@ -135,40 +134,37 @@ Run loop for application
 		//p_ecs.AddComponent<RigidBody>(player, rb);
 		//p_ecs.AddComponent<Sprite>(player, sprite);
 		//p_ecs.AddComponent<NameTag>(player, name);
-		//p_ecs.AddComponent<Collider>(player, ColliderComponent);
+		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
 		//tag.SetTag("Player");
 		//p_ecs.AddComponent<Tag>(player, tag);
 		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-
-
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
 		//p_ecs.AddComponent<RigidBody>(enemy, rb);
 		//p_ecs.AddComponent<Sprite>(enemy, sprite);
-		//p_ecs.AddComponent<Collider>(enemy, ColliderComponent);
-		//p_ecs.AddComponent<Tag>(enemy, TagComponent);
-		//p_ecs.AddComponent<NameTag>(enemy, NameTagComponent);
+		//p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(enemy, C_TagComponent);
+		//p_ecs.AddComponent<NameTag>(enemy, C_NameTagComponent);
 		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
 		//p_ecs.AddComponent<Logic>(enemy, logic2);
 		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
 		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
-
 		//Entity col = p_ecs.CreateEntity();
-		//p_ecs.AddComponent<Tag>(col, TagComponent);
+		//p_ecs.AddComponent<Tag>(col, C_TagComponent);
 		//p_ecs.GetComponent<Tag>(col).SetTag("PlayerAttack");
 		//p_ecs.GetComponent<Tag>(col).SetTargetTag("Enemy");
-		//p_ecs.AddComponent<Sprite>(col, SpriteComponent);
+		//p_ecs.AddComponent<Sprite>(col, C_SpriteComponent);
 		//p_ecs.AddComponent<Transform>(col, C_TransformComponent);
 		//p_ecs.GetComponent<Transform>(col).SetComponentEntityID(player);
 		//p_ecs.GetComponent<Transform>(col).GetComponentEntityID();
 		//p_ecs.AddComponent<RigidBody>(col, rb);
 		//p_ecs.AddComponent<NameTag>(col, name);
 		//p_ecs.GetComponent<NameTag>(col).SetNameTag("PlayerAttackCollider");
-		//p_ecs.AddComponent<Collider>(col, ColliderComponent);
-		//p_ecs.AddComponent<Logic>(col, LogicComponent);
+		//p_ecs.AddComponent<Collider>(col, C_ColliderComponent);
+		//p_ecs.AddComponent<Logic>(col, C_LogicComponent);
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -209,7 +205,7 @@ End loop for application
 ****************************************************************************/
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("Assets/Scene/Level.json");
+		//p_Scene->SerializeToFile("Assets/Scene/LevelTest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}
