@@ -65,6 +65,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -237,6 +238,7 @@
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
