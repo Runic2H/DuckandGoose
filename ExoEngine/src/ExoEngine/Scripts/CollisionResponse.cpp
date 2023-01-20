@@ -46,7 +46,7 @@ namespace EM
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		if (col[0].is_Alive || col[1].is_Alive) {
-			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
+			//std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
 			vec2D response = rigidbody.GetVel();
 			vec2D normal = vec2D();
 			for (int i = 0; i < 2; i++) {

@@ -32,7 +32,7 @@ namespace EM
 			mColArr[i].mOffset = vec2D();
 			mColArr[i].mHit = 0;
 			mColArr[i].mRadius = 0;
-			mColArr[i].is_Alive = false;
+			mColArr[i].is_Alive = true;
 		}
 	}
 	/*!*************************************************************************

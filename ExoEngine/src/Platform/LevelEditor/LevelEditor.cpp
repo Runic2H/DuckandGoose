@@ -55,6 +55,7 @@ namespace EM {
     bool color_picker = false;
     bool drop_menu = false;
     bool logger = false;
+    bool HaltUpdates = true;
 
     static int current_sound = 0;
     /*!*************************************************************************
@@ -84,7 +85,6 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Update()
     {
-
         //MainMenuBar();
         if (p_Input->KeyPressed(GLFW_KEY_P))
         {
@@ -142,7 +142,7 @@ namespace EM {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-        p_Audio->Release();
+        //p_Audio->Release();
     }
 
     /*!*************************************************************************
