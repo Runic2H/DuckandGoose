@@ -156,7 +156,15 @@ namespace EM {
 						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
 						{ 0.0f, 1.0f, 0.0f, 1.0f });*/
 
-				
+
+				if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::circle) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
+				{
+					auto& collider = p_ecs.GetComponent<Collider>(entity);
+					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
+						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
+					mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+				}
+        
 			}
 			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{

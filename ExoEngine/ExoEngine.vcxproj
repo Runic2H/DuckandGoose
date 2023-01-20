@@ -39,6 +39,7 @@
     <ClInclude Include="src\ExoEngine.h" />
     <ClInclude Include="src\ExoEngine\Application.h" />
     <ClInclude Include="src\ExoEngine\Core.h" />
+    <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
@@ -210,6 +211,7 @@
     </ClCompile>
     <ClCompile Include="src\ExoEngine\Log.cpp" />
     <ClCompile Include="src\ExoEngine\Application.cpp" />
+    <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
