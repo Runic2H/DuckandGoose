@@ -55,6 +55,7 @@ namespace EM {
     bool color_picker = false;
     bool drop_menu = false;
     bool logger = false;
+    bool HaltUpdates = true;
 
     static int current_sound = 0;
     /*!*************************************************************************
@@ -84,7 +85,6 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Update()
     {
-
         //MainMenuBar();
         if (p_Input->KeyPressed(GLFW_KEY_P))
         {
@@ -142,7 +142,7 @@ namespace EM {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-        p_Audio->Release();
+        //p_Audio->Release();
     }
 
     /*!*************************************************************************
@@ -898,16 +898,16 @@ namespace EM {
                     if (ImGui::CollapsingHeader("Collider", ImGuiTreeNodeFlags_None))
                     {
                         //selection for collider type
-                        auto& colliderType = p_ecs.GetComponent<Collider>(selectedEntity).GetCollider();
-
+                        auto& colliderComp = p_ecs.GetComponent<Collider>(selectedEntity);
+                        auto& colliderType = colliderComp[0].mCol;
                         int colliderIndex = static_cast<int>(colliderType);
                         const char* colliderNames = "none\0circle\0line\0rect\0button";
-                        ImGui::Text("Collider Type"); ImGui::SameLine();
+                        ImGui::Text("Collider 1 Type"); ImGui::SameLine();
                         ImGui::Combo("##test", &colliderIndex, colliderNames);
                         colliderType = static_cast<Collider::ColliderType>(colliderIndex);
 
                         //positioning the offset
-                        auto& colliderOffset = p_ecs.GetComponent<Collider>(selectedEntity).GetOffset();
+                        auto& colliderOffset = colliderComp[0].mOffset;
                         ImGui::PushItemWidth(100.0f);
 
                         ImGui::Text("OffSet   "); ImGui::SameLine();
@@ -919,27 +919,69 @@ namespace EM {
                         ImGui::DragFloat("##colliderOffsetY", (float*)&colliderOffset.y, 0.05f);
                         ImGui::PopID();
 
-                        //size of the collider
-                        if (p_ecs.GetComponent<Collider>(selectedEntity).GetCollider() == Collider::ColliderType::circle)
+                            //size of the collider
+                        if (colliderComp[0].mCol == Collider::ColliderType::circle)
                         {
-                            auto& colliderSize = p_ecs.GetComponent<Collider>(selectedEntity).GetRad();
+                            auto& colliderSize = colliderComp[0].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("##Radius", (float*)&colliderSize, 0.05f);
                         }
-                        else if (p_ecs.GetComponent<Collider>(selectedEntity).GetCollider() == Collider::ColliderType::rect)
+                        else if (colliderComp[0].mCol == Collider::ColliderType::rect)
                         {
-                            auto& colliderSize = p_ecs.GetComponent<Collider>(selectedEntity);
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
-                            ImGui::DragFloat("##MinimumX", (float*)&colliderSize.GetMin().x, 0.05f); ImGui::SameLine();
+                            ImGui::DragFloat("##MinimumX", (float*)&colliderComp[0].mMin.x, 0.05f); ImGui::SameLine();
                             ImGui::Text("Y"); ImGui::SameLine();
-                            ImGui::DragFloat("##MininmumY", (float*)&colliderSize.GetMin().y, 0.05f);
+                            ImGui::DragFloat("##MinimumY", (float*)&colliderComp[0].mMin.y, 0.05f);
 
                             ImGui::Text("Maximum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
-                            ImGui::DragFloat("##MaximumX", (float*)&colliderSize.GetMax().x, 0.05f); ImGui::SameLine();
+                            ImGui::DragFloat("##MaximumX", (float*)&colliderComp[0].mMax.x, 0.05f); ImGui::SameLine();
                             ImGui::Text("Y"); ImGui::SameLine();
-                            ImGui::DragFloat("##MaximumY", (float*)&colliderSize.GetMax().y, 0.05f);
+                            ImGui::DragFloat("##MaximumY", (float*)&colliderComp[0].mMax.y, 0.05f);
+                        }
+
+                        //selection for collider 2 type
+                        auto& colliderType1 = colliderComp[1].mCol;
+                        int colliderIndex1 = static_cast<int>(colliderType1);
+                        const char* colliderNames1 = "none\0circle\0line\0rect\0button";
+                        ImGui::Text("Collider 2 Type"); ImGui::SameLine();
+                        ImGui::Combo("###test", &colliderIndex1, colliderNames1);
+                        ImGui::PushItemWidth(100.0f);
+                        colliderType1 = static_cast<Collider::ColliderType>(colliderIndex1);
+
+                        //positioning the offset
+                        auto& colliderOffset1 = colliderComp[1].mOffset;
+
+                        ImGui::Text("OffSet   "); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();
+
+                        ImGui::DragFloat("###colliderOffsetX", (float*)&colliderOffset1.x, 0.05f); ImGui::SameLine();
+                        ImGui::PushID(1);
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("###colliderOffsetY", (float*)&colliderOffset1.y, 0.05f);
+                        ImGui::PopID();
+
+                            //size of the collider
+                        if (colliderComp[1].mCol == Collider::ColliderType::circle)
+                        {
+                            auto& colliderSize1 = colliderComp[1].mRadius;
+                            ImGui::Text("Radius   "); ImGui::SameLine();
+                            ImGui::DragFloat("###Radius", (float*)&colliderSize1, 0.05f);
+                        }
+                        else if (colliderComp[1].mCol == Collider::ColliderType::rect)
+                        {
+                            ImGui::Text("Minimum "); ImGui::SameLine();
+                            ImGui::Text("X"); ImGui::SameLine();
+                            ImGui::DragFloat("###MinimumX", (float*)&colliderComp[1].mMin.x, 0.05f); ImGui::SameLine();
+                            ImGui::Text("Y"); ImGui::SameLine();
+                            ImGui::DragFloat("###MinimumY", (float*)&colliderComp[1].mMin.y, 0.05f);
+
+                            ImGui::Text("Maximum "); ImGui::SameLine();
+                            ImGui::Text("X"); ImGui::SameLine();
+                            ImGui::DragFloat("###MaximumX", (float*)&colliderComp[1].mMax.x, 0.05f); ImGui::SameLine();
+                            ImGui::Text("Y"); ImGui::SameLine();
+                            ImGui::DragFloat("###MaximumY", (float*)&colliderComp[1].mMax.y, 0.05f);
                         }
                     }
                 }

@@ -37,18 +37,19 @@ namespace EM
 	****************************************************************************/
 	void CollisionResponse::Update(float Frametime)
 	{
-		if (Frametime) {
-
-		}
         auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		if (col.GetAlive() && col.GetHit()) {
-			std::cout << "Current velocity: " << rigidbody.GetVel().x << ", " << rigidbody.GetVel().y << "\n";
+		//std::cout << &col << "\n";
+		if (col[0].mHit || col[1].mHit) {
 			vec2D response = rigidbody.GetVel();
-			vec2D normal = col.GetNormal();
+			vec2D normal = vec2D();
+			for (int i = 0; i < 2; i++) {
+				normal += col[i].mCollisionNormal;
+			}
+			//Normalize(normal, normal);
 			float dotProd = dotProduct(normal, response);
 			if (dotProd <= 0) {
 				normal = normal * dotProd;
@@ -57,7 +58,8 @@ namespace EM
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			rigidbody.SetNextPos(nextPos);
-
+			std::cout << "Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << "\n";
+			//transform.SetPos(nextPos);
 			if (tag.GetNameTag() == "Player")
 			{
 				logic.GetScript()[0]->Update(Frametime);
