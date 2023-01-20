@@ -34,15 +34,18 @@ namespace EM {
 		{
 			auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 			auto& mRigid = p_ecs.GetComponent<RigidBody>(entity);
-
+			//std::cout << "Current Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
 			if (entity == mTrans.GetComponentEntityID())
 			{
-				mTrans.SetPos(mRigid.GetNextPos());
+				vec2D nex = mRigid.GetNextPos();
+				//std::cout << "Next Pos2: " << nex.x << ", " << nex.y << "\n";
+				mTrans.SetPos(nex);
 			}
 			else
 			{
 				mTrans.SetPos(p_ecs.GetComponent<RigidBody>(mTrans.GetComponentEntityID()).GetNextPos());
 			}
+			//std::cout << "Changed Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
 		}
 		Timer::GetInstance().Update(Systems::PHYSICS);
 	}

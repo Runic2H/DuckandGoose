@@ -1649,20 +1649,20 @@
             {
                 "posX": 0.0,
                 "posY": 0.0,
+                "scaleX": 8.270000457763672,
+                "scaleY": 3.9200000762939453,
+                "Rot": 0.0
+            },
+            {
+                "posX": 0.5513206124305725,
+                "posY": 0.34936457872390747,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
             },
             {
-                "posX": 0.0,
-                "posY": 0.0,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": 0.0,
-                "posY": 0.0,
+                "posX": 1.7169909477233887,
+                "posY": 0.2517911195755005,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -1695,8 +1695,8 @@
             {
                 "velX": 100.0,
                 "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
+                "dirX": -1.1657114028930664,
+                "dirY": 0.09912845492362976,
                 "Friction": 0.0,
                 "Restitution": 0.0
             },
@@ -1713,7 +1713,7 @@
             {
                 "Collider": [
                     {
-                        "ColliderType": 3,
+                        "ColliderType": 0,
                         "minX": 3.299999952316284,
                         "minY": 1.0499999523162842,
                         "maxX": 1.9500000476837158,
@@ -1723,7 +1723,7 @@
                         "radius": 0.0
                     },
                     {
-                        "ColliderType": 1,
+                        "ColliderType": 0,
                         "minX": 0.0,
                         "minY": 0.0,
                         "maxX": 0.0,
@@ -1737,21 +1737,21 @@
             {
                 "Collider": [
                     {
-                        "ColliderType": 0,
+                        "ColliderType": 1,
                         "minX": 0.0,
                         "minY": 0.0,
                         "maxX": 0.0,
                         "maxY": 0.0,
                         "offsetX": 0.0,
                         "offsetY": 0.0,
-                        "radius": 0.0
+                        "radius": 0.5
                     },
                     {
                         "ColliderType": 0,
-                        "minX": 0.0,
-                        "minY": 0.0,
-                        "maxX": 0.0,
-                        "maxY": 0.0,
+                        "minX": 0.6499999761581421,
+                        "minY": 0.75,
+                        "maxX": 0.6499999761581421,
+                        "maxY": 0.75,
                         "offsetX": 0.0,
                         "offsetY": 0.0,
                         "radius": 0.0
@@ -1761,21 +1761,21 @@
             {
                 "Collider": [
                     {
-                        "ColliderType": 0,
+                        "ColliderType": 1,
                         "minX": 0.0,
                         "minY": 0.0,
                         "maxX": 0.0,
                         "maxY": 0.0,
                         "offsetX": 0.0,
                         "offsetY": 0.0,
-                        "radius": 0.0
+                        "radius": 0.550000011920929
                     },
                     {
                         "ColliderType": 0,
-                        "minX": 0.0,
-                        "minY": 0.0,
-                        "maxX": 0.0,
-                        "maxY": 0.0,
+                        "minX": 0.6499999761581421,
+                        "minY": 0.6499999761581421,
+                        "maxX": 0.949999988079071,
+                        "maxY": 0.949999988079071,
                         "offsetX": 0.0,
                         "offsetY": 0.0,
                         "radius": 0.0
@@ -1823,7 +1823,7 @@
         ],
         "Sprite": [
             {
-                "TextureName": "Blank",
+                "TextureName": "BackGround",
                 "Index_X": 0.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
@@ -1834,22 +1834,22 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 0.0,
+                "Index_X": 3.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "DisplayTime": 0.16670000553131104
             },
             {
                 "TextureName": "MeleeRunning",
-                "Index_X": 0.0,
+                "Index_X": 3.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "DisplayTime": 0.16670000553131104
             },
             {

@@ -36,6 +36,13 @@ namespace EM {
         //iterate through array of entities
         int k = 0;
         for (auto const& i : mEntities) {
+            auto& col1 = p_ecs.GetComponent<Collider>(i);
+            for (int a = 0; a < 2; a++) {
+                col1[a].mHit = 0;
+                col1[a].mCollisionNormal = vec2D();
+            }
+        }
+        for (auto const& i : mEntities) {
             int l = 0;
             for (auto const& j : mEntities) {
                 if (i != j && l > k) {
@@ -49,8 +56,6 @@ namespace EM {
                             for (int b = 0; b < 2; b++) {
                                 Collider::ColliderType e1 = col1[a].mCol;
                                 Collider::ColliderType e2 = col2[b].mCol;
-                                col1[a].mHit = 0;
-                                col2[b].mHit = 0;
                                 vec2D offset1 = rigid1.GetNextPos() + col1[a].mOffset;
                                 vec2D offset2 = rigid2.GetNextPos() + col2[b].mOffset;
                                 //std::cout << (int)e1 << ", " << (int)e2 << "\n";
@@ -58,10 +63,14 @@ namespace EM {
                                     if (e1 == Collider::ColliderType::circle) {
                                         if (e2 == Collider::ColliderType::circle) {
                                             if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
+                                                std::cout << "Collision Circle-Circle\n";
                                                 col1[a].mHit = 1;
                                                 vec2D norm1 = offset1 - offset2;
                                                 Normalize(norm1, norm1);
+                                                //std::cout << &col1 << "\n";
+                                                //std::cout << "Norm1: " << norm1.x << ", " << norm1.y << "\n";
                                                 col1[a].mCollisionNormal = norm1;
+                                                //std::cout << "ColNorm1: " << col1[a].mCollisionNormal.x << ", " << col1[a].mCollisionNormal.y << "\n";
                                                 col2[b].mHit = 1;
                                                 vec2D norm2 = offset2 - offset1;
                                                 Normalize(norm2, norm2);
