@@ -22,17 +22,39 @@ namespace EM
 	Data members will be changed during the de-serialization function call if the
 	specific entity has serialized collider information
 	****************************************************************************/
-	Collider::Collider() : mCol{ ColliderType::none }, mMin{ vec2D(1.0f,1.0f) }, mMax{ vec2D(1.0f,1.0f) }, mRadius{ 0.3f }, mHit{ 0 }, mCollisionNormal{ vec2D() }, is_Alive{true} {}
+	Collider::Collider() {
+		for (int i = 0; i < 2; ++i)
+		{
+			mColArr[i].mCol = ColliderType::none;
+			mColArr[i].mCollisionNormal = vec2D();
+			mColArr[i].mMin = vec2D();
+			mColArr[i].mMax = vec2D();
+			mColArr[i].mOffset = vec2D();
+			mColArr[i].mHit = 0;
+			mColArr[i].mRadius = 0;
+			mColArr[i].is_Alive = true;
+		}
+	}
 	/*!*************************************************************************
 	This function de-serializes the level colliders from the given level json file
 	****************************************************************************/
 	bool Collider::Deserialize(const rapidjson::Value& obj)
 	{
-		mCol = static_cast<ColliderType>(obj["ColliderType"].GetInt());
-		mMin = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
-		mMax = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
-		mOffset = vec2D(obj["offsetX"].GetFloat(), obj["offsetY"].GetFloat());
-		mRadius = obj["radius"].GetFloat();
+		for (int i = 0; i < 2; ++i)
+		{
+			mColArr[i].mCol = static_cast<ColliderType>(obj["Collider"][i]["ColliderType"].GetInt());
+			mColArr[i].mMin = vec2D(obj["Collider"][i]["minX"].GetFloat(), obj["Collider"][i]["minY"].GetFloat());
+			mColArr[i].mMax = vec2D(obj["Collider"][i]["maxX"].GetFloat(), obj["Collider"][i]["maxY"].GetFloat());
+			mColArr[i].mOffset = vec2D(obj["Collider"][i]["offsetX"].GetFloat(), obj["Collider"][i]["offsetY"].GetFloat());
+			mColArr[i].mRadius = obj["Collider"][i]["radius"].GetFloat();
+		}
+
+		/*mColArr[1].mCol = static_cast<ColliderType>(obj["ColliderType"].GetInt());
+		mColArr[1].mMin = vec2D(obj["minX"].GetFloat(), obj["minY"].GetFloat());
+		mColArr[1].mMax = vec2D(obj["maxX"].GetFloat(), obj["maxY"].GetFloat());
+		mColArr[1].mOffset = vec2D(obj["offsetX"].GetFloat(), obj["offsetY"].GetFloat());
+		mColArr[1].mRadius = obj["radius"].GetFloat();*/
+
 		return true;
 	}
 	/*!*************************************************************************
@@ -42,23 +64,49 @@ namespace EM
 	bool Collider::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		writer->StartObject();
-		writer->Key("ColliderType");
-		writer->Int(static_cast<int>(mCol));
-		writer->Key("minX");
-		writer->Double(mMin.x);
-		writer->Key("minY");
-		writer->Double(mMin.y);
-		writer->Key("maxX");
-		writer->Double(mMax.x);
-		writer->Key("maxY");
-		writer->Double(mMax.y);
-		writer->Key("offsetX");
-		writer->Double(mOffset.x);
-		writer->Key("offsetY");
-		writer->Double(mOffset.y);
-		writer->Key("radius");
-		writer->Double(mRadius);
+		writer->Key("Collider");
+		writer->StartArray();
+		for (int i = 0; i < 2; ++i)
+		{
+			writer->StartObject();
+			writer->Key("ColliderType");
+			writer->Int(static_cast<int>(mColArr[i].mCol));
+			writer->Key("minX");
+			writer->Double(mColArr[i].mMin.x);
+			writer->Key("minY");
+			writer->Double(mColArr[i].mMin.y);
+			writer->Key("maxX");
+			writer->Double(mColArr[i].mMax.x);
+			writer->Key("maxY");
+			writer->Double(mColArr[i].mMax.y);
+			writer->Key("offsetX");
+			writer->Double(mColArr[i].mOffset.x);
+			writer->Key("offsetY");
+			writer->Double(mColArr[i].mOffset.y);
+			writer->Key("radius");
+			writer->Double(mColArr[i].mRadius);
+			writer->EndObject();
+		}
+		writer->EndArray();
 		writer->EndObject();
+		
+		//writer->Key("ColliderType");
+		//writer->Int(static_cast<int>(mColArr[1].mCol));
+		//writer->Key("minX");
+		//writer->Double(mColArr[1].mMin.x);
+		//writer->Key("minY");
+		//writer->Double(mColArr[1].mMin.y);
+		//writer->Key("maxX");
+		//writer->Double(mColArr[1].mMax.x);
+		//writer->Key("maxY");
+		//writer->Double(mColArr[1].mMax.y);
+		//writer->Key("offsetX");
+		//writer->Double(mColArr[1].mOffset.x);
+		//writer->Key("offsetY");
+		//writer->Double(mColArr[1].mOffset.y);
+		//writer->Key("radius");
+		//writer->Double(mColArr[1].mRadius);
+		//writer->EndObject();
 		return true;
 	}
 }
