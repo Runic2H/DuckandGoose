@@ -48,6 +48,8 @@ namespace EM
 		p_ecs.RegisterComponent<Logic>();
 		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
+		p_ecs.RegisterComponent<Button>();
+		sceneToLoad = "";
 	}
 
 	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
@@ -83,6 +85,7 @@ namespace EM
 								p_ecs.AddComponent<Transform>(j, transform);
 							}
 						}
+
 						if (p_ecs.GetComponentTypeName(i) == "RigidBody")
 						{
 							RigidBody rigidbody;
@@ -135,6 +138,14 @@ namespace EM
 							if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 							{
 								p_ecs.AddComponent<Audio>(j, mAudio);
+							}
+						}
+						if (p_ecs.GetComponentTypeName(i) == "Button")
+						{
+							Button button;
+							if (button.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Button>(j, button);
 							}
 						}
 					}
@@ -257,6 +268,10 @@ namespace EM
 					{
 						p_ecs.GetComponent<Audio>(j).Serialize(writer);
 					}
+					if (p_ecs.GetComponentTypeName(i) == "Button")
+					{
+						p_ecs.GetComponent<Button>(j).Serialize(writer);
+					}
 				}
 				j++;
 			}
@@ -267,4 +282,23 @@ namespace EM
 		writer->EndObject();
 		return true;
 	}
+}
+
+void EM::SceneManager::setSceneToLoad(std::string s)
+{
+	sceneToLoad = s;
+}
+
+void EM::SceneManager::checkForSceneToLoad()
+{
+	if (sceneToLoad != "")
+	{
+		DeserializeFromFile(sceneToLoad);
+		sceneToLoad = "";
+	}
+}
+
+void EM::SceneManager::changeScene(std::string s)
+{
+
 }

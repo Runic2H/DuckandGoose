@@ -55,13 +55,15 @@ namespace EM
 
 		void set_pause_button(vec2D pos, float scaleX, float scaleY); //set the position and scale of the pause button
 		void set_continue_button(vec2D pos, float scaleX, float scaleY);//set the position and scale of the continue button
+		float Get_AspectRatio() { return mAspectRatio; }//set the position and scale of the continue button
 		void toggle_pause();// used to toggle the is_pause boolean
 		bool check_pause();// a getter function for the pause
 		bool is_within_box(glm::vec2 cur, button_bb box);// a helper function to check  if the cursor is touching the button,
+		glm::vec2 MousePosition;
 		
 		
 
-		//vec2D update_curPos(Window screen);
+		vec2D update_curPos(Window screen);
 	};
 
 
