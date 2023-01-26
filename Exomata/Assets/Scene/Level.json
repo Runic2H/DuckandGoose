@@ -1933,175 +1933,246 @@
     ],
     "Collider": [
       {
-        "ColliderType": 0,
-        "minX": 1.0,
-        "minY": 1.0,
-        "maxX": 1.0,
-        "maxY": 1.0,
-        "offsetX": 0.0,
-        "offsetY": 0.0,
-        "radius": 0.30000001192092896
-      },
-      {
-        "ColliderType": 1,
-        "minX": 1.0,
-        "minY": 1.0,
-        "maxX": 1.0,
-        "maxY": 1.0,
-        "offsetX": 0.0,
-        "offsetY": 0.0,
-        "radius": 0.25
-      },
-      {
-        "ColliderType": 1,
-        "minX": 1.0,
-        "minY": 1.0,
-        "maxX": 1.0,
-        "maxY": 1.0,
-        "offsetX": 0.0,
-        "offsetY": 0.0,
-        "radius": 0.25
-      },
-      {
-        "ColliderType": 0,
-        "minX": 1.0,
-        "minY": 1.0,
-        "maxX": 1.0,
-        "maxY": 1.0,
-        "offsetX": -0.20000000298023224,
-        "offsetY": 0.0,
-        "radius": 0.30000001192092896
-      },
-      {
-        "ColliderType": 1,
-        "minX": 1.0,
-        "minY": 1.0,
-        "maxX": 1.0,
-        "maxY": 1.0,
-        "offsetX": 0.0,
-        "offsetY": 0.0,
-        "radius": 0.25
-      }
-    ],
-    "NameTag": [
-      {
-        "NameTag": "BackGround"
-      },
-      {
-        "NameTag": "Player"
-      },
-      {
-        "NameTag": "Enemy"
-      },
-      {
-        "NameTag": "PlayerAttackCollider"
-      },
-      {
-        "NameTag": "Enemy"
-      }
-    ],
-    "Sprite": [
-      {
-        "TextureName": "BackGround",
-        "Index_X": 0.0,
-        "Index_Y": 0.0,
-        "Ucoordinates": 512.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": false,
-        "IsAnimated": false,
-        "DisplayTime": 0.16670000553131104
-      },
-      {
-        "TextureName": "Idle",
-        "Index_X": 1.0,
-        "Index_Y": 0.0,
-        "Ucoordinates": 512.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": true,
-        "IsAnimated": true,
-        "DisplayTime": 0.16670000553131104
-      },
-      {
-        "TextureName": "MeleeIdle",
-        "Index_X": 1.0,
-        "Index_Y": 0.0,
-        "Ucoordinates": 500.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": true,
-        "IsAnimated": true,
-        "DisplayTime": 0.16670000553131104
-      },
-      {
-        "TextureName": "Blank",
-        "Index_X": 0.0,
-        "Index_Y": 0.0,
-        "Ucoordinates": 512.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": false,
-        "IsAnimated": false,
-        "DisplayTime": 0.16670000553131104
-      },
-      {
-        "TextureName": "MeleeRunning",
-        "Index_X": 1.0,
-        "Index_Y": 0.0,
-        "Ucoordinates": 500.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": true,
-        "IsAnimated": true,
-        "DisplayTime": 0.16670000553131104
-      }
-    ],
-    "Logic": [
-      {
-        "ScriptName": []
-      },
-      {
-        "ScriptName": [
-          "PlayerController",
-          "CollisionResponse"
+        "Collider": [
+          {
+            "ColliderType": 0,
+            "minX": 1.0,
+            "minY": 1.0,
+            "maxX": 1.0,
+            "maxY": 1.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.30000001192092896
+          },
+          {
+            "ColliderType": 0,
+            "minX": 0.0,
+            "minY": 0.0,
+            "maxX": 0.0,
+            "maxY": 0.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.0
+          }
         ]
       },
       {
-        "ScriptName": [
-          "EnemyMovement",
-          "CollisionResponse"
+        "Collider": [
+          {
+            "ColliderType": 1,
+            "minX": 1.0,
+            "minY": 1.0,
+            "maxX": 1.0,
+            "maxY": 1.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.25
+          },
+          {
+            "ColliderType": 0,
+            "minX": 0.0,
+            "minY": 0.0,
+            "maxX": 0.0,
+            "maxY": 0.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.0
+          }
         ]
       },
       {
-        "ScriptName": []
+        "Collider": [
+          {
+            "ColliderType": 1,
+            "minX": 1.0,
+            "minY": 1.0,
+            "maxX": 1.0,
+            "maxY": 1.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.25
+          },
+          {
+            "ColliderType": 0,
+            "minX": 0.0,
+            "minY": 0.0,
+            "maxX": 0.0,
+            "maxY": 0.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.0
+          }
+        ]
       },
       {
-        "ScriptName": [
-          "EnemyMovement",
-          "CollisionResponse"
+        "Collider": [
+          {
+            "ColliderType": 0,
+            "minX": 1.0,
+            "minY": 1.0,
+            "maxX": 1.0,
+            "maxY": 1.0,
+            "offsetX": -0.20000000298023224,
+            "offsetY": 0.0,
+            "radius": 0.30000001192092896
+          },
+          {
+            "ColliderType": 0,
+            "minX": 0.0,
+            "minY": 0.0,
+            "maxX": 0.0,
+            "maxY": 0.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.0
+          }
+        ]
+      },
+      {
+        "Collider": [
+          {
+            "ColliderType": 1,
+            "minX": 1.0,
+            "minY": 1.0,
+            "maxX": 1.0,
+            "maxY": 1.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.25
+          },
+          {
+            "ColliderType": 0,
+            "minX": 0.0,
+            "minY": 0.0,
+            "maxX": 0.0,
+            "maxY": 0.0,
+            "offsetX": 0.0,
+            "offsetY": 0.0,
+            "radius": 0.0
+          }
         ]
       }
-    ],
-    "Tag": [
-      {
-        "Tag": "Untagged",
-        "TargetTag": ""
-      },
-      {
-        "Tag": "Player",
-        "TargetTag": ""
-      },
-      {
-        "Tag": "Untagged",
-        "TargetTag": ""
-      },
-      {
-        "Tag": "PlayerAttack",
-        "TargetTag": "Enemy"
-      },
-      {
-        "Tag": "Untagged",
-        "TargetTag": ""
-      }
-    ],
-    "Audio": [],
 
-    "Button": []
-  }
-}
+    ],
+        "NameTag": [
+          {
+            "NameTag": "BackGround"
+          },
+          {
+            "NameTag": "Player"
+          },
+          {
+            "NameTag": "Enemy"
+          },
+          {
+            "NameTag": "PlayerAttackCollider"
+          },
+          {
+            "NameTag": "Enemy"
+          }
+        ],
+        "Sprite": [
+          {
+            "TextureName": "BackGround",
+            "Index_X": 0.0,
+            "Index_Y": 0.0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "DisplayTime": 0.16670000553131104
+          },
+          {
+            "TextureName": "Idle",
+            "Index_X": 1.0,
+            "Index_Y": 0.0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": true,
+            "IsAnimated": true,
+            "DisplayTime": 0.16670000553131104
+          },
+          {
+            "TextureName": "MeleeIdle",
+            "Index_X": 1.0,
+            "Index_Y": 0.0,
+            "Ucoordinates": 500.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": true,
+            "IsAnimated": true,
+            "DisplayTime": 0.16670000553131104
+          },
+          {
+            "TextureName": "Blank",
+            "Index_X": 0.0,
+            "Index_Y": 0.0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "DisplayTime": 0.16670000553131104
+          },
+          {
+            "TextureName": "MeleeRunning",
+            "Index_X": 1.0,
+            "Index_Y": 0.0,
+            "Ucoordinates": 500.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": true,
+            "IsAnimated": true,
+            "DisplayTime": 0.16670000553131104
+          }
+        ],
+        "Logic": [
+          {
+            "ScriptName": []
+          },
+          {
+            "ScriptName": [
+              "PlayerController",
+              "CollisionResponse"
+            ]
+          },
+          {
+            "ScriptName": [
+              "EnemyMovement",
+              "CollisionResponse"
+            ]
+          },
+          {
+            "ScriptName": []
+          },
+          {
+            "ScriptName": [
+              "EnemyMovement",
+              "CollisionResponse"
+            ]
+          }
+        ],
+        "Tag": [
+          {
+            "Tag": "Untagged",
+            "TargetTag": ""
+          },
+          {
+            "Tag": "Player",
+            "TargetTag": ""
+          },
+          {
+            "Tag": "Untagged",
+            "TargetTag": ""
+          },
+          {
+            "Tag": "PlayerAttack",
+            "TargetTag": "Enemy"
+          },
+          {
+            "Tag": "Untagged",
+            "TargetTag": ""
+          }
+        ],
+        "Audio": [],
+
+        "Button": []
+      }
+      }

@@ -38,7 +38,7 @@ namespace EM {
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 
-		bool is_within_box(glm::vec2 cur, Collider box);
+		bool is_within_box(glm::vec2 cur, Collider box, Transform trans);
 		
 		bool clicked;
 		bool selected;

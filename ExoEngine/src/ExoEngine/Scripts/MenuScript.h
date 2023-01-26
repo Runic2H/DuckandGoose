@@ -22,8 +22,6 @@ namespace EM
 
 		virtual IScript* Clone() const override;
 		virtual std::string GetScriptName() override;
-
-		bool is_within_box(glm::vec2 cur, Collider box);
 	private:
 		std::string SelectedScene;
 	};
