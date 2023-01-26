@@ -19,7 +19,10 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Logic.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
+#include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerController.h"
+#include "ExoEngine/Scripts/MenuScript.h"
+
 
 namespace EM
 {
@@ -89,6 +92,14 @@ namespace EM
 			if (mScriptNameVector[i] == "CollisionResponse")
 			{
 				mScriptsVector.push_back(new CollisionResponse());
+			}
+			if (mScriptNameVector[i] == "ButtonResponse")
+			{
+				mScriptsVector.push_back(new ButtonResponse());
+			}
+			if (mScriptNameVector[i] == "MenuScript")
+			{
+				mScriptsVector.push_back(new MenuScript());
 			}
 		}
 		return true;

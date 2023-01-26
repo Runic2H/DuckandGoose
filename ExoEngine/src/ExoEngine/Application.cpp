@@ -28,6 +28,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Audio/AudioEngine.h"
 #include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
+#include "ExoEngine/Scripts/ButtonResponse.h"
+#include "ExoEngine/Scripts/MenuScript.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"
@@ -112,22 +114,27 @@ Run loop for application
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
-		//RigidBody rb;
+		RigidBody rb;
 		//Logic logic;
 		//Sprite sprite;
-		//NameTag name;
+		NameTag name;
 		//Tag tag;
 
-		//Entity Background = p_ecs.CreateEntity();
-		//name.SetNameTag("BackGround");
-		//p_ecs.AddComponent<NameTag>(Background, name);
-		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Background, SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Background, rb);
-		//p_ecs.AddComponent<Collider>(Background, ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Background, TagComponent);
-		//p_ecs.AddComponent<Logic>(Background, LogicComponent);
+	//	Entity Background = p_ecs.CreateEntity();
+	//	name.SetNameTag("BackGround");
+	//	p_ecs.AddComponent<NameTag>(Background, name);
+	//	p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
+	//	p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
+	//	p_ecs.AddComponent<RigidBody>(Background, rb);
+	//	p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
+	//	p_ecs.AddComponent<Tag>(Background, C_TagComponent);
+	//	p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
+	//	p_ecs.AddComponent<Button>(Background, C_ButtonComponent);
+	//	p_ecs.GetComponent<Logic>(Background).InsertScript(new ButtonResponse(), Background);
+	//	p_ecs.GetComponent<Logic>(Background).InsertScript(new MenuScript(), Background);
 
+		
+		
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
@@ -170,6 +177,8 @@ Run loop for application
 		//p_ecs.AddComponent<Collider>(col, ColliderComponent);
 		//p_ecs.AddComponent<Logic>(col, LogicComponent);
 		
+		//p_Scene->DeserializeFromFile("Assets/Scene/MainMenu.json");
+		//p_Editor->is_ShowWindow = false;
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
@@ -189,6 +198,9 @@ Run loop for application
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			}
 			end_state = p_GUI->Update(m_window);
+
+			// test menu script
+			p_Scene->checkForSceneToLoad();
 
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
