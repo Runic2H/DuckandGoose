@@ -27,10 +27,11 @@ namespace EM
 			   float _20, float _21, float _22, float _23,
 			   float _30, float _31, float _32, float _33);
 		Mat4x4(Mat3D mat);
+		Mat4x4(glm::mat4& rhs);
 		Mat4x4(float value);
 
 		Mat4x4& operator=(const Mat4x4& rhs);
-
+		Mat4x4& operator=(glm::mat4& rhs);
 		Mat4x4& operator*= (const Mat4x4& rhs);
 		
 
@@ -63,7 +64,8 @@ namespace EM
 	glm::mat4 mtx_adapter(Mat4x4& rhs);
 	Mat4x4 basemtx_adapter(glm::mat4& rhs);
 	glm::mat4 mtx_adapter(const Mat4x4& rhs);
-	Mat4x4 basemtx_adapter(const glm::mat4& rhs);
+	Mat4x4 const& basemtx_adapterC(const glm::mat4& rhs);
+	
 
 	//operator 
 	
