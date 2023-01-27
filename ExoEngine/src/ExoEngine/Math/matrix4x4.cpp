@@ -596,7 +596,7 @@ namespace EM {
 
 	}
 
-	Mat4x4 basemtx_adapter(glm::mat4& rhs)
+	 Mat4x4 basemtx_adapter( glm::mat4& rhs)
 	{
 
 		return (Mat4x4{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
