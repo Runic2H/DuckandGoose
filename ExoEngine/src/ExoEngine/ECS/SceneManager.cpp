@@ -48,7 +48,7 @@ namespace EM
 		p_ecs.RegisterComponent<Logic>();
 		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
-		p_ecs.RegisterComponent<Button>();
+		//p_ecs.RegisterComponent<Button>();
 		sceneToLoad = "";
 	}
 
@@ -140,14 +140,7 @@ namespace EM
 								p_ecs.AddComponent<Audio>(j, mAudio);
 							}
 						}
-						if (p_ecs.GetComponentTypeName(i) == "Button")
-						{
-							Button button;
-							if (button.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
-							{
-								p_ecs.AddComponent<Button>(j, button);
-							}
-						}
+						
 					}
 				}
 				++j;
@@ -267,10 +260,6 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Audio")
 					{
 						p_ecs.GetComponent<Audio>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(i) == "Button")
-					{
-						p_ecs.GetComponent<Button>(j).Serialize(writer);
 					}
 				}
 				j++;

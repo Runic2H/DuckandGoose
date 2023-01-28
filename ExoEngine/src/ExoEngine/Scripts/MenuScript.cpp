@@ -20,17 +20,17 @@ namespace EM {
 			auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 			auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 			auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-			auto& btn = p_ecs.GetComponent<Button>(GetScriptEntityID());
+			//auto& btn = p_ecs.GetComponent<Button>(GetScriptEntityID());
 
 			
 
 			//std::cout << btn.CheckIfclicked();
-			if (btn.CheckIfclicked())
-			{
-				std::cout << "clicked";
-				p_Scene->setSceneToLoad("Assets/Scene/Level.json");
-				btn.Toggleclicked();
-			}
+			//if (btn.CheckIfclicked())
+			//{
+			//	std::cout << "clicked";
+			//	p_Scene->setSceneToLoad("Assets/Scene/Level.json");
+			//	btn.Toggleclicked();
+			//}
 			
 			
 

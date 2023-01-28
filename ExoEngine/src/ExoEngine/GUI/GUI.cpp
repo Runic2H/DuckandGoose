@@ -72,8 +72,6 @@ namespace EM
 	****************************************************************************/
 	bool  gui_system::Update(Window* screen)
 	{
-		
-		
 		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };//store the mouse position into a vector
 		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
 		mAspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
@@ -101,6 +99,10 @@ namespace EM
 			else return false;
 				
 		}
+		if (Script_End == true)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -111,6 +113,10 @@ namespace EM
 	bool gui_system::check_pause()//getter function for pause state
 	{
 		return is_Pause;
+	}
+	bool gui_system::Check_script()
+	{
+		return Script_End;
 	}
 	/*!*************************************************************************
 	Pause states toggling

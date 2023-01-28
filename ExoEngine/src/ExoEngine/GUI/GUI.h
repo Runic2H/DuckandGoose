@@ -35,6 +35,7 @@ namespace EM
 	{
 	private:
 		bool is_Pause = { false }; //a boolean to see if the system is currently pause
+		bool Script_End = { false };
 
 		struct button_bb // a pseudo bounding box not tied to collision meant to check if the cusor is touching the button
 		{
@@ -57,7 +58,9 @@ namespace EM
 		void set_continue_button(vec2D pos, float scaleX, float scaleY);//set the position and scale of the continue button
 		float Get_AspectRatio() { return mAspectRatio; }//set the position and scale of the continue button
 		void toggle_pause();// used to toggle the is_pause boolean
+		void toggle_script(){ Script_End = Script_End ? false : true;}//to be used by script
 		bool check_pause();// a getter function for the pause
+		bool Check_script();
 		bool is_within_box(glm::vec2 cur, button_bb box);// a helper function to check  if the cursor is touching the button,
 		glm::vec2 MousePosition;
 		

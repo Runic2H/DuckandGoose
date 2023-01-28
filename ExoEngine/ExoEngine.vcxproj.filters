@@ -68,7 +68,6 @@
     <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\MenuScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
-    <ClCompile Include="src\ExoEngine\ECS\Components\Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -244,7 +243,6 @@
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\MenuScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
-    <ClInclude Include="src\ExoEngine\ECS\Components\Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

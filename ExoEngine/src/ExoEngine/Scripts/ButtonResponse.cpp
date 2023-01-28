@@ -21,15 +21,18 @@ namespace EM
 		
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		//auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
-		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		//auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+		//auto sprites = p_ecs.GetComponent < Sprite>(GetScriptEntityID());
 		//auto& btn = p_ecs.GetComponent<Button>(GetScriptEntityID());
 		//std::cout << transform.GetPos().x + col.GetOffset().x<<std::endl;
 		//vec2D tempos = transform.GetPos() + col.GetOffset();
 	//	vec2D tempscale = col.GetMin() - col.GetMax();
 
-	//	std::cout << "X:" << tempos.x - tempscale.x*0.5f;
+	//	std::cout << "
+	// :" << tempos.x - tempscale.x*0.5f;
 		//position.x - size.x * 0.5f
 		
 		
@@ -44,22 +47,37 @@ namespace EM
 		if (is_within_box(p_GUI->MousePosition, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
 		{
 			selected = true;
-			std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " ";
+			//sprites.SetTexture("MeleeIdle");
+			//p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("MeleeIdle");
+			///std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " ";
+			std::cout << tag.GetNameTag();
 			std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
 			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 			{
-				p_Scene->setSceneToLoad("Assets/Scene/Level.json");
+				if (ID_tag.GetTag() == "Start")
+				{
+					p_Scene->setSceneToLoad("Assets/Scene/Level.json");
+				}
+
+				if (ID_tag.GetTag() == "Quit")
+				{
+					p_GUI->toggle_script();
+				}
 				
+				
+			
+
 			}
 			else
 			{
 				clicked = false;
-				std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " " << std::endl;
+				//std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " " << std::endl;
 			}
 		}
 		else
-			std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " "<< std::endl;
+			//std::cout << "X:" << p_GUI->MousePosition.x << " Y:" << p_GUI->MousePosition.y << " "<< std::endl;
 			selected = false;
+			
 	}
 
 	void ButtonResponse::End()
