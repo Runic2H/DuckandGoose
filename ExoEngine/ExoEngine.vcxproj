@@ -19,6 +19,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\HUDComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="src\ExoEngine\Core.h" />
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
@@ -193,6 +195,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Tag.cpp" />
@@ -213,6 +216,7 @@
     <ClCompile Include="src\ExoEngine\Application.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
@@ -298,13 +302,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

@@ -182,6 +182,17 @@ namespace EM {
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
+			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
+				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
+				mFont->RenderText(mComp.GetAtk(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetDef(), { camera.GetPosition().x + 0.426f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetSpd(), { camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+			}
 		}
 
 		p_Editor->mGameMousePosition = ImGui::GetMousePos();
