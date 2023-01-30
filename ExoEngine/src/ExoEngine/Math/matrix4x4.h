@@ -64,7 +64,7 @@ namespace EM
 	glm::mat4 mtx_adapter(Mat4x4& rhs);
 	//const Mat4x4& basemtx_adapter(glm::mat4& rhs);
 	glm::mat4 mtx_adapter(const Mat4x4& rhs);
-	Mat4x4 const& basemtx_adapterC(const glm::mat4& rhs);
+	Mat4x4 basemtx_adapterC(const glm::mat4& rhs);
 	
 
 	//operator 

@@ -606,7 +606,7 @@ namespace EM {
 
 	}
 
-	 Mat4x4 basemtx_adapter(const glm::mat4& rhs)
+	 Mat4x4 basemtx_adapterC(const glm::mat4& rhs)
 	{
 		Mat4x4 temp{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
 						rhs[1][0], rhs[1][1], rhs[1][2], rhs[1][3],

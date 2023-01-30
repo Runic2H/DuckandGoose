@@ -24,6 +24,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "FrameBuffer.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
+
 namespace EM {
 
 	//extern ECS ecs;
@@ -137,9 +138,10 @@ namespace EM {
 			{
 				if (p_ecs.HaveComponent<Collider>(entity) && ((p_ecs.GetComponent<Collider>(entity)[0].is_Alive) || (p_ecs.GetComponent<Collider>(entity)[1].is_Alive))) {
 					for (int i = 0; i < 2; i++) {
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect) {
+						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect) 
+						{
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
-							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x/2) - (collider[i].mMin.x/2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y/2) - (collider[i].mMin.y/2), 0.0f },
+							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x / 2) - (collider[i].mMin.x / 2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y / 2) - (collider[i].mMin.y / 2), 0.0f },
 								{ collider[i].mMin.x + collider[i].mMax.x , collider[i].mMin.y + collider[i].mMax.y },
 								{ 1.0f, 0.0f, 0.0f,1.0f });
 						}
@@ -151,9 +153,9 @@ namespace EM {
 							mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 							//mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 						}
-						}
 					}
-			} 
+				}
+			}
 				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
 					mRenderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
 						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
@@ -167,7 +169,6 @@ namespace EM {
 						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
 					mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 				}*/
-			}
 			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
@@ -180,9 +181,11 @@ namespace EM {
 		for (auto const& entity : mEntities)
 		{
 			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Player")
+			{
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
+			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
 				mFont->RenderText(mComp.GetAtk(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 

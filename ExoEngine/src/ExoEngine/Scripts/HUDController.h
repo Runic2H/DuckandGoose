@@ -16,10 +16,10 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #pragma once
 #include "IScript.h"
 #include "ExoEngine/Input/Input.h"
-//#include "GLFW/glfw3.h"
 #include "ExoEngine/Math/physics.h"
-#include "../../src/Platform/Graphics/Camera2D.h"
-#include "../../src/Platform/Graphics/Graphics.h"
+#include "Platform/Graphics/Camera2D.h"
+#include "Platform/Graphics/Graphics.h"
+#include "GLFW/glfw3.h"
 
 namespace EM
 {
