@@ -44,6 +44,7 @@ namespace EM
 			float mRadius;
 			bool is_Alive;
 		};
+
 		Collider();
 		~Collider() = default;
 		/*!*************************************************************************
@@ -55,9 +56,14 @@ namespace EM
 		file
 		****************************************************************************/
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
-		
+    
 		Colpiece& operator[](int i) {
 			return mColArr[i];
+		}
+
+		Colpiece* GetCollisionArray()
+		{
+			return mColArr;
 		}
 
 		Entity& GetComponentEntityID() { return entityID; }

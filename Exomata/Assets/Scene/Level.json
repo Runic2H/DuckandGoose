@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 5
+        "Entities": 6
     },
     "EntityToIndexMap": {
         "Transform": [
@@ -9,7 +9,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -106,11 +106,11 @@
             100
         ],
         "RigidBody": [
-            0,
-            1,
-            2,
-            3,
-            4,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -208,12 +208,12 @@
             100
         ],
         "Collider": [
+            100,
+            100,
+            100,
             0,
             1,
             2,
-            3,
-            4,
-            100,
             100,
             100,
             100,
@@ -315,7 +315,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -417,7 +417,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -514,12 +514,12 @@
             100
         ],
         "Logic": [
+            100,
+            100,
+            100,
             0,
             1,
             2,
-            3,
-            4,
-            100,
             100,
             100,
             100,
@@ -616,12 +616,12 @@
             100
         ],
         "Tag": [
+            100,
+            100,
+            100,
             0,
             1,
             2,
-            3,
-            4,
-            100,
             100,
             100,
             100,
@@ -718,6 +718,108 @@
             100
         ],
         "Audio": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+        ],
+        "Attributes": [
             100,
             100,
             100,
@@ -827,7 +929,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -924,11 +1026,11 @@
             100
         ],
         "RigidBody": [
-            0,
-            1,
-            2,
-            3,
-            4,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -1026,11 +1128,11 @@
             100
         ],
         "Collider": [
-            0,
-            1,
-            2,
             3,
             4,
+            5,
+            100,
+            100,
             100,
             100,
             100,
@@ -1133,7 +1235,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -1235,7 +1337,7 @@
             2,
             3,
             4,
-            100,
+            5,
             100,
             100,
             100,
@@ -1332,11 +1434,11 @@
             100
         ],
         "Logic": [
-            0,
-            1,
-            2,
             3,
             4,
+            5,
+            100,
+            100,
             100,
             100,
             100,
@@ -1434,11 +1536,11 @@
             100
         ],
         "Tag": [
-            0,
-            1,
-            2,
             3,
             4,
+            5,
+            100,
+            100,
             100,
             100,
             100,
@@ -1636,167 +1738,261 @@
             100,
             100,
             100
+        ],
+        "Attributes": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
         ]
     },
     "EntitySignatures": [
-        "00000000000000000000000001111111",
-        "00000000000000000000000001111111",
-        "00000000000000000000000001111111",
-        "00000000000000000000000001111111",
-        "00000000000000000000000001111111"
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101"
     ],
     "Components": {
         "Transform": [
             {
                 "posX": 0.0,
                 "posY": 0.0,
-                "scaleX": 6.5,
-                "scaleY": 4.0,
+                "scaleX": 4.170206546783447,
+                "scaleY": 1.9999960660934448,
                 "Rot": 0.0
             },
             {
-                "posX": -0.06488815695047379,
-                "posY": 0.9521146416664124,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
+                "posX": 0.6422932744026184,
+                "posY": 0.43617022037506104,
+                "scaleX": 1.9796679019927979,
+                "scaleY": 0.9862148761749268,
                 "Rot": 0.0
             },
             {
-                "posX": 2.0747015476226807,
-                "posY": 0.33679959177970886,
-                "scaleX": 0.5,
-                "scaleY": 0.5,
+                "posX": 0.6422932744026184,
+                "posY": 0.43617022037506104,
+                "scaleX": 1.9796679019927979,
+                "scaleY": 0.9862148761749268,
                 "Rot": 0.0
             },
             {
                 "posX": 0.0,
                 "posY": 0.0,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.20000000298023224,
                 "Rot": 0.0
             },
             {
-                "posX": -0.7770861387252808,
-                "posY": -0.16628199815750122,
-                "scaleX": 0.5,
-                "scaleY": 0.5,
+                "posX": 0.5989999771118164,
+                "posY": -0.27000001072883606,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {
+                "posX": 1.1649999618530273,
+                "posY": -0.5630000233650208,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.20000000298023224,
                 "Rot": 0.0
             }
         ],
-        "RigidBody": [
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": -2.139589786529541,
-                "dirY": 0.6153150796890259,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": 0.0,
-                "dirY": 0.0,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": 0.7026907205581665,
-                "dirY": 1.1034669876098633,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            }
-        ],
+        "RigidBody": [],
         "Collider": [
             {
-                "ColliderType": 0,
-                "minX": 1.0,
-                "minY": 1.0,
-                "maxX": 1.0,
-                "maxY": 1.0,
-                "offsetX": 0.0,
-                "offsetY": 0.0,
-                "radius": 0.30000001192092896
+                "Collider": [
+                    {
+                        "ColliderType": 0,
+                        "minX": -0.5,
+                        "minY": -0.5,
+                        "maxX": 0.5,
+                        "maxY": 0.5,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    },
+                    {
+                        "ColliderType": 0,
+                        "minX": 0.0,
+                        "minY": 0.0,
+                        "maxX": 0.0,
+                        "maxY": 0.0,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    }
+                ]
             },
             {
-                "ColliderType": 1,
-                "minX": 1.0,
-                "minY": 1.0,
-                "maxX": 1.0,
-                "maxY": 1.0,
-                "offsetX": 0.0,
-                "offsetY": 0.0,
-                "radius": 0.25
+                "Collider": [
+                    {
+                        "ColliderType": 0,
+                        "minX": -0.5,
+                        "minY": -0.5,
+                        "maxX": 0.5,
+                        "maxY": 0.5,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    },
+                    {
+                        "ColliderType": 0,
+                        "minX": 0.0,
+                        "minY": 0.0,
+                        "maxX": 0.0,
+                        "maxY": 0.0,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    }
+                ]
             },
             {
-                "ColliderType": 1,
-                "minX": 1.0,
-                "minY": 1.0,
-                "maxX": 1.0,
-                "maxY": 1.0,
-                "offsetX": 0.0,
-                "offsetY": 0.0,
-                "radius": 0.25
-            },
-            {
-                "ColliderType": 0,
-                "minX": 1.0,
-                "minY": 1.0,
-                "maxX": 1.0,
-                "maxY": 1.0,
-                "offsetX": -0.20000000298023224,
-                "offsetY": 0.0,
-                "radius": 0.30000001192092896
-            },
-            {
-                "ColliderType": 1,
-                "minX": 1.0,
-                "minY": 1.0,
-                "maxX": 1.0,
-                "maxY": 1.0,
-                "offsetX": 0.0,
-                "offsetY": 0.0,
-                "radius": 0.25
+                "Collider": [
+                    {
+                        "ColliderType": 0,
+                        "minX": -0.5,
+                        "minY": -0.5,
+                        "maxX": 0.5,
+                        "maxY": 0.5,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    },
+                    {
+                        "ColliderType": 0,
+                        "minX": 0.0,
+                        "minY": 0.0,
+                        "maxX": 0.0,
+                        "maxY": 0.0,
+                        "offsetX": 0.0,
+                        "offsetY": 0.0,
+                        "radius": 0.0
+                    }
+                ]
             }
         ],
         "NameTag": [
             {
-                "NameTag": "BackGround"
+                "NameTag": "Main Menu BackGround"
             },
             {
-                "NameTag": "Player"
+                "NameTag": "Title"
             },
             {
-                "NameTag": "Enemy"
+                "NameTag": "Title2"
             },
             {
-                "NameTag": "PlayerAttackCollider"
+                "NameTag": "Start"
             },
             {
-                "NameTag": "Enemy"
+                "NameTag": "Quit"
+            },
+            {
+                "NameTag": "Option"
             }
         ],
         "Sprite": [
             {
-                "TextureName": "BackGround",
+                "TextureName": "MainBackGround",
                 "Index_X": 0.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
@@ -1806,27 +2002,7 @@
                 "DisplayTime": 0.16670000553131104
             },
             {
-                "TextureName": "Idle",
-                "Index_X": 1.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "MeleeIdle",
-                "Index_X": 1.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 500.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "Blank",
+                "TextureName": "ExomataLogo",
                 "Index_X": 0.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
@@ -1836,64 +2012,78 @@
                 "DisplayTime": 0.16670000553131104
             },
             {
-                "TextureName": "MeleeRunning",
-                "Index_X": 1.0,
+                "TextureName": "ExomataLogo",
+                "Index_X": 0.0,
                 "Index_Y": 0.0,
-                "Ucoordinates": 500.0,
+                "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "DisplayTime": 0.16670000553131104
+            },
+            {
+                "TextureName": "SmallButton",
+                "Index_X": 0.0,
+                "Index_Y": 0.0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "DisplayTime": 0.16670000553131104
+            },
+            {
+                "TextureName": "SmallButton",
+                "Index_X": 0.0,
+                "Index_Y": 0.0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "DisplayTime": 0.16670000553131104
+            },
+            {
+                "TextureName": "SmallButton",
+                "Index_X": 0.0,
+                "Index_Y": 0.0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "DisplayTime": 0.16670000553131104
             }
         ],
         "Logic": [
             {
-                "ScriptName": []
-            },
-            {
                 "ScriptName": [
-                    "PlayerController",
-                    "CollisionResponse"
+                    "ButtonResponse"
                 ]
             },
             {
                 "ScriptName": [
-                    "EnemyMovement",
-                    "CollisionResponse"
+                    "ButtonResponse"
                 ]
             },
             {
-                "ScriptName": []
-            },
-            {
                 "ScriptName": [
-                    "EnemyMovement",
-                    "CollisionResponse"
+                    "ButtonResponse"
                 ]
             }
         ],
         "Tag": [
             {
-                "Tag": "Untagged",
+                "Tag": "Start",
                 "TargetTag": ""
             },
             {
-                "Tag": "Player",
+                "Tag": "Quit",
                 "TargetTag": ""
             },
             {
-                "Tag": "Untagged",
-                "TargetTag": ""
-            },
-            {
-                "Tag": "PlayerAttack",
-                "TargetTag": "Enemy"
-            },
-            {
-                "Tag": "Untagged",
+                "Tag": "Option",
                 "TargetTag": ""
             }
         ],
-        "Audio": []
+        "Audio": [],
+        "Attributes": []
     }
 }

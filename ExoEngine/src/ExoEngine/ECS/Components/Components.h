@@ -28,6 +28,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Tag.h"
 #include "Audio.h"
 #include "HUDComponent.h"
+#include "Attributes.h"
+//#include "Button.h"
 
 
 //Macros for creating default values of various components
@@ -40,3 +42,5 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #define C_TagComponent EM::Tag::Tag()
 #define C_AudioComponent EM::Audio::Audio()
 #define C_HUDComponent EM::HUDComponent::HUDComponent()
+#define C_AttributesComponent EM::Attributes::Attributes()
+//#define C_ButtonComponent EM::Button::Button()

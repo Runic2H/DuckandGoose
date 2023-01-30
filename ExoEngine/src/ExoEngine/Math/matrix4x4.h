@@ -38,15 +38,15 @@ namespace EM
 		
 	}Matrix4x4;
 	 void Identity4x4(Mat4x4& pResult);
-	 void Translate4x4(Mat4x4& pResult, float x, float y, float z);
-	 void Scale4x4(Mat4x4& pResult, float x, float y, float z);
+	 Matrix4x4 Translate4x4(Mat4x4& pResult, float x, float y, float z);
+	 Matrix4x4 Scale4x4(Mat4x4& pResult, float x, float y, float z);
 	 void Scale4x4(Mat4x4& pResult, Vec3 temp);
 
 	 void XRotRad4x4(Mat4x4& Result, float angle);
 	 void YRotRad4x4(Mat4x4& Result, float angle);
 	 void ZRotRad4x4(Mat4x4& Result, float angle);
 	 void RotRad4x4(Mat4x4& Result, float angle, Vec3 dir);
-	 void RotRad4x4(Mat4x4& Result, Vec3 rhs);
+	 //void RotRad4x4(Mat4x4& Result, Vec3 rhs);
 	 void RotDeg4x4(Mat4x4& Result, float angle, Vec3 dir);
 	 void XRotDeg4x4(Mat4x4& Result, float angle);
 	 void YRotDeg4x4(Mat4x4& Result, float angle);
@@ -62,14 +62,11 @@ namespace EM
 	Vec4 operator * (const Mat4x4& pMtx, const Vec4& rhs);
 
 	glm::mat4 mtx_adapter(Mat4x4& rhs);
-	Mat4x4 basemtx_adapter(glm::mat4& rhs);
+	//const Mat4x4& basemtx_adapter(glm::mat4& rhs);
 	glm::mat4 mtx_adapter(const Mat4x4& rhs);
 	Mat4x4 const& basemtx_adapterC(const glm::mat4& rhs);
 	
 
 	//operator 
 	
-
-
-
 }
