@@ -17,8 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Input.h"
-
-#include<GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace EM {
     

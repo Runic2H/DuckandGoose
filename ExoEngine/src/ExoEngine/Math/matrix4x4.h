@@ -67,7 +67,4 @@ namespace EM
 
 	//operator 
 	
-
-
-
 }

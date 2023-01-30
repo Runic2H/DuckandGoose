@@ -188,12 +188,13 @@ namespace EM
         auto& pRigid = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 
-
         pRigid.SetVel(mPhys.friction(pRigid.GetVel(), Frametime));
         pRigid.SetVel(mPhys.accelent(pRigid.GetVel(), mVel, Frametime));
         vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
         pRigid.SetNextPos(nextPos);
     }
+
+    
 
     /*!*************************************************************************
     Animate Player base on Texture set during player state
@@ -234,4 +235,19 @@ namespace EM
             break;
         }
     }
+
+    /*void PlayerController::UpdateAttack()
+    {
+        auto pCol = p_ecs.GetComponent<Collider>(GetScriptEntityID()).GetCollisionArray();
+
+
+        if (mState == PlayerState::Attacking)
+        {
+            (pCol + 1)->is_Alive = true;
+        }
+        else
+        {
+            (pCol + 1)->is_Alive = false;
+        }
+    }*/
 }
