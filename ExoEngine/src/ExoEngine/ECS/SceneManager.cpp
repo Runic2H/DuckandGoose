@@ -49,6 +49,8 @@ namespace EM
 		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
 		p_ecs.RegisterComponent<Attributes>();
+		//p_ecs.RegisterComponent<Button>();
+		sceneToLoad = "";
 	}
 
 	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
@@ -84,6 +86,7 @@ namespace EM
 								p_ecs.AddComponent<Transform>(j, transform);
 							}
 						}
+
 						if (p_ecs.GetComponentTypeName(i) == "RigidBody")
 						{
 							RigidBody rigidbody;
@@ -146,6 +149,7 @@ namespace EM
 								p_ecs.AddComponent<Attributes>(j, mAttributes);
 							}
 						}
+						
 					}
 				}
 				++j;
@@ -280,4 +284,23 @@ namespace EM
 		writer->EndObject();
 		return true;
 	}
+}
+
+void EM::SceneManager::setSceneToLoad(std::string s)
+{
+	sceneToLoad = s;
+}
+
+void EM::SceneManager::checkForSceneToLoad()
+{
+	if (sceneToLoad != "")
+	{
+		DeserializeFromFile(sceneToLoad);
+		sceneToLoad = "";
+	}
+}
+
+void EM::SceneManager::changeScene(std::string s)
+{
+
 }

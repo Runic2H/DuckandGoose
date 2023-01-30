@@ -85,6 +85,7 @@ namespace EM
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
 
+		MousePosition = { mouse_pos.x * mAspectRatio, mouse_pos.y};
 		if (is_Pause == true)//check if the system is pause
 		{	
 			if (is_within_box(mouse_pos, mPauseButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
@@ -99,6 +100,10 @@ namespace EM
 			else return false;
 				
 		}
+		if (Script_End == true)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -109,6 +114,10 @@ namespace EM
 	bool gui_system::check_pause()//getter function for pause state
 	{
 		return is_Pause;
+	}
+	bool gui_system::Check_script()
+	{
+		return Script_End;
 	}
 	/*!*************************************************************************
 	Pause states toggling
