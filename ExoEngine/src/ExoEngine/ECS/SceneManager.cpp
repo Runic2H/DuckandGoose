@@ -48,6 +48,7 @@ namespace EM
 		p_ecs.RegisterComponent<Logic>();
 		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
+		p_ecs.RegisterComponent<Attributes>();
 	}
 
 	//Due to restrictions of not using RTTR, components type cannot be deduced at runtime and hence needs to be checked manually
@@ -135,6 +136,14 @@ namespace EM
 							if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
 							{
 								p_ecs.AddComponent<Audio>(j, mAudio);
+							}
+						}
+						if (p_ecs.GetComponentTypeName(i) == "Attributes")
+						{
+							Attributes mAttributes;
+							if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Attributes>(j, mAttributes);
 							}
 						}
 					}
@@ -256,6 +265,10 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Audio")
 					{
 						p_ecs.GetComponent<Audio>(j).Serialize(writer);
+					}
+					if (p_ecs.GetComponentTypeName(i) == "Attributes")
+					{
+						p_ecs.GetComponent<Attributes>(j).Serialize(writer);
 					}
 				}
 				j++;

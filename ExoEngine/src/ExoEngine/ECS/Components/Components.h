@@ -27,6 +27,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Logic.h"
 #include "Tag.h"
 #include "Audio.h"
+#include "Attributes.h"
 
 
 //Macros for creating default values of various components
@@ -38,3 +39,4 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #define C_LogicComponent EM::Logic::Logic()
 #define C_TagComponent EM::Tag::Tag()
 #define C_AudioComponent EM::Audio::Audio()
+#define C_AttributesComponent EM::Attributes::Attributes()
