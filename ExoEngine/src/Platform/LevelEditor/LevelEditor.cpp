@@ -86,7 +86,7 @@ namespace EM {
     void LevelEditor::Update()
     {
         //MainMenuBar();
-        if (p_Input->KeyPressed(GLFW_KEY_P))
+        if (p_Input->KeyPressed(GLFW_KEY_F1))
         {
             is_ShowWindow = !is_ShowWindow;
         }
@@ -919,7 +919,7 @@ namespace EM {
                         ImGui::DragFloat("##colliderOffsetY", (float*)&colliderOffset.y, 0.05f);
                         ImGui::PopID();
 
-                            //size of the collider
+                         //size of the collider
                         if (colliderComp[0].mCol == Collider::ColliderType::circle)
                         {
                             auto& colliderSize = colliderComp[0].mRadius;
@@ -962,7 +962,7 @@ namespace EM {
                         ImGui::DragFloat("###colliderOffsetY", (float*)&colliderOffset1.y, 0.05f);
                         ImGui::PopID();
 
-                            //size of the collider
+                         //size of the collider
                         if (colliderComp[1].mCol == Collider::ColliderType::circle)
                         {
                             auto& colliderSize1 = colliderComp[1].mRadius;
