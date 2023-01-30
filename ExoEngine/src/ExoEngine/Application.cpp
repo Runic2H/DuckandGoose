@@ -29,7 +29,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
-#include "ExoEngine/Scripts/MenuScript.h"
+#include "ExoEngine/Scripts/ScenerioScript.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"

@@ -21,7 +21,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerController.h"
-#include "ExoEngine/Scripts/MenuScript.h"
+#include "ExoEngine/Scripts/ScenerioScript.h"
 
 
 namespace EM
@@ -97,9 +97,9 @@ namespace EM
 			{
 				mScriptsVector.push_back(new ButtonResponse());
 			}
-			if (mScriptNameVector[i] == "MenuScript")
+			if (mScriptNameVector[i] == "ScenerioScript")
 			{
-				mScriptsVector.push_back(new MenuScript());
+				mScriptsVector.push_back(new ScenerioScript());
 			}
 		}
 		return true;
