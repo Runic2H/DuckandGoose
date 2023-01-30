@@ -145,8 +145,9 @@ namespace EM {
 						}
 						/*if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle) {
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
-							Mat4x4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider[i].mOffset.x, transform.GetPos().y + collider[i].mOffset.y, 0.0f }) *
-								glm::scale(glm::mat4(1.0f), glm::vec3(collider[i].mRadius * 2));
+							EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[i].mOffset.x, transform.GetPos().y + collider[i].mOffset.y, 0.0f);
+							EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[i].mRadius * 2, collider[i].mRadius * 2, collider[i].mRadius * 2);
+							EM::Matrix4x4 Transform = translate * scale;
 							mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 						}*/
 							mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
