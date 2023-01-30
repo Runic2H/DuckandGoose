@@ -139,8 +139,8 @@ namespace EM {
 					for (int i = 0; i < 2; i++) {
 						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect) {
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
-							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x , transform.GetPos().y + collider[i].mOffset.y, 0.0f },
-								{ collider[i].mMin.x - collider[i].mMax.x , collider[i].mMin.y - collider[i].mMax.y },
+							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x/2) - (collider[i].mMin.x/2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y/2) - (collider[i].mMin.y/2), 0.0f },
+								{ collider[i].mMin.x + collider[i].mMax.x , collider[i].mMin.y + collider[i].mMax.y },
 								{ 1.0f, 0.0f, 0.0f,1.0f });
 						}
 						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle) {
@@ -167,6 +167,7 @@ namespace EM {
 						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
 					mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 				}*/
+			}
 			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
@@ -182,6 +183,17 @@ namespace EM {
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
+			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
+				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
+				mFont->RenderText(mComp.GetAtk(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetDef(), { camera.GetPosition().x + 0.426f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetSpd(), { camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.321f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
+				0.002f, camera, { 0.87f, 0.92f, 0.18f });
+			}
 		}
 
 		p_Editor->mGameMousePosition = ImGui::GetMousePos();

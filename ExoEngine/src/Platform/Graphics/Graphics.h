@@ -43,7 +43,7 @@ namespace EM {
 	private:
 		//for testing
 		std::unique_ptr<Renderer> mRenderer = std::make_unique<Renderer>();
-		std::unique_ptr<Font> mFont = std::make_unique<Font>();
+		std::shared_ptr<Font> mFont = std::make_shared<Font>();
 		MultiRefs<SpriteRender> mIndex1;
 		WinData mWinData{};
 		Animation mAimator;

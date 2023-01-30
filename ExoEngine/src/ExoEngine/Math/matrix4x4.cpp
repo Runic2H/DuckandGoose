@@ -52,6 +52,12 @@ namespace EM {
 	{
 
 	}
+	Mat4x4::Mat4x4(glm::mat4& rhs) : 
+		m00{ rhs[0][0] }, m01{ rhs[0][1] }, m02{ rhs[0][2] }, m03{ rhs[0][3] },
+		m10{ rhs[1][0] }, m11{ rhs[1][1] }, m12{ rhs[1][2] }, m13{ rhs[1][3] },
+		m20{ rhs[2][0] }, m21{ rhs[2][1] }, m22{ rhs[2][2] }, m23{ rhs[2][3] },
+		m30{ rhs[3][0] }, m31{ rhs[3][1] }, m32{ rhs[3][2] }, m33{ rhs[3][3] }
+	{}
 
 
 
@@ -589,6 +595,7 @@ namespace EM {
 		return temp;
 	}*/
 
+
 	glm::mat4 mtx_adapter(Mat4x4& rhs)
 	{
 
@@ -607,4 +614,25 @@ namespace EM {
 						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] };
 		return temp;
 	}
+
+	 Mat4x4& Mat4x4::operator=(glm::mat4& rhs)
+	 {
+		 m00 = rhs[0][0];
+		 m01 = rhs[0][1];
+		 m02 = rhs[0][2];
+		 m03 = rhs[0][3];
+		 m10 = rhs[1][0];
+		 m11 = rhs[1][1];
+		 m12 = rhs[1][2];
+		 m13 = rhs[1][3];
+		 m20 = rhs[2][0];
+		 m21 = rhs[2][1];
+		 m22 = rhs[2][2];
+		 m23 = rhs[2][3];
+		 m30 = rhs[3][0];
+		 m31 = rhs[3][1];
+		 m32 = rhs[3][2];
+		 m33 = rhs[3][3];
+		 return *this;
+	 }
 }

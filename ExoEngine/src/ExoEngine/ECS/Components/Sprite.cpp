@@ -23,7 +23,7 @@ namespace EM {
 	Ctor for Sprite Component
 	****************************************************************************/
 	Sprite::Sprite() : mTextureName("Blank"), mIndex({ 0.0f,0.0f }), mUVcooridnates({ 512.0f, 512.0f }),
-		is_SpriteSheet(false), is_Animated(false), mDisplayTime(0.1667f){}
+		is_SpriteSheet(false), is_Animated(false), mDisplayTime(0.1667f), mAlpha(1){}
 
 	/*!*************************************************************************
 	Deserialize for Sprite Component
