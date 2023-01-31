@@ -7,7 +7,7 @@
 \par Section: a
 \par Assignment GAM250
 \date 2/11/2022
-\brief  This file contains the class declaration for Button component
+\brief  This file contains the class defination for Button component
 
 Copyright (C) 2023 DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.

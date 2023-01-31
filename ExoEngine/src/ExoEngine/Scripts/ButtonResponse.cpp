@@ -5,9 +5,9 @@
 \par DP email:l.yonghui.edu
 \par Course: CSD2400
 \par Section: a
-\par Assignment GAM200
+\par Assignment GAM250
 \date 20/01/2023
-\brief	Script That allow buttons to work
+\brief	Script That allow buttons to work when selected and clicked on
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.

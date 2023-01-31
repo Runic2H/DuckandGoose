@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file Button.h
+\author Lau Yong Hui
+\par DP email: l.yonghui@gmail.com
+\par Course: CSD2450 / GAM250
+\par Section: a
+\par Assignment GAM250
+\date 2/11/2022
+\brief  This file contains the class declaration for Button component
+
+Copyright (C) 2023 DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #pragma once
 #include "empch.h"
 #include "ExoEngine/Scripts/IScript.h"
@@ -37,7 +52,9 @@ namespace EM {
 		This function returns the purpose of the script as a flag for when it is called
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
-
+		/*!*************************************************************************
+		This function check if the mouse is within the bounding box of the button 
+		****************************************************************************/
 		bool is_within_box(glm::vec2 cur, Collider box, Transform trans);
 		
 		bool clicked;
