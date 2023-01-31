@@ -1654,15 +1654,15 @@
                 "Rot": 0.0
             },
             {
-                "posX": 0.5513206124305725,
-                "posY": 0.34936457872390747,
-                "scaleX": 1.0,
+                "posX": -0.011429072357714176,
+                "posY": 0.014399083331227303,
+                "scaleX": 1.0000001192092896,
                 "scaleY": 1.0,
                 "Rot": 0.0
             },
             {
-                "posX": 1.7169909477233887,
-                "posY": 0.2517911195755005,
+                "posX": 0.7907374501228333,
+                "posY": 0.0988927036523819,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -1670,9 +1670,9 @@
             {
                 "posX": 0.0,
                 "posY": 0.0,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
+                "scaleX": 0.9999996423721313,
+                "scaleY": 0.9999996423721313,
+                "Rot": -119.33479309082031
             }
         ],
         "RigidBody": [
@@ -1695,8 +1695,8 @@
             {
                 "velX": 100.0,
                 "velY": 0.0,
-                "dirX": -1.1657114028930664,
-                "dirY": 0.09912845492362976,
+                "dirX": -0.8021665215492249,
+                "dirY": -0.08449362218379974,
                 "Friction": 0.0,
                 "Restitution": 0.0
             },
@@ -1834,7 +1834,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 3.0,
+                "Index_X": 5.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1844,9 +1844,9 @@
             },
             {
                 "TextureName": "MeleeRunning",
-                "Index_X": 3.0,
+                "Index_X": 5.0,
                 "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
+                "Ucoordinates": 500.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,

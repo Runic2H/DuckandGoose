@@ -40,6 +40,9 @@ namespace EM {
 		void SetUVCoor(float& u, float& v) { mUVcooridnates.x = u; mUVcooridnates.y = v; } 
 		vec2D& GetUVCoor() { return mUVcooridnates; }
 
+		void SetAlpha(float in) { mAlpha = in; }
+		float GetAlpha() { return mAlpha; }
+
 
 		/*!*************************************************************************
 		Retrieves Component Entity ID
@@ -58,6 +61,7 @@ namespace EM {
 		std::string mTextureName;
 		vec2D mIndex, mUVcooridnates;
 		float mDisplayTime;
+		float mAlpha;
 		//TODO insert a increment for mIndex so that it can lease with the mAimator
 	};
 }

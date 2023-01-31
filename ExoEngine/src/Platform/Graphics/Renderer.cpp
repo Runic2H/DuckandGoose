@@ -251,7 +251,7 @@ namespace EM {
 	****************************************************************************/
 	void Renderer::Begin(Camera2D& camera)
 	{
-		s_SceneData->ViewProjectionMatrix = basemtx_adapter(camera.GetViewProjectionMatrix());
+		s_SceneData->ViewProjectionMatrix = basemtx_adapterC(camera.GetViewProjectionMatrix());
 		
 
 		StartBatch();

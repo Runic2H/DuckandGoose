@@ -14,7 +14,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
-#include"Platform/Window/Window.h"
+#include "Platform/Window/Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
 #include "GUI.h"
@@ -72,6 +72,7 @@ namespace EM
 	****************************************************************************/
 	bool  gui_system::Update(Window* screen)
 	{
+		
 		glm::vec2 mouse_pos{ static_cast<float>(screen->Getter().mouseX) , static_cast<float>(screen->Getter().mouseY) };//store the mouse position into a vector
 		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
 		mAspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen

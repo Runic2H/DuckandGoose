@@ -48,6 +48,8 @@ namespace EM
 		p_ecs.RegisterComponent<Logic>();
 		p_ecs.RegisterComponent<Tag>();
 		p_ecs.RegisterComponent<Audio>();
+		p_ecs.RegisterComponent<HUDComponent>();
+		p_ecs.RegisterComponent<Attributes>();
 		//p_ecs.RegisterComponent<Button>();
 		sceneToLoad = "";
 	}
@@ -140,7 +142,22 @@ namespace EM
 								p_ecs.AddComponent<Audio>(j, mAudio);
 							}
 						}
-						
+						if (p_ecs.GetComponentTypeName(i) == "HUDComponent")
+						{
+							HUDComponent mHUD;
+							if (mHUD.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<HUDComponent>(j, mHUD);
+							}
+						}
+						if (p_ecs.GetComponentTypeName(i) == "Attributes")
+						{
+							Attributes mAttributes;
+							if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][j].GetObj()))
+							{
+								p_ecs.AddComponent<Attributes>(j, mAttributes);
+							}
+						}
 					}
 				}
 				++j;
@@ -260,6 +277,14 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(i) == "Audio")
 					{
 						p_ecs.GetComponent<Audio>(j).Serialize(writer);
+					}
+					if (p_ecs.GetComponentTypeName(i) == "HUDComponent")
+					{
+						p_ecs.GetComponent<HUDComponent>(j).Serialize(writer);
+          }
+					if (p_ecs.GetComponentTypeName(i) == "Attributes")
+					{
+						p_ecs.GetComponent<Attributes>(j).Serialize(writer);
 					}
 				}
 				j++;

@@ -52,6 +52,12 @@ namespace EM {
 	{
 
 	}
+	Mat4x4::Mat4x4(glm::mat4& rhs) : 
+		m00{ rhs[0][0] }, m01{ rhs[0][1] }, m02{ rhs[0][2] }, m03{ rhs[0][3] },
+		m10{ rhs[1][0] }, m11{ rhs[1][1] }, m12{ rhs[1][2] }, m13{ rhs[1][3] },
+		m20{ rhs[2][0] }, m21{ rhs[2][1] }, m22{ rhs[2][2] }, m23{ rhs[2][3] },
+		m30{ rhs[3][0] }, m31{ rhs[3][1] }, m32{ rhs[3][2] }, m33{ rhs[3][3] }
+	{}
 
 
 
@@ -121,7 +127,7 @@ namespace EM {
 		Result.m33 = 1.0f;
 	}
 
-	void Translate4x4(Mat4x4& Result, float x, float y, float z) /// turn current matrix into a translation matrix
+	EM::Matrix4x4 EM::Translate4x4(Mat4x4& Result, float x, float y, float z) /// turn current matrix into a translation matrix
 	{
 		Result.m00 = 1.0f;
 		Result.m01 = 0.0f;
@@ -143,9 +149,10 @@ namespace EM {
 		Result.m32 = 0.0f;
 		Result.m33 = 1.0f;
 
+		return Result;
 	}
 
-	void Scale4x4(Mat4x4& Result, float x, float y, float z) /// turn current matrix into a scaling matrix
+	EM::Matrix4x4 EM::Scale4x4(Mat4x4& Result, float x, float y, float z) /// turn current matrix into a scaling matrix
 	{
 		Result.m00 = x;
 		Result.m01 = 0.0f;
@@ -166,6 +173,8 @@ namespace EM {
 		Result.m31 = 0.0f;
 		Result.m32 = 0.0f;
 		Result.m33 = 1.0f;
+
+		return Result;
 	}
 
 	void Scale4x4(Mat4x4& Result, Vec3 temp)
@@ -577,14 +586,15 @@ namespace EM {
 
 	}
 
-	Mat4x4 basemtx_adapter(const glm::mat4& rhs)
+	/*const Mat4x4& basemtx_adapter(const glm::mat4& rhs)
 	{
-
-		return (Mat4x4{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
+		Mat4x4 temp{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
 						rhs[1][0], rhs[1][1], rhs[1][2], rhs[1][3],
 						rhs[2][0], rhs[2][1], rhs[2][2], rhs[2][3],
-						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] });
-	}
+						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] };
+		return temp;
+	}*/
+
 
 	glm::mat4 mtx_adapter(Mat4x4& rhs)
 	{
@@ -596,12 +606,33 @@ namespace EM {
 
 	}
 
-	Mat4x4 basemtx_adapter(glm::mat4& rhs)
+	 Mat4x4 basemtx_adapterC(const glm::mat4& rhs)
 	{
-
-		return (Mat4x4{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
+		Mat4x4 temp{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
 						rhs[1][0], rhs[1][1], rhs[1][2], rhs[1][3],
 						rhs[2][0], rhs[2][1], rhs[2][2], rhs[2][3],
-						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] });
+						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] };
+		return temp;
 	}
+
+	 Mat4x4& Mat4x4::operator=(glm::mat4& rhs)
+	 {
+		 m00 = rhs[0][0];
+		 m01 = rhs[0][1];
+		 m02 = rhs[0][2];
+		 m03 = rhs[0][3];
+		 m10 = rhs[1][0];
+		 m11 = rhs[1][1];
+		 m12 = rhs[1][2];
+		 m13 = rhs[1][3];
+		 m20 = rhs[2][0];
+		 m21 = rhs[2][1];
+		 m22 = rhs[2][2];
+		 m23 = rhs[2][3];
+		 m30 = rhs[3][0];
+		 m31 = rhs[3][1];
+		 m32 = rhs[3][2];
+		 m33 = rhs[3][3];
+		 return *this;
+	 }
 }

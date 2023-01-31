@@ -83,6 +83,8 @@ namespace EM
 		****************************************************************************/
 		void Animate(PlayerState state);
 
+		//void UpdateAttack();
+
 	private:
 		PlayerState mState;
 		int mAttackCounter;
