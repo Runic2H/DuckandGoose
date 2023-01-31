@@ -19,7 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 /*!*************************************************************************
 Constructor for audio component
 ****************************************************************************/
-EM::Audio::Audio() : mAudioPath{ "" }, mChannelGroup{ AudioType::NONE }, is_Looping{ false } {}
+EM::Audio::Audio() {}
 
 
 /*!*************************************************************************
@@ -27,11 +27,15 @@ Deserialize audio component
 ****************************************************************************/
 bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 {
-	mAudioPath = std::string(obj["Audioname"].GetString());
-	mChannelGroup = static_cast<AudioType>(obj["AudioType"].GetInt());
-	is_Looping = obj["Looping"].GetInt();
-	mVolume = obj["Volume"].GetFloat();
-
+	for (int i = 0; (obj["ScriptName"].GetArray().Begin() + i) != obj["ScriptName"].GetArray().End(); ++i) {
+		AudioPiece na;
+		na.mAudioPath = obj["ScriptName"][i]["AudioPath"].GetString();
+		na.mChannelGroup = static_cast<AudioType>(obj["ScriptName"][i]["Channel"].GetInt());
+		na.is_Looping = obj["ScriptName"][i]["IsLooping"].GetInt();
+		na.should_play = false;
+		na.is_Playing = false;
+		AudioArr.push_back(na);
+	}
 	return true;
 }
 
@@ -41,15 +45,18 @@ Serialise audio component
 bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 {
 	writer->StartObject();
-	writer->Key("Audioname");
-	writer->String(mAudioPath.c_str());
-	writer->Key("AudioType");
-	writer->Int(static_cast<int>(mChannelGroup));
-	writer->Key("Looping");
-	writer->Int(is_Looping);
-	writer->EndObject();
-	writer->Key("Volume");
-	writer->Double(static_cast<double>(mVolume));
-
+		writer->Key("AudioPiece");
+		writer->StartArray();
+		for (size_t i = 0; i < AudioArr.size(); ++i)
+		{
+			writer->Key("AudioPath");
+			writer->String(AudioArr[i].mAudioPath.c_str());
+			writer->Key("Channel");
+			writer->Int(static_cast<int>(AudioArr[i].mChannelGroup));
+			writer->Key("IsLooping");
+			writer->Int(AudioArr[i].is_Looping);
+		}
+		writer->EndArray();
+		writer->EndObject();
 	return true;
 }

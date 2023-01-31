@@ -29,20 +29,22 @@ namespace EM
 			BGM,
 			SFX
 		};
+		struct AudioPiece {
+			std::string mAudioPath;
+			AudioType mChannelGroup;
+			bool is_Looping;
+			bool should_play;
+			bool is_Playing;
+		};
 		Audio();
 		~Audio() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 		
-		void SetAudioPath(std::string input) { mAudioPath = input; }
-		void SetChannelGroup(AudioType input) { mChannelGroup = input; }
-		void SetLooping(bool isplayed) { is_Looping = isplayed; }
-		void SetVolume(float vol) {mVolume = vol; }
-
-		std::string GetAudioPath() { return mAudioPath; }
-		AudioType GetChannelGroup() { return mChannelGroup; }
-		bool GetLooping() { return is_Looping; }
-		float GetVolume() { return mVolume; }
+		std::vector<AudioPiece> GetArr() { return AudioArr; }
+		void SetArr(std::vector<AudioPiece> in) { AudioArr = in; }
+		int GetSize() { return (int)AudioArr.size(); }
+		AudioPiece& operator[](int i) { return AudioArr[i]; }
 
 		/*!*************************************************************************
 		Retrieves Component Entity ID
@@ -59,10 +61,6 @@ namespace EM
 		
 
 	private:
-		std::string mAudioPath{};
-		AudioType mChannelGroup{};
-		bool is_Looping{};
-		float mVolume{};
-
+		std::vector<AudioPiece> AudioArr;
 	};
 }

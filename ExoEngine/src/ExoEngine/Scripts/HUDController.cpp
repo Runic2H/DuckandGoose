@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file PlayerController.cpp
+\file HUDController.cpp
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
@@ -44,6 +44,7 @@ namespace EM
         auto& pComp = p_ecs.GetComponent<HUDComponent>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
         auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
+        auto& pStats = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
         //get camera position
         vec2D camPos = vec2D(camera.GetPosition().x, camera.GetPosition().y);
         //update position
@@ -54,8 +55,9 @@ namespace EM
         }
         else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
             //update health bar value
+            float hp = (float)pStats.GetHealth() + 100;
             //update scale
-            pTrans.SetScale(vec2D(1,1));
+            pTrans.SetScale(vec2D(hp,hp));
         }
         else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
             //check for timing of cooldown
@@ -73,7 +75,7 @@ namespace EM
         }
         else if (pComp.GetType() == HUDComponent::ElementType::Text) {
             //update atk value
-            int atk = 0;
+            int atk = pStats.GetDamage();
             //get combo bonus value
             int bonus = 0;
             pComp.SetAtk((std::to_string(atk) + " + " + std::to_string(bonus)));
