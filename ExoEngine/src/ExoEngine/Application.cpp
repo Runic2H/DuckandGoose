@@ -30,6 +30,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"
@@ -120,18 +121,30 @@ Run loop for application
 		NameTag name;
 		Tag tag;
 
-		//Entity Background = p_ecs.CreateEntity();
-		//name.SetNameTag("Main Menu BackGround");
-		//p_ecs.AddComponent<NameTag>(Background, name);
-		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
-		////p_ecs.AddComponent<RigidBody>(Background, rb);
-		////p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
-		////p_ecs.AddComponent<Tag>(Background, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
-		//p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		//p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
+		Entity Background = p_ecs.CreateEntity();
+		name.SetNameTag("Main Menu BackGround");
+		p_ecs.AddComponent<NameTag>(Background, name);
+		p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
+		p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
+		p_ecs.AddComponent<RigidBody>(Background, rb);
+		p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
+		p_ecs.AddComponent<Tag>(Background, C_TagComponent);
+		p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
+		p_ecs.AddComponent<Audio>(Background, C_AudioComponent);
+		Audio::AudioPiece pce;
+		pce.mAudioPath = "Assets/metadigger/FStep1.wav";
+		pce.mChannelGroup = Audio::AudioType::BGM;
+		pce.mChannel = 0;
+		pce.is_Looping = true;
+		pce.is_Playing = false;
+		pce.should_play = false;
+		std::vector<Audio::AudioPiece> ins;
+		ins.push_back(pce);
+		p_ecs.GetComponent<Audio>(Background).SetArr(ins);
+		p_ecs.GetComponent<Logic>(Background).InsertScript(new AudioManager(), Background);
+		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
+		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
+		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
 
 		//Entity Title = p_ecs.CreateEntity();
 		//name.SetNameTag("Title");

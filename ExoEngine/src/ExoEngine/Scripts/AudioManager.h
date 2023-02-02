@@ -53,8 +53,11 @@ namespace EM
 		/*!*************************************************************************
 		Returns the name of Script
 		****************************************************************************/
-		virtual std::string GetScriptName() override;
+		virtual std::string GetScriptName() { return "AudioManager"; }
 		
 	private:
+		float BGMvol;
+		float SFXvol;
+		float Mastervol;
 	};
 }

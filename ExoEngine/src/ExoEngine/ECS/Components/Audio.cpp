@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file Audio.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -32,6 +32,7 @@ bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 		na.mAudioPath = obj["ScriptName"][i]["AudioPath"].GetString();
 		na.mChannelGroup = static_cast<AudioType>(obj["ScriptName"][i]["Channel"].GetInt());
 		na.is_Looping = obj["ScriptName"][i]["IsLooping"].GetInt();
+		na.mChannel = 0;
 		na.should_play = false;
 		na.is_Playing = false;
 		AudioArr.push_back(na);

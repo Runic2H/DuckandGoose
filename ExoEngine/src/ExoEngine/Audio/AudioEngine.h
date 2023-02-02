@@ -29,7 +29,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
 
         FMOD::System* mpSystem;
 
-        int mNextChannelId = 0;
+        int mNextChannelId = 1;
 
         std::map<std::string, FMOD::Sound*> mSoundMap;
         
@@ -62,6 +62,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         void SetVolume(int channelID, float vol);
         void StopChannel(int channelID);
         float GetVolume(int channelID);
+        void SetLooping(const std::string& strSoundName, bool in);
         bool IsPlaying(int nChannelId) const;
         float dbToVolume(float db);
         float VolumeTodB(float volume);

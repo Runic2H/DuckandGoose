@@ -15,13 +15,14 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "AudioManager.h"
+#include "ExoEngine/Audio/AudioEngine.h"
 
 namespace EM
 {
     /*!*************************************************************************
     Default constructor for Audio Manager
     ****************************************************************************/
-    AudioManager::AudioManager() {}
+    AudioManager::AudioManager() : BGMvol { 50.f }, SFXvol { 50.f }, Mastervol { 50.f } {}
     /*!*************************************************************************
     Returns a new copy of AudioManager Script
     ****************************************************************************/
@@ -34,25 +35,48 @@ namespace EM
     ****************************************************************************/
 	void AudioManager::Start()
 	{
-
+        auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
+        for (int i = 0; i < audio.GetSize(); i++) {
+            p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
+        }
 	}
     /*!*************************************************************************
     Update Loop of AudioManager Script
     ****************************************************************************/
 	void AudioManager::Update(float Frametime)
 	{
+        //update volume values
+        //check sounds and update
         auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
         for (int i = 0; i < audio.GetSize(); i++) {
+            p_Audio->Update();
             //check if sound is playing
+            //audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
+            std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
+            //update looping
+            p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
             //set is_playing accordingly
-            if (audio[i].should_play == true && audio[i].is_Playing == false) {
+            float vol = 0;
+            if (audio[i].mChannelGroup == Audio::AudioType::MASTER) {
+                vol = Mastervol;
+            }
+            if (audio[i].mChannelGroup == Audio::AudioType::BGM) {
+                vol = BGMvol;
+            }
+            if (audio[i].mChannelGroup == Audio::AudioType::SFX) {
+                vol = SFXvol;
+            }
+            if (audio[i].is_Looping == false && audio[i].should_play == true && audio[i].is_Playing == false) {
                 //play sound
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
                 audio[i].should_play = false;
                 audio[i].is_Playing = true;
             }
             if (audio[i].is_Looping == true && audio[i].is_Playing == false) {
                 //play sound
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
                 audio[i].is_Playing = true;
+                std::cout << "Playing loop\n";
             }
         }
 	}
@@ -62,12 +86,5 @@ namespace EM
     void AudioManager::End()
     {
         delete this;
-    }
-    /*!*************************************************************************
-    Returns the name of Script
-    ****************************************************************************/
-    std::string AudioManager::GetScriptName()
-    {
-        return "AudioManager";
     }
 }
