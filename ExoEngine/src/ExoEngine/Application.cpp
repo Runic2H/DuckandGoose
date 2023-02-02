@@ -133,10 +133,10 @@ Run loop for application
 		p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
 		p_ecs.AddComponent<Audio>(Background, C_AudioComponent);
 		Audio::AudioPiece pce;
-		pce.mAudioPath = "Assets/metadigger/FStep1.wav";
+		pce.mAudioPath = "Assets/metadigger/HeroFightBossMusic.wav";
 		pce.mChannelGroup = Audio::AudioType::BGM;
 		pce.mChannel = 0;
-		pce.is_Looping = false;
+		pce.is_Looping = true;
 		pce.is_Playing = false;
 		pce.should_play = false;
 		pce.should_stop = false;
