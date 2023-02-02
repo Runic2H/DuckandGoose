@@ -135,9 +135,10 @@ Run loop for application
 		pce.mAudioPath = "Assets/metadigger/FStep1.wav";
 		pce.mChannelGroup = Audio::AudioType::BGM;
 		pce.mChannel = 0;
-		pce.is_Looping = true;
+		pce.is_Looping = false;
 		pce.is_Playing = false;
 		pce.should_play = false;
+		pce.should_stop = false;
 		std::vector<Audio::AudioPiece> ins;
 		ins.push_back(pce);
 		p_ecs.GetComponent<Audio>(Background).SetArr(ins);

@@ -51,8 +51,8 @@ namespace EM
         for (int i = 0; i < audio.GetSize(); i++) {
             p_Audio->Update();
             //check if sound is playing
-            //audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
-            std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
+            audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
+            //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
             //update looping
             p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
             //set is_playing accordingly
@@ -76,7 +76,12 @@ namespace EM
                 //play sound
                 audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
                 audio[i].is_Playing = true;
-                std::cout << "Playing loop\n";
+                audio[i].should_play = false;
+                //std::cout << "Playing loop\n";
+            }
+            if (audio[i].should_stop == true) {
+                p_Audio->StopChannel(audio[i].mChannel);
+                audio[i].is_Playing = false;
             }
         }
 	}

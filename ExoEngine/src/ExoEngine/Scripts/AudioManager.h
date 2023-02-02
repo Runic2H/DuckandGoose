@@ -15,6 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #pragma once
 #include "IScript.h"
+#include "GLFW/glfw3.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Math/physics.h"
 
