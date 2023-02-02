@@ -1,4 +1,5 @@
 #pragma once
+#include "empch.h"
 #include "IComponent.h"
 
 namespace EM

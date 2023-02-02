@@ -23,7 +23,7 @@ namespace EM
 	****************************************************************************/
 	CollisionResponse* CollisionResponse::Clone() const
 	{
-		 return new CollisionResponse(*this); 
+		 return new CollisionResponse(*this);
 	}
 	/*!*************************************************************************
 	This function initialises the script. As there are no data members that require
@@ -37,9 +37,10 @@ namespace EM
 	****************************************************************************/
 	void CollisionResponse::Update(float Frametime)
 	{
-        auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		auto& att = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		//std::cout << &col << "\n";
@@ -63,6 +64,11 @@ namespace EM
 			if (tag.GetNameTag() == "Player")
 			{
 				logic.GetScript()[0]->Update(Frametime);
+				att.GetHealth() -= att.GetDamage();
+				if (att.GetHealth() <= 0)
+				{
+					std::cout << "Dead" << std::endl;
+				}
 			}
 		}
 	}

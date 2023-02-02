@@ -58,6 +58,7 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
     {
         mSoundMap[strSoundName] = pSound; //if sound is created store in sound map
     }
+    std::cout << "Loaded Sound:" << strSoundName << "\n";
     return pSound;
 }
 
@@ -92,7 +93,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
         CAudioEngine::ErrorCheck(pChannel->setVolume(VolumeTodB(fVolumedB)));
         mChannelMap[nChannelId] = pChannel;
     }
-    std::cout << mChannelMap.size() << std::endl;
+    //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }
 
@@ -202,6 +203,18 @@ void CAudioEngine::Init()
 
 	Master->addGroup(BGM);
 	Master->addGroup(SFX);
+
+    //load all audio files from metadigger folder
+    std::string audio_path = "Assets/metadigger/";
+    for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
+    {
+        //checks if given file status or path corresponds to a regular file
+        if (!dir_entry.is_regular_file())
+        {
+            continue;
+        }
+        FMOD::Sound* temp = Loadsound(audio_path + dir_entry.path().filename().string(), false);
+    }
 }
 
 /*!*************************************************************************
@@ -262,17 +275,18 @@ Checks if audio is playing
 ****************************************************************************/
 bool CAudioEngine::IsPlaying(int nChannelId) const
 {
+    std::cout << "checking...\n";
     bool is_playing = false;
     auto it = mChannelMap.find(nChannelId);
     //if not found return false
     if (it != mChannelMap.end())
     {
+        std::cout << "found channel\n";
         return it->second->isPlaying(&is_playing);
     }
-
+    std::cout << "cannot found channel\n";
     return false;
 }
-
 /*!*************************************************************************
 Converts decibels to volume
 ****************************************************************************/
@@ -298,3 +312,13 @@ float  CAudioEngine::VolumeTodB(float volume)
 }
 
 
+void CAudioEngine::SetLooping(const std::string& strSoundName, bool in) {
+    if (in) {
+        auto tFoundIt = mSoundMap.find(strSoundName);
+        if (tFoundIt != mSoundMap.end()) {
+            tFoundIt->second->setMode(FMOD_LOOP_NORMAL);
+        }
+    }
+    std::cout << "Updated looping\n";
+}
+    

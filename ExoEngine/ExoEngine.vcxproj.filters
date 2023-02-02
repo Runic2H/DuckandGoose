@@ -72,7 +72,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\HTP_script.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -252,7 +252,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Attributes.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\HTP_Script.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

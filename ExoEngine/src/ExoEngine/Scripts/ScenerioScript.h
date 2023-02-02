@@ -14,7 +14,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #pragma once
-
+#include "empch.h"
 #include "ExoEngine/Scripts/IScript.h"
 #include "ExoEngine/ECS/Types.h"
 #include "GLFW/glfw3.h"
