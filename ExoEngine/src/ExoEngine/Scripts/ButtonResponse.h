@@ -67,6 +67,7 @@ namespace EM {
 			vec2D max;
 		};
 		button_bb Button_BoundingBox{};
+		bool HTP {false};
 
 		
 	

@@ -145,18 +145,19 @@ Run loop for application
 		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
 		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
 		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
-		Entity Background = p_ecs.CreateEntity();
-		name.SetNameTag("Main Menu BackGround");
-		p_ecs.AddComponent<NameTag>(Background, name);
-		p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Background, rb);
-		//p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Background, C_TagComponent);
-		//p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
-		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
+		
+		//Entity Background = p_ecs.CreateEntity();
+		//name.SetNameTag("Main Menu BackGround");
+		//p_ecs.AddComponent<NameTag>(Background, name);
+		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
+		////p_ecs.AddComponent<RigidBody>(Background, rb);
+		////p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
+		////p_ecs.AddComponent<Tag>(Background, C_TagComponent);
+		////p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
+		//p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
+		//p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
 
 		Entity Title = p_ecs.CreateEntity();
 		name.SetNameTag("Title");
@@ -167,24 +168,11 @@ Run loop for application
 		//p_ecs.AddComponent<Collider>(Title, C_ColliderComponent);
 		//p_ecs.AddComponent<Tag>(Title, C_TagComponent);
 		//p_ecs.AddComponent<Logic>(Title, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Title).SetPos({ 0.6422932744026184f,0.43617022037506104f });
-		p_ecs.GetComponent<Transform>(Title).SetScale(1.9796679019927979f, 0.9862148761749268f);
+		p_ecs.GetComponent<Transform>(Title).SetPos({ 0.0f,0.43617022037506104f });
+		p_ecs.GetComponent<Transform>(Title).SetScale(2.4f, 0.9862148761749268f);
 		p_ecs.GetComponent<Sprite>(Title).SetTexture("ExomataLogo");
 		//p_ecs.GetComponent<Logic>(Title).InsertScript(new EnemyMovement(), Title);
 		//p_ecs.GetComponent<Logic>(Title).InsertScript(new CollisionResponse(), Title);
-
-		Entity Title2 = p_ecs.CreateEntity();
-		name.SetNameTag("Title2");
-		p_ecs.AddComponent<NameTag>(Title2, name);
-		p_ecs.AddComponent<Transform>(Title2, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Title2, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Title, rb);
-		//p_ecs.AddComponent<Collider>(Title, C_ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Title, C_TagComponent);
-		//p_ecs.AddComponent<Logic>(Title, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Title2).SetPos({ 0.6422932744026184f,0.43617022037506104f });
-		p_ecs.GetComponent<Transform>(Title2).SetScale(1.9796679019927979f, 0.9862148761749268f);
-		p_ecs.GetComponent<Sprite>(Title2).SetTexture("ExomataLogo");
 
 		/////*Entity Start = p_ecs.CreateEntity();
 		////name.SetNameTag("Start");
@@ -222,7 +210,7 @@ Run loop for application
 		p_ecs.AddComponent<Tag>(Start, C_TagComponent);
 		p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
 		p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
-		p_ecs.GetComponent<Transform>(Start).SetScale(0.6f, 0.2f);
+		p_ecs.GetComponent<Transform>(Start).SetScale(1.0f, 0.2f);
 		p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
 		p_ecs.GetComponent<Tag>(Start).SetTag("Start");
 		p_ecs.GetComponent<Collider>(Start)[0].mMax = { 0.5,0.5 };
@@ -239,7 +227,7 @@ Run loop for application
 		p_ecs.AddComponent<Tag>(Quit, C_TagComponent);
 		p_ecs.AddComponent<Logic>(Quit, C_LogicComponent);
 		p_ecs.GetComponent<Transform>(Quit).SetPos({ 0.0f,-0.25f });
-		p_ecs.GetComponent<Transform>(Quit).SetScale(0.6f, 0.2f);
+		p_ecs.GetComponent<Transform>(Quit).SetScale(1.0f, 0.2f);
 		p_ecs.GetComponent<Sprite>(Quit).SetTexture("SmallButton");
 		p_ecs.GetComponent<Tag>(Quit).SetTag("Quit");
 		p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
@@ -247,7 +235,7 @@ Run loop for application
 		p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
 
 		Entity Option = p_ecs.CreateEntity();
-		name.SetNameTag("Option");
+		name.SetNameTag("Options");
 		p_ecs.AddComponent<NameTag>(Option, name);
 		p_ecs.AddComponent<Transform>(Option, C_TransformComponent);
 		p_ecs.AddComponent<Sprite>(Option, C_SpriteComponent);
@@ -256,9 +244,9 @@ Run loop for application
 		p_ecs.AddComponent<Tag>(Option, C_TagComponent);
 		p_ecs.AddComponent<Logic>(Option, C_LogicComponent);
 		p_ecs.GetComponent<Transform>(Option).SetPos({ 0.0f,-0.5f });
-		p_ecs.GetComponent<Transform>(Option).SetScale(0.6f, 0.2f);
-		p_ecs.GetComponent<Sprite>(Option).SetTexture("SmallButton");
-		p_ecs.GetComponent<Tag>(Option).SetTag("Option");
+		p_ecs.GetComponent<Transform>(Option).SetScale(1.0f, 0.2f);
+		p_ecs.GetComponent<Sprite>(Option).SetTexture("OptionsIdle");
+		p_ecs.GetComponent<Tag>(Option).SetTag("Options");
 		p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
 		p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
 		p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
@@ -273,7 +261,7 @@ Run loop for application
 		p_ecs.AddComponent<Tag>(HowToPlay, C_TagComponent);
 		p_ecs.AddComponent<Logic>(HowToPlay, C_LogicComponent);
 		p_ecs.GetComponent<Transform>(HowToPlay).SetPos({ 0.0f,-0.75f });
-		p_ecs.GetComponent<Transform>(HowToPlay).SetScale(0.6f, 0.2f);
+		p_ecs.GetComponent<Transform>(HowToPlay).SetScale(1.0f, 0.2f);
 		p_ecs.GetComponent<Sprite>(HowToPlay).SetTexture("SmallButton");
 		p_ecs.GetComponent<Tag>(HowToPlay).SetTag("HowToPlay");
 		p_ecs.GetComponent<Collider>(HowToPlay)[0].mMax = { 0.5,0.5 };
