@@ -23,3 +23,4 @@ MenuPanel Assets/Textures/UI/MenuPanel.png
 MeleeIdle Assets/Textures/MeleeIdle.png
 MeleeRunning Assets/Textures/MeleeRunning.png
 MeleeAttack Assets/Textures/MeleeAttack.png
+HowToPlay Assets/Textures/UI/Placeholder.png

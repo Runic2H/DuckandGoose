@@ -39,6 +39,8 @@ namespace EM
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
+		
 		
 		if (is_within_box(p_GUI->MousePosition, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
 		{
@@ -56,11 +58,15 @@ namespace EM
 				{
 					p_GUI->toggle_script();
 				}
-				
-				
-			
 
+				if (ID_tag.GetTag() == "HowToPlay")
+				{
+					spt.SetTexture("HowToPlay");
+					transform.SetScale({ 4.170206546783447f,1.9999960660934448f });
+					transform.SetPos({ 0.0f,0.0f });
+				}
 			}
+
 			else
 			{
 				clicked = false;
@@ -68,6 +74,13 @@ namespace EM
 		}
 		else
 			selected = false;
+
+		if (spt.GetTexture() == "HowToPlay" && p_Input->KeyPressed(GLFW_KEY_SPACE))
+		{
+			spt.SetTexture("SmallButton");
+			transform.SetPos({ 0.0f,-0.75f });
+			transform.SetScale(0.6f, 0.2f);
+		}
 			
 	}
 
