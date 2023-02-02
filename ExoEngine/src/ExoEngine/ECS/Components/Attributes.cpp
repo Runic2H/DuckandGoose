@@ -1,8 +1,9 @@
+#include "empch.h"
 #include "Attributes.h"
 
 namespace EM
 {
-	Attributes::Attributes() : mHealth(100), mDamage(10) {};
+	Attributes::Attributes() : mHealth(100), mDamage(50) {};
 
 	bool Attributes::Deserialize(const rapidjson::Value& obj)
 	{

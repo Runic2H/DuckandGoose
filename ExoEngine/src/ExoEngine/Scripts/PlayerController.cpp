@@ -129,6 +129,7 @@ namespace EM
         }
 
         UpdateState();
+        UpdateAttack();
         UpdatePhysics(Frametime);
         Animate(mState);
 	}
@@ -236,11 +237,9 @@ namespace EM
         }
     }
 
-    /*void PlayerController::UpdateAttack()
+    void PlayerController::UpdateAttack()
     {
         auto pCol = p_ecs.GetComponent<Collider>(GetScriptEntityID()).GetCollisionArray();
-
-
         if (mState == PlayerState::Attacking)
         {
             (pCol + 1)->is_Alive = true;
@@ -249,5 +248,5 @@ namespace EM
         {
             (pCol + 1)->is_Alive = false;
         }
-    }*/
+    }
 }
