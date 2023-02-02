@@ -10,5 +10,8 @@ namespace EM
 	class StatController : public IScript
 	{
 	public:
+
+	private:
+
 	};
 }
