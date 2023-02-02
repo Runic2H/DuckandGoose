@@ -58,7 +58,7 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 		
-		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		//inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
 	private:
 	};
 }

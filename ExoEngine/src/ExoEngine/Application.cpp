@@ -27,6 +27,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
 #include "ExoEngine/Scripts/PlayerController.h"
+#include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
@@ -221,7 +222,36 @@ Run loop for application
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
+		Entity hud = p_ecs.CreateEntity();
+		p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
+		p_ecs.GetComponent<Transform>(hud).SetScale(1.f, 0.55f);
+		p_ecs.AddComponent<HUDComponent>(hud, C_HUDComponent);
+		p_ecs.GetComponent<HUDComponent>(hud).SetOffset(vec2D(-1.f, 0.75f));
+		p_ecs.GetComponent<HUDComponent>(hud).SetType(HUDComponent::ElementType::Static);
+		p_ecs.AddComponent<Tag>(hud, C_TagComponent);
+		p_ecs.AddComponent<Sprite>(hud, sprite);
+		p_ecs.GetComponent<Sprite>(hud).SetTexture("HPStatic");
+		p_ecs.AddComponent<Attributes>(hud, C_AttributesComponent);
+		p_ecs.AddComponent<NameTag>(hud, C_NameTagComponent);
+		p_ecs.GetComponent<NameTag>(hud).SetNameTag("HUD");
+		p_ecs.AddComponent<Logic>(hud, logic);
+		p_ecs.GetComponent<Logic>(hud).InsertScript(new HUDController(), hud);
 
+		Entity hpbar = p_ecs.CreateEntity();
+		p_ecs.AddComponent<Transform>(hpbar, C_TransformComponent);
+		p_ecs.GetComponent<Transform>(hpbar).SetScale(0.75f, 0.15f);
+		p_ecs.AddComponent<HUDComponent>(hpbar, C_HUDComponent);
+		p_ecs.GetComponent<HUDComponent>(hpbar).SetOffset(vec2D(-0.8f, 0.84f));
+		p_ecs.GetComponent<HUDComponent>(hpbar).SetType(HUDComponent::ElementType::HealthBar);
+		p_ecs.AddComponent<Tag>(hpbar, C_TagComponent);
+		p_ecs.AddComponent<Sprite>(hpbar, sprite);
+		p_ecs.GetComponent<Sprite>(hpbar).SetTexture("HPBar");
+		p_ecs.AddComponent<Attributes>(hpbar, C_AttributesComponent);
+		p_ecs.GetComponent<Attributes>(hpbar).SetHealth(100);
+		p_ecs.AddComponent<NameTag>(hpbar, C_NameTagComponent);
+		p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
+		p_ecs.AddComponent<Logic>(hpbar, logic);
+		p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
 		//Entity Option = p_ecs.CreateEntity();
 		//name.SetNameTag("Option");
 		//p_ecs.AddComponent<NameTag>(Option, name);
@@ -244,20 +274,20 @@ Run loop for application
 		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
 		//p_ecs.AddComponent<Sprite>(Background, sprite);
 		//p_ecs.AddComponent<NameTag>(Background, name);
-		//Entity player = p_ecs.CreateEntity();
-		//name.SetNameTag("Player");
-		//sprite.SetTexture("Idle");
-		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
-		//p_ecs.AddComponent<RigidBody>(player, rb);
-		//p_ecs.AddComponent<Sprite>(player, sprite);
-		//p_ecs.AddComponent<NameTag>(player, name);
-		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
-		//tag.SetTag("Player");
-		//p_ecs.AddComponent<Tag>(player, tag);
-		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
-		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		Entity player = p_ecs.CreateEntity();
+		name.SetNameTag("Player");
+		sprite.SetTexture("Idle");
+		p_ecs.AddComponent<Transform>(player, C_TransformComponent);
+		p_ecs.AddComponent<RigidBody>(player, rb);
+		p_ecs.AddComponent<Sprite>(player, sprite);
+		p_ecs.AddComponent<NameTag>(player, name);
+		p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
+		tag.SetTag("Player");
+		p_ecs.AddComponent<Tag>(player, tag);
+		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
