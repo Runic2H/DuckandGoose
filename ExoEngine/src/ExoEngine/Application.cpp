@@ -30,6 +30,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"
@@ -120,18 +121,30 @@ Run loop for application
 		NameTag name;
 		Tag tag;
 
-		//Entity Background = p_ecs.CreateEntity();
-		//name.SetNameTag("Main Menu BackGround");
-		//p_ecs.AddComponent<NameTag>(Background, name);
-		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
-		////p_ecs.AddComponent<RigidBody>(Background, rb);
-		////p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
-		////p_ecs.AddComponent<Tag>(Background, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
-		//p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		//p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
+		Entity Background = p_ecs.CreateEntity();
+		name.SetNameTag("Main Menu BackGround");
+		p_ecs.AddComponent<NameTag>(Background, name);
+		p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
+		p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
+		p_ecs.AddComponent<RigidBody>(Background, rb);
+		p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
+		p_ecs.AddComponent<Tag>(Background, C_TagComponent);
+		p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
+		p_ecs.AddComponent<Audio>(Background, C_AudioComponent);
+		Audio::AudioPiece pce;
+		pce.mAudioPath = "Assets/metadigger/FStep1.wav";
+		pce.mChannelGroup = Audio::AudioType::BGM;
+		pce.mChannel = 0;
+		pce.is_Looping = true;
+		pce.is_Playing = false;
+		pce.should_play = false;
+		std::vector<Audio::AudioPiece> ins;
+		ins.push_back(pce);
+		p_ecs.GetComponent<Audio>(Background).SetArr(ins);
+		p_ecs.GetComponent<Logic>(Background).InsertScript(new AudioManager(), Background);
+		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
+		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
+		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
 
 		//Entity Title = p_ecs.CreateEntity();
 		//name.SetNameTag("Title");
@@ -161,18 +174,18 @@ Run loop for application
 		//p_ecs.GetComponent<Transform>(Title2).SetScale(1.9796679019927979f, 0.9862148761749268f);
 		//p_ecs.GetComponent<Sprite>(Title2).SetTexture("ExomataLogo");
 
-		/////*Entity Start = p_ecs.CreateEntity();
-		////name.SetNameTag("Start");
-		////p_ecs.AddComponent<NameTag>(Start, name);
-		////p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
-		////p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
-		////p_ecs.AddComponent<Tag>(Start, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
-		////p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
-		////p_ecs.GetComponent<Transform>(Start).SetScale(0.6f, 0.2f);
-		////p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
-		////p_ecs.GetComponent<Tag>(Start).SetTag("Start");
-		////p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);*/
+		/*Entity Start = p_ecs.CreateEntity();
+		name.SetNameTag("Start");
+		p_ecs.AddComponent<NameTag>(Start, name);
+		p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
+		p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
+		p_ecs.AddComponent<Tag>(Start, C_TagComponent);
+		p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
+		p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
+		p_ecs.GetComponent<Transform>(Start).SetScale(0.6f, 0.2f);
+		p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
+		p_ecs.GetComponent<Tag>(Start).SetTag("Start");
+		p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);*/
 
 		//Entity Start = p_ecs.CreateEntity();
 		//name.SetNameTag("Start");
@@ -225,9 +238,11 @@ Run loop for application
 		//p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
 
-
-
-
+		//Entity Background = p_ecs.CreateEntity();
+		//name.SetNameTag("Background");
+		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Background, sprite);
+		//p_ecs.AddComponent<NameTag>(Background, name);
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
@@ -241,6 +256,7 @@ Run loop for application
 		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
@@ -253,19 +269,8 @@ Run loop for application
 		//p_ecs.AddComponent<Logic>(enemy, logic2);
 		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
 		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
-		//Entity col = p_ecs.CreateEntity();
-		//p_ecs.AddComponent<Tag>(col, C_TagComponent);
-		//p_ecs.GetComponent<Tag>(col).SetTag("PlayerAttack");
-		//p_ecs.GetComponent<Tag>(col).SetTargetTag("Enemy");
-		//p_ecs.AddComponent<Sprite>(col, C_SpriteComponent);
-		//p_ecs.AddComponent<Transform>(col, C_TransformComponent);
-		//p_ecs.GetComponent<Transform>(col).SetComponentEntityID(player);
-		//p_ecs.GetComponent<Transform>(col).GetComponentEntityID();
-		//p_ecs.AddComponent<RigidBody>(col, rb);
-		//p_ecs.AddComponent<NameTag>(col, name);
-		//p_ecs.GetComponent<NameTag>(col).SetNameTag("PlayerAttackCollider");
-		//p_ecs.AddComponent<Collider>(col, C_ColliderComponent);
-		//p_ecs.AddComponent<Logic>(col, C_LogicComponent);
+		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
+		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
 		//p_Scene->DeserializeFromFile("Assets/Scene/MainMenu.json");
 		//p_Editor->is_ShowWindow = false;
@@ -313,7 +318,7 @@ End loop for application
 ****************************************************************************/
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("Assets/Scene/Level1.json");
+		//p_Scene->SerializeToFile("Assets/Scene/Level.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

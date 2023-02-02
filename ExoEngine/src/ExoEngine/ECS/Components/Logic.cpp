@@ -75,33 +75,65 @@ namespace EM
 	****************************************************************************/
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
-		for (auto i = obj["ScriptName"].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
+		/*if (!obj["ScriptName"].GetArray().Empty())
 		{
-			mScriptNameVector.push_back(i->GetString());
-		}
-		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+			for (auto i = obj["ScriptName" + 1].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
+			{
+				mScriptNameVector.push_back(i->GetString());
+			}
+			for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+			{
+				if (mScriptNameVector[i] == "PlayerController")
+				{
+					mScriptsVector.push_back(new PlayerController());
+				}
+				if (mScriptNameVector[i] == "EnemyMovement")
+				{
+					mScriptsVector.push_back(new EnemyMovement());
+				}
+				if (mScriptNameVector[i] == "CollisionResponse")
+				{
+					mScriptsVector.push_back(new CollisionResponse());
+				}
+				if (mScriptNameVector[i] == "ButtonResponse")
+				{
+					mScriptsVector.push_back(new ButtonResponse());
+				}
+				if (mScriptNameVector[i] == "ScenerioScript")
+				{
+					mScriptsVector.push_back(new ScenerioScript());
+				}
+			}
+		}*/
+
+		for (int i = 0; i < obj["ScriptCount"].GetInt(); ++i)
 		{
-			if (mScriptNameVector[i] == "PlayerController")
+			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
+			for (size_t i = 0; i < mScriptNameVector.size(); ++i)
 			{
-				mScriptsVector.push_back(new PlayerController());
-			}
-			if (mScriptNameVector[i] == "EnemyMovement")
-			{
-				mScriptsVector.push_back(new EnemyMovement());
-			}
-			if (mScriptNameVector[i] == "CollisionResponse")
-			{
-				mScriptsVector.push_back(new CollisionResponse());
-			}
-			if (mScriptNameVector[i] == "ButtonResponse")
-			{
-				mScriptsVector.push_back(new ButtonResponse());
-			}
-			if (mScriptNameVector[i] == "ScenerioScript")
-			{
-				mScriptsVector.push_back(new ScenerioScript());
+				if (mScriptNameVector[i] == "PlayerController")
+				{
+					mScriptsVector.push_back(new PlayerController());
+				}
+				if (mScriptNameVector[i] == "EnemyMovement")
+				{
+					mScriptsVector.push_back(new EnemyMovement());
+				}
+				if (mScriptNameVector[i] == "CollisionResponse")
+				{
+					mScriptsVector.push_back(new CollisionResponse());
+				}
+				if (mScriptNameVector[i] == "ButtonResponse")
+				{
+					mScriptsVector.push_back(new ButtonResponse());
+				}
+				if (mScriptNameVector[i] == "ScenerioScript")
+				{
+					mScriptsVector.push_back(new ScenerioScript());
+				}
 			}
 		}
+
 		return true;
 	}
 
@@ -110,14 +142,17 @@ namespace EM
 	****************************************************************************/
 	bool Logic::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
+		size_t i = 0;
 		writer->StartObject();
-		writer->Key("ScriptName");
-		writer->StartArray();
-		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+		//writer->StartArray();
+		for (i = 0; i < mScriptNameVector.size(); ++i)
 		{
+			writer->Key(std::to_string(i).c_str());
 			writer->String(mScriptNameVector[i].c_str());
 		}
-		writer->EndArray();
+		//writer->EndArray();
+		writer->Key("ScriptCount");
+		writer->Int(i);
 		writer->EndObject();
 		return true;
 	}

@@ -182,6 +182,10 @@ namespace EM
 		{
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
+			for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			{
+				EntityDestroyed(i);
+			}
 		}
 
 	private:
