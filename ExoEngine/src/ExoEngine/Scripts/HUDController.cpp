@@ -41,6 +41,7 @@ namespace EM
     ****************************************************************************/
 	void HUDController::Update(float Frametime)
 	{
+        UNREFERENCED_PARAMETER(Frametime);
         auto& pComp = p_ecs.GetComponent<HUDComponent>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
         auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
@@ -57,7 +58,7 @@ namespace EM
         else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
             //update scale
             pTrans.SetScale(0.75f * (float)pStats.GetHealth() / 100, pTrans.GetScale().y);
-            pTrans.SetPos(camPos.x + pComp.GetOffset().x - 0.32 * (100.f - (float)pStats.GetHealth()) / 100, camPos.y + pComp.GetOffset().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x - 0.32 * (100.f - (float)pStats.GetHealth())) / 100.0f, camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
             //check for timing of cooldown

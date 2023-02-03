@@ -25,6 +25,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
 
+
 namespace EM
 {
 	/*!*************************************************************************
@@ -110,34 +111,37 @@ namespace EM
 		for (int i = 0; i < obj["ScriptCount"].GetInt(); ++i)
 		{
 			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
-				if (mScriptNameVector[i] == "PlayerController")
+			for (size_t j = 0; j < mScriptNameVector.size(); ++j)
+			{
+				if (mScriptNameVector[j] == "PlayerController")
 				{
 					mScriptsVector.push_back(new PlayerController());
 				}
-				if (mScriptNameVector[i] == "EnemyMovement")
+				if (mScriptNameVector[j] == "EnemyMovement")
 				{
 					mScriptsVector.push_back(new EnemyMovement());
 				}
-				if (mScriptNameVector[i] == "CollisionResponse")
+				if (mScriptNameVector[j] == "CollisionResponse")
 				{
 					mScriptsVector.push_back(new CollisionResponse());
 				}
-				if (mScriptNameVector[i] == "ButtonResponse")
+				if (mScriptNameVector[j] == "ButtonResponse")
 				{
 					mScriptsVector.push_back(new ButtonResponse());
 				}
-				if (mScriptNameVector[i] == "ScenerioScript")
+				if (mScriptNameVector[j] == "ScenerioScript")
 				{
 					mScriptsVector.push_back(new ScenerioScript());
 				}
-				if (mScriptNameVector[i] == "AudioManager")
-				{
-					mScriptsVector.push_back(new AudioManager());
-				}
-				if (mScriptNameVector[i] == "HUDController")
+				if (mScriptNameVector[j] == "HUDController")
 				{
 					mScriptsVector.push_back(new HUDController());
 				}
+				if (mScriptNameVector[j] == "AudioManager")
+				{
+					mScriptsVector.push_back(new AudioManager());
+				}
+			}
 		}
 
 		return true;
@@ -198,6 +202,7 @@ namespace EM
 	void Logic::ClearAllScripts()
 	{
 		mScriptNameVector.clear();
+		mScriptsVector.clear();
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
 		{
 			(*i)->End();
@@ -213,6 +218,7 @@ namespace EM
 				return mScriptsVector[i];
 			}
 		}
+		std::cout << "'Script Not Found" << std::endl;
 		return nullptr;
 	}
 }

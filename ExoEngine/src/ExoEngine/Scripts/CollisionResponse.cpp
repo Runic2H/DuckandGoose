@@ -39,8 +39,9 @@ namespace EM
 	****************************************************************************/
 	void CollisionResponse::Update(float Frametime)
 	{
+		UNREFERENCED_PARAMETER(Frametime);
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
-		auto& att = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+		//auto& att = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
@@ -77,7 +78,6 @@ namespace EM
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->Animate(PlayerController::PlayerState::Damage);
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.0f;
 				}
-
 			}
 		}
 		//Enemy Taking Damage

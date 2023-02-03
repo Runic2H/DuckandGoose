@@ -45,6 +45,7 @@ namespace EM
     ****************************************************************************/
 	void AudioManager::Update(float Frametime)
 	{
+        UNREFERENCED_PARAMETER(Frametime);
         p_Audio->Update();
         //update volume values
         //check sounds and update

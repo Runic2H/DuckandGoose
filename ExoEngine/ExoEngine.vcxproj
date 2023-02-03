@@ -49,7 +49,6 @@
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\StatController.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
