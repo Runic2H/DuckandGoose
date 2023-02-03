@@ -229,7 +229,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\StatController.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">

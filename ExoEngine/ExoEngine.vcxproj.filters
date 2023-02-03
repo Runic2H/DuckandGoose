@@ -68,11 +68,11 @@
     <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\StatController.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\HTP_script.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -253,6 +253,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HTP_Script.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

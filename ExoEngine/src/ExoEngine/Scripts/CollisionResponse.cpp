@@ -46,7 +46,10 @@ namespace EM
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 
-		if (col[0].mHit == 1) {
+		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+
+		//std::cout << &col << "\n";
+		if (col[0].mHit || col[1].mHit) {
 			vec2D response = rigidbody.GetVel();
 			vec2D normal = vec2D();
 			normal += col[0].mCollisionNormal;
@@ -93,8 +96,10 @@ namespace EM
 					response -= normal * 5;
 					rigidbody.SetVel(response);
 				}
-				vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-				rigidbody.SetNextPos(nextPos);
+			}
+			if (tag.GetNameTag() == "Enemy")
+			{
+				logic.GetScript()[1]->Update(Frametime);
 			}
 		}
 	}

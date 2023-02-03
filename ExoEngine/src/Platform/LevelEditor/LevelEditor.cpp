@@ -38,6 +38,13 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/CollisionResponse.h"
+#include "ExoEngine/Scripts/ButtonResponse.h"
+#include "ExoEngine/Scripts/PlayerController.h"
+#include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/AudioManager.h"
+#include "ExoEngine/Scripts/HUDController.h"
 
 namespace EM {
 
@@ -79,6 +86,8 @@ namespace EM {
         LoadAudioFromFile();
 
         LoadSceneFromFile();
+
+        LoadScriptsFromFile();
     }
     /*!*************************************************************************
     Update loop for level editor, poll events and set new frames
@@ -110,7 +119,7 @@ namespace EM {
             Hierarchy();
             Inspector();
             SceneViewer();
-            AudioManager();
+            AudioEditor();
         }
 
     }
@@ -205,6 +214,30 @@ namespace EM {
 
         }
     }
+
+    /*!*************************************************************************
+    Script filepath to get list of scripts
+    ****************************************************************************/
+    void LevelEditor::LoadScriptsFromFile()
+    {
+        std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
+        for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
+        {
+            if (!dir_entry.is_regular_file())
+            {
+                continue;
+            }
+            if (*(dir_entry.path().filename().string().end() - 1) == 'h')
+            {
+                std::string in = dir_entry.path().filename().string();
+                in.pop_back();
+                in.pop_back();
+                mScriptList.emplace_back(in);
+                std::cout << "script path " << in << std::endl;
+            }
+        }
+    }
+
     /*!*************************************************************************
     Menu bar located in the top left side of the window is used to toggle between
     opening and closing the editor
@@ -778,6 +811,18 @@ namespace EM {
                             p_ecs.AddComponent<RigidBody>(selectedEntity, C_RigidBodyComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("Attributes"))
+                    {
+                        if (!p_ecs.HaveComponent<Attributes>(selectedEntity))
+                            p_ecs.AddComponent<Attributes>(selectedEntity, C_AttributesComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Logic"))
+                    {
+                        if (!p_ecs.HaveComponent<Logic>(selectedEntity))
+                            p_ecs.AddComponent<Logic>(selectedEntity, C_LogicComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -985,8 +1030,116 @@ namespace EM {
                         }
                     }
                 }
-               //Rigid Component
-                if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                //Attributes components
+                if (p_ecs.HaveComponent<Attributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& attrib = p_ecs.GetComponent<Attributes>(selectedEntity);
+                        
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        int healthSlider = attrib.GetHealth();
+                        int maxHealthSlider = attrib.GetMaxHealth();
+                        int damageSlider = attrib.GetDamage();
+
+                        ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
+                        ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
+
+                        attrib.SetHealth(healthSlider);
+                        attrib.SetMaxHealth(maxHealthSlider);
+                        attrib.SetDamage(damageSlider);
+                    }
+                }
+                //Logic
+                if (p_ecs.HaveComponent<Logic>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Logic", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& logic = p_ecs.GetComponent<Logic>(selectedEntity);
+                        //std::vector<std::string> scripts{ logic.GetScriptNames() };
+                        
+                        static ImGuiComboFlags flags = 0;
+                        static int current_script = 0;
+                        const size_t aSize = 30;
+                        const char* logicList[aSize];
+                        std::vector<const char*> sList;
+
+                        for (int i = 0; i < mScriptList.size(); i++)
+                        {
+                            sList.push_back(mScriptList[i].c_str());
+                            //std::cout << sList[i] << std::endl;
+                        }
+                       // std::cout << "logic size " << logic.GetScriptNames().size() << std::endl; //causes error
+                        std::cout << "sList size " << sList.size() << std::endl; // 1
+                        std::cout << "sList " << sList[0] << std::endl;
+                        
+                        std::copy(sList.begin(), sList.end(), logicList);
+                        
+                        std::cout << "logicList " << logicList[1] << std::endl; //D
+                        ImGui::Combo("Logic Scripts", &current_script, logicList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
+
+                        //static int isClicked = 0;
+                        if (ImGui::Button("Add"))
+                        {
+                            //isClicked++;
+                            //if (isClicked & 1)
+                            //{
+                                //isClicked = 0;
+                                bool can_addScript = true;//std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
+                                for (int i = 0; i < logic.GetScriptNames().size(); i++) {
+                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) {
+                                        can_addScript = false;
+                                        std::cout << "Cannot Add already existing script!\n";
+                                    }
+                                }
+                                if (can_addScript == true)
+                                {
+                                    if (mScriptList[current_script] == "PlayerController")
+                                    {
+                                        logic.InsertScript(new PlayerController(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "EnemyMovement")
+                                    {
+                                        logic.InsertScript(new EnemyMovement(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "CollisionResponse")
+                                    {
+                                        logic.InsertScript(new CollisionResponse(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "ButtonResponse")
+                                    {
+                                        logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "ScenerioScript")
+                                    {
+                                        logic.InsertScript(new ScenerioScript(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "AudioManager")
+                                    {
+                                        logic.InsertScript(new AudioManager(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "HUDController")
+                                    {
+                                        logic.InsertScript(new HUDController(), selectedEntity);
+                                    }
+                                //}
+                            }
+                        } 
+                        ImGui::SameLine();
+                        if (ImGui::Button("Delete")) {
+                            logic.DeleteScript(mScriptList[current_script]);
+                        }
+                        ImGui::Text("Inserted Scripts:");
+                        for (int i = 0; i < logic.GetScriptNames().size(); i++) {
+                            //display the names of all scripts in the entity
+                            ImGui::Text("% s", logic.GetScriptNames()[i].c_str());
+                        }
+                    }
+                }
+
+                //Rigid Component
+               /* if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
                 {
                     if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
                     {
@@ -1048,8 +1201,18 @@ namespace EM {
                         p_ecs.RemoveComponent<RigidBody>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Logic") && p_ecs.HaveComponent<Logic>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Logic>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
                     ImGui::EndPopup();
-                }
+                }*/
             }
             ImGui::End();
         } //end of is_ShowWindow
@@ -1062,7 +1225,7 @@ namespace EM {
      Audio manager allows users to select and play, pause and test different
      audios in the editor
     ****************************************************************************/
-    void LevelEditor::AudioManager()
+    void LevelEditor::AudioEditor()
     {
         if (is_ShowWindow)
         {
