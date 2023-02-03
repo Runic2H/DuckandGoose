@@ -117,12 +117,12 @@ Run loop for application
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
 		/*RigidBody rb;
-		Logic logic;
+		/*Logic logic;
 		Sprite sprite;
 		NameTag name;
 		Tag tag;
 
-		Entity Background = p_ecs.CreateEntity();
+		Entity Background = p_ecs.CreateEntity(); //start
 		name.SetNameTag("Main Menu BackGround");
 		p_ecs.AddComponent<NameTag>(Background, name);
 		p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
@@ -132,6 +132,7 @@ Run loop for application
 		p_ecs.AddComponent<Tag>(Background, C_TagComponent);
 		p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
 		p_ecs.AddComponent<Audio>(Background, C_AudioComponent);
+		p_ecs.AddComponent<Attributes>(Background, C_AttributesComponent);
 		Audio::AudioPiece pce;
 		pce.mAudioPath = "Assets/metadigger/HeroFightBossMusic.wav";
 		pce.mChannelGroup = Audio::AudioType::BGM;
@@ -145,62 +146,71 @@ Run loop for application
 		p_ecs.GetComponent<Audio>(Background).SetArr(ins);
 		p_ecs.GetComponent<Logic>(Background).InsertScript(new AudioManager(), Background);
 		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
-		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");*/
-		
-		//Entity Background = p_ecs.CreateEntity();
-		//name.SetNameTag("Main Menu BackGround");
-		//p_ecs.AddComponent<NameTag>(Background, name);
-		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Background, C_SpriteComponent);
-		////p_ecs.AddComponent<RigidBody>(Background, rb);
-		////p_ecs.AddComponent<Collider>(Background, C_ColliderComponent);
-		////p_ecs.AddComponent<Tag>(Background, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Background, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
-		//p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		//p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
+		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});*/
 
-		//Entity Title = p_ecs.CreateEntity();
-		//name.SetNameTag("Title");
-		//p_ecs.AddComponent<NameTag>(Title, name);
-		//p_ecs.AddComponent<Transform>(Title, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Title, C_SpriteComponent);
-		////p_ecs.AddComponent<RigidBody>(Title, rb);
-		////p_ecs.AddComponent<Collider>(Title, C_ColliderComponent);
-		////p_ecs.AddComponent<Tag>(Title, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Title, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Title).SetPos({ 0.0f,0.43617022037506104f });
-		//p_ecs.GetComponent<Transform>(Title).SetScale(2.4f, 0.9862148761749268f);
-		//p_ecs.GetComponent<Sprite>(Title).SetTexture("ExomataLogo");
-		//p_ecs.GetComponent<Logic>(Title).InsertScript(new EnemyMovement(), Title);
-		//p_ecs.GetComponent<Logic>(Title).InsertScript(new CollisionResponse(), Title);
+		//Entity hud = p_ecs.CreateEntity();
+		//p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
+		//p_ecs.GetComponent<Transform>(hud).SetScale(1.f, 0.55f);
+		//p_ecs.AddComponent<HUDComponent>(hud, C_HUDComponent);
+		//p_ecs.GetComponent<HUDComponent>(hud).SetOffset(vec2D(-1.f, 0.75f));
+		//p_ecs.GetComponent<HUDComponent>(hud).SetType(HUDComponent::ElementType::Static);
+		//p_ecs.AddComponent<Tag>(hud, C_TagComponent);
+		//p_ecs.AddComponent<Sprite>(hud, sprite);
+		//p_ecs.GetComponent<Sprite>(hud).SetTexture("HPStatic");
+		//p_ecs.AddComponent<Attributes>(hud, C_AttributesComponent);
+		//p_ecs.AddComponent<NameTag>(hud, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(hud).SetNameTag("HUD");
+		//p_ecs.AddComponent<Logic>(hud, logic);
+		//p_ecs.GetComponent<Logic>(hud).InsertScript(new HUDController(), hud);
 
-		/////*Entity Start = p_ecs.CreateEntity();
-		////name.SetNameTag("Start");
-		////p_ecs.AddComponent<NameTag>(Start, name);
-		////p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
-		////p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
-		////p_ecs.AddComponent<Tag>(Start, C_TagComponent);
-		////p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
-		////p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
-		////p_ecs.GetComponent<Transform>(Start).SetScale(0.6f, 0.2f);
-		////p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
-		////p_ecs.GetComponent<Tag>(Start).SetTag("Start");
-		////p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);*/
-
+		//Entity hpbar = p_ecs.CreateEntity();
+		//p_ecs.AddComponent<Transform>(hpbar, C_TransformComponent);
+		//p_ecs.GetComponent<Transform>(hpbar).SetScale(0.75f, 0.15f);
+		//p_ecs.AddComponent<HUDComponent>(hpbar, C_HUDComponent);
+		//p_ecs.GetComponent<HUDComponent>(hpbar).SetOffset(vec2D(-0.8f, 0.84f));
+		//p_ecs.GetComponent<HUDComponent>(hpbar).SetType(HUDComponent::ElementType::HealthBar);
+		//p_ecs.AddComponent<Tag>(hpbar, C_TagComponent);
+		//p_ecs.AddComponent<Sprite>(hpbar, sprite);
+		//p_ecs.GetComponent<Sprite>(hpbar).SetTexture("HPBar");
+		//p_ecs.AddComponent<Attributes>(hpbar, C_AttributesComponent);
+		//p_ecs.GetComponent<Attributes>(hpbar).SetHealth(100);
+		//p_ecs.AddComponent<NameTag>(hpbar, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
+		//p_ecs.AddComponent<Logic>(hpbar, logic);
+		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
+    
+		////Entity Option = p_ecs.CreateEntity();
+		////name.SetNameTag("Option");
+		////p_ecs.AddComponent<NameTag>(Option, name);
+		////p_ecs.AddComponent<Transform>(Option, C_TransformComponent);
+		////p_ecs.AddComponent<Sprite>(Option, C_SpriteComponent);
+		//////p_ecs.AddComponent<RigidBody>(Option, rb);
+		////p_ecs.AddComponent<Collider>(Option, C_ColliderComponent);
+		////p_ecs.AddComponent<Tag>(Option, C_TagComponent);
+		////p_ecs.AddComponent<Logic>(Option, C_LogicComponent);
+		////p_ecs.GetComponent<Transform>(Option).SetPos({ 1.165f,-0.563f });
+		////p_ecs.GetComponent<Transform>(Option).SetScale(0.6f, 0.2f);
+		////p_ecs.GetComponent<Sprite>(Option).SetTexture("SmallButton");
+		////p_ecs.GetComponent<Tag>(Option).SetTag("Option");
+		////p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
+		////p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
+		////p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
 		//Entity Start = p_ecs.CreateEntity();
 		//name.SetNameTag("Start");
 		//p_ecs.AddComponent<NameTag>(Start, name);
 		//p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
 		//p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
+		////	p_ecs.AddComponent<RigidBody>(Start, rb);
+		//p_ecs.AddComponent<Collider>(Start, C_ColliderComponent);
 		//p_ecs.AddComponent<Tag>(Start, C_TagComponent);
 		//p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
 		//p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
-		//p_ecs.GetComponent<Transform>(Start).SetScale(0.6f, 0.2f);
+		//p_ecs.GetComponent<Transform>(Start).SetScale(1.0f, 0.2f);
 		//p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
 		//p_ecs.GetComponent<Tag>(Start).SetTag("Start");
-		//p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);*/
+		//p_ecs.GetComponent<Collider>(Start)[0].mMax = { 0.5,0.5 };
+		//p_ecs.GetComponent<Collider>(Start)[0].mMin = { -0.5,-0.5 };
+		//p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);
 
 		//Entity Quit = p_ecs.CreateEntity();
 		//name.SetNameTag("Quit");
@@ -211,13 +221,14 @@ Run loop for application
 		//p_ecs.AddComponent<Collider>(Quit, C_ColliderComponent);
 		//p_ecs.AddComponent<Tag>(Quit, C_TagComponent);
 		//p_ecs.AddComponent<Logic>(Quit, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Quit).SetPos({ 0.599f,-0.27f });
-		//p_ecs.GetComponent<Transform>(Quit).SetScale(0.6f, 0.2f);
+		//p_ecs.GetComponent<Transform>(Quit).SetPos({ 0.0f,-0.25f });
+		//p_ecs.GetComponent<Transform>(Quit).SetScale(1.0f, 0.2f);
 		//p_ecs.GetComponent<Sprite>(Quit).SetTexture("SmallButton");
 		//p_ecs.GetComponent<Tag>(Quit).SetTag("Quit");
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
+    
 		/*Entity hud = p_ecs.CreateEntity();
 		p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
 		p_ecs.GetComponent<Transform>(hud).SetScale(1.f, 0.55f);
@@ -248,22 +259,7 @@ Run loop for application
 		p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		p_ecs.AddComponent<Logic>(hpbar, logic);
 		p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);*/
-		//Entity Option = p_ecs.CreateEntity();
-		//name.SetNameTag("Option");
-		//p_ecs.AddComponent<NameTag>(Option, name);
-		//p_ecs.AddComponent<Transform>(Option, C_TransformComponent);
-		//p_ecs.AddComponent<Sprite>(Option, C_SpriteComponent);
-		////p_ecs.AddComponent<RigidBody>(Option, rb);
-		//p_ecs.AddComponent<Collider>(Option, C_ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Option, C_TagComponent);
-		//p_ecs.AddComponent<Logic>(Option, C_LogicComponent);
-		//p_ecs.GetComponent<Transform>(Option).SetPos({ 1.165f,-0.563f });
-		//p_ecs.GetComponent<Transform>(Option).SetScale(0.6f, 0.2f);
-		//p_ecs.GetComponent<Sprite>(Option).SetTexture("SmallButton");
-		//p_ecs.GetComponent<Tag>(Option).SetTag("Option");
-		//p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
-		//p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
-		//p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
+
 		//Entity Start = p_ecs.CreateEntity();
 		//name.SetNameTag("Start");
 		//p_ecs.AddComponent<NameTag>(Start, name);

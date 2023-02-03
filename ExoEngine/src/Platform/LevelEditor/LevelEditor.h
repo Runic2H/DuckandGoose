@@ -41,7 +41,8 @@ namespace EM {
 
 		//for audio loading from files
 		void LoadAudioFromFile();
-		void AudioManager();
+		void LoadScriptsFromFile();
+		void AudioEditor();
 		void insertAudioFilePath(std::string in);
 		void insertTextureFilePath(std::string on);
 
@@ -107,5 +108,8 @@ namespace EM {
 		//load texture from file
 		std::vector<std::string> mTextureFile;
 		std::vector<std::filesystem::directory_entry> mTextureFileList;
+
+		//load script list from file
+		std::vector<std::string> mScriptList;
 	};
 }

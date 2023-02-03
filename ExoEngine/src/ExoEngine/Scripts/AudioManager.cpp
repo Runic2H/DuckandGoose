@@ -46,11 +46,11 @@ namespace EM
 	void AudioManager::Update(float Frametime)
 	{
         UNREFERENCED_PARAMETER(Frametime);
+        p_Audio->Update();
         //update volume values
         //check sounds and update
         auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
         for (int i = 0; i < audio.GetSize(); i++) {
-            p_Audio->Update();
             //check if sound is playing
             audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
             //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
@@ -85,6 +85,7 @@ namespace EM
                 audio[i].is_Playing = false;
             }
         }
+
 	}
     /*!*************************************************************************
     End State for Audio Manager
@@ -92,5 +93,10 @@ namespace EM
     void AudioManager::End()
     {
         delete this;
+    }
+
+    std::string AudioManager::GetScriptName()
+    {
+        return "AudioManager";
     }
 }

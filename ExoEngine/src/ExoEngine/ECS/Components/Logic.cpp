@@ -23,6 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
+#include "ExoEngine/Scripts/HUDController.h"
 
 
 namespace EM
@@ -132,6 +133,10 @@ namespace EM
 				{
 					mScriptsVector.push_back(new ScenerioScript());
 				}
+				if (mScriptNameVector[j] == "HUDController")
+				{
+					mScriptsVector.push_back(new HUDController());
+				}
 				if (mScriptNameVector[j] == "AudioManager")
 				{
 					mScriptsVector.push_back(new AudioManager());
@@ -162,6 +167,14 @@ namespace EM
 		return true;
 	}
 
+	//int Logic::FindScript( const std::string& scriptname)
+	//{
+	//	for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); i++)// pointer to the iscript
+	//	{
+	//		if()
+	//	}
+	//}
+
 	/*!*************************************************************************
 	Inserts the scripts into the vector to loop through
 	****************************************************************************/
@@ -170,6 +183,17 @@ namespace EM
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
 		script->SetScriptEntityID(entity);
+	}
+
+	void Logic::DeleteScript(std::string scriptname)
+	{
+		for (int idx = 0;idx < mScriptNameVector.size(); idx++) {
+			if (mScriptNameVector[idx] == scriptname) {
+				mScriptNameVector.erase(mScriptNameVector.begin() + idx);
+				mScriptsVector.erase(mScriptsVector.begin() + idx);
+				std::cout << "Deleted Script: " << scriptname << "\n";
+			}
+		}
 	}
 
 	/*!*************************************************************************
