@@ -68,7 +68,6 @@
     <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\StatController.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
@@ -248,7 +247,6 @@
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\HUDComponent.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\StatController.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Attributes.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />

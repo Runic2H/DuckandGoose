@@ -25,3 +25,16 @@ MeleeIdle Assets/Textures/EXOMATAMELEEENEMYHOVERINGSPRITESHEET.png
 MeleeRunning Assets/Textures/EXOMATAMELEEENEMYHOVERINGSPRITESHEET.png
 MeleeAttack Assets/Textures/EXOMATAMELEEENEMYV2ATTACKINGSPRITESHEET.png
 MeleeDeath Assets/Textures/EXOMATAMELEEENEMYDEATHSPRITESHEET.png
+HowToPlay Assets/Textures/UI/HowToPlay.png
+HTPButtonIdle Assets/Textures/UI/htp_button_Idle.png
+HTPButtonHover Assets/Textures/UI/htp_button_Hover.png
+HTPButtonClick Assets/Textures/UI/htp_button_Click.png
+StartIdle Assets/Textures/UI/Start_Idle.png
+StartHover Assets/Textures/UI/Start_Hover.png
+StartClick Assets/Textures/UI/Start_Click.png
+OptionsIdle Assets/Textures/UI/Options_Idle.png
+OptionsHover Assets/Textures/UI/Options_Hover.png
+OptionsClick Assets/Textures/UI/Options_Click.png
+QuitIdle Assets/Textures/UI/Quit_Idle.png
+QuitHover Assets/Textures/UI/Quit_Hover.png
+QuitClick Assets/Textures/UI/Quit_Click.png 

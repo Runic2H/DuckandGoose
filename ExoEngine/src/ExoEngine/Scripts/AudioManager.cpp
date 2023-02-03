@@ -45,6 +45,7 @@ namespace EM
     ****************************************************************************/
 	void AudioManager::Update(float Frametime)
 	{
+        UNREFERENCED_PARAMETER(Frametime);
         //update volume values
         //check sounds and update
         auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());

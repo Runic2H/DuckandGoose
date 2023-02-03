@@ -34,7 +34,7 @@ namespace EM
 	
 	void ButtonResponse::Update(float Frametime)
 	{
-		
+		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
@@ -61,7 +61,7 @@ namespace EM
 				spt.SetTexture("QuitHover");
 			}
 
-			if (ID_tag.GetTag() == "Options")
+			if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
 				spt.SetTexture("OptionsHover");
 			}

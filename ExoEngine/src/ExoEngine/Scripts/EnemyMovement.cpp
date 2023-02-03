@@ -48,11 +48,12 @@ namespace EM
 			mAttackTime -= Frametime;
 			UpdateAttack();
 			UpdatePhysics(Frametime);
+			UpdateState();
 		}
 		else {
-			UpdateState();
 			Animate(mState);
-			std::cout << std::to_string(static_cast<int>(mState)) << std::endl;
+			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
+			//std::cout << std::to_string(static_cast<int>(mState)) << std::endl;
 		}
 	}
 

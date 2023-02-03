@@ -77,7 +77,7 @@ namespace EM
 
 		void SetState(EnemyState state);
 
-		EnemyState GetState()
+		EnemyState& GetState()
 		{
 			return mState;
 		}

@@ -22,6 +22,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/AudioManager.h"
 
 
 namespace EM
@@ -109,27 +110,31 @@ namespace EM
 		for (int i = 0; i < obj["ScriptCount"].GetInt(); ++i)
 		{
 			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
-			for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+			for (size_t j = 0; j < mScriptNameVector.size(); ++j)
 			{
-				if (mScriptNameVector[i] == "PlayerController")
+				if (mScriptNameVector[j] == "PlayerController")
 				{
 					mScriptsVector.push_back(new PlayerController());
 				}
-				if (mScriptNameVector[i] == "EnemyMovement")
+				if (mScriptNameVector[j] == "EnemyMovement")
 				{
 					mScriptsVector.push_back(new EnemyMovement());
 				}
-				if (mScriptNameVector[i] == "CollisionResponse")
+				if (mScriptNameVector[j] == "CollisionResponse")
 				{
 					mScriptsVector.push_back(new CollisionResponse());
 				}
-				if (mScriptNameVector[i] == "ButtonResponse")
+				if (mScriptNameVector[j] == "ButtonResponse")
 				{
 					mScriptsVector.push_back(new ButtonResponse());
 				}
-				if (mScriptNameVector[i] == "ScenerioScript")
+				if (mScriptNameVector[j] == "ScenerioScript")
 				{
 					mScriptsVector.push_back(new ScenerioScript());
+				}
+				if (mScriptNameVector[j] == "AudioManager")
+				{
+					mScriptsVector.push_back(new AudioManager());
 				}
 			}
 		}
@@ -142,7 +147,7 @@ namespace EM
 	****************************************************************************/
 	bool Logic::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		size_t i = 0;
+		int i = 0;
 		writer->StartObject();
 		//writer->StartArray();
 		for (i = 0; i < mScriptNameVector.size(); ++i)
@@ -173,6 +178,7 @@ namespace EM
 	void Logic::ClearAllScripts()
 	{
 		mScriptNameVector.clear();
+		mScriptsVector.clear();
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
 		{
 			(*i)->End();
@@ -188,5 +194,7 @@ namespace EM
 				return mScriptsVector[i];
 			}
 		}
+		std::cout << "'Script Not Found" << std::endl;
+		return nullptr;
 	}
 }

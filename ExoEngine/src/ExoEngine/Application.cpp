@@ -116,7 +116,7 @@ Run loop for application
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
-		RigidBody rb;
+		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
@@ -146,7 +146,7 @@ Run loop for application
 		p_ecs.GetComponent<Logic>(Background).InsertScript(new AudioManager(), Background);
 		p_ecs.GetComponent<Transform>(Background).SetPos(0.0f,0.0f);
 		p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
-		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
+		p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");*/
 		
 		//Entity Background = p_ecs.CreateEntity();
 		//name.SetNameTag("Main Menu BackGround");
@@ -161,18 +161,18 @@ Run loop for application
 		//p_ecs.GetComponent<Transform>(Background).SetScale({ 4.170206546783447f,1.9999960660934448f});
 		//p_ecs.GetComponent<Sprite>(Background).SetTexture("MainBackGround");
 
-		Entity Title = p_ecs.CreateEntity();
-		name.SetNameTag("Title");
-		p_ecs.AddComponent<NameTag>(Title, name);
-		p_ecs.AddComponent<Transform>(Title, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Title, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Title, rb);
-		//p_ecs.AddComponent<Collider>(Title, C_ColliderComponent);
-		//p_ecs.AddComponent<Tag>(Title, C_TagComponent);
-		//p_ecs.AddComponent<Logic>(Title, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Title).SetPos({ 0.0f,0.43617022037506104f });
-		p_ecs.GetComponent<Transform>(Title).SetScale(2.4f, 0.9862148761749268f);
-		p_ecs.GetComponent<Sprite>(Title).SetTexture("ExomataLogo");
+		//Entity Title = p_ecs.CreateEntity();
+		//name.SetNameTag("Title");
+		//p_ecs.AddComponent<NameTag>(Title, name);
+		//p_ecs.AddComponent<Transform>(Title, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Title, C_SpriteComponent);
+		////p_ecs.AddComponent<RigidBody>(Title, rb);
+		////p_ecs.AddComponent<Collider>(Title, C_ColliderComponent);
+		////p_ecs.AddComponent<Tag>(Title, C_TagComponent);
+		////p_ecs.AddComponent<Logic>(Title, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(Title).SetPos({ 0.0f,0.43617022037506104f });
+		//p_ecs.GetComponent<Transform>(Title).SetScale(2.4f, 0.9862148761749268f);
+		//p_ecs.GetComponent<Sprite>(Title).SetTexture("ExomataLogo");
 		//p_ecs.GetComponent<Logic>(Title).InsertScript(new EnemyMovement(), Title);
 		//p_ecs.GetComponent<Logic>(Title).InsertScript(new CollisionResponse(), Title);
 
@@ -218,7 +218,7 @@ Run loop for application
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
-		Entity hud = p_ecs.CreateEntity();
+		/*Entity hud = p_ecs.CreateEntity();
 		p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
 		p_ecs.GetComponent<Transform>(hud).SetScale(1.f, 0.55f);
 		p_ecs.AddComponent<HUDComponent>(hud, C_HUDComponent);
@@ -247,7 +247,7 @@ Run loop for application
 		p_ecs.AddComponent<NameTag>(hpbar, C_NameTagComponent);
 		p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		p_ecs.AddComponent<Logic>(hpbar, logic);
-		p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
+		p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);*/
 		//Entity Option = p_ecs.CreateEntity();
 		//name.SetNameTag("Option");
 		//p_ecs.AddComponent<NameTag>(Option, name);
@@ -264,93 +264,93 @@ Run loop for application
 		//p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
 		//p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
-		Entity Start = p_ecs.CreateEntity();
-		name.SetNameTag("Start");
-		p_ecs.AddComponent<NameTag>(Start, name);
-		p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
-		//	p_ecs.AddComponent<RigidBody>(Start, rb);
-		p_ecs.AddComponent<Collider>(Start, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(Start, C_TagComponent);
-		p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
-		p_ecs.GetComponent<Transform>(Start).SetScale(1.0f, 0.2f);
-		p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
-		p_ecs.GetComponent<Tag>(Start).SetTag("Start");
-		p_ecs.GetComponent<Collider>(Start)[0].mMax = { 0.5,0.5 };
-		p_ecs.GetComponent<Collider>(Start)[0].mMin = { -0.5,-0.5 };
-		p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);
+		//Entity Start = p_ecs.CreateEntity();
+		//name.SetNameTag("Start");
+		//p_ecs.AddComponent<NameTag>(Start, name);
+		//p_ecs.AddComponent<Transform>(Start, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Start, C_SpriteComponent);
+		////	p_ecs.AddComponent<RigidBody>(Start, rb);
+		//p_ecs.AddComponent<Collider>(Start, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(Start, C_TagComponent);
+		//p_ecs.AddComponent<Logic>(Start, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(Start).SetPos({ 0.0f,0.0f });
+		//p_ecs.GetComponent<Transform>(Start).SetScale(1.0f, 0.2f);
+		//p_ecs.GetComponent<Sprite>(Start).SetTexture("SmallButton");
+		//p_ecs.GetComponent<Tag>(Start).SetTag("Start");
+		//p_ecs.GetComponent<Collider>(Start)[0].mMax = { 0.5,0.5 };
+		//p_ecs.GetComponent<Collider>(Start)[0].mMin = { -0.5,-0.5 };
+		//p_ecs.GetComponent<Logic>(Start).InsertScript(new ButtonResponse(), Start);
 
-		Entity Quit = p_ecs.CreateEntity();
-		name.SetNameTag("Quit");
-		p_ecs.AddComponent<NameTag>(Quit, name);
-		p_ecs.AddComponent<Transform>(Quit, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Quit, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Quit, rb);
-		p_ecs.AddComponent<Collider>(Quit, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(Quit, C_TagComponent);
-		p_ecs.AddComponent<Logic>(Quit, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Quit).SetPos({ 0.0f,-0.25f });
-		p_ecs.GetComponent<Transform>(Quit).SetScale(1.0f, 0.2f);
-		p_ecs.GetComponent<Sprite>(Quit).SetTexture("SmallButton");
-		p_ecs.GetComponent<Tag>(Quit).SetTag("Quit");
-		p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
-		p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
-		p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
+		//Entity Quit = p_ecs.CreateEntity();
+		//name.SetNameTag("Quit");
+		//p_ecs.AddComponent<NameTag>(Quit, name);
+		//p_ecs.AddComponent<Transform>(Quit, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Quit, C_SpriteComponent);
+		////p_ecs.AddComponent<RigidBody>(Quit, rb);
+		//p_ecs.AddComponent<Collider>(Quit, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(Quit, C_TagComponent);
+		//p_ecs.AddComponent<Logic>(Quit, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(Quit).SetPos({ 0.0f,-0.25f });
+		//p_ecs.GetComponent<Transform>(Quit).SetScale(1.0f, 0.2f);
+		//p_ecs.GetComponent<Sprite>(Quit).SetTexture("SmallButton");
+		//p_ecs.GetComponent<Tag>(Quit).SetTag("Quit");
+		//p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
+		//p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
+		//p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
 
-		Entity Option = p_ecs.CreateEntity();
-		name.SetNameTag("Options");
-		p_ecs.AddComponent<NameTag>(Option, name);
-		p_ecs.AddComponent<Transform>(Option, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(Option, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(Option, rb);
-		p_ecs.AddComponent<Collider>(Option, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(Option, C_TagComponent);
-		p_ecs.AddComponent<Logic>(Option, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(Option).SetPos({ 0.0f,-0.5f });
-		p_ecs.GetComponent<Transform>(Option).SetScale(1.0f, 0.2f);
-		p_ecs.GetComponent<Sprite>(Option).SetTexture("OptionsIdle");
-		p_ecs.GetComponent<Tag>(Option).SetTag("Options");
-		p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
-		p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
-		p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
+		//Entity Option = p_ecs.CreateEntity();
+		//name.SetNameTag("Options");
+		//p_ecs.AddComponent<NameTag>(Option, name);
+		//p_ecs.AddComponent<Transform>(Option, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(Option, C_SpriteComponent);
+		////p_ecs.AddComponent<RigidBody>(Option, rb);
+		//p_ecs.AddComponent<Collider>(Option, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(Option, C_TagComponent);
+		//p_ecs.AddComponent<Logic>(Option, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(Option).SetPos({ 0.0f,-0.5f });
+		//p_ecs.GetComponent<Transform>(Option).SetScale(1.0f, 0.2f);
+		//p_ecs.GetComponent<Sprite>(Option).SetTexture("OptionsIdle");
+		//p_ecs.GetComponent<Tag>(Option).SetTag("Options");
+		//p_ecs.GetComponent<Collider>(Option)[0].mMax = { 0.5,0.5 };
+		//p_ecs.GetComponent<Collider>(Option)[0].mMin = { -0.5,-0.5 };
+		//p_ecs.GetComponent<Logic>(Option).InsertScript(new ButtonResponse(), Option);
 
-		Entity HowToPlay = p_ecs.CreateEntity();
-		name.SetNameTag("HowToPlay");
-		p_ecs.AddComponent<NameTag>(HowToPlay, name);
-		p_ecs.AddComponent<Transform>(HowToPlay, C_TransformComponent);
-		p_ecs.AddComponent<Sprite>(HowToPlay, C_SpriteComponent);
-		//p_ecs.AddComponent<RigidBody>(HowToPlay, rb);
-		p_ecs.AddComponent<Collider>(HowToPlay, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(HowToPlay, C_TagComponent);
-		p_ecs.AddComponent<Logic>(HowToPlay, C_LogicComponent);
-		p_ecs.GetComponent<Transform>(HowToPlay).SetPos({ 0.0f,-0.75f });
-		p_ecs.GetComponent<Transform>(HowToPlay).SetScale(1.0f, 0.2f);
-		p_ecs.GetComponent<Sprite>(HowToPlay).SetTexture("SmallButton");
-		p_ecs.GetComponent<Tag>(HowToPlay).SetTag("HowToPlay");
-		p_ecs.GetComponent<Collider>(HowToPlay)[0].mMax = { 0.5,0.5 };
-		p_ecs.GetComponent<Collider>(HowToPlay)[0].mMin = { -0.5,-0.5 };
-		p_ecs.GetComponent<Logic>(HowToPlay).InsertScript(new ButtonResponse(), Option);
+		//Entity HowToPlay = p_ecs.CreateEntity();
+		//name.SetNameTag("HowToPlay");
+		//p_ecs.AddComponent<NameTag>(HowToPlay, name);
+		//p_ecs.AddComponent<Transform>(HowToPlay, C_TransformComponent);
+		//p_ecs.AddComponent<Sprite>(HowToPlay, C_SpriteComponent);
+		////p_ecs.AddComponent<RigidBody>(HowToPlay, rb);
+		//p_ecs.AddComponent<Collider>(HowToPlay, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(HowToPlay, C_TagComponent);
+		//p_ecs.AddComponent<Logic>(HowToPlay, C_LogicComponent);
+		//p_ecs.GetComponent<Transform>(HowToPlay).SetPos({ 0.0f,-0.75f });
+		//p_ecs.GetComponent<Transform>(HowToPlay).SetScale(1.0f, 0.2f);
+		//p_ecs.GetComponent<Sprite>(HowToPlay).SetTexture("SmallButton");
+		//p_ecs.GetComponent<Tag>(HowToPlay).SetTag("HowToPlay");
+		//p_ecs.GetComponent<Collider>(HowToPlay)[0].mMax = { 0.5,0.5 };
+		//p_ecs.GetComponent<Collider>(HowToPlay)[0].mMin = { -0.5,-0.5 };
+		//p_ecs.GetComponent<Logic>(HowToPlay).InsertScript(new ButtonResponse(), Option);
 
 		//Entity Background = p_ecs.CreateEntity();
 		//name.SetNameTag("Background");
 		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
 		//p_ecs.AddComponent<Sprite>(Background, sprite);
 		//p_ecs.AddComponent<NameTag>(Background, name);
-		Entity player = p_ecs.CreateEntity();
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		p_ecs.AddComponent<Transform>(player, C_TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
-		tag.SetTag("Player");
-		p_ecs.AddComponent<Tag>(player, tag);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
-		p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		//Entity player = p_ecs.CreateEntity();
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
+		//tag.SetTag("Player");
+		//p_ecs.AddComponent<Tag>(player, tag);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
@@ -384,14 +384,28 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
+				p_Scene->checkForSceneToLoad();
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				{
+					if (p_ecs.HaveComponent<Tag>(i))
+					{
+						if (p_ecs.GetComponent<Tag>(i).GetTag() == "Enemy")
+						{
+							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
+							{
+								p_ecs.DestroyEntity(i);
+							}
+						}
+					}
+				}
 			}
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
-			p_Scene->checkForSceneToLoad();
+
 
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
@@ -401,7 +415,6 @@ Run loop for application
 			
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
-			
 		}
 		mLogic->End();
 		End();

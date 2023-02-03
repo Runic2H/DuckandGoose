@@ -26,16 +26,17 @@ namespace EM {
 
 		void ScenerioScript::Update(float Frametime)
 		{
+			UNREFERENCED_PARAMETER(Frametime);
 			/*if (SelectedScene != "")
 			{
 				p_Scene->DeserializeFromFile(SelectedScene);
 				SelectedScene = "";
 			}*/
-			auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+			//auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 			//auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
-			auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
-			auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
-			auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+			//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+			//auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
+			//auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 			//auto& btn = p_ecs.GetComponent<Button>(GetScriptEntityID());
 
 			
