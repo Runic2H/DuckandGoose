@@ -1133,7 +1133,7 @@ namespace EM {
             static int item_current = 1;
 
             //set voulume slider
-            static float f1 = 0.0f;
+            static float f1 = 1.0f;
             ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
             p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
 

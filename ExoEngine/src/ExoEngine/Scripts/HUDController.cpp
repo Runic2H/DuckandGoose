@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file PlayerController.cpp
+\file HUDController.cpp
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
@@ -44,18 +44,20 @@ namespace EM
         auto& pComp = p_ecs.GetComponent<HUDComponent>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
         auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
+        auto& pStats = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
         //get camera position
-        vec2D camPos = vec2D(camera.GetPosition().x, camera.GetPosition().y);
+        vec2D camPos = vec2D(Graphic::camera.GetPosition().x, Graphic::camera.GetPosition().y);
         //update position
         pTrans.SetPos(camPos + pComp.GetOffset());
-
+        //std::cout << "Cam Pos: " << Graphic::camera.GetPosition().x << ", " << Graphic::camera.GetPosition().y << "\n";
+        //std::cout << "HUD Pos: " << pTrans.GetPos().x << ", " << pTrans.GetPos().y << "\n";
         if (pComp.GetType() == HUDComponent::ElementType::Static) {    
             //do ???
         }
         else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
-            //update health bar value
             //update scale
-            pTrans.SetScale(vec2D(1,1));
+            pTrans.SetScale(0.75f * (float)pStats.GetHealth() / 100, pTrans.GetScale().y);
+            pTrans.SetPos(camPos.x + pComp.GetOffset().x - 0.32 * (100.f - (float)pStats.GetHealth()) / 100, camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
             //check for timing of cooldown
@@ -73,7 +75,7 @@ namespace EM
         }
         else if (pComp.GetType() == HUDComponent::ElementType::Text) {
             //update atk value
-            int atk = 0;
+            int atk = pStats.GetDamage();
             //get combo bonus value
             int bonus = 0;
             pComp.SetAtk((std::to_string(atk) + " + " + std::to_string(bonus)));
