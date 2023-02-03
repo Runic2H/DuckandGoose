@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
-\file PlayerController.cpp
+\file ScenerioScript.cpp
 \author Lau Yong Hui
-\par DP email: e.teo@digipen.edu
+\par DP email:l.yonghui.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200

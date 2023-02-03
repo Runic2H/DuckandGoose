@@ -50,7 +50,7 @@ namespace EM {
             mInstance = std::make_unique<LevelEditor>();
         }
         return mInstance;
-    }
+     }
 
     bool color_picker = false;
     bool drop_menu = false;

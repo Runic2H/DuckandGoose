@@ -45,6 +45,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HTP_Script.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\HTP_script.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />

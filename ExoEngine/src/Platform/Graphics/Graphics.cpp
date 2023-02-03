@@ -214,7 +214,7 @@ namespace EM {
 		p_Editor->mGameMousePosition.x *= camera.GetZoomLevel();
 		p_Editor->mGameMousePosition.y *= camera.GetZoomLevel();
 
-		if (p_GUI->check_pause() == true)
+		if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
 		{
 			//UI background
 			mRenderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
@@ -232,7 +232,7 @@ namespace EM {
 		p_FrameBuffer->UnBind();
 		
 		
-		if (p_GUI->check_pause() == true)
+		if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
 		{
 			mFont->RenderText("VOLUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the continue button
@@ -251,7 +251,7 @@ namespace EM {
 		}
 
 
-		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false)//toggle menu with escape
+		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
 		{
 			p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
 			//camera.resetZoomLevel();//reset zoom back to default
