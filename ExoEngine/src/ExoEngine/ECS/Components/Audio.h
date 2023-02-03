@@ -35,6 +35,7 @@ namespace EM
 			int mChannel;
 			bool is_Looping;
 			bool should_play;
+			bool should_stop;
 			bool is_Playing;
 		};
 		Audio();

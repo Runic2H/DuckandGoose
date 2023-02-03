@@ -58,7 +58,7 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
     {
         mSoundMap[strSoundName] = pSound; //if sound is created store in sound map
     }
-    std::cout << "Loaded Sound:" << strSoundName << "\n";
+    //std::cout << "Loaded Sound:" << strSoundName << "\n";
     return pSound;
 }
 
@@ -275,16 +275,17 @@ Checks if audio is playing
 ****************************************************************************/
 bool CAudioEngine::IsPlaying(int nChannelId) const
 {
-    std::cout << "checking...\n";
+    //std::cout << "checking...\n";
     bool is_playing = false;
     auto it = mChannelMap.find(nChannelId);
     //if not found return false
     if (it != mChannelMap.end())
     {
-        std::cout << "found channel\n";
-        return it->second->isPlaying(&is_playing);
+        //std::cout << "found channel\n";
+        it->second->isPlaying(&is_playing);
+        return is_playing;
     }
-    std::cout << "cannot found channel\n";
+    //std::cout << "cannot found channel\n";
     return false;
 }
 /*!*************************************************************************
@@ -317,8 +318,16 @@ void CAudioEngine::SetLooping(const std::string& strSoundName, bool in) {
         auto tFoundIt = mSoundMap.find(strSoundName);
         if (tFoundIt != mSoundMap.end()) {
             tFoundIt->second->setMode(FMOD_LOOP_NORMAL);
+            tFoundIt->second->setLoopCount(-1);
         }
     }
-    std::cout << "Updated looping\n";
+    else {
+        auto tFoundIt = mSoundMap.find(strSoundName);
+        if (tFoundIt != mSoundMap.end()) {
+            tFoundIt->second->setMode(FMOD_LOOP_OFF);
+            //std::cout << "turned loop off\n";
+        }
+    }
+    //std::cout << "Updated looping\n";
 }
     

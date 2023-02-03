@@ -34,6 +34,7 @@ bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 		na.is_Looping = obj["ScriptName"][i]["IsLooping"].GetInt();
 		na.mChannel = 0;
 		na.should_play = false;
+		na.should_stop = false;
 		na.is_Playing = false;
 		AudioArr.push_back(na);
 	}
