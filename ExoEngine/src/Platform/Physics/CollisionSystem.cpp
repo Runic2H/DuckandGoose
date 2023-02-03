@@ -63,7 +63,7 @@ namespace EM {
                                     if (e1 == Collider::ColliderType::circle) {
                                         if (e2 == Collider::ColliderType::circle) {
                                             if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
-                                                std::cout << "Collision Circle-Circle\n";
+                                               // std::cout << "Collision Circle-Circle\n";
                                                 col1[a].mHit = 1;
                                                 vec2D norm1 = offset1 - offset2;
                                                 Normalize(norm1, norm1);
@@ -82,8 +82,8 @@ namespace EM {
                                             vec2D max2 = offset2 + col2[b].mMax;
                                             vec2D min2 = offset2 - col2[b].mMin;
                                             if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
-                                                std::cout << "Collision Circle-Rect\n";
-                                                col1[a].mHit = 1;
+                                                //std::cout << "Collision Circle-Rect\n";
+                                                col1[a].mHit = 2;
                                                 vec2D norm1 = offset1 - offset2;
                                                 Normalize(norm1, norm1);
                                                 col1[a].mCollisionNormal = norm1;
@@ -122,12 +122,12 @@ namespace EM {
                                             vec2D max1 = offset1 + col1[a].mMax;
                                             vec2D min1 = offset1 - col1[a].mMin;
                                             if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                std::cout << "Collision Rect-Circle\n";
+                                                //std::cout << "Collision Rect-Circle\n";
                                                 col1[a].mHit = 1;
                                                 vec2D norm1 = offset1 - offset2;
                                                 Normalize(norm1, norm1);
                                                 col1[a].mCollisionNormal = norm1;
-                                                col2[b].mHit = 1;
+                                                col2[b].mHit = 2;
                                                 vec2D norm2 = offset2 - offset1;
                                                 Normalize(norm2, norm2);
                                                 col2[b].mCollisionNormal = norm2;
@@ -171,7 +171,7 @@ namespace EM {
                                             vec2D max1 = offset1 + col1[a].mMax;
                                             vec2D min1 = offset1 - col1[a].mMin;
                                             if (ecm.simpleBoxCircle(offset2, col2[b].mRadius, max1, min1)) {
-                                                std::cout << "Collision Rect-Circle\n";
+                                                //std::cout << "Collision Rect-Circle\n";
                                                 vec2D norm2;
                                                 if (offset2.x - col2[b].mRadius <= min1.x) {
                                                     norm2.x = 1;

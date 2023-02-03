@@ -47,5 +47,6 @@ namespace EM
 	private:
 		std::string mTag;
 		std::string mTargetTag;
+		
 	};
 }

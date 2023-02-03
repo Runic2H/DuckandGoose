@@ -39,6 +39,8 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 
+		IScript* GetScriptByName(std::string ScriptName);
+
 		/*!*************************************************************************
 		Retrieves Component Entity ID
 		****************************************************************************/

@@ -53,5 +53,7 @@ namespace EM
 		virtual std::string GetScriptName() override;
 	private:
 		entityPhysics mPhys;
+		Entity mEntityTarget{};
+		Entity mEntityMain{};
 	};
 }

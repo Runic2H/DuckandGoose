@@ -178,4 +178,15 @@ namespace EM
 			(*i)->End();
 		}
 	}
+
+	IScript* Logic::GetScriptByName(std::string ScriptName)
+	{
+		for (size_t i = 0; i < mScriptNameVector.size(); ++i)
+		{
+			if (mScriptNameVector[i] == ScriptName)
+			{
+				return mScriptsVector[i];
+			}
+		}
+	}
 }

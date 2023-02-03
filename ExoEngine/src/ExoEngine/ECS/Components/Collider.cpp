@@ -55,8 +55,8 @@ namespace EM
 		mColArr[1].mMin = vec2D(obj["minX2"].GetFloat(), obj["minY2"].GetFloat());
 		mColArr[0].mMax = vec2D(obj["maxX1"].GetFloat(), obj["maxY1"].GetFloat());
 		mColArr[1].mMax = vec2D(obj["maxX2"].GetFloat(), obj["maxY2"].GetFloat());
-		mColArr[0].mOffset = vec2D(obj["offsetX1"].GetFloat(), obj["offsetX1"].GetFloat());
-		mColArr[1].mOffset = vec2D(obj["offsetX2"].GetFloat(), obj["offsetX2"].GetFloat());
+		mColArr[0].mOffset = vec2D(obj["offsetX1"].GetFloat(), obj["offsetY1"].GetFloat());
+		mColArr[1].mOffset = vec2D(obj["offsetX2"].GetFloat(), obj["offsetY2"].GetFloat());
 		mColArr[0].mRadius = obj["radius1"].GetFloat();
 		mColArr[1].mRadius = obj["radius2"].GetFloat();
 

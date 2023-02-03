@@ -14,6 +14,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 *******************************************************************************/
 #include "empch.h"
 #include "CollisionResponse.h"
+#include "PlayerController.h"
+#include "EnemyMovement.h"
 
 namespace EM
 {
@@ -43,13 +45,11 @@ namespace EM
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		//std::cout << &col << "\n";
-		if (col[0].mHit || col[1].mHit) {
+
+		if (col[0].mHit == 1) {
 			vec2D response = rigidbody.GetVel();
 			vec2D normal = vec2D();
-			for (int i = 0; i < 2; i++) {
-				normal += col[i].mCollisionNormal;
-			}
+			normal += col[0].mCollisionNormal;
 			//Normalize(normal, normal);
 			float dotProd = dotProduct(normal, response);
 			if (dotProd <= 0) {
@@ -59,16 +59,42 @@ namespace EM
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			rigidbody.SetNextPos(nextPos);
-			std::cout << "Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << "\n";
-			//transform.SetPos(nextPos);
-			if (tag.GetNameTag() == "Player")
+			//std::cout << "Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << "\n";
+			transform.SetPos(nextPos);
+		}
+
+		//Taking Damage As Player
+		if (tag.GetNameTag() == "Player")
+		{
+			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				logic.GetScript()[0]->Update(Frametime);
-				att.GetHealth() -= att.GetDamage();
-				if (att.GetHealth() <= 0)
+				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
 				{
-					std::cout << "Dead" << std::endl;
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->Animate(PlayerController::PlayerState::Damage);
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.0f;
 				}
+
+			}
+		}
+		//Enemy Taking Damage
+		if (tag.GetNameTag() == "Enemy")
+		{
+			if (col.GetCollisionArray()[0].mHit == 2)
+			{
+				dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
+				dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+				vec2D response = rigidbody.GetVel();
+				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+
+				float dotProd = dotProduct(normal, response);
+				if (dotProd <= 0) {
+					normal = normal * dotProd;
+					response -= normal * 5;
+					rigidbody.SetVel(response);
+				}
+				vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
+				rigidbody.SetNextPos(nextPos);
 			}
 		}
 	}

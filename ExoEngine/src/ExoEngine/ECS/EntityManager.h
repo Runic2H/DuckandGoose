@@ -62,17 +62,17 @@ namespace EM
 		{
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
 
-			// Invalidate the destroyed entity's signature
-			for (Entity i = 0; i < MAX_ENTITIES; ++i)
-			{
-				std::cout << mSignatures[i] << std::endl;
-			}
-			mSignatures[entity].reset();
-			std::cout << "--------------------------------------" << std::endl;
-			for (Entity i = 0; i < MAX_ENTITIES; ++i)
-			{
-				std::cout << mSignatures[i] << std::endl;
-			}
+			//// Invalidate the destroyed entity's signature
+			//for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			//{
+			//	std::cout << mSignatures[i] << std::endl;
+			//}
+			//mSignatures[entity].reset();
+			//std::cout << "--------------------------------------" << std::endl;
+			//for (Entity i = 0; i < MAX_ENTITIES; ++i)
+			//{
+			//	std::cout << mSignatures[i] << std::endl;
+			//}
 
 
 			// Put the destroyed ID at the back of the queue

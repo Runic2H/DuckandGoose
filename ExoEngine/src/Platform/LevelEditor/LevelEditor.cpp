@@ -985,8 +985,8 @@ namespace EM {
                         }
                     }
                 }
-                //Rigid Component
-               /* if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+               //Rigid Component
+                if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
                 {
                     if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
                     {
@@ -1022,7 +1022,7 @@ namespace EM {
                         ImGui::Text("Restitution"); ImGui::SameLine();
                         ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
                     }
-                }*/
+                }
                 if (ImGui::Button("Delete Component"))
                     ImGui::OpenPopup("Delete Component");
 

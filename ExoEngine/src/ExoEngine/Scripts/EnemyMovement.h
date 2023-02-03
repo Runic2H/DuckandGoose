@@ -28,6 +28,16 @@ namespace EM
 	class EnemyMovement : public IScript
 	{
 	public:
+
+		enum class EnemyState
+		{
+			Idle,
+			Moving,
+			Attacking,
+			Dash,
+			Death
+		};
+
 		/*!*************************************************************************
 		Ctor for new Enemy Movement Scripts
 		****************************************************************************/
@@ -56,9 +66,34 @@ namespace EM
 		Returns the name of the script
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
+
+		void UpdateState();
+
+		void UpdateAttack();
+
+		void UpdatePhysics(float Frametime);
+
+		void Animate(EnemyState state);
+
+		void SetState(EnemyState state);
+
+		EnemyState GetState()
+		{
+			return mState;
+		}
+
 	private:
+		EnemyState mState;
 		float mAttackCooldown;
 		float mAttackTime;
 		entityPhysics mPhys;
+
+	public:
+		//bool mIsAttacking;
+		//bool mIsIdle;
+		//bool mIsMoving;
+		//bool mIsDashing;
+		//bool mIsDamaged;
+
 	};
 }
