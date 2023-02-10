@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file AudioEngine.h
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
