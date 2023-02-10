@@ -823,6 +823,24 @@ namespace EM {
                             p_ecs.AddComponent<Logic>(selectedEntity, C_LogicComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("Audio"))
+                    {
+                        if (!p_ecs.HaveComponent<Audio>(selectedEntity))
+                            p_ecs.AddComponent<Audio>(selectedEntity, C_AudioComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Tag"))
+                    {
+                        if (!p_ecs.HaveComponent<Tag>(selectedEntity))
+                            p_ecs.AddComponent<Tag>(selectedEntity, C_TagComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("HUD"))
+                    {
+                        if (!p_ecs.HaveComponent<HUDComponent>(selectedEntity))
+                            p_ecs.AddComponent<HUDComponent>(selectedEntity, C_HUDComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -1070,13 +1088,13 @@ namespace EM {
                             sList.push_back(mScriptList[i].c_str());
                             //std::cout << sList[i] << std::endl;
                         }
-                       // std::cout << "logic size " << logic.GetScriptNames().size() << std::endl; //causes error
-                        std::cout << "sList size " << sList.size() << std::endl; // 1
-                        std::cout << "sList " << sList[0] << std::endl;
+                        //std::cout << "logic size " << logic.GetScriptNames().size() << std::endl; //causes error
+                        //std::cout << "sList size " << sList.size() << std::endl; // 1
+                        //std::cout << "sList " << sList[0] << std::endl;
                         
                         std::copy(sList.begin(), sList.end(), logicList);
                         
-                        std::cout << "logicList " << logicList[1] << std::endl; //D
+                        //std::cout << "logicList " << logicList[1] << std::endl; //D
                         ImGui::Combo("Logic Scripts", &current_script, logicList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
 
                         //static int isClicked = 0;
@@ -1137,21 +1155,20 @@ namespace EM {
                         }
                     }
                 }
-
                 //Rigid Component
-               /* if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                if (p_ecs.HaveComponent<RigidBody>(selectedEntity))
                 {
                     if (ImGui::CollapsingHeader("RigidBody", ImGuiTreeNodeFlags_None))
                     {
-                        //velocity
-                        auto& velocity = p_ecs.GetComponent<RigidBody>(selectedEntity).GetVel();
+                        //Acceleration
+                        auto& velocity = p_ecs.GetComponent<RigidBody>(selectedEntity).GetAccel();
                         ImGui::PushItemWidth(100.0f);
-                        ImGui::Text("Velocity   "); ImGui::SameLine();
+                        ImGui::Text("Acceleration   "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##VelocityX", (float*)&velocity.x, 0.005f); ImGui::SameLine();
+                        ImGui::DragFloat("##AccelerationX", (float*)&velocity.x, 0.005f); ImGui::SameLine();
                         ImGui::PushID(3);
                         ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##VelocityY", (float*)&velocity.y, 0.005f);
+                        ImGui::DragFloat("##AccelerationY", (float*)&velocity.y, 0.005f);
                         ImGui::PopID();
 
                         //Direction
@@ -1176,6 +1193,109 @@ namespace EM {
                         ImGui::DragFloat("##Restitution", (float*)&Restitution, 1.0f);
                     }
                 }
+                //Audio Component
+                if (p_ecs.HaveComponent<Audio>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Audio", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& AudioComp = p_ecs.GetComponent<Audio>(selectedEntity);
+                        auto& AudioArr = AudioComp.GetArr();
+                        //list out all audio files loaded
+                        static int currentfile = 0;
+                        const size_t arraysize = 30;
+                        const char* audioFileList[arraysize];
+                        std::vector<const char*> audiofilenames;
+                        for (auto& item : mAudioFile) {
+                            audiofilenames.push_back(item.c_str());
+                        }
+                        std::copy(audiofilenames.begin(), audiofilenames.end(), audioFileList);
+                        ImGui::Text("Loaded Audio Files:");
+                        ImGui::Combo("##Audio Files", &currentfile, audioFileList, static_cast<int>(audiofilenames.size()), static_cast<int>(audiofilenames.size()));
+                        //list out audio file paths in component
+                        static ImGuiComboFlags flags = 0;
+                        static int current_audio = 0;
+                        const size_t aSize = 30;
+                        const char* AudioList[aSize];
+                        std::vector<const char*> sList;
+                        for (int i = 0; i < AudioArr.size(); i++) {
+                            sList.push_back(AudioArr[i].mAudioPath.c_str());
+                            //std::cout << sList[i] << std::endl;
+                        }
+                        std::copy(sList.begin(), sList.end(), AudioList);
+                        //std::cout << "logicList " << logicList[1] << std::endl; 
+                        ImGui::Text("Inserted Audio Files:");
+                        ImGui::Combo("##Audio In Component", &current_audio, AudioList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
+                        //option to add audio to array
+                        if (ImGui::Button("Add Audio")) {
+                            Audio::AudioPiece nAud;
+                            nAud.mAudioPath = audioFileList[currentfile];
+                            nAud.mChannelGroup = Audio::AudioType::NONE;
+                            nAud.mChannel = 0;
+                            nAud.is_Looping = false;
+                            nAud.should_play = false;
+                            nAud.should_stop = false;
+                            nAud.is_Playing = false;
+                            AudioArr.push_back(nAud);
+                        }
+                        //option to remove audio from array
+                        if (ImGui::Button("Remove Audio")) {
+                            AudioArr.erase(AudioArr.begin() + current_audio);
+                        }
+                    }
+                }
+                //Tag Component
+                if (p_ecs.HaveComponent<Tag>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Tag", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& tag = p_ecs.GetComponent<Tag>(selectedEntity);
+                        //set tag
+                        /*auto& origin = tag.GetTag();
+                        char buffer1[256];
+                        memset(buffer1, 0, sizeof(buffer1));
+                        strcpy_s(buffer1, sizeof(buffer1), origin.c_str());
+                        if (ImGui::InputText("Tag", buffer1, sizeof(buffer1)))
+                        {
+                            origin = std::string(buffer1);
+                        }*/
+                        //set target
+                        auto& target = tag.GetTargetTag();
+                        char buffer2[256];
+                        memset(buffer2, 0, sizeof(buffer2));
+                        strcpy_s(buffer2, sizeof(buffer2), target.c_str());
+                        if (ImGui::InputText("Target", buffer2, sizeof(buffer2)))
+                        {
+                            target = std::string(buffer2);
+                        }
+                    }
+                }
+                //HUD Component
+                if (p_ecs.HaveComponent<HUDComponent>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("HUD", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& HUDComp = p_ecs.GetComponent<HUDComponent>(selectedEntity);
+                        const char* HUDList = "Static\0Health Bar\0Block Icon\0Charge Attack\0Text";
+                        auto HUDType = HUDComp.GetType();
+                        int HUDIndex = static_cast<int>(HUDType);
+                        ImGui::Combo("###test", &HUDIndex, HUDList);
+                        ImGui::PushItemWidth(100.0f);
+                        HUDComp.SetType(static_cast<HUDComponent::ElementType>(HUDIndex));
+
+                        auto& Offset = HUDComp.GetOffset();
+                        ImGui::PushItemWidth(100.0f);
+                        ImGui::Text("Offset"); ImGui::SameLine();
+                        ImGui::Text("X"); ImGui::SameLine();                    //set a "x" to indicate x-axis
+                        ImGui::DragFloat("##OffsetX", (float*)&Offset.x, 0.005f); ImGui::SameLine(); //char name , pass float pointer to position vec2D which hold x and y, the scaling value in imgui
+                        ImGui::PushID(1);
+                        ImGui::Text("Y"); ImGui::SameLine();
+                        ImGui::DragFloat("##OffsetY", (float*)&Offset.y, 0.005f);
+                        ImGui::PopID();
+                        HUDComp.SetOffset(Offset);
+                    }
+                }
+                
+
                 if (ImGui::Button("Delete Component"))
                     ImGui::OpenPopup("Delete Component");
 
@@ -1201,18 +1321,33 @@ namespace EM {
                         p_ecs.RemoveComponent<RigidBody>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
-                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
-                    {
-                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
                     if (ImGui::MenuItem("Logic") && p_ecs.HaveComponent<Logic>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<Logic>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Audio") && p_ecs.HaveComponent<Audio>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Audio>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Tag") && p_ecs.HaveComponent<Tag>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Tag>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("HUD") && p_ecs.HaveComponent<HUDComponent>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<HUDComponent>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
                     ImGui::EndPopup();
-                }*/
+                }
             }
             ImGui::End();
         } //end of is_ShowWindow
@@ -1257,7 +1392,7 @@ namespace EM {
             {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
-                current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), 50.f);
+                current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), Audio::AudioType::MASTER);
                 //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 

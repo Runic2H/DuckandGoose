@@ -43,7 +43,7 @@ namespace EM {
 		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 		ElementType GetType() { return mType; }
-		vec2D GetOffset() { return offset; }
+		vec2D& GetOffset() { return offset; }
 		void SetType(ElementType in) { mType = in; }
 		void SetOffset(vec2D in) { offset = in; }
 		std::string GetAtk() { return atk; }
