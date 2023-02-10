@@ -92,6 +92,16 @@ int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioTyp
         pSound->getMode(&currMode);
         //CAudioEngine::ErrorCheck(pChannel->setVolume());
         mChannelMap[nChannelId] = pChannel;
+        //assign channel group to audio
+        if (chgrp == EM::Audio::AudioType::MASTER) {
+            pChannel->setChannelGroup(Master);
+        }
+        if (chgrp == EM::Audio::AudioType::BGM) {
+            pChannel->setChannelGroup(BGM);
+        }
+        if (chgrp == EM::Audio::AudioType::SFX) {
+            pChannel->setChannelGroup(SFX);
+        }
         
     }
     //std::cout << mChannelMap.size() << std::endl;

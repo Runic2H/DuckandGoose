@@ -1225,6 +1225,15 @@ namespace EM {
                         //std::cout << "logicList " << logicList[1] << std::endl; 
                         ImGui::Text("Inserted Audio Files:");
                         ImGui::Combo("##Audio In Component", &current_audio, AudioList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
+                        //edit channel group
+                        if (AudioArr.size() > 0) {
+                            ImGui::Text("Inserted Audio Channel Group:");
+                            const char* ChList = "None\0Master\0BGM\0SFX";
+                            int ChIndex = static_cast<int>(AudioComp[current_audio].mChannelGroup);
+                            ImGui::Combo("###test", &ChIndex, ChList);
+                            ImGui::PushItemWidth(100.0f);
+                            AudioComp[current_audio].mChannelGroup = static_cast<Audio::AudioType>(ChIndex);
+                        }
                         //option to add audio to array
                         if (ImGui::Button("Add Audio")) {
                             Audio::AudioPiece nAud;
@@ -1237,6 +1246,7 @@ namespace EM {
                             nAud.is_Playing = false;
                             AudioArr.push_back(nAud);
                         }
+                        ImGui::SameLine();
                         //option to remove audio from array
                         if (ImGui::Button("Remove Audio")) {
                             AudioArr.erase(AudioArr.begin() + current_audio);

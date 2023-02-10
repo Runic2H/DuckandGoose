@@ -68,7 +68,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         float dbToVolume(float db);
         float VolumeTodB(float volume);
         int GetPlayingChannels() { return (int)mChannelMap.size(); }
-
+        void SetVolumeByChannel(FMOD::ChannelGroup* ch, float volume) { ch->setVolume(volume); }
 };
 
 #endif
