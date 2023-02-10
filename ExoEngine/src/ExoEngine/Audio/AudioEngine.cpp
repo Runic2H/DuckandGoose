@@ -341,4 +341,10 @@ void CAudioEngine::SetLooping(const std::string& strSoundName, bool in) {
     }
     //std::cout << "Updated looping\n";
 }
+
+float GetVolumeByChannel(FMOD::ChannelGroup* ch) {
+    float ret = 0;
+    ch->getVolume(&ret);
+    return ret;
+}
     
