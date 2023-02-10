@@ -26,7 +26,7 @@ namespace EM {
 	class ButtonResponse : public IScript
 	{
 	public:
-		ButtonResponse() = default;
+		ButtonResponse() : clicked{ false }, selected{ false } {};
 		~ButtonResponse() = default;
 		/*!*************************************************************************
 		This function initialises the script. As there are no data members that require

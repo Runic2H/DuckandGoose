@@ -43,7 +43,7 @@ namespace EM
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
 		
-		std::vector<AudioPiece> GetArr() { return AudioArr; }
+		std::vector<AudioPiece>& GetArr() { return AudioArr; }
 		void SetArr(std::vector<AudioPiece> in) { AudioArr = in; }
 		int GetSize() { return (int)AudioArr.size(); }
 		AudioPiece& operator[](int i) { return AudioArr[i]; }

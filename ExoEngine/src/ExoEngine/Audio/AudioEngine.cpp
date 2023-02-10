@@ -66,7 +66,7 @@ FMOD::Sound* CAudioEngine::Loadsound(const std::string& strSoundName, bool b_Loo
 Play sound searches for the audio laoaded into the soumd map, then calls 
 FMOD API play sound using loaded audio
 ****************************************************************************/
-int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
+int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp)
 {
 
     auto tFoundIt = mSoundMap.find(strSoundName);
@@ -90,8 +90,19 @@ int CAudioEngine::PlaySound(const std::string& strSoundName,  float fVolumedB)
     {
         FMOD_MODE currMode;
         pSound->getMode(&currMode);
-        CAudioEngine::ErrorCheck(pChannel->setVolume(VolumeTodB(fVolumedB)));
+        //CAudioEngine::ErrorCheck(pChannel->setVolume());
         mChannelMap[nChannelId] = pChannel;
+        //assign channel group to audio
+        if (chgrp == EM::Audio::AudioType::MASTER) {
+            pChannel->setChannelGroup(Master);
+        }
+        if (chgrp == EM::Audio::AudioType::BGM) {
+            pChannel->setChannelGroup(BGM);
+        }
+        if (chgrp == EM::Audio::AudioType::SFX) {
+            pChannel->setChannelGroup(SFX);
+        }
+        
     }
     //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;

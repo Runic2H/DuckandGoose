@@ -57,25 +57,15 @@ namespace EM
             //update looping
             p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
             //set is_playing accordingly
-            float vol = 0;
-            if (audio[i].mChannelGroup == Audio::AudioType::MASTER) {
-                vol = Mastervol;
-            }
-            if (audio[i].mChannelGroup == Audio::AudioType::BGM) {
-                vol = BGMvol;
-            }
-            if (audio[i].mChannelGroup == Audio::AudioType::SFX) {
-                vol = SFXvol;
-            }
             if (audio[i].is_Looping == false && audio[i].should_play == true && audio[i].is_Playing == false) {
                 //play sound
-                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, audio[i].mChannelGroup);
                 audio[i].should_play = false;
                 audio[i].is_Playing = true;
             }
             if (audio[i].is_Looping == true && audio[i].is_Playing == false) {
                 //play sound
-                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, audio[i].mChannelGroup);
                 audio[i].is_Playing = true;
                 audio[i].should_play = false;
                 //std::cout << "Playing loop\n";
