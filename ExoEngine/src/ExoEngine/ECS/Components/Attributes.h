@@ -14,9 +14,13 @@ namespace EM
 
 		void SetHealth(int value) { mHealth = value; }
 
+		void SetMaxHealth(int value) { mMaxHealth = value; }
+
 		void SetDamage(int value) { mDamage = value; }
 
 		int& GetHealth() { return mHealth; }
+
+		int& GetMaxHealth() { return mMaxHealth; }
 
 		int& GetDamage() { return mDamage; }
 
@@ -31,6 +35,7 @@ namespace EM
 
 	private:
 		int mHealth;
+		int mMaxHealth;
 		int mDamage;
 	};
 }

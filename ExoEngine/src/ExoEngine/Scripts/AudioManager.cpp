@@ -46,36 +46,26 @@ namespace EM
 	void AudioManager::Update(float Frametime)
 	{
         UNREFERENCED_PARAMETER(Frametime);
+        p_Audio->Update();
         //update volume values
         //check sounds and update
         auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
         for (int i = 0; i < audio.GetSize(); i++) {
-            p_Audio->Update();
             //check if sound is playing
             audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
             //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
             //update looping
             p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
             //set is_playing accordingly
-            float vol = 0;
-            if (audio[i].mChannelGroup == Audio::AudioType::MASTER) {
-                vol = Mastervol;
-            }
-            if (audio[i].mChannelGroup == Audio::AudioType::BGM) {
-                vol = BGMvol;
-            }
-            if (audio[i].mChannelGroup == Audio::AudioType::SFX) {
-                vol = SFXvol;
-            }
             if (audio[i].is_Looping == false && audio[i].should_play == true && audio[i].is_Playing == false) {
                 //play sound
-                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, audio[i].mChannelGroup);
                 audio[i].should_play = false;
                 audio[i].is_Playing = true;
             }
             if (audio[i].is_Looping == true && audio[i].is_Playing == false) {
                 //play sound
-                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, vol);
+                audio[i].mChannel = p_Audio->PlaySound(audio[i].mAudioPath, audio[i].mChannelGroup);
                 audio[i].is_Playing = true;
                 audio[i].should_play = false;
                 //std::cout << "Playing loop\n";
@@ -85,6 +75,7 @@ namespace EM
                 audio[i].is_Playing = false;
             }
         }
+
 	}
     /*!*************************************************************************
     End State for Audio Manager
@@ -92,5 +83,10 @@ namespace EM
     void AudioManager::End()
     {
         delete this;
+    }
+
+    std::string AudioManager::GetScriptName()
+    {
+        return "AudioManager";
     }
 }

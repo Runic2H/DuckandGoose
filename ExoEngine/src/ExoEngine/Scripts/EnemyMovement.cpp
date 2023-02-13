@@ -57,6 +57,10 @@ namespace EM
 		}
 	}
 
+	void EnemyMovement::End() {
+		delete this;
+	}
+
 	void EnemyMovement::UpdateState()
 	{
 		if ((mAttackCooldown <= 0.0f) && (mState != EnemyState::Death))
@@ -168,16 +172,9 @@ namespace EM
 		mState = state;
 	}
 
-	/*!*************************************************************************
-	End of Enemy Movement Script
-	****************************************************************************/
-	void EnemyMovement::End() 
-	{
-		delete this;
+	std::string EnemyMovement::GetScriptName() {
+		return "EnemyMovement";
 	}
 
-	/*!*************************************************************************
-	Returns the name of the script
-	****************************************************************************/
-	std::string EnemyMovement::GetScriptName() { return "EnemyMovement"; }
+	
 }

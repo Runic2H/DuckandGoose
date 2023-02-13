@@ -20,6 +20,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 #include "empch.h"
 #include "Fmod/fmod/fmod.hpp"
+#include "ExoEngine/ECS/Components/Audio.h"
 
 #define p_Audio CAudioEngine::GetInstance()
 
@@ -55,7 +56,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         FMOD::Sound* Loadsound(const std::string& strSoundName, bool bLooping = false);
         //void UnLoadSound(const std::string& strSoundName);
         
-        int PlaySound(const std::string& strSoundName, float fVolumedB = 0.0f);
+        int PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp);
         void PauseSound(int channelID);
         void UnpauseSound(int channelID);
         void StopChannel(channel_groups chan);
@@ -67,7 +68,11 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
         float dbToVolume(float db);
         float VolumeTodB(float volume);
         int GetPlayingChannels() { return (int)mChannelMap.size(); }
-
+        void SetVolumeByChannel(FMOD::ChannelGroup* ch, float volume) { ch->setVolume(volume); }
+        float GetVolumeByChannel(FMOD::ChannelGroup* ch);
+        FMOD::ChannelGroup* GetMasterChannelGroup() { return Master; }
+        FMOD::ChannelGroup* GetBGMChannelGroup() { return BGM; }
+        FMOD::ChannelGroup* GetSFXChannelGroup() { return SFX; }
 };
 
 #endif
