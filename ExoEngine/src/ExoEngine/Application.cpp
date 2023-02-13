@@ -410,9 +410,9 @@ Run loop for application
 		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
-		p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
-		p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav", 100.0f);
-		p_Editor->is_ShowWindow = false;
+		//p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
+		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
+		//p_Editor->is_ShowWindow = false;
 
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
