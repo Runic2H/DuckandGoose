@@ -213,7 +213,7 @@ void CAudioEngine::Init()
         {
             continue;
         }
-        FMOD::Sound* temp = Loadsound(audio_path + dir_entry.path().filename().string(), false);
+        //FMOD::Sound* temp = Loadsound(audio_path + dir_entry.path().filename().string(), false);
     }
 }
 

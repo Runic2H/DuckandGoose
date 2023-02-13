@@ -137,12 +137,16 @@ namespace EM
 			
 		}
 
-		// Component methods
-		template<typename T>
+		void ResetAllEntitySignatures()
+		{
+			mEntityManager->ResetAllEntitySignatures();
+		}
 
+		// Component methods
 		/*!*************************************************************************
 		Registers Component for use in ECS
 		****************************************************************************/
+		template<typename T>
 		void RegisterComponent()
 		{
 			mComponentManager->RegisterComponent<T>();
@@ -250,7 +254,8 @@ namespace EM
 		****************************************************************************/
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
-			return mComponentManager->ClearArrayForWorldBuild(Type);
+			//ResetEntities();
+			mComponentManager->ClearArrayForWorldBuild(Type);
 		}
 
 		/*!*************************************************************************

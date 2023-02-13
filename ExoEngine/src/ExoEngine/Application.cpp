@@ -36,6 +36,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/GUI/GUI.h"
 
+EM::vec2D* Trans;
 
 namespace EM {
 	bool end_state{false}; //placeholder
@@ -116,13 +117,13 @@ Run loop for application
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
-		/*RigidBody rb;
-		Logic logic;
+		/*Logic logic;
 		Sprite sprite;
 		NameTag name;
 		Tag tag;
+		RigidBody rb;*/
 
-		Entity Background = p_ecs.CreateEntity();
+		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
 		p_ecs.AddComponent<NameTag>(Background, name);
 		p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
@@ -218,36 +219,7 @@ Run loop for application
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMax = { 0.5,0.5 };
 		//p_ecs.GetComponent<Collider>(Quit)[0].mMin = { -0.5,-0.5 };
 		//p_ecs.GetComponent<Logic>(Quit).InsertScript(new ButtonResponse(), Quit);
-		/*Entity hud = p_ecs.CreateEntity();
-		p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
-		p_ecs.GetComponent<Transform>(hud).SetScale(1.f, 0.55f);
-		p_ecs.AddComponent<HUDComponent>(hud, C_HUDComponent);
-		p_ecs.GetComponent<HUDComponent>(hud).SetOffset(vec2D(-1.f, 0.75f));
-		p_ecs.GetComponent<HUDComponent>(hud).SetType(HUDComponent::ElementType::Static);
-		p_ecs.AddComponent<Tag>(hud, C_TagComponent);
-		p_ecs.AddComponent<Sprite>(hud, sprite);
-		p_ecs.GetComponent<Sprite>(hud).SetTexture("HPStatic");
-		p_ecs.AddComponent<Attributes>(hud, C_AttributesComponent);
-		p_ecs.AddComponent<NameTag>(hud, C_NameTagComponent);
-		p_ecs.GetComponent<NameTag>(hud).SetNameTag("HUD");
-		p_ecs.AddComponent<Logic>(hud, logic);
-		p_ecs.GetComponent<Logic>(hud).InsertScript(new HUDController(), hud);
 
-		Entity hpbar = p_ecs.CreateEntity();
-		p_ecs.AddComponent<Transform>(hpbar, C_TransformComponent);
-		p_ecs.GetComponent<Transform>(hpbar).SetScale(0.75f, 0.15f);
-		p_ecs.AddComponent<HUDComponent>(hpbar, C_HUDComponent);
-		p_ecs.GetComponent<HUDComponent>(hpbar).SetOffset(vec2D(-0.8f, 0.84f));
-		p_ecs.GetComponent<HUDComponent>(hpbar).SetType(HUDComponent::ElementType::HealthBar);
-		p_ecs.AddComponent<Tag>(hpbar, C_TagComponent);
-		p_ecs.AddComponent<Sprite>(hpbar, sprite);
-		p_ecs.GetComponent<Sprite>(hpbar).SetTexture("HPBar");
-		p_ecs.AddComponent<Attributes>(hpbar, C_AttributesComponent);
-		p_ecs.GetComponent<Attributes>(hpbar).SetHealth(100);
-		p_ecs.AddComponent<NameTag>(hpbar, C_NameTagComponent);
-		p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
-		p_ecs.AddComponent<Logic>(hpbar, logic);
-		p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);*/
 		//Entity Option = p_ecs.CreateEntity();
 		//name.SetNameTag("Option");
 		//p_ecs.AddComponent<NameTag>(Option, name);
@@ -337,6 +309,35 @@ Run loop for application
 		//p_ecs.AddComponent<Transform>(Background, C_TransformComponent);
 		//p_ecs.AddComponent<Sprite>(Background, sprite);
 		//p_ecs.AddComponent<NameTag>(Background, name);
+		//Entity hud = p_ecs.CreateEntity();
+		//p_ecs.AddComponent<Transform>(hud, C_TransformComponent);
+		//p_ecs.GetComponent<Transform>(hud).SetScale(3.0f, 1.0f);
+		//p_ecs.AddComponent<HUDComponent>(hud, C_HUDComponent);
+		//p_ecs.GetComponent<HUDComponent>(hud).SetOffset(vec2D(-3.0f, 3.0f));
+		//p_ecs.GetComponent<HUDComponent>(hud).SetType(HUDComponent::ElementType::Static);
+		//p_ecs.AddComponent<Tag>(hud, C_TagComponent);
+		//p_ecs.AddComponent<Sprite>(hud, sprite);
+		//p_ecs.GetComponent<Sprite>(hud).SetTexture("Blank");
+		//p_ecs.AddComponent<Attributes>(hud, C_AttributesComponent);
+		//p_ecs.AddComponent<NameTag>(hud, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(hud).SetNameTag("HUD");
+		//p_ecs.AddComponent<Logic>(hud, logic);
+		//p_ecs.GetComponent<Logic>(hud).InsertScript(new HUDController(), hud);
+		//Entity hpbar = p_ecs.CreateEntity();
+		//p_ecs.AddComponent<Transform>(hpbar, C_TransformComponent);
+		//p_ecs.GetComponent<Transform>(hpbar).SetScale(1.0f, 1.0f);
+		//p_ecs.AddComponent<HUDComponent>(hpbar, C_HUDComponent);
+		//p_ecs.GetComponent<HUDComponent>(hpbar).SetOffset(vec2D(-1.0f, 3.0f));
+		//p_ecs.GetComponent<HUDComponent>(hpbar).SetType(HUDComponent::ElementType::HealthBar);
+		//p_ecs.AddComponent<Tag>(hpbar, C_TagComponent);
+		//p_ecs.AddComponent<Sprite>(hpbar, sprite);
+		//p_ecs.GetComponent<Sprite>(hpbar).SetTexture("HPBar");
+		//p_ecs.AddComponent<Attributes>(hpbar, C_AttributesComponent);
+		//p_ecs.GetComponent<Attributes>(hpbar).SetHealth(100);
+		//p_ecs.AddComponent<NameTag>(hpbar, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
+		//p_ecs.AddComponent<Logic>(hpbar, logic);
+		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
@@ -366,8 +367,10 @@ Run loop for application
 		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
-		//p_Scene->DeserializeFromFile("Assets/Scene/MainMenu.json");
-		//p_Editor->is_ShowWindow = false;
+		p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
+		p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav", 100.0f);
+		p_Editor->is_ShowWindow = false;
+
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -384,10 +387,14 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
-				p_Scene->checkForSceneToLoad();
+				if (p_ecs.GetTotalEntities() >= 1)
+				{
+					Trans = &p_ecs.GetComponent<Transform>(1).GetPos();
+
+				}
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
-				mPosUpdate->Update();
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
+				mPosUpdate->Update();
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
 					if (p_ecs.HaveComponent<Tag>(i))
@@ -397,6 +404,7 @@ Run loop for application
 							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
 								p_ecs.DestroyEntity(i);
+								p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
 							}
 						}
 					}
@@ -411,8 +419,9 @@ Run loop for application
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-		
-			
+
+			p_Scene->checkForSceneToLoad();
+
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
@@ -425,7 +434,7 @@ End loop for application
 ****************************************************************************/
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("Assets/Scene/Level.json");
+		//p_Scene->SerializeToFile("Assets/Scene/Leveltest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

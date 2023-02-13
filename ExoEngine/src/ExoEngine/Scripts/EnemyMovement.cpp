@@ -46,9 +46,9 @@ namespace EM
 		{
 			mAttackCooldown -= Frametime;
 			mAttackTime -= Frametime;
+			UpdateState();
 			UpdateAttack();
 			UpdatePhysics(Frametime);
-			UpdateState();
 		}
 		else {
 			Animate(mState);
@@ -107,7 +107,7 @@ namespace EM
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel = mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 				//Attack Range
-				if (squarelength(rigidbody.GetDir()) < 8.0f)
+				if (squarelength(rigidbody.GetDir()) < 6.0f)
 				{
 					//Attack Logic Here
 					if (mAttackTime > 0.0f)
