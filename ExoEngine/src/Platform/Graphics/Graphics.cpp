@@ -185,6 +185,7 @@ namespace EM {
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
+				camera.SetZoomLevel(5.0f);
 			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);

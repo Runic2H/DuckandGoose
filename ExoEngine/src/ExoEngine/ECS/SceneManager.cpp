@@ -61,130 +61,103 @@ namespace EM
 	****************************************************************************/
 	bool SceneManager::Deserialize(const rapidjson::Value& obj)
 	{
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-		{
-			if (p_ecs.HaveComponent<Logic>(i))
-			{
-				p_ecs.GetComponent<Logic>(i).ClearAllScripts();
-				//std::cout << p_ecs.GetComponent<Logic>(i).GetScript().empty() << std::endl;
-			}
-		}
+		p_ecs.ResetAllEntitySignatures();
 		p_ecs.ResetEntities();
 		p_ecs.SetTotalEntitiesForWorldBuild(obj["Number of Entities"]["Entities"].GetUint());
-		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
+		auto aliveTotal = obj["Number of Entities"]["Entities"].GetUint();
+		Entity aliveCount = 0;
+		Entity j = 0;
+		while(j < aliveTotal)
 		{
-			p_ecs.ClearArrayForWorldBuild(i);
-			auto aliveTotal = obj["Number of Entities"]["Entities"].GetUint();
-			Entity aliveCount = 0;
-			Entity j = 0;
-			while(j < aliveTotal)
+			Signature signature(obj["EntitySignatures"][j].GetString());
+			p_ecs.SetEntitySignature(j, signature);
+			for (ComponentType CompID = 0; CompID < MAX_COMPONENTS; ++CompID)
 			{
-				if (obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(i).c_str()][j].GetUint() != MAX_ENTITIES)
+				if (p_ecs.GetEntitySignature(j).test(CompID))
 				{
-					Signature signature(obj["EntitySignatures"][j].GetString());
-					if (signature.test(i))
+					if (p_ecs.GetComponentTypeName(CompID) == "Transform")
 					{
-						//ADD COMPONENTS HERE FOR DESERIALIZE
-						if (p_ecs.GetComponentTypeName(i) == "Transform")
+						Transform transform;
+						if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
-							Transform transform;
-							if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Transform>(aliveCount == j ? aliveCount : j, transform);
-							}
-							std::cout << "Transform Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "RigidBody")
-						{
-							RigidBody rigidbody;
-							if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<RigidBody>(aliveCount == j ? aliveCount : j, rigidbody);
-							}
-							std::cout << "Rigid Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Collider")
-						{
-							Collider collider;
-							if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Collider>(aliveCount == j ? aliveCount : j, collider);
-							}
-							std::cout << "Collider Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "NameTag")
-						{
-							NameTag nametag;
-							if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<NameTag>(aliveCount == j ? aliveCount : j, nametag);
-							}
-							std::cout << "NameTag Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Sprite")
-						{
-							Sprite sprite;
-							if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Sprite>(aliveCount == j ? aliveCount : j, sprite);
-							}
-							std::cout << "Sprite Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Logic")
-						{
-							Logic logic;
-							if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Logic>(aliveCount == j ? aliveCount : j, logic);
-							}
-							std::cout << "Logic Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Tag")
-						{
-							Tag tag;
-							if (tag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Tag>(aliveCount == j ? aliveCount : j, tag);
-							}
-							std::cout << "Tag Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Audio")
-						{
-							Audio mAudio;
-							if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Audio>(aliveCount == j ? aliveCount : j, mAudio);
-							}
-							std::cout << "Audio Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "HUDComponent")
-						{
-							HUDComponent mHUD;
-							if (mHUD.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<HUDComponent>(aliveCount == j ? aliveCount : j, mHUD);
-							}
-							std::cout << "Hud Okay " << aliveCount << std::endl;
-						}
-						if (p_ecs.GetComponentTypeName(i) == "Attributes")
-						{
-							Attributes mAttributes;
-							if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(i).c_str()][aliveCount].GetObj()))
-							{
-								p_ecs.AddComponent<Attributes>(aliveCount == j ? aliveCount : j, mAttributes);
-							}
-							std::cout << "Attributes Okay " << aliveCount << std::endl;
+							p_ecs.AddComponent<Transform>(j, transform);
 						}
 					}
-					++aliveCount;
+					if (p_ecs.GetComponentTypeName(CompID) == "RigidBody")
+					{
+						RigidBody rigidbody;
+						if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<RigidBody>(j, rigidbody);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Collider")
+					{
+						Collider collider;
+						if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Collider>(j, collider);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "NameTag")
+					{
+						NameTag nametag;
+						if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<NameTag>(j, nametag);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Sprite")
+					{
+						Sprite sprite;
+						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Sprite>(j, sprite);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Logic")
+					{
+						Logic logic;
+						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Logic>(j, logic);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Tag")
+					{
+						Tag tag;
+						if (tag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Tag>(j, tag);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Audio")
+					{
+						Audio mAudio;
+						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Audio>(j, mAudio);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "HUDComponent")
+					{
+						HUDComponent mHUD;
+						if (mHUD.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<HUDComponent>(j, mHUD);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "Attributes")
+					{
+						Attributes mAttributes;
+						if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<Attributes>(j, mAttributes);
+						}
+					}
 				}
-				++j;
 			}
-			for (Entity k = 0; k < MAX_ENTITIES; ++k)
-			{
-				p_ecs.GetEntityToIndexMapECS(i)[k] = obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(i).c_str()][k].GetUint();
-				p_ecs.GetIndexToEntityMapECS(i)[k] = obj["IndexToEntityMap"][p_ecs.GetComponentTypeName(i).c_str()][k].GetUint();
-			}
+			++j;
 		}
 		return true;
 	}
@@ -261,51 +234,51 @@ namespace EM
 			{
 				if (p_ecs.GetEntitySignature(j).any())
 				{
+					aliveCount++;
 					if (p_ecs.GetEntitySignature(j).test(i))
 					{
 						//ADD COMPONENTS HERE FOR SERIALIZE
 						if (p_ecs.GetComponentTypeName(i) == "Transform")
 						{
-							p_ecs.GetComponent<Transform>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Transform>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "RigidBody")
 						{
-							p_ecs.GetComponent<RigidBody>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<RigidBody>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Collider")
 						{
-							p_ecs.GetComponent<Collider>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Collider>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "NameTag")
 						{
-							p_ecs.GetComponent<NameTag>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<NameTag>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Sprite")
 						{
-							p_ecs.GetComponent<Sprite>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Sprite>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Logic")
 						{
-							p_ecs.GetComponent<Logic>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Logic>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Tag")
 						{
-							p_ecs.GetComponent<Tag>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Tag>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Audio")
 						{
-							p_ecs.GetComponent<Audio>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Audio>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "HUDComponent")
 						{
-							p_ecs.GetComponent<HUDComponent>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<HUDComponent>(j).Serialize(writer);
 						}
 						if (p_ecs.GetComponentTypeName(i) == "Attributes")
 						{
-							p_ecs.GetComponent<Attributes>(aliveCount).Serialize(writer);
+							p_ecs.GetComponent<Attributes>(j).Serialize(writer);
 						}
 					}
-					aliveCount++;
 				}
 				j++;
 			}
@@ -327,14 +300,6 @@ void EM::SceneManager::checkForSceneToLoad()
 {
 	if (sceneToLoad != "")
 	{
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-		{
-			if (p_ecs.HaveComponent<Logic>(i))
-			{
-				p_ecs.GetComponent<Logic>(i).ClearAllScripts();
-				std::cout << p_ecs.GetComponent<Logic>(i).GetScript().empty() << std::endl;
-			}
-		}
 		DeserializeFromFile(sceneToLoad);
 		sceneToLoad = "";
 	}

@@ -100,6 +100,7 @@ namespace EM
 		entityPhysics mPhys;
 
 	public:
+		bool mIsDamaged;
 		float mDamageTimer;
 
 	};

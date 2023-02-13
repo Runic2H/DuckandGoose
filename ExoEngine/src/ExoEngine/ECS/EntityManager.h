@@ -103,6 +103,7 @@ namespace EM
 			return mSignatures[entity];
 		}
 
+
 		/*!*************************************************************************
 		Returns the Total Entities in existence (both destroyed + alive)
 		****************************************************************************/
@@ -116,7 +117,7 @@ namespace EM
 		****************************************************************************/
 		void SetTotalEntitiesForWorld(Entity entity)
 		{
-			while(mLivingEntityCount < entity)
+			while(mAliveEntities.size() < entity)
 			{
 				CreateEntity();
 			}
@@ -128,6 +129,16 @@ namespace EM
 		const std::set<Entity> GetAliveEntities()
 		{
 			return mAliveEntities;
+		}
+
+		std::array<Signature, MAX_ENTITIES>& GetEntitySignatureArray()
+		{
+			return mSignatures;
+		}
+
+		void ResetAllEntitySignatures()
+		{
+			mSignatures.fill(0);
 		}
 
 		

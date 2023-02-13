@@ -23,7 +23,7 @@ namespace EM
     Default constructor for Player Controller
     ****************************************************************************/
     PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mBlockTimer{0.0f},
-    mDamageTimer{0.0f}, mVel{ vec2D() } {};
+        mDamageTimer{ 0.0f }, mIsDamaged{false}, mVel{ vec2D() } {};
 
     /*!*************************************************************************
     Returns a new copy of PlayerController Script
@@ -50,6 +50,21 @@ namespace EM
         mDashTimer -= Frametime;
         mBlockTimer -= Frametime;
         mDamageTimer -= Frametime;
+        if (mDamageTimer <= 0.0f && mIsDamaged == true)
+        {
+            mIsDamaged = false;
+            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+            {
+                if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "HPBar")
+                {
+                    p_ecs.GetComponent<Attributes>(i).GetHealth() -= 10;
+                    if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0)
+                    {
+                        p_ecs.GetComponent<Attributes>(i).SetHealth(0);
+                    }
+                }
+            }
+        }
         mVel.x = 0.0f;
         mVel.y = 0.0f;
 
@@ -105,7 +120,7 @@ namespace EM
             mState = PlayerState::Block;
         }
 
-        if (mCooldownTimer <= 0.0f && mDamageTimer <= 0.0f)
+        if (mCooldownTimer <= 0.0f)
         {
             mState = PlayerState::Idle;
             mAttackCounter = 0;
