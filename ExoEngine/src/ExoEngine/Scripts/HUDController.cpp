@@ -54,11 +54,12 @@ namespace EM
         //std::cout << "HUD Pos: " << pTrans.GetPos().x << ", " << pTrans.GetPos().y << "\n";
         if (pComp.GetType() == HUDComponent::ElementType::Static) {    
             //do ???
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x / 100.0f), camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
             //update scale
-            pTrans.SetScale(0.75f * (float)pStats.GetHealth() / 100, pTrans.GetScale().y);
-            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x - 0.32 * (100.f - (float)pStats.GetHealth())) / 100.0f, camPos.y + pComp.GetOffset().y);
+            pTrans.SetScale(5.0f * (float)pStats.GetHealth() / 100, pTrans.GetScale().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
             //check for timing of cooldown

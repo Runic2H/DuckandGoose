@@ -110,7 +110,7 @@ namespace EM
 		****************************************************************************/
 		T& GetData(Entity entity)
 		{
-			//assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
+			assert(mEntityToIndexMap[entity] != MAX_ENTITIES && "Retrieving non-existent component.");
 			// Return a reference to the entity's component
 			return mComponentArray[mEntityToIndexMap[entity]];
 		}
@@ -181,13 +181,13 @@ namespace EM
 		****************************************************************************/
 		void ClearForWorldBuild()
 		{
-			for (Entity i = 0; i < mSize; ++i)
+			/*for (Entity i = 0; i < MAX_ENTITIES; ++i)
 			{
 				EntityDestroyed(i);
-			}
+			}*/
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
-			//std::cout << mComponentArray.empty() << std::endl;
+			std::cout << mComponentArray.empty() << std::endl;
 		}
 
 	private:

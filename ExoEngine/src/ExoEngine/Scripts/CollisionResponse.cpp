@@ -76,7 +76,8 @@ namespace EM
 				{
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->Animate(PlayerController::PlayerState::Damage);
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.0f;
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged = true;
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.5f;
 				}
 			}
 		}

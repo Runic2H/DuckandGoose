@@ -45,7 +45,6 @@
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\HTP_Script.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
@@ -224,7 +223,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\HTP_script.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
@@ -312,7 +310,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -397,7 +395,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)ExoEngine\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)ExoEngine\vendor\freetype\libs;$(SolutionDir)ExoEngine\vendor\fmodL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Release-x64\Exomata"</Command>
+      <Command>copy "$(TargetDir)ExoEngine.dll" "$(SolutionDir)bin\Release-x64\Exomata\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
