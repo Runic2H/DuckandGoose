@@ -118,7 +118,7 @@ namespace EM {
 			if (sprite.is_Animated)
 			{
 				mAimator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
-				mAimator.UpdateAnimation(frametime);
+				mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(entity));
 			}
 			if (sprite.is_SpriteSheet)
 			{
@@ -151,24 +151,10 @@ namespace EM {
 							EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[i].mRadius * 2, collider[i].mRadius * 2, collider[i].mRadius * 2);
 							EM::Matrix4x4 Transform = translate * scale;
 							mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
-							//mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 						}
 					}
 				}
 			}
-				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
-					mRenderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
-						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
-						{ 0.0f, 1.0f, 0.0f, 1.0f });
-
-
-				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::circle) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
-				{
-					auto& collider = p_ecs.GetComponent<Collider>(entity);
-					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
-						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
-					mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
-				}*/
 			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
@@ -255,7 +241,6 @@ namespace EM {
 		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
 		{
 			p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
-			//camera.resetZoomLevel();//reset zoom back to default
 			p_GUI->toggle_pause();//set pause to true thus pausing the game
 		}
 		if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))

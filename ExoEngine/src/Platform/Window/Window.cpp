@@ -148,7 +148,6 @@ namespace EM{
 				auto folder = std::filesystem::path("Assets/Textures");
 				auto filename = std::filesystem::path(paths[i]).filename();
 				std::filesystem::copy(std::filesystem::path(paths[i]), folder / filename);
-				//insert entry into audio file paths
 				p_Editor->insertTextureFilePath(paths[i]);
 			}
 			else
