@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Laser Turret
     ****************************************************************************/
-    LaserTurret::LaserTurret() : firing{ false }, dmg{ 2 }, delay{ 1.f } {};
+    LaserTurret::LaserTurret() : timeTilSpawn{ 1.f }, startTimeTilSpawn{ 1.f }, firingDuration{ 1.f }, startFiringDuration{ 1.f }, damage{2}, playerDetected{ false }, firing{ false } {};
 
     /*!*************************************************************************
     Returns a new copy of LaserTurret Script
@@ -44,11 +44,39 @@ namespace EM
     ****************************************************************************/
     void LaserTurret::Update(float Frametime)
     {
-        //check timer
-        //set firing if timer is 0
-        //fire laser and deal damage
-        //reset timer to max delay
-        //decrease timer
+        //check for player proximity
+        if (playerDetected) {
+            //check timer
+            if (startTimeTilSpawn <= 0) {
+                //set firing if timer is 0
+                //fire laser and deal damage
+                firing = true;
+                //set collider to be alive
+                auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+                col[0].is_Alive = true;
+                //set firing duration
+                startFiringDuration = firingDuration;
+                //reset timer to max delay
+                startTimeTilSpawn = timeTilSpawn;
+            }
+            else {
+                //decrease timer
+                startTimeTilSpawn -= Frametime;
+            }
+            if (firing) {
+                //decrement firing duration
+                startFiringDuration -= Frametime;
+                if (startFiringDuration <= 0) {
+                    //deactivate laser when time runs out
+                    firing = false;
+                    col[0].is_Alive = false;
+                }
+            }
+        }
+        //render laser?
+        if (col[0].is_Alive == true) {
+
+        }
     }
 
     /*!*************************************************************************

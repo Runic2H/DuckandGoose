@@ -1,13 +1,13 @@
 /*!*************************************************************************
 ****
-\file LaserTurret.h
+\file DialogueManager.h
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
 \date 2/11/2022
-\brief	Script for Laser Turret
+\brief	Script for Dialogue Manager
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -22,33 +22,33 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM
 {
 	/*!*************************************************************************
-	Class for Laser Turret Script
+	Class for Dialogue Manager Script
 	****************************************************************************/
-	class LaserTurret : public IScript
+	class DialogueManager : public IScript
 	{
 	public:
 		/*!*************************************************************************
-		Default constructor for Laser Turret
+		Default constructor for Dialogue Manager
 		****************************************************************************/
-		LaserTurret();
+		DialogueManager();
 		/*!*************************************************************************
-		Default destructor for Player Controller
+		Default destructor for Dialogue Manager
 		****************************************************************************/
-		~LaserTurret() = default;
+		~DialogueManager() = default;
 		/*!*************************************************************************
-		Returns a new copy of LaserTurret Script
+		Returns a new copy of Dialogue Manager Script
 		****************************************************************************/
-		virtual LaserTurret* Clone() const override;
+		virtual DialogueManager* Clone() const override;
 		/*!*************************************************************************
-		Start State of LaserTurret Script
+		Start State of DialogueManager Script
 		****************************************************************************/
 		virtual void Start() override;
 		/*!*************************************************************************
-		Update Loop of LaserTurret Script
+		Update Loop of DialogueManager Script
 		****************************************************************************/
 		virtual void Update(float Frametime) override;
 		/*!*************************************************************************
-		End State for LaserTurret
+		End State for DialogueManager
 		****************************************************************************/
 		virtual void End() override;
 		/*!*************************************************************************
@@ -58,12 +58,8 @@ namespace EM
 
 
 	private:
-		float timeTilSpawn;
-		float startTimeTilSpawn;
-		float firingDuration;
-		float startFiringDuration;
-		int damage;
-		bool playerDetected;
-		bool firing;
+		int dialogueIndex;
+		bool isAnimating;
+		bool isFinishedAnimating;
 	};
 }

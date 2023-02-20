@@ -1,13 +1,13 @@
 /*!*************************************************************************
 ****
-\file LaserTurret.h
+\file GateController.h
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
 \date 2/11/2022
-\brief	Script for Laser Turret
+\brief	Script for Gate Controller
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -22,33 +22,33 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM
 {
 	/*!*************************************************************************
-	Class for Laser Turret Script
+	Class for Gate Controller Script
 	****************************************************************************/
-	class LaserTurret : public IScript
+	class GateController : public IScript
 	{
 	public:
 		/*!*************************************************************************
-		Default constructor for Laser Turret
+		Default constructor for Gate Controller
 		****************************************************************************/
-		LaserTurret();
+		GateController();
 		/*!*************************************************************************
-		Default destructor for Player Controller
+		Default destructor for Gate Controller
 		****************************************************************************/
-		~LaserTurret() = default;
+		~GateController() = default;
 		/*!*************************************************************************
-		Returns a new copy of LaserTurret Script
+		Returns a new copy of GateController Script
 		****************************************************************************/
-		virtual LaserTurret* Clone() const override;
+		virtual GateController* Clone() const override;
 		/*!*************************************************************************
-		Start State of LaserTurret Script
+		Start State of GateController Script
 		****************************************************************************/
 		virtual void Start() override;
 		/*!*************************************************************************
-		Update Loop of LaserTurret Script
+		Update Loop of GateController Script
 		****************************************************************************/
 		virtual void Update(float Frametime) override;
 		/*!*************************************************************************
-		End State for LaserTurret
+		End State for GateController
 		****************************************************************************/
 		virtual void End() override;
 		/*!*************************************************************************
@@ -58,12 +58,6 @@ namespace EM
 
 
 	private:
-		float timeTilSpawn;
-		float startTimeTilSpawn;
-		float firingDuration;
-		float startFiringDuration;
-		int damage;
-		bool playerDetected;
-		bool firing;
+		int enemies;
 	};
 }
