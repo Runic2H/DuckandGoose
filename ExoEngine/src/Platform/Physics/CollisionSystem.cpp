@@ -78,6 +78,12 @@ namespace EM {
                                                 // std::cout << "hit\n";
                                             }
                                         }
+                                        if (e2 == Collider::ColliderType::bubble) {
+                                            if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
+                                                // std::cout << "Collision Circle-Circle\n";
+                                                col2[b].mHit = 3;
+                                            }
+                                        }
                                         if (e2 == Collider::ColliderType::rect) {
                                             vec2D max2 = offset2 + col2[b].mMax;
                                             vec2D min2 = offset2 - col2[b].mMin;
@@ -189,6 +195,14 @@ namespace EM {
                                                 col2[b].mHit = 1;
                                                 col2[b].mCollisionNormal = norm2;
                                                 // std::cout << "hit\n";
+                                            }
+                                        }
+                                    }
+                                    else if (e1 == Collider::ColliderType::bubble) {
+                                        if (e2 == Collider::ColliderType::circle) {
+                                            if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
+                                                // std::cout << "Collision Circle-Circle\n";
+                                                col1[a].mHit = 3;
                                             }
                                         }
                                     }

@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Gate Controller
     ****************************************************************************/
-    GateController::GateController() : currentSect{ 0 } {};
+    GateController::GateController() : enemies{ 0 } {};
 
     /*!*************************************************************************
     Returns a new copy of GateController Script

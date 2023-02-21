@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Laser Turret
     ****************************************************************************/
-    LaserTurret::LaserTurret() : timeTilSpawn{ 1.f }, startTimeTilSpawn{ 1.f }, firingDuration{ 1.f }, startFiringDuration{ 1.f }, damage{2}, playerDetected{ false }, firing{ false } {};
+    LaserTurret::LaserTurret() : timeTilSpawn{ 2.f }, startTimeTilSpawn{ 2.f }, firingDuration{ 1.f }, startFiringDuration{ 1.f }, damage{2}, playerDetected{ false }, firing{ false } {};
 
     /*!*************************************************************************
     Returns a new copy of LaserTurret Script
