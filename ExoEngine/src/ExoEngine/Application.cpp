@@ -430,11 +430,6 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
-				if (p_ecs.GetTotalEntities() >= 1)
-				{
-					Trans = &p_ecs.GetComponent<Transform>(1).GetPos();
-
-				}
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
