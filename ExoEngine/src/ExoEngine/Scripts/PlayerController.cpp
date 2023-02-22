@@ -73,32 +73,32 @@ namespace EM
         {   
             mCooldownTimer = 0.1f;
             if (p_Input->KeyHold(GLFW_KEY_W)) {
-                mVel.y += 500.0f;
+                mVel.y += 50.0f;
                 mState = PlayerState::Moving;
             }
             else if (p_Input->KeyHold(GLFW_KEY_S)) {
-                mVel.y -= 500.f;
+                mVel.y -= 50.f;
                 mState = PlayerState::Moving;
             }
             else if (p_Input->KeyHold(GLFW_KEY_D)) {
-                mVel.x += 500.f;
+                mVel.x += 50.f;
                 mState = PlayerState::Moving;
                 p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetUVCoor().x = 512.0f;
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x += 3000.f;
+                    mVel.x += 300.f;
                     mCooldownTimer = 0.5f;
                     mDashTimer = 5.0f;
                     mState = PlayerState::Dash;
                 }
             }
             else if (p_Input->KeyHold(GLFW_KEY_A)) {
-                mVel.x -= 500.f;
+                mVel.x -= 50.f;
                 mState = PlayerState::Moving;
                 p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetUVCoor().x = -512.0f;
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x -= 3000.f;
+                    mVel.x -= 100.f;
                     mCooldownTimer = 0.5f;
                     mDashTimer = 5.0f;
                     mState = PlayerState::Dash;
@@ -190,6 +190,7 @@ namespace EM
             break;
         case PlayerState::Attacking:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Attack");
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetDisplayTime();
             break;
         case PlayerState::Dash:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Dashing");
