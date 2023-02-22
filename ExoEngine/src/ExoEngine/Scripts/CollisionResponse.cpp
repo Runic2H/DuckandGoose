@@ -50,7 +50,7 @@ namespace EM
 		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
 		//std::cout << &col << "\n";
-		if (col[0].mHit || col[1].mHit) {
+		if (col[0].mHit == 1 || col[1].mHit == 1) {
 			vec2D response = rigidbody.GetVel();
 			vec2D normal = vec2D();
 			normal += col[0].mCollisionNormal;

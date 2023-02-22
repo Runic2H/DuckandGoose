@@ -138,14 +138,14 @@ namespace EM {
 			{
 				if (p_ecs.HaveComponent<Collider>(entity) && ((p_ecs.GetComponent<Collider>(entity)[0].is_Alive) || (p_ecs.GetComponent<Collider>(entity)[1].is_Alive))) {
 					for (int i = 0; i < 2; i++) {
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect) 
+						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::box)
 						{
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
 							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x / 2) - (collider[i].mMin.x / 2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y / 2) - (collider[i].mMin.y / 2), 0.0f },
 								{ collider[i].mMin.x + collider[i].mMax.x , collider[i].mMin.y + collider[i].mMax.y },
 								{ 1.0f, 0.0f, 0.0f,1.0f });
 						}
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle) {
+						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::bubble) {
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
 							EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[i].mOffset.x, transform.GetPos().y + collider[i].mOffset.y, 0.0f);
 							EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[i].mRadius * 2, collider[i].mRadius * 2, collider[i].mRadius * 2);
