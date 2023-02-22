@@ -105,17 +105,17 @@ namespace EM {
                                             vec2D min2 = offset2 - col2[b].mMin;
                                             if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
                                                 vec2D norm1;
-                                                if (offset1.x - col1[b].mRadius <= min2.x) {
+                                                if (offset1.x + col1[b].mRadius >= min2.x) {
                                                     norm1.x = -1;
                                                 }
-                                                else if (offset1.x + col1[b].mRadius >= max2.x) {
+                                                else if (offset1.x - col1[b].mRadius <= max2.x) {
                                                     norm1.x = 1;
                                                 }
-                                                if (offset1.y - col1[b].mRadius <= max2.y) {
+                                                if (offset1.y + col1[b].mRadius >= max2.y) {
                                                     norm1.y = -1;
                                                 }
-                                                else if (offset1.y + col1[b].mRadius >= min2.y) {
-                                                    norm1.y = 11;
+                                                else if (offset1.y - col1[b].mRadius <= min2.y) {
+                                                    norm1.y = 1;
                                                 }
                                                 Normalize(norm1, norm1);
                                                 col1[b].mHit = 1;
@@ -179,16 +179,16 @@ namespace EM {
                                             if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
                                                 //std::cout << "Collision Rect-Circle\n";
                                                 vec2D norm2;
-                                                if (offset2.x - col2[b].mRadius <= min1.x) {
+                                                if (offset2.x + col2[b].mRadius >= min1.x) {
                                                     norm2.x = -1;
                                                 }
-                                                else if (offset2.x + col2[b].mRadius >= max1.x) {
+                                                else if (offset2.x - col2[b].mRadius <= max1.x) {
                                                     norm2.x = 1;
                                                 }
-                                                if (offset2.y - col2[b].mRadius <= max1.y) {
+                                                if (offset2.y + col2[b].mRadius >= max1.y) {
                                                     norm2.y = -1;
                                                 }
-                                                else if (offset2.y + col2[b].mRadius >= min1.y) {
+                                                else if (offset2.y - col2[b].mRadius <= min1.y) {
                                                     norm2.y = 1;
                                                 }
                                                 Normalize(norm2, norm2);
