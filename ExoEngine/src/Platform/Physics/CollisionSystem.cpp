@@ -103,19 +103,19 @@ namespace EM {
                                         if (e2 == Collider::ColliderType::box) {
                                             vec2D max2 = offset2 + col2[b].mMax;
                                             vec2D min2 = offset2 - col2[b].mMin;
-                                            if (ecm.simpleBoxCircle(offset1, col1[a].mRadius, max2, min2)) {
+                                            if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
                                                 vec2D norm1;
                                                 if (offset1.x - col1[b].mRadius <= min2.x) {
-                                                    norm1.x = 1;
-                                                }
-                                                else if (offset1.x + col1[b].mRadius >= max2.x) {
                                                     norm1.x = -1;
                                                 }
+                                                else if (offset1.x + col1[b].mRadius >= max2.x) {
+                                                    norm1.x = 1;
+                                                }
                                                 if (offset1.y - col1[b].mRadius <= max2.y) {
-                                                    norm1.y = 1;
+                                                    norm1.y = -1;
                                                 }
                                                 else if (offset1.y + col1[b].mRadius >= min2.y) {
-                                                    norm1.y = -1;
+                                                    norm1.y = 11;
                                                 }
                                                 Normalize(norm1, norm1);
                                                 col1[b].mHit = 1;
@@ -176,20 +176,20 @@ namespace EM {
                                         if (e2 == Collider::ColliderType::circle) {
                                             vec2D max1 = offset1 + col1[a].mMax;
                                             vec2D min1 = offset1 - col1[a].mMin;
-                                            if (ecm.simpleBoxCircle(offset2, col2[b].mRadius, max1, min1)) {
+                                            if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
                                                 //std::cout << "Collision Rect-Circle\n";
                                                 vec2D norm2;
                                                 if (offset2.x - col2[b].mRadius <= min1.x) {
-                                                    norm2.x = 1;
-                                                }
-                                                else if (offset2.x + col2[b].mRadius >= max1.x) {
                                                     norm2.x = -1;
                                                 }
+                                                else if (offset2.x + col2[b].mRadius >= max1.x) {
+                                                    norm2.x = 1;
+                                                }
                                                 if (offset2.y - col2[b].mRadius <= max1.y) {
-                                                    norm2.y = 1;
+                                                    norm2.y = -1;
                                                 }
                                                 else if (offset2.y + col2[b].mRadius >= min1.y) {
-                                                    norm2.y = -1;
+                                                    norm2.y = 1;
                                                 }
                                                 Normalize(norm2, norm2);
                                                 col2[b].mHit = 1;
