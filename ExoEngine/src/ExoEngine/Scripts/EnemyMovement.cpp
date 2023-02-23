@@ -102,11 +102,11 @@ namespace EM
 			mAttackCooldown -= Frametime;
 			mAttackTime -= Frametime;
 		}
-		if (mState == EnemyState::Death)
-		{
-			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
+	/*	if (mState == EnemyState::Death)
+		{*/
+			//p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
 			//std::cout << std::to_string(static_cast<int>(mState)) << std::endl;
-		}
+		//}
 		Animate(mState);
 	}
 
@@ -177,8 +177,8 @@ namespace EM
 				if (mState == EnemyState::Attacking) {
 					//if attacking, attack and calculate chances for cooldown
 					if (mAttackCooldown <= 0 && (rand() % 100) <= 80) {
-						mAttackCooldown = 2.5f;
-						mAttackTime = 2.0f;
+						mAttackCooldown = 10.0f;
+						mAttackTime = 10.0f;
 						mState = EnemyState::Moving;
 						//std::cout << "Cooldown" << std::endl;
 						//if on cooldown, check if can retreat
@@ -186,7 +186,7 @@ namespace EM
 						//set to moving state after retreat
 					}
 					if (mAttackCooldown <= 0) {
-						mAttackTime = 2.0f;
+						mAttackTime = 10.0f;
 					}
 					vec2D newVel = vec2D();
 					if (mAttackCooldown > 0.0f && mAttackTime <= 0.0f && mState != EnemyState::Death)
@@ -231,9 +231,9 @@ namespace EM
 			case EnemyState::Attacking:
 				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("MeleeAttack");
 				break;
-			case EnemyState::Death:
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("MeleeDeath");
-				break;
+				/*	case EnemyState::Death:
+						p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("MeleeDeath");*/
+
 			}
 		}
 		else
