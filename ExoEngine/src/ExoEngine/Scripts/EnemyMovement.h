@@ -31,7 +31,7 @@ namespace EM
 
 		enum class EnemyState
 		{
-			Idle,
+			Patrolling,
 			Moving,
 			Attacking,
 			Dash,
@@ -67,10 +67,6 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 
-		void UpdateState();
-
-		void UpdateAttack();
-
 		void UpdatePhysics(float Frametime);
 
 		void Animate(EnemyState state);
@@ -87,6 +83,11 @@ namespace EM
 		float mAttackCooldown;
 		float mAttackTime;
 		entityPhysics mPhys;
+		vec2D mOrigin;
+		bool mPatrolling;
+		vec2D mDest;
+		float mPatrolTimer;
+		float mPatrolTime;
 
 	public:
 		//bool mIsAttacking;

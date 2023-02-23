@@ -18,11 +18,15 @@ namespace EM
 
 		void SetDamage(int value) { mDamage = value; }
 
+		void SetChestHealth(int value) { mChestHealth = value; }
+
 		int& GetHealth() { return mHealth; }
 
 		int& GetMaxHealth() { return mMaxHealth; }
 
 		int& GetDamage() { return mDamage; }
+
+		int& GetChestHealth() { return mChestHealth; }
 
 		/*!*************************************************************************
 		Retrieves Component Entity ID
@@ -37,5 +41,6 @@ namespace EM
 		int mHealth;
 		int mMaxHealth;
 		int mDamage;
+		int mChestHealth;
 	};
 }
