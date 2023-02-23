@@ -1,13 +1,13 @@
 {
     "Number of Entities": {
-        "Entities": 4
+        "Entities": 2
     },
     "EntityToIndexMap": {
         "Transform": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -106,10 +106,10 @@
             100
         ],
         "RigidBody": [
-            100,
             0,
             1,
-            2,
+            100,
+            100,
             100,
             100,
             100,
@@ -208,10 +208,10 @@
             100
         ],
         "Collider": [
-            100,
             0,
             1,
-            2,
+            100,
+            100,
             100,
             100,
             100,
@@ -312,8 +312,8 @@
         "NameTag": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -414,8 +414,8 @@
         "Sprite": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -514,10 +514,10 @@
             100
         ],
         "Logic": [
-            100,
             0,
             1,
-            2,
+            100,
+            100,
             100,
             100,
             100,
@@ -617,9 +617,9 @@
         ],
         "Tag": [
             100,
-            0,
-            1,
-            2,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -922,10 +922,10 @@
             100
         ],
         "Attributes": [
-            100,
             0,
             1,
-            2,
+            100,
+            100,
             100,
             100,
             100,
@@ -1028,8 +1028,8 @@
         "Transform": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1128,9 +1128,9 @@
             100
         ],
         "RigidBody": [
+            0,
             1,
-            2,
-            3,
+            100,
             100,
             100,
             100,
@@ -1230,9 +1230,9 @@
             100
         ],
         "Collider": [
+            0,
             1,
-            2,
-            3,
+            100,
             100,
             100,
             100,
@@ -1334,8 +1334,8 @@
         "NameTag": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1436,8 +1436,8 @@
         "Sprite": [
             0,
             1,
-            2,
-            3,
+            100,
+            100,
             100,
             100,
             100,
@@ -1536,9 +1536,9 @@
             100
         ],
         "Logic": [
+            0,
             1,
-            2,
-            3,
+            100,
             100,
             100,
             100,
@@ -1638,9 +1638,9 @@
             100
         ],
         "Tag": [
-            1,
-            2,
-            3,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -1944,9 +1944,9 @@
             100
         ],
         "Attributes": [
+            0,
             1,
-            2,
-            3,
+            100,
             100,
             100,
             100,
@@ -2047,39 +2047,23 @@
         ]
     },
     "EntitySignatures": [
-        "00000000000000000000000000011001",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111"
+        "00000000000000000000001000111111",
+        "00000000000000000000001000111111"
     ],
     "Components": {
         "Transform": [
             {
+                "posX": -1.7238686084747314,
+                "posY": 0.3614131808280945,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
                 "posX": 0.0,
                 "posY": 0.0,
-                "scaleX": 30.0,
-                "scaleY": 30.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": -5.046226978302002,
-                "posY": -5.169727325439453,
-                "scaleX": 5.0,
-                "scaleY": 5.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": 1.5406126976013184,
-                "posY": -9.570383071899414,
-                "scaleX": 7.999909400939941,
-                "scaleY": 7.999909400939941,
-                "Rot": 0.0
-            },
-            {
-                "posX": -0.4068243205547333,
-                "posY": -7.423617362976074,
-                "scaleX": 7.9999284744262695,
-                "scaleY": 7.9999284744262695,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
                 "Rot": 0.0
             }
         ],
@@ -2095,16 +2079,8 @@
             {
                 "velX": 100.0,
                 "velY": 0.0,
-                "dirX": -6.601966381072998,
-                "dirY": 4.5259833335876465,
-                "Friction": 0.0,
-                "Restitution": 0.0
-            },
-            {
-                "velX": 100.0,
-                "velY": 0.0,
-                "dirX": -4.622311115264893,
-                "dirY": 2.409350872039795,
+                "dirX": 0.0,
+                "dirY": 0.0,
                 "Friction": 0.0,
                 "Restitution": 0.0
             }
@@ -2112,76 +2088,62 @@
         "Collider": [
             {
                 "ColliderType1": 1,
-                "ColliderType2": 3,
+                "ColliderType2": 0,
                 "minX1": 0.0,
-                "minX2": 1.0,
+                "minX2": 0.0,
                 "minY1": 0.0,
-                "minY2": 1.0,
+                "minY2": 0.0,
                 "maxX1": 0.0,
-                "maxX2": 0.20000000298023224,
+                "maxX2": 0.0,
                 "maxY1": 0.0,
-                "maxY2": 1.0,
+                "maxY2": 0.0,
                 "offsetX1": 0.0,
-                "offsetX2": 2.049999952316284,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": 0.05000000074505806,
-                "radius1": 1.0,
+                "offsetY2": 0.0,
+                "radius1": 0.30000001192092896,
                 "radius2": 0.0
             },
             {
-                "ColliderType1": 1,
-                "ColliderType2": 3,
-                "minX1": 0.0,
-                "minX2": 0.5,
-                "minY1": 0.0,
-                "minY2": 1.5,
-                "maxX1": 0.0,
-                "maxX2": 1.0,
-                "maxY1": 0.0,
-                "maxY2": 1.7999999523162842,
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 1.149999976158142,
+                "minX2": 0.0,
+                "minY1": 0.699999988079071,
+                "minY2": 0.0,
+                "maxX1": 1.350000023841858,
+                "maxX2": 0.0,
+                "maxY1": 0.800000011920929,
+                "maxY2": 0.0,
                 "offsetX1": 0.0,
-                "offsetX2": -1.899999976158142,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": -0.15000000596046448,
-                "radius1": 1.5,
-                "radius2": 0.0
-            },
-            {
-                "ColliderType1": 1,
-                "ColliderType2": 3,
-                "minX1": 0.0,
-                "minX2": 0.5,
-                "minY1": 0.0,
-                "minY2": 1.5,
-                "maxX1": 0.0,
-                "maxX2": 1.0,
-                "maxY1": 0.0,
-                "maxY2": 1.7999999523162842,
-                "offsetX1": 0.0,
-                "offsetX2": -1.899999976158142,
-                "offsetY1": 0.0,
-                "offsetY2": -0.15000000596046448,
-                "radius1": 1.5,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
                 "radius2": 0.0
             }
         ],
         "NameTag": [
             {
-                "NameTag": "Background"
-            },
-            {
                 "NameTag": "Player"
             },
             {
-                "NameTag": "Enemy"
-            },
-            {
-                "NameTag": "Enemy"
+                "NameTag": "none"
             }
         ],
         "Sprite": [
             {
-                "TextureName": "BackGround",
+                "TextureName": "Idle",
+                "Index_X": 7.0,
+                "Index_Y": 0.0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "DisplayTime": 0.16670000553131104
+            },
+            {
+                "TextureName": "Blank",
                 "Index_X": 0.0,
                 "Index_Y": 0.0,
                 "Ucoordinates": 512.0,
@@ -2189,82 +2151,31 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "Running",
-                "Index_X": 7.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": -512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "MeleeIdle",
-                "Index_X": 7.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "MeleeIdle",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": -512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "DisplayTime": 0.16670000553131104
             }
         ],
         "Logic": [
             {
-                "0": "PlayerController",
-                "1": "CollisionResponse",
+                "0": "CollisionResponse",
+                "1": "PlayerController",
                 "ScriptCount": 2
             },
             {
-                "0": "EnemyMovement",
-                "1": "CollisionResponse",
-                "ScriptCount": 2
-            },
-            {
-                "0": "EnemyMovement",
-                "1": "CollisionResponse",
-                "ScriptCount": 2
+                "0": "CollisionResponse",
+                "ScriptCount": 1
             }
         ],
-        "Tag": [
-            {
-                "Tag": "Player",
-                "TargetTag": ""
-            },
-            {
-                "Tag": "Untagged",
-                "TargetTag": ""
-            },
-            {
-                "Tag": "Untagged",
-                "TargetTag": ""
-            }
-        ],
+        "Tag": [],
         "Audio": [],
         "HUDComponent": [],
         "Attributes": [
             {
-                "Health": 100,
-                "Damage": 50
-            },
-            {
-                "Health": 100,
+                "Health": 75,
+                "Max Health": 100,
                 "Damage": 10
             },
             {
-                "Health": 100,
+                "Health": 75,
+                "Max Health": 100,
                 "Damage": 10
             }
         ]

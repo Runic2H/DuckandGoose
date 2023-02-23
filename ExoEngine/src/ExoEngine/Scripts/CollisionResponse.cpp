@@ -50,22 +50,6 @@ namespace EM
 		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
 		//std::cout << &col << "\n";
-		if (col[0].mHit || col[1].mHit) {
-			vec2D response = rigidbody.GetVel();
-			vec2D normal = vec2D();
-			normal += col[0].mCollisionNormal;
-			//Normalize(normal, normal);
-			float dotProd = dotProduct(normal, response);
-			if (dotProd <= 0) {
-				normal = normal * dotProd;
-				response -= normal;
-				rigidbody.SetVel(response);
-			}
-			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			rigidbody.SetNextPos(nextPos);
-			//std::cout << "Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << "\n";
-			transform.SetPos(nextPos);
-		}
 
 		//Taking Damage As Player
 		if (tag.GetNameTag() == "Player")

@@ -28,6 +28,7 @@ namespace EM
 		{
 			none,
 			circle, //-------Circle
+			bubble, //-------Non-physics Circle
 			line, //---------LineSegment
 			rect, //---------AABB
 			box, //----------Playable area box
