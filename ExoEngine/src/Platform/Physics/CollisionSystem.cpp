@@ -104,22 +104,23 @@ namespace EM {
                                             vec2D max2 = offset2 + col2[b].mMax;
                                             vec2D min2 = offset2 - col2[b].mMin;
                                             if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
+                                                std::cout << "Collision Circle-Box\n";
                                                 vec2D norm1;
-                                                if (offset1.x + col1[b].mRadius >= min2.x) {
-                                                    norm1.x = -1;
+                                                if (offset1.x + col1[a].mRadius >= min2.x) {
+                                                    norm1.x = -2;
                                                 }
-                                                else if (offset1.x - col1[b].mRadius <= max2.x) {
-                                                    norm1.x = 1;
+                                                else if (offset1.x - col1[a].mRadius <= max2.x) {
+                                                    norm1.x = 2;
                                                 }
-                                                if (offset1.y + col1[b].mRadius >= max2.y) {
-                                                    norm1.y = -1;
+                                                else if (offset1.y + col1[a].mRadius >= max2.y) {
+                                                    norm1.y = 2;
                                                 }
-                                                else if (offset1.y - col1[b].mRadius <= min2.y) {
-                                                    norm1.y = 1;
+                                                else if (offset1.y - col1[a].mRadius <= min2.y) {
+                                                    norm1.y = -2;
                                                 }
                                                 Normalize(norm1, norm1);
-                                                col1[b].mHit = 1;
-                                                col1[b].mCollisionNormal = norm1;
+                                                col1[a].mHit = 1;
+                                                col1[a].mCollisionNormal = norm1;
                                             }
                                         }
                                     }
@@ -177,19 +178,19 @@ namespace EM {
                                             vec2D max1 = offset1 + col1[a].mMax;
                                             vec2D min1 = offset1 - col1[a].mMin;
                                             if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                //std::cout << "Collision Rect-Circle\n";
+                                                std::cout << "Collision Box-Circle\n";
                                                 vec2D norm2;
                                                 if (offset2.x + col2[b].mRadius >= min1.x) {
-                                                    norm2.x = -1;
+                                                    norm2.x = -2;
                                                 }
                                                 else if (offset2.x - col2[b].mRadius <= max1.x) {
-                                                    norm2.x = 1;
+                                                    norm2.x = 2;
                                                 }
-                                                if (offset2.y + col2[b].mRadius >= max1.y) {
-                                                    norm2.y = -1;
+                                                else if (offset2.y + col2[b].mRadius >= max1.y) {
+                                                    norm2.y = 2;
                                                 }
                                                 else if (offset2.y - col2[b].mRadius <= min1.y) {
-                                                    norm2.y = 1;
+                                                    norm2.y = -2;
                                                 }
                                                 Normalize(norm2, norm2);
                                                 col2[b].mHit = 1;
