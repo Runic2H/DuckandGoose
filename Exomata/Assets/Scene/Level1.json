@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 20
+        "Entities": 21
     },
     "EntityToIndexMap": {
         "Transform": [
@@ -24,7 +24,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -126,7 +126,7 @@
             100,
             100,
             100,
-            100,
+            1,
             100,
             100,
             100,
@@ -228,7 +228,7 @@
             100,
             100,
             100,
-            100,
+            11,
             100,
             100,
             100,
@@ -330,7 +330,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -432,7 +432,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -534,7 +534,7 @@
             100,
             100,
             100,
-            100,
+            1,
             100,
             100,
             100,
@@ -1046,7 +1046,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -1129,7 +1129,7 @@
         ],
         "RigidBody": [
             11,
-            100,
+            20,
             100,
             100,
             100,
@@ -1241,7 +1241,7 @@
             9,
             10,
             11,
-            100,
+            20,
             100,
             100,
             100,
@@ -1352,7 +1352,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -1454,7 +1454,7 @@
             17,
             18,
             19,
-            100,
+            20,
             100,
             100,
             100,
@@ -1537,7 +1537,7 @@
         ],
         "Logic": [
             11,
-            100,
+            20,
             100,
             100,
             100,
@@ -2066,7 +2066,8 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000000000011001"
+        "00000000000000000000000000011001",
+        "00000000000000000000000000111111"
     ],
     "Components": {
         "Transform": [
@@ -2127,7 +2128,7 @@
                 "Rot": 0.0
             },
             {
-                "posX": 0.6583832502365112,
+                "posX": 0.6474244594573975,
                 "posY": -0.20415472984313965,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.25,
@@ -2148,8 +2149,8 @@
                 "Rot": 0.0
             },
             {
-                "posX": 0.05840504541993141,
-                "posY": 0.13557925820350647,
+                "posX": -0.7505459785461426,
+                "posY": 0.1634744554758072,
                 "scaleX": 0.20000000298023224,
                 "scaleY": 0.20000000298023224,
                 "Rot": 0.0
@@ -2190,10 +2191,10 @@
                 "Rot": 0.0
             },
             {
-                "posX": -0.6264371871948242,
-                "posY": -0.17994378507137299,
+                "posX": -0.6428754925727844,
+                "posY": -0.17994393408298492,
                 "scaleX": -2.0,
-                "scaleY": 1.2000000476837158,
+                "scaleY": 1.1999999284744263,
                 "Rot": 0.0
             },
             {
@@ -2209,9 +2210,24 @@
                 "scaleX": 1.0,
                 "scaleY": 0.5,
                 "Rot": 0.0
+            },
+            {
+                "posX": -0.8858447074890137,
+                "posY": 0.0,
+                "scaleX": 0.25,
+                "scaleY": 0.25,
+                "Rot": 0.0
             }
         ],
         "RigidBody": [
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
             {
                 "velX": 100.0,
                 "velY": 0.0,
@@ -2417,7 +2433,25 @@
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
                 "offsetY2": 0.0,
-                "radius1": 0.05000000074505806,
+                "radius1": 0.029999999329447746,
+                "radius2": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05999999865889549,
                 "radius2": 0.0
             }
         ],
@@ -2481,6 +2515,9 @@
             },
             {
                 "NameTag": "Debris 1_2"
+            },
+            {
+                "NameTag": "Enemy"
             }
         ],
         "Sprite": [
@@ -2595,8 +2632,8 @@
                 "MaxIndex": 0
             },
             {
-                "TextureName": "Attack",
-                "Index_X": 0,
+                "TextureName": "Idle",
+                "Index_X": 1,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2707,11 +2744,85 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0
+            },
+            {
+                "TextureName": "MeleeIdle",
+                "Index_X": 18,
+                "Index_Y": 0,
+                "Ucoordinates": -512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 30,
+                "frame 0": 0,
+                "DisplayTime 0": 0.0,
+                "frame 1": 0,
+                "DisplayTime 1": 0.0,
+                "frame 2": 0,
+                "DisplayTime 2": 0.0,
+                "frame 3": 0,
+                "DisplayTime 3": 0.0,
+                "frame 4": 0,
+                "DisplayTime 4": 0.0,
+                "frame 5": 0,
+                "DisplayTime 5": 0.0,
+                "frame 6": 0,
+                "DisplayTime 6": 0.0,
+                "frame 7": 0,
+                "DisplayTime 7": 0.0,
+                "frame 8": 0,
+                "DisplayTime 8": 0.0,
+                "frame 9": 0,
+                "DisplayTime 9": 0.0,
+                "frame 10": 0,
+                "DisplayTime 10": 0.0,
+                "frame 11": 0,
+                "DisplayTime 11": 0.0,
+                "frame 12": 0,
+                "DisplayTime 12": 0.0,
+                "frame 13": 0,
+                "DisplayTime 13": 0.0,
+                "frame 14": 0,
+                "DisplayTime 14": 0.0,
+                "frame 15": 0,
+                "DisplayTime 15": 0.0,
+                "frame 16": 0,
+                "DisplayTime 16": 0.0,
+                "frame 17": 0,
+                "DisplayTime 17": 0.0,
+                "frame 18": 0,
+                "DisplayTime 18": 0.0,
+                "frame 19": 0,
+                "DisplayTime 19": 0.0,
+                "frame 20": 0,
+                "DisplayTime 20": 0.0,
+                "frame 21": 0,
+                "DisplayTime 21": 0.0,
+                "frame 22": 0,
+                "DisplayTime 22": 0.0,
+                "frame 23": 0,
+                "DisplayTime 23": 0.0,
+                "frame 24": 0,
+                "DisplayTime 24": 0.0,
+                "frame 25": 0,
+                "DisplayTime 25": 0.0,
+                "frame 26": 0,
+                "DisplayTime 26": 0.0,
+                "frame 27": 0,
+                "DisplayTime 27": 0.0,
+                "frame 28": 0,
+                "DisplayTime 28": 0.0,
+                "frame 29": 0,
+                "DisplayTime 29": 0.0
             }
         ],
         "Logic": [
             {
                 "0": "PlayerController",
+                "ScriptCount": 1
+            },
+            {
+                "0": "EnemyMovement",
                 "ScriptCount": 1
             }
         ],
