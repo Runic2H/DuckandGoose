@@ -46,8 +46,7 @@ namespace EM
         int atk = 0;
         //get player's stats
         for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
-            auto& tag = p_ecs.GetComponent<NameTag>(i);
-            if (tag.GetNameTag() == "Player") {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
                 auto& att = p_ecs.GetComponent<Attributes>(i);
                 hp = att.GetHealth();
                 maxhp = att.GetMaxHealth();
