@@ -1117,45 +1117,53 @@ namespace EM {
                             //if (isClicked & 1)
                             //{
                                 //isClicked = 0;
-                                bool can_addScript = true;//std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
-                                for (int i = 0; i < logic.GetScriptNames().size(); i++) {
-                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) {
+                                bool can_addScript = true; //std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
+                                for (int i = 0; i < logic.GetScriptNames().size(); i++) 
+                                {
+                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) 
+                                    {
                                         can_addScript = false;
                                         std::cout << "Cannot Add already existing script!\n";
                                     }
                                 }
                                 if (can_addScript == true)
                                 {
-                                    if (mScriptList[current_script] == "PlayerController")
+                                    if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
                                     {
-                                        logic.InsertScript(new PlayerController(), selectedEntity);
+                                        if (mScriptList[current_script] == "PlayerController" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity)
+                                                                                              && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new PlayerController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "EnemyMovement" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity) 
+                                                                                           && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyMovement(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new CollisionResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ButtonResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                            && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ScenerioScript")
+                                        {
+                                            logic.InsertScript(new ScenerioScript(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "AudioManager" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new AudioManager(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new HUDController(), selectedEntity);
+                                        }
                                     }
-                                    if (mScriptList[current_script] == "EnemyMovement")
-                                    {
-                                        logic.InsertScript(new EnemyMovement(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "CollisionResponse")
-                                    {
-                                        logic.InsertScript(new CollisionResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ButtonResponse")
-                                    {
-                                        logic.InsertScript(new ButtonResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ScenerioScript")
-                                    {
-                                        logic.InsertScript(new ScenerioScript(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "AudioManager")
-                                    {
-                                        logic.InsertScript(new AudioManager(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "HUDController")
-                                    {
-                                        logic.InsertScript(new HUDController(), selectedEntity);
-                                    }
-                                //}
-                            }
+                                }
                         } 
                         ImGui::SameLine();
                         if (ImGui::Button("Delete")) {
@@ -1416,6 +1424,7 @@ namespace EM {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
                 current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), Audio::AudioType::MASTER);
+                //std::cout << "Playing Audio: " << audioPath + mAudioFileList[currentfile].path().filename().string() << std::endl;
                 //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 

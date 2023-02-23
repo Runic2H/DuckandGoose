@@ -104,6 +104,14 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseIsReleased(const int& key)
     {
+/*        if (MousePressed(key) || MouseHold(key))
+        {
+            if (mMouseStatus[key] == GLFW_RELEASE)
+            {
+                return true;
+            }
+        }
+        else return false;  */    
         return mMouseStatus[key] == GLFW_RELEASE;
     }
 

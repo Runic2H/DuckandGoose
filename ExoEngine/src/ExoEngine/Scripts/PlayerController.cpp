@@ -22,8 +22,8 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Player Controller
     ****************************************************************************/
-    PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mBlockTimer{0.0f},
-        mDamageTimer{ 0.0f }, mIsDamaged{ false }, mVel{ vec2D() } {};
+    PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mIsBlockTimer{2.0f},
+        mBlockCoolDownTimer{ 0.0f }, mDamageTimer{ 0.0f }, mDashTime{ 0.0f }, mIsDamaged{ false }, mIsBlocking{ false }, mVel{ vec2D() } {};
 
     /*!*************************************************************************
     Returns a new copy of PlayerController Script
@@ -48,7 +48,6 @@ namespace EM
 	{
         mCooldownTimer -= Frametime;
         mDashTimer -= Frametime;
-        mBlockTimer -= Frametime;
         mDamageTimer -= Frametime;
         if (mDamageTimer <= 0.0f && mIsDamaged == true)
         {
@@ -68,9 +67,28 @@ namespace EM
         mVel.x = 0.0f;
         mVel.y = 0.0f;
 
+        if ((mDamageTimer <= 0.0f && mIsDamaged == true) && (mDamageTimer <= 0.0f && mIsBlocking == true))
+        {
+            mIsDamaged = false;
+            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+            {
+                if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "HPBar")
+                {
+                    p_ecs.GetComponent<Attributes>(i).GetHealth() -= 2;
+                    if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0)
+                    {
+                        p_ecs.GetComponent<Attributes>(i).SetHealth(0);
+                    }
+                }
+            }
+        }
+        mVel.x = 0.0f;
+        mVel.y = 0.0f;
+
         if ((p_Input->KeyHold(GLFW_KEY_W) || p_Input->KeyHold(GLFW_KEY_D)
             || p_Input->KeyHold(GLFW_KEY_S) || p_Input->KeyHold(GLFW_KEY_A)))
         {   
+            
             mCooldownTimer = 0.1f;
             if (p_Input->KeyHold(GLFW_KEY_W)) {
                 mVel.y += 50.0f;
@@ -91,7 +109,7 @@ namespace EM
                 {
                     mVel.x += 300.f;
                     mCooldownTimer = 0.5f;
-                    mDashTimer = 5.0f;
+                    mDashTimer = 3.0f;
                     mState = PlayerState::Dash;
                 }
             }
@@ -106,10 +124,11 @@ namespace EM
                 {
                     mVel.x -= 100.f;
                     mCooldownTimer = 0.5f;
-                    mDashTimer = 5.0f;
+                    mDashTimer = 3.0f;
                     mState = PlayerState::Dash;
                 }
             }
+            //p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true;
         }
 
         if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && mCooldownTimer <= 0.0f)
@@ -119,11 +138,62 @@ namespace EM
             mState = PlayerState::Attacking;
         }
 
-        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT) && mBlockTimer <= 0.0f)
+        //std::cout <<"BlockCoolDownTimer" << mBlockCoolDownTimer << std::endl;
+        //std::cout << "Is blocking " << mIsBlockTimer << std::endl;
+        //std::cout << "Mouse is held" << p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT) << std::endl;
+        //std::cout << "Mouse is released " << p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_RIGHT) << std::endl;
+
+        //if ((p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT)) && (mBlockCoolDownTimer <= 0.0f))
+        //{
+        //    mIsBlockTimer -= Frametime;
+        //    std::cout << "Blocking" << std::endl;
+        //    mState = PlayerState::Block;
+        //    mCooldownTimer = 0.5f;            
+
+        //    if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_RIGHT))
+        //    {
+        //        mIsBlockTimer = 2.0f;
+        //        mBlockCoolDownTimer = 5.0f;
+        //    }
+        //    //if (mIsBlockTimer <= 0.0f)
+        //    //{
+        //    //    mBlockCoolDownTimer = 5.0f;
+        //    //    mIsBlockTimer = 2.0f;
+        //    //}
+        //}
+        
+        if (!mIsBlocking) 
         {
-            mCooldownTimer = 0.5f;
-            mBlockTimer = 5.0f;
-            mState = PlayerState::Block;
+            if ((p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT)) && (mBlockCoolDownTimer <= 0.0f)) 
+            {
+                mIsBlocking = true;
+            }
+            else 
+            {
+                mBlockCoolDownTimer -= Frametime;
+            }
+        }
+        else 
+        {
+            if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT)) 
+            {
+                mIsBlockTimer -= Frametime;
+               // std::cout << "Blocking" << std::endl;
+                mState = PlayerState::Block;
+                mCooldownTimer = 0.5f;
+                if (mIsBlockTimer <= 0) 
+                {
+                    mIsBlockTimer = 2.0f;
+                    mBlockCoolDownTimer = 5.0f;
+                    mIsBlocking = false;
+                }
+            }
+            else 
+            {
+                mIsBlockTimer = 2.0f;
+                mBlockCoolDownTimer = 5.0f;
+                mIsBlocking = false;
+            }
         }
 
         if (mCooldownTimer <= 0.0f)

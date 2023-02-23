@@ -104,6 +104,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioTyp
         }
         
     }
+    std::cout << "Playing: " << strSoundName << std::endl;
     //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }

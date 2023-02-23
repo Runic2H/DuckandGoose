@@ -46,8 +46,6 @@ namespace EM {
 		if (sprite.internaltimer >= sprite.GetDisplayTime()[sprite.GetIndex().x].second)
 		{
 			sprite.GetIndex().x++;
-			std::cout << "sprite index: " << sprite.GetIndex().x << std::endl;
-			std::cout << "sprite timer: " << sprite.internaltimer << std::endl;
 			sprite.internaltimer = 0.0f;
 			if (sprite.GetIndex().x >= sprite.GetMaxIndex())
 			{
