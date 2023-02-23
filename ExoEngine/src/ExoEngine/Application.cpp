@@ -430,8 +430,8 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
-				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
