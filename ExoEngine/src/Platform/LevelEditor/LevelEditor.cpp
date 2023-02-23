@@ -904,10 +904,10 @@ namespace EM {
                         ImGui::Checkbox("Animation", &sprite.is_Animated);
                         ImGui::Text("Coordinates: "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
+                        ImGui::DragInt("##X", (int*)&sprite.GetIndex().x, 1); ImGui::SameLine();
                         ImGui::PushID(2);
                         ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
+                        ImGui::DragInt("##Y", (int*)&sprite.GetIndex().y, 1);
                         ImGui::PopID();
                         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
@@ -938,11 +938,24 @@ namespace EM {
                             }
                             ImGui::EndDragDropTarget();
                         }
-                        if (sprite.is_Animated)
+
+                        ImGui::Text("MaxIndex"); ImGui::SameLine();
+                        ImGui::DragInt("##MaxIndex", (int*)&sprite.GetMaxIndex(), 1, 1, 10);
+                            
+                        if (sprite.GetMaxIndex() > 0)
                         {
-                            ImGui::Text("DisplayTime"); ImGui::SameLine();
-                            ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                            int &selectedIndex = sprite.GetIndex().x;
+                            ImGui::Text("SelectedIndex"); ImGui::SameLine();
+                            ImGui::DragInt("##SelectedIndex", &selectedIndex, 1, 0, sprite.GetMaxIndex() - 1);
+
+                            if (sprite.GetDisplayTime().size() > 0)
+                            {
+                                ImGui::Text("SetDisplayTime"); ImGui::SameLine();
+                                ImGui::DragFloat("##SetDisplayTime", (float*)&sprite.GetDisplayTime()[selectedIndex].second, 0.005f, 0.0f);
+                            }
                         }
+                           
+                        
                         if (sprite.is_SpriteSheet)
                         {
                             ImGui::Text("UVCoordinates: "); ImGui::SameLine();

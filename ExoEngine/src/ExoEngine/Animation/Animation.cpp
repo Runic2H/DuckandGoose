@@ -22,7 +22,6 @@ namespace EM {
 	Constructor for animation
 	****************************************************************************/
 	Animation::Animation()
-		:mFrame(0), mCurrentFrameIndex(0), mCurrentFrameTime(0)
 	{
 
 	}
@@ -32,64 +31,31 @@ namespace EM {
 	****************************************************************************/
 	void Animation::AddFrameInfo(Sprite& sprite)
 	{
-		FrameData data;
-		data.TextureId = GETTEXTURE(sprite.GetTexture())->GetRendererID();
-		data.DisplayTime = sprite.GetDisplayTime();
-		data.FrameIndex = sprite.GetIndex();
-		sprite.SetIndex(mCurrentFrameIndex);
-		data.MaxFrame = 8.0f;
-		mFrame.push_back(data);
-		//std::cout <<"Addframeinfo" << data.DisplayTime << std::endl;
+		sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite
 	}
 
-	/*!*************************************************************************
-	Increment frame index
-	****************************************************************************/
-	void Animation::FrameIncrement()
-	{
-		mCurrentFrameIndex++;
-	}
-
-	/*!*************************************************************************
-	Return frame index if frame size > 0
-	****************************************************************************/
-	const Animation::FrameData* Animation::GetCurrentFrame() const
-	{
-		if (mFrame.size() > 0)
-			return &mFrame[(int)mCurrentFrameIndex];
-
-		return nullptr;
-	}
 
 	/*!*************************************************************************
 	Update animations based on delta time
 	****************************************************************************/
-	bool Animation::UpdateAnimation(float deltatime)
+	void Animation::UpdateAnimation(float deltatime, Sprite& sprite)
 	{
-		if (mFrame.size() > 0)
+
+		sprite.internaltimer += deltatime;
+		
+		if (sprite.internaltimer >= sprite.GetDisplayTime()[sprite.GetIndex().x].second)
 		{
-			mCurrentFrameTime += deltatime;
-			
-			if (mCurrentFrameTime >= mFrame[(int)mCurrentFrameIndex].DisplayTime )
+			sprite.GetIndex().x++;
+			std::cout << "sprite index: " << sprite.GetIndex().x << std::endl;
+			std::cout << "sprite timer: " << sprite.internaltimer << std::endl;
+			sprite.internaltimer = 0.0f;
+			if (sprite.GetIndex().x >= sprite.GetMaxIndex())
 			{
-				//std::cout <<"Updateanimation" << mFrame[(int)mCurrentFrameIndex].DisplayTime << std::endl;
-				mCurrentFrameTime = 0.0f;
-				FrameIncrement();
-
-				if (mCurrentFrameIndex >= 8.0f)
-					ResetFrame();
-				return true;
+				sprite.GetIndex().x = 0;
 			}
+			
 		}
-		return false;
+
 	}
 
-	/*!*************************************************************************
-	Set frame index and frame time to 0
-	****************************************************************************/
-	void Animation::ResetFrame()
-	{
-		mCurrentFrameIndex = 0;
-		mCurrentFrameTime = 0;
-	}
 }
