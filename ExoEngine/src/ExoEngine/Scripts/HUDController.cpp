@@ -41,11 +41,22 @@ namespace EM
     ****************************************************************************/
 	void HUDController::Update(float Frametime)
 	{
+        int hp = 0;
+        int maxhp = 0;
+        int atk = 0;
+        //get player's stats
+        for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
+                auto& att = p_ecs.GetComponent<Attributes>(i);
+                hp = att.GetHealth();
+                maxhp = att.GetMaxHealth();
+                atk = att.GetDamage();
+            }
+        }
         UNREFERENCED_PARAMETER(Frametime);
         auto& pComp = p_ecs.GetComponent<HUDComponent>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
         auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
-        auto& pStats = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
         //get camera position
         vec2D camPos = vec2D(Graphic::camera.GetPosition().x, Graphic::camera.GetPosition().y);
         //update position
@@ -53,13 +64,12 @@ namespace EM
         //std::cout << "Cam Pos: " << Graphic::camera.GetPosition().x << ", " << Graphic::camera.GetPosition().y << "\n";
         //std::cout << "HUD Pos: " << pTrans.GetPos().x << ", " << pTrans.GetPos().y << "\n";
         if (pComp.GetType() == HUDComponent::ElementType::Static) {    
-            //do ???
-            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x / 100.0f), camPos.y + pComp.GetOffset().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
             //update scale
-            pTrans.SetScale(5.0f * (float)pStats.GetHealth() / 100, pTrans.GetScale().y);
-            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
+            pTrans.SetScale((float)hp / (float)maxhp, pTrans.GetScale().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((float)hp / (float)maxhp / 2.325f), camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
             //check for timing of cooldown
@@ -76,8 +86,6 @@ namespace EM
             }
         }
         else if (pComp.GetType() == HUDComponent::ElementType::Text) {
-            //update atk value
-            int atk = pStats.GetDamage();
             //get combo bonus value
             int bonus = 0;
             pComp.SetAtk((std::to_string(atk) + " + " + std::to_string(bonus)));

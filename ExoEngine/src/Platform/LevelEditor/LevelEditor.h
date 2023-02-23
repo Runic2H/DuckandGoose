@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.h
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: CSD2400 / GAM200
 \date 9-28-2022
 \brief  Header file for LevelEditor.cpp

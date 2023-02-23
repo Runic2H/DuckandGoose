@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen., t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -977,7 +977,7 @@ namespace EM {
                         auto& colliderComp = p_ecs.GetComponent<Collider>(selectedEntity);
                         auto& colliderType = colliderComp[0].mCol;
                         int colliderIndex = static_cast<int>(colliderType);
-                        const char* colliderNames = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 1 Type"); ImGui::SameLine();
                         ImGui::Combo("##test", &colliderIndex, colliderNames);
                         colliderType = static_cast<Collider::ColliderType>(colliderIndex);
@@ -996,13 +996,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[0].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[0].mCol == Collider::ColliderType::circle || colliderComp[0].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize = colliderComp[0].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("##Radius", (float*)&colliderSize, 0.05f);
                         }
-                        else if (colliderComp[0].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[0].mCol == Collider::ColliderType::rect || colliderComp[0].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
@@ -1020,7 +1020,7 @@ namespace EM {
                         //selection for collider 2 type
                         auto& colliderType1 = colliderComp[1].mCol;
                         int colliderIndex1 = static_cast<int>(colliderType1);
-                        const char* colliderNames1 = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames1 = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 2 Type"); ImGui::SameLine();
                         ImGui::Combo("###test", &colliderIndex1, colliderNames1);
                         ImGui::PushItemWidth(100.0f);
@@ -1039,13 +1039,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[1].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[1].mCol == Collider::ColliderType::circle || colliderComp[1].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize1 = colliderComp[1].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("###Radius", (float*)&colliderSize1, 0.05f);
                         }
-                        else if (colliderComp[1].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[1].mCol == Collider::ColliderType::rect || colliderComp[1].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();

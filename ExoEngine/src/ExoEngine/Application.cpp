@@ -87,6 +87,17 @@ Run loop for application
 		}
 		mGraphics->Init();
 
+		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<Collider>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
+
 		auto mPosUpdate = p_ecs.RegisterSystem<PhysicsSystem>();
 		{
 			Signature signature;
@@ -103,17 +114,6 @@ Run loop for application
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}
 		mLogic->Init();
-
-		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
-		{
-			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			signature.set(p_ecs.GetComponentType<Collider>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			p_ecs.SetSystemSignature<CollisionSystem>(signature);
-		}
-		mCollision->Init();
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
@@ -430,11 +430,6 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
-			/*	if (p_ecs.GetTotalEntities() >= 1)
-				{
-					Trans = &p_ecs.GetComponent<Transform>(1).GetPos();
-
-				}*/
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
