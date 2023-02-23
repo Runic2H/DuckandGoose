@@ -57,6 +57,26 @@ namespace EM
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
+				vec2D response = rigidbody.GetVel();
+				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+				float dotProd = dotProduct(normal, response);
+				if (dotProd <= 0) {
+					normal = normal * dotProd;
+					response -= normal * 5;
+					rigidbody.SetVel(response);
+				}
+				//enemy takes damage based on player damage
+				int pDmg = 0;
+				//get player attributes (damage)
+				for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+					}
+				}
+				//player hp
+				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
+				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+
 				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
 				{
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
@@ -91,15 +111,16 @@ namespace EM
 						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
 					}
 				}
-				////set enemy hp
-				//p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
-				//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+				//set enemy hp
+				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
+				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
 				////if hp < 0, set state to death
-				//if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0) {
-				//	/*dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
-				//	dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);*/
-				//	p_ecs.DestroyEntity(GetScriptEntityID());
-				//}
+				if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0) {
+
+					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
+					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
+					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+				}
 				
 			}
 		}
