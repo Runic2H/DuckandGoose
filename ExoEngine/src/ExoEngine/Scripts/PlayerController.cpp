@@ -23,7 +23,7 @@ namespace EM
     Default constructor for Player Controller
     ****************************************************************************/
     PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mBlockTimer{0.0f},
-        mDamageTimer{ 0.0f }, mIsDamaged{false}, mVel{ vec2D() } {};
+        mDamageTimer{ 0.0f }, mIsDamaged{ false }, mVel{ vec2D() } {};
 
     /*!*************************************************************************
     Returns a new copy of PlayerController Script
@@ -73,32 +73,38 @@ namespace EM
         {   
             mCooldownTimer = 0.1f;
             if (p_Input->KeyHold(GLFW_KEY_W)) {
-                mVel.y += 500.0f;
+                mVel.y += 50.0f;
                 mState = PlayerState::Moving;
             }
             else if (p_Input->KeyHold(GLFW_KEY_S)) {
-                mVel.y -= 500.f;
+                mVel.y -= 50.f;
                 mState = PlayerState::Moving;
             }
             else if (p_Input->KeyHold(GLFW_KEY_D)) {
-                mVel.x += 500.f;
+                mVel.x += 50.f;
                 mState = PlayerState::Moving;
-                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetUVCoor().x = 512.0f;
+                if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x < 0)
+                {
+                    p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetScale(-p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().y);
+                }
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x += 3000.f;
+                    mVel.x += 300.f;
                     mCooldownTimer = 0.5f;
                     mDashTimer = 5.0f;
                     mState = PlayerState::Dash;
                 }
             }
             else if (p_Input->KeyHold(GLFW_KEY_A)) {
-                mVel.x -= 500.f;
+                mVel.x -= 50.f;
                 mState = PlayerState::Moving;
-                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetUVCoor().x = -512.0f;
+                if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x > 0)
+                {
+                    p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetScale(-p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().y);
+                }
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x -= 3000.f;
+                    mVel.x -= 100.f;
                     mCooldownTimer = 0.5f;
                     mDashTimer = 5.0f;
                     mState = PlayerState::Dash;
@@ -190,6 +196,7 @@ namespace EM
             break;
         case PlayerState::Attacking:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Attack");
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetDisplayTime();
             break;
         case PlayerState::Dash:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Dashing");

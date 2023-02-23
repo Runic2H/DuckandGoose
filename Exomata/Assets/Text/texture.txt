@@ -1,4 +1,8 @@
-BackGround Assets/Textures/BackGround.png
+NormalAttack Assets/Textures/Normal_Attack.png
+Prop1 Assets/Textures/Rubble_1.png
+Prop2 Assets/Textures/Rubble_2.png
+Prop3 Assets/Textures/Rubble_3.png 
+Background_Level1 Assets/Textures/ENVIRONMENT_COMPILED_FINAL_COMPOSITION.png
 Blank Assets/Textures/Blank.png
 HealthUI Assets/Textures/HealthUI_4.png
 ShieldUI Assets/Textures/Shield.png
