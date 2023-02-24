@@ -136,8 +136,27 @@ namespace EM
             ++mAttackCounter;
             mCooldownTimer = 0.5f;
             mState = PlayerState::Attacking;
+            auto pCol = p_ecs.GetComponent<Collider>(GetScriptEntityID()).GetCollisionArray();
+            if (mState == PlayerState::Attacking)
+            {
+                (pCol + 1)->is_Alive = true;
+            }
+            else
+            {
+                (pCol + 1)->is_Alive = false;
+            }
         }
-
+        else
+        {
+            p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
+        }
+      /*  if (mState == PlayerState::Attacking)
+        {
+            p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = true;
+            std::cout << "check" << std::endl;
+        }
+        else
+            p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;*/
         //std::cout <<"BlockCoolDownTimer" << mBlockCoolDownTimer << std::endl;
         //std::cout << "Is blocking " << mIsBlockTimer << std::endl;
         //std::cout << "Mouse is held" << p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT) << std::endl;
@@ -203,7 +222,7 @@ namespace EM
         }
 
         UpdateState();
-        UpdateAttack();
+        //UpdateAttack();
         UpdatePhysics(Frametime);
         Animate(mState);
 	}

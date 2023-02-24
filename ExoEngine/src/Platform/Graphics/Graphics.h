@@ -39,7 +39,7 @@ namespace EM {
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
 		
-		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D camera { -2.0f, 2.0f, -2.0f , 2.0f };
 	private:
 		//for testing
 		std::unique_ptr<Renderer> mRenderer = std::make_unique<Renderer>();

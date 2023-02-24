@@ -62,7 +62,7 @@ namespace EM {
                                 vec2D offset2 = rigid2.GetNextPos() + col2[b].mOffset;
                                 //std::cout << (int)e1 << ", " << (int)e2 << "\n";
                                 if (col1[a].is_Alive && col2[b].is_Alive) {
-                                    std::cout << "Running Collision System\n";
+                                    //std::cout << "Running Collision System\n";
                                     if (e1 == Collider::ColliderType::circle) {
                                         if (e2 == Collider::ColliderType::circle) {
                                             if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
@@ -136,23 +136,23 @@ namespace EM {
                                             vec2D max2 = offset2 + col2[b].mMax;
                                             vec2D min2 = offset2 - col2[b].mMin;
                                             if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
-                                                std::cout << "Collision Circle-Box\n";
+                                                //std::cout << "Collision Circle-Box\n";
                                                 vec2D norm1;
                                                 if ((offset1.y < (max2.y) && offset1.y >(min2.y)) && offset1.x <= min2.x) {
                                                     norm1.x = -1;
-                                                    std::cout << "left side\n";
+                                                    //std::cout << "left side\n";
                                                 }
                                                 else if ((offset1.y < (max2.y) && offset1.y >(min2.y)) && offset1.x >= max2.x) {
                                                     norm1.x = 1;
-                                                    std::cout << "right side\n";
+                                                    //std::cout << "right side\n";
                                                 }
                                                 if ((offset1.x < (max2.x) && offset1.x >(min2.x)) && offset1.y >= max2.y) {
                                                     norm1.y = 1;
-                                                    std::cout << "top side\n";
+                                                    //std::cout << "top side\n";
                                                 }
                                                 else if ((offset1.x < (max2.x) && offset1.x >(min2.x)) && offset1.y <= min2.y) {
                                                     norm1.y = -1;
-                                                    std::cout << "bottom side\n";
+                                                    //std::cout << "bottom side\n";
                                                 }
                                                 Normalize(norm1, norm1);
                                                 col1[a].mHit = 1;
@@ -235,23 +235,23 @@ namespace EM {
                                             vec2D max1 = offset1 + col1[a].mMax;
                                             vec2D min1 = offset1 - col1[a].mMin;
                                             if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                std::cout << "Collision Box-Circle\n";
+                                                //std::cout << "Collision Box-Circle\n";
                                                 vec2D norm2;
                                                 if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x <= min1.x) {
                                                     norm2.x = -1;
-                                                    std::cout << "left side\n";
+                                                   // std::cout << "left side\n";
                                                 }
                                                 else if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x >= max1.x) {
                                                     norm2.x = 1;
-                                                    std::cout << "right side\n";
+                                                    //std::cout << "right side\n";
                                                 }
                                                 if ((offset2.x < (max1.x) && offset2.x >(min1.x)) && offset2.y >= max1.y) {
                                                     norm2.y = 1;
-                                                    std::cout << "top side\n";
+                                                    //std::cout << "top side\n";
                                                 }
                                                 else if ((offset2.x < (max1.x) && offset2.x >(min1.x)) && offset2.y <= min1.y) {
                                                     norm2.y = -1;
-                                                    std::cout << "bottom side\n";
+                                                   // std::cout << "bottom side\n";
                                                 }
                                                 Normalize(norm2, norm2);
                                                 col2[b].mHit = 1;

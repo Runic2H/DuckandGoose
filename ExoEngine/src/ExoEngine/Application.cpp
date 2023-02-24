@@ -446,7 +446,7 @@ Run loop for application
 							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
 								p_ecs.DestroyEntity(i);
-								p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
+								//p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
 							}
 						}
 					}
