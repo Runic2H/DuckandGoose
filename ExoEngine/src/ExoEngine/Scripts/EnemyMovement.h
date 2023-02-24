@@ -71,8 +71,7 @@ namespace EM
 
 		void Animate(EnemyState state);
 
-		void SetState(EnemyState state);
-
+		void SetState(EnemyState state);      
 		EnemyState& GetState()
 		{
 			return mState;

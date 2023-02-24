@@ -74,6 +74,9 @@
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -254,6 +257,9 @@
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

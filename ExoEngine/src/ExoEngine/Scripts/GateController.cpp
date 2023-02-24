@@ -37,6 +37,12 @@ namespace EM
     void GateController::Start()
     {
         //how to initialise how many enemies in each section?
+        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+
+                enemies++;
+            }
+        }
     }
 
     /*!*************************************************************************
@@ -45,10 +51,20 @@ namespace EM
     void GateController::Update(float Frametime)
     {
         //check how many enemies killed
+        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+                //check if enemy dead
+                    //if enemy is dead, decrement by one
+            }
+        }
         //if no enemeies left, open gate
         if (enemies <= 0) {
+            //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("??");
             auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
             col[0].is_Alive = false;
+        }
+        else {
+            //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("??");
         }
     }
 

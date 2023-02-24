@@ -45,7 +45,10 @@
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
@@ -224,7 +227,10 @@
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
@@ -313,7 +319,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
