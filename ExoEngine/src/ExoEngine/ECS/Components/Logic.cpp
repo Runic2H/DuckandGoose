@@ -22,8 +22,10 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
+
 
 
 namespace EM
@@ -141,6 +143,11 @@ namespace EM
 				{
 					mScriptsVector.push_back(new AudioManager());
 				}
+				if (mScriptNameVector[j] == "SliderScript")
+				{
+					mScriptsVector.push_back(new SliderScript());
+				}
+
 			}
 		}
 

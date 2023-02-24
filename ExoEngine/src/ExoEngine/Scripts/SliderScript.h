@@ -60,16 +60,20 @@ namespace EM {
 
 		bool clicked;
 		bool selected;
+		bool SliderCali;
+		bool limitset;
 
 	private:
-		struct button_bb
+		struct slider_bb
 		{
 			vec2D min;
 			vec2D max;
 		};
-		button_bb Sider_BoundingBox{};
+		vec2D def_position{};
+		slider_bb limit{};
 
 
 
 	};
 }
+

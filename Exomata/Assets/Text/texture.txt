@@ -45,3 +45,7 @@ QuitClick Assets/Textures/UI/Quit_Click.png
 HPStatic Assets/Textures/HPStatic.png
 HPBar Assets/Textures/HPBar.png
 DashBar Assets/Textures/DashBar.png
+MenuPanel Assets/Textures/UI/MenuPanel.png 
+VolumeBall Assets/Textures/UI/VolumeBall.png
+VolumeBar Assets/Textures/UI/VolumeBar.png
+ 

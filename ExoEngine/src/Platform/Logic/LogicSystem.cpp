@@ -62,7 +62,7 @@ namespace EM
 				{
 					LogicComp.SetScriptEntity(entity);
 				}
-				(*i)->Update(Frametime);
+ 				(*i)->Update(Frametime);
 			}
 		}
 		Timer::GetInstance().Update(Systems::LOGIC);

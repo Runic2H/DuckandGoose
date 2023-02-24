@@ -59,6 +59,15 @@ namespace EM {
 		
 		bool clicked;
 		bool selected;
+		bool Action;
+
+		enum button_state
+		{
+			idle,
+			select,
+			click,
+			release,
+		};
 
 	private:
 		struct button_bb
@@ -67,6 +76,7 @@ namespace EM {
 			vec2D max;
 		};
 		button_bb Button_BoundingBox{};
+		button_state curr_state{idle};
 		bool HTP {false};
 
 		

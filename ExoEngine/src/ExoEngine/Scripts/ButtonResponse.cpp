@@ -49,14 +49,40 @@ namespace EM
 			transform.SetScale(0.9f, 0.2f);
 		}
 
+		if ( p_GUI->Check_HTP() == false)
+		{ 
+			
+			if (curr_state != click)
+				curr_state = idle;
+
+		
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && curr_state == idle)
+			{
+				curr_state = click;
+			}
+
+			else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && curr_state == click)
+			{
+				curr_state = release;
+			}
+		
+			std::cout << ID_tag.GetTag() << ": ";
+			if (curr_state == click)
+				std::cout << "click\n";
+			else if (curr_state == idle)
+				std::cout << "idle\n";
+			else if (curr_state == release)
+				std::cout << "release\n"; 
+		}
+
 		if (is_within_box(p_GUI->MousePosition, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
 		{
-			if (ID_tag.GetTag() == "Start")
+			if (ID_tag.GetTag() == "Start" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
 				spt.SetTexture("StartHover");
 			}
 
-			if (ID_tag.GetTag() == "Quit")
+			if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
 				spt.SetTexture("QuitHover");
 			}
@@ -66,21 +92,26 @@ namespace EM
 				spt.SetTexture("OptionsHover");
 			}
 
-			if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() != "HowToPlay")
+			if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() != "HowToPlay" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
 				spt.SetTexture("HTPButtonHover");
-				std::cout << "hello";
+				//std::cout << "hello";
 			}
 			selected = true;
 			std::cout << tag.GetNameTag();
 			std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
-			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			
+			
+
+		
+			
+			if (curr_state == release)
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
 					spt.SetTexture("StartClick");
 					p_GUI->toggle_menu();
-					p_Scene->setSceneToLoad("Assets/Scene/Level.json");
+					p_Scene->setSceneToLoad("Assets/Scene/Level1.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
@@ -89,13 +120,36 @@ namespace EM
 					p_GUI->toggle_script();
 				}
 
-				if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() == "HTPButtonHover")
+				if (ID_tag.GetTag() == "HowToPlay" && p_GUI->Check_HTP() == false)
 				{
 					//spt.SetTexture("HTPButtonClick");
 					spt.SetTexture("HowToPlay");
 					transform.SetScale({ 4.170206546783447f,1.9999960660934448f });
 					transform.SetPos({ 0.0f,0.0f });
 					p_GUI->toggle_HTP();
+				}
+
+				if (ID_tag.GetTag() == "Options" && p_GUI->Check_HTP() == false)
+				{
+					p_Scene->setSceneToLoad("Assets/Scene/Option.json");
+				}
+			}
+
+			if (curr_state == click)
+			{
+				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
+				{
+					spt.SetTexture("StartClick");
+				}
+
+				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
+				{
+					spt.SetTexture("QuitClick");
+				}
+
+				if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() == "HTPButtonHover")
+				{
+					spt.SetTexture("HTPButtonClick");
 				}
 
 				if (ID_tag.GetTag() == "Options" && p_GUI->Check_HTP() == false)

@@ -45,6 +45,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
+#include "ExoEngine/Scripts/SliderScript.h"
 
 namespace EM {
 
@@ -195,7 +196,11 @@ namespace EM {
     }
 
     /*!*************************************************************************
-   Loads audio filepaths for audio files from assets folder
+   Loads 
+   
+   
+   
+   filepaths for audio files from assets folder
    ****************************************************************************/
     void LevelEditor::LoadAudioFromFile()
     {
@@ -1162,6 +1167,11 @@ namespace EM {
                                         {
                                             logic.InsertScript(new HUDController(), selectedEntity);
                                         }
+                                        if (mScriptList[current_script] == "SliderScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                          && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new SliderScript(), selectedEntity);
+                                        }
                                     }
                                 }
                         } 
@@ -1463,22 +1473,22 @@ namespace EM {
             static int item_current = 1;
 
             //set voulume slider
-            static float f1 = 1.0f;
-            ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
-            p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
+           // static float f1 = 1.0f;
+            ImGui::SliderFloat("Master Volume", &p_Audio->Master_setting, 0.0f, 1.0f, "Min - Max %.3f");
+            p_Audio->SetVolume(current_sound, 1 / (p_Audio->Master_setting + 1));
 
             static float f2 = 0.0f;
             ImGui::SliderFloat("BGM Volume", &f2, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f2 > f1)
+            if (f2 > p_Audio->Master_setting)
             {
-                f2 = f1;
+                f2 = p_Audio->Master_setting;
             }
 
             static float f3 = 0.0f;
             ImGui::SliderFloat("SFX Volume", &f3, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f3 > f1)
+            if (f3 > p_Audio->Master_setting)
             {
-                f3 = f1;
+                f3 = p_Audio->Master_setting;
             }
 
             ImGui::End();
