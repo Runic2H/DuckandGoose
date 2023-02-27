@@ -72,8 +72,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -253,7 +251,6 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

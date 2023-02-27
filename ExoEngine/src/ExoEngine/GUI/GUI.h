@@ -68,11 +68,11 @@ namespace EM
 		bool Check_menu();
 		bool Check_HTP();
 		bool is_within_box(glm::vec2 cur, button_bb box);// a helper function to check  if the cursor is touching the button,
-		glm::vec2 MousePosition;
+		glm::vec2 MousePosition{};
 		
 		
 
-		vec2D update_curPos(Window screen);
+		//vec2D update_curPos(Window screen);
 	};
 
 

@@ -36,6 +36,6 @@ namespace EM
 		void SetScriptEntityID(Entity& entity) { entityID = entity; }
 		Entity& GetScriptEntityID() { return entityID; }
 	private:
-		Entity entityID;
+		Entity entityID{};
 	};
 }

@@ -45,6 +45,7 @@ namespace EM {
 		writer->Double(offset.x);
 		writer->Key("offsetY");
 		writer->Double(offset.y);
+		writer->EndObject();
 		return true;
 	}
 }

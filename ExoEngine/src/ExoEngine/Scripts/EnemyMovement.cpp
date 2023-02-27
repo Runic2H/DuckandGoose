@@ -44,21 +44,23 @@ namespace EM
 	****************************************************************************/
 	void EnemyMovement::Update(float Frametime)
 	{
+
 		//if patrolling state
 		if (mState == EnemyState::Patrolling) {
 			//check if moving
 			if (!mPatrolling) {
 				//std::cout << "At Destination" << std::endl;
 				//if not moving, set destination
-				mDest.x = mOrigin.x + ((rand() % 100) - 50) / 50;
-				mDest.y = mOrigin.y + ((rand() % 100) - 50) / 50;
+				mDest.x = mOrigin.x + ((rand() % 100) - 50) / 5;
+				mDest.y = mOrigin.y + ((rand() % 100) - 50) / 5;
 				//set moving
 				mPatrolling = true;
 				//reset timer
 				mPatrolTimer = mPatrolTime;
+				//std::cout << "Patrolling" << std::endl;
 			}
 			else {
-				//std::cout << "Patrolling" << std::endl;
+				//std::cout << "StoppedPatrolling" << std::endl;
 				//if moving, move to destination
 				UpdatePhysics(Frametime);
 				//decrement timer
@@ -75,7 +77,7 @@ namespace EM
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
 				//std::cout << "Prox Check" << std::endl;
-				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 				{
 					//std::cout << "Found Player" << std::endl;
 					check = true;
@@ -84,7 +86,7 @@ namespace EM
 				}
 			}
 			//if player moves within x radius, set mode to moving
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 5.0f) {
+			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 0.3f) {
 				//std::cout << "Player Detected" << std::endl;
 				mState = EnemyState::Moving;
 			}
@@ -138,7 +140,7 @@ namespace EM
 				if (mState == EnemyState::Moving) {
 					for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 					{
-						if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+						if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 						{
 							rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 							vec2D newVel = vec2D(0, 0);
@@ -177,8 +179,8 @@ namespace EM
 				if (mState == EnemyState::Attacking) {
 					//if attacking, attack and calculate chances for cooldown
 					if (mAttackCooldown <= 0 && (rand() % 100) <= 80) {
-						mAttackCooldown = 10.0f;
-						mAttackTime = 10.0f;
+						mAttackCooldown = 2.5f;
+						mAttackTime = 2.0f;
 						mState = EnemyState::Moving;
 						//std::cout << "Cooldown" << std::endl;
 						//if on cooldown, check if can retreat
@@ -186,7 +188,7 @@ namespace EM
 						//set to moving state after retreat
 					}
 					if (mAttackCooldown <= 0) {
-						mAttackTime = 10.0f;
+						mAttackTime = 2.0f;
 					}
 					vec2D newVel = vec2D();
 					if (mAttackCooldown > 0.0f && mAttackTime <= 0.0f && mState != EnemyState::Death)
