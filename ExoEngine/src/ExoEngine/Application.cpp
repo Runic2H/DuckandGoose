@@ -40,12 +40,14 @@ EM::vec2D* Trans;
 
 namespace EM {
 	bool end_state{false}; //placeholder
-
+	
+	
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
 	Application::Application()
 	{
+
 		p_ecs.Init();
 		p_Scene->Init();
 		FramePerSec::GetInstance().InitFrame();
@@ -69,10 +71,10 @@ System input
 /*!*************************************************************************
 Run loop for application
 ****************************************************************************/
-	void Application::Run() 
+	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
-		
+
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -86,7 +88,6 @@ Run loop for application
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();
-
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
@@ -117,11 +118,11 @@ Run loop for application
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
-		RigidBody rb;
+		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
-		Tag tag;
+		Tag tag;*/
 	/*	RigidBody rb;*/
 
 		/*Entity Background = p_ecs.CreateEntity();
@@ -382,36 +383,36 @@ Run loop for application
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
 		 
-		Entity player = p_ecs.CreateEntity();
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		p_ecs.AddComponent<Transform>(player, C_TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
-		tag.SetTag("Player");
-		p_ecs.AddComponent<Tag>(player, tag);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
-		p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
-		Entity enemy = p_ecs.CreateEntity();
-		Logic logic2;
-		p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
-		vec2D pos = vec2D(200.0f, 200.0f);
-		p_ecs.GetComponent<Transform>(enemy).SetPos(pos);
-		p_ecs.AddComponent<RigidBody>(enemy, rb);
-		p_ecs.AddComponent<Sprite>(enemy, sprite);
-		p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(enemy, C_TagComponent);
-		p_ecs.AddComponent<NameTag>(enemy, C_NameTagComponent);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		p_ecs.AddComponent<Logic>(enemy, logic2);
-		p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
-		p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
-		p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
-		p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
+		//Entity player = p_ecs.CreateEntity();
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
+		//tag.SetTag("Player");
+		//p_ecs.AddComponent<Tag>(player, tag);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		//Entity enemy = p_ecs.CreateEntity();
+		//Logic logic2;
+		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
+		//vec2D pos = vec2D(200.0f, 200.0f);
+		//p_ecs.GetComponent<Transform>(enemy).SetPos(pos);
+		//p_ecs.AddComponent<RigidBody>(enemy, rb);
+		//p_ecs.AddComponent<Sprite>(enemy, sprite);
+		//p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(enemy, C_TagComponent);
+		//p_ecs.AddComponent<NameTag>(enemy, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//p_ecs.AddComponent<Logic>(enemy, logic2);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
+		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
+		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
 		//p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
@@ -445,7 +446,6 @@ Run loop for application
 							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
 								p_ecs.DestroyEntity(i);
-								//p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
 							}
 						}
 					}
@@ -459,6 +459,7 @@ Run loop for application
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
+			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 
 			p_Scene->checkForSceneToLoad();

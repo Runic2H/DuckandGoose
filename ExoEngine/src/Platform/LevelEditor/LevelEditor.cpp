@@ -1499,12 +1499,18 @@ namespace EM {
     }
 
     /*!*************************************************************************
-   using std::filesystem we insert the file path if texture assets into the editor
+   using std::filesystem we insert the file path into the system
    ****************************************************************************/
     void LevelEditor::insertTextureFilePath(std::string in)
     {
-        auto const& dir_entry = std::filesystem::directory_entry{ in };
-        mTextureFileList.emplace_back(dir_entry);
-        mTextureFile.emplace_back(dir_entry.path().filename().string());
+        auto const& dir_entry = std::filesystem::directory_iterator( in );
+        for (const auto& entry : dir_entry)
+        {
+            if(entry.path().extension() == ".png")
+                std::cout << entry.path().filename().string() << std::endl;
+
+        }
+        /* mTextureFileList.emplace_back(dir_entry);
+        mTextureFile.emplace_back(dir_entry.path().filename().string());*/
     }
 }

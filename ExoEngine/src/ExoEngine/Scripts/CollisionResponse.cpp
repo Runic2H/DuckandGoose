@@ -75,7 +75,7 @@ namespace EM
 				}
 				//player hp
 				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
-				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+				//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
 
 				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
 				{
@@ -119,7 +119,7 @@ namespace EM
 
 					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
 					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
-					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+					
 				}
 				
 			}
