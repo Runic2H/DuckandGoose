@@ -116,7 +116,9 @@ namespace EM
 				if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0) {
 					p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
 					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
+					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
 					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+
 				}
 				
 			}
