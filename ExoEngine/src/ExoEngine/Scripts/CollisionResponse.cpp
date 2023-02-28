@@ -57,14 +57,6 @@ namespace EM
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				vec2D response = rigidbody.GetVel();
-				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
-				float dotProd = dotProduct(normal, response);
-				if (dotProd <= 0) {
-					normal = normal * dotProd;
-					response -= normal * 5;
-					rigidbody.SetVel(response);
-				}
 				//enemy takes damage based on player damage
 				int pDmg = 0;
 				//get player attributes (damage)
@@ -95,14 +87,6 @@ namespace EM
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				vec2D response = rigidbody.GetVel();
-				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
-				float dotProd = dotProduct(normal, response);
-				if (dotProd <= 0) {
-					normal = normal * dotProd;
-					response -= normal * 5;
-					rigidbody.SetVel(response);
-				}
 				//enemy takes damage based on player damage
 				int pDmg = 0;
 				//get player attributes (damage)
@@ -133,13 +117,6 @@ namespace EM
 				dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->Animate(SkillsChest::ChestState::Dead);
 				vec2D response = rigidbody.GetVel();
 				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
-				
-				float dotProd = dotProduct(normal, response);
-				if (dotProd <= 0) {
-					normal = normal * dotProd;
-					response -= normal * 5;
-					rigidbody.SetVel(response);
-				}
 			}
 		}
 	}
