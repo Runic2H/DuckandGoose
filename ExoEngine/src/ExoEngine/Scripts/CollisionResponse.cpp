@@ -16,6 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "CollisionResponse.h"
 #include "PlayerController.h"
 #include "EnemyMovement.h"
+#include "SkillsChest.h"
 
 namespace EM
 {
@@ -50,28 +51,32 @@ namespace EM
 		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
 		//std::cout << &col << "\n";
-		if (col[0].mHit || col[1].mHit) {
-			vec2D response = rigidbody.GetVel();
-			vec2D normal = vec2D();
-			normal += col[0].mCollisionNormal;
-			//Normalize(normal, normal);
-			float dotProd = dotProduct(normal, response);
-			if (dotProd <= 0) {
-				normal = normal * dotProd;
-				response -= normal;
-				rigidbody.SetVel(response);
-			}
-			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			rigidbody.SetNextPos(nextPos);
-			//std::cout << "Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << "\n";
-			transform.SetPos(nextPos);
-		}
 
 		//Taking Damage As Player
 		if (tag.GetNameTag() == "Player")
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
+				vec2D response = rigidbody.GetVel();
+				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+				float dotProd = dotProduct(normal, response);
+				if (dotProd <= 0) {
+					normal = normal * dotProd;
+					response -= normal * 5;
+					rigidbody.SetVel(response);
+				}
+				//enemy takes damage based on player damage
+				int pDmg = 0;
+				//get player attributes (damage)
+				for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+					}
+				}
+				//player hp
+				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
+				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+
 				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
 				{
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
@@ -79,6 +84,10 @@ namespace EM
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged = true;
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.5f;
 				}
+				//player takes damage based on which enemy hit him
+				//if hp < 0, player dies
+			
+
 			}
 		}
 		//Enemy Taking Damage
@@ -86,21 +95,51 @@ namespace EM
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
-				dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
 				vec2D response = rigidbody.GetVel();
 				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
-
 				float dotProd = dotProduct(normal, response);
 				if (dotProd <= 0) {
 					normal = normal * dotProd;
 					response -= normal * 5;
 					rigidbody.SetVel(response);
 				}
+				//enemy takes damage based on player damage
+				int pDmg = 0;
+				//get player attributes (damage)
+				for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
+						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+					}
+				}
+				//set enemy hp
+				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
+				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+				////if hp < 0, set state to death
+				if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0) {
+
+					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
+					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
+					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+				}
+				
 			}
-			if (tag.GetNameTag() == "Enemy")
+		}
+		//if chest is damaged
+		if (tag.GetNameTag() == "SkillsChest")
+		{
+			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				logic.GetScript()[1]->Update(Frametime);
+				dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->SetState(SkillsChest::ChestState::Dead);
+				dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->Animate(SkillsChest::ChestState::Dead);
+				vec2D response = rigidbody.GetVel();
+				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+				
+				float dotProd = dotProduct(normal, response);
+				if (dotProd <= 0) {
+					normal = normal * dotProd;
+					response -= normal * 5;
+					rigidbody.SetVel(response);
+				}
 			}
 		}
 	}

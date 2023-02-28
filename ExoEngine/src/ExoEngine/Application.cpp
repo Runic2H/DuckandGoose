@@ -86,6 +86,17 @@ Run loop for application
 		}
 		mGraphics->Init();
 
+		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<Collider>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
+
 		auto mPosUpdate = p_ecs.RegisterSystem<PhysicsSystem>();
 		{
 			Signature signature;
@@ -102,17 +113,6 @@ Run loop for application
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}
 		mLogic->Init();
-
-		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
-		{
-			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			signature.set(p_ecs.GetComponentType<Collider>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			p_ecs.SetSystemSignature<CollisionSystem>(signature);
-		}
-		mCollision->Init();
 
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
@@ -440,7 +440,7 @@ Run loop for application
 							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
 								p_ecs.DestroyEntity(i);
-								p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
+								//p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
 							}
 						}
 					}

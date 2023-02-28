@@ -95,13 +95,16 @@ namespace EM
 		float mCooldownTimer;
 		float mChargedAttackTimer;
 		float mDashTimer;
-		float mBlockTimer;
+		float mIsBlockTimer;
+		float mBlockCoolDownTimer;
 		vec2D mVel;
 		entityPhysics mPhys;
 
 	public:
 		bool mIsDamaged;
 		float mDamageTimer;
+		float mDashTime;
+		bool mIsBlocking;
 
 	};
 }

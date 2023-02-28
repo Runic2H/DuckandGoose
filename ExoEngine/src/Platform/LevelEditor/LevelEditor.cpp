@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen., t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -904,10 +904,10 @@ namespace EM {
                         ImGui::Checkbox("Animation", &sprite.is_Animated);
                         ImGui::Text("Coordinates: "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
+                        ImGui::DragInt("##X", (int*)&sprite.GetIndex().x, 1); ImGui::SameLine();
                         ImGui::PushID(2);
                         ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
+                        ImGui::DragInt("##Y", (int*)&sprite.GetIndex().y, 1);
                         ImGui::PopID();
                         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
@@ -938,11 +938,24 @@ namespace EM {
                             }
                             ImGui::EndDragDropTarget();
                         }
-                        if (sprite.is_Animated)
+
+                        ImGui::Text("MaxIndex"); ImGui::SameLine();
+                        ImGui::DragInt("##MaxIndex", (int*)&sprite.GetMaxIndex(), 1, 1, 10);
+                            
+                        if (sprite.GetMaxIndex() > 0)
                         {
-                            ImGui::Text("DisplayTime"); ImGui::SameLine();
-                            ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                            int &selectedIndex = sprite.GetIndex().x;
+                            ImGui::Text("SelectedIndex"); ImGui::SameLine();
+                            ImGui::DragInt("##SelectedIndex", &selectedIndex, 1, 0, sprite.GetMaxIndex() - 1);
+
+                            if (sprite.GetDisplayTime().size() > 0)
+                            {
+                                ImGui::Text("SetDisplayTime"); ImGui::SameLine();
+                                ImGui::DragFloat("##SetDisplayTime", (float*)&sprite.GetDisplayTime()[selectedIndex].second, 0.005f, 0.0f);
+                            }
                         }
+                           
+                        
                         if (sprite.is_SpriteSheet)
                         {
                             ImGui::Text("UVCoordinates: "); ImGui::SameLine();
@@ -964,7 +977,7 @@ namespace EM {
                         auto& colliderComp = p_ecs.GetComponent<Collider>(selectedEntity);
                         auto& colliderType = colliderComp[0].mCol;
                         int colliderIndex = static_cast<int>(colliderType);
-                        const char* colliderNames = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 1 Type"); ImGui::SameLine();
                         ImGui::Combo("##test", &colliderIndex, colliderNames);
                         colliderType = static_cast<Collider::ColliderType>(colliderIndex);
@@ -983,13 +996,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[0].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[0].mCol == Collider::ColliderType::circle || colliderComp[0].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize = colliderComp[0].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("##Radius", (float*)&colliderSize, 0.05f);
                         }
-                        else if (colliderComp[0].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[0].mCol == Collider::ColliderType::rect || colliderComp[0].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
@@ -1007,7 +1020,7 @@ namespace EM {
                         //selection for collider 2 type
                         auto& colliderType1 = colliderComp[1].mCol;
                         int colliderIndex1 = static_cast<int>(colliderType1);
-                        const char* colliderNames1 = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames1 = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 2 Type"); ImGui::SameLine();
                         ImGui::Combo("###test", &colliderIndex1, colliderNames1);
                         ImGui::PushItemWidth(100.0f);
@@ -1026,13 +1039,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[1].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[1].mCol == Collider::ColliderType::circle || colliderComp[1].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize1 = colliderComp[1].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("###Radius", (float*)&colliderSize1, 0.05f);
                         }
-                        else if (colliderComp[1].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[1].mCol == Collider::ColliderType::rect || colliderComp[1].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
@@ -1104,45 +1117,53 @@ namespace EM {
                             //if (isClicked & 1)
                             //{
                                 //isClicked = 0;
-                                bool can_addScript = true;//std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
-                                for (int i = 0; i < logic.GetScriptNames().size(); i++) {
-                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) {
+                                bool can_addScript = true; //std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
+                                for (int i = 0; i < logic.GetScriptNames().size(); i++) 
+                                {
+                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) 
+                                    {
                                         can_addScript = false;
                                         std::cout << "Cannot Add already existing script!\n";
                                     }
                                 }
                                 if (can_addScript == true)
                                 {
-                                    if (mScriptList[current_script] == "PlayerController")
+                                    if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
                                     {
-                                        logic.InsertScript(new PlayerController(), selectedEntity);
+                                        if (mScriptList[current_script] == "PlayerController" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity)
+                                                                                              && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new PlayerController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "EnemyMovement" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity) 
+                                                                                           && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyMovement(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new CollisionResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ButtonResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                            && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ScenerioScript")
+                                        {
+                                            logic.InsertScript(new ScenerioScript(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "AudioManager" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new AudioManager(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new HUDController(), selectedEntity);
+                                        }
                                     }
-                                    if (mScriptList[current_script] == "EnemyMovement")
-                                    {
-                                        logic.InsertScript(new EnemyMovement(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "CollisionResponse")
-                                    {
-                                        logic.InsertScript(new CollisionResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ButtonResponse")
-                                    {
-                                        logic.InsertScript(new ButtonResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ScenerioScript")
-                                    {
-                                        logic.InsertScript(new ScenerioScript(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "AudioManager")
-                                    {
-                                        logic.InsertScript(new AudioManager(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "HUDController")
-                                    {
-                                        logic.InsertScript(new HUDController(), selectedEntity);
-                                    }
-                                //}
-                            }
+                                }
                         } 
                         ImGui::SameLine();
                         if (ImGui::Button("Delete")) {
@@ -1403,6 +1424,7 @@ namespace EM {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
                 current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), Audio::AudioType::MASTER);
+                //std::cout << "Playing Audio: " << audioPath + mAudioFileList[currentfile].path().filename().string() << std::endl;
                 //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 

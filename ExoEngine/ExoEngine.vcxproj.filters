@@ -76,6 +76,8 @@
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -261,6 +263,7 @@
     <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
     <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

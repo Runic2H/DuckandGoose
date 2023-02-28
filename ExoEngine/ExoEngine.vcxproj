@@ -50,6 +50,7 @@
     <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
     <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
@@ -232,6 +233,8 @@
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
