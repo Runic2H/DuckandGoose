@@ -71,16 +71,20 @@ namespace EM {
     void LevelEditor::Init(Window* window)
     {
         mWindow = window;
-
+        
         IMGUI_CHECKVERSION();
+
         ImGui::CreateContext();
+
         ImGuiIO& io = ImGui::GetIO();
+
         io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
         io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
         ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
+
         ImGui_ImplOpenGL3_Init("#version 450");
 
         LoadAudioFromFile();
@@ -88,6 +92,7 @@ namespace EM {
         LoadSceneFromFile();
 
         LoadScriptsFromFile();
+
     }
     /*!*************************************************************************
     Update loop for level editor, poll events and set new frames
@@ -221,6 +226,7 @@ namespace EM {
     void LevelEditor::LoadScriptsFromFile()
     {
         std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
+        //std::string scriptPath = "Assets/Scripts"; //for release mode
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())
@@ -233,7 +239,7 @@ namespace EM {
                 in.pop_back();
                 in.pop_back();
                 mScriptList.emplace_back(in);
-                std::cout << "script path " << in << std::endl;
+                //std::cout << "script path " << in << std::endl;
             }
         }
     }

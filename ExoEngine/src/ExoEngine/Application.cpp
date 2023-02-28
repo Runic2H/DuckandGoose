@@ -36,6 +36,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/GUI/GUI.h"
+#include <stdlib.h>
 
 namespace EM {
 	bool end_state{false}; //placeholder
@@ -45,6 +46,7 @@ Application constructor
 ****************************************************************************/
 	Application::Application()
 	{
+		_set_abort_behavior(0, _CALL_REPORTFAULT);
 		p_ecs.Init();
 		p_Scene->Init();
 		FramePerSec::GetInstance().InitFrame();
@@ -71,7 +73,6 @@ Run loop for application
 	void Application::Run() 
 	{
 		Timer::GetInstance().GlobalTimeStarter();
-		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -113,14 +114,12 @@ Run loop for application
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}
 		mLogic->Init();
-
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
 		RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
-		Tag tag;
 
 		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
@@ -379,6 +378,7 @@ Run loop for application
 		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
+
 		Entity player = p_ecs.CreateEntity();
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
@@ -408,10 +408,10 @@ Run loop for application
 		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
-		//p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
-		//p_Editor->is_ShowWindow = false;
-
+		p_Editor->is_ShowWindow = false;
+		Graphic::camera.SetZoomLevel(0.25);
+		p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -437,10 +437,12 @@ Run loop for application
 					{
 						if (p_ecs.GetComponent<Tag>(i).GetTag() == "Enemy")
 						{
-							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
+							if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0 && dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
-								p_ecs.DestroyEntity(i);
-								//p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
+								p_ecs.GetComponent<Sprite>(i).SetTexture("MeleeDeath");
+								p_ecs.GetComponent<Collider>(i)[0].is_Alive = false;
+								p_ecs.GetComponent<Collider>(i)[1].is_Alive = false;
+								p_ecs.GetComponent<Sprite>(i).SetTexture("Blank");
 							}
 						}
 					}
@@ -450,12 +452,10 @@ Run loop for application
 
 			// test menu script
 
-
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-
 			p_Scene->checkForSceneToLoad();
 
 			FramePerSec::GetInstance().EndFrameCount();

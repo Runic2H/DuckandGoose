@@ -80,7 +80,7 @@ namespace EM
 				{
 					spt.SetTexture("StartClick");
 					p_GUI->toggle_menu();
-					p_Scene->setSceneToLoad("Assets/Scene/Level.json");
+					p_Scene->setSceneToLoad("Assets/Scene/LevelTest.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
