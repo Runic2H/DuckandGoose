@@ -46,12 +46,18 @@
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
+    <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
+    <ClInclude Include="src\Platform\Logic\States\IStates.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
     <ClInclude Include="src\ExoEngine\Math\matrix3D.h" />
@@ -232,6 +238,10 @@
     <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
+    <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -321,7 +331,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -364,6 +374,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitDefaultLibName>false</OmitDefaultLibName>
       <ProgramDataBaseFileName>$(OutDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -390,6 +401,7 @@
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

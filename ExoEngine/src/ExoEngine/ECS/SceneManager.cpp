@@ -65,7 +65,7 @@ namespace EM
 		p_ecs.ResetEntities();
 		p_ecs.SetTotalEntitiesForWorldBuild(obj["Number of Entities"]["Entities"].GetUint());
 		auto aliveTotal = obj["Number of Entities"]["Entities"].GetUint();
-		Entity aliveCount = 0;
+		//Entity aliveCount = 0;
 		Entity j = 0;
 		while(j < aliveTotal)
 		{

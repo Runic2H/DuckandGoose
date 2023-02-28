@@ -35,18 +35,20 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/GUI/GUI.h"
-
-EM::vec2D* Trans;
+#include <stdlib.h>
 
 namespace EM {
 	bool end_state{false}; //placeholder
-
+	
+	
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
 	Application::Application()
 	{
+		_set_abort_behavior(0, _CALL_REPORTFAULT);
 		p_ecs.Init();
 		p_Scene->Init();
 		FramePerSec::GetInstance().InitFrame();
@@ -70,10 +72,9 @@ System input
 /*!*************************************************************************
 Run loop for application
 ****************************************************************************/
-	void Application::Run() 
+	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
-		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -87,7 +88,6 @@ Run loop for application
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();
-
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
@@ -115,15 +115,14 @@ Run loop for application
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}
 		mLogic->Init();
-
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
 		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
-		Tag tag;*/
-	/*	RigidBody rb;*/
+		Tag tag;
+
 
 		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
@@ -382,26 +381,24 @@ Run loop for application
 		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
-		 
-		//Entity player = p_ecs.CreateEntity();
-		//name.SetNameTag("Player");
-		//sprite.SetTexture("Idle");
-		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
-		//p_ecs.AddComponent<RigidBody>(player, rb);
-		//p_ecs.AddComponent<Sprite>(player, sprite);
-		//p_ecs.AddComponent<NameTag>(player, name);
-		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
-		//tag.SetTag("Player");
-		//p_ecs.AddComponent<Tag>(player, tag);
-		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+
+		Entity player = p_ecs.CreateEntity();
+		name.SetNameTag("Player");
+		sprite.SetTexture("Idle");
+		p_ecs.AddComponent<Transform>(player, C_TransformComponent);
+		p_ecs.AddComponent<RigidBody>(player, rb);
+		p_ecs.AddComponent<Sprite>(player, sprite);
+		p_ecs.AddComponent<NameTag>(player, name);
+		p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
+		tag.SetTag("Player");
+		p_ecs.AddComponent<Tag>(player, tag);
+		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerControl(), player);
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
-		//vec2D pos = vec2D(200.0f, 200.0f);
-		//p_ecs.GetComponent<Transform>(enemy).SetPos(pos);
 		//p_ecs.AddComponent<RigidBody>(enemy, rb);
 		//p_ecs.AddComponent<Sprite>(enemy, sprite);
 		//p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
@@ -414,10 +411,12 @@ Run loop for application
 		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
-		//p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
 		//p_Editor->is_ShowWindow = false; 
 
+		p_Editor->is_ShowWindow = false;
+		Graphic::camera.SetZoomLevel(0.25);
+		p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -443,10 +442,14 @@ Run loop for application
 					{
 						if (p_ecs.GetComponent<Tag>(i).GetTag() == "Enemy")
 						{
-							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
+							if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0 && dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
 								p_ecs.DestroyEntity(i);
-								//p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
+								p_ecs.GetComponent<Sprite>(i).SetTexture("MeleeDeath");
+								p_ecs.GetComponent<Collider>(i)[0].is_Alive = false;
+								p_ecs.GetComponent<Collider>(i)[1].is_Alive = false;
+								p_ecs.GetComponent<Sprite>(i).SetTexture("Blank");
+
 							}
 						}
 					}
@@ -456,12 +459,11 @@ Run loop for application
 
 			// test menu script
 
-
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
+			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-
 			p_Scene->checkForSceneToLoad();
 
 			FramePerSec::GetInstance().EndFrameCount();

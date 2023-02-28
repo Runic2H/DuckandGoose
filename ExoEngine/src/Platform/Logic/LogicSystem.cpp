@@ -26,12 +26,6 @@ namespace EM
 	****************************************************************************/
 	void LogicSystem::Init()
 	{
-		/*auto mLogic = p_ecs.RegisterSystem<LogicSystem>();
-		{
-			Signature signature;
-			signature.set(p_ecs.GetComponentType<Logic>());
-			p_ecs.SetSystemSignature<LogicSystem>(signature);
-		}*/
 		for (const auto& entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
@@ -41,7 +35,6 @@ namespace EM
 				{
 					LogicComp.SetScriptEntity(entity);
 				}
-				(*i)->Start();
 			}
 		}
 	}
@@ -62,7 +55,12 @@ namespace EM
 				{
 					LogicComp.SetScriptEntity(entity);
 				}
- 				(*i)->Update(Frametime);
+				if (!(*i)->GetScriptInit())
+				{
+					(*i)->Start();
+					(*i)->SetScriptInit();
+				}
+				(*i)->Update(Frametime);
 			}
 		}
 		Timer::GetInstance().Update(Systems::LOGIC);
