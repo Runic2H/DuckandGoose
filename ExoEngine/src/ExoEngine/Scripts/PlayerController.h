@@ -38,7 +38,8 @@ namespace EM
 			Dash,
 			Block,
 			Stunned,
-			Damage
+			Damage,
+			Dead
 		};
 		/*!*************************************************************************
 		Default constructor for Player Controller
@@ -95,6 +96,7 @@ namespace EM
 		float mCooldownTimer;
 		float mChargedAttackTimer;
 		float mDashTimer;
+		float mDashDurationTimer;
 		float mIsBlockTimer;
 		float mBlockCoolDownTimer;
 		vec2D mVel;
@@ -105,6 +107,6 @@ namespace EM
 		float mDamageTimer;
 		float mDashTime;
 		bool mIsBlocking;
-
+		bool mIsDashing;
 	};
 }

@@ -23,7 +23,7 @@ namespace EM
     Default constructor for Player Controller
     ****************************************************************************/
     PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mIsBlockTimer{2.0f},
-        mBlockCoolDownTimer{ 0.0f }, mDamageTimer{ 0.0f }, mDashTime{ 0.0f }, mIsDamaged{ false }, mIsBlocking{ false }, mVel{ vec2D() } {};
+        mBlockCoolDownTimer{ 0.0f }, mDamageTimer{ 0.0f }, mDashTime{ 0.0f }, mDashDurationTimer{ 0.0f }, mIsDamaged{ false }, mIsBlocking{ false }, mIsDashing{ false }, mVel{ vec2D(0, 0) } {};
 
     /*!*************************************************************************
     Returns a new copy of PlayerController Script
@@ -48,42 +48,42 @@ namespace EM
 	{
         mCooldownTimer -= Frametime;
         mDashTimer -= Frametime;
+        mDashDurationTimer -= Frametime;
         mDamageTimer -= Frametime;
-        if (mDamageTimer <= 0.0f && mIsDamaged == true)
+        if (mCooldownTimer <= 0.0f)
         {
-            mIsDamaged = false;
-            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-            {
-                if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "HPBar")
-                {
-                    p_ecs.GetComponent<Attributes>(i).GetHealth() -= 10;
-                    if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0)
-                    {
-                        p_ecs.GetComponent<Attributes>(i).SetHealth(0);
-                    }
-                }
-            }
+            mState = PlayerState::Idle;
+            mAttackCounter = 0;
         }
         mVel.x = 0.0f;
         mVel.y = 0.0f;
+        
+        auto& mPlayerAttributes = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+        if ((mDamageTimer <= 0.0f && mIsDamaged == true) && (mIsBlocking == false))
+        {
+            mIsDamaged = false;
+            mPlayerAttributes.SetHealth(mPlayerAttributes.GetHealth() - 10);
+            if (mPlayerAttributes.GetHealth() <= 0)
+            {
+                mPlayerAttributes.SetHealth(0);
+            }
+            mVel.x = 0.0f;
+            mVel.y = 0.0f;
+        }
 
-        if ((mDamageTimer <= 0.0f && mIsDamaged == true) && (mDamageTimer <= 0.0f && mIsBlocking == true))
+
+        if ((mDamageTimer <= 0.0f && mIsDamaged == true) && (mIsBlocking == true))
         {
             mIsDamaged = false;
-            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+            //auto& mPlayerAttributes = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+            mPlayerAttributes.SetHealth(mPlayerAttributes.GetHealth() - 2);
+            if (mPlayerAttributes.GetHealth() <= 0)
             {
-                if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "HPBar")
-                {
-                    p_ecs.GetComponent<Attributes>(i).GetHealth() -= 2;
-                    if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0)
-                    {
-                        p_ecs.GetComponent<Attributes>(i).SetHealth(0);
-                    }
-                }
+                mPlayerAttributes.SetHealth(0);
             }
+            mVel.x = 0.0f;
+            mVel.y = 0.0f;
         }
-        mVel.x = 0.0f;
-        mVel.y = 0.0f;
 
         if ((p_Input->KeyHold(GLFW_KEY_W) || p_Input->KeyHold(GLFW_KEY_D)
             || p_Input->KeyHold(GLFW_KEY_S) || p_Input->KeyHold(GLFW_KEY_A)))
@@ -91,15 +91,15 @@ namespace EM
             
             mCooldownTimer = 0.1f;
             if (p_Input->KeyHold(GLFW_KEY_W)) {
-                mVel.y += 50.0f;
+                mVel.y = 1.0f;
                 mState = PlayerState::Moving;
             }
             else if (p_Input->KeyHold(GLFW_KEY_S)) {
-                mVel.y -= 50.f;
+                mVel.y = -1.0f;
                 mState = PlayerState::Moving;
             }
-            else if (p_Input->KeyHold(GLFW_KEY_D)) {
-                mVel.x += 50.f;
+            if (p_Input->KeyHold(GLFW_KEY_D)) {
+                mVel.x = 1.0f;
                 mState = PlayerState::Moving;
                 if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x < 0)
                 {
@@ -107,14 +107,24 @@ namespace EM
                 }
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x += 300.f;
-                    mCooldownTimer = 0.5f;
-                    mDashTimer = 3.0f;
+                    mIsDashing = true;
+                    mDashTimer = 3.0f; //cd before player can dash again
+                    mDashDurationTimer = 0.2f; //how long dash lasts
+                    mCooldownTimer = 0.5f; // input delay timer
+                        mState = PlayerState::Dash;
+                }
+                
+                if (mIsDashing == true)
+                {
                     mState = PlayerState::Dash;
+                    if (mDashDurationTimer <= 0.0f)
+                    {
+                        mIsDashing = false;
+                    }
                 }
             }
             else if (p_Input->KeyHold(GLFW_KEY_A)) {
-                mVel.x -= 50.f;
+                mVel.x = -1.0f;
                 mState = PlayerState::Moving;
                 if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetScale().x > 0)
                 {
@@ -122,10 +132,20 @@ namespace EM
                 }
                 if (p_Input->isKeyPressed(GLFW_KEY_LEFT_SHIFT) && mDashTimer <= 0.0f)
                 {
-                    mVel.x -= 100.f;
-                    mCooldownTimer = 0.5f;
-                    mDashTimer = 3.0f;
+                    mIsDashing = true;
+                    mDashTimer = 3.0f; //cd before player can dash again
+                    mDashDurationTimer = 0.2f; //how long dash lasts
+                    mCooldownTimer = 0.5f; // input delay timer
                     mState = PlayerState::Dash;
+                }
+
+                if (mIsDashing == true)
+                {
+                    mState = PlayerState::Dash;
+                    if (mDashDurationTimer <= 0.0f)
+                    {
+                        mIsDashing = false;
+                    }
                 }
             }
             //p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true;
@@ -181,6 +201,7 @@ namespace EM
         //    //}
         //}
         
+        //Blocking
         if (!mIsBlocking) 
         {
             if ((p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT)) && (mBlockCoolDownTimer <= 0.0f)) 
@@ -196,10 +217,10 @@ namespace EM
         {
             if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT)) 
             {
-                mIsBlockTimer -= Frametime;
-               // std::cout << "Blocking" << std::endl;
+                mIsBlockTimer -= Frametime; //Blocking duration
+                std::cout << "Blocking for " << mIsBlockTimer << std::endl;
                 mState = PlayerState::Block;
-                mCooldownTimer = 0.5f;
+                mCooldownTimer = 0.5f; // input delay timer
                 if (mIsBlockTimer <= 0) 
                 {
                     mIsBlockTimer = 2.0f;
@@ -209,22 +230,23 @@ namespace EM
             }
             else 
             {
+                //if block ends early, update timers
                 mIsBlockTimer = 2.0f;
                 mBlockCoolDownTimer = 5.0f;
                 mIsBlocking = false;
             }
         }
 
-        if (mCooldownTimer <= 0.0f)
-        {
-            mState = PlayerState::Idle;
-            mAttackCounter = 0;
-        }
+        //if (mPlayerAttributes.GetHealth() <= 0.0f)
+        //{
+        //    mState = PlayerState::Dead;
+        //}
 
         UpdateState();
         //UpdateAttack();
         UpdatePhysics(Frametime);
         Animate(mState);
+        
 	}
 
     /*!*************************************************************************
@@ -261,7 +283,13 @@ namespace EM
     {
         auto& pRigid = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-
+        if (mVel.x != 0.0f || mVel.y != 0.0f) {
+            Normalize(mVel, mVel);
+            mVel = mVel * 25;
+            if (mIsDashing) {
+                mVel.x *= 5;
+            }
+        }
         pRigid.SetVel(mPhys.friction(pRigid.GetVel(), Frametime));
         pRigid.SetVel(mPhys.accelent(pRigid.GetVel(), mVel, Frametime));
         vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
@@ -296,6 +324,9 @@ namespace EM
         case PlayerState::Damage:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Damage");
             break;
+       /* case PlayerState::Dead:
+            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Death");
+            break;*/
         }
     }
 

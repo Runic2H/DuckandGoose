@@ -15,6 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "PhysicsSystem.h"
 #include "ExoEngine/ECS/Components/Components.h"
 #include "ExoEngine/ResourceManager/ResourceManager.h"
+
 namespace EM {
 	/*!*************************************************************************
 	This function initialises the system. As there are no data members that require
