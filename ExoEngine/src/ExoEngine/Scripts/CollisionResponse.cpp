@@ -67,30 +67,24 @@ namespace EM
 				}
 				//enemy takes damage based on player damage
 				int pDmg = 0;
-				//get player attributes (damage)
+				
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
 						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
 					}
 				}
-				//player hp
-				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
-
-				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
+				
+				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->GetDamageTimer() <= 0.0f)
 				{
-					p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->Animate(PlayerController::PlayerState::Damage);
+					std::cout << "Collision Response" << std::endl;
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetDamageValue(10.0f);
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged = true;
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.5f;
+					//std::cout << "damage timer2 " << dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer << std::endl;
 					if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0)
 					{
 						p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
 					}
-				}
-				//player takes damage based on which enemy hit him
-				//if hp < 0, player dies
-			
+				}			
 
 			}
 		}
