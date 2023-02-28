@@ -1,18 +1,18 @@
 {
     "Number of Entities": {
-        "Entities": 9
+        "Entities": 1
     },
     "EntityToIndexMap": {
         "Transform": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -106,7 +106,7 @@
             100
         ],
         "RigidBody": [
-            100,
+            0,
             100,
             100,
             100,
@@ -208,7 +208,7 @@
             100
         ],
         "Collider": [
-            100,
+            0,
             100,
             100,
             100,
@@ -311,14 +311,14 @@
         ],
         "NameTag": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -413,14 +413,14 @@
         ],
         "Sprite": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -514,7 +514,7 @@
             100
         ],
         "Logic": [
-            100,
+            0,
             100,
             100,
             100,
@@ -922,7 +922,7 @@
             100
         ],
         "Attributes": [
-            100,
+            0,
             100,
             100,
             100,
@@ -1027,14 +1027,14 @@
     "IndexToEntityMap": {
         "Transform": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -1128,7 +1128,7 @@
             100
         ],
         "RigidBody": [
-            100,
+            0,
             100,
             100,
             100,
@@ -1230,7 +1230,7 @@
             100
         ],
         "Collider": [
-            100,
+            0,
             100,
             100,
             100,
@@ -1333,14 +1333,14 @@
         ],
         "NameTag": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -1435,14 +1435,14 @@
         ],
         "Sprite": [
             0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
             100,
             100,
             100,
@@ -1536,7 +1536,7 @@
             100
         ],
         "Logic": [
-            100,
+            0,
             100,
             100,
             100,
@@ -1944,7 +1944,7 @@
             100
         ],
         "Attributes": [
-            100,
+            0,
             100,
             100,
             100,
@@ -2047,353 +2047,97 @@
         ]
     },
     "EntitySignatures": [
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001"
+        "00000000000000000000001000111111"
     ],
     "Components": {
         "Transform": [
-            {
-                "posX": -0.47214600443840027,
-                "posY": -0.003652796149253845,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": -0.6428708434104919
-            },
             {
                 "posX": 0.0,
                 "posY": 0.0,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
-            },
-            {
-                "posX": 0.49315059185028076,
-                "posY": -0.004566118121147156,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": -0.4520549476146698,
-                "posY": -0.4785386919975281,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": -0.03835633397102356,
-                "posY": -0.48401814699172974,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": 0.45205458998680115,
-                "posY": -0.508675754070282,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": -0.5013699531555176,
-                "posY": -0.8292235732078552,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": -0.035159870982170105,
-                "posY": -0.8700151443481445,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
-            },
-            {
-                "posX": 0.4739724397659302,
-                "posY": -0.8219176530838013,
-                "scaleX": 1.0,
-                "scaleY": 1.0,
-                "Rot": 0.0
             }
         ],
-        "RigidBody": [],
-        "Collider": [],
+        "RigidBody": [
+            {
+                "velX": 100.0,
+                "velY": 0.0,
+                "dirX": 0.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            }
+        ],
+        "Collider": [
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            }
+        ],
         "NameTag": [
             {
-                "NameTag": "test1"
-            },
-            {
-                "NameTag": "test2"
-            },
-            {
-                "NameTag": "test3"
-            },
-            {
-                "NameTag": "test4"
-            },
-            {
-                "NameTag": "test5"
-            },
-            {
-                "NameTag": "test6"
-            },
-            {
-                "NameTag": "test7"
-            },
-            {
-                "NameTag": "test8"
-            },
-            {
-                "NameTag": "test9"
+                "NameTag": "player"
             }
         ],
         "Sprite": [
             {
-                "TextureName": "Blocking",
-                "Index_X": 6,
+                "TextureName": "Idle",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 8,
                 "frame 0": 0,
-                "DisplayTime 0": 1,
-                "frame 1": 1,
-                "DisplayTime 1": 1,
-                "frame 2": 2,
-                "DisplayTime 2": 1,
-                "frame 3": 3,
-                "DisplayTime 3": 1,
-                "frame 4": 4,
-                "DisplayTime 4": 1,
-                "frame 5": 5,
-                "DisplayTime 5": 1,
-                "frame 6": 6,
-                "DisplayTime 6": 1,
-                "frame 7": 7,
-                "DisplayTime 7": 1
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 7,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 0": 0.0,
                 "frame 1": 0,
-                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 1": 0.0,
                 "frame 2": 0,
-                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 2": 0.0,
                 "frame 3": 0,
-                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 3": 0.0,
                 "frame 4": 0,
-                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 4": 0.0,
                 "frame 5": 0,
-                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 5": 0.0,
                 "frame 6": 0,
-                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 6": 0.0,
                 "frame 7": 0,
-                "DisplayTime 7": 0.019999999552965164
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 7,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.029999999329447746,
-                "frame 1": 0,
-                "DisplayTime 1": 0.029999999329447746,
-                "frame 2": 0,
-                "DisplayTime 2": 0.029999999329447746,
-                "frame 3": 0,
-                "DisplayTime 3": 0.029999999329447746,
-                "frame 4": 0,
-                "DisplayTime 4": 0.029999999329447746,
-                "frame 5": 0,
-                "DisplayTime 5": 0.029999999329447746,
-                "frame 6": 0,
-                "DisplayTime 6": 0.029999999329447746,
-                "frame 7": 0,
-                "DisplayTime 7": 0.029999999329447746
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 2,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.03999999910593033,
-                "frame 1": 0,
-                "DisplayTime 1": 0.03999999910593033,
-                "frame 2": 0,
-                "DisplayTime 2": 0.03999999910593033,
-                "frame 3": 0,
-                "DisplayTime 3": 0.03999999910593033,
-                "frame 4": 0,
-                "DisplayTime 4": 0.03999999910593033,
-                "frame 5": 0,
-                "DisplayTime 5": 0.03999999910593033,
-                "frame 6": 0,
-                "DisplayTime 6": 0.03999999910593033,
-                "frame 7": 0,
-                "DisplayTime 7": 0.03999999910593033
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 2,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.05000000074505806,
-                "frame 1": 0,
-                "DisplayTime 1": 0.05000000074505806,
-                "frame 2": 0,
-                "DisplayTime 2": 0.05000000074505806,
-                "frame 3": 0,
-                "DisplayTime 3": 0.05000000074505806,
-                "frame 4": 0,
-                "DisplayTime 4": 0.05000000074505806,
-                "frame 5": 0,
-                "DisplayTime 5": 0.05000000074505806,
-                "frame 6": 0,
-                "DisplayTime 6": 0.05000000074505806,
-                "frame 7": 0,
-                "DisplayTime 7": 0.05000000074505806
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 3,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.05999999865889549,
-                "frame 1": 0,
-                "DisplayTime 1": 0.05999999865889549,
-                "frame 2": 0,
-                "DisplayTime 2": 0.05999999865889549,
-                "frame 3": 0,
-                "DisplayTime 3": 0.05999999865889549,
-                "frame 4": 0,
-                "DisplayTime 4": 0.05999999865889549,
-                "frame 5": 0,
-                "DisplayTime 5": 0.05999999865889549,
-                "frame 6": 0,
-                "DisplayTime 6": 0.05999999865889549,
-                "frame 7": 0,
-                "DisplayTime 7": 0.05999999865889549
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 2,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.07000000029802322,
-                "frame 1": 0,
-                "DisplayTime 1": 0.07000000029802322,
-                "frame 2": 0,
-                "DisplayTime 2": 0.07000000029802322,
-                "frame 3": 0,
-                "DisplayTime 3": 0.07000000029802322,
-                "frame 4": 0,
-                "DisplayTime 4": 0.07000000029802322,
-                "frame 5": 0,
-                "DisplayTime 5": 0.07000000029802322,
-                "frame 6": 0,
-                "DisplayTime 6": 0.07000000029802322,
-                "frame 7": 0,
-                "DisplayTime 7": 0.07000000029802322
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 2,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.07999999821186066,
-                "frame 1": 0,
-                "DisplayTime 1": 0.07999999821186066,
-                "frame 2": 0,
-                "DisplayTime 2": 0.07999999821186066,
-                "frame 3": 0,
-                "DisplayTime 3": 0.07999999821186066,
-                "frame 4": 0,
-                "DisplayTime 4": 0.07999999821186066,
-                "frame 5": 0,
-                "DisplayTime 5": 0.07999999821186066,
-                "frame 6": 0,
-                "DisplayTime 6": 0.07999999821186066,
-                "frame 7": 0,
-                "DisplayTime 7": 0.07999999821186066
-            },
-            {
-                "TextureName": "Blocking",
-                "Index_X": 5,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
-                "MaxIndex": 8,
-                "frame 0": 0,
-                "DisplayTime 0": 0.10000000149011612,
-                "frame 1": 0,
-                "DisplayTime 1": 0.10000000149011612,
-                "frame 2": 0,
-                "DisplayTime 2": 0.10000000149011612,
-                "frame 3": 0,
-                "DisplayTime 3": 0.10000000149011612,
-                "frame 4": 0,
-                "DisplayTime 4": 0.10000000149011612,
-                "frame 5": 0,
-                "DisplayTime 5": 0.10000000149011612,
-                "frame 6": 0,
-                "DisplayTime 6": 0.10000000149011612,
-                "frame 7": 0,
-                "DisplayTime 7": 0.10000000149011612
+                "DisplayTime 7": 0.0
             }
         ],
-        "Logic": [],
+        "Logic": [
+            {
+                "0": "PlayerController",
+                "ScriptCount": 1
+            }
+        ],
         "Tag": [],
         "Audio": [],
         "HUDComponent": [],
-        "Attributes": []
+        "Attributes": [
+            {
+                "Health": 75,
+                "Max Health": 100,
+                "Damage": 10,
+                "Chest Health": 50
+            }
+        ]
     }
 }

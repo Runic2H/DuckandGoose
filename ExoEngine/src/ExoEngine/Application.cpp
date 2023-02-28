@@ -40,7 +40,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM {
 	bool end_state{false}; //placeholder
-
+	
+	
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
@@ -70,7 +71,7 @@ System input
 /*!*************************************************************************
 Run loop for application
 ****************************************************************************/
-	void Application::Run() 
+	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
 		Window* m_window = new Window;
@@ -86,7 +87,6 @@ Run loop for application
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();
-
 		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
 		{
 			Signature signature;
@@ -120,6 +120,8 @@ Run loop for application
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
+		Tag tag;
+
 
 		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
@@ -439,10 +441,12 @@ Run loop for application
 						{
 							if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0 && dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
 							{
+								p_ecs.DestroyEntity(i);
 								p_ecs.GetComponent<Sprite>(i).SetTexture("MeleeDeath");
 								p_ecs.GetComponent<Collider>(i)[0].is_Alive = false;
 								p_ecs.GetComponent<Collider>(i)[1].is_Alive = false;
 								p_ecs.GetComponent<Sprite>(i).SetTexture("Blank");
+
 							}
 						}
 					}
@@ -455,6 +459,7 @@ Run loop for application
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
+			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			p_Scene->checkForSceneToLoad();
 
