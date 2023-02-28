@@ -48,7 +48,7 @@ namespace EM
         for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
             if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
                 auto& trans = p_ecs.GetComponent<Transform>(i);
-                if (distance(trans.GetPos(), p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 1.0f) {
+                if (distance(trans.GetPos(), p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 2.0f) {
                     playerDetected = true;
                 }
                 else {
@@ -82,8 +82,10 @@ namespace EM
                     //deactivate laser when time runs out
                     firing = false;
                     col[0].is_Alive = false;
-                    //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("???");
                 }
+            }
+            else {
+                //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("???");
             }
         }
     }
