@@ -72,6 +72,10 @@
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -251,6 +255,12 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
+    <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
+    <ClInclude Include="src\Platform\Logic\States\IStates.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />
