@@ -34,9 +34,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/GUI/GUI.h"
-
-EM::vec2D* Trans;
 
 namespace EM {
 	bool end_state{false}; //placeholder
@@ -122,7 +121,6 @@ Run loop for application
 		Sprite sprite;
 		NameTag name;
 		Tag tag;
-	/*	RigidBody rb;*/
 
 		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
@@ -381,7 +379,6 @@ Run loop for application
 		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
-		 
 		Entity player = p_ecs.CreateEntity();
 		name.SetNameTag("Player");
 		sprite.SetTexture("Idle");
@@ -393,25 +390,23 @@ Run loop for application
 		tag.SetTag("Player");
 		p_ecs.AddComponent<Tag>(player, tag);
 		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
-		p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
+		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerControl(), player);
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
 		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
-		Entity enemy = p_ecs.CreateEntity();
-		Logic logic2;
-		p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
-		vec2D pos = vec2D(200.0f, 200.0f);
-		p_ecs.GetComponent<Transform>(enemy).SetPos(pos);
-		p_ecs.AddComponent<RigidBody>(enemy, rb);
-		p_ecs.AddComponent<Sprite>(enemy, sprite);
-		p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
-		p_ecs.AddComponent<Tag>(enemy, C_TagComponent);
-		p_ecs.AddComponent<NameTag>(enemy, C_NameTagComponent);
-		p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
-		p_ecs.AddComponent<Logic>(enemy, logic2);
-		p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
-		p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
-		p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
-		p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
+		//Entity enemy = p_ecs.CreateEntity();
+		//Logic logic2;
+		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(enemy, rb);
+		//p_ecs.AddComponent<Sprite>(enemy, sprite);
+		//p_ecs.AddComponent<Collider>(enemy, C_ColliderComponent);
+		//p_ecs.AddComponent<Tag>(enemy, C_TagComponent);
+		//p_ecs.AddComponent<NameTag>(enemy, C_NameTagComponent);
+		//p_ecs.GetComponent<NameTag>(enemy).SetNameTag("Enemy");
+		//p_ecs.AddComponent<Logic>(enemy, logic2);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new EnemyMovement(), enemy);
+		//p_ecs.GetComponent<Logic>(enemy).InsertScript(new CollisionResponse(), enemy);
+		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
+		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
 		//p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");

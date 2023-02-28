@@ -30,12 +30,27 @@ namespace EM
 		virtual void Start() {};
 		virtual void Update(float Frametime) { UNREFERENCED_PARAMETER(Frametime); };
 		virtual void End() {};
-		virtual IScript* Clone() const = 0;
+		virtual IScript* Clone() const = 0; 
 		virtual std::string GetScriptName() = 0;
 
 		void SetScriptEntityID(Entity& entity) { entityID = entity; }
 		Entity& GetScriptEntityID() { return entityID; }
+
+		void SetScriptInit()
+		{
+			if (!mScriptInit)
+			{
+				mScriptInit = true;
+			}
+		}
+
+		bool GetScriptInit()
+		{
+			return mScriptInit;
+		}
+
 	private:
 		Entity entityID;
+		bool mScriptInit{ false };
 	};
 }

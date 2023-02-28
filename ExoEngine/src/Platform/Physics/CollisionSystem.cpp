@@ -72,7 +72,6 @@ namespace EM {
                                                 Normalize(norm1, norm1);
                                                 col1[a].mCollisionNormal = norm1;
 
-                                                //auto& trans1 = p_ecs.GetComponent<Transform>(i);
                                                 vec2D response1 = rigid1.GetVel();
                                                 vec2D normal1 = norm1;
                                                 //Normalize(normal, normal);
@@ -90,7 +89,6 @@ namespace EM {
                                                 Normalize(norm2, norm2);
                                                 col2[b].mCollisionNormal = norm2;
 
-                                                //auto& trans2 = p_ecs.GetComponent<Transform>(j);
                                                 vec2D response2 = rigid2.GetVel();
                                                 vec2D normal2 = norm2;
                                                 //Normalize(normal, normal);
@@ -158,7 +156,6 @@ namespace EM {
                                                 col1[a].mHit = 1;
                                                 col1[a].mCollisionNormal = norm1;
 
-                                                //auto& trans1 = p_ecs.GetComponent<Transform>(i);
                                                 vec2D response = rigid1.GetVel();
                                                 vec2D normal = norm1;
                                                 //Normalize(normal, normal);
@@ -257,7 +254,6 @@ namespace EM {
                                                 col2[b].mHit = 1;
                                                 col2[b].mCollisionNormal = norm2;
 
-                                                //auto& trans2 = p_ecs.GetComponent<Transform>(j);
                                                 vec2D response = rigid2.GetVel();
                                                 vec2D normal = norm2;
                                                 //Normalize(normal, normal);
