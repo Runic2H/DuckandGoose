@@ -46,6 +46,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyHPBar.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\EnemyHPBar.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />

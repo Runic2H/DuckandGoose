@@ -81,6 +81,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\EnemyHPBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -270,6 +271,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyHPBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

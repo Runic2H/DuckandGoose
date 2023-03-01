@@ -16,6 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "EnemyMovement.h"
+#include "GateController.h"
 
 namespace EM
 {
@@ -87,6 +88,14 @@ namespace EM
 			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 5.0f) {
 				//std::cout << "Player Detected" << std::endl;
 				mState = EnemyState::Moving;
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				{
+					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")
+					{
+						auto& logic = p_ecs.GetComponent<Logic>(i);
+						dynamic_cast<GateController*>(logic.GetScriptByName("GateController"))->enemies += 1;
+					}
+				}
 			}
 		}
 		if (mState == EnemyState::Moving) {
@@ -239,6 +248,14 @@ namespace EM
 		else
 		{
 			p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("MeleeDeath");
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+			{
+				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")
+				{
+					auto& logic = p_ecs.GetComponent<Logic>(i);
+					dynamic_cast<GateController*>(logic.GetScriptByName("GateController"))->enemies -= 1;
+				}
+			}
 		}
 	}
 

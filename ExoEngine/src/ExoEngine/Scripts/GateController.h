@@ -56,8 +56,9 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 
+		int enemies;
 
 	private:
-		int enemies;
+		
 	};
 }

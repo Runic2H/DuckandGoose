@@ -1,81 +1,60 @@
 /*!*************************************************************************
 ****
-\file Gate Controller.cpp
+\file EnemyHPBar.cpp
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
-\date 2/11/2022
-\brief	Script for Gate Controller
+\date 28/01/2023
+\brief	Script for Enemy HP Bar
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
 #include "empch.h"
-#include "GateController.h"
+#include "EnemyHPBar.h"
 
 namespace EM
 {
     /*!*************************************************************************
-    Default constructor for Gate Controller
+    Default constructor for Enemy HP Bar
     ****************************************************************************/
-    GateController::GateController() : enemies{ 0 } {};
-
+    EnemyHPBar::EnemyHPBar() {}
     /*!*************************************************************************
-    Returns a new copy of GateController Script
+    Returns a new copy of EnemyHPBar Script
     ****************************************************************************/
-    GateController* GateController::Clone() const
-    {
-        return new GateController(*this);
-    }
-
+    EnemyHPBar* EnemyHPBar::Clone() const
+	{
+		return new EnemyHPBar(*this);
+	}
     /*!*************************************************************************
-    Start State of GateController Script
+    Start State of EnemyHPBar Script
     ****************************************************************************/
-    void GateController::Start()
-    {
-    }
+	void EnemyHPBar::Start()
+	{
 
+	}
     /*!*************************************************************************
-    Update Loop of Gate Controller Script
+    Update Loop of EnemyHPBar Script
     ****************************************************************************/
-    void GateController::Update(float Frametime)
-    {
-        //check how many enemies killed
-        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
-            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
-                //check if enemy dead
-                    //if enemy is dead, decrement by one
-            }
-        }
-        //if no enemeies left, open gate
-        if (enemies <= 0) {
-            //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("??");
-            auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-            col[0].is_Alive = false;
-        }
-        else {
-            //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("??");
-            auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-            col[0].is_Alive = true;
-        }
-    }
-
+	void EnemyHPBar::Update(float Frametime)
+	{
+        
+	}
     /*!*************************************************************************
-    End State for Gate Controller
+    End State for EnemyHPBar
     ****************************************************************************/
-    void GateController::End()
+    void EnemyHPBar::End()
     {
         delete this;
     }
-
     /*!*************************************************************************
     Returns the name of Script
     ****************************************************************************/
-    std::string GateController::GetScriptName()
+    std::string EnemyHPBar::GetScriptName()
     {
-        return "GateController";
+        return "EnemyHPBar";
     }
 }
