@@ -184,6 +184,16 @@ namespace EM {
 				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });
 			}
+
+			//for rendering of enemy health bar
+			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
+				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
+				auto& mAtt = p_ecs.GetComponent<Attributes>(entity);
+				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
+				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x, mTrans.GetPos().y + mHUD.GetOffset().y);
+				vec2D HPScale = vec2D(mAtt.GetHealth() / mAtt.GetMaxHealth() * mTrans.GetScale().x, mTrans.GetScale().y);
+				mRenderer->DrawQuad(HPpos, HPScale, 0.0f, (1.0f, 0.0f, 0.0f, 1.0f));
+			}
 		}
 
 		p_Editor->mGameMousePosition = ImGui::GetMousePos();
