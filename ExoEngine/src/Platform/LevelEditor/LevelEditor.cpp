@@ -45,6 +45,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
+#include "ExoEngine/Scripts/GateController.h"
 
 namespace EM {
 
@@ -1161,6 +1162,10 @@ namespace EM {
                                         if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
                                             logic.InsertScript(new HUDController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new GateController(), selectedEntity);
                                         }
                                     }
                                 }

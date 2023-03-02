@@ -57,7 +57,7 @@ namespace EM
 		virtual std::string GetScriptName() override;
 
 		int enemies;
-
+		float timer;
 	private:
 		
 	};
