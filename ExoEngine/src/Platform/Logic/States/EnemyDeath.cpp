@@ -1,30 +1,33 @@
 #include "empch.h"
-#include "OnIdle.h"
-#include "OnMove.h"
+#include "EnemyDeath.h"
+#include "ExoEngine/Scripts/GateController.h"
 
 namespace EM
 {
-	OnIdle::OnIdle() {}
+	EnemyDeath::EnemyDeath() : deathTime{ 5.0f } {}
 
-	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
+	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{
-		if (key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D)
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeDeath");
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			return new OnMove();
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")
+			{
+				auto& logic = p_ecs.GetComponent<Logic>(i);
+				dynamic_cast<GateController*>(logic.GetScriptByName("GateController"))->enemies -= 1;
+			}
 		}
-		return nullptr;
 	}
-	void OnIdle::OnEnter(StateMachine* stateMachine)
+	void EnemyDeath::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Idle");
+		deathTime -= Frametime;
+		if (deathTime <= 0) {
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
+		}
 	}
-	void OnIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
+	void EnemyDeath::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "Idling" << std::endl;
-	}
-	void OnIdle::OnExit(StateMachine* stateMachine)
-	{
-		std::cout << "IdleExit" << std::endl;
+		std::cout << "Death Animation Exit" << std::endl;
 		delete this;
 	}
 }

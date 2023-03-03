@@ -3,14 +3,15 @@
 
 namespace EM
 {
-	class OnIdle : public IStates
+	class EnemyDeath : public IStates
 	{
 	public:
-		OnIdle();
-		virtual ~OnIdle() = default;
-		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
+		EnemyDeath();
+		virtual ~EnemyDeath() = default;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
+	private:
+		float deathTime;
 	};
 }

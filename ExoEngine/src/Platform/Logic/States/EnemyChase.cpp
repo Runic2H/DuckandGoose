@@ -6,10 +6,6 @@ namespace EM
 {
 	EnemyChase::EnemyChase() {}
 
-	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
-	{
-		//if take damage, go into damaged state
-	}
 	void EnemyChase::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
@@ -51,7 +47,7 @@ namespace EM
 	}
 	void EnemyChase::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "IdleExit" << std::endl;
+		std::cout << "ChaseExit" << std::endl;
 		delete this;
 	}
 }

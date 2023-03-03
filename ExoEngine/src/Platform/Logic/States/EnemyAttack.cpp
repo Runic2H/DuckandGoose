@@ -4,17 +4,13 @@
 
 namespace EM
 {
-	OnIdle::OnIdle() {}
+	EnemyAttack::EnemyAttack() : mAttackCooldown{ 0.0f }, mAttackTime{ 0.0f } {}
 
-	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
-	{
-		//if take damage, go into damaged state
-	}
-	void OnIdle::OnEnter(StateMachine* stateMachine)
+	void EnemyAttack::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeAttack");
 	}
-	void OnIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
+	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		//if attacking, attack and calculate chances for cooldown
 		if (mAttackCooldown <= 0 && (rand() % 100) <= 80) {
@@ -29,17 +25,36 @@ namespace EM
 			mAttackTime = 10.0f;
 		}
 		auto pCol = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray();
+		vec2D playerPos = vec2D();
+		bool check = false;
 		if (mAttackTime > 0) {
 			(pCol + 1)->is_Alive = true;
 			//std::cout << "Attack Active" << std::endl;
 		}
 		else {
 			(pCol + 1)->is_Alive = false;
+			//if player moves within x radius, set mode to moving
+			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) > 0.1f) {
+				//std::cout << "Player Detected" << std::endl;
+				stateMachine->ChangeState(new EnemyChase());
+			}
+		}
+
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			//std::cout << "Prox Check" << std::endl;
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			{
+				//std::cout << "Found Player" << std::endl;
+				check = true;
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+
+			}
 		}
 	}
-	void OnIdle::OnExit(StateMachine* stateMachine)
+	void EnemyAttack::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "IdleExit" << std::endl;
+		std::cout << "AttackExit" << std::endl;
 		delete this;
 	}
 }
