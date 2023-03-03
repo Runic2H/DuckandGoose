@@ -8,7 +8,6 @@
 \par Assignment GAM200
 \date 2/11/2022
 \brief	Script for Player Controller
-
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
@@ -38,7 +37,8 @@ namespace EM
 			Dash,
 			Block,
 			Stunned,
-			Damage
+			Damage,
+			Dead
 		};
 		/*!*************************************************************************
 		Default constructor for Player Controller
@@ -87,7 +87,7 @@ namespace EM
 		void SetState(PlayerState state);
 
 		void SetDamageTimer(float timer);
-		float &GetDamageTimer();
+		float& GetDamageTimer();
 		void SetDamageValue(int i) { mTakenDamage = i; }
 		/*set damage timer to private
 		create getter function
@@ -100,6 +100,7 @@ namespace EM
 		float mCooldownTimer;
 		float mChargedAttackTimer;
 		float mDashTimer;
+		float mDashDurationTimer;
 		float mIsBlockTimer;
 		float mBlockCoolDownTimer;
 		vec2D mVel;
@@ -112,6 +113,6 @@ namespace EM
 		bool mIsDamaged;
 		float mDashTime;
 		bool mIsBlocking;
-
+		bool mIsDashing;
 	};
 }

@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ButtonResponse.h"
 #include "../ECS/SceneManager.h"
 #include "ExoEngine/GUI/GUI.h"
+#include "Platform/Graphics/Graphics.h"
 
 
 namespace EM
@@ -34,6 +35,7 @@ namespace EM
 	
 	void ButtonResponse::Update(float Frametime)
 	{
+		Graphic::camera.SetZoomLevel(1.0);
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
@@ -44,9 +46,10 @@ namespace EM
 		if (spt.GetTexture() == "HowToPlay" && p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 
-			spt.SetTexture("HTPButtonIdle");
+			spt.SetTexture("htp_button_Idle");
 			transform.SetPos({ 0.0f,-0.75f });
-			transform.SetScale(0.9f, 0.2f);
+			transform.SetScale(1.0f, 0.2f);
+			p_GUI->toggle_HTP();
 		}
 
 		if ( p_GUI->Check_HTP() == false)
@@ -79,22 +82,22 @@ namespace EM
 		{
 			if (ID_tag.GetTag() == "Start" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
-				spt.SetTexture("StartHover");
+				spt.SetTexture("Start_Hover");
 			}
 
 			if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
-				spt.SetTexture("QuitHover");
+				spt.SetTexture("Quit_Hover");
 			}
 
 			if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
-				spt.SetTexture("OptionsHover");
+				spt.SetTexture("Options_Hover");
 			}
 
 			if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() != "HowToPlay" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
-				spt.SetTexture("HTPButtonHover");
+				spt.SetTexture("htp_button_Hover");
 				//std::cout << "hello";
 			}
 			selected = true;
@@ -109,21 +112,21 @@ namespace EM
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
-					spt.SetTexture("StartClick");
+					//spt.SetTexture("Start_Click");
 					p_GUI->toggle_menu();
 					p_Scene->setSceneToLoad("Assets/Scene/Level1.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
 				{
-					spt.SetTexture("QuitClick");
+					//spt.SetTexture("Quit_Click");
 					p_GUI->toggle_script();
 				}
 
 				if (ID_tag.GetTag() == "HowToPlay" && p_GUI->Check_HTP() == false)
 				{
-					//spt.SetTexture("HTPButtonClick");
 					spt.SetTexture("HowToPlay");
+					//spt.SetTexture("HowToPlay");
 					transform.SetScale({ 4.170206546783447f,1.9999960660934448f });
 					transform.SetPos({ 0.0f,0.0f });
 					p_GUI->toggle_HTP();
@@ -139,22 +142,22 @@ namespace EM
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
-					spt.SetTexture("StartClick");
+					spt.SetTexture("Start_Click");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
 				{
-					spt.SetTexture("QuitClick");
+					spt.SetTexture("Quit_Click");
 				}
 
-				if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() == "HTPButtonHover")
+				if (ID_tag.GetTag() == "HowToPlay")
 				{
-					spt.SetTexture("HTPButtonClick");
+					spt.SetTexture("htp_button_Click");
 				}
 
 				if (ID_tag.GetTag() == "Options" && p_GUI->Check_HTP() == false)
 				{
-					spt.SetTexture("OptionsClick");
+					spt.SetTexture("Options_Click");
 				}
 			}
 
@@ -167,22 +170,21 @@ namespace EM
 		{
 			if (ID_tag.GetTag() == "Start")
 			{
-				spt.SetTexture("StartIdle");
+				spt.SetTexture("Start_Idle");
 			}
 
 			if (ID_tag.GetTag() == "Quit")
 			{
-				spt.SetTexture("QuitIdle");
+				spt.SetTexture("Quit_Idle");
 			}
 			if (ID_tag.GetTag() == "Options")
 			{
-				spt.SetTexture("OptionsIdle");
+				spt.SetTexture("Options_Idle");
 			}
 
 			if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() != "HowToPlay")
 			{
-				spt.SetTexture("HTPButtonIdle");
-				p_GUI->toggle_HTP();
+				spt.SetTexture("htp_button_Idle");
 			}
 			selected = false;
 

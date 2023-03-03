@@ -35,7 +35,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
-#include "ExoEngine/Scripts/PlayerControl.h"
+#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/GUI/GUI.h"
 #include <stdlib.h>
 
