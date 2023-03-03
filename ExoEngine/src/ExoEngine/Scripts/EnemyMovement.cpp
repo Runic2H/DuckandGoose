@@ -16,13 +16,16 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "EnemyMovement.h"
+#include "GateController.h"
+#include "Platform/Logic/States/EnemyIdle.h"
+
 
 namespace EM
 {
 	/*!*************************************************************************
 	Ctor for new Enemy Movement Scripts
 	****************************************************************************/
-	EnemyMovement::EnemyMovement() : mState{ EnemyState::Patrolling }, mAttackCooldown{ 0.0f }, mAttackTime{ 0.0f }, mOrigin{ vec2D() }, mPatrolling{ false }, mDest{ vec2D() }, mPatrolTimer{ 2.0f }, mPatrolTime{ 2.0f } {}
+	EnemyMovement::EnemyMovement() {}
 
 	/*!*************************************************************************
 	returns an instance for a new Enemy Movement Script
@@ -36,7 +39,7 @@ namespace EM
 	Init for Enemy Movement Script
 	****************************************************************************/
 	void EnemyMovement::Start() {
-		mOrigin = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
+		mEnemyStateMachine.ChangeState(new EnemyIdle());
 	}
 
 	/*!*************************************************************************
@@ -44,7 +47,6 @@ namespace EM
 	****************************************************************************/
 	void EnemyMovement::Update(float Frametime)
 	{
-
 		//if patrolling state
 		if (mState == EnemyState::Patrolling) {
 			//check if moving

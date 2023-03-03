@@ -45,14 +45,25 @@ namespace EM
     void LaserTurret::Update(float Frametime)
     {
         //check for player proximity
+        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
+                auto& trans = p_ecs.GetComponent<Transform>(i);
+                if (distance(trans.GetPos(), p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 2.0f) {
+                    playerDetected = true;
+                }
+                else {
+                    playerDetected = false;
+                }
+            }
+        }
         if (playerDetected) {
+            auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
             //check timer
             if (startTimeTilSpawn <= 0) {
                 //set firing if timer is 0
                 //fire laser and deal damage
                 firing = true;
                 //set collider to be alive
-                auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
                 col[0].is_Alive = true;
                 //set firing duration
                 startFiringDuration = firingDuration;
@@ -66,16 +77,16 @@ namespace EM
             if (firing) {
                 //decrement firing duration
                 startFiringDuration -= Frametime;
+                //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("??");
                 if (startFiringDuration <= 0) {
                     //deactivate laser when time runs out
                     firing = false;
                     col[0].is_Alive = false;
                 }
             }
-        }
-        //render laser?
-        if (col[0].is_Alive == true) {
-
+            else {
+                //p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("???");
+            }
         }
     }
 

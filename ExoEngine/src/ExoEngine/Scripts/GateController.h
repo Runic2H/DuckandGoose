@@ -56,8 +56,9 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 
-
-	private:
 		int enemies;
+		float timer;
+	private:
+		
 	};
 }

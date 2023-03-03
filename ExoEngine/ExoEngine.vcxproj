@@ -45,13 +45,20 @@
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
     <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyDeath.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
@@ -229,11 +236,18 @@
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
@@ -320,7 +334,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

@@ -47,6 +47,15 @@ OptionsClick Assets/Textures/UI/Options_Click.png
 OptionsHover Assets/Textures/UI/Options_Hover.png
 OptionsIdle Assets/Textures/UI/Options_Idle.png
 QuitClick Assets/Textures/UI/Quit_Click.png 
+HPStatic Assets/Textures/HPStatic.png
+HPBar Assets/Textures/HPBar.png
+DashBar Assets/Textures/DashBar.png
+LaserBackOn Assets/Textures/BG_LASERGATE000.png
+LaserFrontOn Assets/Textures/FG_LASERGATE000.png
+LaserBackAnim Assets/Textures/LASERGATE_BG.png
+LaserFrontAnim Assets/Textures/LASERGATE_FG.png
+LaserBackOff Assets/Textures/BG_LASERGATE019.png
+LaserFrontOff Assets/Textures/FG_LASERGATE019.png
 QuitHover Assets/Textures/UI/Quit_Hover.png
 QuitIdle Assets/Textures/UI/Quit_Idle.png
 ResumeButton Assets/Textures/UI/ResumeButton.png

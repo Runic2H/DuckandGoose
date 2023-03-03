@@ -26,7 +26,8 @@ namespace EM {
 		{
 			Static,
 			HealthBar,
-			BlockIcon,
+			BlockBar,
+			DashBar,
 			ChargeAtk,
 			Text
 		};
