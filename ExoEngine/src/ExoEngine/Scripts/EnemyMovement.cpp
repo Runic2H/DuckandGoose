@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyMovement.h"
 #include "GateController.h"
 
+
 namespace EM
 {
 	/*!*************************************************************************
@@ -38,6 +39,7 @@ namespace EM
 	****************************************************************************/
 	void EnemyMovement::Start() {
 		mOrigin = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
+		mPlayerStateMachine.ChangeState(new EnemyIdle());
 	}
 
 	/*!*************************************************************************
@@ -72,31 +74,7 @@ namespace EM
 			}
 			//check for player proximity
 			vec2D playerPos = vec2D();
-			bool check = false;
-			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-			{
-				//std::cout << "Prox Check" << std::endl;
-				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
-				{
-					//std::cout << "Found Player" << std::endl;
-					check = true;
-					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-					
-				}
-			}
-			//if player moves within x radius, set mode to moving
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 5.0f) {
-				//std::cout << "Player Detected" << std::endl;
-				mState = EnemyState::Moving;
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")
-					{
-						auto& logic = p_ecs.GetComponent<Logic>(i);
-						dynamic_cast<GateController*>(logic.GetScriptByName("GateController"))->enemies += 1;
-					}
-				}
-			}
+			
 		}
 		if (mState == EnemyState::Moving) {
 			//std::cout << "Chasing Player" << std::endl;

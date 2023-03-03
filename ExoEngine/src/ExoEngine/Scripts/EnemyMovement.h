@@ -21,6 +21,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/ECS/ECS.h"
 #include "ExoEngine/Math/Vmath.h"
 #include "ExoEngine/Math/physics.h"
+#include "Platform/Logic/StateMachines/StateMachine.h"
+#include "Platform/Logic/States/IStates.h"
+#include "Platform/Logic/States/EnemyIdle.h"
 
 namespace EM
 {
@@ -89,7 +92,7 @@ namespace EM
 		vec2D mDest;
 		float mPatrolTimer;
 		float mPatrolTime;
-
+		StateMachine mEnemyStateMachine;
 	public:
 		//bool mIsAttacking;
 		//bool mIsIdle;

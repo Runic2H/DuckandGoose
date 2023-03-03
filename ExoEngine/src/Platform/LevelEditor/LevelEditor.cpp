@@ -1311,7 +1311,7 @@ namespace EM {
                     if (ImGui::CollapsingHeader("HUD", ImGuiTreeNodeFlags_None))
                     {
                         auto& HUDComp = p_ecs.GetComponent<HUDComponent>(selectedEntity);
-                        const char* HUDList = "Static\0Health Bar\0Block Icon\0Charge Attack\0Text\0EnemyHPBar";
+                        const char* HUDList = "Static\0Health Bar\0Block Icon\0Charge Attack\0Text";
                         auto HUDType = HUDComp.GetType();
                         int HUDIndex = static_cast<int>(HUDType);
                         ImGui::Combo("###test", &HUDIndex, HUDList);

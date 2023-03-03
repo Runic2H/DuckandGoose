@@ -29,8 +29,7 @@ namespace EM {
 			BlockBar,
 			DashBar,
 			ChargeAtk,
-			Text, 
-			EnemyHPBar
+			Text
 		};
 		HUDComponent();
 		~HUDComponent() = default;
