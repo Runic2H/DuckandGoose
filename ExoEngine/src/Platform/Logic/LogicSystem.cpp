@@ -26,17 +26,7 @@ namespace EM
 	****************************************************************************/
 	void LogicSystem::Init()
 	{
-		for (const auto& entity : mEntities)
-		{
-			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
-			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
-			{
-				if ((*i)->GetScriptEntityID() != entity)
-				{
-					LogicComp.SetScriptEntity(entity);
-				}
-			}
-		}
+
 	}
 
 	/*!*************************************************************************
@@ -49,12 +39,9 @@ namespace EM
 		for (const auto& entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
+			//LogicComp.SetScriptEntity(entity);
 			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 			{
-				if ((*i)->GetScriptEntityID() != entity)
-				{
-					LogicComp.SetScriptEntity(entity);
-				}
 				if (!(*i)->GetScriptInit())
 				{
 					(*i)->Start();

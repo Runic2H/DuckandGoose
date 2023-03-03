@@ -160,7 +160,6 @@ namespace EM
 		{
 			component.SetComponentEntityID(entity);
 			mComponentManager->AddComponent<T>(entity, component);
-
 			auto signature = mEntityManager->GetSignature(entity);
 			signature.set(mComponentManager->GetComponentType<T>(), true);
 			mEntityManager->SetSignature(entity, signature);

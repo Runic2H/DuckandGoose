@@ -78,6 +78,10 @@ namespace EM
 			return mState;
 		}
 
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
+
 	private:
 		EnemyState mState;
 		float mAttackCooldown;

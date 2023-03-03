@@ -57,6 +57,10 @@ namespace EM
 		Returns the name of Script
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
 		
 		//inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
 	private:

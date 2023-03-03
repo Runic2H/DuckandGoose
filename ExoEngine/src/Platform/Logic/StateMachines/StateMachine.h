@@ -9,7 +9,6 @@ namespace EM
 	class StateMachine
 	{
 	public:
-		StateMachine();
 		StateMachine(Entity entity);
 
 		~StateMachine() = default;

@@ -50,7 +50,7 @@ namespace EM
 		p_ecs.RegisterComponent<Audio>();
 		p_ecs.RegisterComponent<HUDComponent>();
 		p_ecs.RegisterComponent<Attributes>();
-		//p_ecs.RegisterComponent<Button>();
+		p_ecs.RegisterComponent<PlayerAttributes>();
 		sceneToLoad = "";
 	}
 
@@ -153,6 +153,14 @@ namespace EM
 						if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Attributes>(j, mAttributes);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "PlayerAttributes")
+					{
+						PlayerAttributes mPlayerAttributes;
+						if (mPlayerAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<PlayerAttributes>(j, mPlayerAttributes);
 						}
 					}
 				}
@@ -277,6 +285,10 @@ namespace EM
 						if (p_ecs.GetComponentTypeName(i) == "Attributes")
 						{
 							p_ecs.GetComponent<Attributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(i) == "PlayerAttributes")
+						{
+							p_ecs.GetComponent<PlayerAttributes>(j).Serialize(writer);
 						}
 					}
 				}

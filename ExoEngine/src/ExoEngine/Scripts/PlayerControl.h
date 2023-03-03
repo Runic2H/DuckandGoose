@@ -5,9 +5,9 @@
 #include "ExoEngine/Math/physics.h"
 #include "Platform/Logic/StateMachines/StateMachine.h"
 #include "Platform/Logic/States/IStates.h"
-#include "Platform/Logic/States/OnIdle.h"
-#include "Platform/Logic/States/OnMove.h"
-#include "Platform/Logic/States/OnAttack.h"
+#include "Platform/Logic/States/PlayerStates/OnIdle.h"
+#include "Platform/Logic/States/PlayerStates/OnMove.h"
+#include "Platform/Logic/States/PlayerStates/OnAttack_1.h"
 
 
 namespace EM
@@ -16,7 +16,9 @@ namespace EM
 	class PlayerControl : public IScript
 	{
 	public:
-		PlayerControl() : mPlayerStateMachine(GetScriptEntityID()) {}
+
+		PlayerControl() : mPlayerStateMachine{StateMachine(this->GetScriptEntityID())} {}
+		PlayerControl(Entity entity) : mPlayerStateMachine{StateMachine(entity)} {}
 		~PlayerControl() = default;
 		virtual IScript* Clone() const override
 		{
@@ -24,7 +26,7 @@ namespace EM
 		}
 		virtual void Start() override
 		{
-			mPlayerStateMachine.ChangeState(new OnIdle());
+			mPlayerStateMachine.ChangeState(new OnIdle(&mPlayerStateMachine));
 		}
 		virtual void Update(float Frametime) override
 		{
@@ -34,7 +36,13 @@ namespace EM
 					mPlayerStateMachine.HandleInput(key.first);
 				}
 			}
-			mPlayerStateMachine.OnUpdate(Frametime);
+			for (auto key : p_Input->mMouseStatus)
+			{
+				if (key.second == GLFW_PRESS)
+				{
+					mPlayerStateMachine.HandleInput(key.first);
+				}
+			}
 		}
 		virtual void End() override
 		{
@@ -45,6 +53,11 @@ namespace EM
 		{
 			return "PlayerControl";
 		}
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
+
 	private:
 		StateMachine mPlayerStateMachine;
 	};

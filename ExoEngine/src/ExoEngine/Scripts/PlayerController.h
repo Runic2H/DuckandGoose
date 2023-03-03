@@ -89,6 +89,9 @@ namespace EM
 
 		void UpdateAttack();
 
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
 		PlayerState mState;

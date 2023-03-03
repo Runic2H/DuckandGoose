@@ -3,8 +3,6 @@
 
 namespace EM
 {
-
-	StateMachine::StateMachine() : mCurrState{}, mEntityID{ MAX_ENTITIES }{}
 	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity }{}
 
 	/*PlayerStates* GetCurrState()
@@ -25,7 +23,10 @@ namespace EM
 	void StateMachine::HandleInput(const int& key)
 	{
 		IStates* state = mCurrState->HandleInput(this, key);
-		ChangeState(state);
+		if (state != nullptr)
+		{
+			ChangeState(state);
+		}
 	}
 
 	Entity& StateMachine::GetEntityID()

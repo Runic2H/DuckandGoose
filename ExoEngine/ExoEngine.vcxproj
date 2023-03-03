@@ -24,6 +24,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\IComponent.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\PlayerAttributes.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Tag.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\RigidBody.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Sprite.h" />
@@ -52,9 +53,14 @@
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDash.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnMove.h" />
     <ClInclude Include="src\Platform\Logic\States\IStates.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
@@ -209,6 +215,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\PlayerAttributes.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Tag.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\RigidBody.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Sprite.cpp" />
@@ -234,9 +241,11 @@
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnIdle.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnMove.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>

@@ -39,7 +39,6 @@ namespace EM
 		void ClearAllScripts();
 		virtual bool Deserialize(const rapidjson::Value& obj);
 		virtual bool Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const;
-		int FindScript(const std::string& scriptname);
 		std::vector<std::string> GetScriptNames() { return mScriptNameVector; }
 
 		IScript* GetScriptByName(std::string ScriptName);

@@ -1,15 +1,21 @@
 #include "OnMove.h"
-#include "OnAttack.h"
+#include "OnAttack_1.h"
+#include "OnIdle.h"
+#include "OnBlock.h"
 
 namespace EM
 {
-	OnMove::OnMove() {}
+	OnMove::OnMove(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()) } {}
 
 	IStates* OnMove::HandleInput(StateMachine* stateMachine, const int& key)
 	{
-		if (key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D)
+		if (key == GLFW_MOUSE_BUTTON_LEFT)
 		{
-			return new OnAttack();
+			return new OnAttack_1(stateMachine);
+		}
+		if (key == GLFW_MOUSE_BUTTON_RIGHT)
+		{
+			return new OnBlock(stateMachine);
 		}
 		return nullptr;
 	}
@@ -24,6 +30,7 @@ namespace EM
 	void OnMove::OnExit(StateMachine* stateMachine)
 	{
 		std::cout << "MovingExit" << std::endl;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }

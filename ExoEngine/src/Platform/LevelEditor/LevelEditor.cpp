@@ -45,6 +45,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
 
 namespace EM {
 
@@ -817,10 +818,10 @@ namespace EM {
                             p_ecs.AddComponent<RigidBody>(selectedEntity, C_RigidBodyComponent);
                         ImGui::CloseCurrentPopup();
                     }
-                    if (ImGui::MenuItem("Attributes"))
+                    if (ImGui::MenuItem("PlayerAttributes"))
                     {
-                        if (!p_ecs.HaveComponent<Attributes>(selectedEntity))
-                            p_ecs.AddComponent<Attributes>(selectedEntity, C_AttributesComponent);
+                        if (!p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
+                            p_ecs.AddComponent<PlayerAttributes>(selectedEntity, C_PlayerAttributesComponent);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Logic"))
@@ -1068,24 +1069,24 @@ namespace EM {
                     }
                 }
                 //Attributes components
-                if (p_ecs.HaveComponent<Attributes>(selectedEntity))
+                if (p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                 {
-                    if (ImGui::CollapsingHeader("Attributes", ImGuiTreeNodeFlags_None))
+                    if (ImGui::CollapsingHeader("PlayerAttributes", ImGuiTreeNodeFlags_None))
                     {
-                        auto& attrib = p_ecs.GetComponent<Attributes>(selectedEntity);
+                        auto& attrib = p_ecs.GetComponent<PlayerAttributes>(selectedEntity);
                         
                         static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
-                        int healthSlider = attrib.GetHealth();
-                        int maxHealthSlider = attrib.GetMaxHealth();
-                        int damageSlider = attrib.GetDamage();
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
 
                         ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
                         ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
                         ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
 
-                        attrib.SetHealth(healthSlider);
-                        attrib.SetMaxHealth(maxHealthSlider);
-                        attrib.SetDamage(damageSlider);
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
                     }
                 }
                 //Logic
@@ -1136,10 +1137,10 @@ namespace EM {
                                 {
                                     if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
                                     {
-                                        if (mScriptList[current_script] == "PlayerController" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity)
+                                        if (mScriptList[current_script] == "PlayerControl" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity)
                                                                                               && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
                                         {
-                                            logic.InsertScript(new PlayerController(), selectedEntity);
+                                            logic.InsertScript(new PlayerControl(selectedEntity), selectedEntity);
                                         }
                                         if (mScriptList[current_script] == "EnemyMovement" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity) 
                                                                                            && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity))
@@ -1147,7 +1148,7 @@ namespace EM {
                                             logic.InsertScript(new EnemyMovement(), selectedEntity);
                                         }
                                         if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
-                                                                                               && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                                                                                               && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                                         {
                                             logic.InsertScript(new CollisionResponse(), selectedEntity);
                                         }
@@ -1363,9 +1364,9 @@ namespace EM {
                         p_ecs.RemoveComponent<Logic>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
-                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                    if (ImGui::MenuItem("PlayerAttributes") && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                     {
-                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
+                        p_ecs.RemoveComponent<PlayerAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Audio") && p_ecs.HaveComponent<Audio>(selectedEntity))

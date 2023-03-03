@@ -56,6 +56,10 @@ namespace EM {
 		This function check if the mouse is within the bounding box of the button 
 		****************************************************************************/
 		bool is_within_box(glm::vec2 cur, Collider box, Transform trans);
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
 		
 		bool clicked;
 		bool selected;

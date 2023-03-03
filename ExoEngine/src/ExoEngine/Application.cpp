@@ -381,20 +381,20 @@ Run loop for application
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
 
-		Entity player = p_ecs.CreateEntity();
-		name.SetNameTag("Player");
-		sprite.SetTexture("Idle");
-		p_ecs.AddComponent<Transform>(player, C_TransformComponent);
-		p_ecs.AddComponent<RigidBody>(player, rb);
-		p_ecs.AddComponent<Sprite>(player, sprite);
-		p_ecs.AddComponent<NameTag>(player, name);
-		p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
-		tag.SetTag("Player");
-		p_ecs.AddComponent<Tag>(player, tag);
-		p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerControl(), player);
+		//Entity player = p_ecs.CreateEntity();
+		//name.SetNameTag("Player");
+		//sprite.SetTexture("Idle");
+		//p_ecs.AddComponent<Transform>(player, C_TransformComponent);
+		//p_ecs.AddComponent<RigidBody>(player, rb);
+		//p_ecs.AddComponent<Sprite>(player, sprite);
+		//p_ecs.AddComponent<NameTag>(player, name);
+		//p_ecs.AddComponent<Collider>(player, C_ColliderComponent);
+		//tag.SetTag("Player");
+		//p_ecs.AddComponent<Tag>(player, tag);
+		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerControl(), player);
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		//p_ecs.AddComponent<PlayerAttributes>(player, C_PlayerAttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
@@ -411,9 +411,9 @@ Run loop for application
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
-		p_Editor->is_ShowWindow = false;
-		Graphic::camera.SetZoomLevel(0.25);
-		p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
+		/*p_Editor->is_ShowWindow = false;
+		Graphic::camera.SetZoomLevel(0.25);*/
+		//p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{

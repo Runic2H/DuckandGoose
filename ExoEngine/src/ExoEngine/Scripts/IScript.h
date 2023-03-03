@@ -33,8 +33,8 @@ namespace EM
 		virtual IScript* Clone() const = 0; 
 		virtual std::string GetScriptName() = 0;
 
-		void SetScriptEntityID(Entity& entity) { entityID = entity; }
-		Entity& GetScriptEntityID() { return entityID; }
+		virtual void SetScriptEntityID(Entity& entity) = 0;
+		virtual Entity & GetScriptEntityID() = 0;
 
 		void SetScriptInit()
 		{
@@ -49,8 +49,9 @@ namespace EM
 			return mScriptInit;
 		}
 
-	private:
-		Entity entityID;
+
+	protected:
+		Entity entityID{};
 		bool mScriptInit{ false };
 	};
 }

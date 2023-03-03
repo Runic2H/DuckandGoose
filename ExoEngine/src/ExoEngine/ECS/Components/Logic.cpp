@@ -20,7 +20,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
-#include "ExoEngine/Scripts/PlayerController.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
@@ -43,7 +43,7 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetScriptEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->GetComponentEntityID());
 		}
 	}
 	/*!*************************************************************************
@@ -56,7 +56,7 @@ namespace EM
 		for (size_t i = 0; i < mScriptsVector.size(); ++i)
 		{
 			mScriptsVector[i] = rhs.mScriptsVector[i]->Clone();
-			mScriptsVector[i]->SetScriptEntityID(this->entityID);
+			mScriptsVector[i]->SetScriptEntityID(this->GetComponentEntityID());
 		}
 		return *this;
 	}
@@ -66,9 +66,10 @@ namespace EM
 	****************************************************************************/
 	void Logic::SetScriptEntity(Entity entity)
 	{
+		this->SetComponentEntityID(entity);
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
 		{
-			(*i)->SetScriptEntityID(entity);
+			(*i)->SetScriptEntityID(this->GetComponentEntityID());
 		}
 	}
 
@@ -77,45 +78,14 @@ namespace EM
 	****************************************************************************/
 	bool Logic::Deserialize(const rapidjson::Value& obj)
 	{
-		/*if (!obj["ScriptName"].GetArray().Empty())
-		{
-			for (auto i = obj["ScriptName" + 1].GetArray().Begin(); i != obj["ScriptName"].GetArray().End(); ++i)
-			{
-				mScriptNameVector.push_back(i->GetString());
-			}
-			for (size_t i = 0; i < mScriptNameVector.size(); ++i)
-			{
-				if (mScriptNameVector[i] == "PlayerController")
-				{
-					mScriptsVector.push_back(new PlayerController());
-				}
-				if (mScriptNameVector[i] == "EnemyMovement")
-				{
-					mScriptsVector.push_back(new EnemyMovement());
-				}
-				if (mScriptNameVector[i] == "CollisionResponse")
-				{
-					mScriptsVector.push_back(new CollisionResponse());
-				}
-				if (mScriptNameVector[i] == "ButtonResponse")
-				{
-					mScriptsVector.push_back(new ButtonResponse());
-				}
-				if (mScriptNameVector[i] == "ScenerioScript")
-				{
-					mScriptsVector.push_back(new ScenerioScript());
-				}
-			}
-		}*/
-
 		for (int i = 0; i < obj["ScriptCount"].GetInt(); ++i)
 		{
 			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
 			for (size_t j = 0; j < mScriptNameVector.size(); ++j)
 			{
-				if (mScriptNameVector[j] == "PlayerController")
+				if (mScriptNameVector[j] == "PlayerControl")
 				{
-					mScriptsVector.push_back(new PlayerController());
+					mScriptsVector.push_back(new PlayerControl());
 				}
 				if (mScriptNameVector[j] == "EnemyMovement")
 				{
@@ -167,22 +137,16 @@ namespace EM
 		return true;
 	}
 
-	//int Logic::FindScript( const std::string& scriptname)
-	//{
-	//	for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); i++)// pointer to the iscript
-	//	{
-	//		if()
-	//	}
-	//}
-
 	/*!*************************************************************************
 	Inserts the scripts into the vector to loop through
 	****************************************************************************/
 	void Logic::InsertScript(IScript* script, Entity entity)
 	{
+		this->SetComponentEntityID(entity);
+		script->SetScriptEntityID(this->GetComponentEntityID());
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
-		script->SetScriptEntityID(entity);
+		std::cout << "Script Vector: " << mScriptsVector.front()->GetScriptEntityID() << std::endl;
 	}
 
 	void Logic::DeleteScript(std::string scriptname)
