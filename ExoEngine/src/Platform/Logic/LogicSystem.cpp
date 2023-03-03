@@ -51,6 +51,7 @@ namespace EM
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
 			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 			{
+				//std::cout << "Script: " << (*i )->GetScriptName() << std::endl;
 				if ((*i)->GetScriptEntityID() != entity)
 				{
 					LogicComp.SetScriptEntity(entity);

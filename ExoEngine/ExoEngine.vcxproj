@@ -53,7 +53,6 @@
     <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerController.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyAttack.h" />
@@ -243,8 +242,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PlayerController.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyAttack.cpp" />
@@ -386,6 +383,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitDefaultLibName>false</OmitDefaultLibName>
       <ProgramDataBaseFileName>$(OutDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -412,6 +410,7 @@
       <PrecompiledHeaderFile>empch.h</PrecompiledHeaderFile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

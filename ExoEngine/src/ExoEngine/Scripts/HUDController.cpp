@@ -50,7 +50,7 @@ namespace EM
         }
         
         //get player's stats
-        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
+        for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
             if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
                 auto& att = p_ecs.GetComponent<Attributes>(i);
                 hp = att.GetHealth();

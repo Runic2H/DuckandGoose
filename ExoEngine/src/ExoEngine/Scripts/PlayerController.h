@@ -38,7 +38,8 @@ namespace EM
 			Dash,
 			Block,
 			Stunned,
-			Damage
+			Damage,
+			Dead
 		};
 		/*!*************************************************************************
 		Default constructor for Player Controller
@@ -86,8 +87,13 @@ namespace EM
 
 		void SetState(PlayerState state);
 
+		void SetDamageTimer(float timer);
+		float &GetDamageTimer();
+		void SetDamageValue(int i) { mTakenDamage = i; }
+		/*set damage timer to private
+		create getter function
+		retrieve damage timer by reference*/
 		void UpdateAttack();
-
 
 	private:
 		PlayerState mState;
@@ -95,16 +101,19 @@ namespace EM
 		float mCooldownTimer;
 		float mChargedAttackTimer;
 		float mDashTimer;
+		float mDashDurationTimer;
 		float mIsBlockTimer;
 		float mBlockCoolDownTimer;
 		vec2D mVel;
 		entityPhysics mPhys;
-
+		float mDamageTimer;
+		int mTakenDamage;
+		float mStunnedTimer;
+		float mStunCoolDown;
 	public:
 		bool mIsDamaged;
-		float mDamageTimer;
 		float mDashTime;
 		bool mIsBlocking;
-
+		bool mIsDashing;
 	};
 }

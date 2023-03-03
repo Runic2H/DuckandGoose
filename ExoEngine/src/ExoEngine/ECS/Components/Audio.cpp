@@ -19,7 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 /*!*************************************************************************
 Constructor for audio component
 ****************************************************************************/
-EM::Audio::Audio() {}
+EM::Audio::Audio() : AudioArr() {}
 
 
 /*!*************************************************************************

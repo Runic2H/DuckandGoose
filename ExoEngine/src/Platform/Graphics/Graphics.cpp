@@ -24,9 +24,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "FrameBuffer.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
-
 namespace EM {
-
+	
 	//extern ECS ecs;
 	/*!*************************************************************************
 	Load Icon from filepath using resource manager
@@ -40,11 +39,10 @@ namespace EM {
 
 		ifs.close();
 	}
-
 	/*!*************************************************************************
 	Load texture from filename using resource manager
 	****************************************************************************/
-	void Graphic::LoadTexture(std::string filename)
+	/*void Graphic::LoadTexture(std::string filename)
 	{
 		std::ifstream ifs(filename.c_str());
 		std::string name, textPath;
@@ -52,23 +50,34 @@ namespace EM {
 			ResourceManager::LoadTexture(name.c_str(), textPath.c_str());
 
 		ifs.close();
-	}
-
+	}*/
 	//for testing purpose
 	/*!*************************************************************************
 	Init loop for Graphics
 	****************************************************************************/
 	void Graphic::Init()
 	{
+		
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
 		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
 		
-	
 		LoadIconsTexture("Assets/Text/Icons.txt");
-		LoadTexture("Assets/Text/texture.txt");
-		
-		
+		std::string path = {"Assets/Textures/"};
+		std::string folderpath[] = {"Characters", "Environment", "UI", "VFX" };
+		for (const auto& i : folderpath)
+		{
+			std::filesystem::path currentPath = path + i;
+			auto currentFolders = std::filesystem::directory_iterator(currentPath);
+			for (const auto& entry : currentFolders)
+			{
+				std::string gs = entry.path().generic_string();
+				std::size_t pos = gs.find_last_of("/");
+				std::size_t pos1 = gs.find(".");
+				std::string Imagename = gs.substr(pos + 1, pos1 - pos - 1);
+				ResourceManager::LoadTexture(Imagename, gs);
+			}
+		}
 		FrameBufferSpecification fbspec;
 		fbspec.Attachments = { FrameBufferTextureFormat::RGBA8, FrameBufferTextureFormat::RED_INTEGER, FrameBufferTextureFormat::DEPTH };
 		fbspec.Width = mWinData.GetWidth();
@@ -117,6 +126,7 @@ namespace EM {
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
 			if (sprite.is_Animated)
 			{
+				/*if(p_ecs.GetComponent<Tag>(entity).)*/
 				mAimator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
 				mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(entity));
 			}
