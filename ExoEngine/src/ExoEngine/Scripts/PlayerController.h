@@ -100,7 +100,7 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		PlayerState mState;
+		PlayerState mState, previousState;
 		int mAttackCounter;
 		float mCooldownTimer;
 		float mChargedAttackTimer;

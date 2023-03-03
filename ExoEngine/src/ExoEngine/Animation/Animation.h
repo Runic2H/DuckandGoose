@@ -21,9 +21,11 @@ namespace EM {
 	class Animation
 	{
 	public:
+	    static std::unordered_map<std::string, std::vector<float>> spriteContainer;// to store all animation info
 		Animation();
 		void AddFrameInfo(Sprite& sprite);
 		void UpdateAnimation(float deltatime, Sprite& sprite);
-
+		//std::unordered_map<std::string, std::vector<float>>& GetContainers() { return spriteContainer; }
+	private:
 	};
 }
