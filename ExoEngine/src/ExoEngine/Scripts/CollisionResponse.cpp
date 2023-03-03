@@ -43,12 +43,12 @@ namespace EM
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		//auto& att = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
-		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
+		//auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 
-		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+		//auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
 		//std::cout << &col << "\n";
 
@@ -67,26 +67,24 @@ namespace EM
 				}
 				//enemy takes damage based on player damage
 				int pDmg = 0;
-				//get player attributes (damage)
-				for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+				
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
 						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
 					}
 				}
-				//player hp
-				p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() - pDmg);
-				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
-
-				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
+				
+				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->GetDamageTimer() <= 0.0f)
 				{
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetState(PlayerController::PlayerState::Damage);
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->Animate(PlayerController::PlayerState::Damage);
+					std::cout << "Collision Response" << std::endl;
+					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetDamageValue(10.0f);
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged = true;
-					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer = 2.5f;
-				}
-				//player takes damage based on which enemy hit him
-				//if hp < 0, player dies
-			
+					//std::cout << "damage timer2 " << dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer << std::endl;
+					if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0)
+					{
+						p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
+					}
+				}			
 
 			}
 		}
@@ -106,7 +104,7 @@ namespace EM
 				//enemy takes damage based on player damage
 				int pDmg = 0;
 				//get player attributes (damage)
-				for (int i = 0; i < p_ecs.GetTotalEntities(); i++) {
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
 						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
 					}
@@ -116,16 +114,17 @@ namespace EM
 				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
 				////if hp < 0, set state to death
 				if (p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() <= 0) {
-
+					p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
 					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
 					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
 					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
+
 				}
 				
 			}
 		}
 		//if chest is damaged
-		if (tag.GetNameTag() == "SkillsChest")
+		/*if (tag.GetNameTag() == "SkillsChest")
 		{
 			if (col.GetCollisionArray()[0].mHit == 2)
 			{
@@ -141,7 +140,7 @@ namespace EM
 					rigidbody.SetVel(response);
 				}
 			}
-		}
+		}*/
 	}
 	/*!*************************************************************************
 	This function ends the script by deleting the pointer to this script
