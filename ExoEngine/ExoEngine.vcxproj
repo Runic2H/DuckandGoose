@@ -64,13 +64,6 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnMove.h" />
-    <ClInclude Include="src\Platform\Logic\States\EnemyAttack.h" />
-    <ClInclude Include="src\Platform\Logic\States\EnemyChase.h" />
-    <ClInclude Include="src\Platform\Logic\States\EnemyDeath.h" />
-    <ClInclude Include="src\Platform\Logic\States\EnemyIdle.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
-    <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
     <ClInclude Include="src\Platform\Logic\States\IStates.h" />
     <ClInclude Include="src\Platform\Physics\CollisionSystem.h" />
     <ClInclude Include="src\ExoEngine\Math\Math.h" />
@@ -259,13 +252,6 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnMove.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\EnemyAttack.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\EnemyChase.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\EnemyDeath.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\EnemyIdle.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnIdle.cpp" />
-    <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />
     <ClCompile Include="src\ExoEngine\Math\matrix3D.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -349,7 +335,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

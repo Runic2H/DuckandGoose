@@ -433,7 +433,7 @@ Run loop for application
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				/*for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
 					if (p_ecs.HaveComponent<Tag>(i))
 					{
@@ -450,7 +450,7 @@ Run loop for application
 							}
 						}
 					}
-				}
+				}*/
 			}
 			end_state = p_GUI->Update(m_window);
 

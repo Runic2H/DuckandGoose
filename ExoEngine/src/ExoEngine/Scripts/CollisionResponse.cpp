@@ -68,7 +68,7 @@ namespace EM
 				//player hp
 				attrib.SetHealth(attrib.GetHealth() - pDmg);
 				std::cout << attrib.GetHealth() << std::endl;
-				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mDamageTimer <= 0.0f)
+				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged <= 0.0f)
 				{
 					std::cout << "Collision Response" << std::endl;
 					dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->SetDamageValue(10.0f);

@@ -16,16 +16,13 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "EnemyMovement.h"
-#include "GateController.h"
-#include "Platform/Logic/States/EnemyIdle.h"
-
 
 namespace EM
 {
 	/*!*************************************************************************
 	Ctor for new Enemy Movement Scripts
 	****************************************************************************/
-	EnemyMovement::EnemyMovement() {}
+	EnemyMovement::EnemyMovement() : mState{ EnemyState::Patrolling }, mAttackCooldown{ 0.0f }, mAttackTime{ 0.0f }, mOrigin{ vec2D() }, mPatrolling{ false }, mDest{ vec2D() }, mPatrolTimer{ 2.0f }, mPatrolTime{ 2.0f } {}
 
 	/*!*************************************************************************
 	returns an instance for a new Enemy Movement Script
@@ -39,7 +36,7 @@ namespace EM
 	Init for Enemy Movement Script
 	****************************************************************************/
 	void EnemyMovement::Start() {
-		mEnemyStateMachine.ChangeState(new EnemyIdle());
+		mOrigin = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
 	}
 
 	/*!*************************************************************************
@@ -47,6 +44,7 @@ namespace EM
 	****************************************************************************/
 	void EnemyMovement::Update(float Frametime)
 	{
+
 		//if patrolling state
 		if (mState == EnemyState::Patrolling) {
 			//check if moving
@@ -84,7 +82,7 @@ namespace EM
 					//std::cout << "Found Player" << std::endl;
 					check = true;
 					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-					
+
 				}
 			}
 			//if player moves within x radius, set mode to moving
@@ -106,8 +104,8 @@ namespace EM
 			mAttackCooldown -= Frametime;
 			mAttackTime -= Frametime;
 		}
-	/*	if (mState == EnemyState::Death)
-		{*/
+		/*	if (mState == EnemyState::Death)
+			{*/
 			//p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
 			//std::cout << std::to_string(static_cast<int>(mState)) << std::endl;
 		//}
@@ -255,5 +253,5 @@ namespace EM
 		return "EnemyMovement";
 	}
 
-	
+
 }

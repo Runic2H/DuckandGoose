@@ -1,18 +1,18 @@
 #pragma once
-#include "IStates.h"
+#include "Platform/Logic/States/IStates.h"
+#include "ExoEngine/Math/physics.h"
 
 namespace EM
 {
-	class EnemyAttack : public IStates
+	class EnemyChase : public IStates
 	{
 	public:
-		EnemyAttack();
-		virtual ~EnemyAttack() = default;
+		EnemyChase();
+		virtual ~EnemyChase() = default;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
-		float mAttackCooldown;
-		float mAttackTime;
+		entityPhysics mPhys;
 	};
 }

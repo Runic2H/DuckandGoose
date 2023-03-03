@@ -56,6 +56,10 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
 
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
+
 		int enemies;
 		float timer;
 	private:

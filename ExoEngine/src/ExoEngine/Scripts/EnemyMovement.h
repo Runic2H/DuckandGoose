@@ -17,13 +17,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 #pragma once
 #include "ExoEngine/Scripts/IScript.h"
-#include "ExoEngine/ECS/Types.h"
-#include "ExoEngine/ECS/ECS.h"
 #include "ExoEngine/Math/Vmath.h"
 #include "ExoEngine/Math/physics.h"
-#include "Platform/Logic/StateMachines/StateMachine.h"
-#include "Platform/Logic/States/IStates.h"
-#include "Platform/Logic/States/EnemyIdle.h"
 
 namespace EM
 {
@@ -33,6 +28,15 @@ namespace EM
 	class EnemyMovement : public IScript
 	{
 	public:
+
+		enum class EnemyState
+		{
+			Patrolling,
+			Moving,
+			Attacking,
+			Dash,
+			Death
+		};
 
 		/*!*************************************************************************
 		Ctor for new Enemy Movement Scripts
@@ -79,6 +83,22 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		StateMachine mEnemyStateMachine;
+		EnemyState mState;
+		float mAttackCooldown;
+		float mAttackTime;
+		entityPhysics mPhys;
+		vec2D mOrigin;
+		bool mPatrolling;
+		vec2D mDest;
+		float mPatrolTimer;
+		float mPatrolTime;
+
+	public:
+		//bool mIsAttacking;
+		//bool mIsIdle;
+		//bool mIsMoving;
+		//bool mIsDashing;
+		//bool mIsDamaged;
+
 	};
 }
