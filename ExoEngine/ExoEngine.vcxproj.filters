@@ -79,6 +79,17 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\PlayerAttributes.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnMove.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\OnAttack.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\Source.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\SkillsChest.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyIdle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -270,6 +281,17 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnMove.h" />
+    <ClInclude Include="src\Platform\Logic\States\OnAttack.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\SkillsChest.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyDeath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

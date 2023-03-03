@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for HUD Controller
     ****************************************************************************/
-    HUDController::HUDController() {}
+    HUDController::HUDController() : mCurrCooldown{ 0.0f } {}
     /*!*************************************************************************
     Returns a new copy of HUDController Script
     ****************************************************************************/
@@ -44,6 +44,11 @@ namespace EM
         int hp = 0;
         int maxhp = 0;
         int atk = 0;
+        mCurrCooldown -= Frametime;
+        if (mCurrCooldown <= 0) {
+            mCurrCooldown = 0;
+        }
+        
         //get player's stats
         for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
             if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
@@ -71,10 +76,22 @@ namespace EM
             pTrans.SetScale((float)hp / (float)maxhp, pTrans.GetScale().y);
             pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((float)hp / (float)maxhp / 2.325f), camPos.y + pComp.GetOffset().y);
         }
-        else if (pComp.GetType() == HUDComponent::ElementType::BlockIcon) {
+        else if (pComp.GetType() == HUDComponent::ElementType::BlockBar) {
             //check for timing of cooldown
+            float maxCooldown = 0;
+            if (1) {
+                mCurrCooldown = maxCooldown;
+            }
             //update alpha
-            pSprite.SetAlpha(1);
+            pTrans.SetScale(mCurrCooldown / maxCooldown, pTrans.GetScale().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (mCurrCooldown / maxCooldown / 2.325f), camPos.y + pComp.GetOffset().y);
+        }
+        else if (pComp.GetType() == HUDComponent::ElementType::DashBar) {
+            //check for timing of cooldown
+            float maxCooldown = 0;
+            //update alpha
+            pTrans.SetScale(mCurrCooldown / maxCooldown, pTrans.GetScale().y);
+            pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (mCurrCooldown / maxCooldown / 2.325f), camPos.y + pComp.GetOffset().y);
         }
         else if (pComp.GetType() == HUDComponent::ElementType::ChargeAtk) {
             //check if charge attack is being triggered

@@ -64,5 +64,6 @@ namespace EM
 		
 		//inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
 	private:
+		float mCurrCooldown = 0; //for shield or dash
 	};
 }

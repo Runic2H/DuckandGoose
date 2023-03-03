@@ -81,6 +81,7 @@ namespace EM
 		for (int i = 0; i < obj["ScriptCount"].GetInt(); ++i)
 		{
 			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
+		}
 			for (size_t j = 0; j < mScriptNameVector.size(); ++j)
 			{
 				if (mScriptNameVector[j] == "PlayerControl")
@@ -112,7 +113,7 @@ namespace EM
 					mScriptsVector.push_back(new AudioManager());
 				}
 			}
-		}
+		
 
 		return true;
 	}
