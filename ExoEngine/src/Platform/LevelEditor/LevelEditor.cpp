@@ -41,7 +41,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
-#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
@@ -910,17 +909,16 @@ namespace EM {
                         auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
                         ImGui::Checkbox("SpriteSheet", &sprite.is_SpriteSheet); ImGui::SameLine();
                         ImGui::Checkbox("Animation", &sprite.is_Animated);
+                        ImGui::PushItemWidth(100.0f);
                         ImGui::Text("Coordinates: "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
                         ImGui::DragInt("##X", (int*)&sprite.GetIndex().x, 1); ImGui::SameLine();
-                        ImGui::PushID(2);
                         ImGui::Text("Y"); ImGui::SameLine();
                         ImGui::DragInt("##Y", (int*)&sprite.GetIndex().y, 1);
-                        ImGui::PopID();
                         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                        ImGui::Text("Image : "); ImGui::SameLine();
                         ImGui::PopStyleColor(3);
                         auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
                         ImGui::SetNextItemWidth(140.0f);
@@ -946,23 +944,22 @@ namespace EM {
                             }
                             ImGui::EndDragDropTarget();
                         }
-
-                        ImGui::Text("MaxIndex"); ImGui::SameLine();
-                        ImGui::DragInt("##MaxIndex", (int*)&sprite.GetMaxIndex(), 1, 1, 10);
-                            
-                        if (sprite.GetMaxIndex() > 0)
+                        if (sprite.is_SpriteSheet)
                         {
-                            int &selectedIndex = sprite.GetIndex().x;
-                            ImGui::Text("SelectedIndex"); ImGui::SameLine();
-                            ImGui::DragInt("##SelectedIndex", &selectedIndex, 1, 0, sprite.GetMaxIndex() - 1);
-
-                            if (sprite.GetDisplayTime().size() > 0)
-                            {
-                                ImGui::Text("SetDisplayTime"); ImGui::SameLine();
-                                ImGui::DragFloat("##SetDisplayTime", (float*)&sprite.GetDisplayTime()[selectedIndex].second, 0.005f, 0.0f);
-                            }
+                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+                            ImGui::Text("MaxIndex : %d ", sprite.GetMaxIndex());
+                            sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite  
                         }
-                           
+                        if (sprite.GetMaxIndex() > 0 && sprite.is_Animated)
+                        {
+                            //const int& selectedIndex = 0;
+                            ImGui::Text("SelectedIndex: "); ImGui::SameLine();
+                            ImGui::DragInt("##SelectedIndex", (int*)&sprite.GetIndex().x, 1, 0, sprite.GetMaxIndex() - 1);
+
+                            ImGui::Text("SetDisplayTime: "); ImGui::SameLine();
+                            ImGui::DragFloat("##SetDisplayTime", (float*)&sprite.GetDisplayTime()[sprite.GetIndex().x], 0.005f, 0.0f);
+                            
+                        }    
                         
                         if (sprite.is_SpriteSheet)
                         {

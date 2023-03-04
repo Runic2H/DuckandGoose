@@ -17,7 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 
 namespace EM {
-	
+	std::unordered_map<std::string, std::vector<float>> Animation::spriteContainer;
 	/*!*************************************************************************
 	Constructor for animation
 	****************************************************************************/
@@ -31,7 +31,6 @@ namespace EM {
 	****************************************************************************/
 	void Animation::AddFrameInfo(Sprite& sprite)
 	{
-		sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite
 	}
 
 
@@ -40,20 +39,37 @@ namespace EM {
 	****************************************************************************/
 	void Animation::UpdateAnimation(float deltatime, Sprite& sprite)
 	{
-
 		sprite.internaltimer += deltatime;
-		
-		if (sprite.internaltimer >= sprite.GetDisplayTime()[sprite.GetIndex().x].second)
+	
+		std::unordered_map <std::string, std::vector <float>> ::const_iterator got = spriteContainer.find(sprite.GetTexture());
+		if (got == spriteContainer.end())// always check the sprite container whether there is any data for the current texture. if no, prompt the user
 		{
-			sprite.GetIndex().x++;
-			sprite.internaltimer = 0.0f;
-			if (sprite.GetIndex().x >= sprite.GetMaxIndex())
-			{
-				sprite.GetIndex().x = 0;
-			}
-			
+			//std::cout << sprite.GetTexture() << " not in  the container" << std::endl;
 		}
+		else
+		{
+			sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+			if (sprite.internaltimer >= spriteContainer[sprite.GetTexture()][sprite.GetIndex().x])
+			{
+				//for debug
+				if(sprite.GetTexture() == "Attack")
+					std::cout <<"Att " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				
+				if (sprite.GetTexture() == "Idle")
+					std::cout << "Idle " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
 
+				if (sprite.GetTexture() == "Running")
+					std::cout << "Running " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				
+				//end of debug
+				sprite.GetIndex().x++;
+				sprite.internaltimer = 0.0f;
+				if (sprite.GetIndex().x >= sprite.GetMaxIndex())
+				{
+					sprite.GetIndex().x = 0;
+				}
+			}
+		}
 	}
 
 }

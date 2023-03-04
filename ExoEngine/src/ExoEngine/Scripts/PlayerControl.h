@@ -18,7 +18,7 @@ namespace EM
 	public:
 
 		PlayerControl() : mPlayerStateMachine{StateMachine(this->GetScriptEntityID())} {}
-		PlayerControl(Entity entity) : mPlayerStateMachine{StateMachine(entity)} {}
+		PlayerControl(Entity entity) : mPlayerStateMachine{ StateMachine(entity) } { std::cout << entity << std::endl; }
 		~PlayerControl() = default;
 		virtual IScript* Clone() const override
 		{
@@ -42,6 +42,7 @@ namespace EM
 				{
 					mPlayerStateMachine.HandleInput(key.first);
 				}
+				
 			}
 		}
 		virtual void End() override
