@@ -39,7 +39,7 @@ namespace EM
 		for (const auto& entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
-			//LogicComp.SetScriptEntity(entity);
+			LogicComp.SetScriptEntity(entity);
 			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 			{
 				if (!(*i)->GetScriptInit())

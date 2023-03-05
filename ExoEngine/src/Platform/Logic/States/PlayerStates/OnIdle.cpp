@@ -3,6 +3,7 @@
 #include "OnMove.h"
 #include "OnAttack_1.h"
 #include "OnDash.h"
+#include "OnBlock.h"
 
 namespace EM
 {
@@ -10,17 +11,21 @@ namespace EM
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
-		if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && p_Input->KeyHold(key))
+		if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && p_Input->isKeyPressed(key))
 		{
 			return new OnMove(stateMachine);
 		}
-		if (key == GLFW_KEY_SPACE)
+		if (key == GLFW_KEY_SPACE && p_Input->isKeyPressed(key))
 		{
 			return new OnDash(stateMachine);
 		}
-		if (key == GLFW_MOUSE_BUTTON_LEFT)
+		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->isKeyPressed(key))
 		{
 			return new OnAttack_1(stateMachine);
+		}
+		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->isKeyPressed(key))
+		{
+			return new OnBlock(stateMachine);
 		}
 		return nullptr;
 	}

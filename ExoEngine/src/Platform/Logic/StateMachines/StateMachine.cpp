@@ -3,13 +3,13 @@
 
 namespace EM
 {
-	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity }{}
+	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity } {}
 
 	/*PlayerStates* GetCurrState()
 	{
 		return mCurrState;
 	}*/
-
+	
 	void StateMachine::ChangeState(IStates* pNewState)
 	{
 		if (mCurrState != nullptr)
@@ -22,14 +22,16 @@ namespace EM
 
 	void StateMachine::HandleInput(const int& key)
 	{
+
 		IStates* state = mCurrState->HandleInput(this, key);
 		if (state != nullptr)
 		{
 			ChangeState(state);
 		}
+		 
 	}
 
-	Entity& StateMachine::GetEntityID()
+	const Entity& StateMachine::GetEntityID()
 	{
 		return mEntityID;
 	}

@@ -22,7 +22,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Player Controller
     ****************************************************************************/
-    PlayerController::PlayerController() : mState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{0.0f}, mIsBlockTimer{2.0f},
+    PlayerController::PlayerController() : mState{ PlayerState::Idle }, previousState{ PlayerState::Idle }, mAttackCounter{ 0 }, mCooldownTimer{ 0.0f }, mChargedAttackTimer{ 0.0f }, mDashTimer{ 0.0f }, mIsBlockTimer{ 2.0f },
         mBlockCoolDownTimer{ 0.0f }, mDamageTimer{ 0.0f }, mDashTime{ 0.0f }, mDashDurationTimer{ 0.0f }, mTakenDamage{ 0 }, mStunnedTimer{ 1.0f }, mStunCoolDown{ 0.0f }, mIsDamaged{ false },
         mIsBlocking{ false }, mIsDashing{ false }, mVel{ vec2D(0, 0) } {};
 
@@ -40,7 +40,7 @@ namespace EM
 	void PlayerController::Start()
 	{
 		mState = PlayerState::Idle;
-        std::cout << "Script initialized" << std::endl;
+        previousState = PlayerState::Idle;
 	}
 
     /*!*************************************************************************
@@ -48,14 +48,6 @@ namespace EM
     ****************************************************************************/
 	void PlayerController::Update(float Frametime)
 	{
-        //if (mState == PlayerState::Damage)
-        //{
-        //    std::cout << "Player State is Damage " << std::endl;
-        //}
-        //if (mState == PlayerState::Idle)
-        //{
-        //    std::cout << "Player State is Idle " << std::endl;
-        //}
 
         mCooldownTimer -= Frametime;
         mDashTimer -= Frametime;
@@ -72,11 +64,6 @@ namespace EM
         }
         mVel.x = 0.0f;
         mVel.y = 0.0f;
-
-        std::cout << "is damaged: " << mIsDamaged << std::endl;
-        std::cout << "damage timer: " << mDamageTimer << std::endl;
-        std::cout << "stun timer: " << mStunCoolDown << std::endl;
-        std::cout << "Entity: " << GetScriptEntityID() << std::endl;
 
         if (mStunCoolDown > 0) {
             mState = PlayerState::Damage;
@@ -346,22 +333,53 @@ namespace EM
         {
         case PlayerState::Idle:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Idle");
+            if (previousState != state)// set this condition so that the animator wont get out of range as different texture have differnt amount of index
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
             break;
         case PlayerState::Moving:
+        {
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Running");
+            if (previousState != state)
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
+        }
             break;
         case PlayerState::Attacking:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Attack");
-            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetDisplayTime();
+            if (previousState != state)
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
             break;
         case PlayerState::Dash:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Dashing");
+            if (previousState != state)
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
             break;
         case PlayerState::Block:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blocking");
+            if (previousState != state)
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
             break;
         case PlayerState::Damage:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Damage");
+            if (previousState != state)
+            {
+                previousState = state;
+                p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
+            }
             break;
        /* case PlayerState::Dead:
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Death");

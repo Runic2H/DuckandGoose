@@ -16,7 +16,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Sprite.h"
-#include "ExoEngine/ResourceManager/ResourceManager.h"
+//#include "ExoEngine/ResourceManager/ResourceManager.h"
+#include "ExoEngine/Animation/Animation.h"
 namespace EM {
 
 	/*!*************************************************************************
@@ -39,13 +40,16 @@ namespace EM {
 		MaxIndex_X = int(obj["MaxIndex"].GetInt());
 		for (auto i = 0; i < MaxIndex_X; i++)
 		{
-			std::string frameNum, DpNum;
-			frameNum = "frame " + std::to_string(i);
+			std::string DpNum;
 			DpNum = "DisplayTime " + std::to_string(i);
-			int first = int(obj[frameNum.c_str()].GetInt());
-			float second = float(obj[DpNum.c_str()].GetFloat());
-			displayTime.push_back(std::make_pair(first, second));
+			float individualtime = float(obj[DpNum.c_str()].GetFloat());
+			displayTime.push_back(individualtime);
 		}
+		if (is_Animated)
+		{
+			Animation::spriteContainer.emplace(mTextureName, displayTime);
+		}
+			
 		return true;
 	}
 
@@ -73,13 +77,10 @@ namespace EM {
 		writer->Int(MaxIndex_X);
 		for (auto i = 0; i < displayTime.size(); i++)
 		{
-			std::string frameNum, DpNum;
-			frameNum = "frame " + std::to_string(i);
+			std::string DpNum;
 			DpNum = "DisplayTime " + std::to_string(i);
-			writer->Key(frameNum.c_str());
-			writer->Int(displayTime[i].first);
 			writer->Key(DpNum.c_str());
-			writer->Double(displayTime[i].second);
+			writer->Double(displayTime[i]);
 		}
 		writer->EndObject();
 		return true;

@@ -19,7 +19,9 @@ namespace EM
 
 		void HandleInput(const int& key);
 
-		Entity& GetEntityID();
+		const Entity& GetEntityID();
+
+		void SetEntityID(Entity& entity) { mEntityID = entity; }
 
 		void OnUpdate(float Frametime);
 

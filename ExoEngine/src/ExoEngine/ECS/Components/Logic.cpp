@@ -31,7 +31,7 @@ namespace EM
 	/*!*************************************************************************
 	Ctor for Logic Component
 	****************************************************************************/
-	Logic::Logic() { }
+	Logic::Logic() { entityID = GetComponentEntityID(); }
 
 	/*!*************************************************************************
 	Copy Ctor
@@ -64,7 +64,7 @@ namespace EM
 	/*!*************************************************************************
 	Sets the Script's entity to retrieve data only from that entity
 	****************************************************************************/
-	void Logic::SetScriptEntity(Entity entity)
+	void Logic::SetScriptEntity(Entity& entity)
 	{
 		this->SetComponentEntityID(entity);
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
@@ -82,39 +82,37 @@ namespace EM
 		{
 			mScriptNameVector.push_back(obj[std::to_string(i).c_str()].GetString());
 		}
-			for (size_t j = 0; j < mScriptNameVector.size(); ++j)
+		for (size_t j = 0; j < mScriptNameVector.size(); ++j)
+		{
+			if (mScriptNameVector[j] == "PlayerControl")
 			{
-				if (mScriptNameVector[j] == "PlayerControl")
-				{
-					mScriptsVector.push_back(new PlayerControl());
-				}
-				if (mScriptNameVector[j] == "EnemyMovement")
-				{
-					mScriptsVector.push_back(new EnemyMovement());
-				}
-				if (mScriptNameVector[j] == "CollisionResponse")
-				{
-					mScriptsVector.push_back(new CollisionResponse());
-				}
-				if (mScriptNameVector[j] == "ButtonResponse")
-				{
-					mScriptsVector.push_back(new ButtonResponse());
-				}
-				if (mScriptNameVector[j] == "ScenerioScript")
-				{
-					mScriptsVector.push_back(new ScenerioScript());
-				}
-				if (mScriptNameVector[j] == "HUDController")
-				{
-					mScriptsVector.push_back(new HUDController());
-				}
-				if (mScriptNameVector[j] == "AudioManager")
-				{
-					mScriptsVector.push_back(new AudioManager());
-				}
+				mScriptsVector.push_back(new PlayerControl(GetComponentEntityID()));
 			}
-		
-
+			if (mScriptNameVector[j] == "EnemyMovement")
+			{
+				mScriptsVector.push_back(new EnemyMovement());
+			}
+			if (mScriptNameVector[j] == "CollisionResponse")
+			{
+				mScriptsVector.push_back(new CollisionResponse());
+			}
+			if (mScriptNameVector[j] == "ButtonResponse")
+			{
+				mScriptsVector.push_back(new ButtonResponse());
+			}
+			if (mScriptNameVector[j] == "ScenerioScript")
+			{
+				mScriptsVector.push_back(new ScenerioScript());
+			}
+			if (mScriptNameVector[j] == "HUDController")
+			{
+				mScriptsVector.push_back(new HUDController());
+			}
+			if (mScriptNameVector[j] == "AudioManager")
+			{
+				mScriptsVector.push_back(new AudioManager());
+			}
+		}
 		return true;
 	}
 
