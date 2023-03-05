@@ -46,6 +46,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
+#include "ExoEngine/Scripts/EnemyStateMachine.h"
 
 namespace EM {
 
@@ -108,7 +109,7 @@ namespace EM {
         if (!p_Editor->is_ShowWindow)
         {
             glViewport(0, 0, mWindow->Getter().m_Width, mWindow->Getter().m_Height);
-            EM::Graphic::camera.Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
+            EM::Graphic::mcamera->Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
         }
         if (is_ShowWindow)
         {
@@ -334,22 +335,60 @@ namespace EM {
         mViewportFocused = ImGui::IsWindowFocused();
         mViewportSize = { ImGui::GetContentRegionAvail() };
 
-
         uint64_t textureID = p_FrameBuffer->GetColorAttachmentRendererID();
         ImGui::Image((void*)(intptr_t)textureID, mViewportSize,
             ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 
+        //for mouse position
+        mGameMousePosition = ImGui::GetMousePos();
+
+        mGameMousePosition.x -= mViewportBounds[0].x;
+        mGameMousePosition.y -= mViewportBounds[0].y;
+
+        glm::vec2 vpSize{ 0.0f ,0.0f };
+        vpSize.x = mViewportBounds[1].x -mViewportBounds[0].x;
+        vpSize.y = mViewportBounds[1].y - mViewportBounds[0].y;
+        mGameMousePosition.y = vpSize.y - mGameMousePosition.y;
+        mGameMousePosition.x = ((mGameMousePosition.x / mViewportSize.x) * 2.0f) - 1.0f;
+        mGameMousePosition.y = ((mGameMousePosition.y / mViewportSize.y) * 2.0f) - 1.0f;
+        static bool dragging = false;
+        static double c_x = 0.0f, c_y = 0.0f;
+        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            if (mSceneMouse.x >= mViewportBounds[0].x &&
+                mSceneMouse.x <= mViewportBounds[1].x &&
+                mSceneMouse.y >= mViewportBounds[0].y &&
+                mSceneMouse.y <= mViewportBounds[1].y)
+            {
+                dragging = true;
+            }
+        }
+        if (dragging && p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            double new_x, new_y;
+            glfwGetCursorPos(mWindow->GetWindow(), &new_x, &new_y);
+            
+            EM::Graphic::scene_camera.SetPosition({ EM::Graphic::scene_camera.GetPosition().x - (static_cast<float>(new_x - c_x) * 0.005f) , 
+                                                    EM::Graphic::scene_camera.GetPosition().y + (static_cast<float>(new_y - c_y) * 0.005f),
+                0.0f });
+           
+        }
+        else if (dragging && p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            dragging = false;
+        }
+        glfwGetCursorPos(mWindow->GetWindow(), &c_x, &c_y);
         //gizmos
-        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing())
+        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::TRANSLATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::ROTATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::SCALE;
         }
@@ -366,8 +405,8 @@ namespace EM {
                 mViewportBounds[1].y - mViewportBounds[0].y
             );
 
-            glm::mat4 cameraProj = EM::Graphic::camera.GetProjectionMatrix();
-            glm::mat4 cameraView = EM::Graphic::camera.GetViewMatrix();
+            glm::mat4 cameraProj = EM::Graphic::mcamera->GetProjectionMatrix();
+            glm::mat4 cameraView = EM::Graphic::mcamera->GetViewMatrix();
             glm::mat4 transform{ 1.0f }; // identity matrix
 
             auto& trans = p_ecs.GetComponent<Transform>(selectedEntity);
@@ -413,7 +452,7 @@ namespace EM {
 
             }
 
-            selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
+            selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
 
             //std::cout << selectedEntity << std::endl;
             if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
@@ -848,6 +887,12 @@ namespace EM {
                             p_ecs.AddComponent<HUDComponent>(selectedEntity, C_HUDComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("EnemyAttributes"))
+                    {
+                        if (!p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                            p_ecs.AddComponent<EnemyAttributes>(selectedEntity, C_EnemyAttributesComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -946,7 +991,7 @@ namespace EM {
                         }
                         if (sprite.is_SpriteSheet)
                         {
-                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512;
                             ImGui::Text("MaxIndex : %d ", sprite.GetMaxIndex());
                             sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite  
                         }
@@ -1145,8 +1190,7 @@ namespace EM {
                                         {
                                             logic.InsertScript(new EnemyMovement(), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
-                                                                                               && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
                                         {
                                             logic.InsertScript(new CollisionResponse(), selectedEntity);
                                         }
@@ -1170,6 +1214,11 @@ namespace EM {
                                         if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
                                             logic.InsertScript(new GateController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyStateMachine(), selectedEntity);
                                         }
                                     }
                                 }
@@ -1334,6 +1383,32 @@ namespace EM {
                         HUDComp.SetOffset(Offset);
                     }
                 }
+                if (p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& attrib = p_ecs.GetComponent<EnemyAttributes>(selectedEntity);
+
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
+                        float attackSlider = attrib.mAttackTimer;
+                        float damageCooldown = attrib.mDamageCooldownTimer;
+
+                        ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
+                        ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
+                        ImGui::SliderFloat("Attack Duration (0 -> 10)", &attackSlider, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Attack Cooldown (0 -> 10)", &damageCooldown, 0, 10, "%f", flags);
+
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
+                        attrib.mAttackTimer = attackSlider;
+                        attrib.mDamageCooldownTimer = damageCooldown;
+                    }
+                }
                 
 
                 if (ImGui::Button("Delete Component"))
@@ -1384,6 +1459,11 @@ namespace EM {
                     if (ImGui::MenuItem("HUD") && p_ecs.HaveComponent<HUDComponent>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<HUDComponent>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("EnemyAttributes") && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<EnemyAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::EndPopup();

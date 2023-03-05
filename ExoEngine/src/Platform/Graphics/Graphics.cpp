@@ -39,19 +39,7 @@ namespace EM {
 
 		ifs.close();
 	}
-	/*!*************************************************************************
-	Load texture from filename using resource manager
-	****************************************************************************/
-	/*void Graphic::LoadTexture(std::string filename)
-	{
-		std::ifstream ifs(filename.c_str());
-		std::string name, textPath;
-		while (ifs >> name >> textPath)
-			ResourceManager::LoadTexture(name.c_str(), textPath.c_str());
-
-		ifs.close();
-	}*/
-	//for testing purpose
+	
 	/*!*************************************************************************
 	Init loop for Graphics
 	****************************************************************************/
@@ -64,7 +52,7 @@ namespace EM {
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
-		std::string folderpath[] = {"Characters", "Environment", "UI", "VFX" };
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX"};
 		for (const auto& i : folderpath)
 		{
 			std::filesystem::path currentPath = path + i;
@@ -95,29 +83,38 @@ namespace EM {
 		Timer::GetInstance().Start(Systems::GRAPHIC);
 		Timer::GetInstance().GetDT(Systems::GRAPHIC);
 		
+		if (p_Editor->is_ShowWindow)
+			mcamera = &scene_camera;
+		else
+			mcamera = &camera;
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
 			p_Editor->mViewportSize.x > 0.0f && p_Editor->mViewportSize.y > 0.0f && // zero sized framebuffer is invalid
-			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y)
-			&& p_Editor->is_ShowWindow)
+			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y) && 
+			p_Editor->is_ShowWindow)
 		{
+			
 			p_FrameBuffer->Resize((uint32_t)p_Editor->mViewportSize.x, (uint32_t)p_Editor->mViewportSize.y);
-			camera.Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
+			mcamera->Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
+			
 		}
 		
 	
 		mRenderer->ResetInfo();
-		mRenderer->Clear();
 		if (p_Editor->is_ShowWindow)
 		{
 			p_FrameBuffer->Bind();
-			glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RED_INTEGER, GL_INT, 0);
 		}
 		
 		mRenderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		mRenderer->Clear();
-		mRenderer->Begin(camera);// begin of the renderer 
-		p_GUI->VPmat = camera.GetViewProjectionMatrix();
+		int value = -1;
+		glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RGBA8, GL_INT, &value);
+	
+		mRenderer->Begin(*mcamera);// begin of the renderer 
+	
+
+		p_GUI->VPmat = mcamera->GetViewProjectionMatrix();
 		
 
 		for (auto const& entity : mEntities)
@@ -171,7 +168,7 @@ namespace EM {
 					{ 1.0f, 0.0f, 1.0f,1.0f });
 			}
 		}
-
+		//mRenderer->DrawQuad({ 0.0f,0.0f }, { 1.0f,1.0f }, { 1.0f,0.0f,0.0f,1.0f });
 		for (auto const& entity : mEntities)
 		{
 			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Player")
@@ -193,31 +190,18 @@ namespace EM {
 			}
 
 			//for rendering of enemy health bar
-			if (p_ecs.HaveComponent<Attributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
+			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
 				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
-				auto& mAtt = p_ecs.GetComponent<Attributes>(entity);
+				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
-				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x, mTrans.GetPos().y + mHUD.GetOffset().y);
-				vec2D HPScale = vec2D(mAtt.GetHealth() / mAtt.GetMaxHealth() * mTrans.GetScale().x, mTrans.GetScale().y);
-				mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 1.0f, 1.0f, 1.0f });
+				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+				vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y  / 20.0f);
+				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
 				std::cout << "Displaying HPBar" << std::endl;
 			}
 		}
 
-		p_Editor->mGameMousePosition = ImGui::GetMousePos();
-
-		p_Editor->mGameMousePosition.x -= p_Editor->mViewportBounds[0].x;
-		p_Editor->mGameMousePosition.y -= p_Editor->mViewportBounds[0].y;
-
-		glm::vec2 vpSize{ 0.0f ,0.0f };
-		vpSize.x = p_Editor->mViewportBounds[1].x - p_Editor->mViewportBounds[0].x;
-		vpSize.y = p_Editor->mViewportBounds[1].y - p_Editor->mViewportBounds[0].y;
-		p_Editor->mGameMousePosition.y = vpSize.y - p_Editor->mGameMousePosition.y;
-
-		p_Editor->mGameMousePosition.x = ((p_Editor->mGameMousePosition.x / p_Editor->mViewportSize.x) * 2.0f) - 1.0f;
-		p_Editor->mGameMousePosition.y = ((p_Editor->mGameMousePosition.y / p_Editor->mViewportSize.y) * 2.0f) - 1.0f;
-		p_Editor->mGameMousePosition.x *= camera.GetZoomLevel();
-		p_Editor->mGameMousePosition.y *= camera.GetZoomLevel();
+		
 
 		if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
 		{
@@ -265,9 +249,8 @@ namespace EM {
 		{
 			p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
 		}
-		
-		if (p_Editor->mViewportFocused && p_Editor->is_ShowWindow)
-			camera.MouseScrolling();
+	
+		mcamera->MouseScrolling();
 		
 
 		Timer::GetInstance().Update(Systems::GRAPHIC);

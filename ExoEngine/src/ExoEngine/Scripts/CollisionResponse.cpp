@@ -43,10 +43,10 @@ namespace EM
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		//auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
+		//auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+		//auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
 		//std::cout << &col << "\n";
 
@@ -65,28 +65,21 @@ namespace EM
 		//Enemy Taking Damage
 		if (tag.GetNameTag() == "Enemy")
 		{
-			if (col.GetCollisionArray()[0].mHit == 2)
+			if (col.GetCollisionArray()[0].mHit == 2 && p_ecs.HaveComponent<EnemyAttributes>(GetScriptEntityID()))
 			{
 				//enemy takes damage based on player damage
 				int pDmg = 0;
 				//get player attributes (damage)
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
-						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+						pDmg = p_ecs.GetComponent<PlayerAttributes>(i).GetDamage();
 					}
 				}
 				//set enemy hp
-				attrib.SetHealth(attrib.GetHealth() - pDmg);
-				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+				auto& eAttrib = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+				eAttrib.mHealth -= pDmg;
+				//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
 				////if hp < 0, set state to death
-				if (attrib.GetHealth() <= 0) {
-					p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
-					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
-					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
-					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
-
-				}
-				
 			}
 		}
 		//if chest is damaged

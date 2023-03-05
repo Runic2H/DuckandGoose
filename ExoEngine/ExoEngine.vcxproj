@@ -20,6 +20,7 @@
     <ClInclude Include="src\ExoEngine\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Collider.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Components.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\EnemyAttributes.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\HUDComponent.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Logic.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\NameTag.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyStateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
@@ -55,6 +57,10 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
@@ -214,6 +220,7 @@
     <ClCompile Include="src\ExoEngine\ECS\Components\CameraComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Collider.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Components.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\EnemyAttributes.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\HUDComponent.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Logic.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\NameTag.cpp" />
@@ -245,6 +252,10 @@
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
@@ -335,7 +346,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
