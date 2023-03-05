@@ -51,16 +51,16 @@ namespace EM {
 			sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
 			if (sprite.internaltimer >= spriteContainer[sprite.GetTexture()][sprite.GetIndex().x])
 			{
-				//for debug
-				if(sprite.GetTexture() == "Attack")
-					std::cout <<"Att " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
-				
-				if (sprite.GetTexture() == "Idle")
-					std::cout << "Idle " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				////for debug
+				//if(sprite.GetTexture() == "Attack")
+				//	std::cout <<"Att " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				//
+				//if (sprite.GetTexture() == "Idle")
+				//	std::cout << "Idle " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
 
-				if (sprite.GetTexture() == "Running")
-					std::cout << "Running " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
-				
+				//if (sprite.GetTexture() == "Running")
+				//	std::cout << "Running " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
+				//
 				//end of debug
 				sprite.GetIndex().x++;
 				sprite.internaltimer = 0.0f;

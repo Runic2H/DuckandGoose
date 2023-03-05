@@ -109,7 +109,7 @@ namespace EM {
         if (!p_Editor->is_ShowWindow)
         {
             glViewport(0, 0, mWindow->Getter().m_Width, mWindow->Getter().m_Height);
-            EM::Graphic::camera.Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
+            EM::Graphic::mcamera->Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
         }
         if (is_ShowWindow)
         {
@@ -335,22 +335,60 @@ namespace EM {
         mViewportFocused = ImGui::IsWindowFocused();
         mViewportSize = { ImGui::GetContentRegionAvail() };
 
-
         uint64_t textureID = p_FrameBuffer->GetColorAttachmentRendererID();
         ImGui::Image((void*)(intptr_t)textureID, mViewportSize,
             ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 
+        //for mouse position
+        mGameMousePosition = ImGui::GetMousePos();
+
+        mGameMousePosition.x -= mViewportBounds[0].x;
+        mGameMousePosition.y -= mViewportBounds[0].y;
+
+        glm::vec2 vpSize{ 0.0f ,0.0f };
+        vpSize.x = mViewportBounds[1].x -mViewportBounds[0].x;
+        vpSize.y = mViewportBounds[1].y - mViewportBounds[0].y;
+        mGameMousePosition.y = vpSize.y - mGameMousePosition.y;
+        mGameMousePosition.x = ((mGameMousePosition.x / mViewportSize.x) * 2.0f) - 1.0f;
+        mGameMousePosition.y = ((mGameMousePosition.y / mViewportSize.y) * 2.0f) - 1.0f;
+        static bool dragging = false;
+        static double c_x = 0.0f, c_y = 0.0f;
+        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            if (mSceneMouse.x >= mViewportBounds[0].x &&
+                mSceneMouse.x <= mViewportBounds[1].x &&
+                mSceneMouse.y >= mViewportBounds[0].y &&
+                mSceneMouse.y <= mViewportBounds[1].y)
+            {
+                dragging = true;
+            }
+        }
+        if (dragging && p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            double new_x, new_y;
+            glfwGetCursorPos(mWindow->GetWindow(), &new_x, &new_y);
+            
+            EM::Graphic::scene_camera.SetPosition({ EM::Graphic::scene_camera.GetPosition().x - (static_cast<float>(new_x - c_x) * 0.005f) , 
+                                                    EM::Graphic::scene_camera.GetPosition().y + (static_cast<float>(new_y - c_y) * 0.005f),
+                0.0f });
+           
+        }
+        else if (dragging && p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            dragging = false;
+        }
+        glfwGetCursorPos(mWindow->GetWindow(), &c_x, &c_y);
         //gizmos
-        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing())
+        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::TRANSLATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::ROTATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::SCALE;
         }
@@ -367,8 +405,8 @@ namespace EM {
                 mViewportBounds[1].y - mViewportBounds[0].y
             );
 
-            glm::mat4 cameraProj = EM::Graphic::camera.GetProjectionMatrix();
-            glm::mat4 cameraView = EM::Graphic::camera.GetViewMatrix();
+            glm::mat4 cameraProj = EM::Graphic::mcamera->GetProjectionMatrix();
+            glm::mat4 cameraView = EM::Graphic::mcamera->GetViewMatrix();
             glm::mat4 transform{ 1.0f }; // identity matrix
 
             auto& trans = p_ecs.GetComponent<Transform>(selectedEntity);
@@ -414,7 +452,7 @@ namespace EM {
 
             }
 
-            selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
+            selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
 
             //std::cout << selectedEntity << std::endl;
             if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
