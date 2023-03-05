@@ -64,7 +64,7 @@ namespace EM
 	/*!*************************************************************************
 	Sets the Script's entity to retrieve data only from that entity
 	****************************************************************************/
-	void Logic::SetScriptEntity(Entity& entity)
+	void Logic::SetScriptEntity(Entity entity)
 	{
 		this->SetComponentEntityID(entity);
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)
@@ -145,7 +145,7 @@ namespace EM
 		script->SetScriptEntityID(this->GetComponentEntityID());
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
-		std::cout << "Script Vector: " << mScriptsVector.front()->GetScriptEntityID() << std::endl;
+		//std::cout << "Script Vector: " << mScriptsVector.front()->GetScriptEntityID() << std::endl;
 	}
 
 	void Logic::DeleteScript(std::string scriptname)
@@ -154,7 +154,7 @@ namespace EM
 			if (mScriptNameVector[idx] == scriptname) {
 				mScriptNameVector.erase(mScriptNameVector.begin() + idx);
 				mScriptsVector.erase(mScriptsVector.begin() + idx);
-				std::cout << "Deleted Script: " << scriptname << "\n";
+				//std::cout << "Deleted Script: " << scriptname << "\n";
 			}
 		}
 	}

@@ -45,7 +45,7 @@ namespace EM
 		}
 		virtual void Update(float Frametime) override
 		{
-
+			mEnemyStateMachine.OnUpdate(Frametime);
 		}
 		virtual void End() override
 		{

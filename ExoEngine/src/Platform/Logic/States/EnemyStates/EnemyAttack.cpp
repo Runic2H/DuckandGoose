@@ -28,7 +28,7 @@ namespace EM
 			//if can retreat, retreat.
 			//set to moving state after retreat
 		}
-		if (mAttackCooldown <= 0) {
+		if (mAttackCooldown <= 0 && mAttackTime <= 0) {
 			mAttackTime = attrib.mAttackTimer;
 		}
 		auto pCol = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray();
@@ -47,15 +47,18 @@ namespace EM
 		}
 		if (mAttackTime > 0) {
 			(pCol + 1)->is_Alive = true;
-			//std::cout << "Attack Active" << std::endl;
+			mAttackTime -= Frametime;
+			std::cout << "Attack Cooldown" << mAttackCooldown << std::endl;
+			std::cout << "Attack Timer" << mAttackTime << std::endl;
 		}
 		else {
 			(pCol + 1)->is_Alive = false;
-			//if player moves within x radius, set mode to moving
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) > 0.1f) {
-				//std::cout << "Player Detected" << std::endl;
-				stateMachine->ChangeState(new EnemyChase(stateMachine));
-			}
+		}
+		//if player moves within x radius, set mode to moving
+		if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) > 0.1f) {
+			//std::cout << "Player Detected" << std::endl
+			(pCol + 1)->is_Alive = false;
+			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 		//death
 		if (attrib.mHealth <= 0) {
@@ -64,6 +67,7 @@ namespace EM
 			(pCol)->is_Alive = false;
 			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
+		mAttackCooldown -= Frametime;
 		std::cout << "Attack State" << std::endl;
 	}
 	void EnemyAttack::OnExit(StateMachine* stateMachine)

@@ -24,9 +24,9 @@ namespace EM
 		writer->Key("Damage");
 		writer->Int(mDamage);
 		writer->Key("Attack Timer");
-		writer->Int(mAttackTimer);
+		writer->Double((double)mAttackTimer);
 		writer->Key("Damage Cooldown");
-		writer->Int(mDamageCooldownTimer);
+		writer->Double((double)mDamageCooldownTimer);
 		writer->EndObject();
 		return true;
 	}

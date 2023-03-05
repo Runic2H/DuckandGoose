@@ -197,9 +197,9 @@ namespace EM {
 				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
-				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x, mTrans.GetPos().y + mHUD.GetOffset().y);
-				vec2D HPScale = vec2D(mAtt.mHealth / mAtt.mMaxHealth * mTrans.GetScale().x, mTrans.GetScale().y);
-				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 1.0f, 1.0f, 1.0f });
+				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+				vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y  / 20.0f);
+				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
 				std::cout << "Displaying HPBar" << std::endl;
 			}
 		}

@@ -953,7 +953,7 @@ namespace EM {
                         }
                         if (sprite.is_SpriteSheet)
                         {
-                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512;
                             ImGui::Text("MaxIndex : %d ", sprite.GetMaxIndex());
                             sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite  
                         }
