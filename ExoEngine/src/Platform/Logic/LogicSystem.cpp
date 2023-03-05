@@ -36,7 +36,7 @@ namespace EM
 	{
 		Timer::GetInstance().Start(Systems::LOGIC);
 		Timer::GetInstance().GetDT(Systems::LOGIC);
-		for (const auto& entity : mEntities)
+		for (auto entity : mEntities)
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
 			LogicComp.SetScriptEntity(entity);

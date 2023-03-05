@@ -48,6 +48,8 @@ namespace EM {
 
 		//for textures loading from files
 		void LoadTextureFromFile();
+
+	
 	public:
 		bool is_ShowWindow = true;
 		static std::unique_ptr<LevelEditor>& GetInstance();
@@ -65,6 +67,7 @@ namespace EM {
 		ImVec2 mViewportBounds[2];
 		bool mViewportFocused = false;
 		ImVec2 mGameMousePosition = { 0.0f, 0.0f };
+		ImVec2 mSceneMouse = { 0.0f, 0.0f };
 	private:
 		void MainMenuBar();
 		void Docking();
