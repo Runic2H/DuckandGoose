@@ -16,7 +16,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #pragma once
 #include "IComponent.h"
 #include "glm/glm.hpp"
-#include "Platform/Graphics/Texture.h"
+//#include "Platform/Graphics/Texture.h"
+
 namespace EM {
 
 	class Sprite : public IComponent
@@ -39,8 +40,7 @@ namespace EM {
 		void SetIndex(int& x, int& y) { Index.x = x, Index.y = y; } // y will always remind as zero
 		Coordinates& GetIndex() { return Index; }
 
-		std::vector<std::pair<int, float>>&GetDisplayTime() { return displayTime; }
-
+		std::vector<float>&GetDisplayTime() { return displayTime; }
 		int& GetMaxIndex() { return MaxIndex_X; }
 		void SetUVCoor(float& u, float& v) { mUVcooridnates.x = u; mUVcooridnates.y = v; } 
 		vec2D& GetUVCoor() { return mUVcooridnates; }
@@ -68,7 +68,7 @@ namespace EM {
 		vec2D mUVcooridnates;
 		float mAlpha;
 		int MaxIndex_X;
-		std::vector<std::pair<int,float>>displayTime;
+		std::vector<float>displayTime;
 		//TODO insert a increment for mIndex so that it can lease with the mAimator
 	};
 }

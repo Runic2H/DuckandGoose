@@ -9,7 +9,7 @@ namespace EM
 	{
 		return mCurrState;
 	}*/
-
+	
 	void StateMachine::ChangeState(IStates* pNewState)
 	{
 		if (mCurrState != nullptr)
@@ -22,14 +22,16 @@ namespace EM
 
 	void StateMachine::HandleInput(const int& key)
 	{
+
 		IStates* state = mCurrState->HandleInput(this, key);
 		if (state != nullptr)
 		{
 			ChangeState(state);
 		}
+		 
 	}
 
-	Entity& StateMachine::GetEntityID()
+	const Entity& StateMachine::GetEntityID()
 	{
 		return mEntityID;
 	}

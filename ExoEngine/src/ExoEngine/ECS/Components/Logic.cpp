@@ -64,7 +64,7 @@ namespace EM
 	/*!*************************************************************************
 	Sets the Script's entity to retrieve data only from that entity
 	****************************************************************************/
-	void Logic::SetScriptEntity(Entity entity)
+	void Logic::SetScriptEntity(Entity& entity)
 	{
 		this->SetComponentEntityID(entity);
 		for (auto i = mScriptsVector.begin(); i != mScriptsVector.end(); ++i)

@@ -126,8 +126,6 @@ namespace EM {
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
 			if (sprite.is_Animated)
 			{
-				/*if(p_ecs.GetComponent<Tag>(entity).)*/
-				mAimator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
 				mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(entity));
 			}
 			if (sprite.is_SpriteSheet)
@@ -181,7 +179,6 @@ namespace EM {
 				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 					p_ecs.GetComponent<Transform>(entity).GetPos().y,
 					0.0f });
-				//camera.SetZoomLevel(5.0f);
 			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);

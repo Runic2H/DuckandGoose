@@ -116,11 +116,11 @@ Run loop for application
 		mLogic->Init();
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
-		RigidBody rb;
+		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
-		Tag tag;
+		Tag tag;*/
 
 
 		/*Entity Background = p_ecs.CreateEntity();
