@@ -27,11 +27,14 @@ namespace EM
 		int mMaxHealth;
 		int mDamage;
 		int mAttackCounter;
-		float mDamageTimer;
-		float mDashTime;
+		float mDamageCoolDown;
+		float mDashCoolDown;
 		float mDashDurationTimer;
-		float mIsBlockTimer;
-		float mBlockCoolDownTimer;
+		float mBlockCoolDown;
+		float mBlockDurationTimer;
+		float mCooldownTimer;
+		float mDamageTaken;
+		float mDamageDurationTimer;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;

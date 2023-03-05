@@ -3,9 +3,9 @@
 
 namespace EM
 {
-	PlayerAttributes::PlayerAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackCounter{ 0 }, mDamageTimer{ 0 }, mDashTime{ 0 },
-		mDashDurationTimer{0}, mIsBlockTimer{0}, mBlockCoolDownTimer{0}, mIsDamaged{false},
-		mIsBlocking{ false }, mIsDashing{ false }, mVel{ vec2D(0,0) }, mDir{ vec2D(1,0) } {}
+	PlayerAttributes::PlayerAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackCounter{ 0 }, mDamageCoolDown{ 0.0f }, mDashCoolDown{ 0.0f },
+		mDashDurationTimer{ 0.0f }, mBlockCoolDown{ 2.0f }, mBlockDurationTimer{ 0.0f }, mCooldownTimer{ 0.0f }, mDamageTaken{ 0.0f }, mDamageDurationTimer{ 0.5f }, mIsDamaged{ false },
+		mIsBlocking{ false }, mIsDashing{ false }, mVel{ vec2D(1.0f,1.0f) }, mDir{ vec2D(1.0f,0.0f) } {}
 
 	bool PlayerAttributes::Deserialize(const rapidjson::Value& obj)
 	{

@@ -81,6 +81,8 @@
     <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />

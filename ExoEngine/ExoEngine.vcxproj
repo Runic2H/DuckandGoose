@@ -247,7 +247,9 @@
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnMove.cpp" />
     <ClCompile Include="src\Platform\Physics\CollisionSystem.cpp" />

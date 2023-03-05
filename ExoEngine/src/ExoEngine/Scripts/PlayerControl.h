@@ -41,7 +41,7 @@ namespace EM
 		}
 		virtual void End() override
 		{
-
+			delete this;
 		}
 
 		virtual std::string GetScriptName() override
