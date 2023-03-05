@@ -1,6 +1,7 @@
 #include "empch.h"
 #include "EnemyAttack.h"
 #include "EnemyChase.h"
+#include "EnemyDeath.h"
 
 namespace EM
 {
@@ -17,21 +18,33 @@ namespace EM
 	}
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		auto& attrib = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID());
 		//if attacking, attack and calculate chances for cooldown
 		if (mAttackCooldown <= 0 && (rand() % 100) <= 80) {
-			mAttackCooldown = 10.0f;
-			mAttackTime = 10.0f;
+			mAttackCooldown = attrib.mDamageCooldownTimer;
+			mAttackTime = attrib.mAttackTimer;
 			//std::cout << "Cooldown" << std::endl;
 			//if on cooldown, check if can retreat
 			//if can retreat, retreat.
 			//set to moving state after retreat
 		}
 		if (mAttackCooldown <= 0) {
-			mAttackTime = 10.0f;
+			mAttackTime = attrib.mAttackTimer;
 		}
 		auto pCol = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray();
 		vec2D playerPos = vec2D();
 		bool check = false;
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			//std::cout << "Prox Check" << std::endl;
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			{
+				//std::cout << "Found Player" << std::endl;
+				check = true;
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+
+			}
+		}
 		if (mAttackTime > 0) {
 			(pCol + 1)->is_Alive = true;
 			//std::cout << "Attack Active" << std::endl;
@@ -44,17 +57,12 @@ namespace EM
 				stateMachine->ChangeState(new EnemyChase(stateMachine));
 			}
 		}
-
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-		{
-			//std::cout << "Prox Check" << std::endl;
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
-			{
-				//std::cout << "Found Player" << std::endl;
-				check = true;
-				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-
-			}
+		//death
+		if (attrib.mHealth <= 0) {
+			attrib.mHealth = 0;
+			(pCol + 1)->is_Alive = false;
+			(pCol)->is_Alive = false;
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
 	}
 	void EnemyAttack::OnExit(StateMachine* stateMachine)

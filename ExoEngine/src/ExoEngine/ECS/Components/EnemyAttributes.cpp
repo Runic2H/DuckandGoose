@@ -2,7 +2,7 @@
 
 namespace EM
 {
-	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 0 }, mDamageCooldownTimer{ 2.0f } {}
+	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 2.0f }, mDamageCooldownTimer{ 2.0f } {}
 
 	bool EnemyAttributes::Deserialize(const rapidjson::Value& obj)
 	{

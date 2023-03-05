@@ -28,6 +28,7 @@ namespace EM
 		deathTime -= Frametime;
 		if (deathTime <= 0) {
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
+			deathTime = 0;
 		}
 	}
 	void EnemyDeath::OnExit(StateMachine* stateMachine)

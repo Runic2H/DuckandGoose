@@ -196,12 +196,12 @@ namespace EM {
 			}
 
 			//for rendering of enemy health bar
-			if (p_ecs.HaveComponent<Attributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
+			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
 				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
-				auto& mAtt = p_ecs.GetComponent<Attributes>(entity);
+				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
 				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x, mTrans.GetPos().y + mHUD.GetOffset().y);
-				vec2D HPScale = vec2D(mAtt.GetHealth() / mAtt.GetMaxHealth() * mTrans.GetScale().x, mTrans.GetScale().y);
+				vec2D HPScale = vec2D(mAtt.mHealth / mAtt.mMaxHealth * mTrans.GetScale().x, mTrans.GetScale().y);
 				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 1.0f, 1.0f, 1.0f });
 				std::cout << "Displaying HPBar" << std::endl;
 			}

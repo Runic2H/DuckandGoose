@@ -1181,7 +1181,8 @@ namespace EM {
                                         {
                                             logic.InsertScript(new GateController(), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                                         {
                                             logic.InsertScript(new EnemyStateMachine(), selectedEntity);
                                         }
@@ -1352,7 +1353,26 @@ namespace EM {
                 {
                     if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
                     {
-                        
+                        auto& attrib = p_ecs.GetComponent<EnemyAttributes>(selectedEntity);
+
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
+                        float attackSlider = attrib.mAttackTimer;
+                        float damageCooldown = attrib.mDamageCooldownTimer;
+
+                        ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
+                        ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
+                        ImGui::SliderFloat("Attack Duration (0 -> 10)", &attackSlider, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Attack Cooldown (0 -> 10)", &damageCooldown, 0, 10, "%f", flags);
+
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
+                        attrib.mAttackTimer = attackSlider;
+                        attrib.mDamageCooldownTimer = damageCooldown;
                     }
                 }
                 
@@ -1405,6 +1425,11 @@ namespace EM {
                     if (ImGui::MenuItem("HUD") && p_ecs.HaveComponent<HUDComponent>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<HUDComponent>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("EnemyAttributes") && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<EnemyAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::EndPopup();

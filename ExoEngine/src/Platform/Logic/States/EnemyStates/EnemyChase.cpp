@@ -1,6 +1,7 @@
 #include "empch.h"
 #include "EnemyChase.h"
 #include "EnemyAttack.h"
+#include "EnemyDeath.h"
 
 namespace EM
 {
@@ -40,7 +41,6 @@ namespace EM
 				dist = distance(transform.GetPos(), p_ecs.GetComponent<Transform>(i).GetPos());
 			}
 		}
-		
 		//Attack Range
 		//check if within range. If not, set to moving state
 		if (dist < 0.1f)
@@ -48,6 +48,13 @@ namespace EM
 			//std::cout << "In Proximity2" << std::endl;
 			//if within range to attack, set mode to attacking
 			stateMachine->ChangeState(new EnemyAttack(stateMachine));
+		}
+
+		//death
+		auto& eAttrib = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID());
+		if (eAttrib.mHealth <= 0) {
+			eAttrib.mHealth = 0;
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
 	}
 	void EnemyChase::OnExit(StateMachine* stateMachine)

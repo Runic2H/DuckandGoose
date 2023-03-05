@@ -62,12 +62,12 @@ namespace EM
 				
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
-						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+						pDmg = p_ecs.GetComponent<EnemyAttributes>(i).mDamage;
 					}
 				}
 				//player hp
-				attrib.SetHealth(attrib.GetHealth() - pDmg);
-				std::cout << attrib.GetHealth() << std::endl;
+				//attrib.SetHealth(attrib.GetHealth() - pDmg);
+				//std::cout << attrib.GetHealth() << std::endl;
 				if (dynamic_cast<PlayerController*>(logic.GetScriptByName("PlayerController"))->mIsDamaged <= 0.0f)
 				{
 					std::cout << "Collision Response" << std::endl;
@@ -96,17 +96,10 @@ namespace EM
 					}
 				}
 				//set enemy hp
-				attrib.SetHealth(attrib.GetHealth() - pDmg);
-				std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+				auto& eAttrib = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+				eAttrib.mHealth -= pDmg;
+				//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
 				////if hp < 0, set state to death
-				if (attrib.GetHealth() <= 0) {
-					p_ecs.GetComponent<Attributes>(GetScriptEntityID()).SetHealth(0);
-					dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->SetState(EnemyMovement::EnemyState::Death);
-					p_ecs.GetComponent<Collider>(GetScriptEntityID())[1].is_Alive = false;
-					//dynamic_cast<EnemyMovement*>(logic.GetScriptByName("EnemyMovement"))->Animate(EnemyMovement::EnemyState::Death);
-
-				}
-				
 			}
 		}
 		//if chest is damaged
