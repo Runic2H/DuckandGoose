@@ -1155,8 +1155,7 @@ namespace EM {
                                         {
                                             logic.InsertScript(new EnemyMovement(), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
-                                                                                               && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
                                         {
                                             logic.InsertScript(new CollisionResponse(), selectedEntity);
                                         }

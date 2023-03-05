@@ -64,6 +64,7 @@ namespace EM
 			(pCol)->is_Alive = false;
 			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
+		std::cout << "Attack State" << std::endl;
 	}
 	void EnemyAttack::OnExit(StateMachine* stateMachine)
 	{
