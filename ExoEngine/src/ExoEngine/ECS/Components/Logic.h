@@ -33,7 +33,7 @@ namespace EM
 		~Logic() = default;
 
 		std::vector<IScript*>& GetScript() { return mScriptsVector; }
-		void SetScriptEntity( Entity& entity);
+		void SetScriptEntity(Entity entity);
 		void InsertScript(IScript* script, Entity entity);
 		void DeleteScript(std::string scriptname);
 		void ClearAllScripts();
