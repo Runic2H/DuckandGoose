@@ -4,7 +4,12 @@
 
 namespace EM
 {
-	EnemyDeath::EnemyDeath() : deathTime{ 5.0f } {}
+	EnemyDeath::EnemyDeath(StateMachine* stateMachine) : deathTime{ 5.0f } {}
+
+	IStates* EnemyDeath::HandleInput(StateMachine* stateMachine, const int& key)
+	{
+		return nullptr;
+	}
 
 	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{

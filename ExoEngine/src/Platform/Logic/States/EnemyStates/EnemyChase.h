@@ -7,8 +7,9 @@ namespace EM
 	class EnemyChase : public IStates
 	{
 	public:
-		EnemyChase();
+		EnemyChase(StateMachine* stateMachine);
 		virtual ~EnemyChase() = default;
+		IStates* HandleInput(StateMachine* stateMachine, const int& key);
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;

@@ -47,6 +47,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
+#include "ExoEngine/Scripts/EnemyStateMachine.h"
 
 namespace EM {
 
@@ -849,6 +850,12 @@ namespace EM {
                             p_ecs.AddComponent<HUDComponent>(selectedEntity, C_HUDComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("EnemyAttributes"))
+                    {
+                        if (!p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                            p_ecs.AddComponent<EnemyAttributes>(selectedEntity, C_EnemyAttributesComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -1174,6 +1181,10 @@ namespace EM {
                                         {
                                             logic.InsertScript(new GateController(), selectedEntity);
                                         }
+                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyStateMachine(), selectedEntity);
+                                        }
                                     }
                                 }
                         } 
@@ -1335,6 +1346,13 @@ namespace EM {
                         ImGui::DragFloat("##OffsetY", (float*)&Offset.y, 0.005f);
                         ImGui::PopID();
                         HUDComp.SetOffset(Offset);
+                    }
+                }
+                if (p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        
                     }
                 }
                 

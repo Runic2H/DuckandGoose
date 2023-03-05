@@ -4,7 +4,12 @@
 
 namespace EM
 {
-	EnemyChase::EnemyChase() {}
+	EnemyChase::EnemyChase(StateMachine* stateMachine) {}
+
+	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
+	{
+		return nullptr;
+	}
 
 	void EnemyChase::OnEnter(StateMachine* stateMachine)
 	{
@@ -42,7 +47,7 @@ namespace EM
 		{
 			//std::cout << "In Proximity2" << std::endl;
 			//if within range to attack, set mode to attacking
-			stateMachine->ChangeState(new EnemyAttack());
+			stateMachine->ChangeState(new EnemyAttack(stateMachine));
 		}
 	}
 	void EnemyChase::OnExit(StateMachine* stateMachine)

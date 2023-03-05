@@ -202,7 +202,7 @@ namespace EM {
 				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
 				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x, mTrans.GetPos().y + mHUD.GetOffset().y);
 				vec2D HPScale = vec2D(mAtt.GetHealth() / mAtt.GetMaxHealth() * mTrans.GetScale().x, mTrans.GetScale().y);
-				mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 1.0f, 1.0f, 1.0f });
+				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 1.0f, 1.0f, 1.0f });
 				std::cout << "Displaying HPBar" << std::endl;
 			}
 		}

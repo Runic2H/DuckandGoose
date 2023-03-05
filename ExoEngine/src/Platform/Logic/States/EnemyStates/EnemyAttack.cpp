@@ -4,7 +4,12 @@
 
 namespace EM
 {
-	EnemyAttack::EnemyAttack() : mAttackCooldown{ 0.0f }, mAttackTime{ 0.0f } {}
+	EnemyAttack::EnemyAttack(StateMachine* stateMachine) : mAttackCooldown{ 0.0f }, mAttackTime{ 0.0f } {}
+
+	IStates* EnemyAttack::HandleInput(StateMachine* stateMachine, const int& key)
+	{
+		return nullptr;
+	}
 
 	void EnemyAttack::OnEnter(StateMachine* stateMachine)
 	{
@@ -36,7 +41,7 @@ namespace EM
 			//if player moves within x radius, set mode to moving
 			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) > 0.1f) {
 				//std::cout << "Player Detected" << std::endl;
-				stateMachine->ChangeState(new EnemyChase());
+				stateMachine->ChangeState(new EnemyChase(stateMachine));
 			}
 		}
 
