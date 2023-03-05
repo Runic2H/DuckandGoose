@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "PlayerAttributes.h"
 
 namespace EM

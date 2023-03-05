@@ -465,7 +465,6 @@ Run loop for application
 
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
-			std::cout << "End Frame" << std::endl;
 		}
 		mLogic->End();
 		End();

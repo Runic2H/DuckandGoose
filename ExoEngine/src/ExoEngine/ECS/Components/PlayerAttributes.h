@@ -1,6 +1,7 @@
 #pragma once
 #include "IComponent.h"
 #include "empch.h"
+#include "ExoEngine/Math/physics.h"
 
 namespace EM
 {
@@ -26,15 +27,16 @@ namespace EM
 		int mMaxHealth;
 		int mDamage;
 		int mAttackCounter;
-		int mDamageTimer;
-		int mDashTime;
-		int mDashDurationTimer;
-		int mIsBlockTimer;
-		int mBlockCoolDownTimer;
+		float mDamageTimer;
+		float mDashTime;
+		float mDashDurationTimer;
+		float mIsBlockTimer;
+		float mBlockCoolDownTimer;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;
 		vec2D mVel;
 		vec2D mDir;
+		entityPhysics mPhys;
 	};
 }

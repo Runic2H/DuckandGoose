@@ -16,9 +16,8 @@ namespace EM
 	class PlayerControl : public IScript
 	{
 	public:
-
-		PlayerControl() : mPlayerStateMachine{StateMachine(this->GetScriptEntityID())} {}
 		PlayerControl(Entity entity) : mPlayerStateMachine{StateMachine(entity)} {}
+
 		~PlayerControl() = default;
 		virtual IScript* Clone() const override
 		{
@@ -32,17 +31,13 @@ namespace EM
 		{
 			for (auto key : p_Input->mKeyStatus)
 			{
-				if (key.second == GLFW_PRESS) {
-					mPlayerStateMachine.HandleInput(key.first);
-				}
+				mPlayerStateMachine.HandleInput(key.first);
 			}
 			for (auto key : p_Input->mMouseStatus)
 			{
-				if (key.second == GLFW_PRESS)
-				{
-					mPlayerStateMachine.HandleInput(key.first);
-				}
+				mPlayerStateMachine.HandleInput(key.first);
 			}
+			mPlayerStateMachine.OnUpdate(Frametime);
 		}
 		virtual void End() override
 		{

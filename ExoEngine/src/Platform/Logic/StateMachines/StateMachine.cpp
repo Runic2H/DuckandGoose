@@ -3,7 +3,7 @@
 
 namespace EM
 {
-	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity }{}
+	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity } {}
 
 	/*PlayerStates* GetCurrState()
 	{

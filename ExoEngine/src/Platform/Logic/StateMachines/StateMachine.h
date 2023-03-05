@@ -21,6 +21,8 @@ namespace EM
 
 		Entity& GetEntityID();
 
+		void SetEntityID(Entity& entity) { mEntityID = entity; }
+
 		void OnUpdate(float Frametime);
 
 	private:
