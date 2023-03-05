@@ -51,6 +51,7 @@ namespace EM
 		p_ecs.RegisterComponent<HUDComponent>();
 		p_ecs.RegisterComponent<Attributes>();
 		p_ecs.RegisterComponent<PlayerAttributes>();
+		p_ecs.RegisterComponent<EnemyAttributes>();
 		sceneToLoad = "";
 	}
 

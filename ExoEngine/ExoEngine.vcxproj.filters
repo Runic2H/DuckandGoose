@@ -80,7 +80,11 @@
     <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
-    <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
+    <ClCompile Include="src\ExoEngine\ECS\Components\EnemyAttributes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -273,7 +277,12 @@
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
-    <ClInclude Include="src\ExoEngine\ECS\Components\Attributes.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyStateMachine.h" />
+    <ClInclude Include="src\ExoEngine\ECS\Components\EnemyAttributes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

@@ -5,11 +5,17 @@
 
 namespace EM
 {
-	EnemyIdle::EnemyIdle() {}
+	EnemyIdle::EnemyIdle(StateMachine* stateMachine) {}
+
+	IStates* EnemyIdle::HandleInput(StateMachine* stateMachine, const int& key)
+	{
+		return nullptr;
+	}
 
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
+		std::cout << "Idle Entry" << std::endl;
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -29,7 +35,7 @@ namespace EM
 		//if player moves within x radius, set mode to moving
 		if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 5.0f) {
 			//std::cout << "Player Detected" << std::endl;
-			stateMachine->ChangeState(new EnemyChase());
+			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 		std::cout << "EnemyIdling" << std::endl;
 	}

@@ -6,8 +6,9 @@ namespace EM
 	class EnemyDeath : public IStates
 	{
 	public:
-		EnemyDeath();
+		EnemyDeath(StateMachine* stateMachine);
 		virtual ~EnemyDeath() = default;
+		IStates* HandleInput(StateMachine* stateMachine, const int& key);
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;

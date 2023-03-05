@@ -46,6 +46,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
+#include "ExoEngine/Scripts/EnemyStateMachine.h"
 
 namespace EM {
 
@@ -848,6 +849,12 @@ namespace EM {
                             p_ecs.AddComponent<HUDComponent>(selectedEntity, C_HUDComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("EnemyAttributes"))
+                    {
+                        if (!p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                            p_ecs.AddComponent<EnemyAttributes>(selectedEntity, C_EnemyAttributesComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -946,7 +953,7 @@ namespace EM {
                         }
                         if (sprite.is_SpriteSheet)
                         {
-                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512;
                             ImGui::Text("MaxIndex : %d ", sprite.GetMaxIndex());
                             sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite  
                         }
@@ -1145,8 +1152,7 @@ namespace EM {
                                         {
                                             logic.InsertScript(new EnemyMovement(), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity)
-                                                                                               && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
                                         {
                                             logic.InsertScript(new CollisionResponse(), selectedEntity);
                                         }
@@ -1170,6 +1176,11 @@ namespace EM {
                                         if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
                                             logic.InsertScript(new GateController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyStateMachine(), selectedEntity);
                                         }
                                     }
                                 }
@@ -1334,6 +1345,32 @@ namespace EM {
                         HUDComp.SetOffset(Offset);
                     }
                 }
+                if (p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& attrib = p_ecs.GetComponent<EnemyAttributes>(selectedEntity);
+
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
+                        float attackSlider = attrib.mAttackTimer;
+                        float damageCooldown = attrib.mDamageCooldownTimer;
+
+                        ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
+                        ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
+                        ImGui::SliderFloat("Attack Duration (0 -> 10)", &attackSlider, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Attack Cooldown (0 -> 10)", &damageCooldown, 0, 10, "%f", flags);
+
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
+                        attrib.mAttackTimer = attackSlider;
+                        attrib.mDamageCooldownTimer = damageCooldown;
+                    }
+                }
                 
 
                 if (ImGui::Button("Delete Component"))
@@ -1384,6 +1421,11 @@ namespace EM {
                     if (ImGui::MenuItem("HUD") && p_ecs.HaveComponent<HUDComponent>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<HUDComponent>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("EnemyAttributes") && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<EnemyAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::EndPopup();
