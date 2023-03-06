@@ -45,6 +45,7 @@
     <ClInclude Include="src\ExoEngine\Core.h" />
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="src\ExoEngine\Application.cpp" />
     <ClCompile Include="src\ExoEngine\Math\Vec4.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\AudioManager.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\BackgroudAudio.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />

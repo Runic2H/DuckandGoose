@@ -170,6 +170,11 @@ namespace EM
 
             if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && mCooldownTimer <= 0.0f)
             {
+                if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && (p_ecs.GetComponent<Audio>(GetScriptEntityID()).GetSize() > 0))
+                {
+                    p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = true;
+                }
+
                 ++mAttackCounter;
                 mCooldownTimer = 0.5f;
                 mState = PlayerState::Attacking;

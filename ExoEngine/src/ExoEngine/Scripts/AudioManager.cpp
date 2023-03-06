@@ -22,7 +22,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Audio Manager
     ****************************************************************************/
-    AudioManager::AudioManager() : BGMvol { 50.f }, SFXvol { 50.f }, Mastervol { 50.f } {}
+    AudioManager::AudioManager() : BGMvol { 20.f }, SFXvol { 50.f }, Mastervol { 50.f } {}
     /*!*************************************************************************
     Returns a new copy of AudioManager Script
     ****************************************************************************/
@@ -52,16 +52,21 @@ namespace EM
         auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
         for (int i = 0; i < audio.GetSize(); i++) {
             //check if sound is playing
-            audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
+            if (audio[i].triggered)
+            {
+                audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
+            }
             //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
             //update looping
             p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
-            std::cout << "Should play: " << audio[i].should_play << std::endl;
+            //std::cout << "Should play: " << audio[i].should_play << std::endl;
             //set is_playing accordingly
+            std::cout << "Is playing " << audio[i].is_Playing << std::endl;
             if (audio[i].is_Looping == false && audio[i].should_play == true && audio[i].is_Playing == false) {
                 //play sound
                 audio[i].mChannel = p_Audio->PlaySound("Assets/Metadigger/" + audio[i].mAudioPath, audio[i].mChannelGroup);
                 audio[i].should_play = false;
+                audio[i].triggered = true;
                 //audio[i].is_Playing = true;
                 /*std::cout << "Is Playing: " << audio[i].is_Playing << std::endl;
                 std::cout << "Should stop: " << audio[i].should_stop << std::endl;
@@ -70,15 +75,18 @@ namespace EM
             if (audio[i].is_Looping == true && audio[i].is_Playing == false) {
                 //play sound
                 audio[i].mChannel = p_Audio->PlaySound("Assets/Metadigger/" + audio[i].mAudioPath, audio[i].mChannelGroup);
-                audio[i].is_Playing = true;
+               // audio[i].is_Playing = true;
                 audio[i].should_play = false;
-                //std::cout << "Playing loop\n";
+                std::cout << "Playing loop\n";
+                audio[i].triggered = true;
             }
             if (audio[i].should_stop == true) {
                 p_Audio->StopChannel(audio[i].mChannel);
                 audio[i].is_Playing = false;
+                audio[i].triggered = false;
             }
             audio[i].should_play = false;
+
         }
 
 	}
