@@ -51,11 +51,21 @@ namespace EM
 				if (p_Input->KeyHold(GLFW_KEY_D)) {
 					vel.x = stats.mVel.x;
 					stats.mDir.x = 1.0f;
+					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x < 0)
+					{
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x, 
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
+					}
 					std::cout << "X: " << stats.mVel.x << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_A)) {
 					vel.x = -stats.mVel.x;
 					stats.mDir.x = -1.0f;
+					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x > 0)
+					{
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x,
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
+					}
 					std::cout << "X: " << stats.mVel.x << std::endl;
 				}
 				auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());

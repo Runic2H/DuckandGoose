@@ -15,7 +15,7 @@ namespace EM
 
 	void EnemyChase::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 	}
 	void EnemyChase::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -27,7 +27,7 @@ namespace EM
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
 				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 				vec2D newVel = vec2D(0, 0);
