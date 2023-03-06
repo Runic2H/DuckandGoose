@@ -87,6 +87,7 @@
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\EnemyAttributes.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\BackgroudAudio.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\EnemyScript.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\EnemyAttributes.h" />
     <ClInclude Include="src\ExoEngine\ECS\Components\Attributes.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.h" />

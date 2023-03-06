@@ -37,6 +37,7 @@ namespace EM
 			bool should_play;
 			bool should_stop;
 			bool is_Playing;
+			bool triggered;
 		};
 		Audio();
 		~Audio() = default;
