@@ -13,8 +13,5 @@ namespace EM
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
-		float mAttackCooldown;
-		float mAttackTime;
-		EnemyAttributes& stats;
 	};
 }

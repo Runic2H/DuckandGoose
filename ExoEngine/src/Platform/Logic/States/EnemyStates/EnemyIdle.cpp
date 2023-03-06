@@ -6,7 +6,7 @@
 
 namespace EM
 {
-	EnemyIdle::EnemyIdle(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyIdle::EnemyIdle(StateMachine* stateMachine) {}
 
 	IStates* EnemyIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -20,27 +20,25 @@ namespace EM
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mDamageCoolDownTimer -= Frametime;
-		stats.mAttackCooldown -= Frametime;
-		if (stats.mIsDamaged)
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
 		vec2D playerPos = vec2D();
-		bool check = false;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
 				//std::cout << "Found Player" << std::endl;
-				check = true;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 4.0f) {
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f) {
 			//std::cout << "Player Detected" << std::endl;
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}

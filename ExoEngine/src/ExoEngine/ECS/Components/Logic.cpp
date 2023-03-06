@@ -20,7 +20,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
-#include "ExoEngine/Scripts/EnemyStateMachine.h"
+#include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"

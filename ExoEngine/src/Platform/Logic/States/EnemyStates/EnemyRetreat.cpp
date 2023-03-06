@@ -4,7 +4,7 @@
 
 namespace EM
 {
-	EnemyRetreat::EnemyRetreat(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyRetreat::EnemyRetreat(StateMachine* stateMachine) {}
 
 	IStates* EnemyRetreat::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -17,9 +17,9 @@ namespace EM
 	}
 	void EnemyRetreat::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mDamageCoolDownTimer -= Frametime;
-		stats.mAttackCooldown -= Frametime;
-		if (stats.mIsDamaged)
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
@@ -34,7 +34,7 @@ namespace EM
 				newVel = rigidbody.GetVel();
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel = stats.mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 				if (newVel.x > -99 && newVel.y < 99) {
 					rigidbody.SetVel(newVel);
 				}

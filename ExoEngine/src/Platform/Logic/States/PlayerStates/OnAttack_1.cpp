@@ -5,7 +5,7 @@
 
 namespace EM
 {
-	OnAttack_1::OnAttack_1(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()) } {}
+	OnAttack_1::OnAttack_1(StateMachine* stateMachine) {}
 
 	IStates* OnAttack_1::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -21,14 +21,14 @@ namespace EM
 	}
 	void OnAttack_1::OnEnter(StateMachine* stateMachine)
 	{
-		stats.mCooldownTimer = 0.5f;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
 	}
 	void OnAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mCooldownTimer -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-		if (stats.mCooldownTimer <= 0.0f)
+		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}

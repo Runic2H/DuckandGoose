@@ -4,7 +4,7 @@
 
 namespace EM
 {
-	EnemyTransition::EnemyTransition(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyTransition::EnemyTransition(StateMachine* stateMachine) {}
 
 	IStates* EnemyTransition::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -24,8 +24,8 @@ namespace EM
 	}
 	void EnemyTransition::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mDamageCoolDownTimer -= Frametime;
-		stats.mAttackCooldown -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
 	}
 	void EnemyTransition::OnExit(StateMachine* stateMachine)
 	{

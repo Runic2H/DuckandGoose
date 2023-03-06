@@ -2,7 +2,7 @@
 
 namespace EM
 {
-	OnDieded::OnDieded(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()) } {}
+	OnDieded::OnDieded(StateMachine* stateMachine) {}
 
 	IStates* OnDieded::HandleInput(StateMachine* stateMachine, const int& key)
 	{

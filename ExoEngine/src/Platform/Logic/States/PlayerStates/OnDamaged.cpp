@@ -4,7 +4,7 @@
 
 namespace EM
 {
-	OnDamaged::OnDamaged(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()) } {}
+	OnDamaged::OnDamaged(StateMachine* stateMachine) {}
 
 	IStates* OnDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -18,19 +18,19 @@ namespace EM
 				pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
 			}
 		}
-		stats.mHealth -= pDmg;
-		if (stats.mHealth <= 0)
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
+		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 		{
 			stateMachine->ChangeState(new OnDieded(stateMachine));
 		}
-		stats.mDamageDurationTimer = 0.5f;
-		stats.mDamageCoolDown = 2.0f;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.5f;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 2.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Damage");
 	}
 	void OnDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mDamageDurationTimer -= Frametime;
-		if (stats.mDamageDurationTimer <= 0)
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
+		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0)
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
@@ -39,7 +39,7 @@ namespace EM
 	void OnDamaged::OnExit(StateMachine* stateMachine)
 	{
 		std::cout << "DamageExit" << std::endl;
-		stats.mIsDamaged = false;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

@@ -6,7 +6,7 @@
 
 namespace EM
 {
-	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) {}
 
 	IStates* EnemyDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -17,30 +17,38 @@ namespace EM
 	{
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
-				pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
+				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 			}
 		}
-		stats.mHealth -= pDmg;
-		if (stats.mHealth <= 0)
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.5f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.5f;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Enemy_Damaged_Normal_Attack");
+		/*if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 		{
 			stateMachine->ChangeState(new EnemyDeath(stateMachine));
-		}
-		stats.mDamageDurationTimer = 0.5f;
-		stats.mDamageCoolDownTimer = 2.0f;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Damage");
+		}*/
 	}
 	void EnemyDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		stats.mDamageDurationTimer -= Frametime;
-		if (stats.mDamageDurationTimer <= 0) {
-			stateMachine->ChangeState(new EnemyIdle(stateMachine));
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0) {
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+			{
+				stateMachine->ChangeState(new EnemyDeath(stateMachine));
+			}
+			else
+			{
+				stateMachine->ChangeState(new EnemyIdle(stateMachine));
+			}
 		}
 	}
 	void EnemyDamaged::OnExit(StateMachine* stateMachine)
 	{
-		stats.mIsDamaged = false;
-		std::cout << "Death Animation Exit" << std::endl;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.5f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

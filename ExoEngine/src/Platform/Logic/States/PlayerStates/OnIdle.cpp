@@ -8,7 +8,7 @@
 
 namespace EM
 {
-	OnIdle::OnIdle(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()) } {}
+	OnIdle::OnIdle(StateMachine* stateMachine) {}
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -16,7 +16,7 @@ namespace EM
 		{
 			return new OnMove(stateMachine);
 		}
-		if (key == GLFW_KEY_SPACE && p_Input->isKeyPressed(key) && stats.mDashCoolDown <= 0.0f)
+		if (key == GLFW_KEY_SPACE && p_Input->isKeyPressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f)
 		{
 			return new OnDash(stateMachine);
 		}
@@ -24,7 +24,7 @@ namespace EM
 		{
 			return new OnAttack_1(stateMachine);
 		}
-		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && stats.mBlockCoolDown <= 0.0f)
+		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f)
 		{
 			return new OnBlock(stateMachine);
 		}
@@ -37,13 +37,11 @@ namespace EM
 	void OnIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		std::cout << "Idling" << std::endl;
-		stats.mCooldownTimer -= Frametime;
-		stats.mBlockCoolDown -= Frametime;
-		stats.mDashCoolDown -= Frametime;
-		stats.mDamageCoolDown -= Frametime;
-		stats.mVel.x = 0.0f;
-		stats.mVel.y = 0.0f;
-		if (stats.mIsDamaged)
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown -= Frametime;
+		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new OnDamaged(stateMachine));
 		}

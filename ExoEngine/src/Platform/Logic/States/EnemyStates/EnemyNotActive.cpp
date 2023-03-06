@@ -3,7 +3,7 @@
 
 namespace EM
 {
-	EnemyNotActive::EnemyNotActive(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyNotActive::EnemyNotActive(StateMachine* stateMachine) {}
 
 	IStates* EnemyNotActive::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -12,7 +12,7 @@ namespace EM
 
 	void EnemyNotActive::OnEnter(StateMachine* stateMachine)
 	{
-		stats.mIsAlive = false;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 		std::cout << "InActive Entry" << std::endl;
 	}
@@ -22,15 +22,15 @@ namespace EM
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			//std::cout << "Prox Check" << std::endl;
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
 				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 5.0f) {
-			stats.mIsAlive = true;
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.5f) {
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 			stateMachine->ChangeState(new EnemyIdle(stateMachine));
 		}
 		std::cout << "EnemyNotActive" << std::endl;
