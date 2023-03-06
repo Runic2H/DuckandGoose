@@ -12,6 +12,13 @@ namespace EM
 		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MousePressed(key))
 		{
 			//return new OnAttack_2(stateMachine);
+
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+				//std::cout << "attacking audio" << std::endl;
+			}
+
 		}
 		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key))
 		{

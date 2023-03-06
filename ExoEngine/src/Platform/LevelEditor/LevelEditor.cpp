@@ -46,6 +46,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
+#include "ExoEngine/Scripts/EnemyStateMachine.h"
+#include "ExoEngine/Scripts/BackgroundAudio.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 
 namespace EM {
@@ -1215,6 +1217,10 @@ namespace EM {
                                         {
                                             logic.InsertScript(new EnemyScript(selectedEntity), selectedEntity);
                                         }
+                                        if (mScriptList[current_script] == "BackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new BackgroundAudio(), selectedEntity);
+                                        }
                                     }
                                 }
                         } 
@@ -1564,6 +1570,23 @@ namespace EM {
             {
                 f3 = f1;
             }
+
+            float f4 = p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup());
+            ImGui::SliderFloat("BGM vol", &f4, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f4 > f1)
+            {
+                f4 = f1;
+            }
+            p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), f4);
+
+
+            float f5 = p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup());
+            ImGui::SliderFloat("SFX vol", &f5, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f5 > f1)
+            {
+                f5 = f1;
+            }
+            p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), f5);
 
             ImGui::End();
         }
