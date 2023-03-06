@@ -37,7 +37,7 @@ namespace EM
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			//std::cout << "Prox Check" << std::endl;
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
 				//std::cout << "Found Player" << std::endl;
 				check = true;

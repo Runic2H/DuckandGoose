@@ -13,7 +13,7 @@ namespace EM
 
 	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeDeath");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_DEATH");
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")

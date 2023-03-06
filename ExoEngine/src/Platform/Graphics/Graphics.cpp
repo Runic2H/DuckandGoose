@@ -168,14 +168,15 @@ namespace EM {
 					{ 1.0f, 0.0f, 1.0f,1.0f });
 			}
 		}
-		//mRenderer->DrawQuad({ 0.0f,0.0f }, { 1.0f,1.0f }, { 1.0f,0.0f,0.0f,1.0f });
+		
 		for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(entity) && !p_Editor->is_ShowWindow)
 			{
-				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
-					p_ecs.GetComponent<Transform>(entity).GetPos().y,
-					0.0f });
+				if(p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player")
+					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
+						p_ecs.GetComponent<Transform>(entity).GetPos().y,
+						0.0f });
 			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);

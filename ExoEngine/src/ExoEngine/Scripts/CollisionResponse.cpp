@@ -72,7 +72,7 @@ namespace EM
 				//get player attributes (damage)
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
-						pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage();
+						pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 					}
 				}
 				//set enemy hp

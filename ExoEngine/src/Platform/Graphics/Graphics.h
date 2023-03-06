@@ -39,7 +39,7 @@ namespace EM {
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
 		
-		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D camera { -3.0f, 3.0f, -3.0f , 3.0f };
 		inline static Camera2D scene_camera { -1.0f, 1.0f, -1.0f , 1.0f };
 		inline static Camera2D *mcamera = nullptr;
 	private:
