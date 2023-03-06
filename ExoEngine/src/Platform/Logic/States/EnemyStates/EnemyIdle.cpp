@@ -14,7 +14,7 @@ namespace EM
 
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 		std::cout << "Idle Entry" << std::endl;
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
@@ -24,7 +24,7 @@ namespace EM
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			//std::cout << "Prox Check" << std::endl;
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
 				//std::cout << "Found Player" << std::endl;
 				check = true;

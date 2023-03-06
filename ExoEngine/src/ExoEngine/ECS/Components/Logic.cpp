@@ -17,10 +17,10 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Logic.h"
-#include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
+#include "ExoEngine/Scripts/EnemyStateMachine.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
@@ -88,9 +88,9 @@ namespace EM
 			{
 				mScriptsVector.push_back(new PlayerControl(GetComponentEntityID()));
 			}
-			if (mScriptNameVector[j] == "EnemyMovement")
+			if (mScriptNameVector[j] == "EnemyStateMachine")
 			{
-				mScriptsVector.push_back(new EnemyMovement());
+				mScriptsVector.push_back(new EnemyStateMachine(GetComponentEntityID()));
 			}
 			if (mScriptNameVector[j] == "CollisionResponse")
 			{
