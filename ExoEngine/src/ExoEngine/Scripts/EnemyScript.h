@@ -25,23 +25,24 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Platform/Logic/States/EnemyStates/EnemyChase.h"
 #include "Platform/Logic/States/EnemyStates/EnemyDeath.h"
 #include "Platform/Logic/States/EnemyStates/EnemyIdle.h"
+#include "Platform/Logic/States/EnemyStates/EnemyNotActive.h"
 
 namespace EM
 {
 
-	class EnemyStateMachine : public IScript
+	class EnemyScript : public IScript
 	{
 	public:
-		EnemyStateMachine() : mEnemyStateMachine{ StateMachine(this->GetScriptEntityID()) } {}
-		EnemyStateMachine(Entity entity) : mEnemyStateMachine{ StateMachine(entity) } {}
-		~EnemyStateMachine() = default;
+		EnemyScript(Entity entity) : mEnemyStateMachine{StateMachine(entity)} {}
+
+		~EnemyScript() = default;
 		virtual IScript* Clone() const override
 		{
-			return new EnemyStateMachine(*this);
+			return new EnemyScript(*this);
 		}
 		virtual void Start() override
 		{
-			mEnemyStateMachine.ChangeState(new EnemyIdle(&mEnemyStateMachine));
+			mEnemyStateMachine.ChangeState(new EnemyNotActive(&mEnemyStateMachine));
 		}
 		virtual void Update(float Frametime) override
 		{
@@ -49,12 +50,12 @@ namespace EM
 		}
 		virtual void End() override
 		{
-
+			delete this;
 		}
 
 		virtual std::string GetScriptName() override
 		{
-			return "EnemyStateMachine";
+			return "EnemyScript";
 		}
 
 		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }

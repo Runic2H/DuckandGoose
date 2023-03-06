@@ -48,7 +48,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\EnemyStateMachine.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\EnemyScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
@@ -59,8 +59,12 @@
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
@@ -81,7 +85,6 @@
     <ClInclude Include="src\ExoEngine\Math\Vec3.h" />
     <ClInclude Include="src\ExoEngine\Math\Vmath.h" />
     <ClInclude Include="src\ExoEngine\ResourceManager\ResourceManager.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\EnemyMovement.h" />
     <ClInclude Include="src\ExoEngine\Scripts\IScript.h" />
     <ClInclude Include="src\ExoEngine\Timer\Fps.h" />
     <ClInclude Include="src\ExoEngine\Timer\Time.h" />
@@ -254,8 +257,12 @@
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
@@ -277,7 +284,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ExoEngine\ResourceManager\ResourceManager.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\EnemyMovement.cpp" />
     <ClCompile Include="src\ExoEngine\Timer\Time.cpp" />
     <ClCompile Include="src\Platform\Graphics\Buffer.cpp" />
     <ClCompile Include="src\Platform\Graphics\Camera2D.cpp" />

@@ -8,12 +8,13 @@ namespace EM
 	public:
 		EnemyAttack(StateMachine* stateMachine);
 		virtual ~EnemyAttack() = default;
-		IStates* HandleInput(StateMachine* stateMachine, const int& key);
+		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
 		float mAttackCooldown;
 		float mAttackTime;
+		EnemyAttributes& stats;
 	};
 }

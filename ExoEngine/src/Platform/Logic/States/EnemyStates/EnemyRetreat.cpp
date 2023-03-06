@@ -1,33 +1,33 @@
-#include "empch.h"
-#include "EnemyChase.h"
-#include "EnemyAttack.h"
-#include "EnemyDeath.h"
+#include "EnemyRetreat.h"
+#include "EnemyIdle.h"
 #include "EnemyDamaged.h"
 
 namespace EM
 {
-	EnemyChase::EnemyChase(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
+	EnemyRetreat::EnemyRetreat(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) } {}
 
-	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
+	IStates* EnemyRetreat::HandleInput(StateMachine* stateMachine, const int& key)
 	{
 		return nullptr;
 	}
 
-	void EnemyChase::OnEnter(StateMachine* stateMachine)
+	void EnemyRetreat::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
 	}
-	void EnemyChase::OnUpdate(StateMachine* stateMachine, float Frametime)
+	void EnemyRetreat::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		stats.mDamageCoolDownTimer -= Frametime;
 		stats.mAttackCooldown -= Frametime;
-		std::cout << "Enemy Chasing" << std::endl;
-		float dist = 0;
+		if (stats.mIsDamaged)
+		{
+			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+		}
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player")
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
 				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
 				vec2D newVel = vec2D(0, 0);
@@ -40,30 +40,13 @@ namespace EM
 				}
 				vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 				rigidbody.SetNextPos(nextPos);
-
-				dist = distance(transform.GetPos(), p_ecs.GetComponent<Transform>(i).GetPos());
 			}
 		}
-		//Attack Range
-		//check if within range. If not, set to moving state
-		if (dist < 0.1f && stats.mAttackCooldown <= 0.0f)
-		{
-			//std::cout << "In Proximity2" << std::endl;
-			//if within range to attack, set mode to attacking
-			stateMachine->ChangeState(new EnemyAttack(stateMachine));
-		}
-
-
-		if (stats.mIsDamaged)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
-
+		stateMachine->ChangeState(new EnemyIdle(stateMachine));
 	}
-	void EnemyChase::OnExit(StateMachine* stateMachine)
+	void EnemyRetreat::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		std::cout << "ChaseExit" << std::endl;
 		delete this;
 	}
 }

@@ -59,10 +59,5 @@ namespace EM
 		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
 
 		virtual Entity& GetScriptEntityID() override { return entityID; }
-
-		int enemies;
-		float timer;
-	private:
-		
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "IComponent.h"
 #include "empch.h"
+#include "ExoEngine/Math/physics.h"
 
 namespace EM
 {
@@ -26,6 +27,11 @@ namespace EM
 		int mMaxHealth;
 		int mDamage;
 		float mAttackTimer;
-		float mDamageCooldownTimer;
+		float mAttackCooldown;
+		float mDamageCoolDownTimer;
+		float mDamageDurationTimer;
+		bool mIsAlive;
+		bool mIsDamaged;
+		entityPhysics mPhys;
 	};
 }

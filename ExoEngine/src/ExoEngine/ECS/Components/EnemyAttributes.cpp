@@ -1,16 +1,17 @@
+#include "empch.h"
 #include "EnemyAttributes.h"
 
 namespace EM
 {
-	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 2.0f }, mDamageCooldownTimer{ 2.0f } {}
+	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 2.0f }, mAttackCooldown{ 0.0f }, mDamageCoolDownTimer{ 2.0f }, mDamageDurationTimer{ 0.0f }, mIsAlive{ false }, mIsDamaged{false} {}
 
 	bool EnemyAttributes::Deserialize(const rapidjson::Value& obj)
 	{
 		mHealth = obj["Health"].GetInt();
 		mMaxHealth = obj["Max Health"].GetInt();
 		mDamage = obj["Damage"].GetInt();
-		mAttackTimer = (float)obj["Attack Timer"].GetDouble();
-		mDamageCooldownTimer = (float)obj["Damage Cooldown"].GetDouble();
+		//mAttackTimer = (float)obj["Attack Timer"].GetDouble();
+		//mDamageCooldownTimer = (float)obj["Damage Cooldown"].GetDouble();
 		return true;
 	}
 
@@ -23,10 +24,10 @@ namespace EM
 		writer->Int(mMaxHealth);
 		writer->Key("Damage");
 		writer->Int(mDamage);
-		writer->Key("Attack Timer");
-		writer->Double((double)mAttackTimer);
-		writer->Key("Damage Cooldown");
-		writer->Double((double)mDamageCooldownTimer);
+		//writer->Key("Attack Timer");
+		//writer->Double((double)mAttackTimer);
+		//writer->Key("Damage Cooldown");
+		//writer->Double((double)mDamageCooldownTimer);
 		writer->EndObject();
 		return true;
 	}

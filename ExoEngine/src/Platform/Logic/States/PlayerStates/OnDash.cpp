@@ -23,7 +23,7 @@ namespace EM
 		stats.mDir = stats.mDir * 25;
 		stats.mDir.x *= 5;
 		pRigid.SetVel(stats.mPhys.friction(pRigid.GetVel(), Frametime));
-		pRigid.SetVel(stats.mPhys.accelent(pRigid.GetVel(), stats.mVel, Frametime));
+		pRigid.SetVel(stats.mPhys.accelent(pRigid.GetVel(), stats.mDir, Frametime));
 		vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
 		pRigid.SetNextPos(nextPos);
 		if (stats.mDashDurationTimer <= 0.0f)

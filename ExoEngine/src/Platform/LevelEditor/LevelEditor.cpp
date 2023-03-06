@@ -46,7 +46,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
-#include "ExoEngine/Scripts/EnemyStateMachine.h"
+#include "ExoEngine/Scripts/EnemyScript.h"
 
 namespace EM {
 
@@ -1185,11 +1185,6 @@ namespace EM {
                                         {
                                             logic.InsertScript(new PlayerControl(selectedEntity), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "EnemyMovement" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity) 
-                                                                                           && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new EnemyMovement(), selectedEntity);
-                                        }
                                         if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
                                         {
                                             logic.InsertScript(new CollisionResponse(), selectedEntity);
@@ -1215,10 +1210,10 @@ namespace EM {
                                         {
                                             logic.InsertScript(new GateController(), selectedEntity);
                                         }
-                                        if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                        if (mScriptList[current_script] == "EnemyScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
                                                                                                && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                                         {
-                                            logic.InsertScript(new EnemyStateMachine(), selectedEntity);
+                                            logic.InsertScript(new EnemyScript(selectedEntity), selectedEntity);
                                         }
                                     }
                                 }
@@ -1394,7 +1389,7 @@ namespace EM {
                         int maxHealthSlider = attrib.mMaxHealth;
                         int damageSlider = attrib.mDamage;
                         float attackSlider = attrib.mAttackTimer;
-                        float damageCooldown = attrib.mDamageCooldownTimer;
+                        float damageCooldown = attrib.mDamageCoolDownTimer;
 
                         ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
                         ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
@@ -1406,7 +1401,7 @@ namespace EM {
                         attrib.mMaxHealth = maxHealthSlider;
                         attrib.mDamage = damageSlider;
                         attrib.mAttackTimer = attackSlider;
-                        attrib.mDamageCooldownTimer = damageCooldown;
+                        attrib.mDamageCoolDownTimer = damageCooldown;
                     }
                 }
                 

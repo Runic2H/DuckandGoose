@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Gate Controller
     ****************************************************************************/
-    GateController::GateController() : enemies{ 0 }, timer{ 0.0f } {};
+    GateController::GateController() {}
 
     /*!*************************************************************************
     Returns a new copy of GateController Script
@@ -43,11 +43,27 @@ namespace EM
     ****************************************************************************/
     void GateController::Update(float Frametime)
     {
-        //check how many enemies killed
-        timer -= Frametime;
         //if no enemeies left, open gate
         auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-        if (enemies <= 0) {
+        for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+        {
+            if (p_ecs.HaveComponent<EnemyAttributes>(i))
+            {
+                if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive)
+                {
+                    p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("BG_LASERGATE000");
+                    col[0].is_Alive = true;
+                    return;
+                }
+                else 
+                {
+                    continue;
+                }
+            }
+        }
+        p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("BG_LASERGATE019");
+        col[0].is_Alive = false;
+        /*if (enemies <= 0) {
             p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("BG_LASERGATE019");
             col[0].is_Alive = false;
             std::cout << "Gate Off" << std::endl;
@@ -57,23 +73,23 @@ namespace EM
             col[0].is_Alive = true;
             timer = 1.0f;
             std::cout << "Gate On" << std::endl;
-        }
-        //failsafe
-        int f = 0;
-        for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
-            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
-                f++;
-            }
-        }
-        if (f == 0) {
-            col[0].is_Alive = false;
-            std::cout << "Failsafe" << std::endl;
-            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("BG_LASERGATE019");
-        }
-        if (col[0].is_Alive == false && timer >= 0) {
-            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("LASERGATE_BG");
-            std::cout << "Animating Gate" << std::endl;
-        }
+        }*/
+        ////failsafe
+        //int f = 0;
+        //for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
+        //    if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+        //        f++;
+        //    }
+        //}
+        //if (f == 0) {
+        //    col[0].is_Alive = false;
+        //    std::cout << "Failsafe" << std::endl;
+        //    p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("BG_LASERGATE019");
+        //}
+        //if (col[0].is_Alive == false && timer >= 0) {
+        //    p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("LASERGATE_BG");
+        //    std::cout << "Animating Gate" << std::endl;
+        //}
     }
 
     /*!*************************************************************************

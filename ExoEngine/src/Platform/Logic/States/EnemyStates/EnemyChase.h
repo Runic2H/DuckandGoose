@@ -9,11 +9,11 @@ namespace EM
 	public:
 		EnemyChase(StateMachine* stateMachine);
 		virtual ~EnemyChase() = default;
-		IStates* HandleInput(StateMachine* stateMachine, const int& key);
+		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
-		entityPhysics mPhys;
+		EnemyAttributes& stats;
 	};
 }

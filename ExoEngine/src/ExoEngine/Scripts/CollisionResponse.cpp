@@ -65,22 +65,30 @@ namespace EM
 		//Enemy Taking Damage
 		if (tag.GetNameTag() == "Enemy")
 		{
-			if (col.GetCollisionArray()[0].mHit == 2 && p_ecs.HaveComponent<EnemyAttributes>(GetScriptEntityID()))
+			if (col.GetCollisionArray()[0].mHit == 2)
 			{
-				//enemy takes damage based on player damage
-				int pDmg = 0;
-				//get player attributes (damage)
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
-					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
-						pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage();
-					}
+				auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+				if (enemystats.mDamageCoolDownTimer <= 0.0f)
+				{
+					enemystats.mIsDamaged = true;
 				}
-				//set enemy hp
-				auto& eAttrib = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-				eAttrib.mHealth -= pDmg;
-				//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
-				////if hp < 0, set state to death
 			}
+			//if (col.GetCollisionArray()[0].mHit == 2 && p_ecs.HaveComponent<EnemyAttributes>(GetScriptEntityID()))
+			//{
+			//	//enemy takes damage based on player damage
+			//	int pDmg = 0;
+			//	//get player attributes (damage)
+			//	for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
+			//		if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
+			//			pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+			//		}
+			//	}
+			//	//set enemy hp
+			//	auto& eAttrib = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+			//	eAttrib.mHealth -= pDmg;
+			//	//std::cout << p_ecs.GetComponent<Attributes>(GetScriptEntityID()).GetHealth() << std::endl;
+			//	////if hp < 0, set state to death
+			//}
 		}
 		//if chest is damaged
 		/*if (tag.GetNameTag() == "SkillsChest")
