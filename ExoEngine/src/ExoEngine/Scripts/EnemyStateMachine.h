@@ -32,7 +32,6 @@ namespace EM
 	class EnemyStateMachine : public IScript
 	{
 	public:
-		EnemyStateMachine() : mEnemyStateMachine{ StateMachine(this->GetScriptEntityID()) } {}
 		EnemyStateMachine(Entity entity) : mEnemyStateMachine{ StateMachine(entity) } {}
 		~EnemyStateMachine() = default;
 		virtual IScript* Clone() const override
@@ -49,7 +48,7 @@ namespace EM
 		}
 		virtual void End() override
 		{
-
+			delete this;
 		}
 
 		virtual std::string GetScriptName() override

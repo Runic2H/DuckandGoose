@@ -175,6 +175,15 @@ namespace EM
 							p_ecs.AddComponent<PlayerAttributes>(j, mPlayerAttributes);
 						}
 					}
+					if (p_ecs.GetComponentTypeName(CompID) == "EnemyAttributes")
+					{
+						EnemyAttributes mEnemyAttributes;
+						mEnemyAttributes.SetComponentEntityID(j);
+						if (mEnemyAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<EnemyAttributes>(j, mEnemyAttributes);
+						}
+					}
 				}
 			}
 			++j;
@@ -301,6 +310,10 @@ namespace EM
 						if (p_ecs.GetComponentTypeName(i) == "PlayerAttributes")
 						{
 							p_ecs.GetComponent<PlayerAttributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(i) == "EnemyAttributes")
+						{
+							p_ecs.GetComponent<EnemyAttributes>(j).Serialize(writer);
 						}
 					}
 				}

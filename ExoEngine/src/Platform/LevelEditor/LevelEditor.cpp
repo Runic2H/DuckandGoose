@@ -1218,7 +1218,7 @@ namespace EM {
                                         if (mScriptList[current_script] == "EnemyStateMachine" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
                                                                                                && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                                         {
-                                            logic.InsertScript(new EnemyStateMachine(), selectedEntity);
+                                            logic.InsertScript(new EnemyStateMachine(selectedEntity), selectedEntity);
                                         }
                                     }
                                 }

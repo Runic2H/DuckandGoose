@@ -14,7 +14,7 @@ namespace EM
 
 	void EnemyAttack::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeAttack");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET");
 	}
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{

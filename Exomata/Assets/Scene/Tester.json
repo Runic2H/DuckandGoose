@@ -1154,7 +1154,7 @@
             100,
             100,
             100,
-            100,
+            0,
             100,
             100,
             100,
@@ -2352,7 +2352,7 @@
             100
         ],
         "EnemyAttributes": [
-            100,
+            28,
             100,
             100,
             100,
@@ -3534,7 +3534,7 @@
             },
             {
                 "TextureName": "EXOMATA_MELEE_ENEMY_HOVERING",
-                "Index_X": 18,
+                "Index_X": 6,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3678,6 +3678,14 @@
                 "Damage": 20
             }
         ],
-        "EnemyAttributes": []
+        "EnemyAttributes": [
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 20,
+                "Attack Timer": 2.0,
+                "Damage Cooldown": 2.0
+            }
+        ]
     }
 }
