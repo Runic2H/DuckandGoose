@@ -29,9 +29,7 @@ namespace EM
 	void OnAttack_1::OnEnter(StateMachine* stateMachine)
 	{
 		stats.mCooldownTimer = 0.5f;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Attack");
-
-
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
 	}
 	void OnAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{

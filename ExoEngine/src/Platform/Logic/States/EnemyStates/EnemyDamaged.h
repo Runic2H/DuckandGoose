@@ -3,11 +3,11 @@
 
 namespace EM
 {
-	class EnemyIdle : public IStates
+	class EnemyDamaged : public IStates
 	{
 	public:
-		EnemyIdle(StateMachine* stateMachine);
-		virtual ~EnemyIdle() = default;
+		EnemyDamaged(StateMachine* stateMachine);
+		virtual ~EnemyDamaged() = default;
 		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;

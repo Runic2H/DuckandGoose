@@ -31,8 +31,7 @@ namespace EM
 		stats.mBlockCoolDown -= Frametime;
 		stats.mDashCoolDown -= Frametime;
 		stats.mDamageCoolDown -= Frametime;
-		stats.mVel.x = 0.0f;
-		stats.mVel.y = 0.0f;
+		vec2D vel{};
 		if (stats.mIsDamaged)
 		{
 			stateMachine->ChangeState(new OnDamaged(stateMachine));
@@ -48,31 +47,41 @@ namespace EM
 					//std::cout << "moving audio" << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_W)) {
-					stats.mVel.y = 1.0f;
+					vel.y = stats.mVel.y;
 					std::cout << "Y: " << stats.mVel.y << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_S)) {
-					stats.mVel.y = -1.0f;
+					vel.y = -stats.mVel.y;
 					std::cout << "Y: " << stats.mVel.y << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_D)) {
-					stats.mVel.x = 1.0f;
+					vel.x = stats.mVel.x;
 					stats.mDir.x = 1.0f;
+					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x < 0)
+					{
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x, 
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
+					}
 					std::cout << "X: " << stats.mVel.x << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_A)) {
-					stats.mVel.x = -1.0f;
+					vel.x = -stats.mVel.x;
 					stats.mDir.x = -1.0f;
+					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x > 0)
+					{
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x,
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
+					}
 					std::cout << "X: " << stats.mVel.x << std::endl;
 				}
 				auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 				auto& pTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-				if (stats.mVel.x != 0.0f || stats.mVel.y != 0.0f) {
-					Normalize(stats.mVel, stats.mVel);
-					stats.mVel = stats.mVel * 25;
+				if (vel.x != 0.0f || vel.y != 0.0f) {
+					Normalize(vel, vel);
+					vel = vel * 25;
 				}
 				pRigid.SetVel(stats.mPhys.friction(pRigid.GetVel(), Frametime));
-				pRigid.SetVel(stats.mPhys.accelent(pRigid.GetVel(), stats.mVel, Frametime));
+				pRigid.SetVel(stats.mPhys.accelent(pRigid.GetVel(), vel, Frametime));
 				vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
 				pRigid.SetNextPos(nextPos);
 			}

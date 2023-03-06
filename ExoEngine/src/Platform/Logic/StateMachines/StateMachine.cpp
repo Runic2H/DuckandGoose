@@ -22,7 +22,6 @@ namespace EM
 
 	void StateMachine::HandleInput(const int& key)
 	{
-
 		IStates* state = mCurrState->HandleInput(this, key);
 		if (state != nullptr)
 		{

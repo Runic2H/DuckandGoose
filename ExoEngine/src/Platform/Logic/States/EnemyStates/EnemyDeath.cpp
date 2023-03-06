@@ -4,7 +4,7 @@
 
 namespace EM
 {
-	EnemyDeath::EnemyDeath(StateMachine* stateMachine) : deathTime{ 5.0f } {}
+	EnemyDeath::EnemyDeath(StateMachine* stateMachine) : stats{ p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()) }, mDeathTimer{2.0f} {}
 
 	IStates* EnemyDeath::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -13,27 +13,23 @@ namespace EM
 
 	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{
+		stats.mIsAlive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeDeath");
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-		{
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Gate")
-			{
-				auto& logic = p_ecs.GetComponent<Logic>(i);
-				dynamic_cast<GateController*>(logic.GetScriptByName("GateController"))->enemies -= 1;
-			}
-		}
 	}
 	void EnemyDeath::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		deathTime -= Frametime;
-		if (deathTime <= 0) {
+		mDeathTimer -= Frametime;
+		if (mDeathTimer <= 0) {
+			mDeathTimer = 0;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
-			deathTime = 0;
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		}
 	}
 	void EnemyDeath::OnExit(StateMachine* stateMachine)
 	{
 		std::cout << "Death Animation Exit" << std::endl;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }
