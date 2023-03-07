@@ -31,10 +31,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
-#include "ExoEngine/Scripts/PlayerControl.h"
+#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/GUI/GUI.h"
 #include <stdlib.h>
 
@@ -411,17 +412,13 @@ Run loop for application
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
 		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
-		/*p_Editor->is_ShowWindow = false;
-		Graphic::camera.SetZoomLevel(0.25);*/
-		//p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
+		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
-			//std::cout << p_GUI->Check_script();
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-
 			if (p_GUI->check_pause() == false)
 			{
 				p_Audio->Update();
@@ -444,7 +441,7 @@ Run loop for application
 			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			p_Scene->checkForSceneToLoad();
-
+			p_Editor->is_ShowWindow = false;
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}

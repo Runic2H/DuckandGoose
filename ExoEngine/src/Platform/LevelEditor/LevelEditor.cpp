@@ -48,6 +48,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/GateController.h"
 #include "ExoEngine/Scripts/BackgroundAudio.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
+#include "ExoEngine/Scripts/SliderScript.h"
 
 namespace EM {
 
@@ -203,7 +204,11 @@ namespace EM {
     }
 
     /*!*************************************************************************
-   Loads audio filepaths for audio files from assets folder
+   Loads 
+   
+   
+   
+   filepaths for audio files from assets folder
    ****************************************************************************/
     void LevelEditor::LoadAudioFromFile()
     {
@@ -1220,9 +1225,14 @@ namespace EM {
                                         {
                                             logic.InsertScript(new BackgroundAudio(), selectedEntity);
                                         }
+                                        if (mScriptList[current_script] == "SliderScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                          && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new SliderScript(), selectedEntity);
+                                        }
                                     }
                                 }
-                        } 
+                        }
                         ImGui::SameLine();
                         if (ImGui::Button("Delete")) {
                             logic.DeleteScript(mScriptList[current_script]);

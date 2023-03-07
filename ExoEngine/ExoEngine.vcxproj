@@ -54,6 +54,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
     <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
