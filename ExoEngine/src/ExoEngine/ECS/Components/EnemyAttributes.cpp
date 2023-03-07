@@ -3,7 +3,7 @@
 
 namespace EM
 {
-	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 2.0f }, mAttackCooldown{ 0.0f }, mDamageCoolDownTimer{ 2.0f }, mDamageDurationTimer{ 0.0f }, mIsAlive{ false }, mIsDamaged{false} {}
+	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 20 }, mAttackTimer{ 2.0f }, mAttackCooldown{ 0.0f }, mDamageCoolDownTimer{ 2.0f }, mDamageDurationTimer{ 0.0f }, mIsAlive{ false }, mIsDamaged{ false }, mVel{vec2D(1.0f,1.0f)} {}
 
 	bool EnemyAttributes::Deserialize(const rapidjson::Value& obj)
 	{

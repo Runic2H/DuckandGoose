@@ -30,7 +30,7 @@ namespace EM
 	}
 	void EnemyDeath::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "Death Animation Exit" << std::endl;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

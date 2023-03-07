@@ -43,11 +43,9 @@ namespace EM
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
-		std::cout << "Blocking" << std::endl;
 	}
 	void OnBlock::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "BlockingExit" << std::endl;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 5.0f;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = false;

@@ -18,6 +18,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Input/Input.h"
 #include "GLFW/glfw3.h"
 #include "ExoEngine/Math/physics.h"
+#include "Platform/Logic/StateMachines/StateMachine.h"
+#include "Platform/Logic/States/GateStates/GateUnlocked.h"
+#include "Platform/Logic/States/GateStates/GateLocked.h"
 
 namespace EM
 {
@@ -30,7 +33,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Gate Controller
 		****************************************************************************/
-		GateController();
+		GateController(Entity entity) : mGateStateMachine{ StateMachine(entity) } {}
 		/*!*************************************************************************
 		Default destructor for Gate Controller
 		****************************************************************************/
@@ -38,26 +41,44 @@ namespace EM
 		/*!*************************************************************************
 		Returns a new copy of GateController Script
 		****************************************************************************/
-		virtual GateController* Clone() const override;
+		virtual GateController* Clone() const override
+		{
+			return new GateController(*this);
+		}
 		/*!*************************************************************************
 		Start State of GateController Script
 		****************************************************************************/
-		virtual void Start() override;
+		virtual void Start() override
+		{
+			mGateStateMachine.ChangeState(new GateLocked(&mGateStateMachine));
+		}
 		/*!*************************************************************************
 		Update Loop of GateController Script
 		****************************************************************************/
-		virtual void Update(float Frametime) override;
+		virtual void Update(float Frametime) override
+		{
+			mGateStateMachine.OnUpdate(Frametime);
+		}
 		/*!*************************************************************************
 		End State for GateController
 		****************************************************************************/
-		virtual void End() override;
+		virtual void End() override
+		{
+			delete this;
+		}
 		/*!*************************************************************************
 		Returns the name of Script
 		****************************************************************************/
-		virtual std::string GetScriptName() override;
+		virtual std::string GetScriptName() override
+		{
+			return "GateController";
+		}
 
 		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
 
 		virtual Entity& GetScriptEntityID() override { return entityID; }
+
+	private:
+		StateMachine mGateStateMachine;
 	};
 }

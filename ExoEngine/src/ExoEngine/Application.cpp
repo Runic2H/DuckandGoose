@@ -433,24 +433,6 @@ Run loop for application
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
-				/*for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<Tag>(i))
-					{
-						if (p_ecs.GetComponent<Tag>(i).GetTag() == "Enemy")
-						{
-							if (p_ecs.GetComponent<Attributes>(i).GetHealth() <= 0 && dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
-							{
-								p_ecs.DestroyEntity(i);
-								p_ecs.GetComponent<Sprite>(i).SetTexture("MeleeDeath");
-								p_ecs.GetComponent<Collider>(i)[0].is_Alive = false;
-								p_ecs.GetComponent<Collider>(i)[1].is_Alive = false;
-								p_ecs.GetComponent<Sprite>(i).SetTexture("Blank");
-
-							}
-						}
-					}
-				}*/
 			}
 			end_state = p_GUI->Update(m_window);
 

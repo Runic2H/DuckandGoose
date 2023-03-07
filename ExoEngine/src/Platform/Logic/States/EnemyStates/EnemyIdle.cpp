@@ -16,7 +16,6 @@ namespace EM
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
-		std::cout << "Idle Entry" << std::endl;
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -43,12 +42,9 @@ namespace EM
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 
-
-		std::cout << "EnemyIdling" << std::endl;
 	}
 	void EnemyIdle::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "IdleExit" << std::endl;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

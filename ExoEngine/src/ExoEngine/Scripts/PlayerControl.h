@@ -8,6 +8,7 @@
 #include "Platform/Logic/States/PlayerStates/OnIdle.h"
 #include "Platform/Logic/States/PlayerStates/OnMove.h"
 #include "Platform/Logic/States/PlayerStates/OnAttack_1.h"
+#include "Platform/Logic/States/PlayerStates/OnAttack_2.h"
 
 
 namespace EM

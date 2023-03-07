@@ -25,6 +25,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
+#include "ExoEngine/Scripts/GateController.h"
 
 
 namespace EM
@@ -112,6 +113,10 @@ namespace EM
 			if (mScriptNameVector[j] == "AudioManager")
 			{
 				mScriptsVector.push_back(new AudioManager());
+			}
+			if (mScriptNameVector[j] == "GateController")
+			{
+				mScriptsVector.push_back(new GateController(GetComponentEntityID()));
 			}
 		}
 		return true;

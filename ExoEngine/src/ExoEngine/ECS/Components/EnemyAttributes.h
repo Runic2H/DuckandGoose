@@ -32,6 +32,7 @@ namespace EM
 		float mDamageDurationTimer;
 		bool mIsAlive;
 		bool mIsDamaged;
+		vec2D mVel;
 		entityPhysics mPhys;
 	};
 }

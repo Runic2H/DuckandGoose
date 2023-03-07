@@ -3,11 +3,11 @@
 
 namespace EM
 {
-	class OnAttack_2 : public IStates
+	class GateLocked : public IStates
 	{
 	public:
-		OnAttack_2(StateMachine* stateMachine);
-		virtual ~OnAttack_2() = default;
+		GateLocked(StateMachine* stateMachine);
+		virtual ~GateLocked() = default;
 		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;

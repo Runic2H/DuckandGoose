@@ -3,6 +3,7 @@
 #include "OnIdle.h"
 #include "OnBlock.h"
 #include "OnDamaged.h"
+#include "OnDash.h"
 
 namespace EM
 {
@@ -48,11 +49,9 @@ namespace EM
 				}
 				if (p_Input->KeyHold(GLFW_KEY_W)) {
 					vel.y = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
-					std::cout << "Y: " << vel.y << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_S)) {
 					vel.y = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
-					std::cout << "Y: " << vel.y << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_D)) {
 					vel.x = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
@@ -62,7 +61,6 @@ namespace EM
 						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x, 
 							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
 					}
-					std::cout << "X: " << vel.x << std::endl;
 				}
 				if (p_Input->KeyHold(GLFW_KEY_A)) {
 					vel.x = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
@@ -72,13 +70,16 @@ namespace EM
 						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x,
 							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().y);
 					}
-					std::cout << "X: " << vel.x << std::endl;
+				}
+				if (p_Input->KeyPressed(GLFW_KEY_SPACE) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f)
+				{
+					stateMachine->ChangeState(new OnDash(stateMachine));
 				}
 				auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 				auto& pTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				if (vel.x != 0.0f || vel.y != 0.0f) {
 					Normalize(vel, vel);
-					vel = vel * 25;
+					vel = vel * 30;
 				}
 				pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
 				pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), vel, Frametime));
@@ -90,11 +91,9 @@ namespace EM
 				stateMachine->ChangeState(new OnIdle(stateMachine));
 			}
 		}
-		std::cout << "Moving" << std::endl;
 	}
 	void OnMove::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "MovingExit" << std::endl;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

@@ -22,7 +22,7 @@ namespace EM
 	/*!*************************************************************************
 	Ctor for RigidBody Component
 	****************************************************************************/
-	RigidBody::RigidBody() : mAccel{vec2D(100.f,0.f)}, mVelocity{vec2D(1.0f,1.0f)}, mDirection{vec2D(1.0f,0.0f)}, mFriction{0.0f}, mRestitution{0.0f} {}
+	RigidBody::RigidBody() : mAccel{vec2D(0.f,0.f)}, mVelocity{vec2D(1.0f,1.0f)}, mDirection{vec2D(1.0f,0.0f)}, mFriction{0.0f}, mRestitution{0.0f} {}
 
 	/*!*************************************************************************
 	Deserialize for RigidBody

@@ -36,7 +36,6 @@ namespace EM
 	}
 	void OnIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		std::cout << "Idling" << std::endl;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown -= Frametime;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown -= Frametime;
@@ -48,7 +47,6 @@ namespace EM
 	}
 	void OnIdle::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "IdleExit" << std::endl;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

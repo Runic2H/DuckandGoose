@@ -66,6 +66,8 @@
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.h" />
+    <ClInclude Include="src\Platform\Logic\States\GateStates\GateLocked.h" />
+    <ClInclude Include="src\Platform\Logic\States\GateStates\GateUnlocked.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
@@ -251,7 +253,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\GateController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
@@ -265,7 +266,10 @@
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\GateStates\GateLocked.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\GateStates\GateUnlocked.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />

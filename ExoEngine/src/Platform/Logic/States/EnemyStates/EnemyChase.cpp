@@ -3,6 +3,7 @@
 #include "EnemyAttack.h"
 #include "EnemyDeath.h"
 #include "EnemyDamaged.h"
+#include "EnemyIdle.h"
 
 namespace EM
 {
@@ -25,7 +26,6 @@ namespace EM
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
-		std::cout << "Enemy Chasing" << std::endl;
 		float dist = 0;
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -33,9 +33,9 @@ namespace EM
 		{
 			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
-				rigidbody.SetDir(p_ecs.GetComponent<Transform>(i).GetPos().x - transform.GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - transform.GetPos().y);
-				//vec2D newVel = vec2D(0, 0);
-				vec2D newVel = rigidbody.GetVel();
+				rigidbody.SetDir(transform.GetPos().x - p_ecs.GetComponent<Transform>(i).GetPos().x, transform.GetPos().y - p_ecs.GetComponent<Transform>(i).GetPos().y);
+				vec2D newVel = vec2D(0.0f, 0.0f);
+				newVel = rigidbody.GetVel();
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
@@ -50,7 +50,7 @@ namespace EM
 		}
 		//Attack Range
 		//check if within range. If not, set to moving state
-		if (dist < 0.1f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown <= 0.0f)
+		if (dist < 0.2f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown <= 0.0f)
 		{
 			//std::cout << "In Proximity2" << std::endl;
 			//if within range to attack, set mode to attacking
@@ -61,7 +61,6 @@ namespace EM
 	void EnemyChase::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		std::cout << "ChaseExit" << std::endl;
 		delete this;
 	}
 }

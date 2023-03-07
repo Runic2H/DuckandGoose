@@ -38,7 +38,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown = 2.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		std::cout << "AttackExit" << std::endl;
 		delete this;
 	}
 }

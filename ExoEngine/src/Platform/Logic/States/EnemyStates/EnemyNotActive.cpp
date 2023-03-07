@@ -14,7 +14,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
-		std::cout << "InActive Entry" << std::endl;
 	}
 	void EnemyNotActive::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -33,11 +32,9 @@ namespace EM
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 			stateMachine->ChangeState(new EnemyIdle(stateMachine));
 		}
-		std::cout << "EnemyNotActive" << std::endl;
 	}
 	void EnemyNotActive::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "Active" << std::endl;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

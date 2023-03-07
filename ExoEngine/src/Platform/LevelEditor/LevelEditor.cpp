@@ -46,7 +46,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/GateController.h"
-#include "ExoEngine/Scripts/EnemyStateMachine.h"
 #include "ExoEngine/Scripts/BackgroundAudio.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 
@@ -1210,7 +1209,7 @@ namespace EM {
                                         }
                                         if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
-                                            logic.InsertScript(new GateController(), selectedEntity);
+                                            logic.InsertScript(new GateController(selectedEntity), selectedEntity);
                                         }
                                         if (mScriptList[current_script] == "EnemyScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
                                                                                                && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
@@ -1340,23 +1339,23 @@ namespace EM {
                     {
                         auto& tag = p_ecs.GetComponent<Tag>(selectedEntity);
                         //set tag
-                        /*auto& origin = tag.GetTag();
+                        auto& origin = tag.GetTag();
                         char buffer1[256];
                         memset(buffer1, 0, sizeof(buffer1));
                         strcpy_s(buffer1, sizeof(buffer1), origin.c_str());
                         if (ImGui::InputText("Tag", buffer1, sizeof(buffer1)))
                         {
                             origin = std::string(buffer1);
-                        }*/
+                        }
                         //set target
-                        auto& target = tag.GetTargetTag();
+                        /*auto& target = tag.GetTag();
                         char buffer2[256];
                         memset(buffer2, 0, sizeof(buffer2));
                         strcpy_s(buffer2, sizeof(buffer2), target.c_str());
-                        if (ImGui::InputText("Target", buffer2, sizeof(buffer2)))
+                        if (ImGui::InputText("Tag", buffer2, sizeof(buffer2)))
                         {
                             target = std::string(buffer2);
-                        }
+                        }*/
                     }
                 }
                 //HUD Component

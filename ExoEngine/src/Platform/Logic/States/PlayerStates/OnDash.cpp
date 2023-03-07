@@ -30,11 +30,9 @@ namespace EM
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
-		std::cout << "Dashing" << std::endl;
 	}
 	void OnDash::OnExit(StateMachine* stateMachine)
 	{
-		std::cout << "DashingExit" << std::endl;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

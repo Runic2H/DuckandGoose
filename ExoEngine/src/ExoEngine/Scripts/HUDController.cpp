@@ -51,11 +51,19 @@ namespace EM
         
         //get player's stats
         for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
-            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
-                auto& att = p_ecs.GetComponent<Attributes>(i);
-                hp = att.GetHealth();
-                maxhp = att.GetMaxHealth();
-                atk = att.GetDamage();
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
+                auto& att = p_ecs.GetComponent<PlayerAttributes>(i);
+                hp = att.mHealth;
+                maxhp = att.mMaxHealth;
+                atk = att.mDamage;
+            }
+        }
+        for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
+            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+                auto& att = p_ecs.GetComponent<EnemyAttributes>(i);
+                hp = att.mHealth;
+                maxhp = att.mMaxHealth;
+                atk = att.mDamage;
             }
         }
         UNREFERENCED_PARAMETER(Frametime);
