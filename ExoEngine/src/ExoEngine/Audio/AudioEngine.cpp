@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file AudioEngine.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -68,7 +68,7 @@ FMOD API play sound using loaded audio
 ****************************************************************************/
 int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp)
 {
-
+    std::cout << "Function called" << std::endl;
     auto tFoundIt = mSoundMap.find(strSoundName);
     FMOD::Sound* pSound;
     
@@ -104,6 +104,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioTyp
         }
         
     }
+    std::cout << "Playing: " << strSoundName << std::endl;
     //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }
@@ -342,7 +343,7 @@ void CAudioEngine::SetLooping(const std::string& strSoundName, bool in) {
     //std::cout << "Updated looping\n";
 }
 
-float GetVolumeByChannel(FMOD::ChannelGroup* ch) {
+float CAudioEngine::GetVolumeByChannel(FMOD::ChannelGroup* ch) {
     float ret = 0;
     ch->getVolume(&ret);
     return ret;

@@ -50,7 +50,8 @@ namespace EM
 		p_ecs.RegisterComponent<Audio>();
 		p_ecs.RegisterComponent<HUDComponent>();
 		p_ecs.RegisterComponent<Attributes>();
-		//p_ecs.RegisterComponent<Button>();
+		p_ecs.RegisterComponent<PlayerAttributes>();
+		p_ecs.RegisterComponent<EnemyAttributes>();
 		sceneToLoad = "";
 	}
 
@@ -65,7 +66,7 @@ namespace EM
 		p_ecs.ResetEntities();
 		p_ecs.SetTotalEntitiesForWorldBuild(obj["Number of Entities"]["Entities"].GetUint());
 		auto aliveTotal = obj["Number of Entities"]["Entities"].GetUint();
-		Entity aliveCount = 0;
+		//Entity aliveCount = 0;
 		Entity j = 0;
 		while(j < aliveTotal)
 		{
@@ -78,6 +79,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Transform")
 					{
 						Transform transform;
+						transform.SetComponentEntityID(j);
 						if (transform.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Transform>(j, transform);
@@ -86,6 +88,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "RigidBody")
 					{
 						RigidBody rigidbody;
+						rigidbody.SetComponentEntityID(j);
 						if (rigidbody.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<RigidBody>(j, rigidbody);
@@ -94,6 +97,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Collider")
 					{
 						Collider collider;
+						collider.SetComponentEntityID(j);
 						if (collider.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Collider>(j, collider);
@@ -102,6 +106,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "NameTag")
 					{
 						NameTag nametag;
+						nametag.SetComponentEntityID(j);
 						if (nametag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<NameTag>(j, nametag);
@@ -110,6 +115,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Sprite")
 					{
 						Sprite sprite;
+						sprite.SetComponentEntityID(j);
 						if (sprite.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Sprite>(j, sprite);
@@ -118,6 +124,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Logic")
 					{
 						Logic logic;
+						logic.SetComponentEntityID(j);
 						if (logic.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Logic>(j, logic);
@@ -126,6 +133,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Tag")
 					{
 						Tag tag;
+						tag.SetComponentEntityID(j);
 						if (tag.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Tag>(j, tag);
@@ -134,6 +142,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Audio")
 					{
 						Audio mAudio;
+						mAudio.SetComponentEntityID(j);
 						if (mAudio.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Audio>(j, mAudio);
@@ -142,6 +151,7 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "HUDComponent")
 					{
 						HUDComponent mHUD;
+						mHUD.SetComponentEntityID(j);
 						if (mHUD.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<HUDComponent>(j, mHUD);
@@ -150,9 +160,28 @@ namespace EM
 					if (p_ecs.GetComponentTypeName(CompID) == "Attributes")
 					{
 						Attributes mAttributes;
+						mAttributes.SetComponentEntityID(j);
 						if (mAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
 						{
 							p_ecs.AddComponent<Attributes>(j, mAttributes);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "PlayerAttributes")
+					{
+						PlayerAttributes mPlayerAttributes;
+						mPlayerAttributes.SetComponentEntityID(j);
+						if (mPlayerAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<PlayerAttributes>(j, mPlayerAttributes);
+						}
+					}
+					if (p_ecs.GetComponentTypeName(CompID) == "EnemyAttributes")
+					{
+						EnemyAttributes mEnemyAttributes;
+						mEnemyAttributes.SetComponentEntityID(j);
+						if (mEnemyAttributes.Deserialize(obj["Components"][p_ecs.GetComponentTypeName(CompID).c_str()][obj["EntityToIndexMap"][p_ecs.GetComponentTypeName(CompID).c_str()][j].GetUint()].GetObj()))
+						{
+							p_ecs.AddComponent<EnemyAttributes>(j, mEnemyAttributes);
 						}
 					}
 				}
@@ -277,6 +306,14 @@ namespace EM
 						if (p_ecs.GetComponentTypeName(i) == "Attributes")
 						{
 							p_ecs.GetComponent<Attributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(i) == "PlayerAttributes")
+						{
+							p_ecs.GetComponent<PlayerAttributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(i) == "EnemyAttributes")
+						{
+							p_ecs.GetComponent<EnemyAttributes>(j).Serialize(writer);
 						}
 					}
 				}

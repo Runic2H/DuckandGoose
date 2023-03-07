@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.cpp
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen., t.ekhern@digipen.edu
 \par Course: csd2400
 \par Section: a
 \par Milestone 2
@@ -41,10 +41,13 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
-#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
+#include "ExoEngine/Scripts/GateController.h"
+#include "ExoEngine/Scripts/BackgroundAudio.h"
+#include "ExoEngine/Scripts/EnemyScript.h"
 
 namespace EM {
 
@@ -71,16 +74,20 @@ namespace EM {
     void LevelEditor::Init(Window* window)
     {
         mWindow = window;
-
+        
         IMGUI_CHECKVERSION();
+
         ImGui::CreateContext();
+
         ImGuiIO& io = ImGui::GetIO();
+
         io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
         io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
         ImGui_ImplGlfw_InitForOpenGL(window->GetWindow(), true);
+
         ImGui_ImplOpenGL3_Init("#version 450");
 
         LoadAudioFromFile();
@@ -88,6 +95,7 @@ namespace EM {
         LoadSceneFromFile();
 
         LoadScriptsFromFile();
+
     }
     /*!*************************************************************************
     Update loop for level editor, poll events and set new frames
@@ -102,7 +110,7 @@ namespace EM {
         if (!p_Editor->is_ShowWindow)
         {
             glViewport(0, 0, mWindow->Getter().m_Width, mWindow->Getter().m_Height);
-            EM::Graphic::camera.Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
+            EM::Graphic::mcamera->Resize(static_cast<float>(mWindow->Getter().m_Width), static_cast<float>(mWindow->Getter().m_Height));
         }
         if (is_ShowWindow)
         {
@@ -221,6 +229,7 @@ namespace EM {
     void LevelEditor::LoadScriptsFromFile()
     {
         std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
+        //std::string scriptPath = "Assets/Scripts"; //for release mode
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())
@@ -233,7 +242,7 @@ namespace EM {
                 in.pop_back();
                 in.pop_back();
                 mScriptList.emplace_back(in);
-                std::cout << "script path " << in << std::endl;
+                //std::cout << "script path " << in << std::endl;
             }
         }
     }
@@ -327,22 +336,60 @@ namespace EM {
         mViewportFocused = ImGui::IsWindowFocused();
         mViewportSize = { ImGui::GetContentRegionAvail() };
 
-
         uint64_t textureID = p_FrameBuffer->GetColorAttachmentRendererID();
         ImGui::Image((void*)(intptr_t)textureID, mViewportSize,
             ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 
+        //for mouse position
+        mGameMousePosition = ImGui::GetMousePos();
+
+        mGameMousePosition.x -= mViewportBounds[0].x;
+        mGameMousePosition.y -= mViewportBounds[0].y;
+
+        glm::vec2 vpSize{ 0.0f ,0.0f };
+        vpSize.x = mViewportBounds[1].x -mViewportBounds[0].x;
+        vpSize.y = mViewportBounds[1].y - mViewportBounds[0].y;
+        mGameMousePosition.y = vpSize.y - mGameMousePosition.y;
+        mGameMousePosition.x = ((mGameMousePosition.x / mViewportSize.x) * 2.0f) - 1.0f;
+        mGameMousePosition.y = ((mGameMousePosition.y / mViewportSize.y) * 2.0f) - 1.0f;
+        static bool dragging = false;
+        static double c_x = 0.0f, c_y = 0.0f;
+        if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            if (mSceneMouse.x >= mViewportBounds[0].x &&
+                mSceneMouse.x <= mViewportBounds[1].x &&
+                mSceneMouse.y >= mViewportBounds[0].y &&
+                mSceneMouse.y <= mViewportBounds[1].y)
+            {
+                dragging = true;
+            }
+        }
+        if (dragging && p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            double new_x, new_y;
+            glfwGetCursorPos(mWindow->GetWindow(), &new_x, &new_y);
+            
+            EM::Graphic::scene_camera.SetPosition({ EM::Graphic::scene_camera.GetPosition().x - (static_cast<float>(new_x - c_x) * 0.005f) , 
+                                                    EM::Graphic::scene_camera.GetPosition().y + (static_cast<float>(new_y - c_y) * 0.005f),
+                0.0f });
+           
+        }
+        else if (dragging && p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_RIGHT))
+        {
+            dragging = false;
+        }
+        glfwGetCursorPos(mWindow->GetWindow(), &c_x, &c_y);
         //gizmos
-        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing())
+        if (p_Input->isKeyPressed(GLFW_KEY_1) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::TRANSLATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_2) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::ROTATE;
         }
-        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing())
+        else if (p_Input->isKeyPressed(GLFW_KEY_3) && !ImGuizmo::IsUsing() && mViewportFocused)
         {
             mGizmoType = ImGuizmo::OPERATION::SCALE;
         }
@@ -359,8 +406,8 @@ namespace EM {
                 mViewportBounds[1].y - mViewportBounds[0].y
             );
 
-            glm::mat4 cameraProj = EM::Graphic::camera.GetProjectionMatrix();
-            glm::mat4 cameraView = EM::Graphic::camera.GetViewMatrix();
+            glm::mat4 cameraProj = EM::Graphic::mcamera->GetProjectionMatrix();
+            glm::mat4 cameraView = EM::Graphic::mcamera->GetViewMatrix();
             glm::mat4 transform{ 1.0f }; // identity matrix
 
             auto& trans = p_ecs.GetComponent<Transform>(selectedEntity);
@@ -406,7 +453,7 @@ namespace EM {
 
             }
 
-            selectedEntity = (Entity)Picker::Pick(&EM::Graphic::camera, sortedMultimap);
+            selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
 
             //std::cout << selectedEntity << std::endl;
             if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
@@ -811,10 +858,10 @@ namespace EM {
                             p_ecs.AddComponent<RigidBody>(selectedEntity, C_RigidBodyComponent);
                         ImGui::CloseCurrentPopup();
                     }
-                    if (ImGui::MenuItem("Attributes"))
+                    if (ImGui::MenuItem("PlayerAttributes"))
                     {
-                        if (!p_ecs.HaveComponent<Attributes>(selectedEntity))
-                            p_ecs.AddComponent<Attributes>(selectedEntity, C_AttributesComponent);
+                        if (!p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
+                            p_ecs.AddComponent<PlayerAttributes>(selectedEntity, C_PlayerAttributesComponent);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Logic"))
@@ -839,6 +886,12 @@ namespace EM {
                     {
                         if (!p_ecs.HaveComponent<HUDComponent>(selectedEntity))
                             p_ecs.AddComponent<HUDComponent>(selectedEntity, C_HUDComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("EnemyAttributes"))
+                    {
+                        if (!p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                            p_ecs.AddComponent<EnemyAttributes>(selectedEntity, C_EnemyAttributesComponent);
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -902,17 +955,16 @@ namespace EM {
                         auto& sprite = p_ecs.GetComponent<Sprite>(selectedEntity);
                         ImGui::Checkbox("SpriteSheet", &sprite.is_SpriteSheet); ImGui::SameLine();
                         ImGui::Checkbox("Animation", &sprite.is_Animated);
+                        ImGui::PushItemWidth(100.0f);
                         ImGui::Text("Coordinates: "); ImGui::SameLine();
                         ImGui::Text("X"); ImGui::SameLine();
-                        ImGui::DragFloat("##X", (float*)&sprite.GetIndex().x, 0.5f); ImGui::SameLine();
-                        ImGui::PushID(2);
+                        ImGui::DragInt("##X", (int*)&sprite.GetIndex().x, 1); ImGui::SameLine();
                         ImGui::Text("Y"); ImGui::SameLine();
-                        ImGui::DragFloat("##Y", (float*)&sprite.GetIndex().y, 0.5f);
-                        ImGui::PopID();
+                        ImGui::DragInt("##Y", (int*)&sprite.GetIndex().y, 1);
                         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4());
                         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4());
-                        ImGui::Button("Image : "); ImGui::SameLine(80.0f);
+                        ImGui::Text("Image : "); ImGui::SameLine();
                         ImGui::PopStyleColor(3);
                         auto& texturePath = p_ecs.GetComponent<Sprite>(selectedEntity).GetTexture();
                         ImGui::SetNextItemWidth(140.0f);
@@ -938,11 +990,23 @@ namespace EM {
                             }
                             ImGui::EndDragDropTarget();
                         }
-                        if (sprite.is_Animated)
+                        if (sprite.is_SpriteSheet)
                         {
-                            ImGui::Text("DisplayTime"); ImGui::SameLine();
-                            ImGui::DragFloat("##DisplayTime", (float*)&sprite.GetDisplayTime(), 0.005f);
+                            sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512;
+                            ImGui::Text("MaxIndex : %d ", sprite.GetMaxIndex());
+                            sprite.GetDisplayTime().resize(sprite.GetMaxIndex());//resize the number of frames in a sprite  
                         }
+                        if (sprite.GetMaxIndex() > 0 && sprite.is_Animated)
+                        {
+                            //const int& selectedIndex = 0;
+                            ImGui::Text("SelectedIndex: "); ImGui::SameLine();
+                            ImGui::DragInt("##SelectedIndex", (int*)&sprite.GetIndex().x, 1, 0, sprite.GetMaxIndex() - 1);
+
+                            ImGui::Text("SetDisplayTime: "); ImGui::SameLine();
+                            ImGui::DragFloat("##SetDisplayTime", (float*)&sprite.GetDisplayTime()[sprite.GetIndex().x], 0.005f, 0.0f);
+                            
+                        }    
+                        
                         if (sprite.is_SpriteSheet)
                         {
                             ImGui::Text("UVCoordinates: "); ImGui::SameLine();
@@ -964,7 +1028,7 @@ namespace EM {
                         auto& colliderComp = p_ecs.GetComponent<Collider>(selectedEntity);
                         auto& colliderType = colliderComp[0].mCol;
                         int colliderIndex = static_cast<int>(colliderType);
-                        const char* colliderNames = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 1 Type"); ImGui::SameLine();
                         ImGui::Combo("##test", &colliderIndex, colliderNames);
                         colliderType = static_cast<Collider::ColliderType>(colliderIndex);
@@ -983,13 +1047,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[0].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[0].mCol == Collider::ColliderType::circle || colliderComp[0].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize = colliderComp[0].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("##Radius", (float*)&colliderSize, 0.05f);
                         }
-                        else if (colliderComp[0].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[0].mCol == Collider::ColliderType::rect || colliderComp[0].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
@@ -1007,7 +1071,7 @@ namespace EM {
                         //selection for collider 2 type
                         auto& colliderType1 = colliderComp[1].mCol;
                         int colliderIndex1 = static_cast<int>(colliderType1);
-                        const char* colliderNames1 = "none\0circle\0line\0rect\0button";
+                        const char* colliderNames1 = "none\0circle\0bubble\0line\0rect\0box\0button";
                         ImGui::Text("Collider 2 Type"); ImGui::SameLine();
                         ImGui::Combo("###test", &colliderIndex1, colliderNames1);
                         ImGui::PushItemWidth(100.0f);
@@ -1026,13 +1090,13 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[1].mCol == Collider::ColliderType::circle)
+                        if (colliderComp[1].mCol == Collider::ColliderType::circle || colliderComp[1].mCol == Collider::ColliderType::bubble)
                         {
                             auto& colliderSize1 = colliderComp[1].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
                             ImGui::DragFloat("###Radius", (float*)&colliderSize1, 0.05f);
                         }
-                        else if (colliderComp[1].mCol == Collider::ColliderType::rect)
+                        else if (colliderComp[1].mCol == Collider::ColliderType::rect || colliderComp[1].mCol == Collider::ColliderType::box)
                         {
                             ImGui::Text("Minimum "); ImGui::SameLine();
                             ImGui::Text("X"); ImGui::SameLine();
@@ -1049,24 +1113,24 @@ namespace EM {
                     }
                 }
                 //Attributes components
-                if (p_ecs.HaveComponent<Attributes>(selectedEntity))
+                if (p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                 {
-                    if (ImGui::CollapsingHeader("Attributes", ImGuiTreeNodeFlags_None))
+                    if (ImGui::CollapsingHeader("PlayerAttributes", ImGuiTreeNodeFlags_None))
                     {
-                        auto& attrib = p_ecs.GetComponent<Attributes>(selectedEntity);
+                        auto& attrib = p_ecs.GetComponent<PlayerAttributes>(selectedEntity);
                         
                         static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
-                        int healthSlider = attrib.GetHealth();
-                        int maxHealthSlider = attrib.GetMaxHealth();
-                        int damageSlider = attrib.GetDamage();
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
 
                         ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
                         ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
                         ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
 
-                        attrib.SetHealth(healthSlider);
-                        attrib.SetMaxHealth(maxHealthSlider);
-                        attrib.SetDamage(damageSlider);
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
                     }
                 }
                 //Logic
@@ -1104,45 +1168,60 @@ namespace EM {
                             //if (isClicked & 1)
                             //{
                                 //isClicked = 0;
-                                bool can_addScript = true;//std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
-                                for (int i = 0; i < logic.GetScriptNames().size(); i++) {
-                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) {
+                                bool can_addScript = true; //std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
+                                for (int i = 0; i < logic.GetScriptNames().size(); i++) 
+                                {
+                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) 
+                                    {
                                         can_addScript = false;
                                         std::cout << "Cannot Add already existing script!\n";
                                     }
                                 }
                                 if (can_addScript == true)
                                 {
-                                    if (mScriptList[current_script] == "PlayerController")
+                                    if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
                                     {
-                                        logic.InsertScript(new PlayerController(), selectedEntity);
+                                        if (mScriptList[current_script] == "PlayerControl" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity)
+                                                                                              && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new PlayerControl(selectedEntity), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new CollisionResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ButtonResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                            && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "ScenerioScript")
+                                        {
+                                            logic.InsertScript(new ScenerioScript(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "AudioManager" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new AudioManager(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new HUDController(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new GateController(selectedEntity), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "EnemyScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                               && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new EnemyScript(selectedEntity), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "BackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new BackgroundAudio(), selectedEntity);
+                                        }
                                     }
-                                    if (mScriptList[current_script] == "EnemyMovement")
-                                    {
-                                        logic.InsertScript(new EnemyMovement(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "CollisionResponse")
-                                    {
-                                        logic.InsertScript(new CollisionResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ButtonResponse")
-                                    {
-                                        logic.InsertScript(new ButtonResponse(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "ScenerioScript")
-                                    {
-                                        logic.InsertScript(new ScenerioScript(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "AudioManager")
-                                    {
-                                        logic.InsertScript(new AudioManager(), selectedEntity);
-                                    }
-                                    if (mScriptList[current_script] == "HUDController")
-                                    {
-                                        logic.InsertScript(new HUDController(), selectedEntity);
-                                    }
-                                //}
-                            }
+                                }
                         } 
                         ImGui::SameLine();
                         if (ImGui::Button("Delete")) {
@@ -1260,23 +1339,23 @@ namespace EM {
                     {
                         auto& tag = p_ecs.GetComponent<Tag>(selectedEntity);
                         //set tag
-                        /*auto& origin = tag.GetTag();
+                        auto& origin = tag.GetTag();
                         char buffer1[256];
                         memset(buffer1, 0, sizeof(buffer1));
                         strcpy_s(buffer1, sizeof(buffer1), origin.c_str());
                         if (ImGui::InputText("Tag", buffer1, sizeof(buffer1)))
                         {
                             origin = std::string(buffer1);
-                        }*/
+                        }
                         //set target
-                        auto& target = tag.GetTargetTag();
+                        /*auto& target = tag.GetTag();
                         char buffer2[256];
                         memset(buffer2, 0, sizeof(buffer2));
                         strcpy_s(buffer2, sizeof(buffer2), target.c_str());
-                        if (ImGui::InputText("Target", buffer2, sizeof(buffer2)))
+                        if (ImGui::InputText("Tag", buffer2, sizeof(buffer2)))
                         {
                             target = std::string(buffer2);
-                        }
+                        }*/
                     }
                 }
                 //HUD Component
@@ -1302,6 +1381,32 @@ namespace EM {
                         ImGui::DragFloat("##OffsetY", (float*)&Offset.y, 0.005f);
                         ImGui::PopID();
                         HUDComp.SetOffset(Offset);
+                    }
+                }
+                if (p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& attrib = p_ecs.GetComponent<EnemyAttributes>(selectedEntity);
+
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        int healthSlider = attrib.mHealth;
+                        int maxHealthSlider = attrib.mMaxHealth;
+                        int damageSlider = attrib.mDamage;
+                        float attackSlider = attrib.mAttackTimer;
+                        float damageCooldown = attrib.mDamageCoolDownTimer;
+
+                        ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
+                        ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
+                        ImGui::SliderFloat("Attack Duration (0 -> 10)", &attackSlider, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Attack Cooldown (0 -> 10)", &damageCooldown, 0, 10, "%f", flags);
+
+                        attrib.mHealth = healthSlider;
+                        attrib.mMaxHealth = maxHealthSlider;
+                        attrib.mDamage = damageSlider;
+                        attrib.mAttackTimer = attackSlider;
+                        attrib.mDamageCoolDownTimer = damageCooldown;
                     }
                 }
                 
@@ -1336,9 +1441,9 @@ namespace EM {
                         p_ecs.RemoveComponent<Logic>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
-                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                    if (ImGui::MenuItem("PlayerAttributes") && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                     {
-                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
+                        p_ecs.RemoveComponent<PlayerAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     if (ImGui::MenuItem("Audio") && p_ecs.HaveComponent<Audio>(selectedEntity))
@@ -1354,6 +1459,11 @@ namespace EM {
                     if (ImGui::MenuItem("HUD") && p_ecs.HaveComponent<HUDComponent>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<HUDComponent>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("EnemyAttributes") && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<EnemyAttributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::EndPopup();
@@ -1403,6 +1513,7 @@ namespace EM {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
                 current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), Audio::AudioType::MASTER);
+                //std::cout << "Playing Audio: " << audioPath + mAudioFileList[currentfile].path().filename().string() << std::endl;
                 //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 
@@ -1459,6 +1570,23 @@ namespace EM {
                 f3 = f1;
             }
 
+            float f4 = p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup());
+            ImGui::SliderFloat("BGM vol", &f4, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f4 > f1)
+            {
+                f4 = f1;
+            }
+            p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), f4);
+
+
+            float f5 = p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup());
+            ImGui::SliderFloat("SFX vol", &f5, 0.0f, 1.0f, "Min - Max %.3f");
+            if (f5 > f1)
+            {
+                f5 = f1;
+            }
+            p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), f5);
+
             ImGui::End();
         }
     }
@@ -1477,12 +1605,18 @@ namespace EM {
     }
 
     /*!*************************************************************************
-   using std::filesystem we insert the file path if texture assets into the editor
+   using std::filesystem we insert the file path into the system
    ****************************************************************************/
     void LevelEditor::insertTextureFilePath(std::string in)
     {
-        auto const& dir_entry = std::filesystem::directory_entry{ in };
-        mTextureFileList.emplace_back(dir_entry);
-        mTextureFile.emplace_back(dir_entry.path().filename().string());
+        auto const& dir_entry = std::filesystem::directory_iterator( in );
+        for (const auto& entry : dir_entry)
+        {
+            if(entry.path().extension() == ".png")
+                std::cout << entry.path().filename().string() << std::endl;
+
+        }
+        /* mTextureFileList.emplace_back(dir_entry);
+        mTextureFile.emplace_back(dir_entry.path().filename().string());*/
     }
 }

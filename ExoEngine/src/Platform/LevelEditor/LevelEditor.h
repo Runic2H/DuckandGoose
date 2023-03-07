@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file LevelEditor.h
-\author Cheung Jun Yin Matthew
-\par DP email: j.cheung@digipen.edu
+\author Cheung Jun Yin Matthew, Tan Ek Hern
+\par DP email: j.cheung@digipen.edu, t.ekhern@digipen.edu
 \par Course: CSD2400 / GAM200
 \date 9-28-2022
 \brief  Header file for LevelEditor.cpp
@@ -48,6 +48,8 @@ namespace EM {
 
 		//for textures loading from files
 		void LoadTextureFromFile();
+
+	
 	public:
 		bool is_ShowWindow = true;
 		static std::unique_ptr<LevelEditor>& GetInstance();
@@ -65,6 +67,7 @@ namespace EM {
 		ImVec2 mViewportBounds[2];
 		bool mViewportFocused = false;
 		ImVec2 mGameMousePosition = { 0.0f, 0.0f };
+		ImVec2 mSceneMouse = { 0.0f, 0.0f };
 	private:
 		void MainMenuBar();
 		void Docking();

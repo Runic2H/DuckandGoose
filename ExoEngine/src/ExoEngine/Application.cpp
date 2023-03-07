@@ -34,18 +34,20 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/EnemyMovement.h"
+#include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/GUI/GUI.h"
-
-EM::vec2D* Trans;
+#include <stdlib.h>
 
 namespace EM {
 	bool end_state{false}; //placeholder
-
+	
+	
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
 	Application::Application()
 	{
+		_set_abort_behavior(0, _CALL_REPORTFAULT);
 		p_ecs.Init();
 		p_Scene->Init();
 		FramePerSec::GetInstance().InitFrame();
@@ -69,10 +71,9 @@ System input
 /*!*************************************************************************
 Run loop for application
 ****************************************************************************/
-	void Application::Run() 
+	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
-		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -86,6 +87,16 @@ Run loop for application
 			p_ecs.SetSystemSignature<Graphic>(signature);
 		}
 		mGraphics->Init();
+		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
+		{
+			Signature signature;
+			signature.set(p_ecs.GetComponentType<Transform>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			signature.set(p_ecs.GetComponentType<Collider>());
+			signature.set(p_ecs.GetComponentType<RigidBody>());
+			p_ecs.SetSystemSignature<CollisionSystem>(signature);
+		}
+		mCollision->Init();
 
 		auto mPosUpdate = p_ecs.RegisterSystem<PhysicsSystem>();
 		{
@@ -103,26 +114,14 @@ Run loop for application
 			p_ecs.SetSystemSignature<LogicSystem>(signature);
 		}
 		mLogic->Init();
-
-		auto mCollision = p_ecs.RegisterSystem<CollisionSystem>();
-		{
-			Signature signature;
-			signature.set(p_ecs.GetComponentType<Transform>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			signature.set(p_ecs.GetComponentType<Collider>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
-			p_ecs.SetSystemSignature<CollisionSystem>(signature);
-		}
-		mCollision->Init();
-
 		//FOR DEBUGGING ECS 
 		//Scene Manager Requires some tweaking to entity serialization and deserialization
 		/*RigidBody rb;
 		Logic logic;
 		Sprite sprite;
 		NameTag name;
-		Tag tag;
-		RigidBody rb;*/
+		Tag tag;*/
+
 
 		/*Entity Background = p_ecs.CreateEntity();
 		name.SetNameTag("Main Menu BackGround");
@@ -381,6 +380,7 @@ Run loop for application
 		//p_ecs.GetComponent<NameTag>(hpbar).SetNameTag("HPBar");
 		//p_ecs.AddComponent<Logic>(hpbar, logic);
 		//p_ecs.GetComponent<Logic>(hpbar).InsertScript(new HUDController(), hpbar);
+
 		//Entity player = p_ecs.CreateEntity();
 		//name.SetNameTag("Player");
 		//sprite.SetTexture("Idle");
@@ -392,9 +392,9 @@ Run loop for application
 		//tag.SetTag("Player");
 		//p_ecs.AddComponent<Tag>(player, tag);
 		//p_ecs.AddComponent<Logic>(player, logic);	//Add Component
-		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerController(), player);
+		//p_ecs.GetComponent<Logic>(player).InsertScript(new PlayerControl(), player);
 		//p_ecs.GetComponent<Logic>(player).InsertScript(new CollisionResponse(), player);
-		//p_ecs.AddComponent<Attributes>(player, C_AttributesComponent);
+		//p_ecs.AddComponent<PlayerAttributes>(player, C_PlayerAttributesComponent);
 		//Entity enemy = p_ecs.CreateEntity();
 		//Logic logic2;
 		//p_ecs.AddComponent<Transform>(enemy, C_TransformComponent);
@@ -410,10 +410,10 @@ Run loop for application
 		//p_ecs.AddComponent<Attributes>(enemy, C_AttributesComponent);
 		//p_ecs.GetComponent<Attributes>(enemy).SetDamage(10);
 		
-		p_Scene->DeserializeFromFile("Assets/Scene/Menu.json");
-		p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav", 100.0f);
-		p_Editor->is_ShowWindow = false;
-
+		//p_Audio->PlaySound("Assets/metadigger/HeroFightBossMusic.wav");
+		/*p_Editor->is_ShowWindow = false;
+		Graphic::camera.SetZoomLevel(0.25);*/
+		//p_Scene->DeserializeFromFile("Assets/Scene/LevelTest.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
@@ -430,39 +430,19 @@ Run loop for application
 				{
 					p_Editor->Draw();
 				}
-				if (p_ecs.GetTotalEntities() >= 1)
-				{
-					Trans = &p_ecs.GetComponent<Transform>(1).GetPos();
-
-				}
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<Tag>(i))
-					{
-						if (p_ecs.GetComponent<Tag>(i).GetTag() == "Enemy")
-						{
-							if (dynamic_cast<EnemyMovement*>(p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyMovement"))->GetState() == EnemyMovement::EnemyState::Death)
-							{
-								p_ecs.DestroyEntity(i);
-								p_ecs.GetComponent<Collider>(i).GetCollisionArray()->is_Alive = false;
-							}
-						}
-					}
-				}
 			}
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
 
-
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
+			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-
 			p_Scene->checkForSceneToLoad();
 
 			FramePerSec::GetInstance().EndFrameCount();

@@ -55,6 +55,10 @@ namespace EM
 		Returns the name of Script
 		****************************************************************************/
 		virtual std::string GetScriptName();
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
 		
 	private:
 		float BGMvol;

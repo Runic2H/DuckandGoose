@@ -54,6 +54,10 @@ namespace EM
 		This function returns the purpose of the script as a flag for when it is called
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
 	private:
 		/*!*************************************************************************
 		This Variable originally hold the name of the selected string

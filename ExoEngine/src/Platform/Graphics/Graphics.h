@@ -31,7 +31,7 @@ namespace EM {
 	class Graphic : public System
 	{
 	public:
-
+		
 		//For Debugging Purposes
 		virtual std::string GetName() { return "graphic"; }
 
@@ -39,7 +39,9 @@ namespace EM {
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
 		
-		inline static Camera2D camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D camera { -3.0f, 3.0f, -3.0f , 3.0f };
+		inline static Camera2D scene_camera { -1.0f, 1.0f, -1.0f , 1.0f };
+		inline static Camera2D *mcamera = nullptr;
 	private:
 		//for testing
 		std::unique_ptr<Renderer> mRenderer = std::make_unique<Renderer>();
@@ -48,7 +50,7 @@ namespace EM {
 		WinData mWinData{};
 		Animation mAimator;
 	private:
-		void LoadTexture(std::string filename);
+		//void LoadTexture(std::string filename);
 		void LoadIconsTexture(std::string filename);
 	};
 }

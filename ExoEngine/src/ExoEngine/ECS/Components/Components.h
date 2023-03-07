@@ -29,6 +29,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Audio.h"
 #include "HUDComponent.h"
 #include "Attributes.h"
+#include "PlayerAttributes.h"
+#include "EnemyAttributes.h"
 //#include "Button.h"
 
 
@@ -43,4 +45,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #define C_AudioComponent EM::Audio::Audio()
 #define C_HUDComponent EM::HUDComponent::HUDComponent()
 #define C_AttributesComponent EM::Attributes::Attributes()
+#define C_PlayerAttributesComponent EM::PlayerAttributes::PlayerAttributes()
+#define C_EnemyAttributesComponent EM::EnemyAttributes::EnemyAttributes()
 //#define C_ButtonComponent EM::Button::Button()

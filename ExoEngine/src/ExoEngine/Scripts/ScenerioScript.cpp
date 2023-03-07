@@ -20,7 +20,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM {
 
-	ScenerioScript::ScenerioScript() :SelectedScene{""} {}
+	ScenerioScript::ScenerioScript() : SelectedScene{""} {}
 
 		void ScenerioScript::Start(){}
 

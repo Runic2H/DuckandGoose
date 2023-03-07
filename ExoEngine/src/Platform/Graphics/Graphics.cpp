@@ -24,9 +24,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "FrameBuffer.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
-
 namespace EM {
-
+	
 	//extern ECS ecs;
 	/*!*************************************************************************
 	Load Icon from filepath using resource manager
@@ -40,35 +39,33 @@ namespace EM {
 
 		ifs.close();
 	}
-
-	/*!*************************************************************************
-	Load texture from filename using resource manager
-	****************************************************************************/
-	void Graphic::LoadTexture(std::string filename)
-	{
-		std::ifstream ifs(filename.c_str());
-		std::string name, textPath;
-		while (ifs >> name >> textPath)
-			ResourceManager::LoadTexture(name.c_str(), textPath.c_str());
-
-		ifs.close();
-	}
-
-	//for testing purpose
+	
 	/*!*************************************************************************
 	Init loop for Graphics
 	****************************************************************************/
 	void Graphic::Init()
 	{
+		
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
 		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
 		
-	
 		LoadIconsTexture("Assets/Text/Icons.txt");
-		LoadTexture("Assets/Text/texture.txt");
-		
-		
+		std::string path = {"Assets/Textures/"};
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX"};
+		for (const auto& i : folderpath)
+		{
+			std::filesystem::path currentPath = path + i;
+			auto currentFolders = std::filesystem::directory_iterator(currentPath);
+			for (const auto& entry : currentFolders)
+			{
+				std::string gs = entry.path().generic_string();
+				std::size_t pos = gs.find_last_of("/");
+				std::size_t pos1 = gs.find(".");
+				std::string Imagename = gs.substr(pos + 1, pos1 - pos - 1);
+				ResourceManager::LoadTexture(Imagename, gs);
+			}
+		}
 		FrameBufferSpecification fbspec;
 		fbspec.Attachments = { FrameBufferTextureFormat::RGBA8, FrameBufferTextureFormat::RED_INTEGER, FrameBufferTextureFormat::DEPTH };
 		fbspec.Width = mWinData.GetWidth();
@@ -86,29 +83,38 @@ namespace EM {
 		Timer::GetInstance().Start(Systems::GRAPHIC);
 		Timer::GetInstance().GetDT(Systems::GRAPHIC);
 		
+		if (p_Editor->is_ShowWindow)
+			mcamera = &scene_camera;
+		else
+			mcamera = &camera;
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
 			p_Editor->mViewportSize.x > 0.0f && p_Editor->mViewportSize.y > 0.0f && // zero sized framebuffer is invalid
-			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y)
-			&& p_Editor->is_ShowWindow)
+			(spec.Width != p_Editor->mViewportSize.x || spec.Height != p_Editor->mViewportSize.y) && 
+			p_Editor->is_ShowWindow)
 		{
+			
 			p_FrameBuffer->Resize((uint32_t)p_Editor->mViewportSize.x, (uint32_t)p_Editor->mViewportSize.y);
-			camera.Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
+			mcamera->Resize(p_Editor->mViewportSize.x, p_Editor->mViewportSize.y);
+			
 		}
 		
 	
 		mRenderer->ResetInfo();
-		mRenderer->Clear();
 		if (p_Editor->is_ShowWindow)
 		{
 			p_FrameBuffer->Bind();
-			glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RED_INTEGER, GL_INT, 0);
 		}
 		
 		mRenderer->SetClearColor({ 0.0f, 0.1f, 0.1f, 1.0f });
 		mRenderer->Clear();
-		mRenderer->Begin(camera);// begin of the renderer 
-		p_GUI->VPmat = camera.GetViewProjectionMatrix();
+		int value = -1;
+		glClearTexImage(p_FrameBuffer->GetColorAttachmentRendererID(1), 0, GL_RGBA8, GL_INT, &value);
+	
+		mRenderer->Begin(*mcamera);// begin of the renderer 
+	
+
+		p_GUI->VPmat = mcamera->GetViewProjectionMatrix();
 		
 
 		for (auto const& entity : mEntities)
@@ -117,8 +123,7 @@ namespace EM {
 			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
 			if (sprite.is_Animated)
 			{
-				mAimator.AddFrameInfo(p_ecs.GetComponent<Sprite>(entity));
-				mAimator.UpdateAnimation(frametime);
+				mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(entity));
 			}
 			if (sprite.is_SpriteSheet)
 			{
@@ -138,37 +143,23 @@ namespace EM {
 			{
 				if (p_ecs.HaveComponent<Collider>(entity) && ((p_ecs.GetComponent<Collider>(entity)[0].is_Alive) || (p_ecs.GetComponent<Collider>(entity)[1].is_Alive))) {
 					for (int i = 0; i < 2; i++) {
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect) 
+						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::box)
 						{
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
 							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x / 2) - (collider[i].mMin.x / 2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y / 2) - (collider[i].mMin.y / 2), 0.0f },
 								{ collider[i].mMin.x + collider[i].mMax.x , collider[i].mMin.y + collider[i].mMax.y },
 								{ 1.0f, 0.0f, 0.0f,1.0f });
 						}
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle) {
+						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::bubble) {
 							auto& collider = p_ecs.GetComponent<Collider>(entity);
 							EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[i].mOffset.x, transform.GetPos().y + collider[i].mOffset.y, 0.0f);
 							EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[i].mRadius * 2, collider[i].mRadius * 2, collider[i].mRadius * 2);
 							EM::Matrix4x4 Transform = translate * scale;
 							mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
-							//mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
 						}
 					}
 				}
 			}
-				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::line))
-					mRenderer->DrawLine({ transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f },
-						{ (transform.GetPos().x + (25 * velocity.GetVel().x)), (transform.GetPos().y + (25 * velocity.GetVel().y)),0.0f },
-						{ 0.0f, 1.0f, 0.0f, 1.0f });
-
-
-				/*if (p_ecs.HaveComponent<Collider>(entity) && (p_ecs.GetComponent<Collider>(entity).GetCollider() == Collider::ColliderType::circle) && (p_ecs.GetComponent<Collider>(entity).GetAlive()))
-				{
-					auto& collider = p_ecs.GetComponent<Collider>(entity);
-					glm::mat4 Transform = glm::translate(glm::mat4(1.0f), { transform.GetPos().x + collider.GetOffset().x, transform.GetPos().y + collider.GetOffset().y, 0.0f }) *
-						glm::scale(glm::mat4(1.0f), glm::vec3(collider.GetRad() * 2));
-					mRenderer->DrawCircle(basemtx_adapter(Transform), { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
-				}*/
 			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
 			{
 				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
@@ -177,15 +168,15 @@ namespace EM {
 					{ 1.0f, 0.0f, 1.0f,1.0f });
 			}
 		}
-
+		
 		for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Player")
+			if (p_ecs.HaveComponent<NameTag>(entity) && !p_Editor->is_ShowWindow)
 			{
-				camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
-					p_ecs.GetComponent<Transform>(entity).GetPos().y,
-					0.0f });
-				camera.SetZoomLevel(5.0f);
+				if(p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player")
+					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
+						p_ecs.GetComponent<Transform>(entity).GetPos().y,
+						0.0f });
 			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
@@ -198,22 +189,20 @@ namespace EM {
 				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });
 			}
+
+			//for rendering of enemy health bar
+			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
+				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
+				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
+				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
+				vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+				vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y  / 20.0f);
+				mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+				//std::cout << "Displaying HPBar" << std::endl;
+			}
 		}
 
-		p_Editor->mGameMousePosition = ImGui::GetMousePos();
-
-		p_Editor->mGameMousePosition.x -= p_Editor->mViewportBounds[0].x;
-		p_Editor->mGameMousePosition.y -= p_Editor->mViewportBounds[0].y;
-
-		glm::vec2 vpSize{ 0.0f ,0.0f };
-		vpSize.x = p_Editor->mViewportBounds[1].x - p_Editor->mViewportBounds[0].x;
-		vpSize.y = p_Editor->mViewportBounds[1].y - p_Editor->mViewportBounds[0].y;
-		p_Editor->mGameMousePosition.y = vpSize.y - p_Editor->mGameMousePosition.y;
-
-		p_Editor->mGameMousePosition.x = ((p_Editor->mGameMousePosition.x / p_Editor->mViewportSize.x) * 2.0f) - 1.0f;
-		p_Editor->mGameMousePosition.y = ((p_Editor->mGameMousePosition.y / p_Editor->mViewportSize.y) * 2.0f) - 1.0f;
-		p_Editor->mGameMousePosition.x *= camera.GetZoomLevel();
-		p_Editor->mGameMousePosition.y *= camera.GetZoomLevel();
+		
 
 		if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
 		{
@@ -255,16 +244,14 @@ namespace EM {
 		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
 		{
 			p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
-			//camera.resetZoomLevel();//reset zoom back to default
 			p_GUI->toggle_pause();//set pause to true thus pausing the game
 		}
 		if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
 		{
 			p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
 		}
-		
-		if (p_Editor->mViewportFocused && p_Editor->is_ShowWindow)
-			camera.MouseScrolling();
+	
+		mcamera->MouseScrolling();
 		
 
 		Timer::GetInstance().Update(Systems::GRAPHIC);

@@ -9,6 +9,7 @@
 #include <array>
 #include <bitset>
 #include <utility>
+#include <cstdlib>
 #include <random>
 
 #include <string>
