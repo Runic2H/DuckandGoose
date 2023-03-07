@@ -19,6 +19,7 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET");
+		std::cout << "Enemy Attacking\n";
 	}
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -32,6 +33,19 @@ namespace EM
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+		}
+		vec2D playerPos = vec2D();
+		bool check = false;
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+			{
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+				check = true;
+			}
+		}
+		if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) > 0.2f) {
+			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 	}
 	void EnemyAttack::OnExit(StateMachine* stateMachine)

@@ -16,6 +16,7 @@ namespace EM
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		std::cout << "Enemy Idle\n";
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -26,18 +27,20 @@ namespace EM
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
 		vec2D playerPos = vec2D();
+		bool check = false;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
 			{
+				check = true;
 				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f) {
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
 			//std::cout << "Player Detected" << std::endl;
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}

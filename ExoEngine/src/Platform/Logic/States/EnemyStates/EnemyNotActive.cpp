@@ -12,7 +12,9 @@ namespace EM
 
 	void EnemyNotActive::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
+		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
+		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 	}
 	void EnemyNotActive::OnUpdate(StateMachine* stateMachine, float Frametime)

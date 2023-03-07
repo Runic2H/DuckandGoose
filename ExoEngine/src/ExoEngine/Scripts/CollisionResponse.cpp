@@ -45,58 +45,61 @@ namespace EM
 		//auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		//auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
 		//auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
-		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-		//auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
+		if (p_ecs.HaveComponent<Collider>(GetScriptEntityID())) {
+			auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+			//auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
 
-		//std::cout << &col << "\n";
+			//std::cout << &col << "\n";
 
-		//Taking Damage As Player
-		if (tag.GetNameTag() == "player")
-		{
-			if (col.GetCollisionArray()[0].mHit == 2)
+			//Taking Damage As Player
+			if (tag.GetNameTag() == "player")
 			{
-				auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
-				if (playerstats.mDamageCoolDown <= 0.0f)
+				if (col.GetCollisionArray()[0].mHit == 2)
 				{
-					playerstats.mIsDamaged = true;
+					auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+					if (playerstats.mDamageCoolDown <= 0.0f)
+					{
+						playerstats.mIsDamaged = true;
+					}
 				}
 			}
-		}
-		//Enemy Taking Damage
-		if (tag.GetNameTag() == "Enemy")
-		{
-			if (col.GetCollisionArray()[0].mHit == 2)
+			//Enemy Taking Damage
+			if (tag.GetNameTag() == "Enemy")
 			{
-				auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-				if (enemystats.mDamageCoolDownTimer <= 0.0f)
+				if (col.GetCollisionArray()[0].mHit == 2)
 				{
-					enemystats.mIsDamaged = true;
+					auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+					if (enemystats.mDamageCoolDownTimer <= 0.0f)
+					{
+						enemystats.mIsDamaged = true;
+					}
 				}
 			}
-		}
 
-		if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Enemy")
-		{
-			if (col.GetCollisionArray()[0].mHit == 2)
+			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Enemy")
 			{
-				auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-				if (enemystats.mDamageCoolDownTimer <= 0.0f)
+				if (col.GetCollisionArray()[0].mHit == 2)
 				{
-					enemystats.mIsDamaged = true;
+					auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+					if (enemystats.mDamageCoolDownTimer <= 0.0f)
+					{
+						enemystats.mIsDamaged = true;
+					}
 				}
 			}
-		}
-		//if chest is damaged
-		/*if (tag.GetNameTag() == "SkillsChest")
-		{
-			if (col.GetCollisionArray()[0].mHit == 2)
+			//if chest is damaged
+			/*if (tag.GetNameTag() == "SkillsChest")
 			{
-				dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->SetState(SkillsChest::ChestState::Dead);
-				dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->Animate(SkillsChest::ChestState::Dead);
-				vec2D response = rigidbody.GetVel();
-				vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
-			}
-		}*/
+				if (col.GetCollisionArray()[0].mHit == 2)
+				{
+					dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->SetState(SkillsChest::ChestState::Dead);
+					dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->Animate(SkillsChest::ChestState::Dead);
+					vec2D response = rigidbody.GetVel();
+					vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+				}
+			}*/
+		}
+		
 	}
 	/*!*************************************************************************
 	This function ends the script by deleting the pointer to this script

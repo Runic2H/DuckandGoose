@@ -1,6 +1,7 @@
 #include "EnemyRetreat.h"
 #include "EnemyIdle.h"
 #include "EnemyDamaged.h"
+#include "EnemyChase.h"
 
 namespace EM
 {
@@ -13,6 +14,7 @@ namespace EM
 
 	void EnemyRetreat::OnEnter(StateMachine* stateMachine)
 	{
+		std::cout << "Enemy Retreating\n";
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
 	}
 	void EnemyRetreat::OnUpdate(StateMachine* stateMachine, float Frametime)
@@ -42,7 +44,7 @@ namespace EM
 				rigidbody.SetNextPos(nextPos);
 			}
 		}
-		stateMachine->ChangeState(new EnemyIdle(stateMachine));
+		stateMachine->ChangeState(new EnemyChase(stateMachine));
 	}
 	void EnemyRetreat::OnExit(StateMachine* stateMachine)
 	{

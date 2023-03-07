@@ -18,7 +18,9 @@ namespace EM
 	}
 	void OnAttack_1::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
+		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
@@ -28,19 +30,23 @@ namespace EM
 	}
 	void OnAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
+		}
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-		if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.2f)
-		{
-			stateMachine->ChangeState(new OnAttack_2(stateMachine));
-		}
-		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new OnDamaged(stateMachine));
-		}
-		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
-		{
-			stateMachine->ChangeState(new OnIdle(stateMachine));
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.2f)
+			{
+				stateMachine->ChangeState(new OnAttack_2(stateMachine));
+			}
+			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+			{
+				stateMachine->ChangeState(new OnDamaged(stateMachine));
+			}
+			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
+			{
+				stateMachine->ChangeState(new OnIdle(stateMachine));
+			}
 		}
 	}
 	void OnAttack_1::OnExit(StateMachine* stateMachine)

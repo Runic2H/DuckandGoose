@@ -11,13 +11,15 @@ namespace EM
 	}
 	void OnBlock::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Block");
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Block");
+		}
 	}
 	void OnBlock::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT))
+		if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT) && p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID()))
 		{
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown <= 0.0f)
@@ -46,10 +48,12 @@ namespace EM
 	}
 	void OnBlock::OnExit(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 5.0f;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = false;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 5.0f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = false;
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		}
 		delete this;
 	}
 }

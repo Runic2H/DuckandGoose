@@ -13,6 +13,7 @@ namespace EM
 
 	void EnemyTransition::OnEnter(StateMachine* stateMachine)
 	{
+		std::cout << "Enemy Attack Transition\n";
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("MeleeIdle");
 		if ((rand() % 100) <= 80) {
 			stateMachine->ChangeState(new EnemyAttack(stateMachine));
