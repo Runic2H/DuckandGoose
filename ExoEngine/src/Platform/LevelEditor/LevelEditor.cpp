@@ -1562,22 +1562,22 @@ namespace EM {
             static int item_current = 1;
 
             //set voulume slider
-           // static float f1 = 1.0f;
-            ImGui::SliderFloat("Master Volume", &p_Audio->Master_setting, 0.0f, 1.0f, "Min - Max %.3f");
-            p_Audio->SetVolume(current_sound, 1 / (p_Audio->Master_setting + 1));
+            static float f1 = 1.0f;
+            ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
+            p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
 
             static float f2 = 0.0f;
             ImGui::SliderFloat("BGM Volume", &f2, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f2 > p_Audio->Master_setting)
+            if (f2 > f1)
             {
-                f2 = p_Audio->Master_setting;
+                f2 = f1;
             }
 
             static float f3 = 0.0f;
             ImGui::SliderFloat("SFX Volume", &f3, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f3 > p_Audio->Master_setting)
+            if (f3 > f1)
             {
-                f3 = p_Audio->Master_setting;
+                f3 = f1;
             }
 
             float f4 = p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup());

@@ -114,7 +114,7 @@ namespace EM
 				{
 					//spt.SetTexture("Start_Click");
 					p_GUI->toggle_menu();
-					p_Scene->setSceneToLoad("Assets/Scene/Level1.json");
+					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)

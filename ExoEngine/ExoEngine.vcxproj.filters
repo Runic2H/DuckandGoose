@@ -95,7 +95,6 @@
     <ClCompile Include="src\Platform\Logic\States\GateStates\GateUnlocked.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -302,7 +301,6 @@
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateUnlocked.h" />
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateLocked.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

@@ -53,6 +53,11 @@ namespace EM {
 		This function returns the purpose of the script as a flag for when it is called
 		****************************************************************************/
 		virtual std::string GetScriptName() override;
+
+		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
+
+		virtual Entity& GetScriptEntityID() override { return entityID; }
+
 		/*!*************************************************************************
 		This function check if the mouse is within the bounding box of the button
 		****************************************************************************/

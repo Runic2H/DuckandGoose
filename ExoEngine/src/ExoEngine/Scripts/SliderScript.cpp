@@ -71,7 +71,7 @@ namespace EM
 		
 		if(p_Editor->is_ShowWindow == false)
 		{ 
-			transform.SetPos(p_Audio->Master_setting+limit.min.x, transform.GetPos().y);
+			transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup())+limit.min.x, transform.GetPos().y);
 			SliderCali = true;
 			//std::cout << "limit min at:" << limit.min.x;
 			if((p_GUI->MousePosition.x >= limit.min.x && p_GUI->MousePosition.y >= limit.min.y) &&
@@ -91,10 +91,12 @@ namespace EM
 					clicked = false;
 				}
 			}
-			p_Audio->Master_setting = transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x);
-			if (p_Audio->Master_setting < 0.01)
-				p_Audio->Master_setting = 0.0f;
-			p_Audio->SetVolume(0, 1 / (p_Audio->Master_setting + 1));
+			p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+			if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < 0.01)
+			{
+				p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
+			}
+			p_Audio->SetVolume(0, 1/p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
 
 		}
 
