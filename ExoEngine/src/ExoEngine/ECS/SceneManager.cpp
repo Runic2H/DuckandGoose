@@ -17,6 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "SceneManager.h"
+#include "Platform/Graphics/Graphics.h"
 
 namespace EM
 {
@@ -337,6 +338,10 @@ void EM::SceneManager::checkForSceneToLoad()
 {
 	if (sceneToLoad != "")
 	{
+		if (sceneToLoad == "Assets/Scene/Elton.json")
+		{
+			Graphic::camera.SetZoomLevel(0.25f);
+		}
 		DeserializeFromFile(sceneToLoad);
 		sceneToLoad = "";
 	}
