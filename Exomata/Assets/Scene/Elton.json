@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 46
+        "Entities": 47
     },
     "EntityToIndexMap": {
         "Transform": [
@@ -50,7 +50,7 @@
             34,
             35,
             36,
-            100,
+            37,
             100,
             100,
             100,
@@ -356,7 +356,7 @@
             43,
             44,
             45,
-            100,
+            46,
             100,
             100,
             100,
@@ -560,7 +560,7 @@
             4,
             5,
             6,
-            100,
+            7,
             100,
             100,
             100,
@@ -764,7 +764,7 @@
             100,
             100,
             100,
-            100,
+            1,
             100,
             100,
             100,
@@ -1267,7 +1267,7 @@
             43,
             44,
             45,
-            100,
+            46,
             100,
             100,
             100,
@@ -1582,7 +1582,7 @@
             43,
             44,
             45,
-            100,
+            46,
             100,
             100,
             100,
@@ -1747,7 +1747,7 @@
             43,
             44,
             45,
-            100,
+            46,
             100,
             100,
             100,
@@ -1945,7 +1945,7 @@
         ],
         "Audio": [
             20,
-            100,
+            46,
             100,
             100,
             100,
@@ -2500,7 +2500,8 @@
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
-        "00000000000000000000100100111111"
+        "00000000000000000000100100111111",
+        "00000000000000000000000010101001"
     ],
     "Components": {
         "Transform": [
@@ -2645,9 +2646,9 @@
                 "Rot": 0.0
             },
             {
-                "posX": -3.8082058429718018,
+                "posX": -4.050652027130127,
                 "posY": 0.16885900497436523,
-                "scaleX": 0.25,
+                "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -2761,6 +2762,13 @@
                 "posY": -0.12820425629615784,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "posX": 0.0,
+                "posY": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
                 "Rot": 0.0
             }
         ],
@@ -3400,6 +3408,9 @@
             },
             {
                 "NameTag": "Enemy"
+            },
+            {
+                "NameTag": "BGM"
             }
         ],
         "Sprite": [
@@ -3686,7 +3697,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3967,7 +3978,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3997,7 +4008,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4027,7 +4038,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4057,7 +4068,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4087,7 +4098,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4117,7 +4128,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4147,7 +4158,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4275,6 +4286,11 @@
                 "0": "EnemyScript",
                 "1": "CollisionResponse",
                 "ScriptCount": 2
+            },
+            {
+                "0": "AudioManager",
+                "1": "BackgroundAudio",
+                "ScriptCount": 2
             }
         ],
         "Tag": [],
@@ -4291,6 +4307,14 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 2
+            },
+            {
+                "0": {
+                    "AudioPath": "HeroFightBossMusic.wav",
+                    "Channel": 2,
+                    "IsLooping": true
+                },
+                "AudioArrCount": 1
             }
         ],
         "HUDComponent": [

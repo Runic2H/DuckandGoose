@@ -58,10 +58,13 @@ namespace EM
                 if (audio[i].triggered)
                 {
                     audio[i].is_Playing = p_Audio->IsPlaying(audio[i].mChannel);
+                    if (audio[i].is_Playing == false) {
+                        audio[i].triggered = false;
+                    }
                 }
                 //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
                 //update looping
-                p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
+                //p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
                 //std::cout << "Should play: " << audio[i].should_play << std::endl;
                 //set is_playing accordingly
                 //std::cout << "Is playing " << audio[i].is_Playing << std::endl;
@@ -79,8 +82,8 @@ namespace EM
                     //play sound
                     audio[i].mChannel = p_Audio->PlaySound("Assets/Metadigger/" + audio[i].mAudioPath, audio[i].mChannelGroup);
                     // audio[i].is_Playing = true;
-                    audio[i].should_play = false;
-                    std::cout << "Playing loop\n";
+                    //audio[i].should_play = false;
+                    //std::cout << "Playing loop\n";
                     audio[i].triggered = true;
                 }
                 if (audio[i].should_stop == true) {
