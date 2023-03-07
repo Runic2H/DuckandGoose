@@ -22,10 +22,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/PlayerControl.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
+#include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/GateController.h"
+
 
 
 namespace EM
@@ -117,6 +119,10 @@ namespace EM
 			if (mScriptNameVector[j] == "GateController")
 			{
 				mScriptsVector.push_back(new GateController(GetComponentEntityID()));
+			}
+			if (mScriptNameVector[j] == "SliderScript")
+			{
+				mScriptsVector.push_back(new SliderScript());
 			}
 		}
 		return true;

@@ -277,7 +277,6 @@ namespace EM
         //UpdateAttack();
         UpdatePhysics(Frametime);
         Animate(mState);
-        
 	}
 
     /*!*************************************************************************
@@ -314,13 +313,7 @@ namespace EM
     {
         auto& pRigid = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
         auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-        if (mVel.x != 0.0f || mVel.y != 0.0f) {
-            Normalize(mVel, mVel);
-            mVel = mVel * 25;
-            if (mIsDashing) {
-                mVel.x *= 5;
-            }
-        }
+
         pRigid.SetVel(mPhys.friction(pRigid.GetVel(), Frametime));
         pRigid.SetVel(mPhys.accelent(pRigid.GetVel(), mVel, Frametime));
         vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
@@ -386,9 +379,6 @@ namespace EM
                 p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetIndex().x = 0;
             }
             break;
-       /* case PlayerState::Dead:
-            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Death");
-            break;*/
         }
     }
 

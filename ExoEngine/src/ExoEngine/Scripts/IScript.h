@@ -8,7 +8,6 @@
 \par Assignment GAM200
 \date 2/11/2022
 \brief	Abstract class for IScript
-
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
@@ -30,7 +29,7 @@ namespace EM
 		virtual void Start() {};
 		virtual void Update(float Frametime) { UNREFERENCED_PARAMETER(Frametime); };
 		virtual void End() {};
-		virtual IScript* Clone() const = 0; 
+		virtual IScript* Clone() const = 0;
 		virtual std::string GetScriptName() = 0;
 
 		virtual void SetScriptEntityID(Entity& entity) = 0;

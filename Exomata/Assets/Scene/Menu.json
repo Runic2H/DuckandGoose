@@ -2213,66 +2213,66 @@
             }
         ],
         "Sprite": [
-            {
-                "TextureName": "MainBackGround",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "ExomataLogo",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "StartIdle",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "QuitIdle",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "OptionsIdle",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            },
-            {
-                "TextureName": "HTPButtonIdle",
-                "Index_X": 0.0,
-                "Index_Y": 0.0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "DisplayTime": 0.16670000553131104
-            }
+          {
+            "TextureName": "Main_Background",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
+          {
+            "TextureName": "ExomataLogo",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
+          {
+            "TextureName": "Start_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
+          {
+            "TextureName": "Quit_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
+          {
+            "TextureName": "Options_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
+          {
+            "TextureName": "htp_button_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          }
         ],
         "Logic": [
             {
@@ -2290,10 +2290,10 @@
                 "0": "ButtonResponse",
                 "ScriptCount": 1
             },
-            {
-                "0": "ButtonResponse",
-                "ScriptCount": 1
-            }
+          {
+            "0": "ButtonResponse",
+            "ScriptCount": 1
+          }
         ],
         "Tag": [
             {

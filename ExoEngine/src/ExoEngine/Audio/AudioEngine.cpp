@@ -1,4 +1,4 @@
-/*!*************************************************************************
+    /*!*************************************************************************
 ****
 \file AudioEngine.cpp
 \author Cheung Jun Yin Matthew, Tan Ek Hern
@@ -215,7 +215,7 @@ void CAudioEngine::Init()
 
 	Master->addGroup(BGM);
 	Master->addGroup(SFX);
-
+    //Master_setting = 1.0f;
     //load all audio files from metadigger folder
     std::string audio_path = "Assets/metadigger/";
     for (auto const& dir_entry : std::filesystem::directory_iterator{ audio_path }) //iterate files in metadigger file
