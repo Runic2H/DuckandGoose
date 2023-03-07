@@ -1315,7 +1315,7 @@ namespace EM {
                         ImGui::Text("Inserted Audio Files:");
                         ImGui::Combo("##Audio In Component", &current_audio, AudioList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
                         //edit channel group
-                        if (AudioArr.size() > 0) {
+                        if (AudioArr.size() > current_audio) {
                             ImGui::Text("Inserted Audio Channel Group:");
                             const char* ChList = "None\0Master\0BGM\0SFX";
                             int ChIndex = static_cast<int>(AudioComp[current_audio].mChannelGroup);

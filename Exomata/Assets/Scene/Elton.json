@@ -738,7 +738,7 @@
             100,
             100,
             100,
-            100,
+            0,
             100,
             100,
             100,
@@ -1944,7 +1944,7 @@
             100
         ],
         "Audio": [
-            100,
+            20,
             100,
             100,
             100,
@@ -2475,7 +2475,7 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000010000111111",
+        "00000000000000000000010010111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
@@ -3697,7 +3697,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 0,
+                "Index_X": 4,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3978,7 +3978,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 2,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4008,7 +4008,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 1,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4038,7 +4038,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 2,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4068,7 +4068,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 1,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4098,7 +4098,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 2,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4128,7 +4128,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 1,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4265,7 +4265,8 @@
             {
                 "0": "PlayerControl",
                 "1": "CollisionResponse",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "0": "EnemyScript",
@@ -4303,7 +4304,21 @@
             }
         ],
         "Tag": [],
-        "Audio": [],
+        "Audio": [
+            {
+                "0": {
+                    "AudioPath": "Attack2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "FStep8.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 2
+            }
+        ],
         "HUDComponent": [
             {
                 "ElementType": 1,

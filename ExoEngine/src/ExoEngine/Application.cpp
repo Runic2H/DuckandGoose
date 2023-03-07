@@ -94,7 +94,7 @@ Run loop for application
 			signature.set(p_ecs.GetComponentType<Transform>());
 			signature.set(p_ecs.GetComponentType<RigidBody>());
 			signature.set(p_ecs.GetComponentType<Collider>());
-			signature.set(p_ecs.GetComponentType<RigidBody>());
+			//signature.set(p_ecs.GetComponentType<RigidBody>());
 			p_ecs.SetSystemSignature<CollisionSystem>(signature);
 		}
 		mCollision->Init();

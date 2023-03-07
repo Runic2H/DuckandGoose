@@ -109,7 +109,7 @@ namespace EM {
                                             }
                                             if (e2 == Collider::ColliderType::circle) {
                                                 if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
-                                                    // std::cout << "Collision Circle-Circle\n";
+                                                    //std::cout << "Collision Circle-Circle\n";
                                                     col1[a].mHit = 1;
                                                     vec2D norm1 = offset1 - offset2;
                                                     Normalize(norm1, norm1);
@@ -149,7 +149,7 @@ namespace EM {
                                                 rigid2.SetNextPos(trans2.GetPos());
                                                 offset2 = trans2.GetPos() + col2[b].mOffset;
                                                 if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
-                                                    // std::cout << "Collision Circle-Circle\n";
+                                                    //std::cout << "Collision Circle-Circle\n";
                                                     col2[b].mHit = 3;
                                                 }
                                             }
@@ -275,7 +275,7 @@ namespace EM {
                                                 rigid1.SetNextPos(trans1.GetPos());
                                                 offset1 = trans1.GetPos() + col1[a].mOffset;
                                                 if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
-                                                    // std::cout << "Collision Circle-Circle\n";
+                                                    //std::cout << "Collision Circle-Circle\n";
                                                     col1[a].mHit = 3;
                                                 }
                                             }

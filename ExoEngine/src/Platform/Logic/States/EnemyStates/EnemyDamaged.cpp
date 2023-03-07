@@ -1,7 +1,7 @@
 #include "empch.h"
 #include "EnemyDamaged.h"
 #include "EnemyDeath.h"
-#include "EnemyIdle.h"
+#include "EnemyChase.h"
 #include "ExoEngine/Scripts/GateController.h"
 
 namespace EM
@@ -15,6 +15,7 @@ namespace EM
 
 	void EnemyDamaged::OnEnter(StateMachine* stateMachine)
 	{
+		std::cout << "Enemy Damaged\n";
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
@@ -41,7 +42,7 @@ namespace EM
 			}
 			else
 			{
-				stateMachine->ChangeState(new EnemyIdle(stateMachine));
+				stateMachine->ChangeState(new EnemyChase(stateMachine));
 			}
 		}
 	}
