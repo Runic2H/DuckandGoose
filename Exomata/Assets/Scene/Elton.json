@@ -764,7 +764,7 @@
             100,
             100,
             100,
-            100,
+            1,
             100,
             100,
             100,
@@ -1945,7 +1945,7 @@
         ],
         "Audio": [
             20,
-            100,
+            46,
             100,
             100,
             100,
@@ -2501,7 +2501,7 @@
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
-        "00000000000000000000000100111001"
+        "00000000000000000000000010101001"
     ],
     "Components": {
         "Transform": [
@@ -2646,9 +2646,9 @@
                 "Rot": 0.0
             },
             {
-                "posX": -4.01267671585083,
-                "posY": 0.06301984935998917,
-                "scaleX": 0.25,
+                "posX": -4.050652027130127,
+                "posY": 0.16885900497436523,
+                "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -2765,10 +2765,10 @@
                 "Rot": 0.0
             },
             {
-                "posX": -4.002569198608398,
-                "posY": 0.263019859790802,
+                "posX": 0.0,
+                "posY": 0.0,
                 "scaleX": 1.0,
-                "scaleY": 0.05000000074505806,
+                "scaleY": 1.0,
                 "Rot": 0.0
             }
         ],
@@ -3410,7 +3410,7 @@
                 "NameTag": "Enemy"
             },
             {
-                "NameTag": "PlayerHUD"
+                "NameTag": "BGM"
             }
         ],
         "Sprite": [
@@ -3697,7 +3697,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3978,7 +3978,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4008,7 +4008,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4038,7 +4038,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4068,7 +4068,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4098,7 +4098,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4128,7 +4128,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4158,7 +4158,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 2,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4299,8 +4299,9 @@
                 "ScriptCount": 2
             },
             {
-                "0": "HUDController",
-                "ScriptCount": 1
+                "0": "AudioManager",
+                "1": "BackgroundAudio",
+                "ScriptCount": 2
             }
         ],
         "Tag": [],
@@ -4317,6 +4318,14 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 2
+            },
+            {
+                "0": {
+                    "AudioPath": "HeroFightBossMusic.wav",
+                    "Channel": 2,
+                    "IsLooping": true
+                },
+                "AudioArrCount": 1
             }
         ],
         "HUDComponent": [

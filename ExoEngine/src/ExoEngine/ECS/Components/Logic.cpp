@@ -124,6 +124,7 @@ namespace EM
 			if (mScriptNameVector[j] == "BackgroundAudio")
 			{
 				mScriptsVector.push_back(new BackgroundAudio());
+			}
 			if (mScriptNameVector[j] == "SliderScript")
 			{
 				mScriptsVector.push_back(new SliderScript());
