@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "OnDamaged.h"
 #include "OnIdle.h"
 #include "OnDieded.h"

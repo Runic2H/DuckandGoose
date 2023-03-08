@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "OnDieded.h"
 
 namespace EM

@@ -100,7 +100,7 @@ namespace EM {
 		CircleVertex* CircleVertexBufferPtr = nullptr;
 
 		//contain an array of texture
-		std::array<MultiRefs<Texture>, 32> TextureUnits;
+		std::array<MultiRefs<Texture>, 64> TextureUnits;
 		unsigned int TextureUnitIndex = 1; // 0 = blank texture. Index to keep track of the texture
 
 		Renderer::Information Infos;

@@ -19,7 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 /*!*************************************************************************
 Constructor for audio component
 ****************************************************************************/
-EM::Audio::Audio() : AudioArr() {}
+EM::Audio::Audio() : AudioArr(), bgmVol{ 1.0f }, sfxVol{ 1.0f }, masterVol{ 1.0f } {}
 
 
 /*!*************************************************************************
@@ -52,6 +52,9 @@ bool EM::Audio::Deserialize(const rapidjson::Value& obj)
 		na.triggered = false;
 		AudioArr.emplace_back(na);
 	}
+	bgmVol = (float)obj["BGM Volume"].GetDouble();
+	sfxVol = (float)obj["SFX Volume"].GetDouble();
+	masterVol = (float)obj["Master Volume"].GetDouble();
 	return true;
 }
 
@@ -92,6 +95,12 @@ bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writ
 	}
 	writer->Key("AudioArrCount");
 	writer->Int(i);
+	writer->Key("BGM Volume");
+	writer->Double(bgmVol);
+	writer->Key("SFX Volume");
+	writer->Double(sfxVol);
+	writer->Key("Master Volume");
+	writer->Double(masterVol);
 	writer->EndObject();
 	return true;
 }

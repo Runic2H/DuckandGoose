@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "OnAttack_1.h"
 #include "OnIdle.h"
 #include "OnAttack_2.h"
