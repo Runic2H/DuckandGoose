@@ -58,6 +58,14 @@ namespace EM
 		****************************************************************************/
 		void SetComponentEntityID(Entity& entity) { entityID = entity; }
 
+		float& GetBGMVolume() { return bgmVol; }
+		float& GetSFXVolume() { return sfxVol; }
+		float& GetMasterVolume() { return masterVol; }
+
+		void SetBGMVolume(float vol) { bgmVol = vol; }
+		void SetSFXVolume(float vol) { sfxVol = vol; }
+		void SetMasterVolume(float vol) { masterVol = vol; }
+
 		//Audio component
 		//	Singular piece of audio that can be set to play upon a specific event.
 		//	Toggle looping.
@@ -65,5 +73,8 @@ namespace EM
 
 	private:
 		std::vector<AudioPiece> AudioArr;
+		float bgmVol;
+		float sfxVol;
+		float masterVol;
 	};
 }

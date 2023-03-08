@@ -441,7 +441,7 @@ Run loop for application
 			
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			p_Scene->checkForSceneToLoad();
-			p_Editor->is_ShowWindow = false;
+			//p_Editor->is_ShowWindow = false;
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}

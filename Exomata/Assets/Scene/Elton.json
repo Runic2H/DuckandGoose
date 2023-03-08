@@ -2501,7 +2501,7 @@
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
         "00000000000000000000100100111111",
-        "00000000000000000000000010101001"
+        "00000000000000000000000110111001"
     ],
     "Components": {
         "Transform": [
@@ -2646,9 +2646,9 @@
                 "Rot": 0.0
             },
             {
-                "posX": -4.050652027130127,
-                "posY": 0.16885900497436523,
-                "scaleX": -0.25,
+                "posX": -4.002931594848633,
+                "posY": 0.07680528610944748,
+                "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -2765,10 +2765,10 @@
                 "Rot": 0.0
             },
             {
-                "posX": 0.0,
-                "posY": 0.0,
+                "posX": 0.015107512474060059,
+                "posY": 0.20499999821186066,
                 "scaleX": 1.0,
-                "scaleY": 1.0,
+                "scaleY": 0.10000000149011612,
                 "Rot": 0.0
             }
         ],
@@ -3697,7 +3697,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 0,
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3978,7 +3978,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4008,7 +4008,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 9,
+                "Index_X": 6,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4038,7 +4038,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4068,7 +4068,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 9,
+                "Index_X": 6,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4098,7 +4098,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4128,7 +4128,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 9,
+                "Index_X": 6,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4158,7 +4158,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4257,8 +4257,7 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "MaxIndex": 0
             }
         ],
         "Logic": [
@@ -4301,7 +4300,8 @@
             {
                 "0": "AudioManager",
                 "1": "BackgroundAudio",
-                "ScriptCount": 2
+                "2": "HUDController",
+                "ScriptCount": 3
             }
         ],
         "Tag": [],
@@ -4317,7 +4317,10 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 2
+                "AudioArrCount": 2,
+                "BGM Volume": 0.14499999582767487,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.47999998927116394
             },
             {
                 "0": {
@@ -4325,7 +4328,10 @@
                     "Channel": 2,
                     "IsLooping": true
                 },
-                "AudioArrCount": 1
+                "AudioArrCount": 1,
+                "BGM Volume": 0.14499999582767487,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.47999998927116394
             }
         ],
         "HUDComponent": [
@@ -4356,8 +4362,8 @@
             },
             {
                 "ElementType": 1,
-                "offsetX": -0.41999998688697815,
-                "offsetY": 0.20000000298023224
+                "offsetX": -0.41499999165534973,
+                "offsetY": 0.20499999821186066
             }
         ],
         "Attributes": [],
