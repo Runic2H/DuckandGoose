@@ -25,6 +25,11 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown <= 0.0f)
 			{
+				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
+				{
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[7].should_play = true;
+				}
+
 				int pDmg = 0;
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
