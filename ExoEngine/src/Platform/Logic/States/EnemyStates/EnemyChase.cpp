@@ -32,13 +32,16 @@ namespace EM
 		bool check = false;
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		if (!check)
 		{
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-				check = true;
-				//std::cout << "Player Detected\n";
+				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+				{
+					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+					check = true;
+					//std::cout << "Player Detected\n";
+				}
 			}
 		}
 		if (check) {
@@ -69,7 +72,7 @@ namespace EM
 			//__________________________________________________________________________________________________________________
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (dist < 0.2f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown <= 0.0f)
+			if (dist < 0.1f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown <= 0.0f)
 			{
 				//std::cout << "In Proximity2" << std::endl;
 				//if within range to attack, set mode to attacking

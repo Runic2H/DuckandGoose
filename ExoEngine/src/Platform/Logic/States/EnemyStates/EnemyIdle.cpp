@@ -28,15 +28,18 @@ namespace EM
 		}
 		vec2D playerPos = vec2D();
 		bool check = false;
-		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		if (!check)
 		{
-			//std::cout << "Prox Check" << std::endl;
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				check = true;
-				//std::cout << "Found Player" << std::endl;
-				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+				//std::cout << "Prox Check" << std::endl;
+				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+				{
+					check = true;
+					//std::cout << "Found Player" << std::endl;
+					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 
+				}
 			}
 		}
 		//if player moves within x radius, set mode to moving

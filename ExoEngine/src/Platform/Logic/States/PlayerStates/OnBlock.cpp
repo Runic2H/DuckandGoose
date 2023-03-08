@@ -27,7 +27,7 @@ namespace EM
 				int pDmg = 0;
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 					if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
-						pDmg = p_ecs.GetComponent<Attributes>(i).GetDamage();
+						pDmg = p_ecs.GetComponent<EnemyAttributes>(i).mDamage;
 					}
 				}
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg/5;
