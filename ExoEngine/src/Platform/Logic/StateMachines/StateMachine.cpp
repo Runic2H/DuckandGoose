@@ -1,3 +1,4 @@
+#include "empch.h"
 #include "StateMachine.h"
 #include "Platform/Logic/States/IStates.h"
 

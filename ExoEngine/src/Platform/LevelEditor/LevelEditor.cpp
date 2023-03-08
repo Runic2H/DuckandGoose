@@ -1561,26 +1561,23 @@ namespace EM {
 
             static int item_current = 1;
 
+            float f1 = p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup());
+            float f4 = p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup());
+            float f5 = p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup());
+            
+            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i) 
+            {
+                if (p_ecs.HaveComponent<Audio>(i)) 
+                {
+                    f1 = p_ecs.GetComponent<Audio>(i).GetMasterVolume();
+                    f4 = p_ecs.GetComponent<Audio>(i).GetBGMVolume();
+                    f5 = p_ecs.GetComponent<Audio>(i).GetSFXVolume();
+                }
+            }
             //set voulume slider
-            static float f1 = 1.0f;
             ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
             p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
 
-            static float f2 = 0.0f;
-            ImGui::SliderFloat("BGM Volume", &f2, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f2 > f1)
-            {
-                f2 = f1;
-            }
-
-            static float f3 = 0.0f;
-            ImGui::SliderFloat("SFX Volume", &f3, 0.0f, 1.0f, "Min - Max %.3f");
-            if (f3 > f1)
-            {
-                f3 = f1;
-            }
-
-            float f4 = p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup());
             ImGui::SliderFloat("BGM vol", &f4, 0.0f, 1.0f, "Min - Max %.3f");
             if (f4 > f1)
             {
@@ -1589,7 +1586,6 @@ namespace EM {
             p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), f4);
 
 
-            float f5 = p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup());
             ImGui::SliderFloat("SFX vol", &f5, 0.0f, 1.0f, "Min - Max %.3f");
             if (f5 > f1)
             {
@@ -1597,6 +1593,15 @@ namespace EM {
             }
             p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), f5);
 
+            for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+            {
+                if (p_ecs.HaveComponent<Audio>(i))
+                {
+                    p_ecs.GetComponent<Audio>(i).SetMasterVolume(f1);
+                    p_ecs.GetComponent<Audio>(i).SetBGMVolume(f4);
+                    p_ecs.GetComponent<Audio>(i).SetSFXVolume(f5);
+                }
+            }
             ImGui::End();
         }
     }
