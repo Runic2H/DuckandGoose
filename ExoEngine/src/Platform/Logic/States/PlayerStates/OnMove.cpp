@@ -8,7 +8,7 @@
 
 namespace EM
 {
-	OnMove::OnMove(StateMachine* stateMachine) {}
+	OnMove::OnMove(StateMachine* stateMachine) : footstep_switch{ true } {}
 
 	IStates* OnMove::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -67,25 +67,42 @@ namespace EM
 				if ((p_Input->KeyHold(GLFW_KEY_W) || p_Input->KeyHold(GLFW_KEY_D)
 					|| p_Input->KeyHold(GLFW_KEY_S) || p_Input->KeyHold(GLFW_KEY_A)))
 				{
-					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
+					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 2))
 					{
 						auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
-						bool noPlay = true;
-						for (int i = 0; i < 5; i++)
+						if (footstep_switch == true && (aud[1].triggered == false && aud[1].is_Playing == false && aud[1].should_play == false) &&
+							(aud[2].triggered == false && aud[2].is_Playing == false && aud[2].should_play == false))
 						{
-							if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
-							{
-								noPlay = false;
-								std::cout << "sound is playing" << std::endl;
-							}
-
+							aud[1].should_play = true;
+							footstep_switch = false;
 						}
-						if (noPlay)
+						else if (footstep_switch == false && (aud[1].triggered == false && aud[1].is_Playing == false && aud[1].should_play == false) &&
+							(aud[2].triggered == false && aud[2].is_Playing == false && aud[2].should_play == false))
 						{
-							int r = (rand() % 5);
-							aud[r].should_play = true;
+							aud[2].should_play = true;
+							footstep_switch = true;
 						}
 					}
+
+					//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
+					//{
+					//	auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
+					//	bool noPlay = true;
+					//	for (int i = 0; i < 5; i++)
+					//	{
+					//		if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
+					//		{
+					//			noPlay = false;
+					//			std::cout << "sound is playing" << std::endl;
+					//		}
+
+					//	}
+					//	if (noPlay)
+					//	{
+					//		int r = (rand() % 5);
+					//		aud[r].should_play = true;
+					//	}
+					//}
 
 					//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
 					//{

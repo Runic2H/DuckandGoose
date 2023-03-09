@@ -13,6 +13,11 @@ namespace EM
 
 	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 2))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[2].should_play = true;
+			std::cout << "Enemy Death" << std::endl;
+		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_DEATH");
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 	}

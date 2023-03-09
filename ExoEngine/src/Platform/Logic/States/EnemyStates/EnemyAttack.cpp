@@ -19,6 +19,11 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET");
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+			std::cout << "Enemy Attacking" << std::endl;
+		}
 	}
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{

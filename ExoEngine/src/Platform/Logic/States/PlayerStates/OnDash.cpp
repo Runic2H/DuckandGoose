@@ -15,9 +15,9 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer = 0.2f;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown = 3.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Dash");
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 8))
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 4))
 		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[8].should_play = true;
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[4].should_play = true;
 		}
 	}
 	void OnDash::OnUpdate(StateMachine* stateMachine, float Frametime)

@@ -397,7 +397,7 @@ namespace EM {
             mGizmoType = ImGuizmo::OPERATION::SCALE;
         }
         ImGuizmo::BeginFrame();
-        if (selectedEntity >= 0 && p_ecs.HaveComponent<Transform>(selectedEntity))//have selected entity
+        if (selectedEntity >= 0 && selectedEntity < MAX_ENTITIES && p_ecs.HaveComponent<Transform>(selectedEntity))//have selected entity
         {
             ImGuizmo::SetOrthographic(true);
 
@@ -443,25 +443,24 @@ namespace EM {
 
         ImGui::End();
         ImGui::PopStyleVar();
-        if (p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver() && mViewportFocused)
+        std::multimap<float, Transform*> sortedMultimap;
+        for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
         {
-
-            std::multimap<float, Transform*> sortedMultimap;
-            for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
-            {
-                if (p_ecs.HaveComponent<Transform>(entity)) {
-                    sortedMultimap.insert({ p_ecs.GetComponent<Transform>(entity).GetRot(),
-                                  &p_ecs.GetComponent<Transform>(entity) });
-                }
-            }
-
-            selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
-
+            if(p_ecs.HaveComponent<Transform>(entity))
+                sortedMultimap.insert({ p_ecs.GetComponent<Transform>(entity).GetRot(),
+                            &p_ecs.GetComponent<Transform>(entity) });
+        }
+        if (p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver())
+        {
             //std::cout << selectedEntity << std::endl;
-            if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
+            if (selectedEntity >= 0 && selectedEntity < MAX_ENTITIES)//no entity selected will remain to the previous selected entity
             {
-                selectedEntity = 0; //to be fixed
+                if(p_ecs.HaveComponent<Transform>(selectedEntity))
+                    selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
             }
+            else
+                selectedEntity = 0;
+          
         }
     }
 
@@ -827,7 +826,7 @@ namespace EM {
         if (is_ShowWindow)
         {
             ImGui::Begin("Inspector");
-            if (selectedEntity != MAX_ENTITIES && p_ecs.GetTotalEntities() != 0)// if the selectedEntityExist
+            if (selectedEntity < MAX_ENTITIES && selectedEntity >= 0 && p_ecs.GetTotalEntities() != 0)// if the selectedEntityExist
             {
                 //create component for the selected entity 
                 if (ImGui::Button("Add Component"))

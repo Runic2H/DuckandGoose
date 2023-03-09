@@ -23,9 +23,9 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 6))
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[6].should_play = true;
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
 			//std::cout << "attacking audio" << std::endl;
 		}
 	}

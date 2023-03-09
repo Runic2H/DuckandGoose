@@ -172,11 +172,11 @@ namespace EM {
 
 		//Shader
 		r_Data.QuadShader = ResourceManager::GetShader("QuadShader");
-		int TextureSamplers[32];
-		for (int i = 0; i < 32; i++)
+		int TextureSamplers[64];
+		for (int i = 0; i < 64; i++)
 			TextureSamplers[i] = i;
 		r_Data.QuadShader->Bind();
-		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 32);
+		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 64);
 
 		//set first texture unit 0 to be blanktexture
 		r_Data.TextureUnits[0] = r_Data.BlankTexture;
@@ -472,7 +472,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 32)
+			if (r_Data.TextureUnitIndex >= 64)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;
@@ -601,7 +601,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 32)
+			if (r_Data.TextureUnitIndex >= 64)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;

@@ -25,9 +25,9 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown <= 0.0f)
 			{
-				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
+				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 3))
 				{
-					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[7].should_play = true;
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[3].should_play = true;
 				}
 
 				int pDmg = 0;
