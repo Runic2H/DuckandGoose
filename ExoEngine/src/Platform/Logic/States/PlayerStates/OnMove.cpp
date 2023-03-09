@@ -26,11 +26,29 @@ namespace EM
 	void OnMove::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Running");
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+	/*	if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
 		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
-			//std::cout << "moving audio" << std::endl;
-		}
+			auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
+			bool noPlay = true;
+			for (int i = 0; i < 5; i++) 
+			{
+				if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
+				{
+					noPlay = false;
+				}
+			}
+			if (noPlay) 
+			{
+				int r = (rand() % 5);
+				aud[r].should_play = true;
+			}
+		}*/
+		// 
+		//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+		//{
+		//	p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
+		//	//std::cout << "moving audio" << std::endl;
+		//}
 	}
 	void OnMove::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -49,11 +67,32 @@ namespace EM
 				if ((p_Input->KeyHold(GLFW_KEY_W) || p_Input->KeyHold(GLFW_KEY_D)
 					|| p_Input->KeyHold(GLFW_KEY_S) || p_Input->KeyHold(GLFW_KEY_A)))
 				{
-					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
 					{
-						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
-						//std::cout << "moving audio" << std::endl;
+						auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
+						bool noPlay = true;
+						for (int i = 0; i < 5; i++)
+						{
+							if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
+							{
+								noPlay = false;
+								std::cout << "sound is playing" << std::endl;
+							}
+
+						}
+						if (noPlay)
+						{
+							int r = (rand() % 5);
+							aud[r].should_play = true;
+						}
 					}
+
+					//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+					//{
+					//	p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
+					//	//std::cout << "moving audio" << std::endl;
+					//}
+
 					if (p_Input->KeyHold(GLFW_KEY_W)) {
 						vel.y = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
 					}
