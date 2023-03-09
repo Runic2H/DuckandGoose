@@ -41,14 +41,17 @@ namespace EM
 		{
 			auto& LogicComp = p_ecs.GetComponent<Logic>(entity);
 			LogicComp.SetScriptEntity(entity);
-			for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
+			if (!LogicComp.GetScript().empty())
 			{
-				if (!(*i)->GetScriptInit())
+				for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 				{
-					(*i)->Start();
-					(*i)->SetScriptInit();
+					if (!(*i)->GetScriptInit())
+					{
+						(*i)->Start();
+						(*i)->SetScriptInit();
+					}
+					(*i)->Update(Frametime);
 				}
-				(*i)->Update(Frametime);
 			}
 		}
 		Timer::GetInstance().Update(Systems::LOGIC);

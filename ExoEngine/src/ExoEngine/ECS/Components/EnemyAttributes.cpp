@@ -17,7 +17,7 @@ namespace EM
 
 	bool EnemyAttributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("Health");
 		writer->Int(mHealth);
 		writer->Key("Max Health");
@@ -28,7 +28,7 @@ namespace EM
 		//writer->Double((double)mAttackTimer);
 		//writer->Key("Damage Cooldown");
 		//writer->Double((double)mDamageCooldownTimer);
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 }

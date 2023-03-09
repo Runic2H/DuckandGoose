@@ -58,7 +58,7 @@ namespace EM {
 	****************************************************************************/
 	bool Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("TextureName");
 		writer->String(mTextureName.c_str());
 		writer->Key("Index_X");
@@ -82,7 +82,7 @@ namespace EM {
 			writer->Key(DpNum.c_str());
 			writer->Double(displayTime[i]);
 		}
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 	

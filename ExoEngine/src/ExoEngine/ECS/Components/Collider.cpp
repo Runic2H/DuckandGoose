@@ -74,7 +74,7 @@ namespace EM
 	****************************************************************************/
 	bool Collider::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("ColliderType1");
 		writer->Int(static_cast<int>(mColArr[0].mCol));
 		writer->Key("ColliderType2");
@@ -107,7 +107,7 @@ namespace EM
 		writer->Double(mColArr[0].mRadius);
 		writer->Key("radius2");
 		writer->Double(mColArr[1].mRadius);
-		writer->EndObject();
+		//writer->EndObject();
 		
 		/*writer->StartArray();
 		for (int i = 0; i < 2; ++i)

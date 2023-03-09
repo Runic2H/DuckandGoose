@@ -38,14 +38,14 @@ namespace EM {
 	****************************************************************************/
 	bool HUDComponent::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("ElementType");
 		writer->Int(static_cast<int>(mType));
 		writer->Key("offsetX");
 		writer->Double(offset.x);
 		writer->Key("offsetY");
 		writer->Double(offset.y);
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 }

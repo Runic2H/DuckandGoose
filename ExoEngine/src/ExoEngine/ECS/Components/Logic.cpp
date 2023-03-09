@@ -139,7 +139,7 @@ namespace EM
 	bool Logic::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		int i = 0;
-		writer->StartObject();
+		//writer->StartObject();
 		//writer->StartArray();
 		for (i = 0; i < mScriptNameVector.size(); ++i)
 		{
@@ -149,7 +149,7 @@ namespace EM
 		//writer->EndArray();
 		writer->Key("ScriptCount");
 		writer->Int(i);
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 

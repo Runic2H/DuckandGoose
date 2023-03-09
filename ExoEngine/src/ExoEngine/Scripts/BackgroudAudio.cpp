@@ -37,7 +37,10 @@ namespace EM {
 
 	void BackgroundAudio::Update(float Frametime)
 	{
-		p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = true;
+		if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && (p_ecs.GetComponent<Audio>(GetScriptEntityID()).GetSize() > 0))
+		{
+			p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = true;
+		}
 	}
 
 	void BackgroundAudio::End()

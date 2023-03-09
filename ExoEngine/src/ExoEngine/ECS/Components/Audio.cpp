@@ -80,7 +80,7 @@ bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writ
 	//return true;
 
 	int i = 0;
-	writer->StartObject();
+	//writer->StartObject();
 	for (i = 0; i < AudioArr.size(); ++i)
 	{
 		writer->Key(std::to_string(i).c_str());
@@ -101,6 +101,6 @@ bool EM::Audio::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writ
 	writer->Double(sfxVol);
 	writer->Key("Master Volume");
 	writer->Double(masterVol);
-	writer->EndObject();
+	//writer->EndObject();
 	return true;
 }

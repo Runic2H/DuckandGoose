@@ -16,7 +16,7 @@ namespace EM
 
 	bool Attributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		writer->StartObject();
+		//writer->StartObject();
 		writer->Key("Health");
 		writer->Int(mHealth);
 		writer->Key("Max Health");
@@ -25,7 +25,7 @@ namespace EM
 		writer->Int(mDamage);
 		writer->Key("Chest Health");
 		writer->Int(mChestHealth);
-		writer->EndObject();
+		//writer->EndObject();
 		return true;
 	}
 }
