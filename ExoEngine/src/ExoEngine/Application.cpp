@@ -26,7 +26,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ECS/ECS.h"
 #include "ECS/SceneManager.h"
 #include "Audio/AudioEngine.h"
-#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
@@ -34,8 +33,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
-#include "ExoEngine/Scripts/EnemyMovement.h"
-#include "ExoEngine/Scripts/PlayerController.h"
 #include "ExoEngine/GUI/GUI.h"
 #include <stdlib.h>
 

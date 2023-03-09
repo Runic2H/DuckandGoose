@@ -14,8 +14,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 *******************************************************************************/
 #include "empch.h"
 #include "CollisionResponse.h"
-#include "PlayerController.h"
-#include "EnemyMovement.h"
 #include "SkillsChest.h"
 
 namespace EM
@@ -42,48 +40,69 @@ namespace EM
 	{
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
-		//auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		//auto& rigidbody = p_ecs.GetComponent<RigidBody>(GetScriptEntityID());
-		//auto& logic = p_ecs.GetComponent<Logic>(GetScriptEntityID());
 		if (p_ecs.HaveComponent<Collider>(GetScriptEntityID())) {
 			auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-			//auto& attrib = p_ecs.GetComponent<Attributes>(GetScriptEntityID());
-
-			//std::cout << &col << "\n";
 
 			//Taking Damage As Player
 			if (tag.GetNameTag() == "player")
 			{
-				if (col.GetCollisionArray()[0].mHit == 2)
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
-					if (playerstats.mDamageCoolDown <= 0.0f)
+					if (p_ecs.HaveComponent<EnemyAttributes>(i))
 					{
-						playerstats.mIsDamaged = true;
+						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
+						{
+							if (col.GetCollisionArray()[0].mHit == 2)
+							{
+								auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+								if (playerstats.mDamageCoolDown <= 0.0f)
+								{
+									playerstats.mIsDamaged = true;
+								}
+							}
+						}
 					}
 				}
 			}
 			//Enemy Taking Damage
 			if (tag.GetNameTag() == "Enemy")
 			{
-				if (col.GetCollisionArray()[0].mHit == 2)
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-					if (enemystats.mDamageCoolDownTimer <= 0.0f)
+					if (p_ecs.HaveComponent<PlayerAttributes>(i))
 					{
-						enemystats.mIsDamaged = true;
+						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
+						{
+							if (col.GetCollisionArray()[0].mHit == 2)
+							{
+								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+								if (enemystats.mDamageCoolDownTimer <= 0.0f)
+								{
+									enemystats.mIsDamaged = true;
+								}
+							}
+						}
 					}
 				}
 			}
 
 			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Enemy")
 			{
-				if (col.GetCollisionArray()[0].mHit == 2)
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-					if (enemystats.mDamageCoolDownTimer <= 0.0f)
+					if (p_ecs.HaveComponent<PlayerAttributes>(i))
 					{
-						enemystats.mIsDamaged = true;
+						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
+						{
+							if (col.GetCollisionArray()[0].mHit == 2)
+							{
+								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+								if (enemystats.mDamageCoolDownTimer <= 0.0f)
+								{
+									enemystats.mIsDamaged = true;
+								}
+							}
+						}
 					}
 				}
 			}
