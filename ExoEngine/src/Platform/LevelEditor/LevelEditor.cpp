@@ -37,8 +37,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Log.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
-
-#include "ExoEngine/Scripts/EnemyMovement.h"
 #include "ExoEngine/Scripts/CollisionResponse.h"
 #include "ExoEngine/Scripts/ButtonResponse.h"
 #include "ExoEngine/Scripts/ScenerioScript.h"
@@ -455,7 +453,6 @@ namespace EM {
                     sortedMultimap.insert({ p_ecs.GetComponent<Transform>(entity).GetRot(),
                                   &p_ecs.GetComponent<Transform>(entity) });
                 }
-
             }
 
             selectedEntity = (Entity)Picker::Pick(EM::Graphic::mcamera, sortedMultimap);
@@ -463,7 +460,7 @@ namespace EM {
             //std::cout << selectedEntity << std::endl;
             if (selectedEntity == -1)//no entity selected will remain to the previous selected entity
             {
-                selectedEntity = MAX_ENTITIES - 1; //to be fixed
+                selectedEntity = 0; //to be fixed
             }
         }
     }
