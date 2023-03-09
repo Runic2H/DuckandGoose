@@ -340,7 +340,7 @@ namespace EM
 		writer->Uint(p_ecs.GetTotalEntities());
 		writer->EndObject();
 
-		writer->Key("EntityToIndexMap");
+		/*writer->Key("EntityToIndexMap");
 		writer->StartObject();
 		for (ComponentType i = 0; i < p_ecs.GetTotalRegisteredComponents(); ++i)
 		{
@@ -352,7 +352,7 @@ namespace EM
 			}
 			writer->EndArray();
 		}
-		writer->EndObject();
+		writer->EndObject();*/
 
 		writer->Key("EntitySignatures");
 		writer->StartArray();
