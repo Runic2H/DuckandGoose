@@ -39,12 +39,11 @@ namespace EM
 	void CollisionResponse::Update(float Frametime)
 	{
 		UNREFERENCED_PARAMETER(Frametime);
-		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		if (p_ecs.HaveComponent<Collider>(GetScriptEntityID())) {
 			auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 
 			//Taking Damage As Player
-			if (tag.GetNameTag() == "player")
+			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Player")
 			{
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
@@ -65,27 +64,6 @@ namespace EM
 				}
 			}
 			//Enemy Taking Damage
-			if (tag.GetNameTag() == "Enemy")
-			{
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<PlayerAttributes>(i))
-					{
-						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
-						{
-							if (col.GetCollisionArray()[0].mHit == 2)
-							{
-								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-								if (enemystats.mDamageCoolDownTimer <= 0.0f)
-								{
-									enemystats.mIsDamaged = true;
-								}
-							}
-						}
-					}
-				}
-			}
-
 			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Enemy")
 			{
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)

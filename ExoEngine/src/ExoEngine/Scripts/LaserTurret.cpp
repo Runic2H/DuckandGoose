@@ -46,9 +46,9 @@ namespace EM
     {
         //check for player proximity
         for (int i = 0; i < (int)p_ecs.GetTotalEntities(); i++) {
-            if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Player") {
+            if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
                 auto& trans = p_ecs.GetComponent<Transform>(i);
-                if (distance(trans.GetPos(), p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos()) < 2.0f) {
+                if (distance(trans.GetPos(), p_ecs.GetComponent<Transform>(i).GetPos()) < 2.0f) {
                     playerDetected = true;
                 }
                 else {

@@ -1351,15 +1351,6 @@ namespace EM {
                         {
                             tag = std::string(buffer1);
                         }
-                        //set target
-                        /* auto& target = tag.GetTag();
-                        char buffer2[256];
-                        memset(buffer2, 0, sizeof(buffer2));
-                        strcpy_s(buffer2, sizeof(buffer2), target.c_str());
-                        if (ImGui::InputText("Tag", buffer2, sizeof(buffer2)))
-                        {
-                            target = std::string(buffer2);
-                        }*/
                     }
                 }
                 //HUD Component

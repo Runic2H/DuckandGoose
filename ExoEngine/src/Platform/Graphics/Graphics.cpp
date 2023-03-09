@@ -174,9 +174,9 @@ namespace EM {
 		
 		for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<NameTag>(entity) && !p_Editor->is_ShowWindow)
+			if (p_ecs.HaveComponent<Tag>(entity) && !p_Editor->is_ShowWindow)
 			{
-				if(p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player")
+				if(p_ecs.GetComponent<Tag>(entity).GetTag() == "Player")
 					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 						p_ecs.GetComponent<Transform>(entity).GetPos().y,
 						0.0f });
@@ -194,7 +194,7 @@ namespace EM {
 			}
 
 			//for rendering of enemy health bar
-			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Enemy") {
+			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
 				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);

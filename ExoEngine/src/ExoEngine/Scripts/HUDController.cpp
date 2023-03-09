@@ -64,7 +64,7 @@ namespace EM
             }
             else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
                 //update scale
-                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth)/2.0f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth)/2.0f, pTrans.GetScale().y);
+                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth) / 2.0f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth)/ 2.0f, pTrans.GetScale().y);
                 pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth / 2.325f), camPos.y + pComp.GetOffset().y);
             }
             else if (pComp.GetType() == HUDComponent::ElementType::BlockBar) {

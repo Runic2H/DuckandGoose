@@ -18,7 +18,7 @@ namespace EM
 		std::cout << "Enemy Damaged\n";
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
 				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 			}
 		}

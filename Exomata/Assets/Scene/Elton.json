@@ -24,7 +24,7 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000010010111111",
+        "00000000000000000000010011111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
@@ -32,7 +32,7 @@
         "00000000000000000000000000011000",
         "00000000000000000000000000011111",
         "00000000000000000000000000011111",
-        "00000000000000000000100110111111",
+        "00000000000000000000100111111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
@@ -46,10 +46,10 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
         "00000000000000000000000010101001",
         "00000000000000000000000100111001"
     ],
@@ -1013,9 +1013,9 @@
         ],
         "21": [
             {
-                "posX": -4.0305280685424805,
-                "posY": 0.09117124229669571,
-                "scaleX": 0.25,
+                "posX": -4.049516201019287,
+                "posY": 0.10553719848394394,
+                "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -1050,7 +1050,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 5,
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1072,7 +1072,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Player",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "Attack2.wav",
@@ -1105,9 +1108,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 6,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1444,7 +1447,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -1462,9 +1468,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -1735,9 +1741,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1759,7 +1765,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1889,7 +1895,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1940,7 +1946,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 11,
+                "Index_X": 13,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1991,7 +1997,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2042,7 +2048,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 11,
+                "Index_X": 13,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2093,7 +2099,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2223,7 +2229,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2241,9 +2250,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2312,7 +2321,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2330,9 +2342,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2401,7 +2413,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2419,9 +2434,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2490,7 +2505,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2508,9 +2526,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2552,9 +2570,9 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -2565,7 +2583,7 @@
             {
                 "posX": 0.030107498168945313,
                 "posY": 0.20499999821186066,
-                "scaleX": 1.0,
+                "scaleX": 0.25,
                 "scaleY": 0.10000000149011612,
                 "Rot": 0.0
             },
