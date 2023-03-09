@@ -86,7 +86,10 @@ namespace EM {
 		if (p_Editor->is_ShowWindow)
 			mcamera = &scene_camera;
 		else
+		{
 			mcamera = &camera;
+			mcamera->SetZoomLevel(0.25);
+		}
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
 			p_Editor->mViewportSize.x > 0.0f && p_Editor->mViewportSize.y > 0.0f && // zero sized framebuffer is invalid
@@ -259,8 +262,12 @@ namespace EM {
 		}
 	
 		mcamera->MouseScrolling();
-		
-
+		if (p_Input->KeyHold(GLFW_KEY_F2) && !p_Editor->is_ShowWindow)
+		{
+			auto i = std::to_string(FramePerSec::GetInstance().GetFps());
+			mFont->RenderText("FPS: " + i, {camera.GetPosition().x + 0.2f, camera.GetPosition().y + 0.2f},
+				0.0008f, camera, { 0.87f, 0.92f, 0.18f });
+		}
 		Timer::GetInstance().Update(Systems::GRAPHIC);
 		
 		

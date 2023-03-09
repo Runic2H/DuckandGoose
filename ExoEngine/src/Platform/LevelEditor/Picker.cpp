@@ -37,7 +37,8 @@ namespace EM {
 
 		for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
 		{
-			EntityTransform.insert({ &p_ecs.GetComponent<Transform>(entity), entity });
+			if(p_ecs.HaveComponent<Transform>(entity))
+				EntityTransform.insert({ &p_ecs.GetComponent<Transform>(entity), entity });
 		}
 		
 		int index = -1;
