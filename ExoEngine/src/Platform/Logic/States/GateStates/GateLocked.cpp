@@ -29,6 +29,26 @@ namespace EM
                 }
             }
         }
+		vec2D playerPos = vec2D();
+		bool check = false;
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			//std::cout << "Prox Check" << std::endl;
+			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player")
+			{
+				check = true;
+				//std::cout << "Found Player" << std::endl;
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+			}
+		}
+		//if player moves within x radius, set mode to moving
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+				//std::cout << "attacking audio" << std::endl;
+			}
+		}
         if (aliveCount == 0)
         {
 			stateMachine->ChangeState(new GateUnlocked(stateMachine));

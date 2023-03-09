@@ -27,6 +27,11 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.5f;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 2.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Damage");
+
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[5].should_play = true;
+		}
 	}
 	void OnDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
