@@ -61,8 +61,8 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		int dialogueIndex;
-		bool isAnimating;
-		bool isFinishedAnimating;
+		std::ostream mTextStream;
+		const char mTextBuffer[300];
+		float mPrintSpeed;
 	};
 }

@@ -8,6 +8,15 @@ namespace EM
 	class EnemyAttributes : public IComponent
 	{
 	public:
+
+		enum class EnemyTypes
+		{
+			ENEMY_RANGED,
+			ENEMY_MELEE,
+			ENEMY_SPECIAL,
+			ENEMY_BOSS
+		};
+
 		EnemyAttributes();
 		~EnemyAttributes() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);

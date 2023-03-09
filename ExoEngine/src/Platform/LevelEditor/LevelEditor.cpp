@@ -1342,20 +1342,18 @@ namespace EM {
                 //Tag Component
                 if (p_ecs.HaveComponent<Tag>(selectedEntity))
                 {
-                    if (ImGui::CollapsingHeader("Tag", ImGuiTreeNodeFlags_None))
+                    if (ImGui::CollapsingHeader("TAG", ImGuiTreeNodeFlags_None))
                     {
-                        auto& tag = p_ecs.GetComponent<Tag>(selectedEntity);
-                        //set tag
-                        auto& origin = tag.GetTag();
+                        auto& tag = p_ecs.GetComponent<Tag>(selectedEntity).GetTag();
                         char buffer1[256];
                         memset(buffer1, 0, sizeof(buffer1));
-                        strcpy_s(buffer1, sizeof(buffer1), origin.c_str());
+                        strcpy_s(buffer1, sizeof(buffer1), tag.c_str());
                         if (ImGui::InputText("Tag", buffer1, sizeof(buffer1)))
                         {
-                            origin = std::string(buffer1);
+                            tag = std::string(buffer1);
                         }
                         //set target
-                        /*auto& target = tag.GetTag();
+                        /* auto& target = tag.GetTag();
                         char buffer2[256];
                         memset(buffer2, 0, sizeof(buffer2));
                         strcpy_s(buffer2, sizeof(buffer2), target.c_str());

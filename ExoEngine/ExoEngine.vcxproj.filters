@@ -76,7 +76,6 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\PlayerAttributes.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\DialogueManager.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
@@ -283,7 +282,6 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />

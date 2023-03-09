@@ -21,7 +21,7 @@ namespace EM
     /*!*************************************************************************
     Default constructor for Dialogue Manager
     ****************************************************************************/
-    DialogueManager::DialogueManager() : dialogueIndex{ 0 }, isAnimating{ false }, isFinishedAnimating{ false } {};
+    DialogueManager::DialogueManager() : mTextStream{ nullptr }, mTextBuffer{}, mPrintSpeed{ 0.0f } {}
 
     /*!*************************************************************************
     Returns a new copy of DialogueManager Script
@@ -44,28 +44,6 @@ namespace EM
     ****************************************************************************/
     void DialogueManager::Update(float Frametime)
     {
-        //check for finished animating
-        if (isFinishedAnimating == false) {
-            //check for animating
-            if (isAnimating == false) {
-                //if not finished and not animating, start animating
-                isAnimating = true; 
-            }
-            //check for click
-            if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && isAnimating == true) {
-                //if click and animating, skip to end of animation
-                isAnimating = false;
-                isFinishedAnimating = true;
-            }
-        }
-        else {
-            //if click and animation finished, go to next dialogue
-            if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)) {
-                dialogueIndex++;
-            }
-        }
-        //check for empty dialogue segment. If empty means end of dialogue string. 
-        //other trigger to start next dialogue strign? 
     }
 
     /*!*************************************************************************

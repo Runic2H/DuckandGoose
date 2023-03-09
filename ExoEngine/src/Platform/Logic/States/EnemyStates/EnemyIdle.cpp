@@ -16,7 +16,6 @@ namespace EM
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
-		std::cout << "Enemy Idle\n";
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{

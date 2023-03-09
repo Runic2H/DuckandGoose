@@ -114,7 +114,7 @@ Run loop for application
 		mPosUpdate->Init();
 
 
-		//p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+		p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{

@@ -30,7 +30,7 @@ namespace EM
 		float mDamageCoolDown;
 		float mDashCoolDown;
 		float mDashDurationTimer;
-		float mBlockCoolDown;
+		float mBlockCoolDown;	//5.0f
 		float mBlockDurationTimer;
 		float mCooldownTimer;
 		float mDamageTaken;
