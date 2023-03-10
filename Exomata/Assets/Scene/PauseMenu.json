@@ -67,9 +67,9 @@
         "1": [
             {
                 "posX": 0.0,
-                "posY": 0.43617022037506104,
-                "scaleX": 2.4000000953674316,
-                "scaleY": 0.9862148761749268,
+                "posY": -0.28346991539001465,
+                "scaleX": 1.899999976158142,
+                "scaleY": 1.899999976158142,
                 "Rot": 0.0
             },
             {},
@@ -78,7 +78,7 @@
                 "NameTag": "Title"
             },
             {
-                "TextureName": "ExomataLogo",
+                "TextureName": "MenuPanel",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -123,24 +123,24 @@
                 "radius2": 0.0
             },
             {
-                "NameTag": "Start"
+                "NameTag": "Resume"
             },
-            {
-                "TextureName": "Start_Idle",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
+          {
+            "TextureName": "Resume_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
             {
                 "0": "ButtonResponse",
                 "ScriptCount": 1
             },
             {
-                "Tag": "Start",
+                "Tag": "Resume",
                 "TargetTag": ""
             },
             {},
@@ -152,7 +152,7 @@
         "3": [
             {
                 "posX": 0.0,
-                "posY": -0.75,
+                "posY": -0.25,
                 "scaleX": 1.0,
                 "scaleY": 0.20000000298023224,
                 "Rot": 0.0
@@ -260,7 +260,7 @@
         "5": [
             {
                 "posX": 0.0,
-                "posY": -0.25,
+                "posY": -0.75,
                 "scaleX": 1.0,
                 "scaleY": 0.20000000298023224,
                 "Rot": 0.0
@@ -285,26 +285,26 @@
                 "radius2": 0.0
             },
             {
-                "NameTag": "HowToPlay"
+                "NameTag": "Restart"
             },
-            {
-                "TextureName": "htp_button_Idle",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
+          {
+            "TextureName": "Restart_Idle",
+            "Index_X": 0,
+            "Index_Y": 0,
+            "Ucoordinates": 512.0,
+            "Vcoordinates": 512.0,
+            "IsSpriteSheet": false,
+            "IsAnimated": false,
+            "MaxIndex": 0
+          },
             {
                 "0": "ButtonResponse",
                 "ScriptCount": 1
             },
-            {
-                "Tag": "HowToPlay",
-                "TargetTag": ""
-            },
+          {
+            "Tag": "PRestart",
+            "TargetTag": ""
+          },
             {},
             {},
             {},

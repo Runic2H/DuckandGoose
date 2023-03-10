@@ -1060,7 +1060,7 @@
                 "NameTag": "player"
             },
             {
-                "TextureName": "Idle",
+                "TextureName": "Normal_Attack_Swing1",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -1768,7 +1768,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 0,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1898,7 +1898,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 0,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1949,7 +1949,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2000,7 +2000,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 0,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2051,7 +2051,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2102,7 +2102,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 0,
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2572,9 +2572,9 @@
         ],
         "48": [
             {
-                "posX": -3.9069910049438477,
-                "posY": 0.272320955991745,
-                "scaleX": 0.25,
+                "posX": -4.063370704650879,
+                "posY": 0.3558059632778168,
+                "scaleX": 0.3265306055545807,
                 "scaleY": 0.10000000149011612,
                 "Rot": 0.0
             },
@@ -2928,8 +2928,8 @@
         ],
         "57": [
             {
-                "posX": -3.937098741531372,
-                "posY": 0.06732096523046494,
+                "posX": -3.793983221054077,
+                "posY": 0.15080596506595612,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -2987,8 +2987,8 @@
         ],
         "58": [
             {
-                "posX": -3.937098741531372,
-                "posY": -0.032679036259651184,
+                "posX": -3.793983221054077,
+                "posY": 0.050805963575839996,
                 "scaleX": 0.2000000923871994,
                 "scaleY": 0.08000004291534424,
                 "Rot": 0.0

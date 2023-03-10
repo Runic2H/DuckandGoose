@@ -42,7 +42,8 @@ namespace EM
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
-		
+		Graphic::mcamera->SetZoomLevel(1.0f);
+		Graphic::camera.SetPosition({ 0.0f, 0.0f, 0.0f });
 		if (spt.GetTexture() == "HowToPlay" && p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 
@@ -113,6 +114,18 @@ namespace EM
 				//std::cout << "hello";
 			}
 
+			if (ID_tag.GetTag() == "Resume" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+			{
+				spt.SetTexture("Resume_Hover");
+				//std::cout << "hello";
+			}
+
+			if (ID_tag.GetTag() == "PRestart" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+			{
+				spt.SetTexture("Restart_Hover");
+				//std::cout << "hello";
+			}
+
 
 			//std::cout << tag.GetNameTag();
 			//std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
@@ -125,10 +138,16 @@ namespace EM
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
-					//spt.SetTexture("Start_Click");
-					p_GUI->toggle_menu();
+				
+					Graphic::mcamera->SetZoomLevel(0.25f);
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
+
+				if (ID_tag.GetTag() == "Resume")
+					//		{
+					//			spt.SetTexture("Resume_Idle");
+					//		//	transform.SetPos(offset.x + camPos.y, offset.y + camPos.y);
+					//		}
 
 				if (ID_tag.GetTag() == "Restart" && p_GUI->Check_HTP() == false)
 				{
@@ -163,6 +182,15 @@ namespace EM
 					p_GUI->toggle_menu();
 					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 				}
+				if (ID_tag.GetTag() == "PResart")
+				{
+					//p_GUI->toggle_pause();
+				
+					Graphic::mcamera->SetZoomLevel(0.25f);
+					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+				}
+
+			
 			}
 
 			if (curr_state == click)
@@ -199,6 +227,15 @@ namespace EM
 					spt.SetTexture("Options_Click");
 				}
 
+				if (ID_tag.GetTag() == "Resume")
+				{
+					spt.SetTexture("Resume_Click");
+					
+				}
+				if (ID_tag.GetTag() == "PRestart")
+				{
+					spt.SetTexture("Restart_Click");//to be change
+				}
 				
 			}
 
@@ -234,6 +271,17 @@ namespace EM
 			{
 				spt.SetTexture("htp_button_Idle");
 			}
+
+			if (ID_tag.GetTag() == "Resume")
+						{
+							spt.SetTexture("Resume_Idle");
+						//	transform.SetPos(offset.x + camPos.y, offset.y + camPos.y);
+						}
+			if (ID_tag.GetTag() == "PRestart")
+						{
+							spt.SetTexture("Restart_Idle");//to be change
+							//transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
+						}
 
 
 
