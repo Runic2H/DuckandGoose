@@ -1362,7 +1362,7 @@ namespace EM {
                         const char* HUDList = "Static\0Health Bar\0Block Bar\0Dash Bar\0Charge Attack\0Text";
                         auto HUDType = HUDComp.GetType();
                         int HUDIndex = static_cast<int>(HUDType);
-                        ImGui::Combo("###test", &HUDIndex, HUDList);
+                        ImGui::Combo("HudType", &HUDIndex, HUDList);
                         ImGui::PushItemWidth(100.0f);
                         HUDComp.SetType(static_cast<HUDComponent::ElementType>(HUDIndex));
 
@@ -1390,18 +1390,23 @@ namespace EM {
                         int damageSlider = attrib.mDamage;
                         float attackSlider = attrib.mAttackTimer;
                         float damageCooldown = attrib.mDamageCoolDownTimer;
+                        int enemyType = static_cast<int>(attrib.mEnemyType);
+                        const char* EnemyList = "None\0Melee\0Ranged\0Special\0Boss";
 
                         ImGui::SliderInt("Health (0 -> 150)", &healthSlider, 0, 150, "%d", flags);
                         ImGui::SliderInt("Max Health (0 -> 200)", &maxHealthSlider, 0, 200, "%d", flags);
                         ImGui::SliderInt("Damage (0 -> 50)", &damageSlider, 0, 50, "%d", flags);
                         ImGui::SliderFloat("Attack Duration (0 -> 10)", &attackSlider, 0, 10, "%f", flags);
                         ImGui::SliderFloat("Attack Cooldown (0 -> 10)", &damageCooldown, 0, 10, "%f", flags);
+                        ImGui::Combo("Enemy Type", &enemyType, EnemyList);
+                        ImGui::PushItemWidth(100.0f);
 
                         attrib.mHealth = healthSlider;
                         attrib.mMaxHealth = maxHealthSlider;
                         attrib.mDamage = damageSlider;
                         attrib.mAttackTimer = attackSlider;
                         attrib.mDamageCoolDownTimer = damageCooldown;
+                        attrib.mEnemyType = static_cast<EnemyAttributes::EnemyTypes>(enemyType);
                     }
                 }
                 

@@ -15,8 +15,12 @@ namespace EM
 
 	void EnemyTransition::OnEnter(StateMachine* stateMachine)
 	{
-		std::cout << "Enemy Attack Transition\n";
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+	}
+	void EnemyTransition::OnUpdate(StateMachine* stateMachine, float Frametime)
+	{
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
 		if ((rand() % 100) <= 80) {
 			vec2D playerPos = vec2D();
 			bool check = false;
@@ -31,7 +35,8 @@ namespace EM
 					}
 				}
 			}
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.1f) {
+			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.1f
+				&& p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f) {
 				stateMachine->ChangeState(new EnemyAttack(stateMachine));
 			}
 			else
@@ -43,11 +48,6 @@ namespace EM
 		{
 			stateMachine->ChangeState(new EnemyRetreat(stateMachine));
 		}
-	}
-	void EnemyTransition::OnUpdate(StateMachine* stateMachine, float Frametime)
-	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
 	}
 	void EnemyTransition::OnExit(StateMachine* stateMachine)
 	{

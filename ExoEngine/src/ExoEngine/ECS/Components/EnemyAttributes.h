@@ -11,8 +11,9 @@ namespace EM
 
 		enum class EnemyTypes
 		{
-			ENEMY_RANGED,
+			ENEMY_NONE,
 			ENEMY_MELEE,
+			ENEMY_RANGED,
 			ENEMY_SPECIAL,
 			ENEMY_BOSS
 		};
@@ -36,11 +37,12 @@ namespace EM
 		int mMaxHealth;
 		int mDamage;
 		float mAttackTimer;
-		float mAttackCooldown;
+		float mAttackCoolDown;
 		float mDamageCoolDownTimer;
 		float mDamageDurationTimer;
 		bool mIsAlive;
 		bool mIsDamaged;
+		EnemyTypes mEnemyType;
 		vec2D mVel;
 		entityPhysics mPhys;
 	};
