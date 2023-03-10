@@ -46,6 +46,7 @@ namespace EM {
 	void BackgroundAudio::End()
 	{
 		p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_stop = true;
+		p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = false;
 		delete this;
 	}
 

@@ -1016,9 +1016,9 @@
         ],
         "21": [
             {
-                "posX": -4.017561435699463,
-                "posY": 0.06124354153871536,
-                "scaleX": 0.25,
+                "posX": -3.8251290321350098,
+                "posY": 0.017450399696826935,
+                "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -1053,7 +1053,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 0,
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1110,10 +1110,15 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 6,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "6": {
+                    "AudioPath": "Shutdown.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 7,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {},
             {},
@@ -1461,19 +1466,19 @@
                     "IsLooping": false
                 },
                 "1": {
-                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "AudioPath": "Slash2.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "2": {
-                    "AudioPath": "PlayerDamaged4.mp3",
+                    "AudioPath": "Explosion_Low.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {
                 "ElementType": 1,
@@ -1739,14 +1744,14 @@
             {},
             {
                 "0": {
-                    "AudioPath": "FStep4.wav",
+                    "AudioPath": "SustainedBeam.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {},
             {},
@@ -1768,7 +1773,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 16,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1898,7 +1903,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 16,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1949,7 +1954,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 11,
+                "Index_X": 15,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2000,7 +2005,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 16,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2051,7 +2056,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 11,
+                "Index_X": 15,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2102,7 +2107,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 12,
+                "Index_X": 16,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2243,19 +2248,19 @@
                     "IsLooping": false
                 },
                 "1": {
-                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "AudioPath": "Slash2.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "2": {
-                    "AudioPath": "PlayerDamaged4.mp3",
+                    "AudioPath": "Explosion_Low.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {
                 "ElementType": 1,
@@ -2335,19 +2340,19 @@
                     "IsLooping": false
                 },
                 "1": {
-                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "AudioPath": "Slash2.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "2": {
-                    "AudioPath": "PlayerDamaged4.mp3",
+                    "AudioPath": "Explosion_Low.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {
                 "ElementType": 1,
@@ -2427,19 +2432,19 @@
                     "IsLooping": false
                 },
                 "1": {
-                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "AudioPath": "Slash2.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "2": {
-                    "AudioPath": "PlayerDamaged4.mp3",
+                    "AudioPath": "Explosion_Low.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {
                 "ElementType": 1,
@@ -2519,19 +2524,19 @@
                     "IsLooping": false
                 },
                 "1": {
-                    "AudioPath": "Melee_EnemyImpact4.wav",
+                    "AudioPath": "Slash2.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "2": {
-                    "AudioPath": "PlayerDamaged4.mp3",
+                    "AudioPath": "Explosion_Low.wav",
                     "Channel": 3,
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {
                 "ElementType": 1,
@@ -2573,9 +2578,9 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
             },
             {},
             {},
@@ -2584,10 +2589,10 @@
         ],
         "48": [
             {
-                "posX": -4.2319488525390625,
-                "posY": 0.2562435269355774,
+                "posX": -0.21438775956630707,
+                "posY": 0.19499999284744263,
                 "scaleX": 0.3265306055545807,
-                "scaleY": 0.05999999865889549,
+                "scaleY": 0.10000000149011612,
                 "Rot": 0.0
             },
             {},
@@ -2623,8 +2628,8 @@
         ],
         "49": [
             {
-                "posX": -4.33756160736084,
-                "posY": 0.22524353861808777,
+                "posX": -0.3199999928474426,
+                "posY": 0.164000004529953,
                 "scaleX": 0.0,
                 "scaleY": 0.03999999910593033,
                 "Rot": 0.0
@@ -2661,9 +2666,9 @@
         ],
         "50": [
             {
-                "posX": -4.364894866943359,
-                "posY": 0.1712435483932495,
-                "scaleX": 0.106666199862957,
+                "posX": -0.3902633488178253,
+                "posY": 0.10999999940395355,
+                "scaleX": -0.0006583875510841608,
                 "scaleY": 0.03999999910593033,
                 "Rot": 0.0
             },
@@ -2699,8 +2704,8 @@
         ],
         "51": [
             {
-                "posX": -4.282561302185059,
-                "posY": 0.22624355554580688,
+                "posX": -0.26499998569488525,
+                "posY": 0.16500000655651093,
                 "scaleX": 0.4000000059604645,
                 "scaleY": 0.20000000298023224,
                 "Rot": 0.0

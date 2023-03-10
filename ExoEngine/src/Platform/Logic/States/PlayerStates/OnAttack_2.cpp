@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file On_Attack_2.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	2nd attacking state for player
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnAttack_2.h"
 #include "OnIdle.h"
@@ -21,6 +36,10 @@ namespace EM
 		}
 		return nullptr;
 	}
+
+	/*!*************************************************************************
+		Enter state for Player Attack 2
+	****************************************************************************/
 	void OnAttack_2::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
@@ -31,6 +50,10 @@ namespace EM
 			//std::cout << "attacking audio" << std::endl;
 		}
 	}
+
+	/*!*************************************************************************
+	update state for Player Attack 2
+	****************************************************************************/
 	void OnAttack_2::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
@@ -49,6 +72,9 @@ namespace EM
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
+	/*!*************************************************************************
+	Exit state for Player Attack 2
+	****************************************************************************/
 	void OnAttack_2::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;

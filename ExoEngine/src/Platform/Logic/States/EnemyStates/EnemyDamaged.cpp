@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file EnemyDamaged.cpp
+\author Elton Teo Zhe Wei, Cheung Jun Yin Matthew
+\par DP email: e.teo@digipen.edu, j.cheung@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when enemy is damaged.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyDamaged.h"
 #include "EnemyDeath.h"
@@ -13,9 +28,12 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for when enemy is damaged state
+	****************************************************************************/
 	void EnemyDamaged::OnEnter(StateMachine* stateMachine)
 	{
-		std::cout << "Enemy Damaged\n";
+		//std::cout << "Enemy Damaged\n";
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
@@ -31,13 +49,16 @@ namespace EM
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
-			std::cout << "Enemy Damaged" << std::endl;
 		}
 		/*if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 		{
 			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}*/
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy is damaged state
+	****************************************************************************/
 	void EnemyDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
@@ -52,6 +73,10 @@ namespace EM
 			}
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for when enemy is damaged state
+	****************************************************************************/
 	void EnemyDamaged::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;

@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file GateLocked.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when the gate on the map is locked, which is only
+		unlocked when the player has cleared all enemies in his current area.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "GateLocked.h"
 #include "GateUnlocked.h"
@@ -10,12 +26,19 @@ namespace EM
 	{
 		return nullptr;
 	}
+	/*!*************************************************************************
+	Enter state for gate locked state
+	****************************************************************************/
 	void GateLocked::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("LASERGATE_BG_V2");
         p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = true;
         p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
 	}
+
+	/*!*************************************************************************
+	Update state for gate locked state
+	****************************************************************************/
 	void GateLocked::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
         int aliveCount{};
@@ -46,6 +69,7 @@ namespace EM
 			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 			{
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+				std::cout << "Playing Gate Audio" << std::endl;
 			}
 		}
         if (aliveCount == 0)
@@ -53,6 +77,10 @@ namespace EM
 			stateMachine->ChangeState(new GateUnlocked(stateMachine));
         }
 	}
+
+	/*!*************************************************************************
+	Exit state for gate locked state
+	****************************************************************************/
 	void GateLocked::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex() - 1;

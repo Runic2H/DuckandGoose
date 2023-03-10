@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file OnDamaged.cpp
+\author Elton Teo Zhe Wei, Cheung Jun Yin Matthew
+\par DP email: e.teo@digipen.edu, j.cheung"digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when the player takes damage
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnDamaged.h"
 #include "OnIdle.h"
@@ -11,6 +26,9 @@ namespace EM
 	{
 		return nullptr;
 	}
+	/*!*************************************************************************
+	Enter state for Player damaged state
+	****************************************************************************/
 	void OnDamaged::OnEnter(StateMachine* stateMachine)
 	{
 		int pDmg = 0;
@@ -33,6 +51,10 @@ namespace EM
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[5].should_play = true;
 		}
 	}
+
+	/*!*************************************************************************
+	Update state for Player damaged state
+	****************************************************************************/
 	void OnDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
@@ -45,6 +67,10 @@ namespace EM
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for Player damaged state
+	****************************************************************************/
 	void OnDamaged::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;

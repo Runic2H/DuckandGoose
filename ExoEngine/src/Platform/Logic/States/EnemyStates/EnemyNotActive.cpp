@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file EnemyNotActive.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when enemy is not in range of the player. This is a 
+		transitional stage for the enemies to spawn when in player proximity.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyNotActive.h"
 #include "EnemyIdle.h"
@@ -11,6 +27,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for when enemy is not active state
+	****************************************************************************/
 	void EnemyNotActive::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
@@ -18,6 +37,10 @@ namespace EM
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy is not active state
+	****************************************************************************/
 	void EnemyNotActive::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		vec2D playerPos = vec2D();
@@ -36,6 +59,10 @@ namespace EM
 			stateMachine->ChangeState(new EnemyIdle(stateMachine));
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for when enemy is not active state
+	****************************************************************************/
 	void EnemyNotActive::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

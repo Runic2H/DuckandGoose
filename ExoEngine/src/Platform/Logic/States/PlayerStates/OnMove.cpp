@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file OnMove.cpp
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains logic for player moving state.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnMove.h"
 #include "OnAttack_1.h"
@@ -23,33 +38,18 @@ namespace EM
 		}
 		return nullptr;
 	}
+
+	/*!*************************************************************************
+	Enter state for when player is in moving state
+	****************************************************************************/
 	void OnMove::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Running");
-	/*	if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
-		{
-			auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
-			bool noPlay = true;
-			for (int i = 0; i < 5; i++) 
-			{
-				if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
-				{
-					noPlay = false;
-				}
-			}
-			if (noPlay) 
-			{
-				int r = (rand() % 5);
-				aud[r].should_play = true;
-			}
-		}*/
-		// 
-		//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
-		//{
-		//	p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
-		//	//std::cout << "moving audio" << std::endl;
-		//}
 	}
+
+	/*!*************************************************************************
+	Update state for when player is in moving state
+	****************************************************************************/
 	void OnMove::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
@@ -83,32 +83,6 @@ namespace EM
 							footstep_switch = true;
 						}
 					}
-
-					//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
-					//{
-					//	auto& aud = p_ecs.GetComponent<Audio>(stateMachine->GetEntityID());
-					//	bool noPlay = true;
-					//	for (int i = 0; i < 5; i++)
-					//	{
-					//		if ((aud[i].triggered && aud[i].is_Playing) || aud[i].should_play)
-					//		{
-					//			noPlay = false;
-					//			std::cout << "sound is playing" << std::endl;
-					//		}
-
-					//	}
-					//	if (noPlay)
-					//	{
-					//		int r = (rand() % 5);
-					//		aud[r].should_play = true;
-					//	}
-					//}
-
-					//if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
-					//{
-					//	p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
-					//	//std::cout << "moving audio" << std::endl;
-					//}
 
 					if (p_Input->KeyHold(GLFW_KEY_W)) {
 						vel.y = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
@@ -157,6 +131,10 @@ namespace EM
 			}
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for when player is in moving state
+	****************************************************************************/
 	void OnMove::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

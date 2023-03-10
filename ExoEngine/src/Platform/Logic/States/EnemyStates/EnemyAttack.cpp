@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file EnemyAttack.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the enemy attack state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyAttack.h"
 #include "EnemyChase.h"
@@ -15,6 +30,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for enemy attacking state
+	****************************************************************************/
 	void EnemyAttack::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.0f;
@@ -22,9 +40,12 @@ namespace EM
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
-			std::cout << "Enemy Attacking" << std::endl;
 		}
 	}
+
+	/*!*************************************************************************
+	Update state for enemy attacking state
+	****************************************************************************/
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
@@ -39,6 +60,10 @@ namespace EM
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for enemy attacking state
+	****************************************************************************/
 	void EnemyAttack::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown = 2.0f;

@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file EnemyChase.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the enemy chasing state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyChase.h"
 #include "EnemyAttack.h"
@@ -14,10 +29,17 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for when enemy is chasing state
+	****************************************************************************/
 	void EnemyChase::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy is chasing state
+	****************************************************************************/
 	void EnemyChase::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
@@ -79,6 +101,10 @@ namespace EM
 			}
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for when enemy is chasing state
+	****************************************************************************/
 	void EnemyChase::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

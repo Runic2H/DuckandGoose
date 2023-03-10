@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file OnBlock.cpp
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	Blocking state for player
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnBlock.h"
 #include "OnIdle.h"
@@ -10,6 +25,10 @@ namespace EM
 	{
 		return nullptr;
 	}
+
+	/*!*************************************************************************
+	Enter state for Player Blocking state
+	****************************************************************************/
 	void OnBlock::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
@@ -18,6 +37,10 @@ namespace EM
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Block");
 		}
 	}
+
+	/*!*************************************************************************
+	Update state for Player Blocking state
+	****************************************************************************/
 	void OnBlock::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT) && p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID()))
@@ -52,6 +75,9 @@ namespace EM
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
+	/*!*************************************************************************
+	Exit state for Player Blocking state
+	****************************************************************************/
 	void OnBlock::OnExit(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
