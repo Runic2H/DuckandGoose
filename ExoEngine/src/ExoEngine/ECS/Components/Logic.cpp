@@ -24,10 +24,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/ScenerioScript.h"
 #include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
+#include "ExoEngine/Scripts/PauseMenu.h"
 #include "ExoEngine/Scripts/HUDController.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/GateController.h"
 #include "ExoEngine/Scripts/BackgroundAudio.h"
+
 
 
 
@@ -128,6 +130,10 @@ namespace EM
 			if (mScriptNameVector[j] == "SliderScript")
 			{
 				mScriptsVector.push_back(new SliderScript());
+			}
+			if (mScriptNameVector[j] == "PauseMenu")
+			{
+				mScriptsVector.push_back(new PauseMenu());
 			}
 		}
 		return true;

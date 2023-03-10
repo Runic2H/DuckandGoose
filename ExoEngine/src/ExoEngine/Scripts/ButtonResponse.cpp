@@ -25,8 +25,7 @@ namespace EM
 {
 
 	void ButtonResponse::Start()
-	{	clicked = false;
-		selected= false;
+	{	
 	}
 
 	/*transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
@@ -35,7 +34,8 @@ namespace EM
 	
 	void ButtonResponse::Update(float Frametime)
 	{
-		Graphic::camera.SetZoomLevel(1.0);
+		
+		Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
@@ -47,7 +47,7 @@ namespace EM
 		{
 
 			spt.SetTexture("htp_button_Idle");
-			transform.SetPos({ 0.0f,-0.75f });
+			transform.SetPos({ 0.0f,-0.25f });
 			transform.SetScale(1.0f, 0.2f);
 			p_GUI->toggle_HTP();
 		}
@@ -69,13 +69,13 @@ namespace EM
 				curr_state = release;
 			}
 		
-			std::cout << ID_tag.GetTag() << ": ";
+			/*std::cout << ID_tag.GetTag() << ": ";
 			if (curr_state == click)
 				std::cout << "click\n";
 			else if (curr_state == idle)
 				std::cout << "idle\n";
 			else if (curr_state == release)
-				std::cout << "release\n"; 
+				std::cout << "release\n"; */
 		}
 
 		if (is_within_box(p_GUI->MousePosition, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
@@ -100,9 +100,22 @@ namespace EM
 				spt.SetTexture("htp_button_Hover");
 				//std::cout << "hello";
 			}
-			selected = true;
-			std::cout << tag.GetNameTag();
-			std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
+
+			if (ID_tag.GetTag() == "MainMenu" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+			{
+				spt.SetTexture("MM_B");
+				//std::cout << "hello";
+			}
+
+			if (ID_tag.GetTag() == "Restart" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+			{
+				spt.SetTexture("RESTART_B");
+				//std::cout << "hello";
+			}
+
+
+			//std::cout << tag.GetNameTag();
+			//std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
 			
 			
 
@@ -115,6 +128,13 @@ namespace EM
 					//spt.SetTexture("Start_Click");
 					p_GUI->toggle_menu();
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+				}
+
+				if (ID_tag.GetTag() == "Restart" && p_GUI->Check_HTP() == false)
+				{
+					//spt.SetTexture("Start_Click");
+					
+					p_Scene->setSceneToLoad("Assets/Scene/Level1.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
@@ -136,6 +156,13 @@ namespace EM
 				{
 					p_Scene->setSceneToLoad("Assets/Scene/Option.json");
 				}
+
+				if (ID_tag.GetTag() == "MainMenu" && p_GUI->Check_HTP() == false)
+				{
+					//spt.SetTexture("Start_Click");
+					p_GUI->toggle_menu();
+					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+				}
 			}
 
 			if (curr_state == click)
@@ -150,6 +177,18 @@ namespace EM
 					spt.SetTexture("Quit_Click");
 				}
 
+				if (ID_tag.GetTag() == "MainMenu" && p_GUI->Check_HTP() == false)
+				{
+					spt.SetTexture("MM_R");
+
+				}
+
+				if (ID_tag.GetTag() == "Restart" && p_GUI->Check_HTP() == false)
+				{
+					spt.SetTexture("RESTART_R");
+
+				}
+
 				if (ID_tag.GetTag() == "HowToPlay")
 				{
 					spt.SetTexture("htp_button_Click");
@@ -159,12 +198,11 @@ namespace EM
 				{
 					spt.SetTexture("Options_Click");
 				}
+
+				
 			}
 
-			else
-			{
-				clicked = false;
-			}
+			
 		}
 		else
 		{
@@ -182,11 +220,22 @@ namespace EM
 				spt.SetTexture("Options_Idle");
 			}
 
+			if (ID_tag.GetTag() == "MainMenu")
+			{
+				spt.SetTexture("MM_Y");
+			}
+
+			if (ID_tag.GetTag() == "Restart")
+			{
+				spt.SetTexture("RESTART_Y");
+			}
+
 			if (ID_tag.GetTag() == "HowToPlay" && spt.GetTexture() != "HowToPlay")
 			{
 				spt.SetTexture("htp_button_Idle");
 			}
-			selected = false;
+
+
 
 			
 		}
@@ -220,3 +269,6 @@ namespace EM
 		return false;// return false if it isnt
 	}
 }
+
+//check if it is menu or play mode
+// if play update position of button when pause is toggled on and Hide the UI i

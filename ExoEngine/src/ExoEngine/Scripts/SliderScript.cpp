@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file ButtonResponse.cpp
+\file SliderScript.cpp
 \author Lau Yong Hui
 \par DP email:l.yonghui.edu
 \par Course: CSD2400
@@ -51,6 +51,7 @@ namespace EM
 			//std::cout<< SliderCali;
 			if (SliderCali == true)
 			{
+				
 				p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(limit.min.x + 0.5f, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y);
 				SliderCali = false;//slider have been calibrated
 			}
@@ -65,25 +66,28 @@ namespace EM
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 
-
-		//if (is_within_box(p_GUI->MousePosition, col, transform))
-		//{
 		
 		if(p_Editor->is_ShowWindow == false)
 		{ 
+			if(ID_tag.GetTargetTag()== "Master")
 			transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup())+limit.min.x, transform.GetPos().y);
+
+			if (ID_tag.GetTargetTag() == "BGM")
+				transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + limit.min.x, transform.GetPos().y);
+
+			if (ID_tag.GetTargetTag() == "SFX")
+				transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + limit.min.x, transform.GetPos().y);
+
+
 			SliderCali = true;
 			//std::cout << "limit min at:" << limit.min.x;
 			if((p_GUI->MousePosition.x >= limit.min.x && p_GUI->MousePosition.y >= limit.min.y) &&
 				(p_GUI->MousePosition.x <= limit.max.x&& p_GUI->MousePosition.y <= limit.max.y))//if system is pause and continue button is pressed, tell the system to resume the game
 			{
-				//std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x) << "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
 				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 				{
 					clicked = true;
-					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);
-
-					//calculate the percen	tage				
+					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);		
 				}
 				else
 				{
@@ -91,20 +95,68 @@ namespace EM
 					clicked = false;
 				}
 			}
-			p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
-			if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < 0.01)
+
+			
+			if (ID_tag.GetTargetTag() == "Master")
 			{
-				p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
+				p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < 0.01)
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
+				}
+				p_Audio->SetVolume(0, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				}
+
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				}
+
 			}
-			p_Audio->SetVolume(0, 1/p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
+
+			if (ID_tag.GetTargetTag() == "BGM")
+			{
+				p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) < 0.01)
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), 0.0f);
+				}
+				p_Audio->SetVolume(1, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + 1);
+
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				}
+			}
+
+			if (ID_tag.GetTargetTag() == "SFX")
+			{
+				p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) < 0.01)
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), 0.0f);
+				}
+				p_Audio->SetVolume(2, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + 1);
+
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				}
+			}
+
+
 
 		}
 
-		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
+		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE)&& p_GUI->Check_menu() == false)
 		{
-			limitset = false;
-			p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-
+			
+				limitset = false;
+				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+			
 		}
 
 		

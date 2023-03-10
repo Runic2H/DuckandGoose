@@ -33,13 +33,14 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/AudioManager.h"
 #include "Platform/Logic/LogicSystem.h"
+#include "ExoEngine/Scripts/PauseMenu.h"
 #include "ExoEngine/GUI/GUI.h"
 #include <stdlib.h>
 
 namespace EM {
-	bool end_state{false}; //placeholder
-	
-	
+	bool end_state{ false }; //placeholder
+
+
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
@@ -51,24 +52,24 @@ Application constructor
 		FramePerSec::GetInstance().InitFrame();
 	}
 
-/*!*************************************************************************
-Application destructor
-****************************************************************************/
+	/*!*************************************************************************
+	Application destructor
+	****************************************************************************/
 	Application::~Application()
 	{
 	}
 
-/*!*************************************************************************
-System input
-****************************************************************************/
+	/*!*************************************************************************
+	System input
+	****************************************************************************/
 	void Application::SystemInput(System* system)
 	{
 		(void)system;
 	}
 
-/*!*************************************************************************
-Run loop for application
-****************************************************************************/
+	/*!*************************************************************************
+	Run loop for application
+	****************************************************************************/
 	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
@@ -114,15 +115,15 @@ Run loop for application
 		mPosUpdate->Init();
 
 
-		p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+		//p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			if (p_GUI->check_pause() == false)
-			{
+			/*if (p_GUI->check_pause() == false)
+			{*/
 				p_Editor->Update();
 				if (p_Editor->is_ShowWindow)
 				{
@@ -132,14 +133,14 @@ Run loop for application
 				mCollision->Update(Timer::GetInstance().GetGlobalDT());
 				mPosUpdate->Update();
 				p_Audio->Update();
-			}
+		//	}
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
 
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
 
-			
+
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
 			p_Scene->checkForSceneToLoad();
@@ -151,9 +152,9 @@ Run loop for application
 		End();
 	}
 
-/*!*************************************************************************
-End loop for application
-****************************************************************************/
+	/*!*************************************************************************
+	End loop for application
+	****************************************************************************/
 	void Application::End()
 	{
 		//p_Scene->SerializeToFile("Assets/Scene/Leveltest.json");

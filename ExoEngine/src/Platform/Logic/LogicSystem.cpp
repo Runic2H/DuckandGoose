@@ -17,6 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "LogicSystem.h"
+#include "ExoEngine/GUI/GUI.h"
 #include "ExoEngine/Timer/Time.h"
 
 namespace EM

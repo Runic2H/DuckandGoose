@@ -1,4 +1,4 @@
-/*!*************************************************************************
+ /*!*************************************************************************
 ****
 \file SceneManager.cpp
 \author Elton Teo Zhe Wei
@@ -524,6 +524,17 @@ void EM::SceneManager::checkForSceneToLoad()
 		if (sceneToLoad == "Assets/Scene/Elton.json")
 		{
 			Graphic::camera.SetZoomLevel(0.25f);
+		}
+
+		if (sceneToLoad == "Assets/Scene/Level1.json")
+		{
+			Graphic::camera.SetZoomLevel(0.25f);
+		}
+
+		if (sceneToLoad == "Assets/Scene/Menu.json")
+		{
+			Graphic::camera.SetZoomLevel(1.0f);
+			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 		DeserializeFromFile(sceneToLoad);
 		sceneToLoad = "";

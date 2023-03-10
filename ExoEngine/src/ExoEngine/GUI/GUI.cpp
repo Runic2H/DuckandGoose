@@ -17,7 +17,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Platform/Window/Window.h"
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
+#include "Platform/Graphics/Graphics.h"
 #include "GUI.h"
+
 
 namespace EM
 {
@@ -77,6 +79,7 @@ namespace EM
 		glm::vec2 screen_size{ static_cast<float>(screen->Getter().m_Width),static_cast<float>(screen->Getter().m_Height) };//store the screen size into a vector
 		mAspectRatio = screen_size.x / screen_size.y;//find and store the aspect ratio of the screen
 		
+		
 
 		//function to convert mouse to screen position
 		mouse_pos.x /= screen_size.x; 
@@ -85,7 +88,7 @@ namespace EM
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
 
-		MousePosition = { mouse_pos.x * mAspectRatio, mouse_pos.y};
+		MousePosition = { mouse_pos.x * mAspectRatio , mouse_pos.y};
 		if (is_Pause == true && is_menu == false)//check if the system is pause
 		{	
 			if (is_within_box(mouse_pos, mPauseButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game
