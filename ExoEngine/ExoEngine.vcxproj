@@ -51,7 +51,7 @@
     <ClInclude Include="src\ExoEngine\Scripts\EnemyScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HazardScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\PlayerControl.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
     <ClInclude Include="src\Platform\Logic\StateMachines\StateMachine.h" />
@@ -68,6 +68,9 @@
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.h" />
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateLocked.h" />
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateUnlocked.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardCharging.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardFire.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
@@ -253,7 +256,6 @@
     <ClCompile Include="src\ExoEngine\Scripts\ButtonResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\CollisionResponse.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\HUDController.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\ScenerioScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
@@ -269,6 +271,9 @@
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyTransition.cpp" />
     <ClCompile Include="src\Platform\Logic\States\GateStates\GateLocked.cpp" />
     <ClCompile Include="src\Platform\Logic\States\GateStates\GateUnlocked.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardCharging.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardFire.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />

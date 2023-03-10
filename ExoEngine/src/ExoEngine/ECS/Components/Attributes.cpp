@@ -3,28 +3,31 @@
 
 namespace EM
 {
-	Attributes::Attributes() : mHealth(75), mMaxHealth(100), mDamage(10), mChestHealth(50) {};
+	Attributes::Attributes() : mFiringCoolDown{ 2.0f }, mFireDurationTimer{ 1.0f }, mChargeCoolDown{ 2.0f }, mHazardDmg{ 20 }, mHazardType{HazardTypes::HAZARD_EMPTY} {}
 
 	bool Attributes::Deserialize(const rapidjson::Value& obj)
 	{
-		mHealth = obj["Health"].GetInt();
-		mMaxHealth = obj["Max Health"].GetInt();
-		mDamage = obj["Damage"].GetInt();
-		mChestHealth = obj["Chest Health"].GetInt();
+		mFiringCoolDown = obj["FiringCooldown"].GetFloat();
+		mFireDurationTimer = obj["FiringDuration"].GetFloat();
+		mChargeCoolDown = obj["ChargeDuration"].GetFloat();
+		mHazardDmg = obj["HazardDamage"].GetInt();
+		mHazardType = static_cast<Attributes::HazardTypes>(obj["HazardType"].GetInt());
 		return true;
 	}
 
 	bool Attributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		//writer->StartObject();
-		writer->Key("Health");
-		writer->Int(mHealth);
-		writer->Key("Max Health");
-		writer->Int(mMaxHealth);
-		writer->Key("Damage");
-		writer->Int(mDamage);
-		writer->Key("Chest Health");
-		writer->Int(mChestHealth);
+		writer->Key("FiringCooldown");
+		writer->Double(mFiringCoolDown);
+		writer->Key("FiringDuration");
+		writer->Double(mFireDurationTimer);
+		writer->Key("ChargeDuration");
+		writer->Double(mChargeCoolDown);
+		writer->Key("HazardDamage");
+		writer->Int(mHazardDmg);
+		writer->Key("HazardType");
+		writer->Int(static_cast<int>(mHazardType));
 		//writer->EndObject();
 		return true;
 	}

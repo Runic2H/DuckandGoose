@@ -76,7 +76,6 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\PlayerAttributes.cpp" />
-    <ClCompile Include="src\ExoEngine\Scripts\LaserTurret.cpp" />
     <ClCompile Include="src\ExoEngine\ECS\Components\Attributes.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />
@@ -95,6 +94,9 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardCharging.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardFire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -284,7 +286,7 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
-    <ClInclude Include="src\ExoEngine\Scripts\LaserTurret.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\HazardScript.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
@@ -300,6 +302,9 @@
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateUnlocked.h" />
     <ClInclude Include="src\Platform\Logic\States\GateStates\GateLocked.h" />
     <ClInclude Include="src\ExoEngine\Scripts\SliderScript.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardCharging.h" />
+    <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardFire.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

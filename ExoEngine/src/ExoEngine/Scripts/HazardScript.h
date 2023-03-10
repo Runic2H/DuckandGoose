@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file LaserTurret.h
+\file HazardScript.h
 \author Tan Ek Hern
 \par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
@@ -18,55 +18,68 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Input/Input.h"
 #include "GLFW/glfw3.h"
 #include "ExoEngine/Math/physics.h"
+#include "Platform/Logic/StateMachines/StateMachine.h"
+#include "Platform/Logic/States/HazardStates/HazardIdle.h"
+#include "Platform/Logic/States/HazardStates/HazardCharging.h"
+#include "Platform/Logic/States/HazardStates/HazardFire.h"
 
 namespace EM
 {
 	/*!*************************************************************************
 	Class for Laser Turret Script
 	****************************************************************************/
-	class LaserTurret : public IScript
+	class HazardScript : public IScript
 	{
 	public:
 		/*!*************************************************************************
 		Default constructor for Laser Turret
 		****************************************************************************/
-		LaserTurret();
+		HazardScript(Entity entity) : mHazardStateMachine{ StateMachine(entity) } {};
 		/*!*************************************************************************
 		Default destructor for Player Controller
 		****************************************************************************/
-		~LaserTurret() = default;
+		~HazardScript() = default;
 		/*!*************************************************************************
-		Returns a new copy of LaserTurret Script
+		Returns a new copy of HazardScript Script
 		****************************************************************************/
-		virtual LaserTurret* Clone() const override;
+		virtual HazardScript* Clone() const override
+		{
+			return new HazardScript(*this);
+		}
 		/*!*************************************************************************
-		Start State of LaserTurret Script
+		Start State of HazardScript Script
 		****************************************************************************/
-		virtual void Start() override;
+		virtual void Start() override
+		{
+			mHazardStateMachine.ChangeState(new HazardIdle(&mHazardStateMachine));
+		}
 		/*!*************************************************************************
-		Update Loop of LaserTurret Script
+		Update Loop of HazardScript Script
 		****************************************************************************/
-		virtual void Update(float Frametime) override;
+		virtual void Update(float Frametime) override
+		{
+			mHazardStateMachine.OnUpdate(Frametime);
+		}
 		/*!*************************************************************************
-		End State for LaserTurret
+		End State for HazardScript
 		****************************************************************************/
-		virtual void End() override;
+		virtual void End() override
+		{
+			delete this;
+		}
 		/*!*************************************************************************
 		Returns the name of Script
 		****************************************************************************/
-		virtual std::string GetScriptName() override;
+		virtual std::string GetScriptName() override
+		{
+			return "HazardScript";
+		}
 
 		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
 
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		float timeTilSpawn;
-		float startTimeTilSpawn;
-		float firingDuration;
-		float startFiringDuration;
-		int damage;
-		bool playerDetected;
-		bool firing;
+		StateMachine mHazardStateMachine;
 	};
 }

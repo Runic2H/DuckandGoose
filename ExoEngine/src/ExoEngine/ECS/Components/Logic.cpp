@@ -29,6 +29,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/GateController.h"
 #include "ExoEngine/Scripts/BackgroundAudio.h"
+#include "ExoEngine/Scripts/HazardScript.h"
 
 
 
@@ -134,6 +135,10 @@ namespace EM
 			if (mScriptNameVector[j] == "PauseMenu")
 			{
 				mScriptsVector.push_back(new PauseMenu());
+			}
+			if (mScriptNameVector[j] == "HazardScript")
+			{
+				mScriptsVector.push_back(new HazardScript(GetComponentEntityID()));
 			}
 		}
 		return true;

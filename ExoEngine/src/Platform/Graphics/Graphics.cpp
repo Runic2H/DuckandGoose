@@ -52,7 +52,7 @@ namespace EM {
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
-		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX"};
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX", "Hazards"};
 		for (const auto& i : folderpath)
 		{
 			std::filesystem::path currentPath = path + i;
@@ -195,20 +195,22 @@ namespace EM {
 
 			//for rendering of enemy health bar
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
-				auto& mTrans = p_ecs.GetComponent<Transform>(entity);
-				auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
-				auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
-				if (mTrans.GetScale().x < 0) {
-					vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
-					vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-					mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive)
+				{
+					auto& mTrans = p_ecs.GetComponent<Transform>(entity);
+					auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
+					auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
+					if (mTrans.GetScale().x < 0) {
+						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+					}
+					else {
+						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+					}
 				}
-				else {
-					vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
-					vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-					mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
-				}
-				//std::cout << "Displaying HPBar" << std::endl;
 			}
 		}
 

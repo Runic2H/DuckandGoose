@@ -35,6 +35,8 @@ namespace EM
 		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		}
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 	}
 
@@ -66,6 +68,8 @@ namespace EM
 	void EnemyNotActive::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
 		delete this;
 	}
 }
