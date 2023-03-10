@@ -62,23 +62,21 @@ namespace EM
             if (pComp.GetType() == HUDComponent::ElementType::Static) {
                 pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
             }
-            else if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
+            if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
                 //update scale
-                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth) / 2.0f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth)/ 2.0f, pTrans.GetScale().y);
-                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth / 2.325f), camPos.y + pComp.GetOffset().y);
+                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth)/ 1.75f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth)/1.75f, pTrans.GetScale().y);
+                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth) / 1.75f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth) / 1.75f) / 2.5f, camPos.y + pComp.GetOffset().y);
             }
-            else if (pComp.GetType() == HUDComponent::ElementType::BlockBar) {
+            if (pComp.GetType() == HUDComponent::ElementType::BlockBar) {
                 //check for timing of cooldown
                 //update alpha
-                pTrans.SetScale(p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / 5.0f, pTrans.GetScale().y);
-                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / 5.0f) / 2.325f), camPos.y + pComp.GetOffset().y);
+                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / 0.05f) / 2.25f / (5.0f / 0.05f) / 2.25f, pTrans.GetScale().y);
+                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / 0.05f) / 2.25f / (5.0f / 0.05f) / 2.25f) / 2.5f, camPos.y + pComp.GetOffset().y);
             }
-            else if (pComp.GetType() == HUDComponent::ElementType::DashBar) {
+            if (pComp.GetType() == HUDComponent::ElementType::DashBar) {
                 //check for timing of cooldown
-                float maxCooldown = 0;
-                //update alpha
-                pTrans.SetScale(p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / 3.0f, pTrans.GetScale().y);
-                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / 3.0f) / 2.325f), camPos.y + pComp.GetOffset().y);
+                pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / 0.03f) / 2.25f / (3.0f/ 0.03f) / 2.25f, pTrans.GetScale().y);
+                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / 0.03f) / 2.25f / (3.0f / 0.03f) / 2.25f) / 2.5f, camPos.y + pComp.GetOffset().y);
             }
         }
 	}

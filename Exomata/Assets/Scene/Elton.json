@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 49
+        "Entities": 52
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -51,6 +51,9 @@
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
         "00000000000000000000000010101001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
         "00000000000000000000000100111001"
     ],
     "Components": {
@@ -59,7 +62,7 @@
             {},
             {},
             {
-                "NameTag": "none"
+                "NameTag": "PlayerHUDStatic"
             },
             {},
             {},
@@ -1013,9 +1016,9 @@
         ],
         "21": [
             {
-                "posX": -4.049516201019287,
-                "posY": 0.10553719848394394,
-                "scaleX": -0.25,
+                "posX": -4.017561435699463,
+                "posY": 0.06124354153871536,
+                "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -1765,7 +1768,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 12,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1895,7 +1898,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 12,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1946,7 +1949,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 13,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1997,7 +2000,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 12,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2048,7 +2051,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 13,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2099,7 +2102,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 12,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2581,16 +2584,16 @@
         ],
         "48": [
             {
-                "posX": 0.030107498168945313,
-                "posY": 0.20499999821186066,
-                "scaleX": 0.25,
-                "scaleY": 0.10000000149011612,
+                "posX": -4.2319488525390625,
+                "posY": 0.2562435269355774,
+                "scaleX": 0.3265306055545807,
+                "scaleY": 0.05999999865889549,
                 "Rot": 0.0
             },
             {},
             {},
             {
-                "NameTag": "PlayerHUD"
+                "NameTag": "PlayerHUDHealth"
             },
             {
                 "TextureName": "HPBar",
@@ -2611,8 +2614,122 @@
             {},
             {
                 "ElementType": 1,
-                "offsetX": -0.4000000059604645,
-                "offsetY": 0.20499999821186066
+                "offsetX": -0.3449999988079071,
+                "offsetY": 0.19499999284744263
+            },
+            {},
+            {},
+            {}
+        ],
+        "49": [
+            {
+                "posX": -4.33756160736084,
+                "posY": 0.22524353861808777,
+                "scaleX": 0.0,
+                "scaleY": 0.03999999910593033,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDDash"
+            },
+            {
+                "TextureName": "DashBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 3,
+                "offsetX": -0.3199999928474426,
+                "offsetY": 0.164000004529953
+            },
+            {},
+            {},
+            {}
+        ],
+        "50": [
+            {
+                "posX": -4.364894866943359,
+                "posY": 0.1712435483932495,
+                "scaleX": 0.106666199862957,
+                "scaleY": 0.03999999910593033,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDBlock"
+            },
+            {
+                "TextureName": "DashBar",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 2,
+                "offsetX": -0.38999998569488525,
+                "offsetY": 0.10999999940395355
+            },
+            {},
+            {},
+            {}
+        ],
+        "51": [
+            {
+                "posX": -4.282561302185059,
+                "posY": 0.22624355554580688,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "PlayerHUDStatic"
+            },
+            {
+                "TextureName": "HPStatic",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {
+                "ElementType": 0,
+                "offsetX": -0.26499998569488525,
+                "offsetY": 0.16500000655651093
             },
             {},
             {},
