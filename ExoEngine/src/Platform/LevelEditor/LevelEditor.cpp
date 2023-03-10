@@ -47,6 +47,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/BackgroundAudio.h"
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/SliderScript.h"
+#include "ExoEngine/Scripts/PauseMenu.h"
 
 namespace EM {
 
@@ -1195,6 +1196,12 @@ namespace EM {
                                                                                             && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
                                             logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                        }
+
+                                        if (mScriptList[current_script] == "PauseMenu" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                     && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new PauseMenu(), selectedEntity);
                                         }
                                         if (mScriptList[current_script] == "ScenerioScript")
                                         {

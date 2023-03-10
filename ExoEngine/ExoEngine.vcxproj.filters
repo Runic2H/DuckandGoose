@@ -94,6 +94,7 @@
     <ClCompile Include="src\Platform\Logic\States\GateStates\GateUnlocked.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\ExoEngine\Scripts\SliderScript.cpp" />
+    <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
