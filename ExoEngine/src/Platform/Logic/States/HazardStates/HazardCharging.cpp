@@ -3,10 +3,11 @@
 
 namespace EM
 {
-	HazardCharging::HazardCharging(StateMachine* stateMachine) {}
+	HazardCharging::HazardCharging(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* HazardCharging::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 

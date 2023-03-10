@@ -61,11 +61,11 @@ namespace EM {
 
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 		
-		bool clicked;
-		bool selected;
-		bool Action;
+		bool clicked = false;
+		bool selected = false;
+		bool Action = false;
 
-		enum button_state
+		enum class button_state
 		{
 			idle,
 			select,
@@ -80,7 +80,7 @@ namespace EM {
 			vec2D max;
 		};
 		button_bb Button_BoundingBox{};
-		button_state curr_state{idle};
+		button_state curr_state{ button_state::idle};
 		bool HTP {false};
 
 		

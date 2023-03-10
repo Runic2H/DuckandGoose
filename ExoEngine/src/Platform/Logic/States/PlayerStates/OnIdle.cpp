@@ -23,7 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnIdle::OnIdle(StateMachine* stateMachine) {}
+	OnIdle::OnIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{

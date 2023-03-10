@@ -20,10 +20,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	GateLocked::GateLocked(StateMachine* stateMachine) {}
+	GateLocked::GateLocked(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* GateLocked::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 	/*!*************************************************************************
@@ -41,6 +42,7 @@ namespace EM
 	****************************************************************************/
 	void GateLocked::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		UNREFERENCED_PARAMETER(Frametime);
         int aliveCount{};
         for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
         {

@@ -3,10 +3,11 @@
 
 namespace EM
 {
-	HazardFire::HazardFire(StateMachine* stateMachine) : mCurrTrans{ vec2D() }, mCurrScale{ vec2D() } {}
+	HazardFire::HazardFire(StateMachine* stateMachine) : mCurrTrans{ vec2D() }, mCurrScale{ vec2D() } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* HazardFire::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 

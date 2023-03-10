@@ -3,10 +3,11 @@
 
 namespace EM
 {
-	HazardIdle::HazardIdle(StateMachine* stateMachine) {}
+	HazardIdle::HazardIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* HazardIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 

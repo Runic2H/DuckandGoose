@@ -20,10 +20,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	GateUnlocked::GateUnlocked(StateMachine* stateMachine) {}
+	GateUnlocked::GateUnlocked(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* GateUnlocked::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 	/*!*************************************************************************
@@ -40,6 +41,7 @@ namespace EM
 	****************************************************************************/
 	void GateUnlocked::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		UNREFERENCED_PARAMETER(Frametime);
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			if (p_ecs.HaveComponent<EnemyAttributes>(i))

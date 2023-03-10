@@ -22,10 +22,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyChase::EnemyChase(StateMachine* stateMachine) {}
+	EnemyChase::EnemyChase(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 

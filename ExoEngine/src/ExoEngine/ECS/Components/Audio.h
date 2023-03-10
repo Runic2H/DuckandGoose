@@ -15,7 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #pragma once
 #include "IComponent.h"
-
+#pragma warning( disable : 26495 )
 namespace EM
 {
 
@@ -30,14 +30,14 @@ namespace EM
 			SFX
 		};
 		struct AudioPiece {
-			std::string mAudioPath;
-			AudioType mChannelGroup;
-			int mChannel;
-			bool is_Looping;
-			bool should_play;
-			bool should_stop;
-			bool is_Playing;
-			bool triggered;
+			std::string mAudioPath{};
+			AudioType mChannelGroup{};
+			int mChannel{};
+			bool is_Looping{};
+			bool should_play{};
+			bool should_stop{};
+			bool is_Playing{};
+			bool triggered{};
 		};
 		Audio();
 		~Audio() = default;

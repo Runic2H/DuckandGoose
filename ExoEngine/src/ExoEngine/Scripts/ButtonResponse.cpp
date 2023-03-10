@@ -38,7 +38,7 @@ namespace EM
 		Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
@@ -55,18 +55,18 @@ namespace EM
 		if ( p_GUI->Check_HTP() == false)
 		{ 
 			
-			if (curr_state != click)
-				curr_state = idle;
+			if (curr_state != button_state::click)
+				curr_state = button_state::idle;
 
 		
-			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && curr_state == idle)
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::idle)
 			{
-				curr_state = click;
+				curr_state = button_state::click;
 			}
 
-			else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && curr_state == click)
+			else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::click)
 			{
-				curr_state = release;
+				curr_state = button_state::release;
 			}
 		
 			/*std::cout << ID_tag.GetTag() << ": ";
@@ -121,7 +121,7 @@ namespace EM
 
 		
 			
-			if (curr_state == release)
+			if (curr_state == button_state::release)
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
@@ -165,7 +165,7 @@ namespace EM
 				}
 			}
 
-			if (curr_state == click)
+			if (curr_state == button_state::click)
 			{
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{

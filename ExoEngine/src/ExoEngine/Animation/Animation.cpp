@@ -27,14 +27,6 @@ namespace EM {
 	}
 
 	/*!*************************************************************************
-	Add frame information
-	****************************************************************************/
-	void Animation::AddFrameInfo(Sprite& sprite)
-	{
-	}
-
-
-	/*!*************************************************************************
 	Update animations based on delta time
 	****************************************************************************/
 	void Animation::UpdateAnimation(float deltatime, Sprite& sprite)
@@ -48,7 +40,7 @@ namespace EM {
 		}
 		else
 		{
-			sprite.GetMaxIndex() = (int)GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f;
+			sprite.GetMaxIndex() = static_cast<int>(GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f);
 			if (sprite.internaltimer >= spriteContainer[sprite.GetTexture()][sprite.GetIndex().x])
 			{
 				////for debug

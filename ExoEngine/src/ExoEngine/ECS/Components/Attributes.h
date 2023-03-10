@@ -32,7 +32,7 @@ namespace EM
 		float mFiringCoolDown;
 		float mFireDurationTimer;
 		float mChargeCoolDown;
-		float mHazardDmg;
+		int mHazardDmg;
 		HazardTypes mHazardType;
 	};
 }
