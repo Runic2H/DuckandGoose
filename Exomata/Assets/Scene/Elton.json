@@ -39,11 +39,11 @@
         "00000000000000000000000000011000",
         "00000000000000000000000010111111",
         "00000000000000000000000000011001",
-        "00000000000000000000000000111111",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000100111111111",
@@ -57,30 +57,30 @@
         "00000000000000000000000100111001",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000000010111001",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
@@ -1088,7 +1088,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 2,
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1150,8 +1150,13 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 7,
-                "BGM Volume": 0.9850000143051147,
+                "7": {
+                    "AudioPath": "Shield_Up2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 8,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -1511,7 +1516,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -1785,7 +1790,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -1915,10 +1920,21 @@
             {
                 "0": "CollisionResponse",
                 "1": "GateController",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -1983,8 +1999,32 @@
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
-            {},
-            {},
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
             {
                 "NameTag": "Gate Back 3"
             },
@@ -1995,7 +2035,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2018,9 +2058,24 @@
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164
             },
+            {
+                "0": "AudioManager",
+                "1": "CollisionResponse",
+                "2": "GateController",
+                "ScriptCount": 3
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2085,8 +2140,32 @@
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
-            {},
-            {},
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
             {
                 "NameTag": "Gate Back 4"
             },
@@ -2097,7 +2176,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2120,9 +2199,24 @@
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164
             },
+            {
+                "0": "CollisionResponse",
+                "1": "GateController",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2294,7 +2388,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -2387,7 +2481,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -2480,7 +2574,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -2573,7 +2667,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -2618,7 +2712,7 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -2866,9 +2960,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2898,9 +3005,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2930,9 +3050,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2962,9 +3095,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -2994,9 +3140,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3026,9 +3185,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3058,9 +3230,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3090,9 +3275,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3188,9 +3386,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3220,9 +3431,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3252,9 +3476,22 @@
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0
             },
+            {
+                "0": "AudioManager",
+                "ScriptCount": 1
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {},
             {},
@@ -3316,13 +3553,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3390,13 +3638,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3464,13 +3723,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3538,13 +3808,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3612,13 +3893,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3686,13 +3978,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3760,13 +4063,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3836,13 +4150,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3912,13 +4237,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -3988,13 +4324,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -4064,13 +4411,24 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "HAZARD_LASER_3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.03999999910593033,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
             {},
             {
                 "FiringCooldown": -0.01666543446481228,
@@ -4157,7 +4515,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4250,7 +4608,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4343,7 +4701,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4363,7 +4721,7 @@
         ],
         "81": [
             {
-                "posX": 1.9891855716705322,
+                "posX": 2.3861451148986816,
                 "posY": 0.08514009416103363,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
@@ -4436,7 +4794,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4529,7 +4887,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4622,7 +4980,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4642,7 +5000,7 @@
         ],
         "84": [
             {
-                "posX": 3.761289119720459,
+                "posX": 3.834676742553711,
                 "posY": 0.006337285041809082,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
@@ -4715,7 +5073,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
@@ -4808,7 +5166,7 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
+                "BGM Volume": 0.03999999910593033,
                 "SFX Volume": 0.9850000143051147,
                 "Master Volume": 0.9850000143051147
             },
