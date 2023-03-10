@@ -48,6 +48,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/EnemyScript.h"
 #include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/PauseMenu.h"
+#include "ExoEngine/Scripts/HazardScript.h"
 
 namespace EM {
 
@@ -896,6 +897,12 @@ namespace EM {
                             p_ecs.AddComponent<EnemyAttributes>(selectedEntity, C_EnemyAttributesComponent);
                         ImGui::CloseCurrentPopup();
                     }
+                    if (ImGui::MenuItem("Attributes"))
+                    {
+                        if (!p_ecs.HaveComponent<Attributes>(selectedEntity))
+                            p_ecs.AddComponent<Attributes>(selectedEntity, C_AttributesComponent);
+                        ImGui::CloseCurrentPopup();
+                    }
 
                     ImGui::EndPopup();
                 }
@@ -1114,7 +1121,7 @@ namespace EM {
                         }
                     }
                 }
-                //Attributes components
+                //Player Attributes
                 if (p_ecs.HaveComponent<PlayerAttributes>(selectedEntity))
                 {
                     if (ImGui::CollapsingHeader("PlayerAttributes", ImGuiTreeNodeFlags_None))
@@ -1133,6 +1140,37 @@ namespace EM {
                         attrib.mHealth = healthSlider;
                         attrib.mMaxHealth = maxHealthSlider;
                         attrib.mDamage = damageSlider;
+                    }
+                }
+                //Attributes
+                if (p_ecs.HaveComponent<Attributes>(selectedEntity))
+                {
+                    if (ImGui::CollapsingHeader("Attributes", ImGuiTreeNodeFlags_None))
+                    {
+                        auto& attrib = p_ecs.GetComponent<Attributes>(selectedEntity);
+
+                        static ImGuiSliderFlags flags = ImGuiSliderFlags_None;
+                        float FiringCoolDown = attrib.mFiringCoolDown;
+                        float FireDurationTimer = attrib.mFireDurationTimer;
+                        float ChargeCoolDown = attrib.mChargeCoolDown;
+                        float HazardDmg = attrib.mHazardDmg;
+                        const char* HazardList = "None\0Ground\0Laser";
+                        auto HazardType = attrib.mHazardType;
+                        int HazardIndex = static_cast<int>(HazardType);
+                        ImGui::Combo("HazardType", &HazardIndex, HazardList);
+                        ImGui::PushItemWidth(100.0f);
+                        attrib.mHazardType = static_cast<Attributes::HazardTypes>(HazardIndex);
+
+                        ImGui::SliderFloat("Firing Cooldown (0 -> 10)", &FiringCoolDown, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Firing Duration (0 -> 10)", &FireDurationTimer, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Charge Cooldown (0 -> 10)", &ChargeCoolDown, 0, 10, "%f", flags);
+                        ImGui::SliderFloat("Damage (0 -> 50)", &HazardDmg, 0, 50, "%f", flags);
+
+
+                        attrib.mFiringCoolDown = FiringCoolDown;
+                        attrib.mFireDurationTimer = FireDurationTimer;
+                        attrib.mChargeCoolDown = ChargeCoolDown;
+                        attrib.mHazardDmg = HazardDmg;
                     }
                 }
                 //Logic
@@ -1232,6 +1270,11 @@ namespace EM {
                                                                                           && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
                                         {
                                             logic.InsertScript(new SliderScript(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "HazardScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                          && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new HazardScript(selectedEntity), selectedEntity);
                                         }
                                     }
                                 }
@@ -1385,6 +1428,7 @@ namespace EM {
                         HUDComp.SetOffset(Offset);
                     }
                 }
+                //Enemy Attributes
                 if (p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                 {
                     if (ImGui::CollapsingHeader("Enemy Attributes", ImGuiTreeNodeFlags_None))
@@ -1471,6 +1515,11 @@ namespace EM {
                     if (ImGui::MenuItem("EnemyAttributes") && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                     {
                         p_ecs.RemoveComponent<EnemyAttributes>(selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                    if (ImGui::MenuItem("Attributes") && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                    {
+                        p_ecs.RemoveComponent<Attributes>(selectedEntity);
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::EndPopup();

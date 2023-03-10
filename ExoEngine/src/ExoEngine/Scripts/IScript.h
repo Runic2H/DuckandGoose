@@ -21,6 +21,9 @@ namespace EM
 {
 	/*!*************************************************************************
 	Interface for Script
+	When Adding a new script
+	1) Ensure the Logic Component has the inserted script when deserializing
+	2) Ensure the Level Editor has the new script that can be inserted
 	****************************************************************************/
 	class IScript
 	{

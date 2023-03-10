@@ -47,7 +47,7 @@ namespace EM
 			{
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					if (p_ecs.HaveComponent<EnemyAttributes>(i))
+					if (p_ecs.HaveComponent<EnemyAttributes>(i) || p_ecs.HaveComponent<Attributes>(i))
 					{
 						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
 						{
