@@ -46,12 +46,15 @@ namespace EM
 			{
 				for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 				{
-					if (!(*i)->GetScriptInit())
+					if ((p_GUI->check_pause() == false || (*i)->GetScriptName() == "PauseMenu"))
 					{
-						(*i)->Start();
-						(*i)->SetScriptInit();
+						if (!(*i)->GetScriptInit())
+						{
+							(*i)->Start();
+							(*i)->SetScriptInit();
+						}
+						(*i)->Update(Frametime);
 					}
-					(*i)->Update(Frametime);
 				}
 			}
 		}

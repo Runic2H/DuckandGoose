@@ -15,6 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "OnDieded.h"
+#include "ExoEngine/ECS/SceneManager.h"
 
 namespace EM
 {
@@ -31,12 +32,13 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnEnter(StateMachine* stateMachine)
 	{
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 6))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[6].should_play = true;
 		}
-
 	}
 
 	/*!*************************************************************************
@@ -44,7 +46,7 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		//Change Scene to Game Over;
+		p_Scene->setSceneToLoad("Assets/Scenes/Game_Over.json");
 	}
 
 	/*!*************************************************************************

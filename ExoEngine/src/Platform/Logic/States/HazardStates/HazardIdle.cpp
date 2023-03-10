@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file HazardIdle.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the hazard idle state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "HazardIdle.h"
 #include "HazardCharging.h"
 
@@ -11,6 +26,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	enter state for hazard idle state
+	****************************************************************************/
 	void HazardIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
@@ -22,6 +40,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Update state for hazard idle state
+	****************************************************************************/
 	void HazardIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
@@ -34,6 +55,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Exit state for hazard idle state
+	****************************************************************************/
 	void HazardIdle::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

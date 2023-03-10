@@ -36,7 +36,7 @@ namespace EM
 
 	void PauseMenu::Update(float Frametime)
 	{
-		Graphic::camera.SetZoomLevel(0.25);
+		
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
@@ -45,12 +45,19 @@ namespace EM
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
 		//std::cout << p_GUI->check_pause();
 
-		vec2D camPos = vec2D(Graphic::camera.GetPosition().x, Graphic::camera.GetPosition().y);
-		if(p_Input->KeyPressed(GLFW_KEY_ESCAPE) && ID_tag.GetTag() == "PauseMenuBG")
+		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
+		
+		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE)&&p_GUI->check_pause()==false)
 		{
+			if (ID_tag.GetTag() == "PauseMenuBG")
+			{
 			p_GUI->toggle_pause();
+			Graphic::mcamera->SetZoomLevel(1.0f);
+			Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
+			}
 			
 		}
+		
 		//check if the game is pause
 		//if (p_Editor->is_ShowWindow == true)
 		//{
@@ -77,7 +84,7 @@ namespace EM
 				}
 				if (ID_tag.GetTag() == "Quit")
 				{
-					spt.SetTexture("Quit_Idle");
+					spt.SetTexture("QG_Y");
 				//	transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "Options")
@@ -115,7 +122,7 @@ namespace EM
 					curr_state = button_state::release;
 				}
 
-				glm::vec2 newmousepos{ (p_GUI->MousePosition.x + camPos.x)*(1/ Graphic::camera.GetZoomLevel()) ,(p_GUI->MousePosition.y + camPos.y)};
+				glm::vec2 newmousepos{ (p_GUI->MousePosition.x + camPos.x),(p_GUI->MousePosition.y + camPos.y)};
 				//component to detect if mouse is hovering over the buttons
 				if (is_within_box(newmousepos, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
 				{
@@ -125,12 +132,12 @@ namespace EM
 					}
 					if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("Quit_Hover");
+						spt.SetTexture("QG_B");
 					}
-					if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
-					{
-						spt.SetTexture("Options_Hover"); //to be updated
-					}
+					//if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+					//{
+					//	spt.SetTexture("Options_Hover"); //to be updated
+					//}
 					if (ID_tag.GetTag() == "Restart" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
 						spt.SetTexture("Restart_Hover"); //to be updated
@@ -141,24 +148,33 @@ namespace EM
 						if (ID_tag.GetTag() == "Resume")
 						{
 							p_GUI->toggle_pause();
+							Graphic::camera.SetPosition(p_GUI->PrevCamPos);
+							Graphic::mcamera->SetZoomLevel(0.25f);
+
+
 						}
 
 						if (ID_tag.GetTag() == "Quit")
 						{
-							p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-							p_GUI->toggle_menu();
+							
+							//curr_state = idle;
+							//p_GUI->toggle_menu();
 							p_GUI->toggle_pause();
+							p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 						}
 
-						if (ID_tag.GetTag() == "Options")
+					/*	if (ID_tag.GetTag() == "Options")
 						{
 							PrevCamPos = Graphic::camera.GetPosition();
 							Graphic::camera.SetPosition({ 40.0f, 40.0f, 0});
 							optionstate = true;
-						}
+						}*/
 
-						if (ID_tag.GetTag() == "Resart")
+						if (ID_tag.GetTag() == "Restart")
 						{
+							p_GUI->toggle_pause();
+							Graphic::camera.SetPosition(p_GUI->PrevCamPos);
+							Graphic::mcamera->SetZoomLevel(0.25f);
 							p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 						}
 					}
@@ -168,17 +184,18 @@ namespace EM
 						if (ID_tag.GetTag() == "Resume")
 						{
 							spt.SetTexture("Resume_Click");
+							
 						}
 
 						if (ID_tag.GetTag() == "Quit")
 						{
-							spt.SetTexture("Quit_Click");
+							spt.SetTexture("QG_R");
 						}
 
-						if (ID_tag.GetTag() == "Options")
+					/*	if (ID_tag.GetTag() == "Options")
 						{
 							spt.SetTexture("Options_Click");
-						}
+						}*/
 
 						if (ID_tag.GetTag() == "Restart")
 						{
@@ -193,6 +210,7 @@ namespace EM
 		else if (p_GUI->check_pause() == false)
 		{
 		spt.SetTexture("Blank");
+		//Graphic::camera.SetZoomLevel(0.25f);
 		}
 	}
 
@@ -213,8 +231,8 @@ namespace EM
 
 	bool PauseMenu::is_within_box(glm::vec2 cur, Collider box, Transform trans)
 	{
-		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x )) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&
-			cur.x < ((box[0].mMax.x * (trans.GetScale().x )) + trans.GetPos().x) && cur.y < (box[0].mMax.y * (trans.GetScale().y / 2) + trans.GetPos().y))
+		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x/2 )) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&
+			cur.x < ((box[0].mMax.x * (trans.GetScale().x/2 )) + trans.GetPos().x) && cur.y < (box[0].mMax.y * (trans.GetScale().y / 2) + trans.GetPos().y))
 		{
 			return true;//return true if the position of the cursor is between both of the button minimun and maximum bounding point
 		}

@@ -175,9 +175,9 @@ namespace EM {
 		
 		for (auto const& entity : mEntities)
 		{
-			if (p_ecs.HaveComponent<Tag>(entity) && !p_Editor->is_ShowWindow)
+			if (p_ecs.HaveComponent<NameTag>(entity) && !p_Editor->is_ShowWindow)
 			{
-				if(p_ecs.GetComponent<Tag>(entity).GetTag() == "Player")
+				if(p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player" && p_GUI->check_pause() == false)
 					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 						p_ecs.GetComponent<Transform>(entity).GetPos().y,
 						0.0f });
@@ -217,19 +217,19 @@ namespace EM {
 
 		
 
-		//if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
-		//{
-		//	//UI background
-		//	mRenderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + -0.89f, camera.GetPosition().y + -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.522f, camera.GetPosition().y + 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f,camera.GetPosition().y + 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
-		//	mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
+		if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
+		{
+			//UI background
+			mRenderer->DrawQuad({ camera.GetPosition().x, camera.GetPosition().y}, { 3.52f, 1.89f }, 0.0f, GETTEXTURE("EndGameUI"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + -0.89f, camera.GetPosition().y + -0.01f }, { 1.21f, 1.54f }, 0.0f, GETTEXTURE("Avatar"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.522f, camera.GetPosition().y + 0.118f }, { 1.125f, 1.222f }, 0.0f, GETTEXTURE("MenuPanel"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f,camera.GetPosition().y + 0.361f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.186f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.007f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.198f }, { 0.802f, 0.123f }, 0.0f, GETTEXTURE("ResumeButton"));
+			mRenderer->DrawQuad({ camera.GetPosition().x + 0.526f, camera.GetPosition().y + -0.556f }, { 1.350f, 0.175f }, 0.0f, GETTEXTURE("ResumeButton"));
 
-		//}
+		}
 		mRenderer->End();
 	
 		p_FrameBuffer->UnBind();
@@ -254,15 +254,15 @@ namespace EM {
 		//}
 
 
-		if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
-		{
-			p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
-			p_GUI->toggle_pause();//set pause to true thus pausing the game
-		}
-		if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
-		{
-			p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
-		}
+		//if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
+		//{
+		//	p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
+		//	p_GUI->toggle_pause();//set pause to true thus pausing the game
+		//}
+		//if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
+		//{
+		//	p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
+		//}
 	
 		mcamera->MouseScrolling();
 		if (p_Input->KeyHold(GLFW_KEY_F2) && !p_Editor->is_ShowWindow)

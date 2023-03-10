@@ -37,6 +37,10 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Block");
 		}
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[7].should_play = true;
+		}
 	}
 
 	/*!*************************************************************************

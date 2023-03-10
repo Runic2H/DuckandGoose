@@ -94,7 +94,7 @@ namespace EM
 			//__________________________________________________________________________________________________________________
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (dist < 0.1f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+			if (dist < 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 			{
 				//std::cout << "In Proximity2" << std::endl;
 				//if within range to attack, set mode to attacking

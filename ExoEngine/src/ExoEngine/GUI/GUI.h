@@ -51,7 +51,7 @@ namespace EM
 		
 	public:
 		static std::unique_ptr<gui_system>& GetInstance(); //used to create an instance to work alongside the game during it's lifetime
-		
+		glm::vec3 PrevCamPos;
 		bool Update(Window* screen); // to be update in realtime  with the rest of the engine system
 		bool mPauseSwitch = false; // a secondary boolean to prevent button from flickering 
 		glm::mat4 VPmat{}; //hold the viewprojection matrix passed from the camera

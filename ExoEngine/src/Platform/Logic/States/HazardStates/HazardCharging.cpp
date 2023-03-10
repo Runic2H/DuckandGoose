@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file HazardCharging.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the hazard charging state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "HazardCharging.h"
 #include "HazardFire.h"
 
@@ -11,6 +26,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for hazard charging state
+	****************************************************************************/
 	void HazardCharging::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
@@ -30,6 +48,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Update state for hazard charging state
+	****************************************************************************/
 	void HazardCharging::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
@@ -42,6 +63,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Exit state for hazard charging state
+	****************************************************************************/
 	void HazardCharging::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file EnemyMovement.h
-\author Tan Ek Hern
-\par DP email: t.ekhern@digipen.edu
+\author Tan Ek Hern / Elton Teo Zhe Wei / Matthew Cheung
+\par DP email: t.ekhern@digipen.edu / e.teo@digipen.edu / j.cheung@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200

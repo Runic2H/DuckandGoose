@@ -152,7 +152,7 @@ namespace EM
 
 		}
 
-		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE)&& p_GUI->Check_menu() == false)
+		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 			
 				limitset = false;
