@@ -88,7 +88,7 @@ namespace EM
 		mouse_pos -= glm::vec2{ 1, 1 };
 		mouse_pos.y *= -1;
 
-		MousePosition = { mouse_pos.x * mAspectRatio , mouse_pos.y};
+		MousePosition = { mouse_pos.x * mAspectRatio * 1/Graphic::camera.GetZoomLevel() , mouse_pos.y};
 		if (is_Pause == true && is_menu == false)//check if the system is pause
 		{	
 			if (is_within_box(mouse_pos, mPauseButton) && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))//if system is pause and the quit button is pressed, tell the system to quit the game

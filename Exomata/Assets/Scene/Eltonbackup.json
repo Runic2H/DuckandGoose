@@ -1,9 +1,9 @@
 {
     "Number of Entities": {
-        "Entities": 60
+        "Entities": 59
     },
     "EntitySignatures": [
-        "00000000000000000000000000001000",
+        "00000000000000000000000001001000",
         "00000000000000000000000000011001",
         "00000000000000000000000000011111",
         "00000000000000000000000000011111",
@@ -24,7 +24,7 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000010010111111",
+        "00000000000000000000010011111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
@@ -32,7 +32,7 @@
         "00000000000000000000000000011000",
         "00000000000000000000000000011111",
         "00000000000000000000000000011111",
-        "00000000000000000000100110111111",
+        "00000000000000000000100111111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
@@ -46,23 +46,22 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
-        "00000000000000000000100110111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
         "00000000000000000000000010101001",
         "00000000000000000000000100111001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000001111101",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000100111001",
+        "00000000000000000000000001111001",
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
-        "00000000000000000000000101111101",
-        "00000000000000000000000101111101",
-        "00000000000000000000000000001000"
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111101"
     ],
     "Components": {
         "0": [
@@ -70,11 +69,14 @@
             {},
             {},
             {
-                "NameTag": "SOUND_BG"
+                "NameTag": "PlayerHUDStatic"
             },
             {},
             {},
-            {},
+            {
+                "Tag": "",
+                "TargetTag": ""
+            },
             {},
             {},
             {},
@@ -1024,8 +1026,8 @@
         ],
         "21": [
             {
-                "posX": -3.937098741531372,
-                "posY": 0.06732096523046494,
+                "posX": -4.5871758460998535,
+                "posY": -0.04239274933934212,
                 "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
@@ -1060,20 +1062,22 @@
                 "NameTag": "player"
             },
             {
-                "TextureName": "Normal_Attack_Swing1",
-                "Index_X": 0,
+                "TextureName": "Idle",
+                "Index_X": 1,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 6,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 8,
                 "DisplayTime 0": 0.25999999046325684,
                 "DisplayTime 1": 0.20000000298023224,
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.25999999046325684,
-                "DisplayTime 5": 0.20000000298023224
+                "DisplayTime 5": 0.20000000298023224,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0
             },
             {
                 "0": "PlayerControl",
@@ -1081,7 +1085,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Player",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "Attack2.wav",
@@ -1114,9 +1121,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 6,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1453,7 +1460,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -1471,9 +1481,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -1744,9 +1754,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1768,7 +1778,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1898,7 +1908,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1949,7 +1959,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2000,7 +2010,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2051,7 +2061,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2102,7 +2112,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 3,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2232,7 +2242,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2250,9 +2263,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2321,7 +2334,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2339,9 +2355,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2410,7 +2426,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2428,9 +2447,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2499,7 +2518,10 @@
                 "2": "AudioManager",
                 "ScriptCount": 3
             },
-            {},
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
             {
                 "0": {
                     "AudioPath": "ThudStrike2.wav",
@@ -2517,9 +2539,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2561,9 +2583,9 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.14499999582767487,
-                "SFX Volume": 0.4950000047683716,
-                "Master Volume": 0.7900000214576721
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -2572,16 +2594,16 @@
         ],
         "48": [
             {
-                "posX": -4.063370704650879,
-                "posY": 0.3558059632778168,
+                "posX": -0.21438775956630707,
+                "posY": -3.805000066757202,
                 "scaleX": 0.3265306055545807,
-                "scaleY": 0.10000000149011612,
+                "scaleY": 0.05999999865889549,
                 "Rot": 0.0
             },
             {},
             {},
             {
-                "NameTag": "PlayerHUD"
+                "NameTag": "PlayerHUDHealth"
             },
             {
                 "TextureName": "HPBar",
@@ -2602,8 +2624,8 @@
             {},
             {
                 "ElementType": 1,
-                "offsetX": -0.4000000059604645,
-                "offsetY": 0.20499999821186066
+                "offsetX": -0.3449999988079071,
+                "offsetY": 0.19499999284744263
             },
             {},
             {},
@@ -2611,19 +2633,19 @@
         ],
         "49": [
             {
-                "posX": -0.6000000238418579,
-                "posY": -5.0,
-                "scaleX": 5.843409538269043,
-                "scaleY": 3.0,
+                "posX": -0.3199999928474426,
+                "posY": -3.8359999656677246,
+                "scaleX": 0.0,
+                "scaleY": 0.03999999910593033,
                 "Rot": 0.0
             },
             {},
             {},
             {
-                "NameTag": "SOUND_BG"
+                "NameTag": "PlayerHUDDash"
             },
             {
-                "TextureName": "Main_Background2",
+                "TextureName": "DashBar",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -2632,29 +2654,36 @@
                 "IsAnimated": false,
                 "MaxIndex": 0
             },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
             {},
             {},
-            {},
-            {},
+            {
+                "ElementType": 3,
+                "offsetX": -0.3199999928474426,
+                "offsetY": 0.164000004529953
+            },
             {},
             {},
             {}
         ],
         "50": [
             {
-                "posX": -0.00992340687662363,
-                "posY": -5.0,
-                "scaleX": 3.014554023742676,
-                "scaleY": 2.3258650302886963,
+                "posX": -0.3902633488178253,
+                "posY": -3.890000104904175,
+                "scaleX": -0.0006583875510841608,
+                "scaleY": 0.03999999910593033,
                 "Rot": 0.0
             },
             {},
             {},
             {
-                "NameTag": "Menu"
+                "NameTag": "PlayerHUDBlock"
             },
             {
-                "TextureName": "MenuPanel",
+                "TextureName": "DashBar",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -2663,29 +2692,36 @@
                 "IsAnimated": false,
                 "MaxIndex": 0
             },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
             {},
             {},
-            {},
-            {},
+            {
+                "ElementType": 2,
+                "offsetX": -0.38999998569488525,
+                "offsetY": 0.10999999940395355
+            },
             {},
             {},
             {}
         ],
         "51": [
             {
-                "posX": -0.4643329977989197,
-                "posY": -4.689955234527588,
-                "scaleX": 1.639686942100525,
-                "scaleY": 0.24613748490810394,
+                "posX": -0.26499998569488525,
+                "posY": -3.8350000381469727,
+                "scaleX": 0.4000000059604645,
+                "scaleY": 0.20000000298023224,
                 "Rot": 0.0
             },
             {},
             {},
             {
-                "NameTag": "Master Slider"
+                "NameTag": "PlayerHUDStatic"
             },
             {
-                "TextureName": "VolumeBar",
+                "TextureName": "HPStatic",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -2694,46 +2730,36 @@
                 "IsAnimated": false,
                 "MaxIndex": 0
             },
+            {
+                "0": "HUDController",
+                "ScriptCount": 1
+            },
             {},
             {},
-            {},
-            {},
+            {
+                "ElementType": 0,
+                "offsetX": -0.26499998569488525,
+                "offsetY": 0.16500000655651093
+            },
             {},
             {},
             {}
         ],
         "52": [
             {
-                "posX": -0.5099999904632568,
-                "posY": -4.690000057220459,
-                "scaleX": 0.09000003337860107,
-                "scaleY": 0.09000003337860107,
+                "posX": 0.0,
+                "posY": -4.0,
+                "scaleX": 4.170000076293945,
+                "scaleY": 2.0,
                 "Rot": 0.0
             },
             {},
+            {},
             {
-                "ColliderType1": 0,
-                "ColliderType2": 0,
-                "minX1": 0.0,
-                "minX2": 0.0,
-                "minY1": 0.0,
-                "minY2": 0.0,
-                "maxX1": 0.0,
-                "maxX2": 0.0,
-                "maxY1": 0.0,
-                "maxY2": 0.0,
-                "offsetX1": 0.0,
-                "offsetX2": 0.0,
-                "offsetY1": 0.0,
-                "offsetY2": 0.0,
-                "radius1": 0.0,
-                "radius2": 0.0
+                "NameTag": "Pause_BackGround"
             },
             {
-                "NameTag": "Master"
-            },
-            {
-                "TextureName": "VolumeBall",
+                "TextureName": "Main_Background",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -2743,12 +2769,11 @@
                 "MaxIndex": 0
             },
             {
-                "0": "SliderScript",
-                "ScriptCount": 1
+                "ScriptCount": 0
             },
             {
-                "Tag": "Untagged",
-                "TargetTag": "Master"
+                "Tag": "",
+                "TargetTag": ""
             },
             {},
             {},
@@ -2758,178 +2783,8 @@
         ],
         "53": [
             {
-                "posX": -0.46399998664855957,
-                "posY": -5.128035545349121,
-                "scaleX": 1.639686942100525,
-                "scaleY": 0.24613748490810394,
-                "Rot": 0.0
-            },
-            {},
-            {},
-            {
-                "NameTag": "BGM Slider"
-            },
-            {
-                "TextureName": "VolumeBar",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {}
-        ],
-        "54": [
-            {
-                "posX": -0.46399998664855957,
-                "posY": -5.566999912261963,
-                "scaleX": 1.639686942100525,
-                "scaleY": 0.24613748490810394,
-                "Rot": 0.0
-            },
-            {},
-            {},
-            {
-                "NameTag": "SFX Slider"
-            },
-            {
-                "TextureName": "VolumeBar",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {}
-        ],
-        "55": [
-            {
-                "posX": -0.5099999904632568,
-                "posY": -5.127999782562256,
-                "scaleX": 0.09000003337860107,
-                "scaleY": 0.09000003337860107,
-                "Rot": 0.0
-            },
-            {},
-            {
-                "ColliderType1": 0,
-                "ColliderType2": 0,
-                "minX1": 0.0,
-                "minX2": 0.0,
-                "minY1": 0.0,
-                "minY2": 0.0,
-                "maxX1": 0.0,
-                "maxX2": 0.0,
-                "maxY1": 0.0,
-                "maxY2": 0.0,
-                "offsetX1": 0.0,
-                "offsetX2": 0.0,
-                "offsetY1": 0.0,
-                "offsetY2": 0.0,
-                "radius1": 0.0,
-                "radius2": 0.0
-            },
-            {
-                "NameTag": "BGM"
-            },
-            {
-                "TextureName": "VolumeBall",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
-            {
-                "0": "SliderScript",
-                "ScriptCount": 1
-            },
-            {
-                "Tag": "Untagged",
-                "TargetTag": "BGM"
-            },
-            {},
-            {},
-            {},
-            {},
-            {}
-        ],
-        "56": [
-            {
-                "posX": -0.5099999904632568,
-                "posY": -5.566999912261963,
-                "scaleX": 0.09000003337860107,
-                "scaleY": 0.09000000357627869,
-                "Rot": 0.0
-            },
-            {},
-            {
-                "ColliderType1": 0,
-                "ColliderType2": 0,
-                "minX1": 0.0,
-                "minX2": 0.0,
-                "minY1": 0.0,
-                "minY2": 0.0,
-                "maxX1": 0.0,
-                "maxX2": 0.0,
-                "maxY1": 0.0,
-                "maxY2": 0.0,
-                "offsetX1": 0.0,
-                "offsetX2": 0.0,
-                "offsetY1": 0.0,
-                "offsetY2": 0.0,
-                "radius1": 0.0,
-                "radius2": 0.0
-            },
-            {
-                "NameTag": "SFX"
-            },
-            {
-                "TextureName": "VolumeBall",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
-            {
-                "0": "SliderScript",
-                "ScriptCount": 1
-            },
-            {
-                "Tag": "Untagged",
-                "TargetTag": "SFX"
-            },
-            {},
-            {},
-            {},
-            {},
-            {}
-        ],
-        "57": [
-            {
-                "posX": -3.793983221054077,
-                "posY": 0.15080596506595612,
+                "posX": 0.0,
+                "posY": -4.0,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
@@ -2954,10 +2809,10 @@
                 "radius2": 0.0
             },
             {
-                "NameTag": "menu"
+                "NameTag": "Menu_UI"
             },
             {
-                "TextureName": "Blank",
+                "TextureName": "MenuPanel",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -2967,30 +2822,25 @@
                 "MaxIndex": 0
             },
             {
-                "0": "HUDController",
-                "1": "PauseMenu",
-                "ScriptCount": 2
+                "0": "PauseMenu",
+                "ScriptCount": 1
             },
             {
                 "Tag": "PauseMenuBG",
-                "TargetTag": "PauseMenuBG"
+                "TargetTag": ""
             },
             {},
-            {
-                "ElementType": 0,
-                "offsetX": 0.0,
-                "offsetY": 0.0
-            },
+            {},
             {},
             {},
             {}
         ],
-        "58": [
+        "54": [
             {
-                "posX": -3.793983221054077,
-                "posY": 0.050805963575839996,
-                "scaleX": 0.2000000923871994,
-                "scaleY": 0.08000004291534424,
+                "posX": 0.0,
+                "posY": -4.0,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
                 "Rot": 0.0
             },
             {},
@@ -3013,7 +2863,169 @@
                 "radius2": 0.0
             },
             {
-                "NameTag": "none"
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "Resume_Idle",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "PauseMenu",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Resume",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "55": [
+            {
+                "posX": 4.656612873077393e-10,
+                "posY": -4.5,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 4,
+                "ColliderType2": 0,
+                "minX1": -0.5,
+                "minX2": 0.0,
+                "minY1": -0.5,
+                "minY2": 0.0,
+                "maxX1": 0.5,
+                "maxX2": 0.0,
+                "maxY1": 0.5,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Quit"
+            },
+            {
+                "TextureName": "QG_Y",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "PauseMenu",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Quit",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "56": [
+            {
+                "posX": 0.0,
+                "posY": -4.25,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 4,
+                "ColliderType2": 0,
+                "minX1": -0.5,
+                "minX2": 0.0,
+                "minY1": -0.5,
+                "minY2": 0.0,
+                "maxX1": 0.5,
+                "maxX2": 0.0,
+                "maxY1": 0.5,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Restart"
+            },
+            {
+                "TextureName": "Restart_Idle",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "PauseMenu",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Restart",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "57": [
+            {
+                "posX": 0.0,
+                "posY": -3.799999952316284,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
             },
             {
                 "TextureName": "Blank",
@@ -3026,34 +3038,65 @@
                 "MaxIndex": 0
             },
             {
-                "0": "HUDController",
-                "1": "PauseMenu",
-                "ScriptCount": 2
+                "ScriptCount": 0
             },
             {
-                "Tag": "Quit",
-                "TargetTag": "Quit"
+                "Tag": "Untagged",
+                "TargetTag": ""
             },
             {},
-            {
-                "ElementType": 0,
-                "offsetX": 0.0,
-                "offsetY": -0.10000000149011612
-            },
+            {},
             {},
             {},
             {}
         ],
-        "59": [
-            {},
-            {},
-            {},
+        "58": [
             {
-                "NameTag": "none"
+                "posX": 0.0,
+                "posY": -3.799999952316284,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
             },
             {},
-            {},
-            {},
+            {
+                "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": 0.0,
+                "minX2": 0.0,
+                "minY1": 0.0,
+                "minY2": 0.0,
+                "maxX1": 0.0,
+                "maxX2": 0.0,
+                "maxY1": 0.0,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Resume"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "ScriptCount": 0
+            },
+            {
+                "Tag": "Untagged",
+                "TargetTag": ""
+            },
             {},
             {},
             {},

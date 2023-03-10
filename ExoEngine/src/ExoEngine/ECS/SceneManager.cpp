@@ -527,7 +527,8 @@ void EM::SceneManager::checkForSceneToLoad()
 	{
 		if (sceneToLoad == "Assets/Scene/Elton.json")
 		{
-			Graphic::camera.SetZoomLevel(0.25f);
+			Graphic::camera.SetZoomLevel(1.0f);
+			Graphic::camera.SetPosition({ -0.26399998664855957, -5.128035545349121,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/Level1.json")

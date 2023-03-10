@@ -318,7 +318,8 @@ namespace EM {
         {
             p_Scene->SerializeToFile(path + mFileList[mSelectedFile].path().filename().string());
         }
-
+        
+        
         ImGui::End();
     }
 
