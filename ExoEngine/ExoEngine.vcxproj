@@ -48,6 +48,8 @@
     <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\EnemyScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\GateController.h" />
     <ClInclude Include="src\ExoEngine\Scripts\HUDController.h" />
