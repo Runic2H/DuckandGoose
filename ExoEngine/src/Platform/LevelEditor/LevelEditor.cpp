@@ -1155,7 +1155,7 @@ namespace EM {
                         float FiringCoolDown = attrib.mFiringCoolDown;
                         float FireDurationTimer = attrib.mFireDurationTimer;
                         float ChargeCoolDown = attrib.mChargeCoolDown;
-                        float HazardDmg = attrib.mHazardDmg;
+                        int HazardDmg = attrib.mHazardDmg;
                         const char* HazardList = "None\0Ground\0Laser";
                         auto HazardType = attrib.mHazardType;
                         int HazardIndex = static_cast<int>(HazardType);
@@ -1166,7 +1166,7 @@ namespace EM {
                         ImGui::SliderFloat("Firing Cooldown (0 -> 10)", &FiringCoolDown, 0, 10, "%f", flags);
                         ImGui::SliderFloat("Firing Duration (0 -> 10)", &FireDurationTimer, 0, 10, "%f", flags);
                         ImGui::SliderFloat("Charge Cooldown (0 -> 10)", &ChargeCoolDown, 0, 10, "%f", flags);
-                        ImGui::SliderFloat("Damage (0 -> 50)", &HazardDmg, 0, 50, "%f", flags);
+                        ImGui::SliderInt("Damage (0 -> 50)", &HazardDmg, 0, 50, "%f", flags);
 
 
                         attrib.mFiringCoolDown = FiringCoolDown;

@@ -20,10 +20,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyNotActive::EnemyNotActive(StateMachine* stateMachine) {}
+	EnemyNotActive::EnemyNotActive(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyNotActive::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 
@@ -45,6 +46,7 @@ namespace EM
 	****************************************************************************/
 	void EnemyNotActive::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		UNREFERENCED_PARAMETER(Frametime);
 		vec2D playerPos = vec2D();
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{

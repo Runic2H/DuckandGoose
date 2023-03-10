@@ -21,7 +21,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnAttack_2::OnAttack_2(StateMachine* stateMachine) {}
+	OnAttack_2::OnAttack_2(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
 	{

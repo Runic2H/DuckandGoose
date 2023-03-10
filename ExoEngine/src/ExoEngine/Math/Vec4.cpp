@@ -14,7 +14,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************/
 #include "empch.h"
 #include "Vec4.h"
-
+#pragma warning (disable : 26495)
 namespace EM
 {
 	Vec4::Vec4()

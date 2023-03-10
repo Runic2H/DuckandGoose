@@ -5,6 +5,7 @@
 #include "empch.h"
 #include "Vec4.h"
 
+#pragma warning( disable : 4201 )
 namespace EM
 {
 

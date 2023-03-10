@@ -4,6 +4,7 @@
 #include <math.h>
 #include "empch.h"
 
+#pragma warning( disable : 4201 )
 namespace EM
 {
 

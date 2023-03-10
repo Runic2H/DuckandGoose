@@ -42,6 +42,7 @@ namespace EM
 
 	void SliderScript::Update(float Frametime)
 	{
+		UNREFERENCED_PARAMETER(Frametime);
 		//things to add check volume and set pos accordingly
 
 		
@@ -62,9 +63,9 @@ namespace EM
 		}
 
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
+		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
-		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
+		//auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 
 		
 		if(p_Editor->is_ShowWindow == false)

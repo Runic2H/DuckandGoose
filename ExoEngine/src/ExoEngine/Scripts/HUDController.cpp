@@ -53,7 +53,7 @@ namespace EM
         {
             auto& pComp = p_ecs.GetComponent<HUDComponent>(GetScriptEntityID());
             auto& pTrans = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-            auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
+            //auto& pSprite = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
 
             //get camera position
             vec2D camPos = vec2D(Graphic::camera.GetPosition().x, Graphic::camera.GetPosition().y);

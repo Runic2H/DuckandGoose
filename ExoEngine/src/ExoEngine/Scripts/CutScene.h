@@ -53,7 +53,7 @@ namespace EM
 				++mScenePicker;
 				EM::Graphic::mcamera->SetPosition({ p_ecs.GetComponent<Transform>(mScenePicker).GetPos().x
 					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
-				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] == GLFW_RELEASE;
+				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 				timer = 0.0f;
 			}
 			if (timer >= 5.0f)

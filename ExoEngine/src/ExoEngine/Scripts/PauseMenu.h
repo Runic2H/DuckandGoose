@@ -63,7 +63,7 @@ namespace EM {
 		bool is_within_box(glm::vec2 cur, Collider box, Transform trans);
 
 
-		enum button_state
+		enum class button_state
 		{
 			idle,
 			select,
@@ -79,12 +79,13 @@ namespace EM {
 			vec2D max;
 		};
 		button_bb Button_BoundingBox{};
-		button_state curr_state{ idle };
+		button_state curr_state{ button_state::idle };
 		bool Option_toggle{ false };
 		bool calibrate_pos{ false };
 		bool optionstate{ false };
 		vec2D offset;
-		
+		//glm::vec3 PrevCamPos{};
+
 	};
 }
 

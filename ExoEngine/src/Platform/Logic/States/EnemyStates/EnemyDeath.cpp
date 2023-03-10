@@ -19,10 +19,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyDeath::EnemyDeath(StateMachine* stateMachine) : mDeathTimer{0.3f} {}
+	EnemyDeath::EnemyDeath(StateMachine* stateMachine) : mDeathTimer{0.3f} { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyDeath::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+
+		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 

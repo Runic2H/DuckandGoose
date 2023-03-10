@@ -23,7 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnMove::OnMove(StateMachine* stateMachine) : footstep_switch{ true } {}
+	OnMove::OnMove(StateMachine* stateMachine) : footstep_switch{ true } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnMove::HandleInput(StateMachine* stateMachine, const int& key)
 	{

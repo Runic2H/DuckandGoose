@@ -25,14 +25,16 @@ namespace EM
 	float EaseInOutSine(float start, float end, float value)
 	{
 		end -= start;
-		return -end * 0.5f * (cosf(M_PI * value) - 1) + start;
+		return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
 	}
 
 	OnDamaged::OnDamaged(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.2f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.05f},
-		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.05f } {}
+		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.05f } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
+		UNREFERENCED_PARAMETER(stateMachine);
+		UNREFERENCED_PARAMETER(key);
 		return nullptr;
 	}
 	/*!*************************************************************************
