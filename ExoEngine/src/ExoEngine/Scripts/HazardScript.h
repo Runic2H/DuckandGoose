@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file HazardScript.h
-\author Tan Ek Hern
-\par DP email: t.ekhern@digipen.edu
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200

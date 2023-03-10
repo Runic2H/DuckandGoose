@@ -1,63 +1,76 @@
-/*!*************************************************************************
-****
-\file GateController.h
-\author Elton Teo Zhe Wei
-\par DP email: e.teo@digipen.edu
-\par Course: CSD2400
-\par Section: a
-\par Assignment GAM200
-\date 2/11/2022
-\brief	Script for Gate Controller
-
-Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
-without the prior written consent of DigiPen Institute of Technology is prohibited.
-****************************************************************************
-***/
 #pragma once
 #include "IScript.h"
 #include "ExoEngine/Input/Input.h"
-#include "GLFW/glfw3.h"
-#include "ExoEngine/Math/physics.h"
-#include "Platform/Logic/StateMachines/StateMachine.h"
-#include "Platform/Logic/States/GateStates/GateUnlocked.h"
-#include "Platform/Logic/States/GateStates/GateLocked.h"
+#include "Platform/Graphics/Camera2D.h"
+#include "Platform/Graphics/Graphics.h"
+#include "ExoEngine/ECS/SceneManager.h"
+#include "ExoEngine/Input/Input.h"
 
 namespace EM
 {
 	/*!*************************************************************************
 	Class for Gate Controller Script
 	****************************************************************************/
-	class GateController : public IScript
+	class CutScene: public IScript
 	{
 	public:
 		/*!*************************************************************************
 		Default constructor for Gate Controller
 		****************************************************************************/
-		GateController(Entity entity) : mGateStateMachine{ StateMachine(entity) } {}
+		CutScene() : timer(0), mScenePicker{0} {}
 		/*!*************************************************************************
 		Default destructor for Gate Controller
 		****************************************************************************/
-		~GateController() = default;
+		~CutScene() = default;
 		/*!*************************************************************************
 		Returns a new copy of GateController Script
 		****************************************************************************/
-		virtual GateController* Clone() const override
+		virtual CutScene* Clone() const override
 		{
-			return new GateController(*this);
+			return new CutScene(*this);
 		}
 		/*!*************************************************************************
 		Start State of GateController Script
 		****************************************************************************/
 		virtual void Start() override
 		{
-			mGateStateMachine.ChangeState(new GateLocked(&mGateStateMachine));
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+			{
+				if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "CutScene Controller")
+				{
+					EM::Graphic::mcamera->SetPosition({ 0.0f, 0.0f, 0.0f });
+				}
+			}
 		}
 		/*!*************************************************************************
 		Update Loop of GateController Script
 		****************************************************************************/
 		virtual void Update(float Frametime) override
 		{
-			mGateStateMachine.OnUpdate(Frametime);
+			timer += Frametime;
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			{
+				++mScenePicker;
+				EM::Graphic::mcamera->SetPosition({ p_ecs.GetComponent<Transform>(mScenePicker).GetPos().x
+					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
+				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] == GLFW_RELEASE;
+				timer = 0.0f;
+			}
+			if (timer >= 5.0f)
+			{
+				
+				++mScenePicker;
+				
+				EM::Graphic::mcamera->SetPosition({ p_ecs.GetComponent<Transform>(mScenePicker).GetPos().x
+					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
+				timer = 0.0f;
+			}
+			
+			if (mScenePicker == 9)
+			{
+				//transit to another scene
+				p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+			}
 		}
 		/*!*************************************************************************
 		End State for GateController
@@ -71,7 +84,7 @@ namespace EM
 		****************************************************************************/
 		virtual std::string GetScriptName() override
 		{
-			return "GateController";
+			return "CutScene";
 		}
 
 		virtual void SetScriptEntityID(Entity& entity) override { entityID = entity; }
@@ -79,6 +92,7 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		StateMachine mGateStateMachine;
+		float timer;
+		Entity mScenePicker;
 	};
 }
