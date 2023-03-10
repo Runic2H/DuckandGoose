@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 86
+        "Entities": 87
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -88,7 +88,8 @@
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
-        "00000000000000000000100111111111"
+        "00000000000000000000100111111111",
+        "00000000000000000000000001111111"
     ],
     "Components": {
         "0": [
@@ -1050,9 +1051,9 @@
         ],
         "21": [
             {
-                "posX": -3.9762942790985107,
-                "posY": 0.08290203660726547,
-                "scaleX": 0.25,
+                "posX": -3.9869136810302734,
+                "posY": 0.11400502920150757,
+                "scaleX": -0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -1087,7 +1088,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1808,7 +1809,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 19,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1938,7 +1939,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 19,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1989,7 +1990,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 18,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2040,7 +2041,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 19,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2091,7 +2092,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 18,
+                "Index_X": 9,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2142,7 +2143,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 19,
+                "Index_X": 10,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2628,8 +2629,8 @@
         ],
         "48": [
             {
-                "posX": -4.04991340637207,
-                "posY": 0.30226799845695496,
+                "posX": -4.114370346069336,
+                "posY": 0.28790202736854553,
                 "scaleX": 0.36730948090553284,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
@@ -2667,8 +2668,8 @@
         ],
         "49": [
             {
-                "posX": -4.191837787628174,
-                "posY": 0.2862679958343506,
+                "posX": -4.256294250488281,
+                "posY": 0.27190202474594116,
                 "scaleX": 0.0,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
@@ -2705,9 +2706,9 @@
         ],
         "50": [
             {
-                "posX": -4.30183744430542,
-                "posY": 0.252267986536026,
-                "scaleX": -4.993751758775034e-7,
+                "posX": -4.352294445037842,
+                "posY": 0.23790204524993896,
+                "scaleX": 0.03499950096011162,
                 "scaleY": 0.03999999910593033,
                 "Rot": 0.0
             },
@@ -2743,8 +2744,8 @@
         ],
         "51": [
             {
-                "posX": -4.126837730407715,
-                "posY": 0.2872679829597473,
+                "posX": -4.191294193267822,
+                "posY": 0.2729020416736603,
                 "scaleX": 0.5,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
@@ -3326,7 +3327,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3400,7 +3401,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3474,7 +3475,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3548,7 +3549,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3622,7 +3623,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3696,7 +3697,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3770,7 +3771,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3846,7 +3847,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -3922,7 +3923,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -3998,7 +3999,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4074,7 +4075,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4666671752929688,
+                "ChargeDuration": 1.266667366027832,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4824,6 +4825,67 @@
                 "Damage": 10,
                 "EnemyType": 1
             }
+        ],
+        "86": [
+            {
+                "posX": 4.203027725219727,
+                "posY": -0.11699484288692474,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 4,
+                "ColliderType2": 0,
+                "minX1": 0.05000000074505806,
+                "minX2": 0.0,
+                "minY1": 0.20000000298023224,
+                "minY2": 0.0,
+                "maxX1": 0.05000000074505806,
+                "maxX2": 0.0,
+                "maxY1": 0.20000000298023224,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "WinGate"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "CollisionResponse",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Win",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
         ]
     }
 }

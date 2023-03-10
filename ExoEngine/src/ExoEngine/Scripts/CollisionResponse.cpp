@@ -15,6 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "empch.h"
 #include "CollisionResponse.h"
 #include "SkillsChest.h"
+#include "ExoEngine/ECS/SceneManager.h"
 
 namespace EM
 {
@@ -84,17 +85,27 @@ namespace EM
 					}
 				}
 			}
-			//if chest is damaged
-			/*if (tag.GetNameTag() == "SkillsChest")
+
+			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Player")
 			{
-				if (col.GetCollisionArray()[0].mHit == 2)
+				Entity enemyDead{};
+				Entity enemyAll{};
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->SetState(SkillsChest::ChestState::Dead);
-					dynamic_cast<SkillsChest*>(logic.GetScriptByName("SkillsChest"))->Animate(SkillsChest::ChestState::Dead);
-					vec2D response = rigidbody.GetVel();
-					vec2D normal = col.GetCollisionArray()[0].mCollisionNormal;
+					if (p_ecs.HaveComponent<EnemyAttributes>(i))
+					{
+						++enemyAll;
+						if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == false && p_ecs.GetComponent<EnemyAttributes>(i).mHealth <= 0.0f)
+						{
+							++enemyDead;
+						}
+					}
+					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Win" && (enemyAll == enemyDead))
+					{
+						p_Scene->setSceneToLoad("Assets/Scenes/Menu.json");
+					}
 				}
-			}*/
+			}
 		}
 		
 	}
