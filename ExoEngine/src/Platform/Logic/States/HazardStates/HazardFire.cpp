@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file HazardFire.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the hazard fire state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "HazardFire.h"
 #include "HazardIdle.h"
 
@@ -10,6 +25,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnEnter(StateMachine* stateMachine)
 	{
 		mCurrTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos();
@@ -36,6 +54,9 @@ namespace EM
 	
 	}
 
+	/*!*************************************************************************
+	Update state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
@@ -73,6 +94,9 @@ namespace EM
 		}
 	}
 
+	/*!*************************************************************************
+	Exit state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
