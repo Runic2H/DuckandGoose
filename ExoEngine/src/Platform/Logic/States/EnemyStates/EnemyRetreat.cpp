@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file EnemyRetreat.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when enemy is retreating, on every hit there is a chance
+		that the enemy will retreat before returning to attack the player.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyRetreat.h"
 #include "EnemyIdle.h"
@@ -13,11 +29,18 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for when enemy is retreating state
+	****************************************************************************/
 	void EnemyRetreat::OnEnter(StateMachine* stateMachine)
 	{
 		std::cout << "Enemy Retreating\n";
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy is retreating state
+	****************************************************************************/
 	void EnemyRetreat::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
@@ -79,6 +102,10 @@ namespace EM
 			}
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for when enemy is retreating state
+	****************************************************************************/
 	void EnemyRetreat::OnExit(StateMachine * stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

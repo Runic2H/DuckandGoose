@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file OnDash.cpp
+\author Cheung Jun Yin Matthew
+\par DP email: j.cheung@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains logic for player dash state.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnDash.h"
 #include "OnIdle.h"
@@ -10,6 +25,10 @@ namespace EM
 	{
 		return nullptr;
 	}
+
+	/*!*************************************************************************
+	Enter state for Player dashing state
+	****************************************************************************/
 	void OnDash::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer = 0.2f;
@@ -20,6 +39,10 @@ namespace EM
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[4].should_play = true;
 		}
 	}
+
+	/*!*************************************************************************
+	Update state for Player dashing state
+	****************************************************************************/
 	void OnDash::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer -= Frametime;
@@ -37,6 +60,10 @@ namespace EM
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
+
+	/*!*************************************************************************
+	Exit state for Player dashing state
+	****************************************************************************/
 	void OnDash::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

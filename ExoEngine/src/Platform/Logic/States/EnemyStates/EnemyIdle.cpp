@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file EnemyIdle.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when enemy is idle.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "EnemyIdle.h"
 #include "EnemyChase.h"
@@ -13,12 +28,19 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for when enemy is idle state
+	****************************************************************************/
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = false;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy is idle state
+	****************************************************************************/
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetNextPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos());
@@ -51,6 +73,10 @@ namespace EM
 		}
 
 	}
+
+	/*!*************************************************************************
+	Exit state for when enemy is idle state
+	****************************************************************************/
 	void EnemyIdle::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

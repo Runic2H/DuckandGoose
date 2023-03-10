@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file On_Attack_1.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	1st attacking state for player
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "OnAttack_1.h"
 #include "OnIdle.h"
@@ -17,6 +32,9 @@ namespace EM
 		}
 		return nullptr;
 	}
+/*!*************************************************************************
+	Enter state for Player Attack 1
+****************************************************************************/
 	void OnAttack_1::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
@@ -26,9 +44,12 @@ namespace EM
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
-			//std::cout << "attacking audio" << std::endl;
 		}
 	}
+
+/*!*************************************************************************
+	Update state for Player Attack 1
+****************************************************************************/
 	void OnAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
@@ -53,6 +74,9 @@ namespace EM
 			}
 		}
 	}
+/*!*************************************************************************
+	Exit state for Player Attack 1
+****************************************************************************/
 	void OnAttack_1::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;

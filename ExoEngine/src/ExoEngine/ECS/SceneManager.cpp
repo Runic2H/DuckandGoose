@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "empch.h"
 #include "SceneManager.h"
 #include "Platform/Graphics/Graphics.h"
+#include "ExoEngine/Audio/AudioEngine.h"
 
 namespace EM
 {
@@ -514,6 +515,9 @@ namespace EM
 
 void EM::SceneManager::setSceneToLoad(std::string s)
 {
+	p_Audio->StopChannel(CAudioEngine::channel_groups::master);
+	p_Audio->StopChannel(CAudioEngine::channel_groups::bgm);
+	p_Audio->StopChannel(CAudioEngine::channel_groups::sfx);
 	sceneToLoad = s;
 }
 
