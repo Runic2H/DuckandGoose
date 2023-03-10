@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 78
+        "Entities": 86
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -80,7 +80,15 @@
         "00000000000000000000001001111111",
         "00000000000000000000001001111111",
         "00000000000000000000001001111111",
-        "00000000000000000000001001111111"
+        "00000000000000000000001001111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111",
+        "00000000000000000000100111111111"
     ],
     "Components": {
         "0": [
@@ -1800,7 +1808,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1930,7 +1938,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1981,7 +1989,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 9,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2032,7 +2040,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2083,7 +2091,7 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 9,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2134,7 +2142,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 10,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2230,11 +2238,11 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
                 "minY2": 0.05000000074505806,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
                 "maxY2": 0.05000000074505806,
                 "offsetX1": 0.0,
@@ -2323,11 +2331,11 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
                 "minY2": 0.05000000074505806,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
                 "maxY2": 0.05000000074505806,
                 "offsetX1": 0.0,
@@ -2620,8 +2628,8 @@
         ],
         "48": [
             {
-                "posX": -4.114370346069336,
-                "posY": 0.28790202736854553,
+                "posX": 0.19716103374958038,
+                "posY": 0.27608513832092285,
                 "scaleX": 0.36730948090553284,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
@@ -2659,8 +2667,8 @@
         ],
         "49": [
             {
-                "posX": -4.256294250488281,
-                "posY": 0.27190202474594116,
+                "posX": 0.05523723363876343,
+                "posY": 0.2600851356983185,
                 "scaleX": 0.0,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
@@ -2697,8 +2705,8 @@
         ],
         "50": [
             {
-                "posX": -4.3662943840026855,
-                "posY": 0.23790204524993896,
+                "posX": -0.05476295202970505,
+                "posY": 0.2260851263999939,
                 "scaleX": -4.993751758775034e-7,
                 "scaleY": 0.03999999910593033,
                 "Rot": 0.0
@@ -2735,8 +2743,8 @@
         ],
         "51": [
             {
-                "posX": -4.191294193267822,
-                "posY": 0.2729020416736603,
+                "posX": 0.12023723125457764,
+                "posY": 0.2610851228237152,
                 "scaleX": 0.5,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
@@ -3289,13 +3297,13 @@
                 "NameTag": "Ground hazard firing 1"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3316,9 +3324,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3363,13 +3371,13 @@
                 "NameTag": "Ground hazard firing 2"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3390,9 +3398,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3437,13 +3445,13 @@
                 "NameTag": "Ground hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3464,9 +3472,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3511,13 +3519,13 @@
                 "NameTag": "Ground hazard firing 4"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3538,9 +3546,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3585,13 +3593,13 @@
                 "NameTag": "Ground hazard firing 5"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3612,9 +3620,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3659,13 +3667,13 @@
                 "NameTag": "Ground hazard firing 6"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3686,9 +3694,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3733,13 +3741,13 @@
                 "NameTag": "Ground hazard firing 7"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3760,9 +3768,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.0500009059906006,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3808,7 +3816,7 @@
             },
             {
                 "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 1,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3836,7 +3844,7 @@
             {},
             {},
             {
-                "FiringCooldown": 1.9833333492279053,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
                 "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
@@ -3884,7 +3892,7 @@
             },
             {
                 "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 6,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -3912,7 +3920,7 @@
             {},
             {},
             {
-                "FiringCooldown": 0.03333456814289093,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
                 "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
@@ -3959,13 +3967,13 @@
                 "NameTag": "Lazer hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Charging",
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3988,9 +3996,9 @@
             {},
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 0.9166676998138428,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4036,7 +4044,7 @@
             },
             {
                 "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 3,
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -4064,7 +4072,7 @@
             {},
             {},
             {
-                "FiringCooldown": 1.8500001430511475,
+                "FiringCooldown": 0.45000138878822327,
                 "FiringDuration": -0.016666388139128685,
                 "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
@@ -4072,6 +4080,750 @@
             },
             {},
             {}
+        ],
+        "78": [
+            {
+                "posX": 0.015269570052623749,
+                "posY": 0.08514009416103363,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "79": [
+            {
+                "posX": 0.5764996409416199,
+                "posY": 0.08514009416103363,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "80": [
+            {
+                "posX": 0.9666699767112732,
+                "posY": 0.08514009416103363,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "81": [
+            {
+                "posX": 1.9891855716705322,
+                "posY": 0.08514009416103363,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "82": [
+            {
+                "posX": 2.567713737487793,
+                "posY": -0.020571067929267883,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "83": [
+            {
+                "posX": 3.1251001358032227,
+                "posY": 0.09282822161912918,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "84": [
+            {
+                "posX": 3.761289119720459,
+                "posY": 0.006337285041809082,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
+        ],
+        "85": [
+            {
+                "posX": 4.038060188293457,
+                "posY": -0.12436018884181976,
+                "scaleX": 0.30000001192092896,
+                "scaleY": 0.30000001192092896,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 1,
+                "ColliderType2": 4,
+                "minX1": 0.0,
+                "minX2": 0.05999999865889549,
+                "minY1": 0.0,
+                "minY2": 0.05000000074505806,
+                "maxX1": 0.0,
+                "maxX2": 0.05999999865889549,
+                "maxY1": 0.0,
+                "maxY2": 0.05000000074505806,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.05000000074505806,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "Enemy"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 1,
+                "DisplayTime 0": 0.05999999865889549
+            },
+            {
+                "0": "EnemyScript",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
+            },
+            {
+                "0": {
+                    "AudioPath": "ThudStrike2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "Slash2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Explosion_Low.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 3,
+                "BGM Volume": 0.9850000143051147,
+                "SFX Volume": 0.9850000143051147,
+                "Master Volume": 0.9850000143051147
+            },
+            {
+                "ElementType": 1,
+                "offsetX": -0.10000000149011612,
+                "offsetY": 0.10000000149011612
+            },
+            {},
+            {},
+            {
+                "Health": 100,
+                "Max Health": 100,
+                "Damage": 10,
+                "EnemyType": 1
+            }
         ]
     }
 }

@@ -34,8 +34,6 @@ namespace EM
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
-		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = false;
-		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 	}
 
 	/*!*************************************************************************
@@ -80,8 +78,6 @@ namespace EM
 	void EnemyIdle::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
-		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = true;
 		delete this;
 	}
 }

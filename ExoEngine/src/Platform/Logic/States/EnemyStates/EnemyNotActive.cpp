@@ -70,6 +70,8 @@ namespace EM
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;
 	}
 }

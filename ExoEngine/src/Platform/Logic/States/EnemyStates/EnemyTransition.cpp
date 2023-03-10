@@ -36,6 +36,10 @@ namespace EM
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 	}
+
+	/*!*************************************************************************
+	Update state for when enemy transition state
+	****************************************************************************/
 	void EnemyTransition::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
@@ -67,15 +71,6 @@ namespace EM
 		{
 			stateMachine->ChangeState(new EnemyRetreat(stateMachine));
 		}
-	}
-
-	/*!*************************************************************************
-	Update state for when enemy transition state
-	****************************************************************************/
-	void EnemyTransition::OnUpdate(StateMachine* stateMachine, float Frametime)
-	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
 	}
 
 	/*!*************************************************************************
