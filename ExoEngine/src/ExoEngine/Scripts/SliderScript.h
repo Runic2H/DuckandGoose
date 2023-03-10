@@ -41,7 +41,7 @@ namespace EM {
 		****************************************************************************/
 		virtual void Update(float Frametime) override;
 		/*!*************************************************************************
-		This function ends the script by deleting the pointer to this script
+		This function ends the script by deleting the pointer to this scriptv
 		****************************************************************************/
 		virtual void End() override;
 		/*!*************************************************************************
@@ -67,6 +67,7 @@ namespace EM {
 		bool selected;
 		bool SliderCali;
 		bool limitset;
+		bool ingame;
 
 	private:
 		struct slider_bb
