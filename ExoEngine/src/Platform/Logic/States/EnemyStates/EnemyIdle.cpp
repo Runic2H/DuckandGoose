@@ -16,9 +16,12 @@ namespace EM
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = false;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 	}
 	void EnemyIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetNextPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos());
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCooldown -= Frametime;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
@@ -51,6 +54,8 @@ namespace EM
 	void EnemyIdle::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = true;
 		delete this;
 	}
 }
