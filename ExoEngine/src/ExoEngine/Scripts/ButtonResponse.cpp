@@ -143,17 +143,16 @@ namespace EM
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
 
-				if (ID_tag.GetTag() == "Resume")
+				//f (ID_tag.GetTag() == "Resume")
 					//		{
 					//			spt.SetTexture("Resume_Idle");
 					//		//	transform.SetPos(offset.x + camPos.y, offset.y + camPos.y);
 					//		}
 
-				if (ID_tag.GetTag() == "Restart" && p_GUI->Check_HTP() == false)
+				if (ID_tag.GetTag() == "Restart" )
 				{
-					//spt.SetTexture("Start_Click");
 					
-					p_Scene->setSceneToLoad("Assets/Scene/Level1.json");
+					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
