@@ -67,7 +67,7 @@ namespace EM
 			//std::cout << "Actual Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << std::endl;
 			dist = distance(transform.GetPos(), playerPos);
 			//______________________________________BODGE FIX. REMOVE AFTER FIXING RIGIDBODY____________________________________
-			transform.SetPos(nextPos);
+			//transform.SetPos(nextPos);
 			//__________________________________________________________________________________________________________________
 			//Attack Range
 			//check if within range. If not, set to moving state

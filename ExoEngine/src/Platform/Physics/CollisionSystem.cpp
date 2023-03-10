@@ -22,7 +22,9 @@ namespace EM {
     This function initialises the system. As there are no data members that require
     initialization, this function is empty
     ****************************************************************************/
-    void CollisionSystem::Init() {}
+    void CollisionSystem::Init() {
+
+    }
     /*!*************************************************************************
     This function runs the logic of the system. It checks the list of entities with
     a collision component in pairs to see which of them are colliding. If two objects
@@ -154,7 +156,7 @@ namespace EM {
                                                 }
                                             }
                                             if (e2 == Collider::ColliderType::rect) {
-                                                rigid2.SetNextPos(trans2.GetPos());
+                                                //rigid2.SetNextPos(trans2.GetPos());
                                                 offset2 = trans2.GetPos() + col2[b].mOffset;
                                                 vec2D max2 = offset2 + col2[b].mMax;
                                                 vec2D min2 = offset2 - col2[b].mMin;
@@ -174,7 +176,7 @@ namespace EM {
                                         }
                                         else if (e1 == Collider::ColliderType::rect) {
                                             if (e2 == Collider::ColliderType::circle) {
-                                                rigid1.SetNextPos(trans1.GetPos());
+                                                //rigid1.SetNextPos(trans1.GetPos());
                                                 offset1 = trans1.GetPos() + col1[a].mOffset;
                                                 vec2D max1 = offset1 + col1[a].mMax;
                                                 vec2D min1 = offset1 - col1[a].mMin;
@@ -192,9 +194,9 @@ namespace EM {
                                                 }
                                             }
                                             if (e2 == Collider::ColliderType::rect) {
-                                                rigid1.SetNextPos(trans1.GetPos());
+                                                //rigid1.SetNextPos(trans1.GetPos());
                                                 offset1 = trans1.GetPos() + col1[a].mOffset;
-                                                rigid2.SetNextPos(trans2.GetPos());
+                                                //rigid2.SetNextPos(trans2.GetPos());
                                                 offset2 = trans2.GetPos() + col2[b].mOffset;
                                                 vec2D max1 = offset1 + col1[a].mMax;
                                                 vec2D min1 = offset1 - col1[a].mMin;
@@ -234,7 +236,9 @@ namespace EM {
                                                 vec2D max1 = offset1 + col1[a].mMax;
                                                 vec2D min1 = offset1 - col1[a].mMin;
                                                 if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                    //std::cout << "Collision Box-Circle\n";
+                                                    /*std::cout << "Collided with Box: " << p_ecs.GetComponent<NameTag>(i).GetNameTag() << "\n";
+                                                    std::cout << "Collision Box-Circle\n";
+                                                    std::cout << "Initial Position: " << trans2.GetPos().x << ", " << trans2.GetPos().y << "\n";*/
                                                     vec2D norm2;
                                                     if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x <= min1.x) {
                                                         norm2.x = -1;
@@ -267,6 +271,8 @@ namespace EM {
                                                     }
                                                     vec2D nextPos = trans2.GetPos() + rigid2.GetVel();
                                                     rigid2.SetNextPos(nextPos);
+                                                    /*std::cout << "Next Pos: " << rigid2.GetNextPos().x << ", " << rigid2.GetNextPos().y << "\n";
+                                                    std::cout << "Yeeted Distance: " << distance(trans2.GetPos(), rigid2.GetNextPos()) << "\n";*/
                                                 }
                                             }
                                         }

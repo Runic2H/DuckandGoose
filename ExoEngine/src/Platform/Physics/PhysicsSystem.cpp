@@ -36,13 +36,21 @@ namespace EM {
 			auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 			auto& mRigid = p_ecs.GetComponent<RigidBody>(entity);
 			if (mRigid.GetNextPos().x != 0 || mRigid.GetNextPos().y != 0) {
-				/*if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player") {
+				if (distance(mTrans.GetPos(), mRigid.GetNextPos()) < 1.0f) {
+					mTrans.SetPos(mRigid.GetNextPos());
+				}
+				else {
+					mRigid.SetNextPos(mTrans.GetPos());
+				}
+			}
+			/*if (mRigid.GetNextPos().x != 0 || mRigid.GetNextPos().y != 0) {
+				if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player") {
 					std::cout << "Current Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
 				}
 				if (entity == mTrans.GetComponentEntityID())
 				{
 					vec2D nex = mRigid.GetNextPos();
-					//std::cout << "Next Pos2: " << nex.x << ", " << nex.y << "\n";
+					std::cout << "Next Pos2: " << nex.x << ", " << nex.y << "\n";
 					mTrans.SetPos(nex);
 				}
 				else
@@ -52,14 +60,14 @@ namespace EM {
 				vec2D nex = mRigid.GetNextPos();
 				if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player") {
 					std::cout << "Next Pos: " << mRigid.GetNextPos().x << ", " << mRigid.GetNextPos().y << "\n";
-				}*/
-				//std::cout << "Next Pos2: " << nex.x << ", " << nex.y << "\n";
+				}
+				std::cout << "Next Pos2: " << nex.x << ", " << nex.y << "\n";
 				mTrans.SetPos(mRigid.GetNextPos());
-				/*if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player") {
+				if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player") {
 					std::cout << "Changed Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
-				}*/
-				//std::cout << "Changed Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
-			}
+				}
+				std::cout << "Changed Pos: " << mTrans.GetPos().x << ", " << mTrans.GetPos().y << "\n";
+			}*/
 		}
 		Timer::GetInstance().Update(Systems::PHYSICS);
 	}
