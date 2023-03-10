@@ -68,7 +68,7 @@ FMOD API play sound using loaded audio
 ****************************************************************************/
 int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp)
 {
-    std::cout << "Function called" << std::endl;
+    //std::cout << "Function called" << std::endl;
     auto tFoundIt = mSoundMap.find(strSoundName);
     FMOD::Sound* pSound;
 
@@ -104,7 +104,7 @@ int CAudioEngine::PlaySound(const std::string& strSoundName, EM::Audio::AudioTyp
         }
 
     }
-    std::cout << "Playing: " << strSoundName << std::endl;
+    //std::cout << "Playing: " << strSoundName << std::endl;
     //std::cout << mChannelMap.size() << std::endl;
     return nChannelId;
 }

@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 93
+        "Entities": 94
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -95,7 +95,8 @@
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
-        "00000000000000000000000001111101"
+        "00000000000000000000000001111101",
+        "00000000000000000000000001111111"
     ],
     "Components": {
         "0": [
@@ -5182,6 +5183,67 @@
             },
             {
                 "Tag": "Untagged",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "93": [
+            {
+                "posX": 4.203027725219727,
+                "posY": -0.11699484288692474,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 4,
+                "ColliderType2": 0,
+                "minX1": 0.05000000074505806,
+                "minX2": 0.0,
+                "minY1": 0.20000000298023224,
+                "minY2": 0.0,
+                "maxX1": 0.05000000074505806,
+                "maxX2": 0.0,
+                "maxY1": 0.20000000298023224,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "WinGate"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "CollisionResponse",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "Win",
                 "TargetTag": ""
             },
             {},

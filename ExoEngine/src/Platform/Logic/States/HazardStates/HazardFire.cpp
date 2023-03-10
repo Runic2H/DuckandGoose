@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file HazardFire.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the hazard fire state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "HazardFire.h"
 #include "HazardIdle.h"
 
@@ -10,6 +25,9 @@ namespace EM
 		return nullptr;
 	}
 
+	/*!*************************************************************************
+	Enter state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnEnter(StateMachine* stateMachine)
 	{
 		mCurrTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos();
@@ -32,8 +50,13 @@ namespace EM
 		{
 			p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer = 1.0f;
 		}
+		
+	
 	}
 
+	/*!*************************************************************************
+	Update state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
@@ -48,8 +71,32 @@ namespace EM
 		{
 			stateMachine->ChangeState(new HazardIdle(stateMachine));
 		}
+
+		vec2D playerPos = vec2D();
+		bool check = false;
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			//std::cout << "Prox Check" << std::endl;
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
+			{
+				check = true;
+				//std::cout << "Found Player" << std::endl;
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+			}
+		}
+		//if player moves within x radius, set mode to moving
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.6f && check) {
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+				//std::cout << "Hazard firing" << std::endl;
+			}
+		}
 	}
 
+	/*!*************************************************************************
+	Exit state for Hazard fire state
+	****************************************************************************/
 	void HazardFire::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

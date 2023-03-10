@@ -61,8 +61,6 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		std::ostream mTextStream;
-		const char mTextBuffer[300];
-		float mPrintSpeed;
+
 	};
 }

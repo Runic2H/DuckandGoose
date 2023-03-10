@@ -18,7 +18,7 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
                 "minX1": 0.0,
                 "minX2": 0.0,
@@ -63,8 +63,8 @@
         ],
         "1": [
             {
-                "posX": 0.7076461315155029,
-                "posY": -0.6446776390075684,
+                "posX": -0.7522732615470886,
+                "posY": -0.5953140258789063,
                 "scaleX": 1.0,
                 "scaleY": 0.20000000298023224,
                 "Rot": 0.0
@@ -72,6 +72,60 @@
             {},
             {
                 "ColliderType1": 0,
+                "ColliderType2": 0,
+                "minX1": -0.5,
+                "minX2": 0.0,
+                "minY1": -0.5,
+                "minY2": 0.0,
+                "maxX1": 0.5,
+                "maxX2": 0.0,
+                "maxY1": 0.5,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
+            {
+                "NameTag": "MainMenu"
+            },
+            {
+                "TextureName": "MM_Y",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "ButtonResponse",
+                "ScriptCount": 1
+            },
+            {
+                "Tag": "MainMenu",
+                "TargetTag": ""
+            },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "2": [
+            {
+                "posX": 0.7700154781341553,
+                "posY": -0.5937031507492065,
+                "scaleX": 1.0,
+                "scaleY": 0.20000000298023224,
+                "Rot": 0.0
+            },
+            {},
+            {
+                "ColliderType1": 4,
                 "ColliderType2": 0,
                 "minX1": -0.5,
                 "minX2": 0.0,
@@ -105,64 +159,10 @@
                 "0": "ButtonResponse",
                 "ScriptCount": 1
             },
-          {
-            "Tag": "Restart",
-            "TargetTag": "Restart"
-          },
-            {},
-            {},
-            {},
-            {},
-            {}
-        ],
-        "2": [
             {
-                "posX": -0.6926537752151489,
-                "posY": -0.6450525522232056,
-                "scaleX": 1.0,
-                "scaleY": 0.20000000298023224,
-                "Rot": 0.0
+                "Tag": "Restart",
+                "TargetTag": ""
             },
-            {},
-            {
-                "ColliderType1": 0,
-                "ColliderType2": 0,
-                "minX1": -0.5,
-                "minX2": 0.0,
-                "minY1": -0.5,
-                "minY2": 0.0,
-                "maxX1": 0.5,
-                "maxX2": 0.0,
-                "maxY1": 0.5,
-                "maxY2": 0.0,
-                "offsetX1": 0.0,
-                "offsetX2": 0.0,
-                "offsetY1": 0.0,
-                "offsetY2": 0.0,
-                "radius1": 0.0,
-                "radius2": 0.0
-            },
-            {
-                "NameTag": "mainmenu"
-            },
-            {
-                "TextureName": "MM_Y",
-                "Index_X": 0,
-                "Index_Y": 0,
-                "Ucoordinates": 512.0,
-                "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
-                "MaxIndex": 0
-            },
-            {
-                "0": "ButtonResponse",
-                "ScriptCount": 1
-            },
-          {
-            "Tag": "MainMenu",
-            "TargetTag": "MainMenu"
-          },
             {},
             {},
             {},

@@ -49,6 +49,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/SliderScript.h"
 #include "ExoEngine/Scripts/PauseMenu.h"
 #include "ExoEngine/Scripts/HazardScript.h"
+#include "ExoEngine/Scripts/CutScene.h"
 
 namespace EM {
 
@@ -1276,6 +1277,11 @@ namespace EM {
                                                                                           && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity))
                                         {
                                             logic.InsertScript(new HazardScript(selectedEntity), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "CutScene"
+                                            && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new CutScene(), selectedEntity);
                                         }
                                     }
                                 }
