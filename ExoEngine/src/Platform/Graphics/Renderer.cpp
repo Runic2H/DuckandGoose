@@ -58,7 +58,7 @@ namespace EM {
 											{  0.5f,  0.5f, 0.0f, 1.0f },
 											{ -0.5f,  0.5f, 0.0f, 1.0f } };
 
-		static const unsigned int MaxQuads = 20000;			//max number of square or triangles can be adjust
+		static const unsigned int MaxQuads = 40000;			//max number of square or triangles can be adjust
 		static const unsigned int MaxVertices = MaxQuads * 4;	//since one quard have 4 vertices we multi by 4
 		static const unsigned int MaxIndices = MaxQuads * 6;	//{0, 1, 2, 2, 3, 0} 6 indices per quad
 
@@ -100,7 +100,7 @@ namespace EM {
 		CircleVertex* CircleVertexBufferPtr = nullptr;
 
 		//contain an array of texture
-		std::array<MultiRefs<Texture>, 64> TextureUnits;
+		std::array<MultiRefs<Texture>, 32> TextureUnits;
 		unsigned int TextureUnitIndex = 1; // 0 = blank texture. Index to keep track of the texture
 
 		Renderer::Information Infos;

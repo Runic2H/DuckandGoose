@@ -163,6 +163,7 @@ namespace EM {
                                                 if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
                                                     //std::cout << "Collision Circle-Rect\n";
                                                     col1[a].mHit = 2;
+                                                    col2[b].mHit = 4;
                                                     //vec2D norm1 = offset1 - offset2;
                                                     //Normalize(norm1, norm1);
                                                     //col1[a].mCollisionNormal = norm1;

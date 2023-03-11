@@ -114,26 +114,37 @@ Application constructor
 		}
 		mPosUpdate->Init();
 
-
-		p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
-			/*if (p_GUI->check_pause() == false)
-			{*/
-				p_Editor->Update();
-				if (p_Editor->is_ShowWindow)
+
+			p_Editor->Update();
+			if (p_Editor->is_ShowWindow)
+			{
+				p_Editor->Draw();
+			}
+			p_Scene->checkForSceneToLoad();
+			mLogic->Update(Timer::GetInstance().GetGlobalDT());
+			mCollision->Update(Timer::GetInstance().GetGlobalDT());
+			mPosUpdate->Update();
+			p_Audio->Update();
+
+			if (p_Input->KeyPressed(GLFW_KEY_F3))
+			{
+				for (Entity i = 0; i <= p_ecs.GetTotalEntities(); ++i)
 				{
-					p_Editor->Draw();
+					if (p_ecs.HaveComponent<EnemyAttributes>(i))
+					{
+						p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
+						p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+					}
 				}
-				mLogic->Update(Timer::GetInstance().GetGlobalDT());
-				mCollision->Update(Timer::GetInstance().GetGlobalDT());
-				mPosUpdate->Update();
-				p_Audio->Update();
-		//	}
+			}
+
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
@@ -143,8 +154,7 @@ Application constructor
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			p_Scene->checkForSceneToLoad();
-			//p_Editor->is_ShowWindow = false;
+			p_Editor->is_ShowWindow = false;
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}

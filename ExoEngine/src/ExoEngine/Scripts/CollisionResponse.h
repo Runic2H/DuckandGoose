@@ -25,7 +25,7 @@ namespace EM
 	class CollisionResponse : public IScript
 	{
 	public:
-		CollisionResponse() = default;
+		CollisionResponse() : mTotalEnemies{ 0 }, mTotalDeadEnemies{ 0 } {}
 		~CollisionResponse() = default;
 		/*!*************************************************************************
 		This function initialises the script. As there are no data members that require
@@ -60,5 +60,7 @@ namespace EM
 		entityPhysics mPhys;
 		Entity mEntityTarget{};
 		Entity mEntityMain{};
+		Entity mTotalEnemies;
+		Entity mTotalDeadEnemies;
 	};
 }

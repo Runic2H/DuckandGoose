@@ -42,8 +42,8 @@ namespace EM
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
-		Graphic::mcamera->SetZoomLevel(1.0f);
-		Graphic::camera.SetPosition({ 0.0f, 0.0f, 0.0f });
+		//Graphic::mcamera->SetZoomLevel(1.0f);
+		//Graphic::camera.SetPosition({ 0.0f, 0.0f, 0.0f });
 		if (spt.GetTexture() == "HowToPlay" && p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 
@@ -140,7 +140,7 @@ namespace EM
 				{
 				
 					Graphic::mcamera->SetZoomLevel(0.25f);
-					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+					p_Scene->setSceneToLoad("Assets/Scene/CutScene.json");
 				}
 
 				//f (ID_tag.GetTag() == "Resume")

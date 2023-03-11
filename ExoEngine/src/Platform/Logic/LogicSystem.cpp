@@ -53,7 +53,8 @@ namespace EM
 							(*i)->Start();
 							(*i)->SetScriptInit();
 						}
-						(*i)->Update(Frametime);
+						if(!(*i)->GetScriptPaused())
+							(*i)->Update(Frametime);
 					}
 				}
 			}

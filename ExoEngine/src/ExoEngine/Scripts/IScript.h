@@ -51,6 +51,22 @@ namespace EM
 			return mScriptInit;
 		}
 
+		void TogglePauseScript()
+		{
+			mScriptPause == true ? false : true;
+		}
+
+		bool GetScriptPaused()
+		{
+			return mScriptPause;
+		}
+
+		void SetScriptPause(bool value)
+		{
+			mScriptPause = value;
+		}
+
+		bool mScriptPause{ false };
 
 	protected:
 		Entity entityID{};

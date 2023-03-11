@@ -52,7 +52,7 @@ namespace EM {
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
-		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX", "Hazards" ,"CutScene"};
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX", "Hazards" ,"CutScene", "Dialogues"};
 		
 		for (const auto& i : folderpath)
 		{

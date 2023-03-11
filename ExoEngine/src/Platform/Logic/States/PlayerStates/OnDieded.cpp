@@ -39,6 +39,7 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[6].should_play = true;
 		}
+		
 	}
 
 	/*!*************************************************************************
@@ -46,7 +47,9 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		p_Scene->setSceneToLoad("Assets/Scenes/Game_Over.json");
+		UNREFERENCED_PARAMETER(Frametime);
+		UNREFERENCED_PARAMETER(stateMachine);
+		p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
 	}
 
 	/*!*************************************************************************

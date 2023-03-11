@@ -31,6 +31,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/BackgroundAudio.h"
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/HazardScript.h"
+#include "ExoEngine/Scripts/DialogueManager.h"
 
 
 
@@ -144,6 +145,10 @@ namespace EM
 			if (mScriptNameVector[j] == "CutScene")
 			{
 				mScriptsVector.push_back(new CutScene());
+			}
+			if (mScriptNameVector[j] == "DialogueManager")
+			{
+				mScriptsVector.push_back(new DialogueManager());
 			}
 		}
 		return true;

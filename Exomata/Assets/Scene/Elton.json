@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 94
+        "Entities": 95
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -39,11 +39,11 @@
         "00000000000000000000000000011000",
         "00000000000000000000000010111111",
         "00000000000000000000000000011001",
-        "00000000000000000000000000111111",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
-        "00000000000000000000000000011001",
+        "00000000000000000000000010111111",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000100111111111",
@@ -70,17 +70,17 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
-        "00000000000000000000001001111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
+        "00000000000000000000001011111111",
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
         "00000000000000000000100111111111",
@@ -96,7 +96,8 @@
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
-        "00000000000000000000000001111111"
+        "00000000000000000000000001111111",
+        "00000000000000000000000000111001"
     ],
     "Components": {
         "0": [
@@ -1058,8 +1059,8 @@
         ],
         "21": [
             {
-                "posX": -3.9762942790985107,
-                "posY": 0.08290203660726547,
+                "posX": -3.785536766052246,
+                "posY": 0.05775301903486252,
                 "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
@@ -1076,13 +1077,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.07999999821186066,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.07999999821186066,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -1095,7 +1096,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 1,
+                "Index_X": 4,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1157,10 +1158,15 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 7,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "7": {
+                    "AudioPath": "Shield_Up2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 8,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1463,13 +1469,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -1518,9 +1524,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -1792,9 +1798,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -1816,7 +1822,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1922,10 +1928,21 @@
             {
                 "0": "CollisionResponse",
                 "1": "GateController",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {},
             {},
@@ -1946,7 +1963,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1990,19 +2007,43 @@
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
-            {},
-            {},
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
             {
                 "NameTag": "Gate Back 3"
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 16,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2025,9 +2066,19 @@
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164
             },
+            {
+                "0": "AudioManager",
+                "1": "CollisionResponse",
+                "2": "GateController",
+                "ScriptCount": 3
+            },
             {},
-            {},
-            {},
+            {
+                "AudioArrCount": 0,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {},
             {},
@@ -2048,7 +2099,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2092,19 +2143,43 @@
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
-            {},
-            {},
+            {
+                "velX": 0.0,
+                "velY": 0.0,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "Friction": 0.0,
+                "Restitution": 0.0
+            },
+            {
+                "ColliderType1": 5,
+                "ColliderType2": 0,
+                "minX1": 0.10000000149011612,
+                "minX2": 0.0,
+                "minY1": 0.30000001192092896,
+                "minY2": 0.0,
+                "maxX1": 0.10000000149011612,
+                "maxX2": 0.0,
+                "maxY1": 0.30000001192092896,
+                "maxY2": 0.0,
+                "offsetX1": 0.0,
+                "offsetX2": 0.0,
+                "offsetY1": 0.0,
+                "offsetY2": 0.0,
+                "radius1": 0.0,
+                "radius2": 0.0
+            },
             {
                 "NameTag": "Gate Back 4"
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 16,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2127,9 +2202,24 @@
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164
             },
+            {
+                "0": "GateController",
+                "1": "CollisionResponse",
+                "2": "AudioManager",
+                "ScriptCount": 3
+            },
             {},
-            {},
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {},
             {},
@@ -2150,7 +2240,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 8,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2248,11 +2338,11 @@
                 "minX1": 0.0,
                 "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
                 "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -2301,9 +2391,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2341,11 +2431,11 @@
                 "minX1": 0.0,
                 "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
                 "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -2394,9 +2484,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2432,13 +2522,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -2487,9 +2577,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2525,13 +2615,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -2580,9 +2670,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -2625,9 +2715,9 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {},
             {},
@@ -2636,8 +2726,8 @@
         ],
         "48": [
             {
-                "posX": -4.114370346069336,
-                "posY": 0.28790202736854553,
+                "posX": -3.9236128330230713,
+                "posY": 0.2627530097961426,
                 "scaleX": 0.36730948090553284,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
@@ -2675,8 +2765,8 @@
         ],
         "49": [
             {
-                "posX": -4.256294250488281,
-                "posY": 0.27190202474594116,
+                "posX": -4.065536975860596,
+                "posY": 0.2467530071735382,
                 "scaleX": 0.0,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
@@ -2713,8 +2803,8 @@
         ],
         "50": [
             {
-                "posX": -4.3662943840026855,
-                "posY": 0.23790204524993896,
+                "posX": -4.175536632537842,
+                "posY": 0.212753027677536,
                 "scaleX": 0.0,
                 "scaleY": 0.03999999910593033,
                 "Rot": 0.0
@@ -2751,8 +2841,8 @@
         ],
         "51": [
             {
-                "posX": -4.191294193267822,
-                "posY": 0.2729020416736603,
+                "posX": -4.000536918640137,
+                "posY": 0.24775302410125732,
                 "scaleX": 0.5,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
@@ -3289,15 +3379,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3305,13 +3395,13 @@
                 "NameTag": "Ground hazard firing 1"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3323,18 +3413,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3363,15 +3464,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3379,13 +3480,13 @@
                 "NameTag": "Ground hazard firing 2"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3397,18 +3498,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3417,8 +3529,8 @@
         ],
         "69": [
             {
-                "posX": 2.180943489074707,
-                "posY": 0.03147950768470764,
+                "posX": 2.1933107376098633,
+                "posY": 0.032992392778396606,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3437,15 +3549,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3453,13 +3565,13 @@
                 "NameTag": "Ground hazard firing 3"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3471,18 +3583,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3491,8 +3614,8 @@
         ],
         "70": [
             {
-                "posX": 2.8294460773468018,
-                "posY": -0.018444839864969254,
+                "posX": 2.838721513748169,
+                "posY": -0.022983405739068985,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3511,15 +3634,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3527,13 +3650,13 @@
                 "NameTag": "Ground hazard firing 4"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3545,18 +3668,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3565,8 +3699,8 @@
         ],
         "71": [
             {
-                "posX": 3.868286609649658,
-                "posY": -0.2136036902666092,
+                "posX": 3.87060546875,
+                "posY": -0.2128472775220871,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3585,15 +3719,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3601,13 +3735,13 @@
                 "NameTag": "Ground hazard firing 5"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3619,18 +3753,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3639,8 +3784,8 @@
         ],
         "72": [
             {
-                "posX": 3.979590892791748,
-                "posY": -0.006341978907585144,
+                "posX": 3.982682704925537,
+                "posY": -0.011637018993496895,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3659,15 +3804,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3675,13 +3820,13 @@
                 "NameTag": "Ground hazard firing 6"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3693,18 +3838,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3733,15 +3889,15 @@
                 "minX1": 0.029999999329447746,
                 "minX2": 0.029999999329447746,
                 "minY1": 0.07999999821186066,
-                "minY2": 0.07999999821186066,
+                "minY2": 0.029999999329447746,
                 "maxX1": 0.029999999329447746,
                 "maxX2": 0.029999999329447746,
                 "maxY1": 0.07999999821186066,
-                "maxY2": 0.07999999821186066,
+                "maxY2": 0.029999999329447746,
                 "offsetX1": 0.05000000074505806,
                 "offsetX2": 0.05000000074505806,
                 "offsetY1": 0.0,
-                "offsetY2": -0.02500000037252903,
+                "offsetY2": -0.05999999865889549,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3749,13 +3905,13 @@
                 "NameTag": "Ground hazard firing 7"
             },
             {
-                "TextureName": "Ground_Hazards_Charging",
-                "Index_X": 2,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3767,18 +3923,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3807,15 +3974,15 @@
                 "minX1": 0.0,
                 "minX2": 0.05000000074505806,
                 "minY1": 0.0,
-                "minY2": 0.25,
+                "minY2": 0.10999999940395355,
                 "maxX1": 0.0,
                 "maxX2": 0.05000000074505806,
                 "maxY1": 0.0,
-                "maxY2": 0.25,
+                "maxY2": 0.10999999940395355,
                 "offsetX1": 0.0,
-                "offsetX2": -0.05000000074505806,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": 0.0,
+                "offsetY2": -0.02500000037252903,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3823,13 +3990,13 @@
                 "NameTag": "Lazer hazard firing 1"
             },
             {
-                "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 6,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3843,18 +4010,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -3883,15 +4061,15 @@
                 "minX1": 0.0,
                 "minX2": 0.05000000074505806,
                 "minY1": 0.0,
-                "minY2": 0.25,
+                "minY2": 0.10999999940395355,
                 "maxX1": 0.0,
                 "maxX2": 0.05000000074505806,
                 "maxY1": 0.0,
-                "maxY2": 0.25,
+                "maxY2": 0.10999999940395355,
                 "offsetX1": 0.0,
-                "offsetX2": -0.05000000074505806,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": 0.0,
+                "offsetY2": -0.02500000037252903,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3899,13 +4077,13 @@
                 "NameTag": "Lazer hazard firing 2"
             },
             {
-                "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 6,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3919,18 +4097,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -3959,15 +4148,15 @@
                 "minX1": 0.0,
                 "minX2": 0.05000000074505806,
                 "minY1": 0.0,
-                "minY2": 0.25,
+                "minY2": 0.10999999940395355,
                 "maxX1": 0.0,
                 "maxX2": 0.05000000074505806,
                 "maxY1": 0.0,
-                "maxY2": 0.25,
+                "maxY2": 0.10999999940395355,
                 "offsetX1": 0.0,
-                "offsetX2": -0.05000000074505806,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": 0.0,
+                "offsetY2": -0.02500000037252903,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -3975,13 +4164,13 @@
                 "NameTag": "Lazer hazard firing 3"
             },
             {
-                "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 6,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3995,18 +4184,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4035,15 +4235,15 @@
                 "minX1": 0.0,
                 "minX2": 0.05000000074505806,
                 "minY1": 0.0,
-                "minY2": 0.25,
+                "minY2": 0.10999999940395355,
                 "maxX1": 0.0,
                 "maxX2": 0.05000000074505806,
                 "maxY1": 0.0,
-                "maxY2": 0.25,
+                "maxY2": 0.10999999940395355,
                 "offsetX1": 0.0,
-                "offsetX2": -0.05000000074505806,
+                "offsetX2": 0.0,
                 "offsetY1": 0.0,
-                "offsetY2": 0.0,
+                "offsetY2": -0.02500000037252903,
                 "radius1": 0.0,
                 "radius2": 0.0
             },
@@ -4051,13 +4251,13 @@
                 "NameTag": "Lazer hazard firing 4"
             },
             {
-                "TextureName": "Laser_Hazard_Charging",
-                "Index_X": 6,
+                "TextureName": "Blank",
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4071,18 +4271,29 @@
             {
                 "0": "CollisionResponse",
                 "1": "HazardScript",
-                "ScriptCount": 2
+                "2": "AudioManager",
+                "ScriptCount": 3
             },
             {
                 "Tag": "Hazard",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "SustainedBeam.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
+            },
             {},
             {
-                "FiringCooldown": 0.5333347320556641,
+                "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": -0.01666543446481228,
+                "ChargeDuration": 1.4166672229766846,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4098,7 +4309,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4109,13 +4320,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4164,9 +4375,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4191,7 +4402,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4202,13 +4413,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4257,9 +4468,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4284,7 +4495,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4295,13 +4506,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4350,9 +4561,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4370,14 +4581,14 @@
         ],
         "81": [
             {
-                "posX": 1.9891855716705322,
-                "posY": 0.08514009416103363,
+                "posX": 2.7590408325195313,
+                "posY": 0.06471650302410126,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4388,13 +4599,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4443,9 +4654,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4470,7 +4681,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4481,13 +4692,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4536,9 +4747,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4563,7 +4774,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4574,13 +4785,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4629,9 +4840,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4649,14 +4860,14 @@
         ],
         "84": [
             {
-                "posX": 3.761289119720459,
-                "posY": 0.006337285041809082,
+                "posX": 4.178680896759033,
+                "posY": 0.033568769693374634,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4667,13 +4878,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4722,9 +4933,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4749,7 +4960,7 @@
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -4760,13 +4971,13 @@
                 "ColliderType1": 1,
                 "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.05999999865889549,
+                "minX2": 0.07000000029802322,
                 "minY1": 0.0,
-                "minY2": 0.05000000074505806,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.05999999865889549,
+                "maxX2": 0.07000000029802322,
                 "maxY1": 0.0,
-                "maxY2": 0.05000000074505806,
+                "maxY2": 0.07000000029802322,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -4815,9 +5026,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.9850000143051147,
-                "SFX Volume": 0.9850000143051147,
-                "Master Volume": 0.9850000143051147
+                "BGM Volume": 0.0,
+                "SFX Volume": 0.0,
+                "Master Volume": 0.0
             },
             {
                 "ElementType": 1,
@@ -4900,7 +5111,7 @@
                 "NameTag": "Menu_UI"
             },
             {
-                "TextureName": "MenuPanel",
+                "TextureName": "Blank",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -4954,7 +5165,7 @@
                 "NameTag": "Resume"
             },
             {
-                "TextureName": "Resume_Idle",
+                "TextureName": "Blank",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -5008,7 +5219,7 @@
                 "NameTag": "Quit"
             },
             {
-                "TextureName": "QG_Y",
+                "TextureName": "Blank",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -5062,7 +5273,7 @@
                 "NameTag": "Restart"
             },
             {
-                "TextureName": "Restart_Idle",
+                "TextureName": "Blank",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -5209,15 +5420,15 @@
             },
             {
                 "ColliderType1": 4,
-                "ColliderType2": 0,
+                "ColliderType2": 4,
                 "minX1": 0.05000000074505806,
-                "minX2": 0.0,
+                "minX2": 0.05000000074505806,
                 "minY1": 0.20000000298023224,
-                "minY2": 0.0,
+                "minY2": 0.2199999988079071,
                 "maxX1": 0.05000000074505806,
-                "maxX2": 0.0,
+                "maxX2": 0.05000000074505806,
                 "maxY1": 0.20000000298023224,
-                "maxY2": 0.0,
+                "maxY2": 0.2199999988079071,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
                 "offsetY1": 0.0,
@@ -5246,6 +5457,40 @@
                 "Tag": "Win",
                 "TargetTag": ""
             },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "94": [
+            {
+                "posX": -3.785536766052246,
+                "posY": -0.08224698156118393,
+                "scaleX": 0.699999988079071,
+                "scaleY": 0.12500005960464478,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "DialogueBox"
+            },
+            {
+                "TextureName": "Blank",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0
+            },
+            {
+                "0": "DialogueManager",
+                "ScriptCount": 1
+            },
+            {},
             {},
             {},
             {},

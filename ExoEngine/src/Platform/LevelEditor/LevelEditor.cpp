@@ -50,6 +50,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/PauseMenu.h"
 #include "ExoEngine/Scripts/HazardScript.h"
 #include "ExoEngine/Scripts/CutScene.h"
+#include "ExoEngine/Scripts/DialogueManager.h"
 
 namespace EM {
 
@@ -234,8 +235,8 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::LoadScriptsFromFile()
     {
-        std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
-        //std::string scriptPath = "Assets/Scripts"; //for release mode
+        //std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
+        std::string scriptPath = "Assets/Scripts"; //for release mode
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())
@@ -1282,6 +1283,10 @@ namespace EM {
                                             && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
                                         {
                                             logic.InsertScript(new CutScene(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "DialogueManager" && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new DialogueManager(), selectedEntity);
                                         }
                                     }
                                 }

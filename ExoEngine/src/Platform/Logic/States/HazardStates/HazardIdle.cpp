@@ -13,6 +13,7 @@ Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure o
 without the prior written consent of DigiPen Institute of Technology is prohibited.
 ****************************************************************************
 ***/
+#include "empch.h"
 #include "HazardIdle.h"
 #include "HazardCharging.h"
 
