@@ -154,7 +154,7 @@ Application constructor
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			p_Editor->is_ShowWindow = false;
+			//p_Editor->is_ShowWindow = false;
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
