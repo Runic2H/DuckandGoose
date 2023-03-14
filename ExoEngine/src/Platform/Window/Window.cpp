@@ -57,13 +57,11 @@ namespace EM{
 		glfwWindowHint(GLFW_DEPTH_BITS, 24);
 		glfwWindowHint(GLFW_RED_BITS, 8); glfwWindowHint(GLFW_GREEN_BITS, 8);
 		glfwWindowHint(GLFW_BLUE_BITS, 8); glfwWindowHint(GLFW_ALPHA_BITS, 8);
-
 		//we are setting window size able toggle
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); 
-
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		//fullscreen
 		m_monitor = glfwGetPrimaryMonitor();
-
+		
 		//set initialize window width & height to current (to be set in rapidjson file)
 		m_windowData.m_CurrentWidth = m_windowData.m_Width;
 		m_windowData.m_CurrentHeight = m_windowData.m_Height;
@@ -106,7 +104,7 @@ namespace EM{
 	****************************************************************************/
 	void Window::Update(float frametime)
 	{
-		(void)frametime;
+		(void)frametime;	
 		/* Poll for and process events */
 		glfwPollEvents();
 		/* Swap front and back buffers */
