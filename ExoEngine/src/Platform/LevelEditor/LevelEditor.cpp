@@ -235,8 +235,8 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::LoadScriptsFromFile()
     {
-        //std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
-        std::string scriptPath = "Assets/Scripts"; //for release mode
+        std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
+        //std::string scriptPath = "Assets/Scripts"; //for release mode
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())
