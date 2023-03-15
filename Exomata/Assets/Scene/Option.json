@@ -65,7 +65,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -96,7 +97,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -144,7 +146,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "SliderScript",
@@ -181,7 +184,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -212,7 +216,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -260,7 +265,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "SliderScript",
@@ -314,7 +320,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "SliderScript",

@@ -137,7 +137,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -192,7 +193,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -247,7 +249,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -302,7 +305,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -357,7 +361,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -412,7 +417,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -467,7 +473,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -522,7 +529,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -577,7 +585,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -632,7 +641,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -687,7 +697,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -727,7 +738,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -767,7 +779,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -807,7 +820,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -847,7 +861,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -887,7 +902,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -927,7 +943,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -967,7 +984,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1007,7 +1025,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1047,7 +1066,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1110,7 +1130,8 @@
                 "DisplayTime 4": 0.25999999046325684,
                 "DisplayTime 5": 0.20000000298023224,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 1
             },
             {
                 "0": "PlayerControl",
@@ -1200,7 +1221,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 2.0
+                "DisplayTime 7": 2.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1234,7 +1256,8 @@
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
                 "DisplayTime 7": 0.05999999865889549,
-                "DisplayTime 8": 0.05999999865889549
+                "DisplayTime 8": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1267,7 +1290,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 7": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1298,7 +1322,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1329,7 +1354,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1384,7 +1410,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1439,7 +1466,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1495,7 +1523,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -1580,7 +1609,8 @@
                 "DisplayTime 19": 0.029999999329447746,
                 "DisplayTime 20": 0.029999999329447746,
                 "DisplayTime 21": 0.029999999329447746,
-                "DisplayTime 22": 0.029999999329447746
+                "DisplayTime 22": 0.029999999329447746,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1617,7 +1647,8 @@
                 "DisplayTime 8": 0.05999999865889549,
                 "DisplayTime 9": 0.05999999865889549,
                 "DisplayTime 10": 0.05999999865889549,
-                "DisplayTime 11": 0.05999999865889549
+                "DisplayTime 11": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1672,7 +1703,8 @@
                 "DisplayTime 26": 0.009999999776482582,
                 "DisplayTime 27": 0.009999999776482582,
                 "DisplayTime 28": 0.009999999776482582,
-                "DisplayTime 29": 0.009999999776482582
+                "DisplayTime 29": 0.009999999776482582,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1707,7 +1739,8 @@
                 "DisplayTime 6": -0.009999999776482582,
                 "DisplayTime 7": -0.009999999776482582,
                 "DisplayTime 8": -0.009999999776482582,
-                "DisplayTime 9": -0.009999999776482582
+                "DisplayTime 9": -0.009999999776482582,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1782,7 +1815,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "GateController",
@@ -1848,7 +1882,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1923,7 +1958,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -1989,7 +2025,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2064,7 +2101,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "AudioManager",
@@ -2125,7 +2163,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2200,7 +2239,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "GateController",
@@ -2266,7 +2306,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2306,7 +2347,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2362,7 +2404,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -2455,7 +2498,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -2548,7 +2592,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -2641,7 +2686,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -2746,7 +2792,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2784,7 +2831,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2822,7 +2870,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2860,7 +2909,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2898,7 +2948,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2929,7 +2980,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2961,7 +3013,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2993,7 +3046,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3025,7 +3079,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3057,7 +3112,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3089,7 +3145,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3121,7 +3178,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3153,7 +3211,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3185,7 +3244,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3218,7 +3278,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 7": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3251,7 +3312,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 7": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3283,7 +3345,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3315,7 +3378,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3347,7 +3411,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3408,7 +3473,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3493,7 +3559,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3578,7 +3645,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3663,7 +3731,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3748,7 +3817,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3833,7 +3903,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3918,7 +3989,8 @@
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4005,7 +4077,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4092,7 +4165,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4179,7 +4253,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4266,7 +4341,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4346,7 +4422,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4439,7 +4516,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4532,7 +4610,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4625,7 +4704,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4718,7 +4798,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4811,7 +4892,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4904,7 +4986,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -4997,7 +5080,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "EnemyScript",
@@ -5065,7 +5149,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5118,7 +5203,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5172,7 +5258,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5226,7 +5313,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5280,7 +5368,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5334,7 +5423,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5387,7 +5477,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5447,7 +5538,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -5484,7 +5576,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "DialogueManager",

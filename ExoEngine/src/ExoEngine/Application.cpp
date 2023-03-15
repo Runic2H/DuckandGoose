@@ -113,9 +113,9 @@ Application constructor
 			p_ecs.SetSystemSignature<PhysicsSystem>(signature);
 		}
 		mPosUpdate->Init();
-
+#if !DEBUG
 		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-
+#endif
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();

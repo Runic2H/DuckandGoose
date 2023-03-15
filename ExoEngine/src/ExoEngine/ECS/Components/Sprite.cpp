@@ -24,7 +24,7 @@ namespace EM {
 	Ctor for Sprite Component
 	****************************************************************************/
 	Sprite::Sprite() : mTextureName("Blank"), Index({ 0,0 }), mUVcooridnates({ 512.0f, 512.0f }),
-		is_SpriteSheet(false), is_Animated(false), mAlpha(1), MaxIndex_X(0),displayTime(GetMaxIndex()), internaltimer(0){}
+		is_SpriteSheet(false), is_Animated(false), mAlpha(1), MaxIndex_X(0),displayTime(GetMaxIndex()), internaltimer(0), LayerOrder(0){}
 
 	/*!*************************************************************************
 	Deserialize for Sprite Component
@@ -49,7 +49,7 @@ namespace EM {
 		{
 			Animation::spriteContainer.emplace(mTextureName, displayTime);
 		}
-			
+		LayerOrder= int(obj["LayeringOrder"].GetInt());
 		return true;
 	}
 
@@ -82,6 +82,8 @@ namespace EM {
 			writer->Key(DpNum.c_str());
 			writer->Double(displayTime[i]);
 		}
+		writer->Key("LayeringOrder");
+		writer->Int(LayerOrder);
 		//writer->EndObject();
 		return true;
 	}

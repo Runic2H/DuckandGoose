@@ -1034,6 +1034,8 @@ namespace EM {
                             ImGui::DragFloat("##V", (float*)&sprite.GetUVCoor().y, 0.5f);
                             ImGui::PopID();
                         }
+                        ImGui::Text("Layering Order: "); ImGui::SameLine();
+                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 6);
                     }
                 }
                 //Collider Component
