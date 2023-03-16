@@ -739,7 +739,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -780,7 +780,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -821,7 +821,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -862,7 +862,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -903,7 +903,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -944,7 +944,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -985,7 +985,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1026,7 +1026,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1067,7 +1067,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1131,7 +1131,7 @@
                 "DisplayTime 5": 0.20000000298023224,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "LayeringOrder": 1
+                "LayeringOrder": 3
             },
             {
                 "0": "PlayerControl",
@@ -1524,7 +1524,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.05999999865889549,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -1883,7 +1883,7 @@
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2026,7 +2026,7 @@
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2164,7 +2164,7 @@
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2307,7 +2307,7 @@
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
                 "DisplayTime 19": 0.019999999552965164,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2348,7 +2348,7 @@
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
                 "DisplayTime 8": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -2405,7 +2405,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2499,7 +2499,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2593,7 +2593,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2687,7 +2687,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4423,7 +4423,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4517,7 +4517,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4611,7 +4611,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4705,7 +4705,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4799,7 +4799,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4893,7 +4893,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4987,7 +4987,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -5081,7 +5081,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
