@@ -50,7 +50,7 @@ namespace EM
 		}
 		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
 		{
-			p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer = 1.0f;
+			p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer = 0.25f;
 		}
 		
 	
