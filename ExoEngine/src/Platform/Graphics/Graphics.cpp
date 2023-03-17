@@ -135,6 +135,7 @@ namespace EM {
 					}
 					if (sprite.is_SpriteSheet)
 					{
+					
 						mIndex1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y },
 							{ sprite.GetUVCoor().x, sprite.GetUVCoor().y });
 

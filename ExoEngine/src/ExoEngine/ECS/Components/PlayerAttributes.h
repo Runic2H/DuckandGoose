@@ -44,10 +44,13 @@ namespace EM
 		int mAttackCounter;
 		float mDamageCoolDown;
 		float mDashCoolDown;
+		float mDashMaxCoolDown;
 		float mDashDurationTimer;
 		float mBlockCoolDown;	//5.0f
+		float mBlockMaxCoolDown;
 		float mBlockDurationTimer;
 		float mCooldownTimer;
+		float mCooldownMaxTimer;
 		float mDamageTaken;
 		float mDamageDurationTimer;
 		bool mIsDamaged;

@@ -1079,8 +1079,8 @@
         ],
         "21": [
             {
-                "posX": -3.785536766052246,
-                "posY": 0.05775301903486252,
+                "posX": -4.038283824920654,
+                "posY": 0.0460781566798687,
                 "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
@@ -1116,7 +1116,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1789,12 +1789,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 0,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1856,7 +1856,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1937,7 +1937,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1999,7 +1999,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2137,7 +2137,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2280,7 +2280,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2404,7 +2404,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -2498,7 +2498,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -2592,7 +2592,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -2686,7 +2686,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -2772,9 +2772,9 @@
         ],
         "48": [
             {
-                "posX": -3.9236128330230713,
-                "posY": 0.2627530097961426,
-                "scaleX": 0.36730948090553284,
+                "posX": -4.263283729553223,
+                "posY": 0.25107815861701965,
+                "scaleX": 0.25,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
             },
@@ -2803,7 +2803,7 @@
             {},
             {
                 "ElementType": 1,
-                "offsetX": -0.2849999964237213,
+                "offsetX": -0.32499998807907104,
                 "offsetY": 0.20499999821186066
             },
             {},
@@ -2812,9 +2812,9 @@
         ],
         "49": [
             {
-                "posX": -4.065536975860596,
-                "posY": 0.2467530071735382,
-                "scaleX": 0.0,
+                "posX": -4.293283939361572,
+                "posY": 0.23507815599441528,
+                "scaleX": 0.1818181872367859,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
             },
@@ -2842,7 +2842,7 @@
             {},
             {
                 "ElementType": 3,
-                "offsetX": -0.2800000011920929,
+                "offsetX": -0.2549999952316284,
                 "offsetY": 0.1889999955892563
             },
             {},
@@ -2851,10 +2851,10 @@
         ],
         "50": [
             {
-                "posX": -4.175536632537842,
-                "posY": 0.212753027677536,
-                "scaleX": 0.0,
-                "scaleY": 0.03999999910593033,
+                "posX": -4.416616916656494,
+                "posY": 0.2010781615972519,
+                "scaleX": 0.0809527114033699,
+                "scaleY": 0.029999999329447746,
                 "Rot": 0.0
             },
             {},
@@ -2881,7 +2881,7 @@
             {},
             {
                 "ElementType": 2,
-                "offsetX": -0.38999998569488525,
+                "offsetX": -0.33500000834465027,
                 "offsetY": 0.1550000011920929
             },
             {},
@@ -2890,9 +2890,9 @@
         ],
         "51": [
             {
-                "posX": -4.000536918640137,
-                "posY": 0.24775302410125732,
-                "scaleX": 0.5,
+                "posX": -4.318284034729004,
+                "posY": 0.2360781580209732,
+                "scaleX": 0.3499999940395355,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
             },
@@ -2920,7 +2920,7 @@
             {},
             {
                 "ElementType": 0,
-                "offsetX": -0.2150000035762787,
+                "offsetX": -0.2800000011920929,
                 "offsetY": 0.1899999976158142
             },
             {},
@@ -3501,7 +3501,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3587,7 +3587,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3673,7 +3673,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3759,7 +3759,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3845,7 +3845,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3931,7 +3931,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -4017,7 +4017,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -4105,7 +4105,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4193,7 +4193,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4281,7 +4281,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4369,7 +4369,7 @@
             {
                 "FiringCooldown": -0.01666543446481228,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4422,7 +4422,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4516,7 +4516,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4610,7 +4610,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4704,7 +4704,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4798,7 +4798,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4892,7 +4892,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -4986,7 +4986,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -5080,7 +5080,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0,
+                "DisplayTime 0": 0.0,
                 "LayeringOrder": 3
             },
             {
@@ -5557,8 +5557,8 @@
         ],
         "94": [
             {
-                "posX": -3.785536766052246,
-                "posY": -0.08224698156118393,
+                "posX": -4.055400371551514,
+                "posY": -0.08115170896053314,
                 "scaleX": 0.699999988079071,
                 "scaleY": 0.12500005960464478,
                 "Rot": 0.0
