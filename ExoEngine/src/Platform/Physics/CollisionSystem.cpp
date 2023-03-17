@@ -237,9 +237,10 @@ namespace EM {
                                                 vec2D max1 = offset1 + col1[a].mMax;
                                                 vec2D min1 = offset1 - col1[a].mMin;
                                                 if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                    /*std::cout << "Collided with Box: " << p_ecs.GetComponent<NameTag>(i).GetNameTag() << "\n";
-                                                    std::cout << "Collision Box-Circle\n";
+                                                    //std::cout << "Collided with Box: " << p_ecs.GetComponent<NameTag>(i).GetNameTag() << "\n";
+                                                    /*std::cout << "Collision Box-Circle\n";
                                                     std::cout << "Initial Position: " << trans2.GetPos().x << ", " << trans2.GetPos().y << "\n";*/
+                                                    //std::cout << offset2.x << std::endl;
                                                     vec2D norm2;
                                                     if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x <= min1.x) {
                                                         norm2.x = -1;
