@@ -21,12 +21,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include"Platform/Window/Window.h"
 #include "ExoEngine/ECS/Types.h"
 #include "ExoEngine/ECS/ECS.h"
-#include <vector>
+#include "Platform/Logic/States/IStates.h"
 namespace EM {
 	class ButtonResponse : public IScript
 	{
 	public:
-		ButtonResponse() : clicked{ false }, selected{ false } {};
+		ButtonResponse() : clicked{ false }, selected{ false }, initial_hover{ true }, how_to_play{ false } {};
 		~ButtonResponse() = default;
 		/*!*************************************************************************
 		This function initialises the script. As there are no data members that require
@@ -82,6 +82,8 @@ namespace EM {
 		button_bb Button_BoundingBox{};
 		button_state curr_state{ button_state::idle};
 		bool HTP {false};
+		bool initial_hover;
+		bool how_to_play;
 
 		
 	
