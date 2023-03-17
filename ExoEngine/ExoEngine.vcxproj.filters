@@ -306,6 +306,7 @@
     <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardCharging.h" />
     <ClInclude Include="src\Platform\Logic\States\HazardStates\HazardFire.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

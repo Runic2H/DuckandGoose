@@ -62,6 +62,7 @@ namespace EM {
 		bool is_SpriteSheet; // to tell whether we are using a spritesheet
 		bool is_Animated;	// if is a spritesheet do we want it to be animated 
 		float internaltimer;
+		int LayerOrder;
 		//altas 
 	private:
 		std::string mTextureName;

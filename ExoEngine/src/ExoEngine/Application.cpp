@@ -113,9 +113,9 @@ Application constructor
 			p_ecs.SetSystemSignature<PhysicsSystem>(signature);
 		}
 		mPosUpdate->Init();
-
+#if !DEBUG
 		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-
+#endif
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
@@ -154,7 +154,9 @@ Application constructor
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			//p_Editor->is_ShowWindow = false;
+#if !DEBUG
+			p_Editor->is_ShowWindow = false;
+#endif
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}

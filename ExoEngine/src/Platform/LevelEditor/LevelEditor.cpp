@@ -106,10 +106,12 @@ namespace EM {
     void LevelEditor::Update()
     {
         //MainMenuBar();
+
         if (p_Input->KeyPressed(GLFW_KEY_F1))
         {
             is_ShowWindow = !is_ShowWindow;
         }
+
         if (!p_Editor->is_ShowWindow)
         {
             glViewport(0, 0, mWindow->Getter().m_Width, mWindow->Getter().m_Height);
@@ -235,8 +237,11 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::LoadScriptsFromFile()
     {
+#if DEBUG
         std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
-        //std::string scriptPath = "Assets/Scripts"; //for release mode
+#else
+        std::string scriptPath = "Assets/Scripts"; //for release mode
+#endif
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())
@@ -1029,6 +1034,8 @@ namespace EM {
                             ImGui::DragFloat("##V", (float*)&sprite.GetUVCoor().y, 0.5f);
                             ImGui::PopID();
                         }
+                        ImGui::Text("Layering Order: "); ImGui::SameLine();
+                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 6);
                     }
                 }
                 //Collider Component
