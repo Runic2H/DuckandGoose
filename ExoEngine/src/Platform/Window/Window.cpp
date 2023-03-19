@@ -19,7 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Timer/Time.h"
 
 namespace EM{
-
+	bool Window::isWindowNotFocus = false;
 	Window::Window() : m_window{ nullptr }, m_monitor{ nullptr },
 		m_windowData{ windowData.GetTitle(), windowData.GetWidth(), windowData.GetHeight(), windowData.GetCurrWidth(), windowData.GetCurrHeight(), 0, 0 },//should be serialized
 		m_vsync{ false }, previousTime{glfwGetTime()}, frameCount{0}
@@ -72,6 +72,19 @@ namespace EM{
 			m_windowData.Title.c_str(),
 			NULL, NULL);
 
+#if !DEBUG		
+		const GLFWvidmode* mode = glfwGetVideoMode(m_monitor);
+		m_windowData.m_Width = mode->width;
+		m_windowData.m_Height = mode->height;
+	
+		glfwSetWindowMonitor(
+			m_window, nullptr,
+			0, 0,
+			m_windowData.m_Width, m_windowData.m_Height, 0);
+#endif			
+		glfwMakeContextCurrent(m_window);
+		glfwSetWindowUserPointer(m_window, &m_windowData);
+
 		if (!m_window)
 		{
 			std::cout << "Failed to create window !" << std::endl;
@@ -79,16 +92,14 @@ namespace EM{
 		}
 
 		EM_EXO_INFO("Generating Window {0} : SIZE ({1},{2})", m_windowData.Title, m_windowData.m_Width, m_windowData.m_Height);
-	
-		/* Make the window's context current */
-		glfwMakeContextCurrent(m_window);
-		glfwSetWindowUserPointer(m_window, &m_windowData);
+		
 
 		if(glewInit() != GLEW_OK)
 			EM_EXO_ASSERT(!glewInit(), "GLEW init has failed - abort program...");
 
 		//context
 		ToggleVsync(true);
+
 		glfwSetWindowSizeCallback(m_window, Window_size_callback);
 		glfwSetCursorPosCallback(m_window, Mouseposition_callback);
 		glfwSetKeyCallback(m_window, Key_callback);
@@ -97,6 +108,8 @@ namespace EM{
 		glfwSetFramebufferSizeCallback(m_window, Window_size_callback);
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		glfwSetDropCallback(m_window, drop_callback);
+		glfwSetWindowFocusCallback(m_window, OnWindowFocus);
+		/* Make the window's context current */
 	}
 
 	/*!*************************************************************************
@@ -199,7 +212,7 @@ namespace EM{
 	{
 		UNREFERENCED_PARAMETER(window);
 		(void)scancode, (void)mode;
-		InputSystem::GetInstance()->SetKeyStatus(key, action);
+		InputSystem::GetInstance()->SetKeyStatus(key, action);		
 	}
 
 	/*!*************************************************************************
@@ -245,4 +258,40 @@ namespace EM{
 
 		m_windowData.Vsync = value;
 	}
+
+	void Window::OnWindowFocus(GLFWwindow* window, int focused)
+	{
+		if (!focused)
+		{
+			// Window lost focus (Alt-Tab or similar)
+			int width, height;
+			glfwGetWindowSize(window, &width, &height);
+
+			// Minimize the window or hide it
+			// depending on your game's behavior
+			glfwIconifyWindow(window);
+
+			if (!isWindowNotFocus)
+			{
+				isWindowNotFocus = true;
+				for (auto i = p_Audio->mChannelMap.begin(); i != p_Audio->mChannelMap.end(); i++)
+				{
+					p_Audio->PauseSound(i->first);
+				}
+			}
+		}
+		else
+		{
+			glfwRestoreWindow(window);
+			if (isWindowNotFocus)
+			{
+				isWindowNotFocus = false;
+				for (auto i = p_Audio->mChannelMap.begin(); i != p_Audio->mChannelMap.end(); i++)
+				{
+					p_Audio->UnpauseSound(i->first);					
+				}
+			}
+		}
+	}
+
 }

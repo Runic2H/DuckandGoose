@@ -52,7 +52,7 @@ namespace EM {
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
-		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX", "Hazards" ,"CutScene", "Dialogues"};
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "Hazards" ,"CutScene", "Dialogues"};
 		
 		for (const auto& i : folderpath)
 		{
@@ -89,6 +89,11 @@ namespace EM {
 		else
 		{
 			mcamera = &camera;
+			if (!p_Editor->is_ShowWindow)
+			{
+				glViewport(0, 0, p_Editor->GetWindow()->Getter().m_Width, p_Editor->GetWindow()->Getter().m_Height);
+				mcamera->Resize(static_cast<float>(p_Editor->GetWindow()->Getter().m_Width), static_cast<float>(p_Editor->GetWindow()->Getter().m_Height));
+			}
 		}
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();

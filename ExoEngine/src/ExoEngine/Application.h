@@ -38,11 +38,6 @@ namespace EM {
 		void End();
 
 	private:
-#if DEBUG
-		bool fullscreen = false;//set to true for release .exe
-#else
-		bool fullscreen = true;//set to true for release .exe
-#endif
 		
 	};
 	 
