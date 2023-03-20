@@ -51,7 +51,6 @@ namespace EM {
 		WinData mWinData{};
 		Animation mAimator;
 	private:
-		//void LoadTexture(std::string filename);
 		void LoadIconsTexture(std::string filename);
 	};
 }

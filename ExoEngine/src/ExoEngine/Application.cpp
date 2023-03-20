@@ -40,7 +40,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM {
 	bool end_state{ false }; //placeholder
 
-
 /*!*************************************************************************
 Application constructor
 ****************************************************************************/
@@ -116,6 +115,7 @@ Application constructor
 #if !DEBUG
 		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 #endif
+		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
@@ -127,12 +127,18 @@ Application constructor
 			{
 				p_Editor->Draw();
 			}
+			
 			p_Scene->checkForSceneToLoad();
-			mLogic->Update(Timer::GetInstance().GetGlobalDT());
+			if (!m_window->isWindowNotFocus)
+			{
+				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+			}
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mPosUpdate->Update();
-			p_Audio->Update();
 
+			
+			p_Audio->Update();
+			
 			if (p_Input->KeyPressed(GLFW_KEY_F3))
 			{
 				for (Entity i = 0; i <= p_ecs.GetTotalEntities(); ++i)
@@ -144,7 +150,6 @@ Application constructor
 					}
 				}
 			}
-
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
@@ -154,9 +159,10 @@ Application constructor
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
+			
 #if !DEBUG
 			p_Editor->is_ShowWindow = false;
-#endif
+#endif 
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
