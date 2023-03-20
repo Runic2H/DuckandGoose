@@ -72,6 +72,7 @@ namespace EM
 			newVel = rigidbody.GetVel();
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 			newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+			newVel.y *= 2;
 			newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 			if (newVel.x > -99 && newVel.y < 99) {
 				newVel = newVel * -1;
@@ -89,6 +90,7 @@ namespace EM
 			//std::cout << "Next Pos: " << nextPos.x << ", " << nextPos.y << std::endl;
 			//std::cout << "Actual Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << std::endl;
 			dist = distance(transform.GetPos(), playerPos);
+
 			//______________________________________BODGE FIX. REMOVE AFTER FIXING RIGIDBODY____________________________________
 			//transform.SetPos(nextPos);
 			//__________________________________________________________________________________________________________________
