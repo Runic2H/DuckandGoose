@@ -48,9 +48,9 @@ namespace EM
 		}
 		else
 		{
-			p_Audio->StopChannel(CAudioEngine::channel_groups::master);
+			//p_Audio->StopChannel(CAudioEngine::channel_groups::master);
 			p_Audio->StopChannel(CAudioEngine::channel_groups::bgm);
-			p_Audio->StopChannel(CAudioEngine::channel_groups::sfx);
+			//p_Audio->StopChannel(CAudioEngine::channel_groups::sfx);
 			Deserialize(doc);
 		}
 		return true;

@@ -55,6 +55,11 @@ namespace EM
 					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
 				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 				timer = 0.0f;
+				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+				{
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //cutscene audio
+					//std::cout << "cut scene audio" << std::endl;
+				}
 			}
 			if (timer >= 5.0f)
 			{
