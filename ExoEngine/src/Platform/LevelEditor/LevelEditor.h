@@ -51,7 +51,9 @@ namespace EM {
 
 	
 	public:
+
 		bool is_ShowWindow = true;
+
 		static std::unique_ptr<LevelEditor>& GetInstance();
 
 
@@ -68,6 +70,8 @@ namespace EM {
 		bool mViewportFocused = false;
 		ImVec2 mGameMousePosition = { 0.0f, 0.0f };
 		ImVec2 mSceneMouse = { 0.0f, 0.0f };
+		Window* GetWindow() { return mWindow; }
+
 	private:
 		void MainMenuBar();
 		void Docking();
@@ -76,8 +80,8 @@ namespace EM {
 
 	private:
 		
-		ImGuiDockNodeFlags mDockSpaceFlags{};
 		Window* mWindow{nullptr};
+		ImGuiDockNodeFlags mDockSpaceFlags{};
 		static std::unique_ptr<LevelEditor> mInstance;
 		
 
@@ -95,7 +99,6 @@ namespace EM {
 		
 		//Scene/guizmo
 		int mGizmoType = -1;
-		WinData mWinData;
 
 		//For loading of scene usage
 		std::vector<std::string> mScenefile; //json file

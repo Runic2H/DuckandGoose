@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 95
+        "Entities": 99
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -97,7 +97,11 @@
         "00000000000000000000000001111101",
         "00000000000000000000000001111101",
         "00000000000000000000000001111111",
-        "00000000000000000000000000111001"
+        "00000000000000000000000000111001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001",
+        "00000000000000000000000000011001"
     ],
     "Components": {
         "0": [
@@ -137,7 +141,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -192,7 +197,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -247,7 +253,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -302,7 +309,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -357,7 +365,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -412,7 +421,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -467,7 +477,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -522,7 +533,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -577,7 +589,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -632,7 +645,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -687,7 +701,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -727,7 +742,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -767,7 +783,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -807,7 +824,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -847,7 +865,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -887,7 +906,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -927,7 +947,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -967,7 +988,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1007,7 +1029,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1047,7 +1070,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -1059,8 +1083,8 @@
         ],
         "21": [
             {
-                "posX": -3.785536766052246,
-                "posY": 0.05775301903486252,
+                "posX": -4.038283824920654,
+                "posY": 0.0460781566798687,
                 "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
@@ -1096,21 +1120,22 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 0,
                 "Index_Y": 0,
-                "Ucoordinates": 512.0,
+                "Ucoordinates": 514.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 8,
-                "DisplayTime 0": 0.25999999046325684,
-                "DisplayTime 1": 0.20000000298023224,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.25999999046325684,
-                "DisplayTime 5": 0.20000000298023224,
+                "DisplayTime 0": 0.08666666597127914,
+                "DisplayTime 1": 0.06777777522802353,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.08666666597127914,
+                "DisplayTime 5": 0.06777777522802353,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "PlayerControl",
@@ -1164,9 +1189,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 8,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -1193,14 +1218,15 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 8,
-                "DisplayTime 0": 0.05999999865889549,
-                "DisplayTime 1": 0.05999999865889549,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549,
-                "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 2.0
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 2.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1234,7 +1260,8 @@
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
                 "DisplayTime 7": 0.05999999865889549,
-                "DisplayTime 8": 0.05999999865889549
+                "DisplayTime 8": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1260,14 +1287,15 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 8,
-                "DisplayTime 0": 0.05999999865889549,
-                "DisplayTime 1": 0.05999999865889549,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549,
-                "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1293,12 +1321,13 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 6,
-                "DisplayTime 0": 0.05999999865889549,
-                "DisplayTime 1": 0.05999999865889549,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1324,12 +1353,13 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 6,
-                "DisplayTime 0": 0.05999999865889549,
-                "DisplayTime 1": 0.05999999865889549,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1384,7 +1414,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1439,7 +1470,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1495,7 +1527,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.05999999865889549,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -1524,9 +1557,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -1558,29 +1591,30 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 23,
-                "DisplayTime 0": 0.029999999329447746,
-                "DisplayTime 1": 0.029999999329447746,
-                "DisplayTime 2": 0.029999999329447746,
-                "DisplayTime 3": 0.029999999329447746,
-                "DisplayTime 4": 0.029999999329447746,
-                "DisplayTime 5": 0.029999999329447746,
-                "DisplayTime 6": 0.029999999329447746,
-                "DisplayTime 7": 0.029999999329447746,
-                "DisplayTime 8": 0.029999999329447746,
-                "DisplayTime 9": 0.029999999329447746,
-                "DisplayTime 10": 0.029999999329447746,
-                "DisplayTime 11": 0.029999999329447746,
-                "DisplayTime 12": 0.029999999329447746,
-                "DisplayTime 13": 0.029999999329447746,
-                "DisplayTime 14": 0.029999999329447746,
-                "DisplayTime 15": 0.029999999329447746,
-                "DisplayTime 16": 0.029999999329447746,
-                "DisplayTime 17": 0.029999999329447746,
-                "DisplayTime 18": 0.029999999329447746,
-                "DisplayTime 19": 0.029999999329447746,
-                "DisplayTime 20": 0.029999999329447746,
-                "DisplayTime 21": 0.029999999329447746,
-                "DisplayTime 22": 0.029999999329447746
+                "DisplayTime 0": 0.009999999776482582,
+                "DisplayTime 1": 0.009999999776482582,
+                "DisplayTime 2": 0.009999999776482582,
+                "DisplayTime 3": 0.009999999776482582,
+                "DisplayTime 4": 0.009999999776482582,
+                "DisplayTime 5": 0.009999999776482582,
+                "DisplayTime 6": 0.009999999776482582,
+                "DisplayTime 7": 0.009999999776482582,
+                "DisplayTime 8": 0.009999999776482582,
+                "DisplayTime 9": 0.009999999776482582,
+                "DisplayTime 10": 0.009999999776482582,
+                "DisplayTime 11": 0.009999999776482582,
+                "DisplayTime 12": 0.009999999776482582,
+                "DisplayTime 13": 0.009999999776482582,
+                "DisplayTime 14": 0.009999999776482582,
+                "DisplayTime 15": 0.009999999776482582,
+                "DisplayTime 16": 0.009999999776482582,
+                "DisplayTime 17": 0.009999999776482582,
+                "DisplayTime 18": 0.009999999776482582,
+                "DisplayTime 19": 0.009999999776482582,
+                "DisplayTime 20": 0.009999999776482582,
+                "DisplayTime 21": 0.009999999776482582,
+                "DisplayTime 22": 0.009999999776482582,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1606,18 +1640,19 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": true,
                 "MaxIndex": 12,
-                "DisplayTime 0": 0.05999999865889549,
-                "DisplayTime 1": 0.05999999865889549,
-                "DisplayTime 2": 0.05999999865889549,
-                "DisplayTime 3": 0.05999999865889549,
-                "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549,
-                "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549,
-                "DisplayTime 8": 0.05999999865889549,
-                "DisplayTime 9": 0.05999999865889549,
-                "DisplayTime 10": 0.05999999865889549,
-                "DisplayTime 11": 0.05999999865889549
+                "DisplayTime 0": 0.019999999552965164,
+                "DisplayTime 1": 0.019999999552965164,
+                "DisplayTime 2": 0.019999999552965164,
+                "DisplayTime 3": 0.019999999552965164,
+                "DisplayTime 4": 0.019999999552965164,
+                "DisplayTime 5": 0.019999999552965164,
+                "DisplayTime 6": 0.019999999552965164,
+                "DisplayTime 7": 0.019999999552965164,
+                "DisplayTime 8": 0.019999999552965164,
+                "DisplayTime 9": 0.019999999552965164,
+                "DisplayTime 10": 0.019999999552965164,
+                "DisplayTime 11": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1672,7 +1707,8 @@
                 "DisplayTime 26": 0.009999999776482582,
                 "DisplayTime 27": 0.009999999776482582,
                 "DisplayTime 28": 0.009999999776482582,
-                "DisplayTime 29": 0.009999999776482582
+                "DisplayTime 29": 0.009999999776482582,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1707,7 +1743,8 @@
                 "DisplayTime 6": -0.009999999776482582,
                 "DisplayTime 7": -0.009999999776482582,
                 "DisplayTime 8": -0.009999999776482582,
-                "DisplayTime 9": -0.009999999776482582
+                "DisplayTime 9": -0.009999999776482582,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -1756,12 +1793,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 0,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1782,7 +1819,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "GateController",
@@ -1798,9 +1836,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -1822,7 +1860,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1848,7 +1886,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -1902,7 +1941,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1923,7 +1962,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -1939,9 +1979,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -1963,7 +2003,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1989,7 +2029,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2043,7 +2084,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2064,7 +2105,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "AudioManager",
@@ -2075,9 +2117,9 @@
             {},
             {
                 "AudioArrCount": 0,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -2099,7 +2141,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2125,7 +2167,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2179,7 +2222,7 @@
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2200,7 +2243,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 0
             },
             {
                 "0": "GateController",
@@ -2216,9 +2260,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -2240,7 +2284,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 8,
+                "Index_X": 14,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2266,7 +2310,8 @@
                 "DisplayTime 16": 0.019999999552965164,
                 "DisplayTime 17": 0.019999999552965164,
                 "DisplayTime 18": 0.019999999552965164,
-                "DisplayTime 19": 0.019999999552965164
+                "DisplayTime 19": 0.019999999552965164,
+                "LayeringOrder": 5
             },
             {},
             {},
@@ -2306,7 +2351,8 @@
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
                 "DisplayTime 7": 0.0,
-                "DisplayTime 8": 0.0
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
             },
             {},
             {},
@@ -2362,7 +2408,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2391,9 +2438,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -2455,7 +2502,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2484,9 +2532,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -2548,7 +2596,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2577,9 +2626,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -2641,7 +2690,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -2670,9 +2720,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -2715,9 +2765,9 @@
                     "IsLooping": true
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {},
@@ -2726,9 +2776,9 @@
         ],
         "48": [
             {
-                "posX": -3.9236128330230713,
-                "posY": 0.2627530097961426,
-                "scaleX": 0.36730948090553284,
+                "posX": -4.263283729553223,
+                "posY": 0.25107815861701965,
+                "scaleX": 0.25,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
             },
@@ -2746,7 +2796,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2756,7 +2807,7 @@
             {},
             {
                 "ElementType": 1,
-                "offsetX": -0.2849999964237213,
+                "offsetX": -0.32499998807907104,
                 "offsetY": 0.20499999821186066
             },
             {},
@@ -2765,9 +2816,9 @@
         ],
         "49": [
             {
-                "posX": -4.065536975860596,
-                "posY": 0.2467530071735382,
-                "scaleX": 0.0,
+                "posX": -4.293283939361572,
+                "posY": 0.23507815599441528,
+                "scaleX": 0.1818181872367859,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
             },
@@ -2784,7 +2835,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2794,7 +2846,7 @@
             {},
             {
                 "ElementType": 3,
-                "offsetX": -0.2800000011920929,
+                "offsetX": -0.2549999952316284,
                 "offsetY": 0.1889999955892563
             },
             {},
@@ -2803,10 +2855,10 @@
         ],
         "50": [
             {
-                "posX": -4.175536632537842,
-                "posY": 0.212753027677536,
-                "scaleX": 0.0,
-                "scaleY": 0.03999999910593033,
+                "posX": -4.416616916656494,
+                "posY": 0.2010781615972519,
+                "scaleX": 0.0809527114033699,
+                "scaleY": 0.029999999329447746,
                 "Rot": 0.0
             },
             {},
@@ -2822,7 +2874,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2832,7 +2885,7 @@
             {},
             {
                 "ElementType": 2,
-                "offsetX": -0.38999998569488525,
+                "offsetX": -0.33500000834465027,
                 "offsetY": 0.1550000011920929
             },
             {},
@@ -2841,9 +2894,9 @@
         ],
         "51": [
             {
-                "posX": -4.000536918640137,
-                "posY": 0.24775302410125732,
-                "scaleX": 0.5,
+                "posX": -4.318284034729004,
+                "posY": 0.2360781580209732,
+                "scaleX": 0.3499999940395355,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
             },
@@ -2860,7 +2913,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "HUDController",
@@ -2870,7 +2924,7 @@
             {},
             {
                 "ElementType": 0,
-                "offsetX": -0.2150000035762787,
+                "offsetX": -0.2800000011920929,
                 "offsetY": 0.1899999976158142
             },
             {},
@@ -2898,7 +2952,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2929,7 +2984,8 @@
                 "DisplayTime 2": 0.05999999865889549,
                 "DisplayTime 3": 0.05999999865889549,
                 "DisplayTime 4": 0.05999999865889549,
-                "DisplayTime 5": 0.05999999865889549
+                "DisplayTime 5": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2961,7 +3017,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -2993,7 +3050,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3025,7 +3083,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3057,7 +3116,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3089,7 +3149,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3121,7 +3182,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3153,7 +3215,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3185,7 +3248,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3218,7 +3282,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 7": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3251,7 +3316,8 @@
                 "DisplayTime 4": 0.05999999865889549,
                 "DisplayTime 5": 0.05999999865889549,
                 "DisplayTime 6": 0.05999999865889549,
-                "DisplayTime 7": 0.05999999865889549
+                "DisplayTime 7": 0.05999999865889549,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3283,7 +3349,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3315,7 +3382,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3347,7 +3415,8 @@
                 "IsSpriteSheet": true,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.0
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -3395,20 +3464,21 @@
                 "NameTag": "Ground hazard firing 1"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3427,15 +3497,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3480,20 +3550,21 @@
                 "NameTag": "Ground hazard firing 2"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3512,15 +3583,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3565,20 +3636,21 @@
                 "NameTag": "Ground hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3597,15 +3669,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3650,20 +3722,21 @@
                 "NameTag": "Ground hazard firing 4"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3682,15 +3755,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3735,20 +3808,21 @@
                 "NameTag": "Ground hazard firing 5"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3767,15 +3841,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3820,20 +3894,21 @@
                 "NameTag": "Ground hazard firing 6"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3852,15 +3927,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3905,20 +3980,21 @@
                 "NameTag": "Ground hazard firing 7"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Charging",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
                 "DisplayTime 2": 0.0,
                 "DisplayTime 3": 0.0,
                 "DisplayTime 4": 0.0,
-                "DisplayTime 5": 0.0
+                "DisplayTime 5": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -3937,15 +4013,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3990,13 +4066,13 @@
                 "NameTag": "Lazer hazard firing 1"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Charging",
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4005,7 +4081,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4024,15 +4101,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4077,13 +4154,13 @@
                 "NameTag": "Lazer hazard firing 2"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Charging",
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4092,7 +4169,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4111,15 +4189,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4164,13 +4242,13 @@
                 "NameTag": "Lazer hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Charging",
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4179,7 +4257,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4198,15 +4277,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4251,13 +4330,13 @@
                 "NameTag": "Lazer hazard firing 4"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Charging",
+                "Index_X": 7,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4266,7 +4345,8 @@
                 "DisplayTime 4": 0.0,
                 "DisplayTime 5": 0.0,
                 "DisplayTime 6": 0.0,
-                "DisplayTime 7": 0.0
+                "DisplayTime 7": 0.0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -4285,15 +4365,15 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 1,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {},
             {
-                "FiringCooldown": -0.01666543446481228,
+                "FiringCooldown": 0.9833343029022217,
                 "FiringDuration": -0.016666388139128685,
-                "ChargeDuration": 1.4166672229766846,
+                "ChargeDuration": 1.633333683013916,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4346,7 +4426,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4375,9 +4456,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4439,7 +4520,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4468,9 +4550,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4532,7 +4614,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4561,9 +4644,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4625,7 +4708,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4654,9 +4738,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4718,7 +4802,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4747,9 +4832,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4811,7 +4896,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4840,9 +4926,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4904,7 +4990,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -4933,9 +5020,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -4997,7 +5084,8 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 1,
-                "DisplayTime 0": 0.05999999865889549
+                "DisplayTime 0": 0.0,
+                "LayeringOrder": 3
             },
             {
                 "0": "EnemyScript",
@@ -5026,9 +5114,9 @@
                     "IsLooping": false
                 },
                 "AudioArrCount": 3,
-                "BGM Volume": 0.0,
-                "SFX Volume": 0.0,
-                "Master Volume": 0.0
+                "BGM Volume": 0.10499999672174454,
+                "SFX Volume": 0.6349999904632568,
+                "Master Volume": 0.6650000214576721
             },
             {
                 "ElementType": 1,
@@ -5065,7 +5153,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5118,7 +5207,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5172,7 +5262,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5226,7 +5317,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5280,7 +5372,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "PauseMenu",
@@ -5334,7 +5427,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5387,7 +5481,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "ScriptCount": 0
@@ -5447,7 +5542,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "CollisionResponse",
@@ -5465,8 +5561,8 @@
         ],
         "94": [
             {
-                "posX": -3.785536766052246,
-                "posY": -0.08224698156118393,
+                "posX": -4.055400371551514,
+                "posY": -0.08115170896053314,
                 "scaleX": 0.699999988079071,
                 "scaleY": 0.12500005960464478,
                 "Rot": 0.0
@@ -5484,12 +5580,177 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 5
             },
             {
                 "0": "DialogueManager",
                 "ScriptCount": 1
             },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "95": [
+            {
+                "posX": -3.782412528991699,
+                "posY": 0.1983470469713211,
+                "scaleX": 0.1991444230079651,
+                "scaleY": 0.20999997854232788,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "bg small debris 12"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": -6,
+                "Index_Y": 5,
+                "Ucoordinates": 493.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 2
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "96": [
+            {
+                "posX": -3.506464958190918,
+                "posY": -0.007583819329738617,
+                "scaleX": 0.1991443634033203,
+                "scaleY": 0.21000006794929504,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "small debris 3"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": -6,
+                "Index_Y": 5,
+                "Ucoordinates": 493.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 3
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "97": [
+            {
+                "posX": -2.1777496337890625,
+                "posY": 0.035263486206531525,
+                "scaleX": 0.1991443634033203,
+                "scaleY": 0.21000006794929504,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "small debris 3"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": -6,
+                "Index_Y": 5,
+                "Ucoordinates": 493.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "98": [
+            {
+                "posX": 2.0472447872161865,
+                "posY": -0.01037287712097168,
+                "scaleX": 0.1991443634033203,
+                "scaleY": 0.21000006794929504,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "small debris 3"
+            },
+            {
+                "TextureName": "ENVIRONMENT_PROPS_TILESET",
+                "Index_X": -6,
+                "Index_Y": 5,
+                "Ucoordinates": 493.0,
+                "Vcoordinates": 530.5,
+                "IsSpriteSheet": true,
+                "IsAnimated": false,
+                "MaxIndex": 9,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "LayeringOrder": 4
+            },
+            {},
             {},
             {},
             {},

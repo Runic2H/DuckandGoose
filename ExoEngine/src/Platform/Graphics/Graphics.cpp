@@ -52,7 +52,7 @@ namespace EM {
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
-		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "VFX", "Hazards" ,"CutScene", "Dialogues"};
+		std::string folderpath[] = {"Characters", "Environment", "Gate", "UI", "Hazards" ,"CutScene", "Dialogues"};
 		
 		for (const auto& i : folderpath)
 		{
@@ -89,6 +89,11 @@ namespace EM {
 		else
 		{
 			mcamera = &camera;
+			if (!p_Editor->is_ShowWindow)
+			{
+				glViewport(0, 0, p_Editor->GetWindow()->Getter().m_Width, p_Editor->GetWindow()->Getter().m_Height);
+				mcamera->Resize(static_cast<float>(p_Editor->GetWindow()->Getter().m_Width), static_cast<float>(p_Editor->GetWindow()->Getter().m_Height));
+			}
 		}
 		//Resize
 		if (FrameBufferSpecification spec = p_FrameBuffer->GetSpecification();
@@ -120,57 +125,58 @@ namespace EM {
 		p_GUI->VPmat = mcamera->GetViewProjectionMatrix();
 		
 
-		for (auto const& entity : mEntities)
+		for (auto layer = 0; layer < 6; layer++)
 		{
-			auto& transform = p_ecs.GetComponent<Transform>(entity);
-			auto& sprite = p_ecs.GetComponent<Sprite>(entity);
-			if (sprite.is_Animated)
+			for (auto i = mEntities.begin(); i != mEntities.end(); i++)
 			{
-				mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(entity));
-			}
-			if (sprite.is_SpriteSheet)
-			{
-				mIndex1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y }, 
-					{sprite.GetUVCoor().x, sprite.GetUVCoor().y});
+				
+				auto& transform = p_ecs.GetComponent<Transform>(*i);
+				auto& sprite = p_ecs.GetComponent<Sprite>(*i);
+				if (sprite.LayerOrder == layer)
+				{//render the lowest layer level then follow on
+					if (sprite.is_Animated)
+					{
+						mAimator.UpdateAnimation(frametime, p_ecs.GetComponent<Sprite>(*i));
+					}
+					if (sprite.is_SpriteSheet)
+					{
+					
+						mIndex1 = SpriteRender::CreateSprite(GETTEXTURE(sprite.GetTexture()), { sprite.GetIndex().x, sprite.GetIndex().y },
+							{ sprite.GetUVCoor().x, sprite.GetUVCoor().y });
 
-				mRenderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
-					transform.GetRot(), mIndex1);
-			}
-			else
-			{
-				mRenderer->DrawQuad({ transform.GetPos().x, transform.GetPos().y }, { transform.GetScale().x, transform.GetScale().y },
-					 transform.GetRot(),GETTEXTURE(sprite.GetTexture()));
-			}
-
-			if (p_Editor->mDebugDraw)
-			{
-				if (p_ecs.HaveComponent<Collider>(entity) && ((p_ecs.GetComponent<Collider>(entity)[0].is_Alive) || (p_ecs.GetComponent<Collider>(entity)[1].is_Alive))) {
-					for (int i = 0; i < 2; i++) {
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::rect || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::box)
-						{
-							auto& collider = p_ecs.GetComponent<Collider>(entity);
-							mRenderer->DrawRect({ transform.GetPos().x + collider[i].mOffset.x + (collider[i].mMax.x / 2) - (collider[i].mMin.x / 2) , transform.GetPos().y + collider[i].mOffset.y + (collider[i].mMax.y / 2) - (collider[i].mMin.y / 2), 0.0f },
-								{ collider[i].mMin.x + collider[i].mMax.x , collider[i].mMin.y + collider[i].mMax.y },
-								{ 1.0f, 0.0f, 0.0f,1.0f });
-						}
-						if (p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(entity)[i].mCol == Collider::ColliderType::bubble) {
-							auto& collider = p_ecs.GetComponent<Collider>(entity);
-							EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[i].mOffset.x, transform.GetPos().y + collider[i].mOffset.y, 0.0f);
-							EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[i].mRadius * 2, collider[i].mRadius * 2, collider[i].mRadius * 2);
-							EM::Matrix4x4 Transform = translate * scale;
-							mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+						mRenderer->DrawSprite({ transform.GetPos().x , transform.GetPos().y }, { transform.GetScale().x , transform.GetScale().y },
+							transform.GetRot(), mIndex1);
+					}
+					else
+					{
+						mRenderer->DrawQuad({ transform.GetPos().x, transform.GetPos().y }, { transform.GetScale().x, transform.GetScale().y },
+							transform.GetRot(), GETTEXTURE(sprite.GetTexture()));
+					}
+					if (p_Editor->mDebugDraw)
+					{
+						if (p_ecs.HaveComponent<Collider>(*i) && ((p_ecs.GetComponent<Collider>(*i)[0].is_Alive) || (p_ecs.GetComponent<Collider>(*i)[1].is_Alive))) {
+							for (int u = 0; u < 2; u++) {
+								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::rect || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::box)
+								{
+									auto& collider = p_ecs.GetComponent<Collider>(*i);
+									mRenderer->DrawRect({ transform.GetPos().x + collider[u].mOffset.x + (collider[u].mMax.x / 2) - (collider[u].mMin.x / 2) , transform.GetPos().y + collider[u].mOffset.y + (collider[u].mMax.y / 2) - (collider[u].mMin.y / 2), 0.0f },
+										{ collider[u].mMin.x + collider[u].mMax.x , collider[u].mMin.y + collider[u].mMax.y },
+										{ 1.0f, 0.0f, 0.0f,1.0f });
+								}
+								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bubble) {
+									auto& collider = p_ecs.GetComponent<Collider>(*i);
+									EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[u].mOffset.x, transform.GetPos().y + collider[u].mOffset.y, 0.0f);
+									EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[u].mRadius * 2, collider[u].mRadius * 2, collider[u].mRadius * 2);
+									EM::Matrix4x4 Transform = translate * scale;
+									mRenderer->DrawCircle(Transform, { 0.5f,0.4f,1.0f, 1.0f }, 0.01f);
+								}
+							}
 						}
 					}
 				}
 			}
-			if (p_Editor->selectedEntity == entity && p_Editor->is_ShowWindow)
-			{
-				auto& trans = p_ecs.GetComponent<Transform>(p_Editor->selectedEntity);
-				mRenderer->DrawRect({ trans.GetPos().x , trans.GetPos().y, 0.0f },
-					{trans.GetScale().x/2.0f, trans.GetScale().y/2.0f},
-					{ 1.0f, 0.0f, 1.0f,1.0f });
-			}
 		}
+
 		
 		for (auto const& entity : mEntities)
 		{
@@ -234,35 +240,6 @@ namespace EM {
 		p_FrameBuffer->UnBind();
 		
 		
-		//if (p_GUI->check_pause() == true && p_GUI->Check_menu() == false)
-		//{
-		//	mFont->RenderText("VOLUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
-		//		0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the continue button
-
-		//	mFont->RenderText("CONTROL", { camera.GetPosition().x + 0.296f, camera.GetPosition().y + 0.156f },
-		//		0.002f, camera, { 0.87f, 0.92f, 0.18f });//render the text for the first button
-
-		//	mFont->RenderText("MAIN MENU", { camera.GetPosition().x + 0.236f, camera.GetPosition().y + -0.037f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
-		//	
-		//	mFont->RenderText("QUIT", { camera.GetPosition().x + 0.426f, camera.GetPosition().y + -0.24f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
-		//	
-		//	mFont->RenderText("RESUME", { camera.GetPosition().x + 0.326f, camera.GetPosition().y + -0.586f }, 0.002f, camera, { 0.87f, 0.92f, 0.18f });//to render text for the quit button
-
-		//	p_GUI->set_continue_button({ 0.526f, -0.556f }, 1.350f, 0.175f);//assign position and scale into the GUI
-		//	p_GUI->set_pause_button({ 0.526f, -0.198f }, 0.802f, 0.123f);//assign position and scale into the GUI
-		//}
-
-
-		//if (p_Input->isKeyPressed(GLFW_KEY_ESCAPE) && p_GUI->mPauseSwitch == false && p_GUI->Check_menu() == false)//toggle menu with escape
-		//{
-		//	p_GUI->mPauseSwitch = true;//set first boolean to true to prevent flickering
-		//	p_GUI->toggle_pause();//set pause to true thus pausing the game
-		//}
-		//if (p_Input->KeyReleased(GLFW_KEY_ESCAPE))
-		//{
-		//	p_GUI->mPauseSwitch = false;//set pause to false, exit pause menu
-		//}
-	
 		mcamera->MouseScrolling();
 		if (p_Input->KeyPressed(GLFW_KEY_F2) && !p_Editor->is_ShowWindow)
 		{

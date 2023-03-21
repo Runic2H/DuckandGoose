@@ -35,7 +35,8 @@ namespace EM
     ****************************************************************************/
 	void AudioManager::Start()
 	{
-        if (p_ecs.HaveComponent<Audio>(GetScriptEntityID())) {
+        if (p_ecs.HaveComponent<Audio>(GetScriptEntityID())) 
+        {
             auto& audio = p_ecs.GetComponent<Audio>(GetScriptEntityID());
             for (int i = 0; i < audio.GetSize(); i++) {
                 p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);

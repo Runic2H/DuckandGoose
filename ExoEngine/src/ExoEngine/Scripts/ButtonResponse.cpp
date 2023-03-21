@@ -24,9 +24,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM
 {
 
-	void ButtonResponse::Start()
-	{	
-	}
+	void ButtonResponse::Start() {}
 
 	/*transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
 						{ collider.GetMin().x - collider.GetMax().x , collider.GetMin().y - collider.GetMax().y },
@@ -78,9 +76,16 @@ namespace EM
 			else if (curr_state == release)
 				std::cout << "release\n"; */
 		}
+		
 
 		if (is_within_box(p_GUI->MousePosition, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
 		{
+			if (initial_hover && p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0) && (p_GUI->Check_HTP() == false))
+			{
+				p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //menu hover audio
+				initial_hover = false;
+			}
+
 			if (ID_tag.GetTag() == "Start" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 			{
 				spt.SetTexture("Start_Hover");
@@ -124,6 +129,7 @@ namespace EM
 			{
 				spt.SetTexture("Restart_Hover");
 				//std::cout << "hello";
+				
 			}
 
 
@@ -136,6 +142,7 @@ namespace EM
 			
 			if (curr_state == button_state::release)
 			{
+
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
 				
@@ -151,7 +158,6 @@ namespace EM
 
 				if (ID_tag.GetTag() == "Restart" )
 				{
-					
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
 
@@ -194,6 +200,11 @@ namespace EM
 
 			if (curr_state == button_state::click)
 			{
+				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 1) && (p_GUI->Check_HTP() == false))
+				{
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[1].should_play = true; //menu hover audio
+				}
+
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
 					spt.SetTexture("Start_Click");
@@ -242,6 +253,8 @@ namespace EM
 		}
 		else
 		{
+			initial_hover = true;
+
 			if (ID_tag.GetTag() == "Start")
 			{
 				spt.SetTexture("Start_Idle");
@@ -281,12 +294,9 @@ namespace EM
 							spt.SetTexture("Restart_Idle");//to be change
 							//transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 						}
-
-
-
 			
 		}
-			
+
 	}
 
 	void ButtonResponse::End()

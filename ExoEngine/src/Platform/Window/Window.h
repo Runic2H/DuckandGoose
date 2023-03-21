@@ -23,6 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "ExoEngine/ECS/Components/Components.h"
+#include <windows.h>
 
 
 namespace EM {
@@ -64,6 +65,10 @@ namespace EM {
 		GLFWmonitor* GetMonitor() const { return m_monitor; }
 		
 
+	public:
+
+		static bool isWindowNotFocus;
+
 	private:
 		GLFWwindow* m_window;
 		GLFWmonitor* m_monitor;
@@ -82,8 +87,7 @@ namespace EM {
 		static void Mousescroll_callback(GLFWwindow* window, double xoffset, double yoffset); // mouse scrolling
 		static void Mouseposition_callback(GLFWwindow* window, double xpos, double ypos); // mouse position
 		static void drop_callback(GLFWwindow* window, int count, const char** paths);
-		
 		void ToggleVsync(bool value);// vync based on internal
-
+		static void OnWindowFocus(GLFWwindow* window, int focused);
 	};
 }
