@@ -237,23 +237,24 @@ namespace EM {
                                                 vec2D max1 = offset1 + col1[a].mMax;
                                                 vec2D min1 = offset1 - col1[a].mMin;
                                                 if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
-                                                    /*std::cout << "Collided with Box: " << p_ecs.GetComponent<NameTag>(i).GetNameTag() << "\n";
-                                                    std::cout << "Collision Box-Circle\n";
+                                                    //std::cout << "Collided with Box: " << p_ecs.GetComponent<NameTag>(i).GetNameTag() << "\n";
+                                                    /*std::cout << "Collision Box-Circle\n";
                                                     std::cout << "Initial Position: " << trans2.GetPos().x << ", " << trans2.GetPos().y << "\n";*/
+                                                    //std::cout << offset2.x << std::endl;
                                                     vec2D norm2;
-                                                    if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x <= min1.x) {
+                                                    if (((offset2.y - col2[b].mRadius) < (max1.y) && (offset2.y + col2[b].mRadius) >(min1.y)) && (offset2.x - col2[b].mRadius) <= min1.x) {
                                                         norm2.x = -1;
                                                         // std::cout << "left side\n";
                                                     }
-                                                    else if ((offset2.y < (max1.y) && offset2.y >(min1.y)) && offset2.x >= max1.x) {
+                                                    else if (((offset2.y - col2[b].mRadius) < (max1.y) && (offset2.y + col2[b].mRadius) >(min1.y)) && (offset2.x + col2[b].mRadius) >= max1.x) {
                                                         norm2.x = 1;
                                                         //std::cout << "right side\n";
                                                     }
-                                                    if ((offset2.x < (max1.x) && offset2.x >(min1.x)) && offset2.y >= max1.y) {
+                                                    if (((offset2.x - col2[b].mRadius) < (max1.x) && (offset2.x + col2[b].mRadius) >(min1.x)) && (offset2.y + col2[b].mRadius) >= max1.y) {
                                                         norm2.y = 1;
                                                         //std::cout << "top side\n";
                                                     }
-                                                    else if ((offset2.x < (max1.x) && offset2.x >(min1.x)) && offset2.y <= min1.y) {
+                                                    else if (((offset2.x - col2[b].mRadius) < (max1.x) && (offset2.x + col2[b].mRadius) >(min1.x)) && (offset2.y - col2[b].mRadius) <= min1.y) {
                                                         norm2.y = -1;
                                                         // std::cout << "bottom side\n";
                                                     }
