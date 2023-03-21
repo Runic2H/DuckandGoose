@@ -48,6 +48,7 @@ namespace EM {
 		void SetAlpha(float in) { mAlpha = in; }
 		float GetAlpha() { return mAlpha; }
 
+		void SetLayerOrder(int layer) { LayerOrder = layer; }
 		/*!*************************************************************************
 		Retrieves Component Entity ID
 		****************************************************************************/

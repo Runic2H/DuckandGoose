@@ -108,7 +108,9 @@ namespace EM{
 		glfwSetFramebufferSizeCallback(m_window, Window_size_callback);
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		glfwSetDropCallback(m_window, drop_callback);
+#if !DEBUG
 		glfwSetWindowFocusCallback(m_window, OnWindowFocus);
+#endif
 		/* Make the window's context current */
 	}
 

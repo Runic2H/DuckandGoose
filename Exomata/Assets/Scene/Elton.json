@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 99
+        "Entities": 102
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -101,7 +101,10 @@
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
         "00000000000000000000000000011001",
-        "00000000000000000000000000011001"
+        "00000000000000000000000000011001",
+        "00000000000000000000000000111001",
+        "00000000000000000000000000111001",
+        "00000000000000000000000000111001"
     ],
     "Components": {
         "0": [
@@ -5573,7 +5576,7 @@
                 "NameTag": "DialogueBox"
             },
             {
-                "TextureName": "Blank",
+                "TextureName": "Dialogue1",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -5581,7 +5584,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0,
-                "LayeringOrder": 5
+                "LayeringOrder": 6
             },
             {
                 "0": "DialogueManager",
@@ -5751,6 +5754,111 @@
                 "LayeringOrder": 4
             },
             {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "99": [
+            {
+                "posX": -3.305400371551514,
+                "posY": -0.08115170896053314,
+                "scaleX": 0.699999988079071,
+                "scaleY": 0.12500005960464478,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "DialogueBox3"
+            },
+            {
+                "TextureName": "Dialogue3",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0,
+                "LayeringOrder": 6
+            },
+            {
+                "0": "DialogueManager",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "100": [
+            {
+                "posX": -1.95,
+                "posY": -0.08115170896053314,
+                "scaleX": 0.699999988079071,
+                "scaleY": 0.12500005960464478,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "DialogueBox4"
+            },
+            {
+                "TextureName": "Dialogue4",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0,
+                "LayeringOrder": 6
+            },
+            {
+                "0": "DialogueManager",
+                "ScriptCount": 1
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "101": [
+            {
+                "posX": 3.55,
+                "posY": -0.08115170896053314,
+                "scaleX": 0.699999988079071,
+                "scaleY": 0.12500005960464478,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "DialogueBox5"
+            },
+            {
+                "TextureName": "Dialogue5",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": false,
+                "IsAnimated": false,
+                "MaxIndex": 0,
+                "LayeringOrder": 6
+            },
+            {
+                "0": "DialogueManager",
+                "ScriptCount": 1
+            },
             {},
             {},
             {},
