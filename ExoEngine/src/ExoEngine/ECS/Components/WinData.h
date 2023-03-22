@@ -48,5 +48,8 @@ namespace EM
 			mHeight,
 			mCurrentWidth,
 			mCurrentHeight;
+		float MasterVol;
+		float BGMVol;
+		float SFXVol;
 	};
 }
