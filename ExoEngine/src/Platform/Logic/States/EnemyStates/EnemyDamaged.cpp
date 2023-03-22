@@ -17,6 +17,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyDamaged.h"
 #include "EnemyDeath.h"
 #include "EnemyChase.h"
+#include "EnemyRetreat.h"
 #include "ExoEngine/Scripts/GateController.h"
 
 namespace EM
@@ -44,7 +45,7 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.25f;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.25f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.20f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Enemy_Damaged_Normal_Attack");
 
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
@@ -70,7 +71,14 @@ namespace EM
 			}
 			else
 			{
-				stateMachine->ChangeState(new EnemyChase(stateMachine));
+				if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+				{
+					stateMachine->ChangeState(new EnemyRetreat(stateMachine));
+				}
+				else
+				{
+					stateMachine->ChangeState(new EnemyChase(stateMachine));
+				}
 			}
 		}
 	}
@@ -81,7 +89,7 @@ namespace EM
 	void EnemyDamaged::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.5f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.2f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

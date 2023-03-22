@@ -53,6 +53,7 @@ namespace EM
 		float mCooldownMaxTimer;
 		float mDamageTaken;
 		float mDamageDurationTimer;
+		float mHitStopTimer;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;

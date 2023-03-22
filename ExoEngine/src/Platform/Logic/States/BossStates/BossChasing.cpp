@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file EnemyChase.cpp
+\file BossChase.cpp
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2450
@@ -14,17 +14,15 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
-#include "EnemyChase.h"
-#include "EnemyAttack.h"
-#include "EnemyDeath.h"
-#include "EnemyDamaged.h"
-#include "EnemyIdle.h"
+#include "BossChasing.h"
+#include "BossAttack.h"
+
 
 namespace EM
 {
-	EnemyChase::EnemyChase(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	BossChasing::BossChasing(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
-	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
+	IStates* BossChasing::HandleInput(StateMachine* stateMachine, const int& key)
 	{
 		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
 		return nullptr;
@@ -33,7 +31,7 @@ namespace EM
 	/*!*************************************************************************
 	Enter state for when enemy is chasing state
 	****************************************************************************/
-	void EnemyChase::OnEnter(StateMachine* stateMachine)
+	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 	}
@@ -41,14 +39,10 @@ namespace EM
 	/*!*************************************************************************
 	Update state for when enemy is chasing state
 	****************************************************************************/
-	void EnemyChase::OnUpdate(StateMachine* stateMachine, float Frametime)
+	void BossChasing::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
 		bool check = false;
@@ -69,39 +63,15 @@ namespace EM
 
 		if (check) {
 			dist = distance(transform.GetPos(), playerPos);
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_BOSS)
 			{
 				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.y *= 3;
+				newVel.x = 0.0f;
 				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
-				if (newVel.x > -99 && newVel.y < 99) {
-					newVel = newVel * -1;
-					rigidbody.SetVel(newVel);
-					if (newVel.x < 0 && transform.GetScale().x < 0) {
-						transform.GetScale().x *= -1;
-					}
-					if (newVel.x > 0 && transform.GetScale().x > 0) {
-						transform.GetScale().x *= -1;
-					}
-				}
-			}
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
-			{
-				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
-				vec2D newVel = vec2D(0.0f, 0.0f);
-				newVel = rigidbody.GetVel();
-				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
-				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.y *= 3;
-				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
-				if (dist <= 0.35f)
-				{
-					newVel.x = 0;
-				}
 				if (newVel.x > -99 && newVel.y < 99) {
 					newVel = newVel * -1;
 					rigidbody.SetVel(newVel);
@@ -124,20 +94,12 @@ namespace EM
 			//__________________________________________________________________________________________________________________
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_BOSS)
 			{
-				if (dist <= 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+				if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 				{
-					//std::cout << "In Proximity2" << std::endl;
-					//if within range to attack, set mode to attacking
-					stateMachine->ChangeState(new EnemyAttack(stateMachine));
-				}
-			}
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
-			{
-				if (dist <= 0.35f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
-				{
-					stateMachine->ChangeState(new EnemyAttack(stateMachine));
+					stateMachine->ChangeState(new BossAttack(stateMachine));
 				}
 			}
 		}
@@ -146,7 +108,7 @@ namespace EM
 	/*!*************************************************************************
 	Exit state for when enemy is chasing state
 	****************************************************************************/
-	void EnemyChase::OnExit(StateMachine* stateMachine)
+	void BossChasing::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
