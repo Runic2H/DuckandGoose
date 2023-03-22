@@ -59,7 +59,7 @@ namespace EM
 	private:
 		entityPhysics mPhys;
 		Entity mEntityTarget{};
-		Entity mEntityMain{};
+		Entity mEntityPlayer{};
 		Entity mTotalEnemies;
 		Entity mTotalDeadEnemies;
 	};

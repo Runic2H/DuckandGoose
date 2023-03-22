@@ -39,6 +39,10 @@ namespace EM
 			{
 				++mTotalEnemies;
 			}
+			if (p_ecs.HaveComponent<PlayerAttributes>(i))
+			{
+				mEntityPlayer = i;
+			}
 		}
 	}
 	/*!*************************************************************************
@@ -88,6 +92,7 @@ namespace EM
 								if (enemystats.mDamageCoolDownTimer <= 0.0f)
 								{
 									enemystats.mIsDamaged = true;
+									p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.16f;
 								}
 							}
 						}

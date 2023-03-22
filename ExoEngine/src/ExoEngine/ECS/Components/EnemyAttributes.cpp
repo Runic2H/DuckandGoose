@@ -18,7 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 10 }, mAttackTimer{ 1.0f }, mAttackCoolDown{ 0.0f }, mDamageCoolDownTimer{ 2.0f }, mDamageDurationTimer{ 0.0f }, mIsAlive{ false }, mIsDamaged{ false }, mEnemyType{EnemyTypes::ENEMY_NONE}, mVel{ vec2D(1.0f,1.0f) } {}
+	EnemyAttributes::EnemyAttributes() : mHealth{ 100 }, mMaxHealth{ 100 }, mDamage{ 10 }, mAttackTimer{ 1.0f }, mAttackCoolDown{ 0.0f }, mDamageCoolDownTimer{ 2.0f }, mDamageDurationTimer{ 0.0f }, mIsAlive{ false }, mIsDamaged{ false }, mEnemyType{ EnemyTypes::ENEMY_NONE }, mVel{ vec2D(1.0f,1.0f) } {}
 
 	/*!*************************************************************************
 	Deserialize attributes

@@ -46,6 +46,7 @@
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\BossScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
