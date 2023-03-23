@@ -16,7 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "empch.h"
 #include "BossChasing.h"
 #include "BossAttack.h"
-
+#include "BossOnDamage.h"
 
 namespace EM
 {
@@ -33,9 +33,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 1.f;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 3.f;
-
+		chasingTime = 10.0f;
 	}
 
 	/*!*************************************************************************
@@ -43,23 +41,54 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		float chasingspeed = 2.0f;
-		//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
-		for (auto i = 0; i < p_ecs.GetTotalEntities(); i++)
+		chasingTime -= Frametime;
+		
+		float dist = 0;
+		vec2D playerPos = vec2D();
+		bool check = false;
+		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
+		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
+		if (!check)
 		{
-			if (p_ecs.HaveComponent<PlayerAttributes>(i) && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer > 0.0f)
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y
-					<= p_ecs.GetComponent<Transform>(i).GetPos().y)
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 				{
-					p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y += chasingspeed * Frametime;
+					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+					check = true;
+					dist = distance(transform.GetPos(), playerPos);
 				}
-			
-				
 			}
 		}
+
+		if (check && chasingTime >= 0.0f) 
+		{
+			
+			if (dist <= 1.0f)
+			{
+				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
+				vec2D newVel = vec2D(0.0f, 0.0f);
+				newVel = rigidbody.GetVel();
+				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+				newVel.y *= 3;
+				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+				vec2D nextPos = transform.GetPos();
+				nextPos.y -= rigidbody.GetVel().y;
+				rigidbody.SetNextPos(nextPos);
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+			{
+				stateMachine->ChangeState(new BossOnDamage(stateMachine));
+			}
+		}
+		else
+		{
+			stateMachine->ChangeState(new BossAttack(stateMachine));
+		}
+		
+		
 
 	}
 

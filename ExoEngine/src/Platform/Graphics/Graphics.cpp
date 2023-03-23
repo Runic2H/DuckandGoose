@@ -163,7 +163,8 @@ namespace EM {
 										{ collider[u].mMin.x + collider[u].mMax.x , collider[u].mMin.y + collider[u].mMax.y },
 										{ 1.0f, 0.0f, 0.0f,1.0f });
 								}
-								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bubble) {
+								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bubble
+									|| p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bossball) {
 									auto& collider = p_ecs.GetComponent<Collider>(*i);
 									EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[u].mOffset.x, transform.GetPos().y + collider[u].mOffset.y, 0.0f);
 									EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[u].mRadius * 2, collider[u].mRadius * 2, collider[u].mRadius * 2);

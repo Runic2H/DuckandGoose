@@ -32,6 +32,7 @@ namespace EM
 			line, //---------LineSegment
 			rect, //---------AABB
 			box, //----------Playable area box
+			bossball, //-----Boss damage circle
 			button
 		};
 

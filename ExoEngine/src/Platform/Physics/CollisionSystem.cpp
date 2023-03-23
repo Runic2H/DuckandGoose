@@ -194,6 +194,24 @@ namespace EM {
                                                     // std::cout << "hit\n";
                                                 }
                                             }
+                                            if (e2 == Collider::ColliderType::bossball) {
+                                                //rigid1.SetNextPos(trans1.GetPos());
+                                                offset1 = trans1.GetPos() + col1[a].mOffset;
+                                                vec2D max1 = offset1 + col1[a].mMax;
+                                                vec2D min1 = offset1 - col1[a].mMin;
+                                                if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
+                                                    //std::cout << "Collision Rect-Circle\n";
+                                                    //col1[a].mHit = 1;
+                                                    //vec2D norm1 = offset1 - offset2;
+                                                    //Normalize(norm1, norm1);
+                                                    //col1[a].mCollisionNormal = norm1;
+                                                    col2[b].mHit = 2;
+                                                    //vec2D norm2 = offset2 - offset1;
+                                                    //Normalize(norm2, norm2);
+                                                    //col2[b].mCollisionNormal = norm2;
+                                                    // std::cout << "hit\n";
+                                                }
+                                            }
                                             if (e2 == Collider::ColliderType::rect) {
                                                 //rigid1.SetNextPos(trans1.GetPos());
                                                 offset1 = trans1.GetPos() + col1[a].mOffset;
@@ -285,6 +303,26 @@ namespace EM {
                                                 if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
                                                     //std::cout << "Collision Circle-Circle\n";
                                                     col1[a].mHit = 3;
+                                                }
+                                            }
+                                        }
+                                        else if (e1 == Collider::ColliderType::bossball) {
+                                            if (e2 == Collider::ColliderType::rect) {
+                                                //rigid1.SetNextPos(trans1.GetPos());
+                                                offset2 = trans2.GetPos() + col2[b].mOffset;
+                                                vec2D max2 = offset2 + col2[b].mMax;
+                                                vec2D min2 = offset2 - col2[b].mMin;
+                                                if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
+                                                    //std::cout << "Collision Rect-Circle\n";
+                                                    //col1[a].mHit = 1;
+                                                    //vec2D norm1 = offset1 - offset2;
+                                                    //Normalize(norm1, norm1);
+                                                    //col1[a].mCollisionNormal = norm1;
+                                                    col1[a].mHit = 2;
+                                                    //vec2D norm2 = offset2 - offset1;
+                                                    //Normalize(norm2, norm2);
+                                                    //col2[b].mCollisionNormal = norm2;
+                                                    // std::cout << "hit\n";
                                                 }
                                             }
                                         }
