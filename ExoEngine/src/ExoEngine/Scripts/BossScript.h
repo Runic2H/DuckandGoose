@@ -21,14 +21,14 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Math/physics.h"
 #include "Platform/Logic/StateMachines/StateMachine.h"
 #include "Platform/Logic/States/IStates.h"
-
+#include "Platform/Logic/States/BossStates/BossNotActive.h"
 namespace EM
 {
 
 	class BossScript : public IScript
 	{
 	public:
-		BossScript(Entity entity) : mEnemyStateMachine{ StateMachine(entity) } {}
+		BossScript(Entity entity) : mBossStateMachine{ StateMachine(entity) } {}
 
 		~BossScript() = default;
 		virtual IScript* Clone() const override

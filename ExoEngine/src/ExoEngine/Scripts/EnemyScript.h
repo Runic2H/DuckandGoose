@@ -21,10 +21,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Math/physics.h"
 #include "Platform/Logic/StateMachines/StateMachine.h"
 #include "Platform/Logic/States/IStates.h"
-#include "Platform/Logic/States/EnemyStates/EnemyAttack.h"
-#include "Platform/Logic/States/EnemyStates/EnemyChase.h"
-#include "Platform/Logic/States/EnemyStates/EnemyDeath.h"
-#include "Platform/Logic/States/EnemyStates/EnemyIdle.h"
 #include "Platform/Logic/States/EnemyStates/EnemyNotActive.h"
 
 namespace EM

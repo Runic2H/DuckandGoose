@@ -76,7 +76,6 @@ namespace EM
 						{
 							++counter;
 							p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
-							std::cout << counter << std::endl;
 						}
 						if (counter < MaxCounter)
 						{

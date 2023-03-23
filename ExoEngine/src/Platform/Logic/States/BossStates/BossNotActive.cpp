@@ -16,6 +16,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "BossNotActive.h"
+#include "BossAppear.h"
 
 namespace EM
 {
@@ -35,8 +36,6 @@ namespace EM
 		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		}
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 	}
 
@@ -47,20 +46,32 @@ namespace EM
 	{
 		UNREFERENCED_PARAMETER(Frametime);
 		vec2D playerPos = vec2D();
+		int EnemyPopulation = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
-				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
+			}
+			if (p_ecs.HaveComponent<EnemyAttributes>(i))
+			{
+				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
+					|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+				{
+					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth == p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth)
+					{
+						EnemyPopulation++;
+					}
+				}
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.5f) {
-			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
+		//if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.5f ) {
+			//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 			//stateMachine->ChangeState(new BossIdle(stateMachine));
-		}
+		if(EnemyPopulation == 0) // the enemy has been kill
+			stateMachine->ChangeState(new BossAppear(stateMachine));
+		
 	}
 
 	/*!*************************************************************************
@@ -69,8 +80,8 @@ namespace EM
 	void BossNotActive::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
+		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
+		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;

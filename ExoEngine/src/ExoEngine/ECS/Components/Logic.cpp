@@ -32,6 +32,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/HazardScript.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
+#include "ExoEngine/Scripts/BossScript.h"
 
 
 
@@ -101,6 +102,10 @@ namespace EM
 			if (mScriptNameVector[j] == "EnemyScript")
 			{
 				mScriptsVector.push_back(new EnemyScript(GetComponentEntityID()));
+			}
+			if (mScriptNameVector[j] == "BossScript")
+			{
+				mScriptsVector.push_back(new BossScript(GetComponentEntityID()));
 			}
 			if (mScriptNameVector[j] == "CollisionResponse")
 			{

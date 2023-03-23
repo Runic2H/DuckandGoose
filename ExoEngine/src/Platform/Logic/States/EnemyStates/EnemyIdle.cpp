@@ -38,6 +38,8 @@ namespace EM
 		{
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
 		}
+		else
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 	}
 
 	/*!*************************************************************************
@@ -62,7 +64,6 @@ namespace EM
 				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 				{
 					check = true;
-					//std::cout << "Found Player" << std::endl;
 					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 
 				}
@@ -70,7 +71,6 @@ namespace EM
 		}
 		//if player moves within x radius, set mode to moving
 		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
-			//std::cout << "Player Detected" << std::endl;
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 

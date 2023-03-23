@@ -131,7 +131,9 @@ Application constructor
 			p_Scene->checkForSceneToLoad();
 			if (!m_window->isWindowNotFocus)
 			{
+
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+
 			}
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mPosUpdate->Update();
@@ -145,8 +147,12 @@ Application constructor
 				{
 					if (p_ecs.HaveComponent<EnemyAttributes>(i))
 					{
-						p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
-						p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+						if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
+							|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+						{
+							p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
+							p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+						}
 					}
 				}
 			}
