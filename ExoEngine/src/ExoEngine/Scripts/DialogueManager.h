@@ -30,7 +30,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Dialogue Manager
 		****************************************************************************/
-		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2" }, counter{0} {}
+		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5" }, counter{ 0 }, MaxCounter{ 2 } {}
 		/*!*************************************************************************
 		Default destructor for Dialogue Manager
 		****************************************************************************/
@@ -47,54 +47,67 @@ namespace EM
 		****************************************************************************/
 		virtual void Start() override
 		{
-			if (p_ecs.HaveComponent<Sprite>(GetScriptEntityID()))
-			{
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).is_Animated = false;
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).is_SpriteSheet = false;
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Dialogue1");
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if(p_ecs.HaveComponent<PlayerAttributes>(i))
-						p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(i).GetPos().x, p_ecs.GetComponent<Transform>(i).GetPos().y - 0.140f);
-				}
-			}
 		}
 		/*!*************************************************************************
 		Update Loop of DialogueManager Script
 		****************************************************************************/
 		virtual void Update(float Frametime) override
 		{
+
+
 			UNREFERENCED_PARAMETER(Frametime);
 			Entity i{0};
 			
-			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
 			{
-				++counter;
-				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
-			}
-			if (counter < 2)
-			{
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture(mDialogues[counter].c_str());
-				for (i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				if (p_ecs.HaveComponent<PlayerAttributes>(e))
 				{
-					if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<PlayerAttributes>(i))
+					if (p_ecs.GetComponent<Transform>(e).GetPos().x >= p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().x)
 					{
-						p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = true;
+						p_ecs.GetComponent<Sprite>(e).SetTexture("Idle");
+						p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(5);
+						p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(e).GetPos().x, p_ecs.GetComponent<Transform>(e).GetPos().y - 0.140f);
+
+						
+						if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue3") { MaxCounter = 3; counter = 2; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue4") { MaxCounter = 4; counter = 3; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue5"){ MaxCounter = 5; counter = 4; }
+						if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+						{
+							++counter;
+							p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
+						}
+						if (counter < MaxCounter)
+						{
+							p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture(mDialogues[counter].c_str());
+							for (i = 0; i < p_ecs.GetTotalEntities(); ++i)
+							{
+								if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<PlayerAttributes>(i))
+								{
+									p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = true;
+								}
+							}
+						}
+						else
+						{
+							for (i = 0; i < p_ecs.GetTotalEntities(); ++i)
+							{
+								if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<PlayerAttributes>(i))
+								{
+									p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = false;
+								}
+							}
+							this->mScriptPause = true;
+							p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
+						}
 					}
 				}
 			}
-			else
-			{
-				for (i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<PlayerAttributes>(i))
-					{
-						p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = false;
-					}
-				}
-				this->mScriptPause = true;
-				p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
-			}
+			
+			
+			
+			
+			
 		}
 		/*!*************************************************************************
 		End State for DialogueManager
@@ -116,7 +129,8 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		std::string mDialogues[2];
+		std::string mDialogues[5];
 		int counter;
+		int MaxCounter;
 	};
 }

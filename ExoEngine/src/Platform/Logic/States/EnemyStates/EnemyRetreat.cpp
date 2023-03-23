@@ -35,7 +35,7 @@ namespace EM
 	****************************************************************************/
 	void EnemyRetreat::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 	}
 
 	/*!*************************************************************************

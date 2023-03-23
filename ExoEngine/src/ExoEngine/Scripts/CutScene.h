@@ -58,7 +58,6 @@ namespace EM
 				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
 				{
 					p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //cutscene audio
-					//std::cout << "cut scene audio" << std::endl;
 				}
 			}
 			if (timer >= 5.0f)

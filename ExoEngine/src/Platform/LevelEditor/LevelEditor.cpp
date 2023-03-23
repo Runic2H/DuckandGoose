@@ -51,6 +51,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/HazardScript.h"
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
+#include "ExoEngine/Scripts/BossScript.h"
 
 namespace EM {
 
@@ -1192,16 +1193,10 @@ namespace EM {
 
                         for (int i = 0; i < mScriptList.size(); i++)
                         {
-                            sList.push_back(mScriptList[i].c_str());
-                            //std::cout << sList[i] << std::endl;
+                            sList.push_back(mScriptList[i].c_str()); 
                         }
-                        //std::cout << "logic size " << logic.GetScriptNames().size() << std::endl; //causes error
-                        //std::cout << "sList size " << sList.size() << std::endl; // 1
-                        //std::cout << "sList " << sList[0] << std::endl;
-                        
                         std::copy(sList.begin(), sList.end(), logicList);
-                        
-                        //std::cout << "logicList " << logicList[1] << std::endl; //D
+
                         ImGui::Combo("Logic Scripts", &current_script, logicList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
 
                         //static int isClicked = 0;
@@ -1287,6 +1282,11 @@ namespace EM {
                                         if (mScriptList[current_script] == "DialogueManager" && p_ecs.HaveComponent<Sprite>(selectedEntity))
                                         {
                                             logic.InsertScript(new DialogueManager(), selectedEntity);
+                                        }
+                                        if (mScriptList[current_script] == "BossScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                        && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                        {
+                                            logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
                                         }
                                     }
                                 }
