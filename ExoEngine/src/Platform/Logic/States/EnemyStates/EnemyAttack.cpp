@@ -63,10 +63,10 @@ namespace EM
 			{
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Range Enemy")
+					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 					{
 						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.2f,
-							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
 						p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
 						p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
 					}
@@ -92,7 +92,7 @@ namespace EM
 		{
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Range Enemy")
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 				{
 					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
 				}

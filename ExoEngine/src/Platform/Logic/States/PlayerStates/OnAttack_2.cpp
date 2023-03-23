@@ -89,6 +89,7 @@ namespace EM
 	void OnAttack_2::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer = 0.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

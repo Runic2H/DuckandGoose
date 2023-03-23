@@ -97,6 +97,8 @@
     <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardCharging.cpp" />
     <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardFire.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -308,6 +310,8 @@
     <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
     <ClInclude Include="src\ExoEngine\Scripts\DialogueManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\BossScript.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

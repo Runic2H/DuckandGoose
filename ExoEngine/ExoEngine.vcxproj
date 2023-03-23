@@ -61,6 +61,8 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
@@ -264,6 +266,8 @@
     <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />
