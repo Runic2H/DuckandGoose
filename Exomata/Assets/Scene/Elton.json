@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 108
+        "Entities": 109
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -105,12 +105,13 @@
         "00000000000000000000000000111001",
         "00000000000000000000000000111001",
         "00000000000000000000000000111001",
-        "00000000000000000000100000111111",
+        "00000000000000000000100101111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
-        "00000000000000000000000001011001"
+        "00000000000000000000000001011001",
+        "00000000000000000000000000011001"
     ],
     "Components": {
         "0": [
@@ -667,7 +668,7 @@
         ],
         "11": [
             {
-                "posX": 4.4164581298828125,
+                "posX": 4.436,
                 "posY": 0.04219485819339752,
                 "scaleX": 0.9999980330467224,
                 "scaleY": 0.9999980330467224,
@@ -1094,7 +1095,7 @@
             {
                 "posX": -3.856548309326172,
                 "posY": 0.043827272951602936,
-                "scaleX": -0.25,
+                "scaleX": 0.25,
                 "scaleY": 0.25,
                 "Rot": 0.0
             },
@@ -1129,7 +1130,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 4,
+                "Index_X": 5,
                 "Index_Y": 0,
                 "Ucoordinates": 514.0,
                 "Vcoordinates": 512.0,
@@ -1207,7 +1208,7 @@
             {
                 "Health": 100,
                 "Max Health": 100,
-                "Damage": 20
+                "Damage": 100
             },
             {}
         ],
@@ -1802,12 +1803,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1869,7 +1870,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 17,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1945,12 +1946,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2012,7 +2013,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 17,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2088,12 +2089,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2150,7 +2151,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 17,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2226,12 +2227,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 19,
+                "Index_X": 2,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": false,
+                "IsAnimated": true,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2293,7 +2294,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 14,
+                "Index_X": 17,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2806,7 +2807,7 @@
                 "IsAnimated": false,
                 "MaxIndex": 1,
                 "DisplayTime 0": 0.0,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {
                 "0": "HUDController",
@@ -2845,7 +2846,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {
                 "0": "HUDController",
@@ -2884,7 +2885,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {
                 "0": "HUDController",
@@ -2923,7 +2924,7 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {
                 "0": "HUDController",
@@ -5874,14 +5875,14 @@
         ],
         "102": [
             {
-                "posX": 4.508260250091553,
+                "posX": 0,
                 "posY": -0.07288636267185211,
                 "scaleX": 1.0,
                 "scaleY": 1.0,
                 "Rot": 0.0
             },
             {
-                "velX": 0.0,
+                "velX": 100.0,
                 "velY": 0.0,
                 "dirX": 1.0,
                 "dirY": 0.0,
@@ -5889,21 +5890,21 @@
                 "Restitution": 0.0
             },
             {
-                "ColliderType1": 0,
-                "ColliderType2": 0,
+                "ColliderType1": 6,
+                "ColliderType2": 4,
                 "minX1": 0.0,
-                "minX2": 0.0,
+                "minX2": 0.5,
                 "minY1": 0.0,
-                "minY2": 0.0,
+                "minY2": 0.07000000029802322,
                 "maxX1": 0.0,
-                "maxX2": 0.0,
+                "maxX2": 0.15000000596046448,
                 "maxY1": 0.0,
-                "maxY2": 0.0,
-                "offsetX1": 0.0,
-                "offsetX2": 0.0,
+                "maxY2": 0.07000000029802322,
+                "offsetX1": -0.03,
+                "offsetX2": -0.4000000059604645,
                 "offsetY1": 0.0,
-                "offsetY2": 0.0,
-                "radius1": 0.0,
+                "offsetY2": 0.05000000074505806,
+                "radius1": 0.4000000059604645,
                 "radius2": 0.0
             },
             {
@@ -5918,15 +5919,23 @@
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
                 "MaxIndex": 0,
-                "LayeringOrder": 0
+                "LayeringOrder": 5
             },
             {
                 "0": "BossScript",
-                "ScriptCount": 1
+                "1": "CollisionResponse",
+                "ScriptCount": 2
+            },
+            {
+                "Tag": "Enemy",
+                "TargetTag": ""
             },
             {},
-            {},
-            {},
+            {
+                "ElementType": 1,
+                "offsetX": -0.5,
+                "offsetY": 0.4000000149011612
+            },
             {},
             {},
             {
@@ -6130,7 +6139,7 @@
             },
             {
                 "TextureName": "LaserAttack",
-                "Index_X": 26,
+                "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -6176,6 +6185,82 @@
                 "Tag": "RangeLaser",
                 "TargetTag": ""
             },
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "108": [
+            {
+                "posX": 0.0,
+                "posY": 0.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "BossLaser"
+            },
+            {
+                "TextureName": "BOSSLASER",
+                "Index_X": 14,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 44,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "DisplayTime 9": 0.0,
+                "DisplayTime 10": 0.0,
+                "DisplayTime 11": 0.0,
+                "DisplayTime 12": 0.0,
+                "DisplayTime 13": 0.0,
+                "DisplayTime 14": 0.0,
+                "DisplayTime 15": 0.0,
+                "DisplayTime 16": 0.0,
+                "DisplayTime 17": 0.0,
+                "DisplayTime 18": 0.0,
+                "DisplayTime 19": 0.0,
+                "DisplayTime 20": 0.0,
+                "DisplayTime 21": 0.0,
+                "DisplayTime 22": 0.0,
+                "DisplayTime 23": 0.0,
+                "DisplayTime 24": 0.0,
+                "DisplayTime 25": 0.0,
+                "DisplayTime 26": 0.0,
+                "DisplayTime 27": 0.0,
+                "DisplayTime 28": 0.0,
+                "DisplayTime 29": 0.0,
+                "DisplayTime 30": 0.0,
+                "DisplayTime 31": 0.0,
+                "DisplayTime 32": 0.0,
+                "DisplayTime 33": 0.0,
+                "DisplayTime 34": 0.0,
+                "DisplayTime 35": 0.0,
+                "DisplayTime 36": 0.0,
+                "DisplayTime 37": 0.0,
+                "DisplayTime 38": 0.0,
+                "DisplayTime 39": 0.0,
+                "DisplayTime 40": 0.0,
+                "DisplayTime 41": 0.0,
+                "DisplayTime 42": 0.0,
+                "DisplayTime 43": 0.0,
+                "LayeringOrder": 6
+            },
+            {},
+            {},
             {},
             {},
             {},

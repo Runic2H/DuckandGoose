@@ -20,7 +20,7 @@ namespace EM
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("BossEyeball");
-		p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos({ 4.5f, 1.0f });
+		p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos({ 4.72f, 1.0f });
 	}
 
 	/*!*************************************************************************
@@ -32,7 +32,8 @@ namespace EM
 		float fallspeed = 10.f;
 		if(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y >= 0)
 		{
-			p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y -= (fallspeed * Frametime);
+			vec2D& nextpos = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos();
+			nextpos.y -= (fallspeed * Frametime);
 		}
 		else
 			stateMachine->ChangeState(new BossChasing(stateMachine));

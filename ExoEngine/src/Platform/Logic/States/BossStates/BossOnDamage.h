@@ -3,11 +3,11 @@
 
 namespace EM
 {
-	class BossAttack : public IStates
+	class BossOnDamage : public IStates
 	{
 	public:
-		BossAttack(StateMachine* stateMachine);
-		virtual ~BossAttack() = default;
+		BossOnDamage(StateMachine* stateMachine);
+		virtual ~BossOnDamage() = default;
 		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;

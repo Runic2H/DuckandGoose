@@ -1041,7 +1041,7 @@ namespace EM {
                         auto& colliderComp = p_ecs.GetComponent<Collider>(selectedEntity);
                         auto& colliderType = colliderComp[0].mCol;
                         int colliderIndex = static_cast<int>(colliderType);
-                        const char* colliderNames = "none\0circle\0bubble\0line\0rect\0box\0button";
+                        const char* colliderNames = "none\0circle\0bubble\0line\0rect\0box\0bossball\0button";
                         ImGui::Text("Collider 1 Type"); ImGui::SameLine();
                         ImGui::Combo("##test", &colliderIndex, colliderNames);
                         colliderType = static_cast<Collider::ColliderType>(colliderIndex);
@@ -1060,7 +1060,8 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[0].mCol == Collider::ColliderType::circle || colliderComp[0].mCol == Collider::ColliderType::bubble)
+                        if (colliderComp[0].mCol == Collider::ColliderType::circle || colliderComp[0].mCol == Collider::ColliderType::bubble ||
+                            colliderComp[0].mCol == Collider::ColliderType::bossball)
                         {
                             auto& colliderSize = colliderComp[0].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
@@ -1103,7 +1104,8 @@ namespace EM {
                         ImGui::PopID();
 
                          //size of the collider
-                        if (colliderComp[1].mCol == Collider::ColliderType::circle || colliderComp[1].mCol == Collider::ColliderType::bubble)
+                        if (colliderComp[1].mCol == Collider::ColliderType::circle || colliderComp[1].mCol == Collider::ColliderType::bubble ||
+                            colliderComp[1].mCol == Collider::ColliderType::bossball)
                         {
                             auto& colliderSize1 = colliderComp[1].mRadius;
                             ImGui::Text("Radius   "); ImGui::SameLine();
