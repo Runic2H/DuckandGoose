@@ -54,6 +54,7 @@ namespace EM
 	****************************************************************************/
 	void EnemyAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
+		float offsetlaser = 0;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer -= Frametime;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.25f)
@@ -65,8 +66,10 @@ namespace EM
 				{
 					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 					{
-						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.2f,
-						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
+						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x <= 0) offsetlaser = 0.2f;
+						else offsetlaser = -0.2f;
+						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + offsetlaser,
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
 						p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
 						p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
 					}

@@ -33,7 +33,9 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 1.f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 3.f;
+
 	}
 
 	/*!*************************************************************************
@@ -41,68 +43,24 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
-		float dist = 0;
-		vec2D playerPos = vec2D();
-		bool check = false;
-		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
-		if (!check)
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		float chasingspeed = 2.0f;
+		//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+		for (auto i = 0; i < p_ecs.GetTotalEntities(); i++)
 		{
-			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+			if (p_ecs.HaveComponent<PlayerAttributes>(i) && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer > 0.0f)
 			{
-				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
+				if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y
+					<= p_ecs.GetComponent<Transform>(i).GetPos().y)
 				{
-					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-					check = true;
-					//std::cout << "Player Detected\n";
+					p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y += chasingspeed * Frametime;
 				}
+			
+				
 			}
 		}
 
-		if (check) {
-			dist = distance(transform.GetPos(), playerPos);
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_BOSS)
-			{
-				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
-				vec2D newVel = vec2D(0.0f, 0.0f);
-				newVel = rigidbody.GetVel();
-				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
-				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.x = 0.0f;
-				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
-				if (newVel.x > -99 && newVel.y < 99) {
-					newVel = newVel * -1;
-					rigidbody.SetVel(newVel);
-					if (newVel.x < 0 && transform.GetScale().x < 0) {
-						transform.GetScale().x *= -1;
-					}
-					if (newVel.x > 0 && transform.GetScale().x > 0) {
-						transform.GetScale().x *= -1;
-					}
-				}
-			}
-			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
-			rigidbody.SetNextPos(nextPos);
-			//std::cout << "Curr Pos: " << transform.GetPos().x << ", " << transform.GetPos().y << std::endl;
-			//std::cout << "Next Pos: " << nextPos.x << ", " << nextPos.y << std::endl;
-			//std::cout << "Actual Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << std::endl;
-
-			//______________________________________BODGE FIX. REMOVE AFTER FIXING RIGIDBODY____________________________________
-			//transform.SetPos(nextPos);
-			//__________________________________________________________________________________________________________________
-			//Attack Range
-			//check if within range. If not, set to moving state
-
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_BOSS)
-			{
-				if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
-				{
-					stateMachine->ChangeState(new BossAttack(stateMachine));
-				}
-			}
-		}
 	}
 
 	/*!*************************************************************************
@@ -110,7 +68,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnExit(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }

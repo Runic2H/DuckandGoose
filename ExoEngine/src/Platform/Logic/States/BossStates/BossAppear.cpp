@@ -34,8 +34,8 @@ namespace EM
 		{
 			p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y -= (fallspeed * Frametime);
 		}
-		//else
-			//stateMachine->ChangeState(new BossChasing(stateMachine));
+		else
+			stateMachine->ChangeState(new BossChasing(stateMachine));
 	}
 
 	/*!*************************************************************************
