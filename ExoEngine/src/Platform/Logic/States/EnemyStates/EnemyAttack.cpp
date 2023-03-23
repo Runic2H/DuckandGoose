@@ -59,6 +59,19 @@ namespace EM
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.25f)
 		{
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+			{
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				{
+					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Range Enemy")
+					{
+						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.2f,
+							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
+						p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
+						p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
+					}
+				}
+			}
 		}
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
 		{
@@ -75,6 +88,16 @@ namespace EM
 	****************************************************************************/
 	void EnemyAttack::OnExit(StateMachine* stateMachine)
 	{
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+		{
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+			{
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Range Enemy")
+				{
+					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
+				}
+			}
+		}
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 1.25f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

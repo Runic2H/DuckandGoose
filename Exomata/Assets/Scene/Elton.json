@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 106
+        "Entities": 107
     },
     "EntitySignatures": [
         "00000000000000000000000000001000",
@@ -108,7 +108,8 @@
         "00000000000000000000100000111111",
         "00000000000000000000000000011000",
         "00000000000000000000000000011000",
-        "00000000000000000000000000011000"
+        "00000000000000000000000000011000",
+        "00000000000000000000000001011001"
     ],
     "Components": {
         "0": [
@@ -6049,6 +6050,73 @@
             },
             {},
             {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "106": [
+            {
+                "posX": 0.0,
+                "posY": 0.0,
+                "scaleX": 0.3,
+                "scaleY": 0.3,
+                "Rot": 0.0
+            },
+            {},
+            {},
+            {
+                "NameTag": "Range Enemy Laser"
+            },
+            {
+                "TextureName": "LaserAttack",
+                "Index_X": 0,
+                "Index_Y": 0,
+                "Ucoordinates": 512.0,
+                "Vcoordinates": 512.0,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
+                "MaxIndex": 32,
+                "DisplayTime 0": 0.0,
+                "DisplayTime 1": 0.0,
+                "DisplayTime 2": 0.0,
+                "DisplayTime 3": 0.0,
+                "DisplayTime 4": 0.0,
+                "DisplayTime 5": 0.0,
+                "DisplayTime 6": 0.0,
+                "DisplayTime 7": 0.0,
+                "DisplayTime 8": 0.0,
+                "DisplayTime 9": 0.0,
+                "DisplayTime 10": 0.0,
+                "DisplayTime 11": 0.0,
+                "DisplayTime 12": 0.0,
+                "DisplayTime 13": 0.0,
+                "DisplayTime 14": 0.0,
+                "DisplayTime 15": 0.0,
+                "DisplayTime 16": 0.0,
+                "DisplayTime 17": 0.0,
+                "DisplayTime 18": 0.0,
+                "DisplayTime 19": 0.0,
+                "DisplayTime 20": 0.0,
+                "DisplayTime 21": 0.0,
+                "DisplayTime 22": 0.0,
+                "DisplayTime 23": 0.0,
+                "DisplayTime 24": 0.0,
+                "DisplayTime 25": 0.0,
+                "DisplayTime 26": 0.0,
+                "DisplayTime 27": 0.0,
+                "DisplayTime 28": 0.0,
+                "DisplayTime 29": 0.0,
+                "DisplayTime 30": 0.0,
+                "DisplayTime 31": 0.0,
+                "LayeringOrder": 6
+            },
+            {},
+            {
+                "Tag": "Range Enemy",
+                "TargetTag": ""
+            },
             {},
             {},
             {},
