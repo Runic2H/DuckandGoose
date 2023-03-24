@@ -204,7 +204,6 @@ namespace EM{
 		data.m_Width = width;
 		data.m_Height = height;
 		glViewport(0, 0, data.m_Width, data.m_Height);
-		//EM_EXO_INFO("Window Current Size ({0}, {1})", data.m_Width, data.m_Height); //for debug purpose tb removed
 	}
 
 	/*!*************************************************************************
@@ -244,8 +243,6 @@ namespace EM{
 		WindowProps& data = *(WindowProps*)glfwGetWindowUserPointer(window);
 		data.mouseX = xpos;
 		data.mouseY = ypos;
-
-		//EM_EXO_INFO("Mouse Current Position(x:{0}, y:{1})", data.mouseX, data.mouseY);//for debug purpose tb removed
 	}
 
 	/*!*************************************************************************

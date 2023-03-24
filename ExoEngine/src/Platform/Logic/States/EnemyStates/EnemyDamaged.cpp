@@ -35,7 +35,6 @@ namespace EM
 	****************************************************************************/
 	void EnemyDamaged::OnEnter(StateMachine* stateMachine)
 	{
-		//std::cout << "Enemy Damaged\n";
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
@@ -57,10 +56,6 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
 		}
-		/*if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
-		{
-			stateMachine->ChangeState(new EnemyDeath(stateMachine));
-		}*/
 	}
 
 	/*!*************************************************************************

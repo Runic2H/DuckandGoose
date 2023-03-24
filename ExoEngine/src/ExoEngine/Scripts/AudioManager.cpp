@@ -63,28 +63,15 @@ namespace EM
                         audio[i].triggered = false;
                     }
                 }
-                //std::cout << "Is Channel " << audio[i].mChannel << " Playing?: " << audio[i].is_Playing << "\n";
-                //update looping
-                //p_Audio->SetLooping(audio[i].mAudioPath, audio[i].is_Looping);
-                //std::cout << "Should play: " << audio[i].should_play << std::endl;
-                //set is_playing accordingly
-                //std::cout << "Is playing " << audio[i].is_Playing << std::endl;
                 if (audio[i].is_Looping == false && audio[i].should_play == true && audio[i].is_Playing == false) {
                     //play sound
                     audio[i].mChannel = p_Audio->PlaySound("Assets/Metadigger/" + audio[i].mAudioPath, audio[i].mChannelGroup);
                     audio[i].should_play = false;
                     audio[i].triggered = true;
-                    //audio[i].is_Playing = true;
-                    /*std::cout << "Is Playing: " << audio[i].is_Playing << std::endl;
-                    std::cout << "Should stop: " << audio[i].should_stop << std::endl;
-                    std::cout << "Audio Playing " << audio[i].mAudioPath << ": " << p_Audio->IsPlaying(audio[i].mChannel) << std::endl;*/
                 }
                 if (audio[i].is_Looping == true && audio[i].is_Playing == false) {
                     //play sound
                     audio[i].mChannel = p_Audio->PlaySound("Assets/Metadigger/" + audio[i].mAudioPath, audio[i].mChannelGroup);
-                    // audio[i].is_Playing = true;
-                    //audio[i].should_play = false;
-                    //std::cout << "Playing loop\n";
                     audio[i].triggered = true;
                 }
                 if (audio[i].should_stop == true) {

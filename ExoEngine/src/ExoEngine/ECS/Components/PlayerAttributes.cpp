@@ -38,14 +38,12 @@ namespace EM
 	****************************************************************************/
 	bool PlayerAttributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("Health");
 		writer->Int(mHealth);
 		writer->Key("Max Health");
 		writer->Int(mMaxHealth);
 		writer->Key("Damage");
 		writer->Int(mDamage);
-		//writer->EndObject();
 		return true;
 	}
 }

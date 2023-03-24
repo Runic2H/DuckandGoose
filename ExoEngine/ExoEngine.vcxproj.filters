@@ -99,6 +99,9 @@
     <ClCompile Include="src\Platform\Logic\States\HazardStates\HazardFire.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -312,6 +315,9 @@
     <ClInclude Include="src\ExoEngine\Scripts\BossScript.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

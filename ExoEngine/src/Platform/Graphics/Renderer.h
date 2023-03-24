@@ -68,7 +68,7 @@ namespace EM {
 		//Information for renderer
 		struct Information
 		{
-			unsigned int n_DrawCalls = 0; //n_ = no. of
+			unsigned int n_DrawCalls = 0; 
 			unsigned int n_Quad = 0;
 
 			unsigned int TotalVertexUsed()const { return n_Quad * 4; }

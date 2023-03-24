@@ -94,11 +94,6 @@ namespace EM {
         if (ent1.x + rad1 < min1.x || ent1.x - rad1 > max1.x || ent1.y + rad1 < min1.y || ent1.y - rad1 > max1.y) {
             return 0;
         }
-        /*vec2D topleft = vec2D(min1.x, max1.y);
-        vec2D bottomright = vec2D(max1.x, min1.y);
-        if (distance(ent1, max1) > rad1 || distance(ent1, min1) > rad1 || distance(ent1, topleft) > rad1 || distance(ent1, bottomright) > rad1) {
-            return 0;
-        }*/
         return 1;
     }
     /*!*************************************************************************

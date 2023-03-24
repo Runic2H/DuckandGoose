@@ -15,7 +15,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #pragma once
 #include <GL/glew.h>
-//#include "VertexBuffer.h"
+
 namespace EM {
 
 	enum class ShaderDataType

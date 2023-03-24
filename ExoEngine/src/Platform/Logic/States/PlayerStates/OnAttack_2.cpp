@@ -27,8 +27,6 @@ namespace EM
 	{
 		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MousePressed(key))
 		{
-			//return new OnAttack_3(stateMachine);
-
 		}
 		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f)
 		{

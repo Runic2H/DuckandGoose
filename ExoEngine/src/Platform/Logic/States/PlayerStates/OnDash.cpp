@@ -39,7 +39,6 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[4].should_play = true;
 		}
-		std::cout << "Dash Call" << std::endl;
 	}
 
 	/*!*************************************************************************
@@ -50,10 +49,8 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer -= Frametime;
 		auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 		auto& pTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-		std::cout << pRigid.GetVel().x << std::endl;
 		vec2D dir = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir;
 		dir = dir * 150.0f * 0.8f;
-		//pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), dir, Frametime));
 		vec2D nextPos = (pTrans.GetPos() + pRigid.GetVel());
 		pRigid.SetNextPos(nextPos * Frametime);

@@ -28,7 +28,6 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		//UNREFERENCED_PARAMETER(Frametime);
 		float fallspeed = 10.f;
 		if(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y >= 0)
 		{
@@ -44,11 +43,6 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnExit(StateMachine* stateMachine)
 	{
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
-		//p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
-		//p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;
 	}
 }

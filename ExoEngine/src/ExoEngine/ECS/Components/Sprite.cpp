@@ -16,7 +16,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Sprite.h"
-//#include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Animation/Animation.h"
 namespace EM {
 
@@ -58,7 +57,6 @@ namespace EM {
 	****************************************************************************/
 	bool Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("TextureName");
 		writer->String(mTextureName.c_str());
 		writer->Key("Index_X");
@@ -84,7 +82,6 @@ namespace EM {
 		}
 		writer->Key("LayeringOrder");
 		writer->Int(LayerOrder);
-		//writer->EndObject();
 		return true;
 	}
 	
