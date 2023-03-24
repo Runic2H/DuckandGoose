@@ -46,6 +46,21 @@ namespace EM
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
+
+		//player hp regen
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
+			{
+				//increment player hp based on current player hp
+				p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (160 / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
+				//play hp regen sound
+				if (p_ecs.HaveComponent<Audio>(i) && (p_ecs.GetComponent<Audio>(i).GetSize() > 8))
+				{
+					p_ecs.GetComponent<Audio>(i)[8].should_play = true;
+				}
+			}
+		}
 	}
 
 	/*!*************************************************************************
@@ -68,7 +83,6 @@ namespace EM
 	void EnemyDeath::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }

@@ -22,12 +22,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	//RigidBody Component
-	//Velocity
-	//Direction
-	//Friction
-	//Restitution
-
 	class RigidBody : public IComponent
 	{
 	public:

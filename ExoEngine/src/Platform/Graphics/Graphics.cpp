@@ -25,8 +25,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
 namespace EM {
-	
-	//extern ECS ecs;
 	/*!*************************************************************************
 	Load Icon from filepath using resource manager
 	****************************************************************************/

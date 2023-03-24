@@ -586,24 +586,12 @@ namespace EM {
 
 	}
 
-	/*const Mat4x4& basemtx_adapter(const glm::mat4& rhs)
-	{
-		Mat4x4 temp{ rhs[0][0], rhs[0][1], rhs[0][2], rhs[0][3],
-						rhs[1][0], rhs[1][1], rhs[1][2], rhs[1][3],
-						rhs[2][0], rhs[2][1], rhs[2][2], rhs[2][3],
-						rhs[3][0], rhs[3][1], rhs[3][2], rhs[3][3] };
-		return temp;
-	}*/
-
-
 	glm::mat4 mtx_adapter(Mat4x4& rhs)
 	{
-
 		return (glm::mat4{ rhs.m00, rhs.m01, rhs.m02, rhs.m03,
 							 rhs.m10, rhs.m11, rhs.m12, rhs.m13,
 							 rhs.m20, rhs.m21, rhs.m22, rhs.m23,
 							 rhs.m30, rhs.m31, rhs.m32, rhs.m33 });
-
 	}
 
 	 Mat4x4 basemtx_adapterC(const glm::mat4& rhs)

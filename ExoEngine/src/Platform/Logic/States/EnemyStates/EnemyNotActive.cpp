@@ -50,10 +50,8 @@ namespace EM
 		vec2D playerPos = vec2D();
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
-				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}

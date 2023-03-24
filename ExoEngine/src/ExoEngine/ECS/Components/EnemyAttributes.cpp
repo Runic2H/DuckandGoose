@@ -29,8 +29,6 @@ namespace EM
 		mMaxHealth = obj["Max Health"].GetInt();
 		mDamage = obj["Damage"].GetInt();
 		mEnemyType = static_cast<EnemyTypes>(obj["EnemyType"].GetInt());
-		//mAttackTimer = (float)obj["Attack Timer"].GetDouble();
-		//mDamageCooldownTimer = (float)obj["Damage Cooldown"].GetDouble();
 		return true;
 	}
 
@@ -39,7 +37,6 @@ namespace EM
 	****************************************************************************/
 	bool EnemyAttributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("Health");
 		writer->Int(mHealth);
 		writer->Key("Max Health");
@@ -48,11 +45,6 @@ namespace EM
 		writer->Int(mDamage);
 		writer->Key("EnemyType");
 		writer->Int(static_cast<int>(mEnemyType));
-		//writer->Key("Attack Timer");
-		//writer->Double((double)mAttackTimer);
-		//writer->Key("Damage Cooldown");
-		//writer->Double((double)mDamageCooldownTimer);
-		//writer->EndObject();
 		return true;
 	}
 }

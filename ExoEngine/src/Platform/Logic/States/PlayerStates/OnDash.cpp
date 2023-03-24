@@ -39,7 +39,6 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[4].should_play = true;
 		}
-		std::cout << "Dash Call" << std::endl;
 	}
 
 	/*!*************************************************************************

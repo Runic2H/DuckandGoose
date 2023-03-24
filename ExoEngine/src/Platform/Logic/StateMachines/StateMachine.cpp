@@ -20,11 +20,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM
 {
 	StateMachine::StateMachine(Entity entity) : mCurrState{}, mEntityID{ entity } {}
-
-	/*PlayerStates* GetCurrState()
-	{
-		return mCurrState;
-	}*/
 	
 	void StateMachine::ChangeState(IStates* pNewState)
 	{

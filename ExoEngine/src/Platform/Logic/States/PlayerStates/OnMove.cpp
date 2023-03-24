@@ -122,7 +122,6 @@ namespace EM
 					pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), vel, Frametime));
 					vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
 					pRigid.SetNextPos(nextPos);
-					//std::cout << "Actual Next Pos: " << pRigid.GetNextPos().x << ", " << pRigid.GetNextPos().y << std::endl;
 				}
 				else
 				{

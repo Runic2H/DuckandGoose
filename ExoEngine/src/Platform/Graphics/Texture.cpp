@@ -80,8 +80,6 @@ namespace EM {
 			mInnerFormat = internalFormat;
 			mImageFormat = dataFormat;
 
-			//EM_EXO_ASSERT(internalFormat && dataFormat, "Format not supported!");
-
 			glCreateTextures(GL_TEXTURE_2D, 1, &mRendererID);
 			glTextureStorage2D(mRendererID, 1, mInnerFormat, mWidth, mHeight);
 
