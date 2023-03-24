@@ -1,6 +1,7 @@
 #include "empch.h"
+#include "BossIdle.h"
 #include "BossAppear.h"
-#include "BossChasing.h"
+
 namespace EM
 {
 	BossAppear::BossAppear(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
@@ -16,9 +17,6 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnEnter(StateMachine* stateMachine)
 	{
-		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
-			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
-		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("BossEyeball");
 		p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos({ 4.72f, 1.0f });
 	}
@@ -36,7 +34,7 @@ namespace EM
 			nextpos.y -= (fallspeed * Frametime);
 		}
 		else
-			stateMachine->ChangeState(new BossChasing(stateMachine));
+			stateMachine->ChangeState(new BossIdle(stateMachine));
 	}
 
 	/*!*************************************************************************

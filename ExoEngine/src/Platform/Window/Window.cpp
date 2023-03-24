@@ -78,7 +78,7 @@ namespace EM{
 		m_windowData.m_Height = mode->height;
 	
 		glfwSetWindowMonitor(
-			m_window, nullptr,
+			m_window, m_monitor,
 			0, 0,
 			m_windowData.m_Width, m_windowData.m_Height, 0);
 #endif			
