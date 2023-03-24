@@ -33,7 +33,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 4.5f;
+
 	}
 
 	/*!*************************************************************************
@@ -43,10 +43,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new BossOnDamage(stateMachine));
-		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
 		bool check = false;
@@ -73,7 +69,7 @@ namespace EM
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.y *= 3;
+				newVel.y *= 2;
 				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 				vec2D nextPos = transform.GetPos();
 				nextPos.y -= rigidbody.GetVel().y;
@@ -82,6 +78,10 @@ namespace EM
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 			{
 				stateMachine->ChangeState(new BossAttack(stateMachine));
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+			{
+				stateMachine->ChangeState(new BossOnDamage(stateMachine));
 			}
 		}
 		
