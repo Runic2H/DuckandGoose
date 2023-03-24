@@ -91,8 +91,14 @@ namespace EM
 								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
 								if (enemystats.mDamageCoolDownTimer <= 0.0f)
 								{
-									enemystats.mIsDamaged = true;
-									p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.16f;
+									if ((p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mFacing == PlayerAttributes::Facing::RIGHT &&
+										p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID()).mEnemyFacing == EnemyAttributes::Facing::LEFT) ||
+										(p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mFacing == PlayerAttributes::Facing::LEFT &&
+											p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID()).mEnemyFacing == EnemyAttributes::Facing::RIGHT))
+									{
+										enemystats.mIsDamaged = true;
+										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.16f;
+									}
 								}
 							}
 						}
