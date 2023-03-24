@@ -69,7 +69,7 @@ namespace EM
 						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x <= 0) offsetlaser = 0.2f;
 						else offsetlaser = -0.2f;
 						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + offsetlaser,
-							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
+						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y);
 						p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
 						p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
 					}

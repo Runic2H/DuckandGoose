@@ -37,6 +37,8 @@ namespace EM
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = false;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 	}
 
 	/*!*************************************************************************

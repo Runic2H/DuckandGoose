@@ -102,6 +102,7 @@
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossIdle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -318,6 +319,7 @@
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossIdle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

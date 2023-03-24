@@ -1,5 +1,6 @@
 #include"empch.h"
 #include"BossAttack.h"
+#include"BossIdle.h"
 #include"BossChasing.h"
 
 namespace EM
@@ -17,7 +18,7 @@ namespace EM
 	****************************************************************************/
 	void BossAttack::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 2.0f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.0f;
 	}
 
 	/*!*************************************************************************
@@ -29,9 +30,10 @@ namespace EM
 
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer > 0.f)
 		{
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = true;
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "BossLaser")
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
 				{
 
 					p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.815f,
@@ -43,7 +45,7 @@ namespace EM
 		}
 		else if(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
 		{
-			stateMachine->ChangeState(new BossChasing(stateMachine));
+			stateMachine->ChangeState(new BossIdle(stateMachine));
 		}
 
 	}
@@ -55,13 +57,13 @@ namespace EM
 	{
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "BossLaser")
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
 			{
 				p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
 				p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
 			}
 		}
-		
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;
 	}
 }

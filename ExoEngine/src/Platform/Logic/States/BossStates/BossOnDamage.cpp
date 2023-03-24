@@ -44,7 +44,6 @@ namespace EM
 			else
 			{	
 				stateMachine->ChangeState(new BossChasing(stateMachine));
-
 			}
 		}
 	}

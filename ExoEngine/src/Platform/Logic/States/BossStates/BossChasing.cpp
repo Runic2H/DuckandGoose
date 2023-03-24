@@ -33,7 +33,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
-		chasingTime = 10.0f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 4.5f;
 	}
 
 	/*!*************************************************************************
@@ -41,8 +41,12 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		chasingTime -= Frametime;
-		
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+		{
+			stateMachine->ChangeState(new BossOnDamage(stateMachine));
+		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
 		bool check = false;
@@ -61,13 +65,10 @@ namespace EM
 			}
 		}
 
-		if (check && chasingTime >= 0.0f) 
+		if (check) 
 		{
-			
 			if (dist <= 1.0f)
 			{
-				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
-				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
 				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
@@ -78,14 +79,10 @@ namespace EM
 				nextPos.y -= rigidbody.GetVel().y;
 				rigidbody.SetNextPos(nextPos);
 			}
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 			{
-				stateMachine->ChangeState(new BossOnDamage(stateMachine));
+				stateMachine->ChangeState(new BossAttack(stateMachine));
 			}
-		}
-		else
-		{
-			stateMachine->ChangeState(new BossAttack(stateMachine));
 		}
 		
 		
@@ -97,7 +94,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnExit(StateMachine* stateMachine)
 	{
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }
