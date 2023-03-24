@@ -28,8 +28,6 @@ namespace EM
 
 		~StateMachine() = default;
 
-		//PlayerStates* GetCurrState();
-
 		void ChangeState(IStates* pNewState);
 
 		void HandleInput(const int& key);

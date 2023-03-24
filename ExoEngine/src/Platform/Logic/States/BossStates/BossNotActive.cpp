@@ -67,10 +67,6 @@ namespace EM
 				}
 			}
 		}
-		//if player moves within x radius, set mode to moving
-		//if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.5f ) {
-			//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
-			//stateMachine->ChangeState(new BossIdle(stateMachine));
 		if(EnemyPopulation == 0) // the enemy has been kill
 			stateMachine->ChangeState(new BossAppear(stateMachine));
 		
@@ -82,8 +78,6 @@ namespace EM
 	void BossNotActive::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;

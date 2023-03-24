@@ -36,24 +36,12 @@ namespace EM {
 		std::unordered_map <std::string, std::vector <float>> ::const_iterator got = spriteContainer.find(sprite.GetTexture());
 		if (got == spriteContainer.end())// always check the sprite container whether there is any data for the current texture. if no, prompt the user
 		{
-			//std::cout << sprite.GetTexture() << " not in  the container" << std::endl;
 		}
 		else
 		{
 			sprite.GetMaxIndex() = static_cast<int>(GETTEXTURE(sprite.GetTexture())->GetWidth() / 512.f);
 			if (sprite.internaltimer >= spriteContainer[sprite.GetTexture()][sprite.GetIndex().x])
 			{
-				////for debug
-				//if(sprite.GetTexture() == "Attack")
-				//	std::cout <<"Att " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
-				//
-				//if (sprite.GetTexture() == "Idle")
-				//	std::cout << "Idle " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
-
-				//if (sprite.GetTexture() == "Running")
-				//	std::cout << "Running " << sprite.GetIndex().x << ":  " << spriteContainer[sprite.GetTexture()][sprite.GetIndex().x] << std::endl;
-				//
-				//end of debug
 				sprite.GetIndex().x++;
 				sprite.internaltimer = 0.0f;
 				if (sprite.GetIndex().x >= sprite.GetMaxIndex())

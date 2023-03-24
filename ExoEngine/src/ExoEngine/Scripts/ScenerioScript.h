@@ -20,8 +20,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "GLFW/glfw3.h"
 #include "ExoEngine/ECS/ECS.h"
 #include "ExoEngine/Input/Input.h"
-//#include "ExoEngine/GUI/GUI.h"
-
 
 namespace EM
 {

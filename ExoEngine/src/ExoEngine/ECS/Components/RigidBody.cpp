@@ -41,7 +41,6 @@ namespace EM
 	****************************************************************************/
 	bool RigidBody::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("velX");
 		writer->Double(mAccel.x);
 		writer->Key("velY");
@@ -54,7 +53,6 @@ namespace EM
 		writer->Double(mFriction);
 		writer->Key("Restitution");
 		writer->Double(mRestitution);
-		//writer->EndObject();
 		return true;
 	}
 	//End RigidBody

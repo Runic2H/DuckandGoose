@@ -106,8 +106,6 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Update()
     {
-        //MainMenuBar();
-
         if (p_Input->KeyPressed(GLFW_KEY_F1))
         {
             is_ShowWindow = !is_ShowWindow;
@@ -158,7 +156,6 @@ namespace EM {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-        //p_Audio->Release();
     }
 
     /*!*************************************************************************
@@ -248,7 +245,6 @@ namespace EM {
                 in.pop_back();
                 in.pop_back();
                 mScriptList.emplace_back(in);
-                //std::cout << "script path " << in << std::endl;
             }
         }
     }
@@ -331,7 +327,6 @@ namespace EM {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
         ImGui::Begin("Scene");
 
-        //vp = viewport
         auto vpMinRegion = ImGui::GetWindowContentRegionMin();
         auto vpMaxRegion = ImGui::GetWindowContentRegionMax();
         auto vpOffset = ImGui::GetWindowPos();
@@ -456,7 +451,6 @@ namespace EM {
         }
         if (p_ecs.GetTotalEntities() != 0 && p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && !ImGuizmo::IsOver())
         {
-            //std::cout << selectedEntity << std::endl;
             if (selectedEntity >= 0 && selectedEntity < MAX_ENTITIES)//no entity selected will remain to the previous selected entity
             {
                 if(p_ecs.HaveComponent<Transform>(selectedEntity))
@@ -777,7 +771,6 @@ namespace EM {
                     {
                         p_ecs.DestroyEntity(selectedEntity);
                     }
-                    //selectedEntity = {}; // when the entity is destroy there is no current selected entity
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("Clone Entity") && p_ecs.GetTotalEntities() != 0)// there is entity alive
@@ -948,13 +941,11 @@ namespace EM {
                         ImGui::Text("Y"); ImGui::SameLine();
                         ImGui::DragFloat("##Scale", (float*)&Scale.y, 0.005f);
                         ImGui::PopID();
-                        //EM_EXO_INFO("Scale(x:{0}, y:{1})", Scale.x, Scale.y);
 
                         //rotation
                         auto& rotation = p_ecs.GetComponent<Transform>(selectedEntity).GetRot();
                         ImGui::Text("Rotation Z"); ImGui::SameLine();
                         ImGui::DragFloat("##", (float*)&rotation, 1.0f);
-                        //EM_EXO_INFO("Rotation(z:{0})", rotation);
                     }
                 }
                 //Sprite Component
@@ -1009,7 +1000,6 @@ namespace EM {
                         }
                         if (sprite.GetMaxIndex() > 0 && sprite.is_Animated)
                         {
-                            //const int& selectedIndex = 0;
                             ImGui::Text("SelectedIndex: "); ImGui::SameLine();
                             ImGui::DragInt("##SelectedIndex", (int*)&sprite.GetIndex().x, 1, 0, sprite.GetMaxIndex() - 1);
 
@@ -1185,7 +1175,6 @@ namespace EM {
                     if (ImGui::CollapsingHeader("Logic", ImGuiTreeNodeFlags_None))
                     {
                         auto& logic = p_ecs.GetComponent<Logic>(selectedEntity);
-                        //std::vector<std::string> scripts{ logic.GetScriptNames() };
                         
                         static ImGuiComboFlags flags = 0;
                         static int current_script = 0;
@@ -1201,97 +1190,90 @@ namespace EM {
 
                         ImGui::Combo("Logic Scripts", &current_script, logicList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
 
-                        //static int isClicked = 0;
                         if (ImGui::Button("Add"))
                         {
-                            //isClicked++;
-                            //if (isClicked & 1)
-                            //{
-                                //isClicked = 0;
-                                bool can_addScript = true; //std::find(logic.GetScriptNames().begin(), logic.GetScriptNames().end(), mScriptList[current_script]) == logic.GetScriptNames().end();
-                                for (int i = 0; i < logic.GetScriptNames().size(); i++) 
+                            bool can_addScript = true; 
+                            for (int i = 0; i < logic.GetScriptNames().size(); i++) 
+                            {
+                                if (logic.GetScriptNames()[i] == mScriptList[current_script]) 
                                 {
-                                    if (logic.GetScriptNames()[i] == mScriptList[current_script]) 
-                                    {
-                                        can_addScript = false;
-                                        std::cout << "Cannot Add already existing script!\n";
-                                    }
+                                    can_addScript = false;
                                 }
-                                if (can_addScript == true)
+                            }
+                            if (can_addScript == true)
+                            {
+                                if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
                                 {
-                                    if (p_ecs.HaveComponent<NameTag>(selectedEntity) && p_ecs.HaveComponent<Transform>(selectedEntity))
+                                    if (mScriptList[current_script] == "PlayerControl" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity)
+                                                                                       && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
                                     {
-                                        if (mScriptList[current_script] == "PlayerControl" && p_ecs.HaveComponent<RigidBody>(selectedEntity) && p_ecs.HaveComponent<PlayerAttributes>(selectedEntity)
-                                                                                              && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Collider>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new PlayerControl(selectedEntity), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new CollisionResponse(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "ButtonResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
-                                                                                            && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new ButtonResponse(), selectedEntity);
-                                        }
+                                        logic.InsertScript(new PlayerControl(selectedEntity), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "CollisionResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<RigidBody>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new CollisionResponse(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "ButtonResponse" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                        && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new ButtonResponse(), selectedEntity);
+                                    }
 
-                                        if (mScriptList[current_script] == "PauseMenu" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
-                                                                                     && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new PauseMenu(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "ScenerioScript")
-                                        {
-                                            logic.InsertScript(new ScenerioScript(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "AudioManager" && p_ecs.HaveComponent<Audio>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new AudioManager(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new HUDController(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new GateController(selectedEntity), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "EnemyScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
-                                                                                               && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new EnemyScript(selectedEntity), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "BackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new BackgroundAudio(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "SliderScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
-                                                                                          && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new SliderScript(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "HazardScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
-                                                                                          && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new HazardScript(selectedEntity), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "CutScene"
-                                            && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new CutScene(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "DialogueManager" && p_ecs.HaveComponent<Sprite>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new DialogueManager(), selectedEntity);
-                                        }
-                                        if (mScriptList[current_script] == "BossScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
-                                                                                        && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
-                                        {
-                                            logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
-                                        }
+                                    if (mScriptList[current_script] == "PauseMenu" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                   && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new PauseMenu(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "ScenerioScript")
+                                    {
+                                        logic.InsertScript(new ScenerioScript(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "AudioManager" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new AudioManager(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "HUDController" && p_ecs.HaveComponent<HUDComponent>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new HUDController(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "GateController" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new GateController(selectedEntity), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "EnemyScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                     && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new EnemyScript(selectedEntity), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "BackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new BackgroundAudio(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "SliderScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                      && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new SliderScript(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "HazardScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Tag>(selectedEntity)
+                                                                                      && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<Attributes>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new HazardScript(selectedEntity), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "CutScene" && p_ecs.HaveComponent<Sprite>(selectedEntity) && p_ecs.HaveComponent<NameTag>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new CutScene(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "DialogueManager" && p_ecs.HaveComponent<Sprite>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new DialogueManager(), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "BossScript" && p_ecs.HaveComponent<Collider>(selectedEntity) && p_ecs.HaveComponent<Sprite>(selectedEntity)
+                                                                                    && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
                                     }
                                 }
+                            }
                         }
                         ImGui::SameLine();
                         if (ImGui::Button("Delete")) {
@@ -1368,10 +1350,8 @@ namespace EM {
                         std::vector<const char*> sList;
                         for (int i = 0; i < AudioArr.size(); i++) {
                             sList.push_back(AudioArr[i].mAudioPath.c_str());
-                            //std::cout << sList[i] << std::endl;
                         }
                         std::copy(sList.begin(), sList.end(), AudioList);
-                        //std::cout << "logicList " << logicList[1] << std::endl; 
                         ImGui::Text("Inserted Audio Files:");
                         ImGui::Combo("##Audio In Component", &current_audio, AudioList, static_cast<int>(sList.size()), static_cast<int>(sList.size()));
                         //edit channel group
@@ -1583,8 +1563,6 @@ namespace EM {
                 ImGui::SameLine();
                 ImGui::Text("Playing!");
                 current_sound = p_Audio->PlaySound(audioPath + mAudioFileList[currentfile].path().filename().string(), Audio::AudioType::MASTER);
-                //std::cout << "Playing Audio: " << audioPath + mAudioFileList[currentfile].path().filename().string() << std::endl;
-                //playinglist.emplace_back(std::to_string(current_sound).c_str());
             }
 
             for (auto i = p_Audio->mChannelMap.begin(); i != p_Audio->mChannelMap.end(); i++)
@@ -1687,11 +1665,9 @@ namespace EM {
         auto const& dir_entry = std::filesystem::directory_iterator( in );
         for (const auto& entry : dir_entry)
         {
-            if(entry.path().extension() == ".png")
-                std::cout << entry.path().filename().string() << std::endl;
+            if (entry.path().extension() == ".png") {
 
+            }
         }
-        /* mTextureFileList.emplace_back(dir_entry);
-        mTextureFile.emplace_back(dir_entry.path().filename().string());*/
     }
 }

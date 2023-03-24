@@ -62,11 +62,9 @@ namespace EM
 		bool check = false;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
 				check = true;
-				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
@@ -76,7 +74,6 @@ namespace EM
 			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 			{
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
-				//std::cout << "Playing Gate Audio" << std::endl;
 			}
 		}
         if (aliveCount == 0)

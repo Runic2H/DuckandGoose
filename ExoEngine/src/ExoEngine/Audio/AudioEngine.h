@@ -36,11 +36,7 @@ class CAudioEngine //Handles loading, unloading, playing, stopping and changing 
 
 
     FMOD::ChannelGroup* BGM, * SFX, * Master;
-    //FMOD::Channel*;
     FMOD::Sound* Msound;
-
-    //SoundMap mSounds;
-    //ChannelMap mChannels;
 public:
     std::map<int, FMOD::Channel*> mChannelMap;
 
@@ -52,9 +48,7 @@ public:
     void Release();
     void ErrorCheck(FMOD_RESULT result);
 
-    //void LoadAudio(std::string filename);
     FMOD::Sound* Loadsound(const std::string& strSoundName, bool bLooping = false);
-    //void UnLoadSound(const std::string& strSoundName);
 
     int PlaySound(const std::string& strSoundName, EM::Audio::AudioType chgrp);
     void PauseSound(int channelID);

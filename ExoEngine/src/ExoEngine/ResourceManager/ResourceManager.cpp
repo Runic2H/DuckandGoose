@@ -21,8 +21,6 @@ namespace EM {
 	std::unordered_map <std::string, std::shared_ptr<Shader>> ResourceManager::shaders;
 	std::unordered_map <std::string, std::shared_ptr<CAudioEngine>> ResourceManager::audios;
 	std::unordered_map <std::string, std::shared_ptr<Texture>> ResourceManager::Icons;
-	//TODO to load different fonts and maybe audio/music
-	//std::map <std::string, std::shared_ptr<Font>> ResourceManager::fonts;
 
 	/*!*************************************************************************
 	Load texture
@@ -150,36 +148,13 @@ namespace EM {
 		return std::shared_ptr<CAudioEngine>();
 	}
 
-	//TO be implement
-	// 
-	//std::shared_ptr<Font> ResourceManager::LoadFont(std::string name, unsigned int size)
-	//{
-	//	return std::shared_ptr<Font>();
-	//}
-	//std::shared_ptr<Font> ResourceManager::GetFont(std::string name)
-	//{
-	//	return std::shared_ptr<Font>();
-	//}
-
 	/*!*************************************************************************
 	Clear various maps for resources being managed
 	****************************************************************************/
 	void EM::ResourceManager::clear()
 	{
-		/*for (auto iter : textures)
-		{
-			iter.second->~Texture();
-		}
-
-		for (auto iter : shaders)
-			iter.second->~Shader();
-
-		for (auto iter : Icons)
-			iter.second->~Texture();*/
 		textures.clear();
 		Icons.clear();
 		shaders.clear();
 	}
-
-	
 }

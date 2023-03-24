@@ -22,7 +22,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) : playerPos{ vec2D() } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -35,11 +35,11 @@ namespace EM
 	****************************************************************************/
 	void EnemyDamaged::OnEnter(StateMachine* stateMachine)
 	{
-		//std::cout << "Enemy Damaged\n";
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
 				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
@@ -57,10 +57,6 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
 		}
-		/*if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
-		{
-			stateMachine->ChangeState(new EnemyDeath(stateMachine));
-		}*/
 	}
 
 	/*!*************************************************************************
@@ -69,6 +65,18 @@ namespace EM
 	void EnemyDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
+		//enemy damaged knockback
+		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
+		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
+		rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
+		vec2D newVel = vec2D(0.0f, 0.0f);
+		newVel = rigidbody.GetVel();
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
+		newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+		newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+		vec2D nextPos = transform.GetPos() - rigidbody.GetVel();
+		rigidbody.SetNextPos(nextPos);
+
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0) {
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 			{

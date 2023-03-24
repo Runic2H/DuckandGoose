@@ -394,9 +394,6 @@ namespace EM {
 	****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const Vec4& color)
 	{
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-		*/
 		Mat4x4 transform(1.0f);	
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -440,10 +437,6 @@ Overload function for Draw Quad using vec3 position with texture
 ****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const MultiRefs<Texture>& texture)
 	{
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-			*/
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -506,11 +499,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const Vec4& color)
 	{
-	
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });*/
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -539,10 +527,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const MultiRefs<Texture>& texture)
 	{
-		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			//* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-			//* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -552,8 +536,6 @@ Overload function for Draw Quad using vec3 position with texture
 		Scale4x4(scale, size.x, size.y, 1.0f);
 		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
 		transform = translate* scale * rot ;
-		
-
 		DrawQuad(transform, texture);
 	}
 	/*!*************************************************************************
@@ -569,10 +551,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawSprite(const Vec3& position, const vec2D& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
-		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-		//	* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-		//	* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -581,7 +559,6 @@ Overload function for Draw Quad using vec3 position with texture
 		Scale4x4(scale, size.x, size.y, 1.0f);
 		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
 		transform = translate * rot * scale;
-
 		DrawSprite(transform, sprite);
 	}
 	/*!*************************************************************************

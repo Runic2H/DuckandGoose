@@ -45,7 +45,6 @@ namespace EM
 		Entity CreateEntity()
 		{
 			assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.");
-			//EM_EXO_ASSERT(mLivingEntityCount < MAX_ENTITIES && "Too many entities in existence.")
 			// Take an ID from the front of the queue
 			Entity id = mAvailableEntities.top();
 			mAvailableEntities.pop();	//Removes elements from the front of the queue
@@ -133,11 +132,9 @@ namespace EM
 	private:
 
 		// Queue of unused entity IDs
-		//std::queue<Entity> mAvailableEntities{};
 		std::priority_queue<Entity, std::vector<Entity>, std::greater<Entity>> mAvailableEntities{};
 
 		// Array of signatures where the index corresponds to the entity ID
-		//std::array<SignatureID, MAX_ENTITIES> mSignatures{};
 		std::array<Signature, MAX_ENTITIES> mSignatures{};
 
 		// Total living entities - used to keep limits on how many exist
