@@ -1130,7 +1130,7 @@
             },
             {
                 "TextureName": "Idle",
-                "Index_X": 1,
+                "Index_X": 4,
                 "Index_Y": 0,
                 "Ucoordinates": 514.0,
                 "Vcoordinates": 512.0,
@@ -1198,7 +1198,12 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 8,
+                "8": {
+                    "AudioPath": "HP_Regen.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 9,
                 "BGM Volume": 0.10499999672174454,
                 "SFX Volume": 0.6349999904632568,
                 "Master Volume": 0.6650000214576721
@@ -1803,12 +1808,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -1870,7 +1875,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -1946,12 +1951,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2013,7 +2018,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2089,12 +2094,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2151,7 +2156,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2227,12 +2232,12 @@
             },
             {
                 "TextureName": "LASERGATE_BG_V2",
-                "Index_X": 2,
+                "Index_X": 19,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": true,
-                "IsAnimated": true,
+                "IsAnimated": false,
                 "MaxIndex": 20,
                 "DisplayTime 0": 0.019999999552965164,
                 "DisplayTime 1": 0.019999999552965164,
@@ -2294,7 +2299,7 @@
             },
             {
                 "TextureName": "LASERGATE_FG_V2",
-                "Index_X": 17,
+                "Index_X": 11,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
@@ -2786,8 +2791,8 @@
         ],
         "48": [
             {
-                "posX": -4.048194408416748,
-                "posY": 0.2654440999031067,
+                "posX": -0.22499999403953552,
+                "posY": 0.20499999821186066,
                 "scaleX": 0.25,
                 "scaleY": 0.03500000014901161,
                 "Rot": 0.0
@@ -2826,8 +2831,8 @@
         ],
         "49": [
             {
-                "posX": -4.078194618225098,
-                "posY": 0.2494441121816635,
+                "posX": -0.2549999952316284,
+                "posY": 0.1889999955892563,
                 "scaleX": 0.1818181872367859,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
@@ -2865,9 +2870,9 @@
         ],
         "50": [
             {
-                "posX": -4.198527812957764,
-                "posY": 0.21544411778450012,
-                "scaleX": 0.08523841947317123,
+                "posX": -0.33500000834465027,
+                "posY": 0.1550000011920929,
+                "scaleX": 0.1428571492433548,
                 "scaleY": 0.029999999329447746,
                 "Rot": 0.0
             },
@@ -2904,8 +2909,8 @@
         ],
         "51": [
             {
-                "posX": -4.103194713592529,
-                "posY": 0.25044411420822144,
+                "posX": -0.2800000011920929,
+                "posY": 0.1899999976158142,
                 "scaleX": 0.3499999940395355,
                 "scaleY": 0.11999999731779099,
                 "Rot": 0.0
@@ -3438,8 +3443,8 @@
         ],
         "67": [
             {
-                "posX": -1.5140000581741333,
-                "posY": -0.1720000058412552,
+                "posX": -1.5290000438690186,
+                "posY": -0.08100000768899918,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3474,13 +3479,13 @@
                 "NameTag": "Ground hazard firing 1"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3514,8 +3519,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3524,8 +3529,8 @@
         ],
         "68": [
             {
-                "posX": -1.1552900075912476,
-                "posY": 0.03322087973356247,
+                "posX": -1.1702899932861328,
+                "posY": 0.12422087788581848,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3560,13 +3565,13 @@
                 "NameTag": "Ground hazard firing 2"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3600,8 +3605,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3610,8 +3615,8 @@
         ],
         "69": [
             {
-                "posX": 2.1933107376098633,
-                "posY": 0.032992392778396606,
+                "posX": 2.1783106327056885,
+                "posY": 0.12399239093065262,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3646,13 +3651,13 @@
                 "NameTag": "Ground hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3686,8 +3691,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3696,8 +3701,8 @@
         ],
         "70": [
             {
-                "posX": 2.838721513748169,
-                "posY": -0.022983405739068985,
+                "posX": 2.823721408843994,
+                "posY": 0.06801658868789673,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3732,13 +3737,13 @@
                 "NameTag": "Ground hazard firing 4"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3772,8 +3777,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3782,8 +3787,8 @@
         ],
         "71": [
             {
-                "posX": 3.87060546875,
-                "posY": -0.2128472775220871,
+                "posX": 3.855605363845825,
+                "posY": -0.12184727936983109,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3818,13 +3823,13 @@
                 "NameTag": "Ground hazard firing 5"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3858,8 +3863,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3868,8 +3873,8 @@
         ],
         "72": [
             {
-                "posX": 3.982682704925537,
-                "posY": -0.011637018993496895,
+                "posX": 3.9676826000213623,
+                "posY": 0.07936298102140427,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3904,13 +3909,13 @@
                 "NameTag": "Ground hazard firing 6"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -3944,8 +3949,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -3954,8 +3959,8 @@
         ],
         "73": [
             {
-                "posX": 4.159687519073486,
-                "posY": -0.21662943065166473,
+                "posX": 4.144687652587891,
+                "posY": -0.12562942504882813,
                 "scaleX": 0.30000001192092896,
                 "scaleY": 0.30000001192092896,
                 "Rot": 0.0
@@ -3990,13 +3995,13 @@
                 "NameTag": "Ground hazard firing 7"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Ground_Hazards_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 6,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4030,8 +4035,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 1
             },
@@ -4040,10 +4045,10 @@
         ],
         "74": [
             {
-                "posX": -0.23947827517986298,
-                "posY": 0.18206655979156494,
-                "scaleX": 0.05000000074505806,
-                "scaleY": 0.05000000074505806,
+                "posX": -0.15647828578948975,
+                "posY": 0.08606655895709991,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.6000000238418579,
                 "Rot": -139.99998474121094
             },
             {
@@ -4076,13 +4081,13 @@
                 "NameTag": "Lazer hazard firing 1"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4118,8 +4123,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4128,10 +4133,10 @@
         ],
         "75": [
             {
-                "posX": 0.2683478593826294,
-                "posY": 0.18206655979156494,
-                "scaleX": 0.05000000074505806,
-                "scaleY": 0.05000000074505806,
+                "posX": 0.3513478636741638,
+                "posY": 0.08606655895709991,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.6000000238418579,
                 "Rot": -139.99998474121094
             },
             {
@@ -4164,13 +4169,13 @@
                 "NameTag": "Lazer hazard firing 2"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4206,8 +4211,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4216,10 +4221,10 @@
         ],
         "76": [
             {
-                "posX": 0.762260913848877,
-                "posY": 0.18357941508293152,
-                "scaleX": 0.05000000074505806,
-                "scaleY": 0.05000000074505806,
+                "posX": 0.8452609181404114,
+                "posY": 0.08757941424846649,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.6000000238418579,
                 "Rot": -139.99998474121094
             },
             {
@@ -4252,13 +4257,13 @@
                 "NameTag": "Lazer hazard firing 3"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4294,8 +4299,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -4304,10 +4309,10 @@
         ],
         "77": [
             {
-                "posX": 1.2592657804489136,
-                "posY": 0.18206655979156494,
-                "scaleX": 0.05000000074505806,
-                "scaleY": 0.05000000074505806,
+                "posX": 1.3422657251358032,
+                "posY": 0.08606655895709991,
+                "scaleX": 0.6000000238418579,
+                "scaleY": 0.6000000238418579,
                 "Rot": -139.99998474121094
             },
             {
@@ -4340,13 +4345,13 @@
                 "NameTag": "Lazer hazard firing 4"
             },
             {
-                "TextureName": "Blank",
-                "Index_X": 0,
+                "TextureName": "Laser_Hazard_Fire",
+                "Index_X": 3,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
-                "IsSpriteSheet": false,
-                "IsAnimated": false,
+                "IsSpriteSheet": true,
+                "IsAnimated": true,
                 "MaxIndex": 8,
                 "DisplayTime 0": 0.0,
                 "DisplayTime 1": 0.0,
@@ -4382,8 +4387,8 @@
             {},
             {
                 "FiringCooldown": -0.016666656360030174,
-                "FiringDuration": -0.016666656360030174,
-                "ChargeDuration": 1.4333338737487793,
+                "FiringDuration": 0.016666678711771965,
+                "ChargeDuration": -0.01666543446481228,
                 "HazardDamage": 20,
                 "HazardType": 2
             },
@@ -5571,8 +5576,8 @@
         ],
         "94": [
             {
-                "posX": -4.038283824920654,
-                "posY": -0.09392184019088745,
+                "posX": -3.856548309326172,
+                "posY": -0.09617272764444351,
                 "scaleX": 0.699999988079071,
                 "scaleY": 0.12500005960464478,
                 "Rot": 0.0
@@ -6139,7 +6144,7 @@
             },
             {
                 "TextureName": "LaserAttack",
-                "Index_X": 9,
+                "Index_X": 22,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
                 "Vcoordinates": 512.0,
