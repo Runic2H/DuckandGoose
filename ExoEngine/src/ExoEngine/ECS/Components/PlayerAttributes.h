@@ -23,6 +23,11 @@ namespace EM
 	class PlayerAttributes : public IComponent
 	{
 	public:
+		enum class Facing
+		{
+			RIGHT,
+			LEFT
+		};
 		PlayerAttributes();
 		~PlayerAttributes() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
@@ -60,5 +65,6 @@ namespace EM
 		vec2D mVel;
 		vec2D mDir;
 		entityPhysics mPhys;
+		Facing mFacing;
 	};
 }

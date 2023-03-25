@@ -56,6 +56,7 @@ namespace EM
 		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
+		
 		bool check = false;
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -73,11 +74,18 @@ namespace EM
 
 		if (check) {
 			dist = distance(transform.GetPos(), playerPos);
+			
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			{
-				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
+				rigidbody.SetDir(transform.GetPos().x - playerPos.x,  transform.GetPos().y - playerPos.y);
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
+				if (rigidbody.GetDir().x > 0)
+				{
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+				}
+				else
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel.y *= 3;
@@ -87,9 +95,11 @@ namespace EM
 					rigidbody.SetVel(newVel);
 					if (newVel.x < 0 && transform.GetScale().x < 0) {
 						transform.GetScale().x *= -1;
+						
 					}
 					if (newVel.x > 0 && transform.GetScale().x > 0) {
 						transform.GetScale().x *= -1;
+						p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
 					}
 				}
 			}
@@ -98,6 +108,10 @@ namespace EM
 				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
+				if (rigidbody.GetDir().x > 0)
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+				else
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel.y *= 6;
@@ -107,6 +121,7 @@ namespace EM
 					rigidbody.SetVel(newVel);
 					if (newVel.x < 0 && transform.GetScale().x < 0) {
 						transform.GetScale().x *= -1;
+					
 					}
 					if (newVel.x > 0 && transform.GetScale().x > 0) {
 						transform.GetScale().x *= -1;

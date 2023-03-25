@@ -32,6 +32,11 @@ namespace EM
 			ENEMY_SPECIAL,
 			ENEMY_BOSS
 		};
+		enum class Facing
+		{
+			RIGHT,
+			LEFT
+		};
 
 		EnemyAttributes();
 		~EnemyAttributes() = default;
@@ -58,6 +63,7 @@ namespace EM
 		bool mIsAlive;
 		bool mIsDamaged;
 		EnemyTypes mEnemyType;
+		Facing mEnemyFacing;
 		vec2D mVel;
 		entityPhysics mPhys;
 	};
