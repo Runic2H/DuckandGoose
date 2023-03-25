@@ -117,7 +117,7 @@ namespace EM {
                                                             rigid1.SetVel(vec2D(0.f, 0.f));
                                                         }
                                                         else {
-                                                            rigid1.SetVel(response1);
+                                                            rigid1.SetVel(vec2D(0.f, 0.f));
                                                         }
                                                     }
                                                     vec2D nextPos1 = trans1.GetPos() + rigid1.GetVel();
@@ -138,7 +138,7 @@ namespace EM {
                                                             rigid2.SetVel(vec2D(0.f, 0.f));
                                                         }
                                                         else {
-                                                            rigid2.SetVel(response2);
+                                                            rigid2.SetVel(vec2D(0.f, 0.f));
                                                         }
                                                     }
                                                     vec2D nextPos2 = trans2.GetPos() + rigid2.GetVel();
