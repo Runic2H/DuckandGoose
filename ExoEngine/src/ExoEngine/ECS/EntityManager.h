@@ -62,6 +62,7 @@ namespace EM
 			assert(entity < MAX_ENTITIES && "Entity out of range.");
 
 			// Put the destroyed ID at the back of the queue
+			mSignatures[entity].reset();
 			mAvailableEntities.push(entity);
 			mAliveEntities.erase(entity);
 			--mLivingEntityCount;

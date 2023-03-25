@@ -99,4 +99,18 @@ namespace EM {
 		mViewMatrix = glm::lookAt(mPosition, mPosition + front, up);
 		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
 	}
+
+	void Camera2D::SetPositionSmooth(const float x, const float y, const float zoom, const float speed)
+	{
+		glm::vec3 track = glm::vec3(x, y, mPosition.z);
+		glm::vec2 diff(track.x - mPosition.x, track.y - mPosition.y);
+
+		const float margin = 0.1f;
+		if ((abs(diff.x) > margin) || (abs(diff.y) > margin))
+		{
+			mPosition.x += diff.x * Timer::GetInstance().GetGlobalDT() * speed;
+			mPosition.y += diff.y * Timer::GetInstance().GetGlobalDT() * speed;
+			RecalculateMatrix();
+		}
+	}
 }

@@ -60,7 +60,7 @@ namespace EM
 				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
 					|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
 				{
-					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth == p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth)
+					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth != 0)
 					{
 						EnemyPopulation++;
 					}

@@ -202,19 +202,28 @@ namespace EM {
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
 				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive)
 				{
+					
 					auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 					auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 					auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
 					if (mTrans.GetScale().x < 0) {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.f, 0.f, 1.f });
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
+						
+
 					}
 					else {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.0f, 0.0f, 1.f });
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 					}
+
+					
 				}
 			}
 		}

@@ -33,7 +33,7 @@ namespace EM
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = true;
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 				{
 
 					p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.815f,
@@ -57,7 +57,7 @@ namespace EM
 	{
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 			{
 				p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
 				p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
