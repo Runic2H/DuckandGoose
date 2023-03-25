@@ -145,7 +145,7 @@ namespace EM
 					stateMachine->ChangeState(new EnemyAttack(stateMachine));
 				}
 			}
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+			else
 			{
 				if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
 				{

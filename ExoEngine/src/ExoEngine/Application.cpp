@@ -154,7 +154,7 @@ Application constructor
 					}
 					//temper
 					if (p_ecs.HaveComponent<PlayerAttributes>(i))
-						p_ecs.GetComponent<Transform>(i).SetPos(4.0f, 0.0f);
+						p_ecs.GetComponent<Transform>(i).SetPos(3.5f, 0.0f);
 				}
 			}
 			end_state = p_GUI->Update(m_window);

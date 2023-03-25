@@ -29,6 +29,7 @@ namespace EM {
 
 		const glm::vec3& GetPosition() const { return mPosition; }
 		void SetPosition(const glm::vec3& position) { mPosition = position; RecalculateMatrix(); }
+		void SetPositionSmooth(const float x, const float y, const float zoom = 0.f, const float speed = 2.5f);
 
 		float GetRotation() const { return mRotation; }
 		void SetRotation(float rotation) { mRotation = rotation; RecalculateMatrix(); }

@@ -30,7 +30,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Dialogue Manager
 		****************************************************************************/
-		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5" }, counter{ 0 }, MaxCounter{ 2 } {}
+		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5", "HowToPlay"}, counter{0}, MaxCounter{2} {}
 		/*!*************************************************************************
 		Default destructor for Dialogue Manager
 		****************************************************************************/
@@ -129,7 +129,7 @@ namespace EM
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-		std::string mDialogues[5];
+		std::string mDialogues[6];
 		int counter;
 		int MaxCounter;
 	};
