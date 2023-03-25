@@ -1,7 +1,6 @@
 #include "empch.h"
 #include "BossIdle.h"
 #include "BossAppear.h"
-
 namespace EM
 {
 	BossAppear::BossAppear(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
@@ -19,6 +18,8 @@ namespace EM
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("BossEyeball");
 		p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos({ 4.72f, 1.0f });
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+		
 	}
 
 	/*!*************************************************************************
@@ -26,7 +27,7 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		float fallspeed = 10.f;
+		float fallspeed = 5.f;
 		if(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y >= 0)
 		{
 			vec2D& nextpos = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos();
