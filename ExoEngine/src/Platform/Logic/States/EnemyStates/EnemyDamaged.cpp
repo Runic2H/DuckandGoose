@@ -68,13 +68,10 @@ namespace EM
 		//enemy damaged knockback
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
-		rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
-		vec2D newVel = vec2D(0.0f, 0.0f);
-		newVel = rigidbody.GetVel();
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
-		newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-		newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
-		vec2D nextPos = transform.GetPos() - rigidbody.GetVel();
+		vec2D dir = rigidbody.GetDir();
+		dir = dir * 150.0f;
+		rigidbody.SetVel(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
+		vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
 		rigidbody.SetNextPos(nextPos);
 
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0) {
