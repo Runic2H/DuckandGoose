@@ -33,11 +33,35 @@ namespace EM
 	****************************************************************************/
 	void EnemyDeath::OnEnter(StateMachine* stateMachine)
 	{
+		//player hp regen
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
+			{
+				//play hp regen sound
+				if (p_ecs.HaveComponent<Audio>(i) && (p_ecs.GetComponent<Audio>(i).GetSize() > 8))
+				{
+					p_ecs.GetComponent<Audio>(i)[8].should_play = true;
+				}
+				//increment player hp based on current player hp
+				p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (160 / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
+			}
+		}
+
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 2))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[2].should_play = true;
 		}
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_DEATH");
+
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_DEATH");
+		else
+		{
+			mDeathTimer = 0.6f;
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_DEATH");
+		}
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 	}
 
@@ -52,8 +76,6 @@ namespace EM
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;;
-			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
-			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		}
 	}
 
@@ -63,7 +85,6 @@ namespace EM
 	void EnemyDeath::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}
 }

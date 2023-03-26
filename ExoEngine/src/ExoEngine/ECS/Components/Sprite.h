@@ -16,7 +16,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #pragma once
 #include "IComponent.h"
 #include "glm/glm.hpp"
-//#include "Platform/Graphics/Texture.h"
 
 namespace EM {
 
@@ -48,6 +47,7 @@ namespace EM {
 		void SetAlpha(float in) { mAlpha = in; }
 		float GetAlpha() { return mAlpha; }
 
+		void SetLayerOrder(int layer) { LayerOrder = layer; }
 		/*!*************************************************************************
 		Retrieves Component Entity ID
 		****************************************************************************/

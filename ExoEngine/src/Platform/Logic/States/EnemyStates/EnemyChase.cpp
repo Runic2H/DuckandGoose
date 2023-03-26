@@ -35,7 +35,12 @@ namespace EM
 	****************************************************************************/
 	void EnemyChase::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+		{
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		}
+		else
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 	}
 
 	/*!*************************************************************************
@@ -51,6 +56,7 @@ namespace EM
 		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
+		
 		bool check = false;
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -62,43 +68,89 @@ namespace EM
 				{
 					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 					check = true;
-					//std::cout << "Player Detected\n";
 				}
 			}
 		}
+
 		if (check) {
-			rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
-			vec2D newVel = vec2D(0.0f, 0.0f);
-			newVel = rigidbody.GetVel();
-			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
-			newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-			newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
-			if (newVel.x > -99 && newVel.y < 99) {
-				newVel = newVel * -1;
-				rigidbody.SetVel(newVel);
-				if (newVel.x < 0 && transform.GetScale().x < 0) {
-					transform.GetScale().x *= -1;
+			dist = distance(transform.GetPos(), playerPos);
+			
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+			{
+				rigidbody.SetDir(transform.GetPos().x - playerPos.x,  transform.GetPos().y - playerPos.y);
+				vec2D newVel = vec2D(0.0f, 0.0f);
+				newVel = rigidbody.GetVel();
+				if (rigidbody.GetDir().x > 0)
+				{
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
 				}
-				if (newVel.x > 0 && transform.GetScale().x > 0) {
-					transform.GetScale().x *= -1;
+				else
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
+				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+				newVel.y *= 3;
+				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+				if (newVel.x > -99 && newVel.y < 99) {
+					newVel = newVel * -1;
+					rigidbody.SetVel(newVel);
+					if (newVel.x < 0 && transform.GetScale().x < 0) {
+						transform.GetScale().x *= -1;
+						
+					}
+					if (newVel.x > 0 && transform.GetScale().x > 0) {
+						transform.GetScale().x *= -1;
+						p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+					}
+				}
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+			{
+				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
+				vec2D newVel = vec2D(0.0f, 0.0f);
+				newVel = rigidbody.GetVel();
+				if (rigidbody.GetDir().x > 0)
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+				else
+					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
+				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
+				newVel.y *= 6;
+				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
+				if (newVel.x > -99 && newVel.y < 99) {
+					newVel = newVel * -1;
+					rigidbody.SetVel(newVel);
+					if (newVel.x < 0 && transform.GetScale().x < 0) {
+						transform.GetScale().x *= -1;
+					
+					}
+					if (newVel.x > 0 && transform.GetScale().x > 0) {
+						transform.GetScale().x *= -1;
+					}
+				}
+				if (dist <= 0.35f)
+				{
+					newVel.x = 0;
 				}
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			rigidbody.SetNextPos(nextPos);
-			//std::cout << "Curr Pos: " << transform.GetPos().x << ", " << transform.GetPos().y << std::endl;
-			//std::cout << "Next Pos: " << nextPos.x << ", " << nextPos.y << std::endl;
-			//std::cout << "Actual Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << std::endl;
-			dist = distance(transform.GetPos(), playerPos);
-			//______________________________________BODGE FIX. REMOVE AFTER FIXING RIGIDBODY____________________________________
-			//transform.SetPos(nextPos);
-			//__________________________________________________________________________________________________________________
+
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (dist < 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			{
-				//std::cout << "In Proximity2" << std::endl;
-				//if within range to attack, set mode to attacking
-				stateMachine->ChangeState(new EnemyAttack(stateMachine));
+				if (dist <= 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
+				{
+					//if within range to attack, set mode to attacking
+					stateMachine->ChangeState(new EnemyAttack(stateMachine));
+				}
+			}
+			else
+			{
+				if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
+				{
+					stateMachine->ChangeState(new EnemyAttack(stateMachine));
+				}
 			}
 		}
 	}

@@ -35,7 +35,12 @@ namespace EM
 	****************************************************************************/
 	void EnemyRetreat::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+		{
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
+		}
+		else
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 	}
 
 	/*!*************************************************************************
@@ -85,18 +90,11 @@ namespace EM
 			}
 			vec2D nextPos = transform.GetPos() + rigidbody.GetVel();
 			rigidbody.SetNextPos(nextPos);
-			//std::cout << "Curr Pos: " << transform.GetPos().x << ", " << transform.GetPos().y << std::endl;
-			//std::cout << "Next Pos: " << nextPos.x << ", " << nextPos.y << std::endl;
-			//std::cout << "Actual Next Pos: " << rigidbody.GetNextPos().x << ", " << rigidbody.GetNextPos().y << std::endl;
 			dist = distance(transform.GetPos(), playerPos);
-			//______________________________________BODGE FIX. REMOVE AFTER FIXING RIGIDBODY____________________________________
-			//transform.SetPos(nextPos);
-			//__________________________________________________________________________________________________________________
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (dist >= 0.4f)
+			if (dist >= 0.4f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 			{
-				//std::cout << "In Proximity2" << std::endl;
 				//if within range to attack, set mode to attacking
 				stateMachine->ChangeState(new EnemyChase(stateMachine));
 			}

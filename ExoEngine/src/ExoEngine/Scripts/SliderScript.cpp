@@ -34,26 +34,18 @@ namespace EM
 		def_position = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
 		limit.min = { def_position.x - 0.5f,def_position.y - 0.1f };
 		limit.max = { def_position.x+0.5f,def_position.y+0.1f };
-
 	}
-
-	/*transform.GetPos().x + collider.GetOffset().x , transform.GetPos().y + collider.GetOffset().y, 0.0f },
-						{ collider.GetMin().x - collider.GetMax().x , collider.GetMin().y - collider.GetMax().y },
-						{ 1.0f, 0.0f, 0.0f,1.0f });*/
 
 	void SliderScript::Update(float Frametime)
 	{
 		UNREFERENCED_PARAMETER(Frametime);
-		//things to add check volume and set pos accordingly
 
 		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
 
 		if (p_Editor->is_ShowWindow == true || limitset == false)
 		{
-			//std::cout<< SliderCali;
 			if (SliderCali == true)
 			{
-				
 				p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(limit.min.x + 0.5f, p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y);
 				SliderCali = false;//slider have been calibrated
 			}
@@ -64,10 +56,7 @@ namespace EM
 		}
 
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
-		//auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
-
 		
 		if(p_Editor->is_ShowWindow == false)
 		{ 
@@ -79,7 +68,6 @@ namespace EM
 
 			if (ID_tag.GetTargetTag() == "SFX")
 				transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + limit.min.x, transform.GetPos().y);
-
 
 			SliderCali = true;
 			std::cout << "limit min at:" << limit.min.x;
@@ -93,7 +81,6 @@ namespace EM
 				}
 				else
 				{
-					
 					clicked = false;
 				}
 			}
@@ -133,7 +120,6 @@ namespace EM
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
 				}
 			}
-
 			if (ID_tag.GetTargetTag() == "SFX")
 			{
 				p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
@@ -148,18 +134,13 @@ namespace EM
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
 				}
 			}
-
-
-
 		}
 
 		/*if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
-			
 				limitset = false;
 				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-			
-		}*/
+		}
 
 		
 	}

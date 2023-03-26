@@ -253,7 +253,6 @@ namespace EM
 		****************************************************************************/
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
-			//ResetEntities();
 			mComponentManager->ClearArrayForWorldBuild(Type);
 		}
 

@@ -14,12 +14,21 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
+#include "Platform/Graphics/Camera2D.h"
+#include "Platform/Graphics/Graphics.h"
 #include "OnBlock.h"
 #include "OnIdle.h"
 
+float EaseInOutSine(float start, float end, float value)
+{
+	end -= start;
+	return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
+}
+
 namespace EM
 {
-	OnBlock::OnBlock(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	OnBlock::OnBlock(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.15f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.02f },
+		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.02f } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnBlock::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -57,6 +66,15 @@ namespace EM
 				{
 					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[3].should_play = true;
 				}
+
+				mTimer += Frametime * 2;
+				if (mTimer >= mDuration) {
+					mTimer = 0.f;
+					std::swap(mCamMinX, mCamMaxX);
+					std::swap(mCamMinY, mCamMaxY);
+				}
+
+				EM::Graphic::camera.SetPosition({ EaseInOutSine(mCamMinX,mCamMaxX,mTimer / mDuration) , EaseInOutSine(mCamMinY,mCamMaxY,mTimer / mDuration), EM::Graphic::camera.GetPosition().z });
 
 				int pDmg = 0;
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {

@@ -145,9 +145,16 @@ Application constructor
 				{
 					if (p_ecs.HaveComponent<EnemyAttributes>(i))
 					{
-						p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
-						p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+						if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
+							|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+						{
+							p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
+							p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+						}
 					}
+					//temper
+					if (p_ecs.HaveComponent<PlayerAttributes>(i))
+						p_ecs.GetComponent<Transform>(i).SetPos(3.5f, 0.0f);
 				}
 			}
 			end_state = p_GUI->Update(m_window);
@@ -175,7 +182,6 @@ Application constructor
 	****************************************************************************/
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("Assets/Scene/Leveltest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

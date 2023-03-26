@@ -37,8 +37,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyPressed(const int& key)
     {
-       // mReset.push_back(key);
-
         return mKeyStatus[key] == GLFW_PRESS;
     }
 
@@ -55,7 +53,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyReleased(const int& key)
     {
-       // mReset.push_back(key);
         return mKeyStatus[key] == GLFW_RELEASE;
     }
 
@@ -104,14 +101,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseIsReleased(const int& key)
     {
-/*        if (MousePressed(key) || MouseHold(key))
-        {
-            if (mMouseStatus[key] == GLFW_RELEASE)
-            {
-                return true;
-            }
-        }
-        else return false;  */    
         return mMouseStatus[key] == GLFW_RELEASE;
     }
 

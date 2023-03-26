@@ -93,6 +93,7 @@ namespace EM
 					if (p_Input->KeyHold(GLFW_KEY_D)) {
 						vel.x = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
 						p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir.x = 1.0f;
+						p_ecs.GetComponent <PlayerAttributes>(stateMachine->GetEntityID()).mFacing = PlayerAttributes::Facing::RIGHT;
 						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x < 0)
 						{
 							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x,
@@ -102,6 +103,7 @@ namespace EM
 					if (p_Input->KeyHold(GLFW_KEY_A)) {
 						vel.x = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
 						p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir.x = -1.0f;
+						p_ecs.GetComponent <PlayerAttributes>(stateMachine->GetEntityID()).mFacing = PlayerAttributes::Facing::LEFT;
 						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x > 0)
 						{
 							p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetScale(-p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x,
@@ -122,7 +124,6 @@ namespace EM
 					pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), vel, Frametime));
 					vec2D nextPos = pTrans.GetPos() + pRigid.GetVel();
 					pRigid.SetNextPos(nextPos);
-					//std::cout << "Actual Next Pos: " << pRigid.GetNextPos().x << ", " << pRigid.GetNextPos().y << std::endl;
 				}
 				else
 				{

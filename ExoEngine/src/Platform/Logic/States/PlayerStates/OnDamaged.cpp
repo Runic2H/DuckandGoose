@@ -28,8 +28,8 @@ namespace EM
 		return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
 	}
 
-	OnDamaged::OnDamaged(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.2f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.05f},
-		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.05f } {UNREFERENCED_PARAMETER(stateMachine); }
+	OnDamaged::OnDamaged(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.15f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.02f},
+		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.02f } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -64,7 +64,7 @@ namespace EM
 	****************************************************************************/
 	void OnDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		mTimer += Frametime;
+		mTimer += Frametime * 2;
 		if (mTimer >= mDuration) {
 			mTimer = 0.f;
 			std::swap(mCamMinX, mCamMaxX);

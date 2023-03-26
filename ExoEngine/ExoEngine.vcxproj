@@ -46,6 +46,7 @@
     <ClInclude Include="src\ExoEngine\Math\Vec4.h" />
     <ClInclude Include="src\ExoEngine\Scripts\AudioManager.h" />
     <ClInclude Include="src\ExoEngine\Scripts\BackgroundAudio.h" />
+    <ClInclude Include="src\ExoEngine\Scripts\BossScript.h" />
     <ClInclude Include="src\ExoEngine\Scripts\ButtonResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CollisionResponse.h" />
     <ClInclude Include="src\ExoEngine\Scripts\CutScene.h" />
@@ -60,6 +61,12 @@
     <ClInclude Include="src\ExoEngine\Scripts\ScenerioScript.h" />
     <ClInclude Include="src\Platform\Graphics\Camera.h" />
     <ClInclude Include="src\Platform\LevelEditor\Picker.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossIdle.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
@@ -263,6 +270,12 @@
     <ClCompile Include="src\ExoEngine\Scripts\PauseMenu.cpp" />
     <ClCompile Include="src\Platform\LevelEditor\Picker.cpp" />
     <ClCompile Include="src\Platform\Logic\StateMachines\StateMachine.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossIdle.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />

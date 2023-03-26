@@ -32,6 +32,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/HazardScript.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
+#include "ExoEngine/Scripts/BossScript.h"
 
 
 
@@ -102,6 +103,10 @@ namespace EM
 			{
 				mScriptsVector.push_back(new EnemyScript(GetComponentEntityID()));
 			}
+			if (mScriptNameVector[j] == "BossScript")
+			{
+				mScriptsVector.push_back(new BossScript(GetComponentEntityID()));
+			}
 			if (mScriptNameVector[j] == "CollisionResponse")
 			{
 				mScriptsVector.push_back(new CollisionResponse());
@@ -160,17 +165,13 @@ namespace EM
 	bool Logic::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
 		int i = 0;
-		//writer->StartObject();
-		//writer->StartArray();
 		for (i = 0; i < mScriptNameVector.size(); ++i)
 		{
 			writer->Key(std::to_string(i).c_str());
 			writer->String(mScriptNameVector[i].c_str());
 		}
-		//writer->EndArray();
 		writer->Key("ScriptCount");
 		writer->Int(i);
-		//writer->EndObject();
 		return true;
 	}
 
@@ -183,7 +184,6 @@ namespace EM
 		script->SetScriptEntityID(this->GetComponentEntityID());
 		mScriptNameVector.push_back(script->GetScriptName());
 		mScriptsVector.push_back(script);
-		//std::cout << "Script Vector: " << mScriptsVector.front()->GetScriptEntityID() << std::endl;
 	}
 
 	void Logic::DeleteScript(std::string scriptname)
@@ -192,7 +192,6 @@ namespace EM
 			if (mScriptNameVector[idx] == scriptname) {
 				mScriptNameVector.erase(mScriptNameVector.begin() + idx);
 				mScriptsVector.erase(mScriptsVector.begin() + idx);
-				//std::cout << "Deleted Script: " << scriptname << "\n";
 			}
 		}
 	}
@@ -219,7 +218,6 @@ namespace EM
 				return mScriptsVector[i];
 			}
 		}
-		std::cout << "'Script Not Found" << std::endl;
 		return nullptr;
 	}
 }

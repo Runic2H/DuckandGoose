@@ -51,6 +51,7 @@ namespace EM
 	****************************************************************************/
 	void OnIdle::OnEnter(StateMachine* stateMachine)
 	{
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Idle");
 	}
 

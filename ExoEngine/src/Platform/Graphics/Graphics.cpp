@@ -25,8 +25,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
 namespace EM {
-	
-	//extern ECS ecs;
 	/*!*************************************************************************
 	Load Icon from filepath using resource manager
 	****************************************************************************/
@@ -166,7 +164,8 @@ namespace EM {
 										{ collider[u].mMin.x + collider[u].mMax.x , collider[u].mMin.y + collider[u].mMax.y },
 										{ 1.0f, 0.0f, 0.0f,1.0f });
 								}
-								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bubble) {
+								if (p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::circle || p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bubble
+									|| p_ecs.GetComponent<Collider>(*i)[u].mCol == Collider::ColliderType::bossball) {
 									auto& collider = p_ecs.GetComponent<Collider>(*i);
 									EM::Matrix4x4 translate = EM::Translate4x4(translate, transform.GetPos().x + collider[u].mOffset.x, transform.GetPos().y + collider[u].mOffset.y, 0.0f);
 									EM::Matrix4x4 scale = EM::Scale4x4(scale, collider[u].mRadius * 2, collider[u].mRadius * 2, collider[u].mRadius * 2);
@@ -210,19 +209,28 @@ namespace EM {
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
 				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive)
 				{
+					
 					auto& mTrans = p_ecs.GetComponent<Transform>(entity);
 					auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 					auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
 					if (mTrans.GetScale().x < 0) {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.f, 0.f, 1.f });
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
+						
+
 					}
 					else {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.1f, 0.1f, 1.0f });
+						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.0f, 0.0f, 1.f });
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 					}
+
+					
 				}
 			}
 		}

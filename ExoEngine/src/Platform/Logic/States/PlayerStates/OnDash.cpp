@@ -32,7 +32,7 @@ namespace EM
 	****************************************************************************/
 	void OnDash::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer = 0.2f;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer = 0.5f;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown = 3.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Dash");
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 4))
@@ -49,10 +49,11 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer -= Frametime;
 		auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 		auto& pTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir * 2.0f;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir.x *= 0.8f;
-		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
-		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir, Frametime));
+		//std::cout << pRigid.GetVel().x << std::endl;
+		vec2D dir = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir;
+		dir = dir * 150.0f * 0.2f;
+		//pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
+		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), dir, Frametime));
 		vec2D nextPos = (pTrans.GetPos() + pRigid.GetVel());
 		pRigid.SetNextPos(nextPos * Frametime);
 

@@ -39,11 +39,9 @@ namespace EM
 		
 		UNREFERENCED_PARAMETER(Frametime);
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
-		//auto& tag = p_ecs.GetComponent<NameTag>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
-		//std::cout << p_GUI->check_pause();
 
 		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
 		
@@ -57,17 +55,6 @@ namespace EM
 			}
 			
 		}
-		
-		//check if the game is pause
-		//if (p_Editor->is_ShowWindow == true)
-		//{
-		//	if (calibrate_pos == true)
-		//	{
-		//	//	transform.SetPos(transform.GetPos() - camPos);
-		//		calibrate_pos = false;//this code allow menu to be recalibrated
-		//	}
-		//	//Graphic::camera.SetPosition({ 0.0f, 0.0f, 0.0f });//mthis code set camera at center
-		//}
 
 		if (p_GUI->check_pause() == true&& p_Editor->is_ShowWindow == false)
 		{
@@ -311,5 +298,4 @@ namespace EM
 		else
 			return false;// return false if it isnt
 	}
-
 }
