@@ -132,6 +132,12 @@ namespace EM
 				
 			}
 
+			if (ID_tag.GetTag() == "Mute" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+			{
+				spt.SetTexture("Mute_Hover");
+				//std::cout << "hello";
+			}
+
 
 			//std::cout << tag.GetNameTag();
 			//std::cout << "minX: " << (col[0].mMin.x + transform.GetPos().x)<< "minY: " << (col[0].mMin.y + transform.GetPos().y) << "MaxX: " << (col[0].mMax.x + transform.GetPos().x) << "MaxY: " << (col[0].mMax.y + transform.GetPos().y) << std::endl;
@@ -147,7 +153,7 @@ namespace EM
 				{
 				
 					Graphic::mcamera->SetZoomLevel(0.25f);
-					p_Scene->setSceneToLoad("Assets/Scene/CutScene.json");
+					p_Scene->setSceneToLoad("Assets/Scene/SAV1.json");
 				}
 
 				//f (ID_tag.GetTag() == "Resume")
@@ -193,6 +199,11 @@ namespace EM
 				
 					Graphic::mcamera->SetZoomLevel(0.25f);
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+				}
+
+				if (ID_tag.GetTag() == "Mute")
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
 				}
 
 			
@@ -245,6 +256,11 @@ namespace EM
 				if (ID_tag.GetTag() == "PRestart")
 				{
 					spt.SetTexture("Restart_Click");//to be change
+				}
+
+				if (ID_tag.GetTag() == "Mute")
+				{
+					spt.SetTexture("Mute_Click");//to be change
 				}
 				
 			}

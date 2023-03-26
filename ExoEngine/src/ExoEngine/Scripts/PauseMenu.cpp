@@ -47,13 +47,13 @@ namespace EM
 
 		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
 		
-		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE)&&p_GUI->check_pause()==false)
+		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 			if (ID_tag.GetTag() == "PauseMenuBG")
 			{
 			p_GUI->toggle_pause();
-			Graphic::mcamera->SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
+			Graphic::mcamera->SetZoomLevel(1.0f);
 			}
 			
 		}
@@ -77,33 +77,48 @@ namespace EM
 			//	calibrate_pos = true;
 			//}
 
+			if (ID_tag.GetTag() == "PauseMenuBG")	
+			{
+				spt.SetTexture("PAUSED");
+			}
 				if (ID_tag.GetTag() == "Resume")
 				{
-					spt.SetTexture("Resume_Idle");
+					spt.SetTexture("ResumeGame_Yellow");
 				//	transform.SetPos(offset.x + camPos.y, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "Quit")
 				{
-					spt.SetTexture("QG_Y");
+					spt.SetTexture("Quit_Yellow");
 				//	transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "Options")
 				{
-					spt.SetTexture("Options_Idle");
+					spt.SetTexture("Option_Yellow");
 				//	transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
-				if (ID_tag.GetTag() == "Restart")
+				if (ID_tag.GetTag() == "HTP")
 				{
-					spt.SetTexture("Restart_Idle");//to be change
+					spt.SetTexture("HTP_Yellow");//to be change
 					//transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
-				if (ID_tag.GetTag() == "PauseMenuBG")
+				
+
+				if (ID_tag.GetTag() == "Back")
 				{
-					spt.SetTexture("MenuPanel");//to be change
-				//	transform.SetPos(camPos.x, camPos.y);
-				/*	std::cout << "Position x: " << offset.x + camPos.x << "Position Y: " << offset.y + camPos.y << std::endl;
-					std::cout << "camera_Position:" << Graphic::camera.GetPosition().x << ", " << Graphic::camera.GetPosition().y << std::endl;*/
+					spt.SetTexture("BACK_Y");//to be change
 				}
+
+				if (ID_tag.GetTag() == "No")
+				{
+					spt.SetTexture("NO_Y");//to be change
+				}
+
+				if (ID_tag.GetTag() == "Yes")
+				{
+					spt.SetTexture("YES_Y");//to be change
+				}
+
+				
 				
 				
 
@@ -128,54 +143,91 @@ namespace EM
 				{
 					if (ID_tag.GetTag() == "Resume" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("Resume_Hover");
+						spt.SetTexture("ResumeGame_Blue");
 					}
 					if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("QG_B");
+						spt.SetTexture("Quit_Blue");
 					}
-					//if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
-					//{
-					//	spt.SetTexture("Options_Hover"); //to be updated
-					//}
-					if (ID_tag.GetTag() == "Restart" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+					if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("Restart_Hover"); //to be updated
+						spt.SetTexture("Option_Blue"); //to be updated
+					}
+					if (ID_tag.GetTag() == "HTP" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+					{
+						spt.SetTexture("HTP_Blue"); //to be updated
+					}
+
+					if (ID_tag.GetTag() == "Back")
+					{
+						spt.SetTexture("BACK_B");//to be change
+					}
+
+					if (ID_tag.GetTag() == "No")
+					{
+						spt.SetTexture("NO_B");//to be change
+					}
+
+					if (ID_tag.GetTag() == "Yes")
+					{
+						spt.SetTexture("YES_B");//to be change
 					}
 
 					if (curr_state == button_state::release)
 					{
-						if (ID_tag.GetTag() == "Resume")
+						if (ID_tag.GetTag() == "Resume" && press_once == false)
 						{
 							p_GUI->toggle_pause();
-							Graphic::camera.SetPosition(p_GUI->PrevCamPos);
-							Graphic::mcamera->SetZoomLevel(0.25f);
+							//Graphic::mcamera->SetPosition(p_GUI->PrevCamPos);
+							//Graphic::mcamera->SetZoomLevel(0.25f);
 
 
 						}
 
-						if (ID_tag.GetTag() == "Quit")
+						if (ID_tag.GetTag() == "Quit" && press_once == false)
 						{
 							
-							//curr_state = idle;
+							Graphic::camera.SetPosition({ 0.0f, 8.0f, 0.0f });
+							press_once = true;
+							
+						}
+
+						if (ID_tag.GetTag() == "Options" && press_once == false)
+						{
+
+							Graphic::camera.SetPosition({ 0.0f, 4.0f, 0.0f });
+							press_once = true;
+
+						}
+
+
+						if (ID_tag.GetTag() == "Back" && press_once == false)
+						{
+							Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
+							press_once = true;
+						}
+
+						if (ID_tag.GetTag() == "No" && press_once == false)
+						{
+							Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
+							press_once = true;
+						}
+
+						if (ID_tag.GetTag() == "Yes" && press_once == false)
+						{
+							//curr_state = button_state::idle;
 							//p_GUI->toggle_menu();
 							p_GUI->toggle_pause();
 							p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+							press_once = true;
 						}
 
-					/*	if (ID_tag.GetTag() == "Options")
-						{
-							PrevCamPos = Graphic::camera.GetPosition();
-							Graphic::camera.SetPosition({ 40.0f, 40.0f, 0});
-							optionstate = true;
-						}*/
 
-						if (ID_tag.GetTag() == "Restart")
+						if (ID_tag.GetTag() == "HTP" && press_once == false)
 						{
-							p_GUI->toggle_pause();
-							Graphic::camera.SetPosition(p_GUI->PrevCamPos);
-							Graphic::mcamera->SetZoomLevel(0.25f);
-							p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
+							Graphic::camera.SetPosition({ 0.0f, -8.0f, 0.0f });
+							curr_state = button_state::idle;
+							press_once = true;
 						}
 					}
 
@@ -183,26 +235,46 @@ namespace EM
 					{
 						if (ID_tag.GetTag() == "Resume")
 						{
-							spt.SetTexture("Resume_Click");
+							spt.SetTexture("ResumeGame_Red");
 							
 						}
 
 						if (ID_tag.GetTag() == "Quit")
 						{
-							spt.SetTexture("QG_R");
+							spt.SetTexture("Quit_Red");
+
 						}
 
-					/*	if (ID_tag.GetTag() == "Options")
+						if (ID_tag.GetTag() == "Back")
 						{
-							spt.SetTexture("Options_Click");
-						}*/
+							spt.SetTexture("BACK_R");//to be change
+						}
 
-						if (ID_tag.GetTag() == "Restart")
+						if (ID_tag.GetTag() == "No")
+						{
+							spt.SetTexture("NO_R");//to be change
+						}
+
+						if (ID_tag.GetTag() == "Yes")
+						{
+							spt.SetTexture("YES_R");//to be change
+						}
+
+						if (ID_tag.GetTag() == "Options")
+						{
+							spt.SetTexture("Option_Red");
+						}
+
+						if (ID_tag.GetTag() == "HTP")
+						{
+							spt.SetTexture("HTP_Red");
+						}
+
+
+						if (ID_tag.GetTag() == "PAUSED")
 						{
 							spt.SetTexture("Restart_Click");
 						}
-
-						
 
 					}
 				}			
@@ -210,8 +282,8 @@ namespace EM
 		else if (p_GUI->check_pause() == false)
 		{
 		spt.SetTexture("Blank");
-		//Graphic::camera.SetZoomLevel(0.25f);
 		}
+		press_once = false;
 	}
 
 	void PauseMenu::End()

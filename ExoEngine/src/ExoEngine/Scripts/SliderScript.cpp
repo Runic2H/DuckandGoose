@@ -19,6 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "../ECS/SceneManager.h"
 #include "ExoEngine/GUI/GUI.h"
 #include "Platform/LevelEditor/LevelEditor.h"
+#include "Platform/Graphics/Graphics.h"
 
 
 
@@ -45,7 +46,7 @@ namespace EM
 		UNREFERENCED_PARAMETER(Frametime);
 		//things to add check volume and set pos accordingly
 
-		
+		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
 
 		if (p_Editor->is_ShowWindow == true || limitset == false)
 		{
@@ -81,9 +82,9 @@ namespace EM
 
 
 			SliderCali = true;
-			//std::cout << "limit min at:" << limit.min.x;
-			if((p_GUI->MousePosition.x >= limit.min.x && p_GUI->MousePosition.y >= limit.min.y) &&
-				(p_GUI->MousePosition.x <= limit.max.x&& p_GUI->MousePosition.y <= limit.max.y))//if system is pause and continue button is pressed, tell the system to resume the game
+			std::cout << "limit min at:" << limit.min.x;
+			if((p_GUI->MousePosition.x +  camPos.x >= limit.min.x && p_GUI->MousePosition.y + camPos.y >= limit.min.y) &&
+				(p_GUI->MousePosition.x + camPos.x <= limit.max.x&& p_GUI->MousePosition.y + +camPos.y <= limit.max.y))//if system is pause and continue button is pressed, tell the system to resume the game
 			{
 				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 				{
@@ -105,7 +106,7 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
 				}
-				p_Audio->SetVolume(0, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
+				//p_Audio->SetVolume(0, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
@@ -125,7 +126,7 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), 0.0f);
 				}
-				p_Audio->SetVolume(1, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + 1);
+				//p_Audio->SetVolume(1, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + 1);
 
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
 				{
@@ -140,7 +141,7 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), 0.0f);
 				}
-				p_Audio->SetVolume(2, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + 1);
+				//p_Audio->SetVolume(2, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + 1);
 
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
 				{
@@ -152,13 +153,13 @@ namespace EM
 
 		}
 
-		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
+		/*if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
 			
 				limitset = false;
 				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 			
-		}
+		}*/
 
 		
 	}
