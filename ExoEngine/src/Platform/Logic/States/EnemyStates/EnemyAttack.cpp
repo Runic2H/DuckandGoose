@@ -38,10 +38,10 @@ namespace EM
 	void EnemyAttack::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
-			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 0.63f;
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 0.47f;
 		else//for now only have range enemy
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.92f;
-		
+
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET");
 		else//for now only have range enemy
@@ -50,6 +50,14 @@ namespace EM
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+		}
+
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+		{
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
+			{
+				p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
+			}
 		}
 	}
 
@@ -61,27 +69,31 @@ namespace EM
 		float offsetlaser = 0;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer -= Frametime;
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 1.26f)
+		//if is ranged enemy and passed ranged enemy atk timer
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 1.08f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
 		{
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 				{
-					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
-					{
-						p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
-						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x <= 0) offsetlaser = 0.2f;
-						else offsetlaser = -0.2f;
-						p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + offsetlaser,
+
+					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
+					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x <= 0) offsetlaser = 0.2f;
+					else offsetlaser = -0.2f;
+					p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + offsetlaser,
 						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y - 0.018f);
-						p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
-						if(p_ecs.GetComponent<Sprite>(i).GetIndex().x >= p_ecs.GetComponent<Sprite>(i).GetMaxIndex())
-							p_ecs.GetComponent<Sprite>(i).is_Animated = false;
-					}
+					p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
+					
 				}
 			}
 		}
+		//if melee enemy and passed melee enemy atk timer 
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 0.23f)
+		{
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+		}
+
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
 		{
 			stateMachine->ChangeState(new EnemyTransition(stateMachine));

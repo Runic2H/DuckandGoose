@@ -33,7 +33,7 @@ namespace EM {
     acceleration regardless of frame rate
     ****************************************************************************/
     vec2D entityPhysics::friction(vec2D& entvel, float dt) {
-        entvel -= entvel * 8.5f * dt;
+        entvel -= entvel * 15.5f * dt;
         return entvel;
     }
     /*!*************************************************************************
