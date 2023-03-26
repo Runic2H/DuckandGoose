@@ -61,10 +61,44 @@ namespace EM
             if (pComp.GetType() == HUDComponent::ElementType::Static) {
                 pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
             }
+            if (pComp.GetType() == HUDComponent::ElementType::BossStatic) {
+                for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+                {
+                    if (p_ecs.HaveComponent<EnemyAttributes>(i) && p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Boss")
+                    {
+                        pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
+                        if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == true) {
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Boss_HP_P2");
+                        }
+                        else {
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
+                        }
+                    }
+                }
+            }
             if (pComp.GetType() == HUDComponent::ElementType::HealthBar) {
                 //update scale
                 pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth)/2.0f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth)/2.0f, pTrans.GetScale().y);
                 pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mHealth) / 2.0f / (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mMaxHealth) / 2.0f) /2.5f, camPos.y + pComp.GetOffset().y);
+            }
+            if (pComp.GetType() == HUDComponent::ElementType::BossHP) {
+                //update scale
+                for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
+                {
+                    if (p_ecs.HaveComponent<EnemyAttributes>(i) && p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Boss")
+                    {
+                        if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == true) {
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("HP_Boss_Bar");
+                        }
+                        else {
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
+                        }
+                        pTrans.SetScale(((float)p_ecs.GetComponent<EnemyAttributes>(i).mHealth) / ((float)p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth) / 1.5f, pTrans.GetScale().y);
+                        pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (((float)p_ecs.GetComponent<EnemyAttributes>(i).mHealth) / ((float)p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth) / 1.5f / 2.f), camPos.y + pComp.GetOffset().y);
+                    }
+                }
+
+                
             }
             if (pComp.GetType() == HUDComponent::ElementType::BlockBar) {
                 //check for timing of cooldown

@@ -75,6 +75,8 @@ Regular_HitSplash Assets/Textures/VFX/Regular_HitSplash_SpriteSheet.png
 QuitHover Assets/Textures/UI/Quit_Hover.png
 HPStatic Assets/Textures/HPStatic.png
 HPBar Assets/Textures/HPBar.png
+BossStatic Assets/Textures/Boss_HP_P2.png
+BossHP Assets/Textures/HP_Boss_Bar.png
 DashBar Assets/Textures/DashBar.png
 MenuPanel Assets/Textures/UI/MenuPanel.png 
 VolumeBall Assets/Textures/UI/VolumeBall.png
