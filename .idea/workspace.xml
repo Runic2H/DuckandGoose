@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec72cf66-e13e-41f2-a551-8a4ac066417f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/BossScript.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossAppear.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossAppear.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossAttack.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossAttack.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossChasing.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossChasing.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossIdle.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossIdle.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossNotActive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossNotActive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossOnDamage.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/BossStates/BossOnDamage.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/BOSSLASER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/BossEyeball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/LaserAttack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/RANGED_ENEMY_ATT_LASER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/UI/EnemyHealthBar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exomata/Assets/metadigger/HP_Regen.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/ExoEngine.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/ExoEngine.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/ExoEngine.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/ExoEngine.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Animation/Animation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Animation/Animation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Animation/Animation.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Animation/Animation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Audio/AudioEngine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Audio/AudioEngine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Audio/AudioEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Audio/AudioEngine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/ComponentArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/ComponentArray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Attributes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Attributes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Audio.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Audio.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Audio.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Audio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Collider.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Collider.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Collider.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Collider.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Components.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Components.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/EnemyAttributes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/EnemyAttributes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/EnemyAttributes.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/EnemyAttributes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/HUDComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/HUDComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Logic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Logic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/NameTag.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/NameTag.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/PlayerAttributes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/PlayerAttributes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/PlayerAttributes.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/PlayerAttributes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/RigidBody.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/RigidBody.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/RigidBody.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/RigidBody.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Sprite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Sprite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Sprite.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Sprite.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Tag.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Tag.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/Transform.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/WinData.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/Components/WinData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/ECS.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/ECS.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/EntityManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/EntityManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ECS/SceneManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/GUI/GUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/GUI/GUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Input/Input.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Input/Input.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/matrix4x4.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/matrix4x4.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/matrix4x4.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/matrix4x4.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/physics.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Math/physics.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ResourceManager/ResourceManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ResourceManager/ResourceManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ResourceManager/ResourceManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/ResourceManager/ResourceManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/AudioManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/AudioManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ButtonResponse.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ButtonResponse.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CollisionResponse.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CollisionResponse.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CollisionResponse.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CollisionResponse.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CutScene.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/CutScene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/DialogueManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/DialogueManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/DialogueManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/EnemyScript.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/EnemyScript.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/HUDController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/HUDController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/PauseMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/PauseMenu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ScenerioScript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ScenerioScript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ScenerioScript.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/ScenerioScript.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/SliderScript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/ExoEngine/Scripts/SliderScript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Buffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Buffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Camera2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Camera2D.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Camera2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Camera2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/FrameBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/FrameBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Graphics.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Graphics.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Renderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/TextRendering.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/TextRendering.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Texture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Graphics/Texture.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/LevelEditor/LevelEditor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/LevelEditor/LevelEditor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/StateMachines/StateMachine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/StateMachines/StateMachine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/StateMachines/StateMachine.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/StateMachines/StateMachine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyAttack.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyChase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyChase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDamaged.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDamaged.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDamaged.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDamaged.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDeath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyDeath.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyIdle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyIdle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyNotActive.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyNotActive.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyRetreat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/EnemyStates/EnemyRetreat.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/GateStates/GateLocked.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/GateStates/GateLocked.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/HazardStates/HazardFire.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/HazardStates/HazardFire.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnAttack_1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnAttack_1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnAttack_2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnAttack_2.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnBlock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnBlock.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnBlock.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnDamaged.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnDamaged.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnDash.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnDash.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnIdle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnIdle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnMove.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Logic/States/PlayerStates/OnMove.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Physics/CollisionSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Physics/CollisionSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Physics/PhysicsSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Physics/PhysicsSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Platform/Window/Window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Platform/Window/Window.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExoEngine/src/Serialization/JSONserialization.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExoEngine/src/Serialization/JSONserialization.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/Assets/Scene/Elton.json" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/Assets/Scene/Elton.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_ATTACKING_V2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_ATTACKING.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_DEATH_V2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_DEATH.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_HOVERING_ V2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/Assets/Textures/Characters/EXOMATA_RANGED_ENEMY_HOVERING.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/Exomata.vcxproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/Exomata.vcxproj.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exomata/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Exomata/imgui.ini" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2NYV1ieZMy0zdQOV5KN52HAxOws" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec72cf66-e13e-41f2-a551-8a4ac066417f" name="Changes" comment="" />
+      <created>1679840794660</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679840794660</updated>
+    </task>
+    <servers />
+  </component>
+</project>

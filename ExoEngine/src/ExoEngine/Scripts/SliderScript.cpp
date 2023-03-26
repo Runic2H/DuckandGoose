@@ -140,7 +140,7 @@ namespace EM
 		{
 				limitset = false;
 				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-		}
+		}*/
 
 		
 	}

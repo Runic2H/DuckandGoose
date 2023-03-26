@@ -407,10 +407,10 @@
         ],
         "10": [
             {
-                "posX": -1.3469821214675903,
-                "posY": -0.6656671762466431,
-                "scaleX": 1.0,
-                "scaleY": 0.20000000298023224,
+                "posX": -1.3686245679855347,
+                "posY": -0.6749955415725708,
+                "scaleX": 1.0536959171295166,
+                "scaleY": 0.41180580854415894,
                 "Rot": 0.0
             },
             {},
@@ -436,7 +436,7 @@
                 "NameTag": "none"
             },
             {
-                "TextureName": "MM_Y",
+                "TextureName": "BACK_Y",
                 "Index_X": 0,
                 "Index_Y": 0,
                 "Ucoordinates": 512.0,
@@ -451,7 +451,7 @@
                 "ScriptCount": 1
             },
             {
-                "Tag": "MainMenu",
+                "Tag": "Back",
                 "TargetTag": ""
             },
             {},
