@@ -42,6 +42,7 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnExit(StateMachine* stateMachine)
 	{
+		UNREFERENCED_PARAMETER(stateMachine);
 		delete this;
 	}
 }

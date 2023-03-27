@@ -47,6 +47,7 @@ namespace EM {
 		ResourceManager::LoadShader("QuadShader", "Assets/Shaders/texture.shader");
 		ResourceManager::LoadShader("LineShader", "Assets/Shaders/Line.shader");
 		ResourceManager::LoadShader("CircleShader", "Assets/Shaders/Circle.shader");
+		ResourceManager::LoadShader("ImpactShader", "Assets/Shaders/Impact.shader");
 		
 		LoadIconsTexture("Assets/Text/Icons.txt");
 		std::string path = {"Assets/Textures/"};
@@ -189,7 +190,17 @@ namespace EM {
 					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 						p_ecs.GetComponent<Transform>(entity).GetPos().y,
 						0.0f });
-					Graphic::mcamera->SetZoomLevel(0.25f);
+
+					mcamera->SetZoomLevel(0.25f);
+				}
+				if (p_ecs.HaveComponent<PlayerAttributes>(entity))
+				{
+					if (p_ecs.GetComponent<PlayerAttributes>(entity).mIsDamaged == true || (p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown > 0.0f))
+					{
+						mRenderer->DrawQuadImpact({ p_ecs.GetComponent<Transform>(entity).GetPos().x,p_ecs.GetComponent<Transform>(entity).GetPos().y,0.0f }, 
+							{ 1.f,1.f }, { 1.0f,0.0f,0.0f,p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown / 1.333f });
+
+					}
 				}
 
 			}
@@ -216,7 +227,7 @@ namespace EM {
 					if (mTrans.GetScale().x < 0) {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.f, 0.f, 1.f });
+						mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.f, 0.f, 1.f });
 						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
 							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 						
@@ -225,7 +236,7 @@ namespace EM {
 					else {
 						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
 						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, { 1.0f, 0.0f, 0.0f, 1.f });
+						mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.0f, 0.0f, 1.f });
 						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
 							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 					}

@@ -100,7 +100,7 @@ namespace EM {
 		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
 	}
 
-	void Camera2D::SetPositionSmooth(const float x, const float y, const float zoom, const float speed)
+	void Camera2D::SetPositionSmooth(const float x, const float y, const float speed)
 	{
 		glm::vec2 target = glm::vec2(mPosition.x + x, mPosition.y + y); //how much we want to see infront/ behind
 
