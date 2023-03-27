@@ -70,7 +70,6 @@ namespace EM
 				transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + limit.min.x, transform.GetPos().y);
 
 			SliderCali = true;
-			std::cout << "limit min at:" << limit.min.x;
 			if((p_GUI->MousePosition.x +  camPos.x >= limit.min.x && p_GUI->MousePosition.y + camPos.y >= limit.min.y) &&
 				(p_GUI->MousePosition.x + camPos.x <= limit.max.x&& p_GUI->MousePosition.y + +camPos.y <= limit.max.y))//if system is pause and continue button is pressed, tell the system to resume the game
 			{

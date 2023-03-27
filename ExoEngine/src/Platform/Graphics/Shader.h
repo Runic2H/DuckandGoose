@@ -36,6 +36,7 @@ namespace EM {
 		void SetUniform(const std::string& name, const glm::vec4& value);
 		void SetUniform(const std::string& name, const glm::mat3& value);
 		void SetUniform(const std::string& name, const glm::mat4& value);
+		void SetUniform(const std::string& name, bool value);
 
 	private:
 		std::string ReadFile(const std::string& filepath);

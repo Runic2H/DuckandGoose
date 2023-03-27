@@ -33,7 +33,7 @@ namespace EM
 	****************************************************************************/
 	void BossChasing::OnEnter(StateMachine* stateMachine)
 	{
-
+		UNREFERENCED_PARAMETER(stateMachine);
 	}
 
 	/*!*************************************************************************
