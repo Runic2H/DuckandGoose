@@ -60,6 +60,7 @@ namespace EM
 		bool check = false;
 		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
+		auto& colliderbox = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID());
 		if (!check)
 		{
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
@@ -83,9 +84,13 @@ namespace EM
 				if (rigidbody.GetDir().x > 0)
 				{
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+							
 				}
 				else
+				{
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+	
+				}
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel.y *= 3;
@@ -95,11 +100,10 @@ namespace EM
 					rigidbody.SetVel(newVel);
 					if (newVel.x < 0 && transform.GetScale().x < 0) {
 						transform.GetScale().x *= -1;
-						
+
 					}
 					if (newVel.x > 0 && transform.GetScale().x > 0) {
 						transform.GetScale().x *= -1;
-						p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
 					}
 				}
 			}
@@ -109,9 +113,34 @@ namespace EM
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
 				if (rigidbody.GetDir().x > 0)
+				{
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+					if (colliderbox[1].mMax.x > 0.f)
+					{
+						if (colliderbox[1].mMin.x < colliderbox[1].mMax.x)
+						{	
+							float tempmin = colliderbox[1].mMin.x;
+							float tempmax = colliderbox[1].mMax.x;
+							colliderbox[1].mMax.x = tempmin;
+							colliderbox[1].mMin.x = tempmax;
+						}
+					}
+				}
 				else
+				{
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+					if (colliderbox[1].mMin.x > 0.f)
+					{
+						//colliderbox[1].mMin.x *= -1; //min = -0.3, max = 0
+						if (colliderbox[1].mMin.x > colliderbox[1].mMax.x)
+						{
+							float tempmin = colliderbox[1].mMin.x;
+							float tempmax = colliderbox[1].mMax.x;
+							colliderbox[1].mMax.x = tempmin; //swap max = -0.3
+							colliderbox[1].mMin.x = tempmax; // swap min = 0;
+						}
+					}
+				}
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 				newVel.y *= 6;
@@ -121,7 +150,7 @@ namespace EM
 					rigidbody.SetVel(newVel);
 					if (newVel.x < 0 && transform.GetScale().x < 0) {
 						transform.GetScale().x *= -1;
-					
+						
 					}
 					if (newVel.x > 0 && transform.GetScale().x > 0) {
 						transform.GetScale().x *= -1;

@@ -102,15 +102,22 @@ namespace EM {
 
 	void Camera2D::SetPositionSmooth(const float x, const float y, const float zoom, const float speed)
 	{
-		glm::vec3 track = glm::vec3(x, y, mPosition.z);
-		glm::vec2 diff(track.x - mPosition.x, track.y - mPosition.y);
+		glm::vec2 target = glm::vec2(mPosition.x + x, mPosition.y + y); //how much we want to see infront/ behind
 
-		const float margin = 0.1f;
-		if ((abs(diff.x) > margin) || (abs(diff.y) > margin))
+		if (abs(mPosition.x) != abs(target.x))
 		{
-			mPosition.x += diff.x * Timer::GetInstance().GetGlobalDT() * speed;
-			mPosition.y += diff.y * Timer::GetInstance().GetGlobalDT() * speed;
-			RecalculateMatrix();
+			mPosition.x += x * Timer::GetInstance().GetGlobalDT() * speed;//offset position
 		}
+		RecalculateMatrix();
+	}
+	void Camera2D::Follow(glm::vec2 pos)
+	{
+		if (mPosition.x != pos.x)
+		{	
+			mPosition.x += pos.x * Timer::GetInstance().GetGlobalDT() * 1.0f;
+		}
+		if (mPosition.y != pos.y)
+			mPosition.y += pos.y * Timer::GetInstance().GetGlobalDT() * 1.0f;
+		RecalculateMatrix();
 	}
 }
