@@ -3,7 +3,7 @@
         "Entities": 3
     },
     "EntitySignatures": [
-        "00000000000000000000000001111101",
+        "00000000000000000000000011111101",
         "00000000000000000000000001111101",
         "00000000000000000000000001111101"
     ],
@@ -50,13 +50,25 @@
                 "LayeringOrder": 0
             },
             {
-                "ScriptCount": 0
+                "0": "AudioManager",
+                "1": "NoLoopBackgroundAudio",
+                "ScriptCount": 2
             },
             {
                 "Tag": "Untagged",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "GameOver.wav",
+                    "Channel": 2,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 1.0,
+                "SFX Volume": 1.0,
+                "Master Volume": 1.0
+            },
             {},
             {},
             {},

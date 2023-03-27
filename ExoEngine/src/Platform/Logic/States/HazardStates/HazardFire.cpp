@@ -61,19 +61,6 @@ namespace EM
 	****************************************************************************/
 	void HazardFire::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
-		{
-			p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer -= Frametime;
-		}
-		if (p_ecs.HaveComponent<Collider>(stateMachine->GetEntityID()))
-		{
-			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-		}
-		if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f)
-		{
-			stateMachine->ChangeState(new HazardIdle(stateMachine));
-		}
-
 		vec2D playerPos = vec2D();
 		bool check = false;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
@@ -84,13 +71,34 @@ namespace EM
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
-		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.6f && check) {
-			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
-			{
-				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+
+		if (p_ecs.HaveComponent<Attributes>(stateMachine->GetEntityID()))
+		{
+			p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer -= Frametime;
+		}
+		if (p_ecs.HaveComponent<Collider>(stateMachine->GetEntityID()))
+		{
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+		}
+		if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer > 0.0f)
+		{
+			//if player moves within x radius, set mode to moving
+			if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
+				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+				{
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+				}
 			}
 		}
+		if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f)
+		{
+			stateMachine->ChangeState(new HazardIdle(stateMachine));
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = false;
+			}
+		}
+		
 	}
 
 	/*!*************************************************************************

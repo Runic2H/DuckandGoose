@@ -28,6 +28,11 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.25f;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.20f;
+
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
+		}
 	}
 
 	/*!*************************************************************************
@@ -39,6 +44,14 @@ namespace EM
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0) {
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 			{
+				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 2))
+				{
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[2].should_play = true;
+				}
+				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 3))
+				{
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[3].should_play = true;
+				}
 				p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
 			}
 			else

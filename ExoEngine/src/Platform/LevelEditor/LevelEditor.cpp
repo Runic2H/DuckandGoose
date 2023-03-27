@@ -52,6 +52,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
 #include "ExoEngine/Scripts/BossScript.h"
+#include "ExoEngine/Scripts/NoLoopBackgroundAudio.h"
 
 namespace EM {
 
@@ -1271,6 +1272,10 @@ namespace EM {
                                                                                     && p_ecs.HaveComponent<EnemyAttributes>(selectedEntity))
                                     {
                                         logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
+                                    }
+                                    if (mScriptList[current_script] == "NoLoopBackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new NoLoopBackgroundAudio(), selectedEntity);
                                     }
                                 }
                             }
