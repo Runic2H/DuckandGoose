@@ -112,6 +112,11 @@ namespace EM
 			{
 				spt.SetTexture("Restart_Hover");
 			}
+
+			if (ID_tag.GetTag() == "Back")
+			{
+				spt.SetTexture("BACK_B");//to be change
+			}
 			
 			if (curr_state == button_state::release)
 			{
@@ -120,7 +125,7 @@ namespace EM
 				{
 				
 					Graphic::mcamera->SetZoomLevel(0.25f);
-					p_Scene->setSceneToLoad("Assets/Scene/CutScene.json");
+					p_Scene->setSceneToLoad("Assets/Scene/SAV1.json");
 				}
 
 				if (ID_tag.GetTag() == "Restart" )
@@ -148,7 +153,7 @@ namespace EM
 
 				if (ID_tag.GetTag() == "MainMenu" && p_GUI->Check_HTP() == false)
 				{
-					p_GUI->toggle_menu();
+					//p_GUI->toggle_menu();
 					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 				}
 				if (ID_tag.GetTag() == "PResart")
@@ -156,6 +161,17 @@ namespace EM
 					Graphic::mcamera->SetZoomLevel(0.25f);
 					p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 				}
+
+				if (ID_tag.GetTag() == "Mute")
+				{
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
+				}
+
+				if (ID_tag.GetTag() == "Back")
+				{
+					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+				}
+
 
 			
 			}
@@ -169,6 +185,7 @@ namespace EM
 
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
+				//	p_GUI->toggle_menu();
 					spt.SetTexture("Start_Click");
 				}
 
@@ -207,6 +224,16 @@ namespace EM
 				if (ID_tag.GetTag() == "PRestart")
 				{
 					spt.SetTexture("Restart_Click");//to be change
+				}
+
+				if (ID_tag.GetTag() == "Mute")
+				{
+					spt.SetTexture("Mute_Click");//to be change
+				}
+
+				if (ID_tag.GetTag() == "Back")
+				{
+					spt.SetTexture("BACK_R");//to be change
 				}
 				
 			}
@@ -254,7 +281,10 @@ namespace EM
 						{
 							spt.SetTexture("Restart_Idle");//to be change
 						}
-			
+			if (ID_tag.GetTag() == "Back")
+			{
+				spt.SetTexture("BACK_Y");//to be change
+			}
 		}
 
 	}

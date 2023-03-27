@@ -86,6 +86,9 @@ namespace EM {
 			mcamera = &scene_camera;
 		else
 		{
+			glViewport(0, 0, p_Editor->GetWindow()->Getter().m_Width, p_Editor->GetWindow()->Getter().m_Height);
+			EM::Graphic::mcamera->Resize(static_cast<float>(p_Editor->GetWindow()->Getter().m_Width), static_cast<float>(p_Editor->GetWindow()->Getter().m_Height));
+
 			mcamera = &camera;
 			if (!p_Editor->is_ShowWindow)
 			{
@@ -181,10 +184,14 @@ namespace EM {
 		{
 			if (p_ecs.HaveComponent<NameTag>(entity) && !p_Editor->is_ShowWindow)
 			{
-				if(p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player" && p_GUI->check_pause() == false)
+				if (p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "player" && p_GUI->check_pause() == false)
+				{
 					camera.SetPosition({ p_ecs.GetComponent<Transform>(entity).GetPos().x,
 						p_ecs.GetComponent<Transform>(entity).GetPos().y,
 						0.0f });
+					Graphic::mcamera->SetZoomLevel(0.25f);
+				}
+
 			}
 			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);

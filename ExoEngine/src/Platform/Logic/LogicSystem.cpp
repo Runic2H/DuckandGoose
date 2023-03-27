@@ -46,7 +46,7 @@ namespace EM
 			{
 				for (auto i = LogicComp.GetScript().begin(); i != LogicComp.GetScript().end(); ++i)
 				{
-					if ((p_GUI->check_pause() == false || (*i)->GetScriptName() == "PauseMenu"))
+					if ((p_GUI->check_pause() == false || (*i)->GetScriptName() == "PauseMenu" || (*i)->GetScriptName() == "SliderScript"))
 					{
 						if (!(*i)->GetScriptInit())
 						{

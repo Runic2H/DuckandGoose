@@ -83,6 +83,7 @@ namespace EM {
 		bool Option_toggle{ false };
 		bool calibrate_pos{ false };
 		bool optionstate{ false };
+		bool press_once{ false };
 		vec2D offset;
 		//glm::vec3 PrevCamPos{};
 

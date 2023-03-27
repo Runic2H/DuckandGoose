@@ -49,6 +49,8 @@ namespace EM {
 		//for textures loading from files
 		void LoadTextureFromFile();
 
+		Window* GetWindow() { return mWindow; }
+
 	
 	public:
 
@@ -70,7 +72,7 @@ namespace EM {
 		bool mViewportFocused = false;
 		ImVec2 mGameMousePosition = { 0.0f, 0.0f };
 		ImVec2 mSceneMouse = { 0.0f, 0.0f };
-		Window* GetWindow() { return mWindow; }
+		
 
 	private:
 		void MainMenuBar();
