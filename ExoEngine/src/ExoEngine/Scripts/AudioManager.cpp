@@ -78,6 +78,7 @@ namespace EM
                     p_Audio->StopChannel(audio[i].mChannel);
                     audio[i].is_Playing = false;
                     audio[i].triggered = false;
+                    audio[i].should_stop = false;
                 }
                 audio[i].should_play = false;
             }

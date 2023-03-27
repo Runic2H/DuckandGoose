@@ -35,9 +35,11 @@ namespace EM
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
+		
+
+
 		if (spt.GetTexture() == "HowToPlay" && p_Input->KeyPressed(GLFW_KEY_ESCAPE))
 		{
-
 			spt.SetTexture("htp_button_Idle");
 			transform.SetPos({ 0.0f,-0.25f });
 			transform.SetScale(1.0f, 0.2f);
@@ -162,7 +164,7 @@ namespace EM
 			{
 				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 1) && (p_GUI->Check_HTP() == false))
 				{
-					p_ecs.GetComponent<Audio>(GetScriptEntityID())[1].should_play = true; //menu hover audio
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[1].should_play = true; //menu click audio
 				}
 
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
