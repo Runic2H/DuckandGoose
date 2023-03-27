@@ -131,7 +131,9 @@ Application constructor
 			p_Scene->checkForSceneToLoad();
 			if (!m_window->isWindowNotFocus)
 			{
+//#if !DEBUG
 				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+//#endif
 			}
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mPosUpdate->Update();

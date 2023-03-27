@@ -125,7 +125,7 @@ namespace EM
 				{
 				
 					Graphic::mcamera->SetZoomLevel(0.25f);
-					p_Scene->setSceneToLoad("Assets/Scene/SAV1.json");
+					p_Scene->setSceneToLoad("Assets/Scene/CutScene.json");
 				}
 
 				if (ID_tag.GetTag() == "Restart" )
