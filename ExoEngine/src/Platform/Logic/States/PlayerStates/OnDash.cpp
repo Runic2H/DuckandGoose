@@ -49,11 +49,10 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer -= Frametime;
 		auto& pRigid = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 		auto& pTrans = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-		//std::cout << pRigid.GetVel().x << std::endl;
 		vec2D dir = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir;
-		dir = dir * 150.0f * 0.2f;
-		//pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
+		dir = dir * 250.0f * 0.3f;
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), dir, Frametime));
+		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
 		vec2D nextPos = (pTrans.GetPos() + pRigid.GetVel());
 		pRigid.SetNextPos(nextPos * Frametime);
 
