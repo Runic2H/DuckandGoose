@@ -25,7 +25,9 @@ namespace EM {
 		enum class ElementType
 		{
 			Static,
+			BossStatic,
 			HealthBar,
+			BossHP,
 			BlockBar,
 			DashBar,
 			ChargeAtk,

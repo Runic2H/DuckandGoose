@@ -113,7 +113,12 @@ namespace EM {
                                                     if (dotProd1 <= 0) {
                                                         normal1 = normal1 * dotProd1;
                                                         response1 -= normal1;
-                                                        rigid1.SetVel(response1);
+                                                        if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
+                                                            rigid1.SetVel(vec2D(0.f, 0.f));
+                                                        }
+                                                        else {
+                                                            rigid1.SetVel(vec2D(0.f, 0.f));
+                                                        }
                                                     }
                                                     vec2D nextPos1 = trans1.GetPos() + rigid1.GetVel();
                                                     rigid1.SetNextPos(nextPos1);
@@ -129,7 +134,12 @@ namespace EM {
                                                     if (dotProd2 <= 0) {
                                                         normal2 = normal2 * dotProd2;
                                                         response2 -= normal2;
-                                                        rigid2.SetVel(response2);
+                                                        if (p_ecs.GetComponent<NameTag>(j).GetNameTag() == "Enemy") {
+                                                            rigid2.SetVel(vec2D(0.f, 0.f));
+                                                        }
+                                                        else {
+                                                            rigid2.SetVel(vec2D(0.f, 0.f));
+                                                        }
                                                     }
                                                     vec2D nextPos2 = trans2.GetPos() + rigid2.GetVel();
                                                     rigid2.SetNextPos(nextPos2);
