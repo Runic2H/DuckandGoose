@@ -89,6 +89,10 @@ namespace EM
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex() - 1;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0) && p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].is_Playing == true)
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_stop = true;
+		}
 		delete this;
 	}
 }

@@ -19,6 +19,10 @@ namespace EM
 	void BossAttack::OnEnter(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer = 1.0f;
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+		}
 	}
 
 	/*!*************************************************************************
@@ -30,6 +34,7 @@ namespace EM
 
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer > 0.f)
 		{
+
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = true;
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{

@@ -80,6 +80,9 @@ namespace EM
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
+		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
+		}
 		delete this;
 	}
 }

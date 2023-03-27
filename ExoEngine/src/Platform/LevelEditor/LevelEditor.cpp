@@ -52,6 +52,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
 #include "ExoEngine/Scripts/BossScript.h"
+#include "ExoEngine/Scripts/NoLoopBackgroundAudio.h"
 
 namespace EM {
 
@@ -1272,6 +1273,10 @@ namespace EM {
                                     {
                                         logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
                                     }
+                                    if (mScriptList[current_script] == "NoLoopBackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
+                                    {
+                                        logic.InsertScript(new NoLoopBackgroundAudio(), selectedEntity);
+                                    }
                                 }
                             }
                         }
@@ -1403,7 +1408,7 @@ namespace EM {
                     if (ImGui::CollapsingHeader("HUD", ImGuiTreeNodeFlags_None))
                     {
                         auto& HUDComp = p_ecs.GetComponent<HUDComponent>(selectedEntity);
-                        const char* HUDList = "Static\0Health Bar\0Block Bar\0Dash Bar\0Charge Attack\0Text";
+                        const char* HUDList = "Static\0Boss Overlay\0Player Health Bar\0Boss Health Bar\0Block Bar\0Dash Bar\0Charge Attack\0Text";
                         auto HUDType = HUDComp.GetType();
                         int HUDIndex = static_cast<int>(HUDType);
                         ImGui::Combo("HudType", &HUDIndex, HUDList);
