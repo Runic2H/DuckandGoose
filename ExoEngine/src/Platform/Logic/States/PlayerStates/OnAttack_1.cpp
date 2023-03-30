@@ -39,8 +39,10 @@ namespace EM
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.3f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mComboNext = false;
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
@@ -59,6 +61,10 @@ namespace EM
 		}
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.15f)
 		{
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+			{
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mComboNext = true;
+			}
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
 		}
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f)
@@ -66,17 +72,18 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 			if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
-				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.f)
-				{
-					stateMachine->ChangeState(new OnAttack_2(stateMachine));
-				}
 				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 				{
 					stateMachine->ChangeState(new OnDamaged(stateMachine));
 				}
 				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
 				{
-					stateMachine->ChangeState(new OnIdle(stateMachine));
+					if ( p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mComboNext == true)
+					{
+						stateMachine->ChangeState(new OnAttack_2(stateMachine));
+					}
+					else
+						stateMachine->ChangeState(new OnIdle(stateMachine));
 				}
 			}
 		}

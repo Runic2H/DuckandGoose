@@ -61,9 +61,11 @@ namespace EM
 		float mHitStopTimer;
 		float mChargeAttackCoolDown;
 		bool mIsChargeAttack;
+		float mDeathDuration;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;
+		bool mComboNext;
 		vec2D mVel;
 		vec2D mDir;
 		Facing mFacing;

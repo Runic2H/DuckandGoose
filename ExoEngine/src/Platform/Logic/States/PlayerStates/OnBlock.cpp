@@ -43,8 +43,9 @@ namespace EM
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
-			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Block");
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.3f;
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blocking");
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = true;
 		}
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
 		{
@@ -95,6 +96,8 @@ namespace EM
 		}
 		else
 		{
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.0f;
 			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
