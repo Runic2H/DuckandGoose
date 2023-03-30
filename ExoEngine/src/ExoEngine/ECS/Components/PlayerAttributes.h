@@ -59,12 +59,14 @@ namespace EM
 		float mDamageTaken;
 		float mDamageDurationTimer;
 		float mHitStopTimer;
+		float mChargeAttackCoolDown;
+		bool mIsChargeAttack;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;
 		vec2D mVel;
 		vec2D mDir;
-		entityPhysics mPhys;
 		Facing mFacing;
+		entityPhysics mPhys;
 	};
 }

@@ -83,6 +83,7 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_1.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDash.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_1.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />

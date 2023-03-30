@@ -66,13 +66,18 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
 		//enemy damaged knockback
-		auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-		auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
-		vec2D dir = rigidbody.GetDir();
-		dir = dir * 150.0f;
-		rigidbody.SetVel(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
-		vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
-		rigidbody.SetNextPos(nextPos);
+		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
+			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player" && p_ecs.GetComponent<PlayerAttributes>(i).mIsChargeAttack) 
+			{
+				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
+				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
+				vec2D dir = rigidbody.GetDir();
+				dir = dir * 150.0f;
+				rigidbody.SetVel(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
+				vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
+				rigidbody.SetNextPos(nextPos);
+			}
+		}
 
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0) {
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)

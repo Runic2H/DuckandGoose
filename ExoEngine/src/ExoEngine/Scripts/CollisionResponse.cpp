@@ -14,7 +14,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 *******************************************************************************/
 #include "empch.h"
 #include "CollisionResponse.h"
-#include "SkillsChest.h"
 #include "ExoEngine/ECS/SceneManager.h"
 
 namespace EM
