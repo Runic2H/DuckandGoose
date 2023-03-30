@@ -22,6 +22,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
+	std::default_random_engine generator;
+	std::uniform_int_distribution<>range(8, 16);
+
 	OnAttack_1::OnAttack_1(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnAttack_1::HandleInput(StateMachine* stateMachine, const int& key)
@@ -43,10 +46,9 @@ namespace EM
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
-		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
-		}
+		
+		p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[range(generator)].should_play = true;
+		
 	}
 
 /*!*************************************************************************
