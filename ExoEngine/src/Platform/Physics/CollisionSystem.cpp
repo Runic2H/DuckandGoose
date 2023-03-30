@@ -117,15 +117,14 @@ namespace EM {
                                                             rigid1.SetVel(response1);
                                                         }
                                                         else {
-                                                            rigid1.SetVel(vec2D(0.f, 0.f));
+                                                            rigid1.SetVel(response1);
                                                         }
+                                                        vec2D nextPos1 = trans1.GetPos() + rigid1.GetVel();
+                                                        rigid1.SetNextPos(nextPos1);
                                                     }
-                                                    vec2D nextPos1 = trans1.GetPos() + rigid1.GetVel();
-                                                    rigid1.SetNextPos(nextPos1);
 
                                                     col2[b].mHit = 1;
-                                                    vec2D norm2 = offset2 - offset1;
-                                                    Normalize(norm2, norm2);
+                                                    vec2D norm2 = -norm1;
                                                     col2[b].mCollisionNormal = norm2;
 
                                                     vec2D response2 = rigid2.GetVel();
@@ -138,11 +137,11 @@ namespace EM {
                                                             rigid2.SetVel(response2);
                                                         }
                                                         else {
-                                                            rigid2.SetVel(vec2D(0.f, 0.f));
+                                                            rigid2.SetVel(response2);
                                                         }
+                                                        vec2D nextPos2 = trans2.GetPos() + rigid2.GetVel();
+                                                        rigid2.SetNextPos(nextPos2);
                                                     }
-                                                    vec2D nextPos2 = trans2.GetPos() + rigid2.GetVel();
-                                                    rigid2.SetNextPos(nextPos2);
                                                 }
                                             }
                                             if (e2 == Collider::ColliderType::bubble) {
