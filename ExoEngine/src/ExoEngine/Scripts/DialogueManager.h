@@ -75,6 +75,10 @@ namespace EM
 						if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 						{
 							++counter;
+							if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+							{
+								p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true;
+							}
 							p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 						}
 						if (counter < MaxCounter)

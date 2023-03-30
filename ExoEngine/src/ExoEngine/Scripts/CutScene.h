@@ -17,7 +17,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Gate Controller
 		****************************************************************************/
-		CutScene() : timer(0), mScenePicker{0} {}
+		CutScene() : timer(0), mScenePicker{ 0 }, mSwitchAudio{ 1 } {}
 		/*!*************************************************************************
 		Default destructor for Gate Controller
 		****************************************************************************/
@@ -41,6 +41,10 @@ namespace EM
 					EM::Graphic::mcamera->SetPosition({ 0.0f, 0.0f, 0.0f });
 				}
 			}
+			if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > mSwitchAudio))
+			{
+				p_ecs.GetComponent<Audio>(GetScriptEntityID())[mSwitchAudio].should_play = true;
+			}
 		}
 		/*!*************************************************************************
 		Update Loop of GateController Script
@@ -51,23 +55,37 @@ namespace EM
 			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 			{
 				++mScenePicker;
+				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > mSwitchAudio))
+				{
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[mSwitchAudio].should_stop = true;
+				}
+				++mSwitchAudio;
 				EM::Graphic::mcamera->SetPosition({ p_ecs.GetComponent<Transform>(mScenePicker).GetPos().x
 					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
 				p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 				timer = 0.0f;
 				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
 				{
-					p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //cutscene audio
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; 
 				}
+				
+				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > mSwitchAudio))
+				{
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[mSwitchAudio].should_play = true; 
+				}
+				
 			}
 			if (timer >= 5.0f)
 			{
-				
 				++mScenePicker;
-				
+				++mSwitchAudio;
 				EM::Graphic::mcamera->SetPosition({ p_ecs.GetComponent<Transform>(mScenePicker).GetPos().x
 					, p_ecs.GetComponent<Transform>(mScenePicker).GetPos().y, 0.0f });
 				timer = 0.0f;
+				if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > mSwitchAudio))
+				{
+					p_ecs.GetComponent<Audio>(GetScriptEntityID())[mSwitchAudio].should_play = true; //cutscene audio
+				}
 			}
 			
 			if (mScenePicker == 9)
@@ -75,6 +93,9 @@ namespace EM
 				//transit to another scene
 				p_Scene->setSceneToLoad("Assets/Scene/Elton.json");
 			}
+
+
+
 		}
 		/*!*************************************************************************
 		End State for GateController
@@ -98,5 +119,6 @@ namespace EM
 	private:
 		float timer;
 		Entity mScenePicker;
+		int mSwitchAudio;
 	};
 }

@@ -342,7 +342,52 @@
                     "Channel": 3,
                     "IsLooping": false
                 },
-                "AudioArrCount": 1,
+                "1": {
+                    "AudioPath": "Cutscene1.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "2": {
+                    "AudioPath": "Cutscene2.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "3": {
+                    "AudioPath": "Cutscene3.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "4": {
+                    "AudioPath": "Cutscene4.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "5": {
+                    "AudioPath": "Cutscene5.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "6": {
+                    "AudioPath": "Cutscene6.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "7": {
+                    "AudioPath": "Cutscene7.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "8": {
+                    "AudioPath": "Cutscene8.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "9": {
+                    "AudioPath": "Cutscene9.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 10,
                 "BGM Volume": 1.0,
                 "SFX Volume": 1.0,
                 "Master Volume": 1.0
