@@ -113,8 +113,8 @@ namespace EM {
                                                     if (dotProd1 <= 0) {
                                                         normal1 = normal1 * dotProd1;
                                                         response1 -= normal1;
-                                                        if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Enemy") {
-                                                            rigid1.SetVel(vec2D(0.f, 0.f));
+                                                        if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
+                                                            rigid1.SetVel(response1);
                                                         }
                                                         else {
                                                             rigid1.SetVel(vec2D(0.f, 0.f));
@@ -134,8 +134,8 @@ namespace EM {
                                                     if (dotProd2 <= 0) {
                                                         normal2 = normal2 * dotProd2;
                                                         response2 -= normal2;
-                                                        if (p_ecs.GetComponent<NameTag>(j).GetNameTag() == "Enemy") {
-                                                            rigid2.SetVel(vec2D(0.f, 0.f));
+                                                        if (p_ecs.GetComponent<NameTag>(j).GetNameTag() == "player") {
+                                                            rigid2.SetVel(response2);
                                                         }
                                                         else {
                                                             rigid2.SetVel(vec2D(0.f, 0.f));
