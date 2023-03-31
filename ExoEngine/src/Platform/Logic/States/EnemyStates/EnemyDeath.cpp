@@ -39,7 +39,7 @@ namespace EM
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
 				//increment player hp based on current player hp
-				if (p_ecs.GetComponent<PlayerAttributes>(i).mHealth < p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth) {
+				if (p_ecs.GetComponent<PlayerAttributes>(i).mHealth < (p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth * 0.9f)) {
 					//play hp regen sound
 					if (p_ecs.HaveComponent<Audio>(i) && (p_ecs.GetComponent<Audio>(i).GetSize() > 8))
 					{
