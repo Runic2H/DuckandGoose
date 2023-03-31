@@ -39,6 +39,11 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[4].should_play = true;
 		}
+		vec2D tempOff = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mOffset;
+		float tempRad = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mRadius;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mCol = Collider::ColliderType::dashCirc;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mOffset = tempOff;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mRadius = tempRad;
 	}
 
 	/*!*************************************************************************
@@ -54,8 +59,7 @@ namespace EM
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), dir, Frametime));
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
 		vec2D nextPos = (pTrans.GetPos() + pRigid.GetVel());
-		pRigid.SetNextPos(nextPos * Frametime);
-
+		pRigid.SetNextPos(nextPos);
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer <= 0.0f)
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));
@@ -67,6 +71,11 @@ namespace EM
 	****************************************************************************/
 	void OnDash::OnExit(StateMachine* stateMachine)
 	{
+		vec2D tempOff = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mOffset;
+		float tempRad = p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mRadius;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mCol = Collider::ColliderType::circle;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mOffset = tempOff;
+		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].mRadius = tempRad;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		delete this;
 	}

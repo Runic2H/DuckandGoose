@@ -64,6 +64,7 @@
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossDeath.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />

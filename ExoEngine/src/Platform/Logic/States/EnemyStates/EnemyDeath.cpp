@@ -38,13 +38,15 @@ namespace EM
 		{
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
-				//play hp regen sound
-				if (p_ecs.HaveComponent<Audio>(i) && (p_ecs.GetComponent<Audio>(i).GetSize() > 8))
-				{
-					p_ecs.GetComponent<Audio>(i)[8].should_play = true;
-				}
 				//increment player hp based on current player hp
-				p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (160 / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
+				if (p_ecs.GetComponent<PlayerAttributes>(i).mHealth < p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth) {
+					//play hp regen sound
+					if (p_ecs.HaveComponent<Audio>(i) && (p_ecs.GetComponent<Audio>(i).GetSize() > 8))
+					{
+						p_ecs.GetComponent<Audio>(i)[8].should_play = true;
+					}
+					p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth * 1.6f / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
+				}
 			}
 		}
 
