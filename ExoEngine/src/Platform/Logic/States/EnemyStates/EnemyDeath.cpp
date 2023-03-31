@@ -45,7 +45,7 @@ namespace EM
 					{
 						p_ecs.GetComponent<Audio>(i)[8].should_play = true;
 					}
-					p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth * 1.6f / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
+					p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth * 2.0f / p_ecs.GetComponent<PlayerAttributes>(i).mHealth); //higher hp will regen less health
 				}
 			}
 		}
