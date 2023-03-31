@@ -195,10 +195,10 @@ namespace EM {
 				}
 				if (p_ecs.HaveComponent<PlayerAttributes>(entity))
 				{
-					if (p_ecs.GetComponent<PlayerAttributes>(entity).mIsDamaged == true || (p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown > 0.0f))
+					if (p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown > 0.0f && p_ecs.GetComponent<PlayerAttributes>(entity).mIsBlocking == false)
 					{
 						mRenderer->DrawQuadImpact({ p_ecs.GetComponent<Transform>(entity).GetPos().x,p_ecs.GetComponent<Transform>(entity).GetPos().y,0.0f }, 
-							{ 1.f,1.f }, { 1.0f,0.0f,0.0f,p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown / 1.333f });
+							{ 1.f,1.f }, { 1.0f,0.0f,0.0f,p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown * 4.f});
 
 					}
 				}
@@ -218,7 +218,7 @@ namespace EM {
 
 			//for rendering of enemy health bar
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
-				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive)
+				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive && p_ecs.GetComponent<EnemyAttributes>(entity).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
 				{
 					
 					auto& mTrans = p_ecs.GetComponent<Transform>(entity);

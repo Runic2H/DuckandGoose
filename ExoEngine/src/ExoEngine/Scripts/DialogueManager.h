@@ -30,7 +30,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Dialogue Manager
 		****************************************************************************/
-		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5", "HowToPlay"}, counter{0}, MaxCounter{2} {}
+		DialogueManager() : mDialogues{"HowToPlay", "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5" }, counter{ 0 }, MaxCounter{ 3 } {}
 		/*!*************************************************************************
 		Default destructor for Dialogue Manager
 		****************************************************************************/
@@ -54,10 +54,9 @@ namespace EM
 		virtual void Update(float Frametime) override
 		{
 
-
 			UNREFERENCED_PARAMETER(Frametime);
 			Entity i{0};
-			
+		
 			for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
 			{
 				if (p_ecs.HaveComponent<PlayerAttributes>(e))
@@ -66,15 +65,27 @@ namespace EM
 					{
 						p_ecs.GetComponent<Sprite>(e).SetTexture("Idle");
 						p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(5);
-						p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(e).GetPos().x, p_ecs.GetComponent<Transform>(e).GetPos().y - 0.140f);
-
+						if (counter > 0)
+						{
+							p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(e).GetPos().x, p_ecs.GetComponent<Transform>(e).GetPos().y - 0.140f);
+							p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetScale(0.7f, 0.125f);
+						}
+						else 
+						{
+							p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(e).GetPos().x, p_ecs.GetComponent<Transform>(e).GetPos().y);
+							p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetScale(0.7f, 0.4f);
+						}
 						
-						if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue3") { MaxCounter = 3; counter = 2; }
-						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue4") { MaxCounter = 4; counter = 3; }
-						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue5"){ MaxCounter = 5; counter = 4; }
+						if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue3") { MaxCounter = 4; counter = 3; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue4") { MaxCounter = 5; counter = 4; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue5") { MaxCounter = 6; counter = 5; }
 						if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 						{
 							++counter;
+							if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+							{
+								p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true;
+							}
 							p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 						}
 						if (counter < MaxCounter)
@@ -103,10 +114,7 @@ namespace EM
 					}
 				}
 			}
-			
-			
-			
-			
+				
 			
 		}
 		/*!*************************************************************************

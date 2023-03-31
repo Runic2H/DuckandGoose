@@ -16,6 +16,9 @@ namespace EM
 	****************************************************************************/
 	void BossIdle::OnEnter(StateMachine* stateMachine)
 	{
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Idle");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 2.5f;
@@ -44,8 +47,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 2.5f;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
 		delete this;
 	}
 }

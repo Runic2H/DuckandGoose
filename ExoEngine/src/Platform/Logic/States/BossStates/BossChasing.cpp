@@ -63,7 +63,7 @@ namespace EM
 
 		if (check) 
 		{
-			if (dist <= 1.0f)
+			if (dist <= 0.7f)
 			{
 				rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
 				vec2D newVel = vec2D(0.0f, 0.0f);

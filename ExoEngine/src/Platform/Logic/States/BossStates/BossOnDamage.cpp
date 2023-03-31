@@ -1,7 +1,7 @@
 #include "empch.h"
 #include "BossOnDamage.h"
 #include "BossChasing.h"
-#include "ExoEngine/ECS/SceneManager.h"
+#include "BossDeath.h"
 
 namespace EM
 {
@@ -24,6 +24,7 @@ namespace EM
 				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 			}
 		}
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Damaged");
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.25f;
@@ -52,7 +53,8 @@ namespace EM
 				{
 					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[3].should_play = true;
 				}
-				p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
+
+				stateMachine->ChangeState(new BossDeath(stateMachine));
 			}
 			else
 			{	
