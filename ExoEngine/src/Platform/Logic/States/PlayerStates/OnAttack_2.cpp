@@ -90,6 +90,7 @@ namespace EM
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer = 0.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		delete this;
 	}
 }

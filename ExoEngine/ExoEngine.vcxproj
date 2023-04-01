@@ -64,6 +64,7 @@
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossDeath.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyChase.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.h" />
+    <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyHealthDrop.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.h" />
@@ -84,6 +86,7 @@
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnBlock.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_1.h" />
+    <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDamaged.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDash.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnDieded.h" />
@@ -274,6 +277,7 @@
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />
@@ -281,6 +285,7 @@
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyChase.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyDeath.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyHealthDrop.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyRetreat.cpp" />
@@ -294,6 +299,7 @@
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnAttack_2.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnBlock.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_1.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_2.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDamaged.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDash.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnDieded.cpp" />

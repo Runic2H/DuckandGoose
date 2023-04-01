@@ -19,9 +19,13 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyDeath.h"
 #include "EnemyDamaged.h"
 
+
 namespace EM
 {
-	EnemyIdle::EnemyIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	EnemyIdle::EnemyIdle(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 1.0f }, mMinX{ p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x }, 
+		mMaxX{ p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x}, 
+		mMinY{ p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y }, 
+		mMaxY{ p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y} { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -41,6 +45,13 @@ namespace EM
 		}
 		else
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer = 0.5f;
+		mMaxX = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + float((rand() * 1.0 / RAND_MAX * 5) + 1 - 5.0f) / 100.0f;
+		mMaxY = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y + float((rand() * 1.0 / RAND_MAX * 5) + 1 - 5.0f) / 100.0f;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter == 0)
+		{
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter = (rand() * 1.0 / RAND_MAX * 3) + 1;
+		}
 	}
 
 	/*!*************************************************************************
@@ -51,6 +62,14 @@ namespace EM
 		p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetNextPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos());
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer -= Frametime;
+		mTimer += Frametime;
+		if (mTimer >= mDuration) {
+			mTimer = 0.f;
+			std::swap(mMinX, mMaxX);
+			std::swap(mMinY, mMaxY);
+		}
+		p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetNextPos({ EaseInOutSine(mMinX,mMaxX,mTimer / mDuration) , EaseInOutSine(mMinY,mMaxY,mTimer / mDuration)});
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
@@ -65,15 +84,13 @@ namespace EM
 				{
 					check = true;
 					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
-
 				}
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer <= 0.0f) {
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
-
 	}
 
 	/*!*************************************************************************
