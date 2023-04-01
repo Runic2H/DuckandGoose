@@ -73,7 +73,10 @@ namespace EM
 		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
-
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+		{
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
+		}
 	}
 
 	/*!*************************************************************************

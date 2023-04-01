@@ -182,6 +182,10 @@ namespace EM
 				}
 			}
 		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+		{
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
+		}
 	}
 
 	/*!*************************************************************************
