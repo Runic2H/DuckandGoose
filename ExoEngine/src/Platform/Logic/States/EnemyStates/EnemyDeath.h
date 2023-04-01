@@ -29,5 +29,6 @@ namespace EM
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
 		float mDeathTimer;
+		int mItemDropChance;
 	};
 }

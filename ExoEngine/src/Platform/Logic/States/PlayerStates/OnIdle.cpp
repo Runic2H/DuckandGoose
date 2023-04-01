@@ -20,9 +20,13 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "OnDash.h"
 #include "OnBlock.h"
 #include "OnDamaged.h"
+#include "OnChargeAttack_1.h"
+#include "ExoEngine/Timer/Time.h"
+#include "ExoEngine/Timer/Fps.h"
 
 namespace EM
 {
+	float time{};
 	OnIdle::OnIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
@@ -35,9 +39,9 @@ namespace EM
 		{
 			return new OnDash(stateMachine);
 		}
-		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MousePressed(key))
+		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MouseHold(key))
 		{
-			return new OnAttack_1(stateMachine);
+			return new OnChargeAttack_1(stateMachine);
 		}
 		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f)
 		{
@@ -53,7 +57,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Idle");
-		
 	}
 
 	/*!*************************************************************************

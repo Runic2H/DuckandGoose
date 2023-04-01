@@ -1,13 +1,13 @@
 /*!*************************************************************************
 ****
-\file EnemyIdle.h
+\file OnChargeAttack_2.h
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2450
 \par Section: a
 \par Assignment GAM200
 \date 24/2/2022
-\brief	This file contains the logic for the state when enemy is idle.
+\brief	1st Charge attacking state for player
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -18,11 +18,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	class EnemyIdle : public IStates
+	class OnChargeAttack_2 : public IStates
 	{
 	public:
-		EnemyIdle(StateMachine* stateMachine);
-		virtual ~EnemyIdle() = default;
+		OnChargeAttack_2(StateMachine* stateMachine);
+		virtual ~OnChargeAttack_2() = default;
 		virtual IStates* HandleInput(StateMachine* stateMachine, const int& key) override;
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
@@ -30,14 +30,6 @@ namespace EM
 	private:
 		float mTimer;
 		float mDuration;
-		float mMinX;
-		float mMaxX;
-		float mMinY;
-		float mMaxY;
-		float EaseInOutSine(float start, float end, float value)
-		{
-			end -= start;
-			return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
-		}
+		int mChargeIndex;
 	};
 }

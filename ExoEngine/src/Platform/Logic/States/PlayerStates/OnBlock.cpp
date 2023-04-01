@@ -18,21 +18,28 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Platform/Graphics/Graphics.h"
 #include "OnBlock.h"
 #include "OnIdle.h"
+#include "OnMove.h"
+#include "OnDash.h"
+#include "OnAttack_1.h"
+#include "OnChargeAttack_1.h"
 
-float EaseInOutSine(float start, float end, float value)
-{
-	end -= start;
-	return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
-}
 
 namespace EM
 {
+
 	OnBlock::OnBlock(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.15f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.02f },
 		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.02f } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnBlock::HandleInput(StateMachine* stateMachine, const int& key)
 	{
-		UNREFERENCED_PARAMETER(stateMachine); UNREFERENCED_PARAMETER(key);
+		if (key == GLFW_KEY_SPACE && p_Input->isKeyPressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f)
+		{
+			return new OnDash(stateMachine);
+		}
+		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MouseHold(key))
+		{
+			return new OnChargeAttack_1(stateMachine);
+		}
 		return nullptr;
 	}
 
@@ -45,7 +52,6 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.5f;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.3f;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blocking");
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = true;
 		}
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
 		{
@@ -58,9 +64,15 @@ namespace EM
 	****************************************************************************/
 	void OnBlock::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_RIGHT) && p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID()))
+		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID()))
 		{
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer -= Frametime;
+			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer <= 2.0f)
+			{
+				p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = true;
+			}
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown <= 0.0f)
 			{
 				if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 3))
@@ -88,17 +100,13 @@ namespace EM
 			}
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer <= 0)
 			{
-				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
-				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 5.0f;
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.3f;
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 1.0f;
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = false;
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.0f;
 				stateMachine->ChangeState(new OnIdle(stateMachine));
 			}
-		}
-		else
-		{
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.0f;
-			stateMachine->ChangeState(new OnIdle(stateMachine));
 		}
 	}
 	/*!*************************************************************************
@@ -107,9 +115,12 @@ namespace EM
 	void OnBlock::OnExit(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.0f;
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 5.0f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer = 2.3f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown = 1.0f;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsBlocking = false;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.0f;
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		}
 		delete this;

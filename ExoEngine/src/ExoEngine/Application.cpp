@@ -143,14 +143,15 @@ Application constructor
 			
 			if (p_Input->KeyPressed(GLFW_KEY_F3))
 			{
-				for (Entity i = 0; i <= p_ecs.GetTotalEntities(); ++i)
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
 					if (p_ecs.HaveComponent<EnemyAttributes>(i))
 					{
 						if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
 							|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
 						{
-							p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
+							p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive = true;
+							p_ecs.GetComponent<EnemyAttributes>(i).mHealth  = 0;
 							p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
 						}
 					}
@@ -164,6 +165,7 @@ Application constructor
 			// test menu script
 
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
+			p_Input->ResetPressedMouse();
 
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());

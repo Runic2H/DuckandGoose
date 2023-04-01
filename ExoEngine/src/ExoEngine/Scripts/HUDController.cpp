@@ -105,13 +105,15 @@ namespace EM
                 //update alpha
                 pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown)/7.0f
                     - (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown) / 7.0f, pTrans.GetScale().y);
-                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) - ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / 0.05f) / 2.0f / (5.0f / 0.05f) / 2.0f) / 2.5f, camPos.y + pComp.GetOffset().y);
+                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) - ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown/100.f) / 2.0f / 
+                    (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mBlockMaxCoolDown/100.f) / 2.0f) / 2.5f, camPos.y + pComp.GetOffset().y);
             }
             if (pComp.GetType() == HUDComponent::ElementType::DashBar) {
                 //check for timing of cooldown
                 pTrans.SetScale((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown/p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown)/5.5f
                     - (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown/p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown)/5.5f, pTrans.GetScale().y);
-                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) - ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / 0.03f) / 2.0f / (3.0f / 0.03f) / 2.0f) / 2.5f, camPos.y + pComp.GetOffset().y);
+                pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) - ((p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown/100.f) / 2.0f / 
+                    (p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown / p_ecs.GetComponent<PlayerAttributes>(mEntityID).mDashMaxCoolDown/100.f) / 2.0f) / 2.5f, camPos.y + pComp.GetOffset().y);
             }
         }
 	}

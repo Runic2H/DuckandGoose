@@ -60,6 +60,7 @@ namespace EM
 		float mDamageDurationTimer;
 		float mHitStopTimer;
 		float mChargeAttackCoolDown;
+		float mChargeTimer;
 		bool mIsChargeAttack;
 		float mDeathDuration;
 		bool mIsDamaged;

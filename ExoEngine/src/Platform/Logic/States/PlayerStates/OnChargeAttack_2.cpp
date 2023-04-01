@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file OnChargeAttack_1.cpp
+\file OnChargeAttack_2.cpp
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2450
@@ -14,18 +14,18 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
-#include "OnChargeAttack_1.h"
+#include "OnChargeAttack_2.h"
 #include "OnIdle.h"
 #include "OnBlock.h"
 #include "OnDamaged.h"
-#include "OnAttack_1.h"
+#include "OnAttack_2.h"
 #include "ExoEngine/Timer/Time.h"
 
 namespace EM
 {
-	OnChargeAttack_1::OnChargeAttack_1(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ Timer::GetInstance().GetGlobalDT() }, mChargeIndex{0} { UNREFERENCED_PARAMETER(stateMachine); }
+	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ Timer::GetInstance().GetGlobalDT() }, mChargeIndex{ 0 } { UNREFERENCED_PARAMETER(stateMachine); }
 
-	IStates* OnChargeAttack_1::HandleInput(StateMachine* stateMachine, const int& key)
+	IStates* OnChargeAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
 	{
 		UNREFERENCED_PARAMETER(stateMachine);
 		UNREFERENCED_PARAMETER(key);
@@ -34,7 +34,7 @@ namespace EM
 	/*!*************************************************************************
 		Enter state for Player Attack 1
 	****************************************************************************/
-	void OnChargeAttack_1::OnEnter(StateMachine* stateMachine)
+	void OnChargeAttack_2::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer = 0.5f;
@@ -44,14 +44,14 @@ namespace EM
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
 		}
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing1");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing2");
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
 	}
 
 	/*!*************************************************************************
 		Update state for Player Attack 1
 	****************************************************************************/
-	void OnChargeAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
+	void OnChargeAttack_2::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown -= Frametime;
@@ -67,7 +67,7 @@ namespace EM
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer < 0.3f)
 			{
-				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("CA1");
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("CA2");
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 			}
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
@@ -84,49 +84,49 @@ namespace EM
 		}
 		else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 		{
-				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
-				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
-				vec2D dir = rigidbody.GetDir();
-				dir = dir * 20.0f;
-				rigidbody.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
-				vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
-				rigidbody.SetNextPos(nextPos);
-				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = true;
+			auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
+			auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
+			vec2D dir = rigidbody.GetDir();
+			dir = dir * 20.0f;
+			rigidbody.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
+			vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
+			rigidbody.SetNextPos(nextPos);
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = true;
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
+			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.15f)
+			{
+				p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+			}
+			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f)
+			{
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.15f)
-				{
-					p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-				}
-				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f)
-				{
-					p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
-					p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
-					if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
-						if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-						{
-							stateMachine->ChangeState(new OnDamaged(stateMachine));
-						}
-						if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
-						{
-							stateMachine->ChangeState(new OnIdle(stateMachine));
-						}
+				if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
+					if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+					{
+						stateMachine->ChangeState(new OnDamaged(stateMachine));
+					}
+					if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f)
+					{
+						stateMachine->ChangeState(new OnIdle(stateMachine));
 					}
 				}
-				else
-				{
-					p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer -= Frametime;
-					p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
-				}
+			}
+			else
+			{
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer -= Frametime;
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+			}
 		}
 		else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT))
 		{
-			stateMachine->ChangeState(new OnAttack_1(stateMachine));
+			stateMachine->ChangeState(new OnAttack_2(stateMachine));
 		}
 	}
 	/*!*************************************************************************
 		Exit state for Player Attack 1
 	****************************************************************************/
-	void OnChargeAttack_1::OnExit(StateMachine* stateMachine)
+	void OnChargeAttack_2::OnExit(StateMachine* stateMachine)
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = false;

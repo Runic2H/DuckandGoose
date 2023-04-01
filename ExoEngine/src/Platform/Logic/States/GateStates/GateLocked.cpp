@@ -48,13 +48,9 @@ namespace EM
         {
             if (p_ecs.HaveComponent<EnemyAttributes>(i))
             {
-				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED ||
-					p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+				if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive)
 				{
-					if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive)
-					{
-						++aliveCount;
-					}
+					++aliveCount;
 				}
             }
         }

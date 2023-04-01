@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyNotActive.h"
 #include "EnemyIdle.h"
 #include "EnemyChase.h"
+#include "EnemyDamaged.h"
 
 namespace EM
 {
@@ -73,6 +74,11 @@ namespace EM
 				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 				stateMachine->ChangeState(new EnemyIdle(stateMachine));
 			}
+		}
+
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive)
+		{
+			stateMachine->ChangeState(new EnemyIdle(stateMachine));
 		}
 	}
 
