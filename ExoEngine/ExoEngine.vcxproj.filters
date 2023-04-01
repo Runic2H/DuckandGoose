@@ -107,6 +107,7 @@
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\EnemyStates\EnemyHealthDrop.cpp" />
     <ClCompile Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_2.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExoEngine\Input\Input.h" />
@@ -328,6 +329,7 @@
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossDeath.h" />
     <ClInclude Include="src\Platform\Logic\States\PlayerStates\OnChargeAttack_2.h" />
     <ClInclude Include="src\Platform\Logic\States\EnemyStates\EnemyHealthDrop.h" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Serialization\JSONincludes.h" />

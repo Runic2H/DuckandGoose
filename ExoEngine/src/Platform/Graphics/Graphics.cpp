@@ -225,19 +225,23 @@ namespace EM {
 					auto& mAtt = p_ecs.GetComponent<EnemyAttributes>(entity);
 					auto& mHUD = p_ecs.GetComponent<HUDComponent>(entity);
 					if (mTrans.GetScale().x < 0) {
-						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
-						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.f, 0.f, 1.f });
-						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 2.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * -mTrans.GetScale().x / 2.5f, mTrans.GetScale().y / 25.0f);
+						if (mAtt.mHealth > 0) {
+							mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.f, 0.f, 1.f });
+						}
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.135f, 0.020f },
 							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 						
 
 					}
 					else {
-						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
-						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 1.5f, mTrans.GetScale().y / 20.0f);
-						mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.0f, 0.0f, 1.f });
-						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.215f, 0.030f },
+						vec2D HPpos = vec2D(mTrans.GetPos().x + mHUD.GetOffset().x + ((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 2.5f / 2.0f), mTrans.GetPos().y + mHUD.GetOffset().y);
+						vec2D HPScale = vec2D((float)(mAtt.mHealth) / (float)(mAtt.mMaxHealth) * mTrans.GetScale().x / 2.5f, mTrans.GetScale().y / 25.0f);
+						if (mAtt.mHealth > 0) {
+							mRenderer->DrawQuad(HPpos, HPScale, 0.0f, { 1.0f, 0.0f, 0.0f, 1.f });
+						}
+						mRenderer->DrawQuad({ mTrans.GetPos().x , mTrans.GetPos().y + mHUD.GetOffset().y }, { 0.135f, 0.020f },
 							mTrans.GetRot(), GETTEXTURE("EnemyHealthBar"));
 					}
 
