@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Input/Input.h"
 #include "ExoEngine/Application.h"
 #include "Platform/Graphics/Graphics.h"
+#include "../ECS/SceneManager.h"
 #include "GUI.h"
 
 
@@ -138,9 +139,13 @@ namespace EM
 		if (is_Pause == false)
 		{
 			is_Pause = true;
+			p_Scene->isGameplay = false;
 		}
 		else
+		{
 			is_Pause = false;
+			p_Scene->isGameplay = true;
+		}
 	}
 
 	

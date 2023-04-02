@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 134
+        "Entities": 183
     },
   "EntitySignatures": [
     "00000000000000000000000000001000",
@@ -104,7 +104,7 @@
     "00000000000000000000000010111001",
     "00000000000000000000000010111001",
     "00000000000000000000000010111001",
-    "00000000000000000000100101111111",
+    "00000000000000000000100111111111",
     "00000000000000000000000000011000",
     "00000000000000000000000000011000",
     "00000000000000000000000000011000",
@@ -129,13 +129,62 @@
     "00000000000000000000000000011001",
     "00000000000000000000000100111001",
     "00000000000000000000000100111001",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011000",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011111",
+    "00000000000000000000000000011111",
+    "00000000000000000000000000011111",
+    "00000000000000000000000010111111",
+    "00000000000000000000000000011001",
+    "00000000000000000000000010111111",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011111",
+    "00000000000000000000000000011111",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000100111111111",
+    "00000000000000000000100111111111",
+    "00000000000000000000100111111111",
+    "00000000000000000000100111111111",
+    "00000000000000000000100111111111",
+    "00000000000000000000100111111111",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000001011111111",
+    "00000000000000000000001011111111",
+    "00000000000000000000000000011001",
+    "00000000000000000000001011111111",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000000000011001",
+    "00000000000000000000001011111111",
+    "00000000000000000000001011111111",
+    "00000000000000000000001011111111",
+    "00000000000000000000000010111001",
+    "00000000000000000000000000011111",
+    "00000000000000000000000000011111",
     "00000000000000000000000100111001",
-    "00000000000000000000000000011000",
-    "00000000000000000000000000011000",
-    "00000000000000000000000000011000",
-    "00000000000000000000000000011000",
-    "00000000000000000000000000011000",
-    "00000000000000000000000000011000",
     "00000000000000000000000000011000"
   ],
   "Components": {
@@ -157,19 +206,19 @@
     ],
     "1": [
       {
-        "posX": 0.0,
+        "posX": 6.765,
         "posY": 0.0,
-        "scaleX": 11.0,
+        "scaleX": 1.635,
         "scaleY": 1.0,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "background"
+        "NameTag": "BackGround Part 10"
       },
       {
-        "TextureName": "ENVIRONMENT_COMPILED _FINAL_V2 ",
+        "TextureName": "FINAL_ENVIRONMENT_P10",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -189,8 +238,8 @@
     ],
     "2": [
       {
-        "posX": -1.2790672779083252,
-        "posY": 0.2983676493167877,
+        "posX": -6.769,
+        "posY": 0.290,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -206,11 +255,11 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 4.0,
+        "minX1": 2.0,
         "minX2": 0.0,
         "minY1": 0.07500000298023224,
         "minY2": 0.0,
-        "maxX1": 4.0,
+        "maxX1": 2.0,
         "maxX2": 0.0,
         "maxY1": 0.07500000298023224,
         "maxY2": 0.0,
@@ -245,8 +294,8 @@
     ],
     "3": [
       {
-        "posX": -3.550370931625366,
-        "posY": -0.10031422972679138,
+        "posX": -5.700,
+        "posY": -0.082,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -278,7 +327,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom boundary left 1"
+        "NameTag": "Gate 1 Bottom Collider"
       },
       {
         "TextureName": "Blank",
@@ -301,8 +350,8 @@
     ],
     "4": [
       {
-        "posX": -1.27644944190979,
-        "posY": -0.31090936064720154,
+        "posX": -1.698,
+        "posY": -0.293,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -318,7 +367,7 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.5,
+        "minX1": 1,
         "minX2": 0.0,
         "minY1": 0.10999999940395355,
         "minY2": 0.0,
@@ -334,7 +383,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom boundary middle left"
+        "NameTag": "Collider bottom at gate 2"
       },
       {
         "TextureName": "Blank",
@@ -357,8 +406,8 @@
     ],
     "5": [
       {
-        "posX": 0.5165082812309265,
-        "posY": -0.1360795646905899,
+        "posX": 0.458,
+        "posY": -0.167,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -374,11 +423,11 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 1.2999999523162842,
+        "minX1": 1.95,
         "minX2": 0.0,
         "minY1": 0.09000000357627869,
         "minY2": 0.0,
-        "maxX1": 1.2999999523162842,
+        "maxX1": 1.4,
         "maxX2": 0.0,
         "maxY1": 0.09000000357627869,
         "maxY2": 0.0,
@@ -390,7 +439,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom boundary middle right"
+        "NameTag": "Collider bottom at gate3n4 "
       },
       {
         "TextureName": "Blank",
@@ -413,8 +462,8 @@
     ],
     "6": [
       {
-        "posX": 4.267552375793457,
-        "posY": -0.35117077827453613,
+        "posX": 4.259,
+        "posY": -0.182,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -430,13 +479,13 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.800000011920929,
+        "minX1": 1.200,
         "minX2": 0.0,
-        "minY1": 0.10999999940395355,
+        "minY1": 0.110,
         "minY2": 0.0,
-        "maxX1": 0.800000011920929,
+        "maxX1": 1.500,
         "maxX2": 0.0,
-        "maxY1": 0.0,
+        "maxY1": 0.1,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -446,7 +495,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom right boundary"
+        "NameTag": "Collider bottom Gate5&6"
       },
       {
         "TextureName": "Blank",
@@ -469,8 +518,8 @@
     ],
     "7": [
       {
-        "posX": -1.8197766542434692,
-        "posY": -0.19335085153579712,
+        "posX": -2.661,
+        "posY": -0.182,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -525,8 +574,8 @@
     ],
     "8": [
       {
-        "posX": -0.6765095591545105,
-        "posY": -0.3232313394546509,
+        "posX": -2.178,
+        "posY": -0.036,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -542,13 +591,13 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.10000000149011612,
+        "minX1": 0.09,
         "minX2": 0.0,
-        "minY1": 0.10000000149011612,
+        "minY1": 0.005,
         "minY2": 0.0,
-        "maxX1": 0.10000000149011612,
+        "maxX1": 0.09,
         "maxX2": 0.0,
-        "maxY1": 0.10000000149011612,
+        "maxY1": 0.005,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -558,7 +607,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom right corner"
+        "NameTag": "Colldier for small debris3"
       },
       {
         "TextureName": "Blank",
@@ -581,8 +630,8 @@
     ],
     "9": [
       {
-        "posX": 3.5839662551879883,
-        "posY": -0.23198945820331573,
+        "posX": 4.643,
+        "posY": 0.273,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -598,11 +647,11 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.10000000149011612,
+        "minX1": 0.1,
         "minX2": 0.0,
         "minY1": 0.11999999731779099,
         "minY2": 0.0,
-        "maxX1": 0.10000000149011612,
+        "maxX1": 0.1,
         "maxX2": 0.0,
         "maxY1": 0.12999999523162842,
         "maxY2": 0.0,
@@ -614,7 +663,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom far right corner"
+        "NameTag": "Collider for smalldebris4"
       },
       {
         "TextureName": "Blank",
@@ -637,8 +686,8 @@
     ],
     "10": [
       {
-        "posX": -4.263725280761719,
-        "posY": 0.03749954700469971,
+        "posX": -4.982,
+        "posY": -0.004,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -654,13 +703,13 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.125,
+        "minX1": 0.1,
         "minX2": 0.0,
-        "minY1": 0.27000001072883606,
+        "minY1": 0.005,
         "minY2": 0.0,
-        "maxX1": 0.125,
+        "maxX1": 0.1,
         "maxX2": 0.0,
-        "maxY1": 0.27000001072883606,
+        "maxY1": 0.005,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -670,7 +719,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom most left corner"
+        "NameTag": "small debris collider"
       },
       {
         "TextureName": "Blank",
@@ -693,8 +742,8 @@
     ],
     "11": [
       {
-        "posX": 4.435999870300293,
-        "posY": 0.04219485819339752,
+        "posX": -3.777,
+        "posY": 0.232,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -710,13 +759,13 @@
       {
         "ColliderType1": 5,
         "ColliderType2": 0,
-        "minX1": 0.15000000596046448,
+        "minX1": 0.08,
         "minX2": 0.0,
-        "minY1": 0.5099999904632568,
+        "minY1": 0.05,
         "minY2": 0.0,
-        "maxX1": 0.15000000596046448,
+        "maxX1": 0.08,
         "maxX2": 0.0,
-        "maxY1": 0.30000001192092896,
+        "maxY1": 0.05,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -726,7 +775,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom most top right corner"
+        "NameTag": "Collider for smalldebris2"
       },
       {
         "TextureName": "Blank",
@@ -749,8 +798,8 @@
     ],
     "12": [
       {
-        "posX": -4.260199546813965,
-        "posY": 0.12532055377960205,
+        "posX": -7.758,
+        "posY": 0.150,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -778,7 +827,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -790,8 +839,8 @@
     ],
     "13": [
       {
-        "posX": -4.255789279937744,
-        "posY": -0.009188711643218994,
+        "posX": -7.663,
+        "posY": 0.077,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -819,7 +868,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -831,8 +880,8 @@
     ],
     "14": [
       {
-        "posX": -4.317531585693359,
-        "posY": 0.07019389420747757,
+        "posX": -7.710,
+        "posY": 0.047,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -860,7 +909,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -872,8 +921,8 @@
     ],
     "15": [
       {
-        "posX": -1.8096297979354858,
-        "posY": -0.11650235950946808,
+        "posX": -2.677,
+        "posY": -0.061,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -901,7 +950,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 5
       },
       {},
       {},
@@ -913,8 +962,8 @@
     ],
     "16": [
       {
-        "posX": -1.770857572555542,
-        "posY": -0.19717082381248474,
+        "posX": -2.673,
+        "posY": -0.163,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -954,10 +1003,10 @@
     ],
     "17": [
       {
-        "posX": -0.7545028924942017,
-        "posY": -0.19055604934692383,
-        "scaleX": -0.41499999165534973,
-        "scaleY": 0.20999999344348907,
+        "posX": 1.746,
+        "posY": -0.072,
+        "scaleX": -0.415,
+        "scaleY": 0.21,
         "Rot": 0.0
       },
       {},
@@ -983,7 +1032,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 5
       },
       {},
       {},
@@ -995,8 +1044,8 @@
     ],
     "18": [
       {
-        "posX": -0.7631397247314453,
-        "posY": -0.22308024764060974,
+        "posX": 1.837,
+        "posY": -0.131,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -1024,7 +1073,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 5
       },
       {},
       {},
@@ -1036,8 +1085,8 @@
     ],
     "19": [
       {
-        "posX": 3.510148286819458,
-        "posY": -0.10116206854581833,
+        "posX": 5.701,
+        "posY": -0.086,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -1065,7 +1114,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 5
       },
       {},
       {},
@@ -1077,8 +1126,8 @@
     ],
     "20": [
       {
-        "posX": 3.6988232135772705,
-        "posY": -0.27637001872062683,
+        "posX": 5.849,
+        "posY": -0.140,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -1106,7 +1155,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 5
       },
       {},
       {},
@@ -1118,8 +1167,8 @@
     ],
     "21": [
       {
-        "posX": -3.856548309326172,
-        "posY": 0.043827272951602936,
+        "posX": -7.455,
+        "posY": 0.090,
         "scaleX": 0.25,
         "scaleY": 0.25,
         "Rot": 0.0
@@ -1136,18 +1185,18 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
@@ -1263,32 +1312,7 @@
           "Channel": 3,
           "IsLooping": false
         },
-        "12": {
-          "AudioPath": "Attack1.wav",
-          "Channel": 3,
-          "IsLooping": false
-        },
-        "13": {
-          "AudioPath": "Attack3.wav",
-          "Channel": 3,
-          "IsLooping": false
-        },
-        "14": {
-          "AudioPath": "Attack4.wav",
-          "Channel": 3,
-          "IsLooping": false
-        },
-        "15": {
-          "AudioPath": "Attack5.wav",
-          "Channel": 3,
-          "IsLooping": false
-        },
-        "16": {
-          "AudioPath": "Attack7.wav",
-          "Channel": 3,
-          "IsLooping": false
-        },
-        "AudioArrCount": 17,
+        "AudioArrCount": 12,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -1511,8 +1535,8 @@
     ],
     "27": [
       {
-        "posX": 2.6522724628448486,
-        "posY": -0.20649859309196472,
+        "posX": 2.540,
+        "posY": -0.386,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -1544,7 +1568,7 @@
         "radius2": 0.0
       },
       {
-        "NameTag": "bottom bridge left corner"
+        "NameTag": "Collider bottom at gate4n5"
       },
       {
         "TextureName": "Blank",
@@ -1623,8 +1647,8 @@
     ],
     "29": [
       {
-        "posX": -2.6317834854125977,
-        "posY": 0.02610763907432556,
+        "posX": -6.827,
+        "posY": 0.136,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -1641,22 +1665,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy1"
       },
       {
         "TextureName": "Blank",
@@ -1692,11 +1716,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -1720,7 +1769,7 @@
       {},
       {},
       {
-        "NameTag": "Enemy attack animation "
+        "NameTag": "Enemy attack animation"
       },
       {
         "TextureName": "EXOMATA_ENEMY_MELEE_ATTACKING_SPRITESHEET",
@@ -1896,8 +1945,8 @@
     ],
     "34": [
       {
-        "posX": -2.190999984741211,
-        "posY": 0.1469999998807907,
+        "posX": -3.031,
+        "posY": 0.159,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -1960,7 +2009,7 @@
         "DisplayTime 17": 0.019999999552965164,
         "DisplayTime 18": 0.019999999552965164,
         "DisplayTime 19": 0.019999999552965164,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "GateController",
@@ -1987,8 +2036,8 @@
     ],
     "35": [
       {
-        "posX": -2.1600000858306885,
-        "posY": 0.1080000028014183,
+        "posX": -2.998,
+        "posY": 0.136,
         "scaleX": 0.4000000059604645,
         "scaleY": 0.4000000059604645,
         "Rot": 0.0
@@ -2039,10 +2088,10 @@
     ],
     "36": [
       {
-        "posX": -0.6970000267028809,
-        "posY": 0.164000004529953,
+        "posX": -1.291,
+        "posY": 0.147,
         "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "scaleY": 0.32000001192092896,
         "Rot": 0.0
       },
       {
@@ -2103,7 +2152,7 @@
         "DisplayTime 17": 0.019999999552965164,
         "DisplayTime 18": 0.019999999552965164,
         "DisplayTime 19": 0.019999999552965164,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -2130,7 +2179,7 @@
     ],
     "37": [
       {
-        "posX": -0.6759999990463257,
+        "posX": -1.257,
         "posY": 0.13600000739097595,
         "scaleX": 0.4000000059604645,
         "scaleY": 0.3799999952316284,
@@ -2182,7 +2231,7 @@
     ],
     "38": [
       {
-        "posX": 1.6679999828338623,
+        "posX": 1.479,
         "posY": 0.15000000596046448,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
@@ -2246,7 +2295,7 @@
         "DisplayTime 17": 0.019999999552965164,
         "DisplayTime 18": 0.019999999552965164,
         "DisplayTime 19": 0.019999999552965164,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "AudioManager",
@@ -2268,8 +2317,8 @@
     ],
     "39": [
       {
-        "posX": 1.6970000267028809,
-        "posY": 0.13600000739097595,
+        "posX": 1.513,
+        "posY": 0.12600000739097595,
         "scaleX": 0.4000000059604645,
         "scaleY": 0.3700000047683716,
         "Rot": 0.0
@@ -2320,10 +2369,10 @@
     ],
     "40": [
       {
-        "posX": 3.2890000343322754,
-        "posY": 0.13699999451637268,
+        "posX": 3.1,
+        "posY": 0.154,
         "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "scaleY": 0.4,
         "Rot": 0.0
       },
       {
@@ -2384,7 +2433,7 @@
         "DisplayTime 17": 0.019999999552965164,
         "DisplayTime 18": 0.019999999552965164,
         "DisplayTime 19": 0.019999999552965164,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "GateController",
@@ -2411,8 +2460,8 @@
     ],
     "41": [
       {
-        "posX": 3.319000005722046,
-        "posY": 0.08299999684095383,
+        "posX": 3.136,
+        "posY": 0.153,
         "scaleX": 0.4000000059604645,
         "scaleY": 0.4000000059604645,
         "Rot": 0.0
@@ -2463,8 +2512,8 @@
     ],
     "42": [
       {
-        "posX": 3.57116961479187,
-        "posY": -0.16944767534732819,
+        "posX": 5.867,
+        "posY": -0.156,
         "scaleX": 0.41499999165534973,
         "scaleY": 0.20999999344348907,
         "Rot": 0.0
@@ -2472,7 +2521,7 @@
       {},
       {},
       {
-        "NameTag": "starting debris 9"
+        "NameTag": "starting debris 10"
       },
       {
         "TextureName": "ENVIRONMENT_PROPS_TILESET",
@@ -2504,8 +2553,8 @@
     ],
     "43": [
       {
-        "posX": -2.8421905040740967,
-        "posY": 0.08359619975090027,
+        "posX": -6.518,
+        "posY": 0.035,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -2522,22 +2571,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy2"
       },
       {
         "TextureName": "Blank",
@@ -2573,11 +2622,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -2598,8 +2672,8 @@
     ],
     "44": [
       {
-        "posX": -1.0027046203613281,
-        "posY": -0.2129242718219757,
+        "posX": -5.369,
+        "posY": 0.029,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -2616,22 +2690,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy3"
       },
       {
         "TextureName": "Blank",
@@ -2667,11 +2741,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -2692,8 +2791,8 @@
     ],
     "45": [
       {
-        "posX": -1.0423575639724731,
-        "posY": 0.05939039587974548,
+        "posX": -4.766,
+        "posY": 0.139,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -2710,22 +2809,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy4"
       },
       {
         "TextureName": "Blank",
@@ -2761,11 +2860,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -2786,8 +2910,8 @@
     ],
     "46": [
       {
-        "posX": -1.3397554159164429,
-        "posY": -0.12820425629615784,
+        "posX": -4.195,
+        "posY": -0.025,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -2804,22 +2928,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy5"
       },
       {
         "TextureName": "Blank",
@@ -2855,11 +2979,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -2937,7 +3086,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "HUDController",
@@ -2976,7 +3125,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "HUDController",
@@ -3007,7 +3156,7 @@
         "NameTag": "PlayerHUDBlock"
       },
       {
-        "TextureName": "DashBar",
+        "TextureName": "BlockBar",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3015,7 +3164,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "HUDController",
@@ -3054,7 +3203,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "HUDController",
@@ -3079,21 +3228,23 @@
         "NameTag": "Ground Hazard Charge Animation"
       },
       {
-        "TextureName": "Ground_Hazards_Charging",
-        "Index_X": 5,
+        "TextureName": "GroundElectricHazard",
+        "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
         "Vcoordinates": 512.0,
         "IsSpriteSheet": true,
         "IsAnimated": true,
-        "MaxIndex": 6,
-        "DisplayTime 0": 0.05999999865889549,
-        "DisplayTime 1": 0.05999999865889549,
-        "DisplayTime 2": 0.05999999865889549,
-        "DisplayTime 3": 0.05999999865889549,
-        "DisplayTime 4": 0.05999999865889549,
-        "DisplayTime 5": 0.05999999865889549,
-        "LayeringOrder": 0
+        "MaxIndex": 8,
+        "DisplayTime 0": 0.045,
+        "DisplayTime 1": 0.045,
+        "DisplayTime 2": 0.045,
+        "DisplayTime 3": 0.045,
+        "DisplayTime 4": 0.045,
+        "DisplayTime 5": 0.045,
+        "DisplayTime 6": 0.045,
+        "DisplayTime 7": 0.045,
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3125,7 +3276,7 @@
         "DisplayTime 3": 0.05999999865889549,
         "DisplayTime 4": 0.05999999865889549,
         "DisplayTime 5": 0.05999999865889549,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3137,19 +3288,19 @@
     ],
     "54": [
       {
-        "posX": -1.4839650392532349,
-        "posY": -0.1690962314605713,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": -5.530,
+        "posY": 0.108,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Ground Hazard"
+        "NameTag": "Ground Hazard 1"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3158,7 +3309,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3170,10 +3321,10 @@
     ],
     "55": [
       {
-        "posX": -1.1253643035888672,
-        "posY": 0.02623903751373291,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": -3.999,
+        "posY": -0.015,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3182,7 +3333,7 @@
         "NameTag": "Ground Hazard 2"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3191,7 +3342,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3203,10 +3354,10 @@
     ],
     "56": [
       {
-        "posX": 2.865889549255371,
-        "posY": -0.023323655128479004,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": -2.453,
+        "posY": 0.025,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3215,7 +3366,7 @@
         "NameTag": "Ground Hazard 3"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3224,7 +3375,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3236,10 +3387,10 @@
     ],
     "57": [
       {
-        "posX": 2.2244904041290283,
-        "posY": 0.034985288977622986,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": -1.745,
+        "posY": 0.03,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3248,7 +3399,7 @@
         "NameTag": "Ground Hazard 4"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3257,7 +3408,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3269,10 +3420,10 @@
     ],
     "58": [
       {
-        "posX": 4.008747100830078,
-        "posY": -0.002915501594543457,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": -2.047,
+        "posY": -0.113,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3281,7 +3432,7 @@
         "NameTag": "Ground Hazard 5"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3290,7 +3441,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3302,10 +3453,10 @@
     ],
     "59": [
       {
-        "posX": 3.9008755683898926,
-        "posY": -0.21574342250823975,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": 2.128,
+        "posY": 0.003,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3314,7 +3465,7 @@
         "NameTag": "Ground Hazard 6"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3323,7 +3474,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3335,10 +3486,10 @@
     ],
     "60": [
       {
-        "posX": 4.198251247406006,
-        "posY": -0.21574342250823975,
-        "scaleX": 0.15000000596046448,
-        "scaleY": 0.15000000596046448,
+        "posX": 2.657,
+        "posY": -0.114,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {},
@@ -3347,7 +3498,7 @@
         "NameTag": "Ground Hazard 7"
       },
       {
-        "TextureName": "Ground_Hazard",
+        "TextureName": "ELECTRICHAZARD",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -3356,7 +3507,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -3368,16 +3519,16 @@
     ],
     "61": [
       {
-        "posX": -0.24927115440368652,
-        "posY": 0.1834305226802826,
-        "scaleX": 0.05000000074505806,
-        "scaleY": 0.029999999329447746,
+        "posX": -0.850,
+        "posY": 0.180,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Laser Hazard"
+        "NameTag": "Laser Hazard 1"
       },
       {
         "TextureName": "Laser_Hazard",
@@ -3389,7 +3540,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {},
       {},
@@ -3469,16 +3620,16 @@
     ],
     "64": [
       {
-        "posX": 0.2570456862449646,
-        "posY": 0.1834305226802826,
-        "scaleX": 0.05000000074505806,
-        "scaleY": 0.029999999329447746,
+        "posX": -0.254,
+        "posY": 0.183,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Laser Hazard"
+        "NameTag": "Laser Hazard 2"
       },
       {
         "TextureName": "Laser_Hazard",
@@ -3490,7 +3641,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {},
       {},
@@ -3502,16 +3653,16 @@
     ],
     "65": [
       {
-        "posX": 0.7502429485321045,
-        "posY": 0.1834305226802826,
-        "scaleX": 0.05000000074505806,
-        "scaleY": 0.029999999329447746,
+        "posX": 0.347,
+        "posY": 0.180,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Laser Hazard"
+        "NameTag": "Laser Hazard 3"
       },
       {
         "TextureName": "Laser_Hazard",
@@ -3523,7 +3674,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {},
       {},
@@ -3535,16 +3686,16 @@
     ],
     "66": [
       {
-        "posX": 1.246841549873352,
-        "posY": 0.1834305226802826,
-        "scaleX": 0.05000000074505806,
-        "scaleY": 0.029999999329447746,
+        "posX": 0.937,
+        "posY": 0.179,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Laser Hazard"
+        "NameTag": "Laser Hazard 4"
       },
       {
         "TextureName": "Laser_Hazard",
@@ -3556,7 +3707,7 @@
         "IsAnimated": false,
         "MaxIndex": 1,
         "DisplayTime 0": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {},
       {},
@@ -3568,10 +3719,10 @@
     ],
     "67": [
       {
-        "posX": -1.5140000581741333,
-        "posY": -0.1720000058412552,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": -5.530,
+        "posY": 0.108,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -3586,17 +3737,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.03,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.03,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.03,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.03,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": 0.0,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -3618,7 +3769,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -3654,10 +3805,10 @@
     ],
     "68": [
       {
-        "posX": -1.1552900075912476,
-        "posY": 0.03322087973356247,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": -3.999,
+        "posY": -0.015,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -3672,17 +3823,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -3704,7 +3855,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -3740,10 +3891,10 @@
     ],
     "69": [
       {
-        "posX": 2.1933107376098633,
-        "posY": 0.032992392778396606,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": -2.453,
+        "posY": 0.025,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -3758,17 +3909,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -3790,7 +3941,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -3826,10 +3977,10 @@
     ],
     "70": [
       {
-        "posX": 2.838721513748169,
-        "posY": -0.022983405739068985,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": -1.745,
+        "posY": 0.03,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -3844,17 +3995,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -3876,7 +4027,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -3912,10 +4063,10 @@
     ],
     "71": [
       {
-        "posX": 3.87060546875,
-        "posY": -0.2128472775220871,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": -2.047,
+        "posY": -0.113,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -3930,17 +4081,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -3962,7 +4113,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -3998,10 +4149,10 @@
     ],
     "72": [
       {
-        "posX": 3.982682704925537,
-        "posY": -0.011637018993496895,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": 2.128,
+        "posY": 0.003,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -4016,17 +4167,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -4048,7 +4199,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -4084,10 +4235,10 @@
     ],
     "73": [
       {
-        "posX": 4.159687519073486,
-        "posY": -0.21662943065166473,
-        "scaleX": 0.30000001192092896,
-        "scaleY": 0.30000001192092896,
+        "posX": 2.657,
+        "posY": -0.114,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
         "Rot": 0.0
       },
       {
@@ -4102,17 +4253,17 @@
         "ColliderType1": 0,
         "ColliderType2": 4,
         "minX1": 0.029999999329447746,
-        "minX2": 0.029999999329447746,
+        "minX2": 0.05,
         "minY1": 0.07999999821186066,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.029999999329447746,
-        "maxX2": 0.029999999329447746,
+        "maxX2": 0.05,
         "maxY1": 0.07999999821186066,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.05000000074505806,
-        "offsetX2": 0.05000000074505806,
+        "offsetX2": 0.03,
         "offsetY1": 0.0,
-        "offsetY2": -0.05999999865889549,
+        "offsetY2": -0.08,
         "radius1": 0.0,
         "radius2": 0.0
       },
@@ -4134,7 +4285,7 @@
         "DisplayTime 3": 0.0,
         "DisplayTime 4": 0.0,
         "DisplayTime 5": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 2
       },
       {
         "0": "CollisionResponse",
@@ -4170,8 +4321,8 @@
     ],
     "74": [
       {
-        "posX": -0.23947827517986298,
-        "posY": 0.18206655979156494,
+        "posX": -0.844,
+        "posY": 0.176,
         "scaleX": 0.05000000074505806,
         "scaleY": 0.05000000074505806,
         "Rot": -139.99998474121094
@@ -4222,7 +4373,7 @@
         "DisplayTime 5": 0.0,
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {
         "0": "CollisionResponse",
@@ -4258,7 +4409,7 @@
     ],
     "75": [
       {
-        "posX": 0.2683478593826294,
+        "posX": 0.354,
         "posY": 0.18206655979156494,
         "scaleX": 0.05000000074505806,
         "scaleY": 0.05000000074505806,
@@ -4310,7 +4461,7 @@
         "DisplayTime 5": 0.0,
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {
         "0": "CollisionResponse",
@@ -4346,8 +4497,8 @@
     ],
     "76": [
       {
-        "posX": 0.762260913848877,
-        "posY": 0.18357941508293152,
+        "posX": -0.246,
+        "posY": 0.181,
         "scaleX": 0.05000000074505806,
         "scaleY": 0.05000000074505806,
         "Rot": -139.99998474121094
@@ -4398,7 +4549,7 @@
         "DisplayTime 5": 0.0,
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {
         "0": "CollisionResponse",
@@ -4434,8 +4585,8 @@
     ],
     "77": [
       {
-        "posX": 1.2592657804489136,
-        "posY": 0.18206655979156494,
+        "posX": 0.942,
+        "posY": 0.176,
         "scaleX": 0.05000000074505806,
         "scaleY": 0.05000000074505806,
         "Rot": -139.99998474121094
@@ -4486,7 +4637,7 @@
         "DisplayTime 5": 0.0,
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {
         "0": "CollisionResponse",
@@ -4522,8 +4673,8 @@
     ],
     "78": [
       {
-        "posX": 0.015269570052623749,
-        "posY": 0.08514009416103363,
+        "posX": -3.503,
+        "posY": 0.153,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -4540,22 +4691,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy6"
       },
       {
         "TextureName": "Blank",
@@ -4591,11 +4742,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -4616,8 +4792,8 @@
     ],
     "79": [
       {
-        "posX": 0.5764996409416199,
-        "posY": 0.08514009416103363,
+        "posX": -2.444,
+        "posY": -0.207,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -4634,22 +4810,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy7"
       },
       {
         "TextureName": "Blank",
@@ -4685,11 +4861,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -4710,8 +4911,8 @@
     ],
     "80": [
       {
-        "posX": 0.9666699767112732,
-        "posY": 0.08514009416103363,
+        "posX": -2.109,
+        "posY": 0.099,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -4728,22 +4929,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy8"
       },
       {
         "TextureName": "Blank",
@@ -4779,11 +4980,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -4804,8 +5030,8 @@
     ],
     "81": [
       {
-        "posX": 2.5701355934143066,
-        "posY": 0.06471650302410126,
+        "posX": -1.636,
+        "posY": -0.204,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -4824,20 +5050,20 @@
         "minX1": 0.0,
         "minX2": 0.3499999940395355,
         "minY1": 0.0,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.0,
         "maxX2": 0.0,
         "maxY1": 0.0,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
-        "offsetY2": 0.0,
+        "offsetY2": -0.02,
         "radius1": 0.05000000074505806,
         "radius2": 0.0
       },
       {
-        "NameTag": "EnemyRange"
+        "NameTag": "EnemyRange1"
       },
       {
         "TextureName": "Blank",
@@ -4873,11 +5099,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -4898,8 +5149,8 @@
     ],
     "82": [
       {
-        "posX": 2.444775104522705,
-        "posY": -0.020571067929267883,
+        "posX": -1.582,
+        "posY": 0.124,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -4916,22 +5167,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy9"
       },
       {
         "TextureName": "Blank",
@@ -4967,11 +5218,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -4992,8 +5268,8 @@
     ],
     "83": [
       {
-        "posX": 2.7292981147766113,
-        "posY": -0.012119337916374207,
+        "posX": -0.509,
+        "posY": 0.050,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -5010,22 +5286,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy10"
       },
       {
         "TextureName": "Blank",
@@ -5061,11 +5337,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -5086,8 +5387,8 @@
     ],
     "84": [
       {
-        "posX": 3.873142957687378,
-        "posY": -0.2383032739162445,
+        "posX": 0.059,
+        "posY": 0.084,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -5106,20 +5407,20 @@
         "minX1": 0.0,
         "minX2": 0.3499999940395355,
         "minY1": 0.0,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.0,
         "maxX2": 0.0,
         "maxY1": 0.0,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
-        "offsetY2": 0.0,
+        "offsetY2": -0.02,
         "radius1": 0.05000000074505806,
         "radius2": 0.0
       },
       {
-        "NameTag": "EnemyRange"
+        "NameTag": "EnemyRange2"
       },
       {
         "TextureName": "Blank",
@@ -5155,11 +5456,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -5180,8 +5506,8 @@
     ],
     "85": [
       {
-        "posX": 4.038060188293457,
-        "posY": -0.12436018884181976,
+        "posX": 0.175,
+        "posY": -0.023,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -5198,22 +5524,22 @@
         "ColliderType1": 1,
         "ColliderType2": 4,
         "minX1": 0.0,
-        "minX2": 0.07000000029802322,
+        "minX2": 0.09,
         "minY1": 0.0,
-        "minY2": 0.07000000029802322,
+        "minY2": 0.035,
         "maxX1": 0.0,
-        "maxX2": 0.07000000029802322,
+        "maxX2": 0.09,
         "maxY1": 0.0,
-        "maxY2": 0.07000000029802322,
+        "maxY2":  0.035,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
         "offsetY2": 0.0,
-        "radius1": 0.05000000074505806,
+        "radius1": 0.03,
         "radius2": 0.0
       },
       {
-        "NameTag": "Enemy"
+        "NameTag": "Enemy11"
       },
       {
         "TextureName": "Blank",
@@ -5249,11 +5575,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -5603,23 +5954,23 @@
     ],
     "92": [
       {
-        "posX": 0.699999988079071,
-        "posY": -3.799999952316284,
-        "scaleX": 1.0,
-        "scaleY": 0.20000000298023224,
+        "posX": -1.1584175825119019,
+        "posY": -8.52439022064209,
+        "scaleX": 1.0190999507904053,
+        "scaleY": 0.39816001057624817,
         "Rot": 0.0
       },
       {},
       {
         "ColliderType1": 4,
         "ColliderType2": 0,
-        "minX1": -0.5,
+        "minX1": -0.6499999761581421,
         "minX2": 0.0,
-        "minY1": -0.5,
+        "minY1": -0.15000000596046448,
         "minY2": 0.0,
-        "maxX1": 0.5,
+        "maxX1": 0.6499999761581421,
         "maxX2": 0.0,
-        "maxY1": 0.5,
+        "maxY1": 0.44999998807907104,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -5632,7 +5983,7 @@
         "NameTag": "Resume"
       },
       {
-        "TextureName": "Blank",
+        "TextureName": "BACK_Y",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -5640,14 +5991,14 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 0
+        "LayeringOrder": 1
       },
       {
         "0": "PauseMenu",
         "ScriptCount": 1
       },
       {
-        "Tag": "",
+        "Tag": "Back",
         "TargetTag": ""
       },
       {},
@@ -5658,16 +6009,16 @@
     ],
     "93": [
       {
-        "posX": -4.038283824920654,
-        "posY": -0.09392184019088745,
-        "scaleX": 0.699999988079071,
-        "scaleY": 0.12500005960464478,
+        "posX": -7.455,
+        "posY": -0.06,
+        "scaleX": 0.7,
+        "scaleY": 0.14,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "DialogueBoxHowToPlay"
+        "NameTag": "Dialogue1-4"
       },
       {
         "TextureName": "Blank",
@@ -5678,7 +6029,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "DialogueManager",
@@ -5713,7 +6064,7 @@
       {},
       {},
       {
-        "NameTag": "bg small debris 12"
+        "NameTag": "small debris 1"
       },
       {
         "TextureName": "ENVIRONMENT_PROPS_TILESET",
@@ -5745,8 +6096,8 @@
     ],
     "95": [
       {
-        "posX": -3.506464958190918,
-        "posY": -0.007583819329738617,
+        "posX": -4.979,
+        "posY": 0.067,
         "scaleX": 0.1991443634033203,
         "scaleY": 0.21000006794929504,
         "Rot": 0.0
@@ -5754,7 +6105,7 @@
       {},
       {},
       {
-        "NameTag": "small debris 3"
+        "NameTag": "small debris 2"
       },
       {
         "TextureName": "ENVIRONMENT_PROPS_TILESET",
@@ -5827,8 +6178,8 @@
     ],
     "97": [
       {
-        "posX": 2.0472447872161865,
-        "posY": -0.01037287712097168,
+        "posX": 4.643,
+        "posY": 0.168,
         "scaleX": 0.1991443634033203,
         "scaleY": 0.21000006794929504,
         "Rot": 0.0
@@ -5836,7 +6187,7 @@
       {},
       {},
       {
-        "NameTag": "small debris 3"
+        "NameTag": "small debris 4"
       },
       {
         "TextureName": "ENVIRONMENT_PROPS_TILESET",
@@ -5856,7 +6207,7 @@
         "DisplayTime 6": 0.0,
         "DisplayTime 7": 0.0,
         "DisplayTime 8": 0.0,
-        "LayeringOrder": 4
+        "LayeringOrder": 2
       },
       {},
       {},
@@ -5868,19 +6219,19 @@
     ],
     "98": [
       {
-        "posX": -3.3054003715515137,
-        "posY": -0.08115170896053314,
-        "scaleX": 0.699999988079071,
-        "scaleY": 0.12500005960464478,
+        "posX": -7.252,
+        "posY": -0.06,
+        "scaleX": 0.7,
+        "scaleY": 0.14,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "DialogueBox3"
+        "NameTag": "DialogueTutorial1-3"
       },
       {
-        "TextureName": "Dialogue3",
+        "TextureName": "Tutorial1",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -5888,7 +6239,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {
         "0": "DialogueManager",
@@ -5914,19 +6265,19 @@
     ],
     "99": [
       {
-        "posX": -1.9500000476837158,
+        "posX": -6.784,
         "posY": -0.08115170896053314,
-        "scaleX": 0.699999988079071,
-        "scaleY": 0.12500005960464478,
+        "scaleX": 0.7,
+        "scaleY": 0.14,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "DialogueBox4"
+        "NameTag": "DialogueTutorial4-6"
       },
       {
-        "TextureName": "Dialogue4",
+        "TextureName": "Tutorial4",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -5934,7 +6285,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {
         "0": "DialogueManager",
@@ -5960,19 +6311,19 @@
     ],
     "100": [
       {
-        "posX": 3.549999952316284,
+        "posX": -6.066,
         "posY": -0.08115170896053314,
-        "scaleX": 0.699999988079071,
-        "scaleY": 0.12500005960464478,
+        "scaleX": 0.7,
+        "scaleY": 0.14,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "DialogueBox5"
+        "NameTag": "DialogueBox7-10"
       },
       {
-        "TextureName": "Dialogue5",
+        "TextureName": "Dialogue7",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -5980,7 +6331,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {
         "0": "DialogueManager",
@@ -6006,8 +6357,8 @@
     ],
     "101": [
       {
-        "posX": 0.0,
-        "posY": -0.07288636267185211,
+        "posX": 6.714,
+        "posY": 1.0,
         "scaleX": 0.6,
         "scaleY": 0.6,
         "Rot": 0.0
@@ -6055,13 +6406,34 @@
       {
         "0": "BossScript",
         "1": "CollisionResponse",
-        "ScriptCount": 2
+        "2": "AudioManager",
+        "ScriptCount": 3
       },
       {
         "Tag": "Enemy",
         "TargetTag": ""
       },
-      {},
+      {
+        "0": {
+          "AudioPath": "Boss_Laser.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "RobotHurt2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "Boss_Death.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 3,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
       {
         "ElementType": 1,
         "offsetX": -0.5,
@@ -6245,7 +6617,7 @@
         "DisplayTime 29": 0.05999999865889549,
         "DisplayTime 30": 0.05999999865889549,
         "DisplayTime 31": 0.05999999865889549,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {},
       {},
@@ -6309,7 +6681,7 @@
         "DisplayTime 29": 0.0,
         "DisplayTime 30": 0.0,
         "DisplayTime 31": 0.0,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {},
       {
@@ -6336,14 +6708,14 @@
         "NameTag": "BossLaser"
       },
       {
-        "TextureName": "BOSSLASER",
+        "TextureName": "Boss_Laser_1",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
         "Vcoordinates": 512.0,
         "IsSpriteSheet": true,
         "IsAnimated": true,
-        "MaxIndex": 44,
+        "MaxIndex": 14,
         "DisplayTime 0": 0.04545454,
         "DisplayTime 1": 0.04545454,
         "DisplayTime 2": 0.04545454,
@@ -6358,37 +6730,7 @@
         "DisplayTime 11": 0.04545454,
         "DisplayTime 12": 0.04545454,
         "DisplayTime 13": 0.04545454,
-        "DisplayTime 14": 0.04545454,
-        "DisplayTime 15": 0.04545454,
-        "DisplayTime 16": 0.04545454,
-        "DisplayTime 17": 0.04545454,
-        "DisplayTime 18": 0.04545454,
-        "DisplayTime 19": 0.04545454,
-        "DisplayTime 20": 0.04545454,
-        "DisplayTime 21": 0.04545454,
-        "DisplayTime 22": 0.04545454,
-        "DisplayTime 23": 0.04545454,
-        "DisplayTime 24": 0.04545454,
-        "DisplayTime 25": 0.04545454,
-        "DisplayTime 26": 0.04545454,
-        "DisplayTime 27": 0.04545454,
-        "DisplayTime 28": 0.04545454,
-        "DisplayTime 29": 0.04545454,
-        "DisplayTime 30": 0.04545454,
-        "DisplayTime 31": 0.04545454,
-        "DisplayTime 32": 0.04545454,
-        "DisplayTime 33": 0.04545454,
-        "DisplayTime 34": 0.04545454,
-        "DisplayTime 35": 0.04545454,
-        "DisplayTime 36": 0.04545454,
-        "DisplayTime 37": 0.04545454,
-        "DisplayTime 38": 0.04545454,
-        "DisplayTime 39": 0.04545454,
-        "DisplayTime 40": 0.04545454,
-        "DisplayTime 41": 0.04545454,
-        "DisplayTime 42": 0.04545454,
-        "DisplayTime 43": 0.04545454,
-        "LayeringOrder": 6
+        "LayeringOrder": 8
       },
       {},
       {
@@ -6403,8 +6745,8 @@
     ],
     "108": [
       {
-        "posX": 1.2730000019073486,
-        "posY": 0.041999999433755875,
+        "posX": 2.334,
+        "posY": 0.054,
         "scaleX": 0.30000001192092896,
         "scaleY": 0.30000001192092896,
         "Rot": 0.0
@@ -6423,20 +6765,20 @@
         "minX1": 0.0,
         "minX2": 0.3499999940395355,
         "minY1": 0.0,
-        "minY2": 0.029999999329447746,
+        "minY2": 0.01,
         "maxX1": 0.0,
         "maxX2": 0.0,
         "maxY1": 0.0,
-        "maxY2": 0.029999999329447746,
+        "maxY2": 0.01,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
         "offsetY1": 0.0,
-        "offsetY2": 0.0,
+        "offsetY2": -0.02,
         "radius1": 0.05000000074505806,
         "radius2": 0.0
       },
       {
-        "NameTag": "EnemyRange"
+        "NameTag": "EnemyRange3"
       },
       {
         "TextureName": "Blank",
@@ -6472,11 +6814,36 @@
           "IsLooping": false
         },
         "2": {
-          "AudioPath": "Explosion_Low.wav",
+          "AudioPath": "EnemyDeath2.wav",
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 3,
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
@@ -6499,8 +6866,8 @@
       {
         "posX": 0.0,
         "posY": 4.0,
-        "scaleX": 5.400000095367432,
-        "scaleY": 3.0,
+        "scaleX": 4.0,
+        "scaleY": 2.25,
         "Rot": 0.0
       },
       {},
@@ -6530,7 +6897,7 @@
     "110": [
       {
         "posX": 0.0,
-        "posY": 4.349999904632568,
+        "posY": 4.291463375091553,
         "scaleX": 1.639686942100525,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -6562,7 +6929,7 @@
     "111": [
       {
         "posX": 0.0,
-        "posY": 4.289999961853027,
+        "posY": 4.234715461730957,
         "scaleX": 0.09000003337860107,
         "scaleY": 0.09000003337860107,
         "Rot": 0.0
@@ -6617,7 +6984,7 @@
     "112": [
       {
         "posX": 0.0,
-        "posY": 3.950000047683716,
+        "posY": 3.9987809658050537,
         "scaleX": 1.639686942100525,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -6649,7 +7016,7 @@
     "113": [
       {
         "posX": 0.0,
-        "posY": 3.559999942779541,
+        "posY": 3.6998374462127686,
         "scaleX": 1.639686942100525,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -6681,7 +7048,7 @@
     "114": [
       {
         "posX": 0.0,
-        "posY": 3.890000104904175,
+        "posY": 3.9420325756073,
         "scaleX": 0.09000003337860107,
         "scaleY": 0.09000003337860107,
         "Rot": 0.0
@@ -6736,7 +7103,7 @@
     "115": [
       {
         "posX": 0.0,
-        "posY": 3.5,
+        "posY": 3.6398375034332275,
         "scaleX": 0.09000003337860107,
         "scaleY": 0.09000000357627869,
         "Rot": 0.0
@@ -6791,7 +7158,7 @@
     "116": [
       {
         "posX": 0.029999999329447746,
-        "posY": 4.010000228881836,
+        "posY": 4.062032699584961,
         "scaleX": 1.2899999618530273,
         "scaleY": 0.49000000953674316,
         "Rot": 0.0
@@ -6823,7 +7190,7 @@
     "117": [
       {
         "posX": 0.029999999329447746,
-        "posY": 3.619999885559082,
+        "posY": 3.7598371505737305,
         "scaleX": 1.2899999618530273,
         "scaleY": 0.49000000953674316,
         "Rot": 0.0
@@ -6855,7 +7222,7 @@
     "118": [
       {
         "posX": 0.029999999329447746,
-        "posY": 4.409999847412109,
+        "posY": 4.351463317871094,
         "scaleX": 1.2899999618530273,
         "scaleY": 0.49000000953674316,
         "Rot": 0.0
@@ -6886,23 +7253,23 @@
     ],
     "119": [
       {
-        "posX": -1.3429081439971924,
-        "posY": 3.3140103816986084,
-        "scaleX": 1.2902400493621826,
-        "scaleY": 0.5040000081062317,
+        "posX": -1.1749645471572876,
+        "posY": 3.485365629196167,
+        "scaleX": 1.0190999507904053,
+        "scaleY": 0.39816001057624817,
         "Rot": 0.0
       },
       {},
       {
         "ColliderType1": 4,
         "ColliderType2": 0,
-        "minX1": -0.09000000357627869,
+        "minX1": -0.6499999761581421,
         "minX2": 0.0,
-        "minY1": -1.0,
+        "minY1": -0.15000000596046448,
         "minY2": 0.0,
-        "maxX1": 0.8999999761581421,
+        "maxX1": 0.6499999761581421,
         "maxX2": 0.0,
-        "maxY1": 1.0,
+        "maxY1": 0.44999998807907104,
         "maxY2": 0.0,
         "offsetX1": 0.0,
         "offsetX2": 0.0,
@@ -6915,7 +7282,7 @@
         "NameTag": "BackButton"
       },
       {
-        "TextureName": "Blank",
+        "TextureName": "BACK_Y",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -6943,8 +7310,8 @@
       {
         "posX": 0.0,
         "posY": 8.0,
-        "scaleX": 5.400000095367432,
-        "scaleY": 3.0,
+        "scaleX": 4.0,
+        "scaleY": 2.25,
         "Rot": 0.0
       },
       {},
@@ -6953,7 +7320,7 @@
         "NameTag": "Quit Background"
       },
       {
-        "TextureName": "QUIT_GAME",
+        "TextureName": "Are_You_Sure",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -6974,7 +7341,7 @@
     "121": [
       {
         "posX": 0.5202071070671082,
-        "posY": 7.630000114440918,
+        "posY": 7.756829261779785,
         "scaleX": 1.2899999618530273,
         "scaleY": 0.5040000081062317,
         "Rot": 0.0
@@ -7002,7 +7369,7 @@
         "NameTag": "No"
       },
       {
-        "TextureName": "Blank",
+        "TextureName": "NO_Y",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -7029,7 +7396,7 @@
     "122": [
       {
         "posX": -0.44911640882492065,
-        "posY": 7.630000114440918,
+        "posY": 7.756829261779785,
         "scaleX": 1.2902400493621826,
         "scaleY": 0.5040000081062317,
         "Rot": 0.0
@@ -7057,7 +7424,7 @@
         "NameTag": "Yes"
       },
       {
-        "TextureName": "Blank",
+        "TextureName": "YES_Y",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
@@ -7085,14 +7452,14 @@
       {
         "posX": 0.0,
         "posY": -8.0,
-        "scaleX": 5.400000095367432,
-        "scaleY": 3.0,
+        "scaleX": 4.0,
+        "scaleY": 2.25,
         "Rot": 0.0
       },
       {},
       {},
       {
-        "NameTag": "Quit Background"
+        "NameTag": "HTP Background"
       },
       {
         "TextureName": "HowToPlay",
@@ -7135,7 +7502,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 7
       },
       {
         "0": "HUDController",
@@ -7145,7 +7512,7 @@
       {},
       {
         "ElementType": 3,
-        "offsetX": -0.3199999928474426,
+        "offsetX": -0.3050000071525574,
         "offsetY": -0.125
       },
       {},
@@ -7174,7 +7541,7 @@
         "IsSpriteSheet": false,
         "IsAnimated": false,
         "MaxIndex": 0,
-        "LayeringOrder": 5
+        "LayeringOrder": 8
       },
       {
         "0": "HUDController",
@@ -7192,45 +7559,6 @@
       {}
     ],
     "126": [
-      {
-        "posX": -4.284115791320801,
-        "posY": -0.16710877418518066,
-        "scaleX": 0.10000000149011612,
-        "scaleY": 0.10000000149011612,
-        "Rot": 0.0
-      },
-      {},
-      {},
-      {
-        "NameTag": "BossStatic2"
-      },
-      {
-        "TextureName": "Eyeball_Asset",
-        "Index_X": 0,
-        "Index_Y": 0,
-        "Ucoordinates": 512.0,
-        "Vcoordinates": 512.0,
-        "IsSpriteSheet": false,
-        "IsAnimated": false,
-        "MaxIndex": 0,
-        "LayeringOrder": 5
-      },
-      {
-        "0": "HUDController",
-        "ScriptCount": 1
-      },
-      {},
-      {},
-      {
-        "ElementType": 1,
-        "offsetX": -0.3499999940395355,
-        "offsetY": -0.125
-      },
-      {},
-      {},
-      {}
-    ],
-    "127": [
       {},
       {},
       {},
@@ -7286,7 +7614,7 @@
       {},
       {}
     ],
-    "128": [
+    "127": [
       {},
       {},
       {},
@@ -7343,7 +7671,7 @@
       {},
       {}
     ],
-    "129": [
+    "128": [
       {},
       {},
       {},
@@ -7394,22 +7722,22 @@
       {},
       {}
     ],
-    "130": [
+    "129": [
       {},
       {},
       {},
       {
-        "NameTag": "Boss Idle animation"
+        "NameTag": "Boss Idle 1 animation"
       },
       {
-        "TextureName": "EYEBOSS_Idle",
+        "TextureName": "EYEBOSS_Idle_1",
         "Index_X": 0,
         "Index_Y": 0,
         "Ucoordinates": 512.0,
         "Vcoordinates": 512.0,
         "IsSpriteSheet": true,
         "IsAnimated": true,
-        "MaxIndex": 39,
+        "MaxIndex": 20,
         "DisplayTime 0": 0.0333,
         "DisplayTime 1": 0.0333,
         "DisplayTime 2": 0.0333,
@@ -7430,26 +7758,6 @@
         "DisplayTime 17": 0.0333,
         "DisplayTime 18": 0.0333,
         "DisplayTime 19": 0.0333,
-        "DisplayTime 20": 0.0333,
-        "DisplayTime 21": 0.0333,
-        "DisplayTime 22": 0.0333,
-        "DisplayTime 23": 0.0333,
-        "DisplayTime 24": 0.0333,
-        "DisplayTime 25": 0.0333,
-        "DisplayTime 26": 0.0333,
-        "DisplayTime 27": 0.0333,
-        "DisplayTime 28": 0.0333,
-        "DisplayTime 29": 0.0333,
-        "DisplayTime 30": 0.0333,
-        "DisplayTime 31": 0.0333,
-        "DisplayTime 32": 0.0333,
-        "DisplayTime 33": 0.0333,
-        "DisplayTime 34": 0.0333,
-        "DisplayTime 35": 0.0333,
-        "DisplayTime 36": 0.0333,
-        "DisplayTime 37": 0.0333,
-        "DisplayTime 38": 0.0333,
-        "DisplayTime 39": 0.0333,
         "LayeringOrder": 0
       },
       {},
@@ -7460,7 +7768,7 @@
       {},
       {}
     ],
-    "131": [
+    "130": [
       {},
       {},
       {},
@@ -7518,7 +7826,7 @@
       {},
       {}
     ],
-    "132": [
+    "131": [
       {},
       {},
       {},
@@ -7574,7 +7882,7 @@
       {},
       {}
     ],
-    "133": [
+    "132": [
       {},
       {},
       {},
@@ -7601,6 +7909,2844 @@
         "DisplayTime 8": 0.02,
         "DisplayTime 9": 0.02,
         "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "133": [
+      {},
+      {},
+      {},
+      {
+        "NameTag": "Boss Idle 2 animation"
+      },
+      {
+        "TextureName": "EYEBOSS_Idle_2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 19,
+        "DisplayTime 0": 0.0333,
+        "DisplayTime 1": 0.0333,
+        "DisplayTime 2": 0.0333,
+        "DisplayTime 3": 0.0333,
+        "DisplayTime 4": 0.0333,
+        "DisplayTime 5": 0.0333,
+        "DisplayTime 6": 0.0333,
+        "DisplayTime 7": 0.0333,
+        "DisplayTime 8": 0.0333,
+        "DisplayTime 9": 0.0333,
+        "DisplayTime 10": 0.0333,
+        "DisplayTime 11": 0.0333,
+        "DisplayTime 12": 0.0333,
+        "DisplayTime 13": 0.0333,
+        "DisplayTime 14": 0.0333,
+        "DisplayTime 15": 0.0333,
+        "DisplayTime 16": 0.0333,
+        "DisplayTime 17": 0.0333,
+        "DisplayTime 18": 0.0333,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "134": [
+      {},
+      {},
+      {},
+      {
+        "NameTag": "Boss Laser 2 animation"
+      },
+      {
+        "TextureName": "Boss_Laser_2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 14,
+        "DisplayTime 0": 0.04545454,
+        "DisplayTime 1": 0.04545454,
+        "DisplayTime 2": 0.04545454,
+        "DisplayTime 3": 0.04545454,
+        "DisplayTime 4": 0.04545454,
+        "DisplayTime 5": 0.04545454,
+        "DisplayTime 6": 0.04545454,
+        "DisplayTime 7": 0.04545454,
+        "DisplayTime 8": 0.04545454,
+        "DisplayTime 9": 0.04545454,
+        "DisplayTime 10": 0.04545454,
+        "DisplayTime 11": 0.04545454,
+        "DisplayTime 12": 0.04545454,
+        "DisplayTime 13": 0.04545454,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "135": [
+      {},
+      {},
+      {},
+      {
+        "NameTag": "Boss Laser 3 animation"
+      },
+      {
+        "TextureName": "Boss_Laser_3",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 16,
+        "DisplayTime 0": 0.04545454,
+        "DisplayTime 1": 0.04545454,
+        "DisplayTime 2": 0.04545454,
+        "DisplayTime 3": 0.04545454,
+        "DisplayTime 4": 0.04545454,
+        "DisplayTime 5": 0.04545454,
+        "DisplayTime 6": 0.04545454,
+        "DisplayTime 7": 0.04545454,
+        "DisplayTime 8": 0.04545454,
+        "DisplayTime 9": 0.04545454,
+        "DisplayTime 10": 0.04545454,
+        "DisplayTime 11": 0.04545454,
+        "DisplayTime 12": 0.04545454,
+        "DisplayTime 13": 0.04545454,
+        "DisplayTime 14": 0.04545454,
+        "DisplayTime 15": 0.04545454,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "136": [
+      {
+        "posX": -7.950,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 1"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P1",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "137": [
+      {
+        "posX": -6.315,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 2"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "138": [
+      {
+        "posX": -4.68,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 3"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P3",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "139": [
+      {
+        "posX": -3.045,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 4"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P4",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "140": [
+      {
+        "posX": -1.41,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 5"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P5",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "141": [
+      {
+        "posX": 0.225,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 6"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P6",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "142": [
+      {
+        "posX": 1.86,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 7"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P7",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "143": [
+      {
+        "posX": 3.495,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 8"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P8",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "144": [
+      {
+        "posX": 5.13,
+        "posY": 0.0,
+        "scaleX": 1.635,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BackGround Part 9"
+      },
+      {
+        "TextureName": "FINAL_ENVIRONMENT_P9",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "145": [
+      {
+        "posX": -7.657,
+        "posY": 0.092,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.1,
+        "minX2": 0.0,
+        "minY1": 0.175,
+        "minY2": 0.0,
+        "maxX1": 0.150,
+        "maxX2": 0.0,
+        "maxY1": 0.125,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Debris Collider 1"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "146": [
+      {
+        "posX": -3.475,
+        "posY": -0.131,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.7,
+        "minX2": 0.0,
+        "minY1": 0.05,
+        "minY2": 0.0,
+        "maxX1": 0.7,
+        "maxX2": 0.0,
+        "maxY1": 0.05,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Collider Near Gate2 Bottom"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "147": [
+      {
+        "posX": -2.273,
+        "posY": 0.305,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 3,
+        "minX2": 0.0,
+        "minY1": 0.1,
+        "minY2": 0.0,
+        "maxX1": 3,
+        "maxX2": 0.0,
+        "maxY1": 0.05,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Level1 top near gate"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "148": [
+      {
+        "posX": 5.339,
+        "posY": 0.149,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.4,
+        "Rot": 0.0
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.10000000149011612,
+        "minX2": 0.0,
+        "minY1": 0.30000001192092896,
+        "minY2": 0.0,
+        "maxX1": 0.10000000149011612,
+        "maxX2": 0.0,
+        "maxY1": 0.30000001192092896,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Gate Back 5"
+      },
+      {
+        "TextureName": "LASERGATE_BG_V2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 20,
+        "DisplayTime 0": 0.019999999552965164,
+        "DisplayTime 1": 0.019999999552965164,
+        "DisplayTime 2": 0.019999999552965164,
+        "DisplayTime 3": 0.019999999552965164,
+        "DisplayTime 4": 0.019999999552965164,
+        "DisplayTime 5": 0.019999999552965164,
+        "DisplayTime 6": 0.019999999552965164,
+        "DisplayTime 7": 0.019999999552965164,
+        "DisplayTime 8": 0.019999999552965164,
+        "DisplayTime 9": 0.019999999552965164,
+        "DisplayTime 10": 0.019999999552965164,
+        "DisplayTime 11": 0.019999999552965164,
+        "DisplayTime 12": 0.019999999552965164,
+        "DisplayTime 13": 0.019999999552965164,
+        "DisplayTime 14": 0.019999999552965164,
+        "DisplayTime 15": 0.019999999552965164,
+        "DisplayTime 16": 0.019999999552965164,
+        "DisplayTime 17": 0.019999999552965164,
+        "DisplayTime 18": 0.019999999552965164,
+        "DisplayTime 19": 0.019999999552965164,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "GateController",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {},
+      {
+        "0": {
+          "AudioPath": "SustainedBeam.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {},
+      {},
+      {}
+    ],
+    "149": [
+      {
+        "posX": 5.374,
+        "posY": 0.142,
+        "scaleX": 0.4000000059604645,
+        "scaleY": 0.4000000059604645,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Gate Front 5"
+      },
+      {
+        "TextureName": "LASERGATE_FG_V2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 20,
+        "DisplayTime 0": 0.019999999552965164,
+        "DisplayTime 1": 0.019999999552965164,
+        "DisplayTime 2": 0.019999999552965164,
+        "DisplayTime 3": 0.019999999552965164,
+        "DisplayTime 4": 0.019999999552965164,
+        "DisplayTime 5": 0.019999999552965164,
+        "DisplayTime 6": 0.019999999552965164,
+        "DisplayTime 7": 0.019999999552965164,
+        "DisplayTime 8": 0.019999999552965164,
+        "DisplayTime 9": 0.019999999552965164,
+        "DisplayTime 10": 0.019999999552965164,
+        "DisplayTime 11": 0.019999999552965164,
+        "DisplayTime 12": 0.019999999552965164,
+        "DisplayTime 13": 0.019999999552965164,
+        "DisplayTime 14": 0.019999999552965164,
+        "DisplayTime 15": 0.019999999552965164,
+        "DisplayTime 16": 0.019999999552965164,
+        "DisplayTime 17": 0.019999999552965164,
+        "DisplayTime 18": 0.019999999552965164,
+        "DisplayTime 19": 0.019999999552965164,
+        "LayeringOrder": 5
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "150": [
+      {
+        "posX": -6.307,
+        "posY": 0.173,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.32,
+        "Rot": 0.0
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.10000000149011612,
+        "minX2": 0.0,
+        "minY1": 0.30000001192092896,
+        "minY2": 0.0,
+        "maxX1": 0.10000000149011612,
+        "maxX2": 0.0,
+        "maxY1": 0.30000001192092896,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Gate Back 6"
+      },
+      {
+        "TextureName": "LASERGATE_BG_V2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 20,
+        "DisplayTime 0": 0.019999999552965164,
+        "DisplayTime 1": 0.019999999552965164,
+        "DisplayTime 2": 0.019999999552965164,
+        "DisplayTime 3": 0.019999999552965164,
+        "DisplayTime 4": 0.019999999552965164,
+        "DisplayTime 5": 0.019999999552965164,
+        "DisplayTime 6": 0.019999999552965164,
+        "DisplayTime 7": 0.019999999552965164,
+        "DisplayTime 8": 0.019999999552965164,
+        "DisplayTime 9": 0.019999999552965164,
+        "DisplayTime 10": 0.019999999552965164,
+        "DisplayTime 11": 0.019999999552965164,
+        "DisplayTime 12": 0.019999999552965164,
+        "DisplayTime 13": 0.019999999552965164,
+        "DisplayTime 14": 0.019999999552965164,
+        "DisplayTime 15": 0.019999999552965164,
+        "DisplayTime 16": 0.019999999552965164,
+        "DisplayTime 17": 0.019999999552965164,
+        "DisplayTime 18": 0.019999999552965164,
+        "DisplayTime 19": 0.019999999552965164,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "GateController",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {},
+      {
+        "0": {
+          "AudioPath": "SustainedBeam.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {},
+      {},
+      {}
+    ],
+    "151": [
+      {
+        "posX": -6.273,
+        "posY": 0.148,
+        "scaleX": 0.4000000059604645,
+        "scaleY": 0.4000000059604645,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Gate Front 6"
+      },
+      {
+        "TextureName": "LASERGATE_FG_V2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 20,
+        "DisplayTime 0": 0.019999999552965164,
+        "DisplayTime 1": 0.019999999552965164,
+        "DisplayTime 2": 0.019999999552965164,
+        "DisplayTime 3": 0.019999999552965164,
+        "DisplayTime 4": 0.019999999552965164,
+        "DisplayTime 5": 0.019999999552965164,
+        "DisplayTime 6": 0.019999999552965164,
+        "DisplayTime 7": 0.019999999552965164,
+        "DisplayTime 8": 0.019999999552965164,
+        "DisplayTime 9": 0.019999999552965164,
+        "DisplayTime 10": 0.019999999552965164,
+        "DisplayTime 11": 0.019999999552965164,
+        "DisplayTime 12": 0.019999999552965164,
+        "DisplayTime 13": 0.019999999552965164,
+        "DisplayTime 14": 0.019999999552965164,
+        "DisplayTime 15": 0.019999999552965164,
+        "DisplayTime 16": 0.019999999552965164,
+        "DisplayTime 17": 0.019999999552965164,
+        "DisplayTime 18": 0.019999999552965164,
+        "DisplayTime 19": 0.019999999552965164,
+        "LayeringOrder": 5
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "152": [
+      {
+        "posX": 5.845,
+        "posY": -0.288,
+        "scaleX": 0.9999980330467224,
+        "scaleY": 0.9999980330467224,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.1,
+        "minX2": 0.0,
+        "minY1": 0.11999999731779099,
+        "minY2": 0.0,
+        "maxX1": 0.1,
+        "maxX2": 0.0,
+        "maxY1": 0.12999999523162842,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Collider for Debris 9"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+
+    "153": [
+      {
+        "posX": 6.338,
+        "posY": -0.499,
+        "scaleX": 0.9999980330467224,
+        "scaleY": 0.9999980330467224,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.5,
+        "minX2": 0.0,
+        "minY1": 0.22,
+        "minY2": 0.0,
+        "maxX1": 0.9,
+        "maxX2": 0.0,
+        "maxY1": 0.180,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Collider for boss area bottom"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "154": [
+      {
+        "posX": -5.130,
+        "posY": -0.079,
+        "scaleX": 4.8,
+        "scaleY": 0.1,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_1"
+      },
+      {
+        "TextureName": "BottomWall_1",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "155": [
+      {
+        "posX": -1.938,
+        "posY": -0.281,
+        "scaleX": 1.500,
+        "scaleY": 0.075,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_2"
+      },
+      {
+        "TextureName": "BottomWall_2",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "156": [
+      {
+        "posX": 4.393,
+        "posY": -0.067,
+        "scaleX": 2.500,
+        "scaleY": 0.075,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_5"
+      },
+      {
+        "TextureName": "BottomWall_3",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "157": [
+      {
+        "posX": 2.545,
+        "posY": -0.275,
+        "scaleX": 1.500,
+        "scaleY": 0.075,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_4"
+      },
+      {
+        "TextureName": "BottomWall_4",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+
+    "158": [
+      {
+        "posX": 6.359,
+        "posY": -0.299,
+        "scaleX": 1.30,
+        "scaleY": 0.075,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_6"
+      },
+      {
+        "TextureName": "BottomWall_6",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "159": [
+      {
+        "posX": 0.188,
+        "posY": -0.079,
+        "scaleX": 3.150,
+        "scaleY": 0.075,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BottomWall_3"
+      },
+      {
+        "TextureName": "BottomWall_5",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 4
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "160": [
+      {
+        "posX": 2.094,
+        "posY": -0.168,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.09,
+        "minY1": 0.0,
+        "minY2": 0.035,
+        "maxX1": 0.0,
+        "maxX2": 0.09,
+        "maxY1": 0.0,
+        "maxY2":  0.035,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.03,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Enemy12"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.05999999865889549,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 1
+      }
+    ],
+    "161": [
+      {
+        "posX": 4.149,
+        "posY": 0.085,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.09,
+        "minY1": 0.0,
+        "minY2": 0.035,
+        "maxX1": 0.0,
+        "maxX2": 0.09,
+        "maxY1": 0.0,
+        "maxY2":  0.035,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.03,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Enemy13"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.05999999865889549,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 1
+      }
+    ],
+    "162": [
+      {
+        "posX": 1.256,
+        "posY": -0.027,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.09,
+        "minY1": 0.0,
+        "minY2": 0.035,
+        "maxX1": 0.0,
+        "maxX2": 0.09,
+        "maxY1": 0.0,
+        "maxY2":  0.035,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.03,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Enemy14"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.05999999865889549,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 1
+      }
+    ],
+    "163": [
+      {
+        "posX": 2.762,
+        "posY": 0.002,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.3499999940395355,
+        "minY1": 0.0,
+        "minY2": 0.01,
+        "maxX1": 0.0,
+        "maxX2": 0.0,
+        "maxY1": 0.0,
+        "maxY2": 0.01,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02,
+        "radius1": 0.05000000074505806,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "EnemyRange4"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 2
+      }
+    ],
+    "164": [
+      {
+        "posX": 3.841,
+        "posY": -0.029,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.3499999940395355,
+        "minY1": 0.0,
+        "minY2": 0.01,
+        "maxX1": 0.0,
+        "maxX2": 0.0,
+        "maxY1": 0.0,
+        "maxY2": 0.01,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02,
+        "radius1": 0.05000000074505806,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "EnemyRange5"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 2
+      }
+    ],
+    "165": [
+      {
+        "posX": 4.858,
+        "posY": 0.026,
+        "scaleX": 0.30000001192092896,
+        "scaleY": 0.30000001192092896,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 1,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.3499999940395355,
+        "minY1": 0.0,
+        "minY2": 0.01,
+        "maxX1": 0.0,
+        "maxX2": 0.0,
+        "maxY1": 0.0,
+        "maxY2": 0.01,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02,
+        "radius1": 0.05000000074505806,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "EnemyRange6"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "EnemyScript",
+        "1": "CollisionResponse",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Enemy",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "ThudStrike2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "1": {
+          "AudioPath": "Slash2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "2": {
+          "AudioPath": "EnemyDeath2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "3": {
+          "AudioPath": "Melee_Enemy_Move.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "4": {
+          "AudioPath": "Melee_Enemy_Move2.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "5": {
+          "AudioPath": "Melee_Enemy_Move3.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "6": {
+          "AudioPath": "Melee_Enemy_Move4.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "7": {
+          "AudioPath": "CritAttack1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 8,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {
+        "ElementType": 1,
+        "offsetX": -0.06,
+        "offsetY": 0.10000000149011612
+      },
+      {},
+      {},
+      {
+        "Health": 100,
+        "Max Health": 100,
+        "Damage": 10,
+        "EnemyType": 2
+      }
+    ],
+    "166": [
+      {
+        "posX": 3.650,
+        "posY": 0.058,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Ground Hazard 8"
+      },
+      {
+        "TextureName": "ELECTRICHAZARD",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 2
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "167": [
+      {
+        "posX": 5.962,
+        "posY": -0.018,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Ground Hazard 9"
+      },
+      {
+        "TextureName": "ELECTRICHAZARD",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 2
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "168": [
+      {
+        "posX": 3.650,
+        "posY": 0.058,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.029999999329447746,
+        "minX2": 0.05,
+        "minY1": 0.07999999821186066,
+        "minY2": 0.01,
+        "maxX1": 0.029999999329447746,
+        "maxX2": 0.05,
+        "maxY1": 0.07999999821186066,
+        "maxY2": 0.01,
+        "offsetX1": 0.05000000074505806,
+        "offsetX2": 0.03,
+        "offsetY1": 0.0,
+        "offsetY2": -0.08,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Ground hazard firing 8"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 6,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 1
+      },
+      {},
+      {}
+    ],
+    "169": [
+      {
+        "posX": 5.962,
+        "posY": -0.018,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.029999999329447746,
+        "minX2": 0.05,
+        "minY1": 0.07999999821186066,
+        "minY2": 0.01,
+        "maxX1": 0.029999999329447746,
+        "maxX2": 0.05,
+        "maxY1": 0.07999999821186066,
+        "maxY2": 0.01,
+        "offsetX1": 0.05000000074505806,
+        "offsetX2": 0.03,
+        "offsetY1": 0.0,
+        "offsetY2": -0.08,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Ground hazard firing 9"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 6,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 1
+      },
+      {},
+      {}
+    ],
+    "170": [
+      {
+        "posX": 6.292,
+        "posY": -0.134,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Ground Hazard 10"
+      },
+      {
+        "TextureName": "ELECTRICHAZARD",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 2
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "171": [
+      {
+        "posX": 6.292,
+        "posY": -0.134,
+        "scaleX": 0.2,
+        "scaleY": 0.2,
+        "Rot": 0.0
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.029999999329447746,
+        "minX2": 0.05,
+        "minY1": 0.07999999821186066,
+        "minY2": 0.01,
+        "maxX1": 0.029999999329447746,
+        "maxX2": 0.05,
+        "maxY1": 0.07999999821186066,
+        "maxY2": 0.01,
+        "offsetX1": 0.05000000074505806,
+        "offsetX2": 0.03,
+        "offsetY1": 0.0,
+        "offsetY2": -0.08,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Ground hazard firing 10"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 6,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 1
+      },
+      {},
+      {}
+    ],
+    "172": [
+      {
+        "posX": 4.014,
+        "posY": 0.183,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Laser Hazard 5"
+      },
+      {
+        "TextureName": "Laser_Hazard",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 1
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "173": [
+      {
+        "posX": 4.526,
+        "posY": 0.182,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Laser Hazard 6"
+      },
+      {
+        "TextureName": "Laser_Hazard",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 1
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "174": [
+      {
+        "posX": 6.221,
+        "posY": 0.181,
+        "scaleX": 0.03,
+        "scaleY": 0.03,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "Laser Hazard 7"
+      },
+      {
+        "TextureName": "Laser_Hazard",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": false,
+        "MaxIndex": 1,
+        "DisplayTime 0": 0.0,
+        "LayeringOrder": 1
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "175": [
+      {
+        "posX": 4.019,
+        "posY": 0.179,
+        "scaleX": 0.05000000074505806,
+        "scaleY": 0.05000000074505806,
+        "Rot": -139.99998474121094
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.05000000074505806,
+        "minY1": 0.0,
+        "minY2": 0.10999999940395355,
+        "maxX1": 0.0,
+        "maxX2": 0.05000000074505806,
+        "maxY1": 0.0,
+        "maxY2": 0.10999999940395355,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02500000037252903,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Lazer hazard firing 5"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 8,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "DisplayTime 6": 0.0,
+        "DisplayTime 7": 0.0,
+        "LayeringOrder": 1
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 2
+      },
+      {},
+      {}
+    ],
+    "176": [
+      {
+        "posX": 4.534,
+        "posY": 0.178,
+        "scaleX": 0.05000000074505806,
+        "scaleY": 0.05000000074505806,
+        "Rot": -139.99998474121094
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.05000000074505806,
+        "minY1": 0.0,
+        "minY2": 0.10999999940395355,
+        "maxX1": 0.0,
+        "maxX2": 0.05000000074505806,
+        "maxY1": 0.0,
+        "maxY2": 0.10999999940395355,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02500000037252903,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Lazer hazard firing 6"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 8,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "DisplayTime 6": 0.0,
+        "DisplayTime 7": 0.0,
+        "LayeringOrder": 3
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 2
+      },
+      {},
+      {}
+    ],
+    "177": [
+      {
+        "posX": 6.227,
+        "posY": 0.180,
+        "scaleX": 0.05000000074505806,
+        "scaleY": 0.05000000074505806,
+        "Rot": -139.99998474121094
+      },
+      {
+        "velX": 0.0,
+        "velY": 0.0,
+        "dirX": 1.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 0,
+        "ColliderType2": 4,
+        "minX1": 0.0,
+        "minX2": 0.05000000074505806,
+        "minY1": 0.0,
+        "minY2": 0.10999999940395355,
+        "maxX1": 0.0,
+        "maxX2": 0.05000000074505806,
+        "maxY1": 0.0,
+        "maxY2": 0.10999999940395355,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": -0.02500000037252903,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Lazer hazard firing 7"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 8,
+        "DisplayTime 0": 0.0,
+        "DisplayTime 1": 0.0,
+        "DisplayTime 2": 0.0,
+        "DisplayTime 3": 0.0,
+        "DisplayTime 4": 0.0,
+        "DisplayTime 5": 0.0,
+        "DisplayTime 6": 0.0,
+        "DisplayTime 7": 0.0,
+        "LayeringOrder": 2
+      },
+      {
+        "0": "CollisionResponse",
+        "1": "HazardScript",
+        "2": "AudioManager",
+        "ScriptCount": 3
+      },
+      {
+        "Tag": "Hazard",
+        "TargetTag": ""
+      },
+      {
+        "0": {
+          "AudioPath": "Hazard1.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {
+        "FiringCooldown": -0.016666656360030174,
+        "FiringDuration": -0.016666656360030174,
+        "ChargeDuration": 1.4333338737487793,
+        "HazardDamage": 20,
+        "HazardType": 2
+      },
+      {},
+      {}
+    ],
+    "178": [
+      {
+        "posX": 5.619,
+        "posY": -0.08115170896053314,
+        "scaleX": 0.7,
+        "scaleY": 0.14,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "DialogueBox11-12"
+      },
+      {
+        "TextureName": "Dialogue11",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 8
+      },
+      {
+        "0": "DialogueManager",
+        "1": "AudioManager",
+        "ScriptCount": 2
+      },
+      {},
+      {
+        "0": {
+          "AudioPath": "Start_Dialogue.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 1,
+        "BGM Volume": 0.10499999672174454,
+        "SFX Volume": 0.6349999904632568,
+        "Master Volume": 0.6650000214576721
+      },
+      {},
+      {},
+      {},
+      {}
+    ],
+    "179": [
+      {
+        "posX": 7.017,
+        "posY": 0.172,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 0.5,
+        "minX2": 0,
+        "minY1": 1.0,
+        "minY2": 0.0,
+        "maxX1": 0.5,
+        "maxX2": 0.0,
+        "maxY1": 1.0,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Collider at boss area"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "180": [
+      {
+        "posX": 5.548,
+        "posY": 0.3,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 1.0,
+        "minX2": 0,
+        "minY1": 0.1,
+        "minY2": 0.0,
+        "maxX1": 1.0,
+        "maxX2": 0.0,
+        "maxY1": 0.1,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "Collider top at boss area"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "181": [
+      {
+        "posX": -4.284115791320801,
+        "posY": -0.16710877418518066,
+        "scaleX": 0.10000000149011612,
+        "scaleY": 0.10000000149011612,
+        "Rot": 0.0
+      },
+      {},
+      {},
+      {
+        "NameTag": "BossStatic2"
+      },
+      {
+        "TextureName": "Eyeball_Asset",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 8
+      },
+      {
+        "0": "HUDController",
+        "ScriptCount": 1
+      },
+      {},
+      {},
+      {
+        "ElementType": 1,
+        "offsetX": -0.3499999940395355,
+        "offsetY": -0.125
+      },
+      {},
+      {},
+      {}
+    ],
+    "182": [
+      {},
+      {},
+      {},
+      {
+        "NameTag": "chip_heath"
+      },
+      {
+        "TextureName": "Chip_Health_SpriteSheet",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 513.0,
+        "Vcoordinates": 513.0,
+        "IsSpriteSheet": true,
+        "IsAnimated": true,
+        "MaxIndex": 6,
+        "DisplayTime 0": 0.1,
+        "DisplayTime 1": 0.1,
+        "DisplayTime 2": 0.1,
+        "DisplayTime 3": 0.1,
+        "DisplayTime 4": 0.1,
+        "DisplayTime 5": 0.1,
+        "LayeringOrder": 3
       },
       {},
       {},

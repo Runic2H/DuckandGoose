@@ -58,7 +58,7 @@ namespace EM
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.accelent(pRigid.GetVel(), dir, Frametime));
 		pRigid.SetVel(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mPhys.friction(pRigid.GetVel(), Frametime));
 		vec2D nextPos = (pTrans.GetPos() + pRigid.GetVel());
-		pRigid.SetNextPos(nextPos * Frametime);
+		pRigid.SetNextPos(nextPos);
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashDurationTimer <= 0.0f)
 		{
 			stateMachine->ChangeState(new OnIdle(stateMachine));

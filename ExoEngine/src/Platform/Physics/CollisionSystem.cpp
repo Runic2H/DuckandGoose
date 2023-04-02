@@ -56,7 +56,7 @@ namespace EM {
                         auto& trans1 = p_ecs.GetComponent<Transform>(i);
                         auto& trans2 = p_ecs.GetComponent<Transform>(j);
                         //broad phase sweep
-                        if (distance(rigid1.GetNextPos(), rigid2.GetNextPos()) < 3) {
+                        if (distance(rigid1.GetNextPos(), rigid2.GetNextPos()) < 100) {
                             for (int a = 0; a < 2; a++) {
                                 for (int b = 0; b < 2; b++) {
                                     Collider::ColliderType e1 = col1[a].mCol;

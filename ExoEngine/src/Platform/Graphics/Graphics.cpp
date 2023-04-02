@@ -127,7 +127,7 @@ namespace EM {
 		p_GUI->VPmat = mcamera->GetViewProjectionMatrix();
 		
 
-		for (auto layer = 0; layer < 6; layer++)
+		for (auto layer = 0; layer < 8; layer++)
 		{
 			for (auto i = mEntities.begin(); i != mEntities.end(); i++)
 			{
@@ -204,7 +204,7 @@ namespace EM {
 				}
 
 			}
-			if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
+			/*if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
 				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
 				mFont->RenderText(mComp.GetAtk(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });
@@ -214,7 +214,7 @@ namespace EM {
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });
 				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
 				0.002f, camera, { 0.87f, 0.92f, 0.18f });
-			}
+			}*/
 
 			//for rendering of enemy health bar
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {

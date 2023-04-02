@@ -73,10 +73,14 @@ namespace EM
 			if((p_GUI->MousePosition.x +  camPos.x >= limit.min.x && p_GUI->MousePosition.y + camPos.y >= limit.min.y) &&
 				(p_GUI->MousePosition.x + camPos.x <= limit.max.x&& p_GUI->MousePosition.y + +camPos.y <= limit.max.y)) // check if the mouse is inside the slider 
 			{
-				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)) // when mouse is held down, allow the volume ball to be adjusted
+				if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_LEFT)) // when mouse is held down, allow the volume ball to be adjusted
 				{
-					clicked = true; // let the entity know that it is currently being clicked on
-					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);	//allow the volume ball to be adjusted according to the mouse x coordinate position
+					clicked = true;
+					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);	
+					if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+					{
+						p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //volume slider click audio
+					}
 				}
 				else
 				{

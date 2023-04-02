@@ -118,7 +118,7 @@ namespace EM
 			{
 				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 				{
-					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
+					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(8);
 				}
 			}
 		}

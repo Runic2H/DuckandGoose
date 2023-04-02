@@ -333,13 +333,14 @@
             {
                 "0": "CutScene",
                 "1": "AudioManager",
-                "ScriptCount": 2
+                "2": "BackgroundAudio",
+                "ScriptCount": 3
             },
             {},
             {
               "0": {
-                "AudioPath": "Dialogue_Prompt.wav",
-                "Channel": 3,
+                "AudioPath": "OptionsMenu_BGM.wav",
+                "Channel": 2,
                 "IsLooping": false
               },
               "1": {
@@ -387,7 +388,12 @@
                 "Channel": 3,
                 "IsLooping": false
               },
-              "AudioArrCount": 10,
+              "10": {
+                "AudioPath": "Dialogue_Prompt.wav",
+                "Channel": 3,
+                "IsLooping": false
+              },
+              "AudioArrCount": 11,
               "BGM Volume": 1.0,
               "SFX Volume": 1.0,
               "Master Volume": 1.0
