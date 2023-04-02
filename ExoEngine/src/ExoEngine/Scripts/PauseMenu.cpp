@@ -1,10 +1,3 @@
-// check if pause is on
-
-//calculate button position (current position + camera position)
-//unzoom the screen
-//turn on collision
-//turn set sprites
-
 /*!*************************************************************************
 ****
 \file PauseMenu.cpp
@@ -267,7 +260,7 @@ namespace EM
 		{
 			spt.SetTexture("Blank");
 		}
-		
+
 	}
 
 	void PauseMenu::End()

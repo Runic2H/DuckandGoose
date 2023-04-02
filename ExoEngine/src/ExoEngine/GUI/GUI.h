@@ -35,9 +35,9 @@ namespace EM
 	{
 	private:
 		bool is_Pause = { false }; //a boolean to see if the system is currently pause
-		bool Script_End = { false };
-		bool is_menu = { true };
-		bool HTP = { false };
+		bool Script_End = { false };// a boolean that check if the end for the game loop is called via the script
+		bool is_menu = { true }; // a boolean to check if the menu is currently open
+		bool HTP = { false }; // a boolean to check if how to play on the main menu is on
 		
 
 		struct button_bb // a pseudo bounding box not tied to collision meant to check if the cusor is touching the button
@@ -65,9 +65,9 @@ namespace EM
 		void toggle_menu() { is_menu = is_menu ? false : true; }
 		void toggle_HTP() { HTP = HTP ? false : true; }
 		bool check_pause();// a getter function for the pause
-		bool Check_script();
-		bool Check_menu();
-		bool Check_HTP();
+		bool Check_script(); //check if the qquit is called by the script
+		bool Check_menu(); // check if the menu is on 
+		bool Check_HTP(); // check if player is currently in how to play in the main menu
 		bool is_within_box(glm::vec2 cur, button_bb box);// a helper function to check  if the cursor is touching the button,
 		glm::vec2 MousePosition{};
 	};
