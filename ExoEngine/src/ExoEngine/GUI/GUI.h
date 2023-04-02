@@ -26,11 +26,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	
-
-	//bool check_cur_pos();
-
-
 	class EM_API gui_system 
 	{
 	private:

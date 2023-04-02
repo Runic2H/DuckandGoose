@@ -64,6 +64,7 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnExit(StateMachine* stateMachine)
 	{
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		delete this;
 	}
 }

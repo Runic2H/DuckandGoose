@@ -37,7 +37,7 @@ namespace EM
 		float EaseInOutSine(float start, float end, float value)
 		{
 			end -= start;
-			return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
+			return (float)-end * 0.5f * (float)(cosf((float)M_PI * value) - 1.0f) + start;
 		}
 	};
 }

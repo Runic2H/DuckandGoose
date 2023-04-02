@@ -174,7 +174,4 @@ namespace EM
 	****************************************************************************/
 	Mat4x4 basemtx_adapterC(const glm::mat4& rhs);
 
-
-	//operator 
-
 }

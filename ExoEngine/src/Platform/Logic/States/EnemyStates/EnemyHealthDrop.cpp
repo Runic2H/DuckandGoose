@@ -38,7 +38,6 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType = EnemyAttributes::EnemyTypes::ENEMY_PICKUP;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank"); //Set to PickUp
-		//p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 	}
 
 	/*!*************************************************************************
@@ -69,7 +68,7 @@ namespace EM
 						p_ecs.GetComponent<Audio>(i)[8].should_play = true;
 					}
 					//increment player hp based on current player hp
-					p_ecs.GetComponent<PlayerAttributes>(i).mHealth < p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth ? p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (15 + (0.1f * p_ecs.GetComponent<PlayerAttributes>(i).mHealth)):
+					p_ecs.GetComponent<PlayerAttributes>(i).mHealth < p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth ? p_ecs.GetComponent<PlayerAttributes>(i).mHealth += (15 + (int)(0.1f * p_ecs.GetComponent<PlayerAttributes>(i).mHealth)):
 					p_ecs.GetComponent<PlayerAttributes>(i).mHealth = p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth; //higher hp will regen less health
 					if (p_ecs.GetComponent<PlayerAttributes>(i).mHealth > p_ecs.GetComponent<PlayerAttributes>(i).mMaxHealth)
 					{

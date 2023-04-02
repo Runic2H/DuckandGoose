@@ -60,7 +60,7 @@ namespace EM
 				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
 					|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
 				{
-					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth != 0 || !p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive)
+					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth != 0 || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive)
 					{
 						EnemyPopulation++;
 					}
