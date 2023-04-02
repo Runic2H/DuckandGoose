@@ -16,7 +16,7 @@ namespace EM
 	****************************************************************************/
 	void BossIdle::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Idle");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Idle_1");
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = true;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
@@ -33,6 +33,12 @@ namespace EM
 		//UNREFERENCED_PARAMETER(Frametime);
 		if (p_ecs.HaveComponent<EnemyAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+			
+			if (p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetTexture() == "EYEBOSS_Idle_1" && p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x == p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex()-1)
+			{
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Idle_2");
+			}
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 			{
 				stateMachine->ChangeState(new BossChasing(stateMachine));

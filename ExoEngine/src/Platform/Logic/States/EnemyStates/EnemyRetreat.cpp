@@ -22,6 +22,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
+	std::default_random_engine retreatGenerator;
+	std::uniform_int_distribution<>retreatDistribution(3, 6);
 	EnemyRetreat::EnemyRetreat(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyRetreat::HandleInput(StateMachine* stateMachine, const int& key)
@@ -70,6 +72,13 @@ namespace EM
 					playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 					check = true;
 				}
+			}
+		}
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check)
+		{
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > retreatDistribution(retreatGenerator)))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[retreatDistribution(retreatGenerator)].should_play = true;
 			}
 		}
 		if (check) {

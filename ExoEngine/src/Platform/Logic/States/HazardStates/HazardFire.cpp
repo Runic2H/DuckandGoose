@@ -38,7 +38,7 @@ namespace EM
 		{
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_GROUND)
 			{
-				p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos(mCurrTrans.x + -0.015f, mCurrTrans.y + 0.091f);
+				p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos(mCurrTrans.x + -0.023f, mCurrTrans.y + 0.070f);
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Ground_Hazards_Fire");
 			}
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_LASER)

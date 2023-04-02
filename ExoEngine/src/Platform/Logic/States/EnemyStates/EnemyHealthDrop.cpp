@@ -37,7 +37,8 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType = EnemyAttributes::EnemyTypes::ENEMY_PICKUP;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank"); //Set to PickUp
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Chip_Health_SpriteSheet"); //Set to PickUp
 	}
 
 	/*!*************************************************************************

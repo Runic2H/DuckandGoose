@@ -68,10 +68,10 @@ namespace EM
                     {
                         pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x), camPos.y + pComp.GetOffset().y);
                         if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == true) {
-                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(5);
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(7);
                         }
                         else {
-                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(6);
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(8);
                         }
                     }
                 }
@@ -88,10 +88,10 @@ namespace EM
                     if (p_ecs.HaveComponent<EnemyAttributes>(i) && p_ecs.HaveComponent<NameTag>(i) && p_ecs.GetComponent<NameTag>(i).GetNameTag() == "Boss")
                     {
                         if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == true) {
-                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(5);
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(7);
                         }
                         else {
-                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(6);
+                            p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(8);
                         }
                         pTrans.SetScale(((float)p_ecs.GetComponent<EnemyAttributes>(i).mHealth) / ((float)p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth) / 1.5f, pTrans.GetScale().y);
                         pTrans.SetPos(static_cast<float>(camPos.x + pComp.GetOffset().x) + (((float)p_ecs.GetComponent<EnemyAttributes>(i).mHealth) / ((float)p_ecs.GetComponent<EnemyAttributes>(i).mMaxHealth) / 1.5f / 2.f), camPos.y + pComp.GetOffset().y);

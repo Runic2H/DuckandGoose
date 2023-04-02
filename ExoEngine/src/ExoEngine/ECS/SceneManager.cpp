@@ -323,29 +323,34 @@ void EM::SceneManager::checkForSceneToLoad()
 	{
 		if (sceneToLoad == "Assets/Scene/Elton.json")
 		{
+			isGameplay = true;
 			Graphic::camera.SetZoomLevel(0.25f);
 		}
 
 		if (sceneToLoad == "Assets/Scene/Menu.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/Options.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/Game_Over.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/CutScene.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(0.25f);
 		}
 

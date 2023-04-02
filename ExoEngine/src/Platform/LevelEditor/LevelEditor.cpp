@@ -1019,7 +1019,7 @@ namespace EM {
                             ImGui::PopID();
                         }
                         ImGui::Text("Layering Order: "); ImGui::SameLine();
-                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 6);
+                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 8);
                     }
                 }
                 //Collider Component
@@ -1614,7 +1614,7 @@ namespace EM {
             }
             //set voulume slider
             ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
-            p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
+            p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), f1);
 
             ImGui::SliderFloat("BGM vol", &f4, 0.0f, 1.0f, "Min - Max %.3f");
             if (f4 > f1)

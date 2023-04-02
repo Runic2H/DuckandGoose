@@ -41,6 +41,20 @@ namespace EM
 				p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x - 0.64f,
 					p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y - 0.106f);
 				p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
+
+
+				if (p_ecs.GetComponent<Sprite>(i).GetTexture() == "Boss_Laser_1" && p_ecs.GetComponent<Sprite>(i).GetIndex().x == p_ecs.GetComponent<Sprite>(i).GetMaxIndex()-1)
+				{
+					p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
+					p_ecs.GetComponent<Sprite>(i).SetTexture("Boss_Laser_2");
+
+				}
+				else if(p_ecs.GetComponent<Sprite>(i).GetTexture() == "Boss_Laser_2" && p_ecs.GetComponent<Sprite>(i).GetIndex().x == p_ecs.GetComponent<Sprite>(i).GetMaxIndex()-1)
+				{
+					p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
+					p_ecs.GetComponent<Sprite>(i).SetTexture("Boss_Laser_3");
+				}
+
 			}
 		}
 
@@ -64,9 +78,14 @@ namespace EM
 		{
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
 			{
-				p_ecs.GetComponent<Sprite>(i).SetLayerOrder(6);
+				p_ecs.GetComponent<Sprite>(i).GetIndex().x = 0;
+				p_ecs.GetComponent<Sprite>(i).SetLayerOrder(8);
+				p_ecs.GetComponent<Sprite>(i).SetTexture("Boss_Laser_1");
 			}
 		}
+		
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
 		delete this;
 	}

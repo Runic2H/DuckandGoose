@@ -21,6 +21,8 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
+	std::default_random_engine atk2generator;
+	std::uniform_int_distribution<>atk2range(8, 11);
 	OnAttack_2::OnAttack_2(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
@@ -43,9 +45,9 @@ namespace EM
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.3f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Normal_Attack_Swing2");
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > atk2range(atk2generator)))
 		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[atk2range(atk2generator)].should_play = true;
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 	}
