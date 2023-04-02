@@ -64,6 +64,7 @@
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAppear.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossAttack.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossChasing.h" />
+    <ClInclude Include="src\Platform\Logic\States\BossStates\BossDeath.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossIdle.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossNotActive.h" />
     <ClInclude Include="src\Platform\Logic\States\BossStates\BossOnDamage.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAppear.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossAttack.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossChasing.cpp" />
+    <ClCompile Include="src\Platform\Logic\States\BossStates\BossDeath.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossIdle.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossNotActive.cpp" />
     <ClCompile Include="src\Platform\Logic\States\BossStates\BossOnDamage.cpp" />
@@ -381,13 +383,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

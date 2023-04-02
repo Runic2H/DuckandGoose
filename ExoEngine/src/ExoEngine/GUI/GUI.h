@@ -38,6 +38,7 @@ namespace EM
 		bool Script_End = { false };
 		bool is_menu = { true };
 		bool HTP = { false };
+		
 
 		struct button_bb // a pseudo bounding box not tied to collision meant to check if the cusor is touching the button
 		{
@@ -55,7 +56,7 @@ namespace EM
 		bool Update(Window* screen); // to be update in realtime  with the rest of the engine system
 		bool mPauseSwitch = false; // a secondary boolean to prevent button from flickering 
 		glm::mat4 VPmat{}; //hold the viewprojection matrix passed from the camera
-
+		bool sub_menu{ false };
 		void set_pause_button(vec2D pos, float scaleX, float scaleY); //set the position and scale of the pause button
 		void set_continue_button(vec2D pos, float scaleX, float scaleY);//set the position and scale of the continue button
 		float Get_AspectRatio() { return mAspectRatio; }//set the position and scale of the continue button

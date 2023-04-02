@@ -111,6 +111,8 @@ namespace EM
 		z = z_;
 	}
 
+
+
 	void Normalize(Vec3& result, const Vec3 Vec0)
 	{
 		float mag = sqrtf((Vec0.x * Vec0.x) + (Vec0.y * Vec0.y) + (Vec0.z * Vec0.z));

@@ -117,6 +117,16 @@ namespace EM
 			{
 				spt.SetTexture("BACK_B");//to be change
 			}
+
+			if (ID_tag.GetTag() == "No")
+			{
+				spt.SetTexture("NO_B");//to be change
+			}
+
+			if (ID_tag.GetTag() == "Yes")
+			{
+				spt.SetTexture("YES_B");//to be change
+			}
 			
 			if (curr_state == button_state::release)
 			{
@@ -135,7 +145,7 @@ namespace EM
 
 				if (ID_tag.GetTag() == "Quit" && p_GUI->Check_HTP() == false)
 				{
-					p_GUI->toggle_script();
+					p_Scene->setSceneToLoad("Assets/Scene/Quit.json");
 				}
 
 				if (ID_tag.GetTag() == "HowToPlay" && p_GUI->Check_HTP() == false)
@@ -170,6 +180,17 @@ namespace EM
 				if (ID_tag.GetTag() == "Back")
 				{
 					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+				}
+
+				if (ID_tag.GetTag() == "No")
+				{
+					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+					
+				}
+
+				if (ID_tag.GetTag() == "Yes")
+				{				
+					p_GUI->toggle_script();
 				}
 
 
@@ -235,6 +256,17 @@ namespace EM
 				{
 					spt.SetTexture("BACK_R");//to be change
 				}
+
+
+				if (ID_tag.GetTag() == "No")
+				{
+					spt.SetTexture("NO_R");//to be change
+				}
+
+				if (ID_tag.GetTag() == "Yes")
+				{
+					spt.SetTexture("YES_R");//to be change
+				}
 				
 			}
 
@@ -284,6 +316,16 @@ namespace EM
 			if (ID_tag.GetTag() == "Back")
 			{
 				spt.SetTexture("BACK_Y");//to be change
+			}
+
+			if (ID_tag.GetTag() == "No")
+			{
+				spt.SetTexture("NO_Y");//to be change
+			}
+
+			if (ID_tag.GetTag() == "Yes")
+			{
+				spt.SetTexture("YES_Y");//to be change
 			}
 		}
 
