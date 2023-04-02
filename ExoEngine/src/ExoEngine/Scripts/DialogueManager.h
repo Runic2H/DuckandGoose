@@ -32,7 +32,7 @@ namespace EM
 		****************************************************************************/
 		DialogueManager() : mDialogues{"Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4","Tutorial1","Tutorial2","Tutorial3",
 										"Tutorial4","Tutorial5","Tutorial6","Dialogue7","Dialogue8","Dialogue9","Dialogue10",
-										"Dialogue10","Dialogue11" },
+										"Dialogue11","Dialogue12" },
 			counter{ 0 }, MaxCounter{ 4 } {}
 		/*!*************************************************************************
 		Default destructor for Dialogue Manager
