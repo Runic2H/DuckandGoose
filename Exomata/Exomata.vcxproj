@@ -35,7 +35,6 @@
     <Font Include="Assets\fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\metadigger\test.wav" />
     <Media Include="Assets\metadigger\FStep1.wav" />
     <Media Include="Assets\metadigger\FStep2.wav" />
     <Media Include="Assets\metadigger\FStep3.wav" />
@@ -72,13 +71,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

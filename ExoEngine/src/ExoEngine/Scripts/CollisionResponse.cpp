@@ -71,8 +71,8 @@ namespace EM
 								if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_PICKUP)
 								{
 									auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+									playerstats.mDamageCoolDown = 0.1f;
 									p_ecs.GetComponent<EnemyAttributes>(i).mIsPickedUp = true;
-									playerstats.mIsDamaged = false;
 								}
 								else
 								{
@@ -134,10 +134,6 @@ namespace EM
 								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
 								if (enemystats.mDamageCoolDownTimer <= 0.0f)
 								{
-									if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsBlocking)
-									{
-										enemystats.mIsDamaged = true;
-									}
 									if ((p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mFacing == PlayerAttributes::Facing::RIGHT &&
 										p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID()).mEnemyFacing == EnemyAttributes::Facing::LEFT) ||
 										(p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mFacing == PlayerAttributes::Facing::LEFT &&
@@ -145,6 +141,10 @@ namespace EM
 									{
 										enemystats.mIsDamaged = true;
 										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.1f;
+									}
+									else if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsBlocking)
+									{
+										enemystats.mIsDamaged = true;
 									}
 								}
 							}
@@ -157,7 +157,7 @@ namespace EM
 							if (col.GetCollisionArray()[0].mHit == 2)
 							{
 								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
-								if (enemystats.mDamageCoolDownTimer <= 0.0f)
+								if (enemystats.mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS && enemystats.mDamageCoolDownTimer <= 0.0f)
 								{
 									enemystats.mIsDamaged = true;
 								}

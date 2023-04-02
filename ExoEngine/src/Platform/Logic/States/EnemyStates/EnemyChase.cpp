@@ -26,7 +26,7 @@ namespace EM
 	std::default_random_engine generator2;
 	std::uniform_int_distribution<>distribution(3, 6);
 
-	EnemyChase::EnemyChase(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	EnemyChase::EnemyChase(StateMachine* stateMachine) : mChaseTimer{2.0f} { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -181,7 +181,7 @@ namespace EM
 			{
 				if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 				{
-					if (dist <= 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
+					if (dist <= 0.10f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
 					{
 						//if within range to attack, set mode to attacking
 						stateMachine->ChangeState(new EnemyAttack(stateMachine));

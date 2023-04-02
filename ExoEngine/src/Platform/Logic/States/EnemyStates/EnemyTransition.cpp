@@ -60,7 +60,7 @@ namespace EM
 					}
 				}
 			}
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.15f
+			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) <= 0.10f
 				&& p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f) {
 				stateMachine->ChangeState(new EnemyAttack(stateMachine));
 			}
