@@ -1,10 +1,3 @@
- // check if pause is on
-
-//calculate button position (current position + camera position)
-//unzoom the screen
-//turn on collision
-//turn set sprites
-
 /*!*************************************************************************
 ****
 \file PauseMenu.cpp
@@ -13,8 +6,8 @@
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM250
-\date 20/01/2023
-\brief	Script That allow buttons to work when selected and clicked on
+\date 12/02/2023
+\brief	Script that allow pause menu related User interface to used when the game is set to a pause state
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -36,222 +29,238 @@ namespace EM
 
 	void PauseMenu::Update(float Frametime)
 	{
-		
+
 		UNREFERENCED_PARAMETER(Frametime);
+		//this set of codes are to allow easy access to the game component when coding
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		auto& col = p_ecs.GetComponent<Collider>(GetScriptEntityID());
 		auto& spt = p_ecs.GetComponent<Sprite>(GetScriptEntityID());
 
+
 		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
-		
-		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
+		//obtain the camera position from graphic
+
+
+		if (p_Input->KeyPressed(GLFW_KEY_ESCAPE)) // check if the game is set to a pause state
 		{
-			if (ID_tag.GetTag() == "PauseMenuBG")
+			if (ID_tag.GetTag() == "PauseMenuBG") // only entity with "PauseMenuBG"  can toggle the pause taste
 			{
-			p_GUI->toggle_pause();
-			Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
-			Graphic::mcamera->SetZoomLevel(1.0f);
+				if (p_GUI->sub_menu == true) //this code is to allow the camera to return to the pause menu when escape is press when the user is accessing one of the sub menu
+				{
+					Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f }); //set position to pause menu
+					p_GUI->sub_menu = false;
+				}
+				else
+				{
+					p_GUI->toggle_pause();
+					Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
+					Graphic::mcamera->SetZoomLevel(1.0f);
+				}
 			}
-			
+
 		}
 
-		if (p_GUI->check_pause() == true&& p_Editor->is_ShowWindow == false)
+		//////////code to set a sprite when the game is set into a pause state/////////////////////////////////////
+		if (p_GUI->check_pause() == true && p_Editor->is_ShowWindow == false)
 		{
-			if (ID_tag.GetTag() == "PauseMenuBG")	
+
+			//////////code to set idle sprite when the game is set into a pause state/////////////////////////////////////
+			if (ID_tag.GetTag() == "PauseMenuBG")
 			{
 				spt.SetTexture("PAUSED");
 			}
-				if (ID_tag.GetTag() == "Resume")
+			if (ID_tag.GetTag() == "Resume")
+			{
+				spt.SetTexture("ResumeGame_Yellow");
+
+			}
+			if (ID_tag.GetTag() == "Quit")
+			{
+				spt.SetTexture("ExitToMainMenu_Yellow");
+
+			}
+			if (ID_tag.GetTag() == "Options")
+			{
+				spt.SetTexture("Option_Yellow");
+
+			}
+			if (ID_tag.GetTag() == "HTP")
+			{
+				spt.SetTexture("HTP_Yellow");
+
+			}
+
+
+			if (ID_tag.GetTag() == "Back")
+			{
+				spt.SetTexture("BACK_Y");
+			}
+
+			if (ID_tag.GetTag() == "No")
+			{
+				spt.SetTexture("NO_Y");
+			}
+
+			if (ID_tag.GetTag() == "Yes")
+			{
+				spt.SetTexture("YES_Y");
+			}
+
+			//////////code to set idle sprite when the game is set into a pause state/////////////////////////////////////
+
+
+
+				//this code is to check the current state of the mouse
+			if (curr_state != button_state::click)
+				curr_state = button_state::idle;// return to idle whe the state is set to release at the start of the next game loop
+
+
+			if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::idle)
+			{
+				curr_state = button_state::click; //if left mouse is held down set mouse state to click
+			}
+
+			else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::click)
+			{
+				curr_state = button_state::release;//when mouse key is release set state to release
+			}
+
+			glm::vec2 newmousepos{ (p_GUI->MousePosition.x + camPos.x),(p_GUI->MousePosition.y + camPos.y) };//this code is to check the mouse position in accordance to the camera position
+
+			if (is_within_box(newmousepos, col, transform))//check if the system is hovering over an object, change to the hover sprite if it is
+			{
+				if (ID_tag.GetTag() == "Resume" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 				{
-					spt.SetTexture("ResumeGame_Yellow");
+					spt.SetTexture("ResumeGame_Blue");
 				}
-				if (ID_tag.GetTag() == "Quit")
+				if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 				{
-					spt.SetTexture("Quit_Yellow");
+					spt.SetTexture("ExitToMainMenu_Blue");
 				}
-				if (ID_tag.GetTag() == "Options")
+				if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 				{
-					spt.SetTexture("Option_Yellow");
+					spt.SetTexture("Option_Blue"); //to be updated
 				}
-				if (ID_tag.GetTag() == "HTP")
+				if (ID_tag.GetTag() == "HTP" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 				{
-					spt.SetTexture("HTP_Yellow");
+					spt.SetTexture("HTP_Blue"); //to be updated
 				}
-				
 
 				if (ID_tag.GetTag() == "Back")
 				{
-					spt.SetTexture("BACK_Y");
+					spt.SetTexture("BACK_B");//to be change
 				}
 
 				if (ID_tag.GetTag() == "No")
 				{
-					spt.SetTexture("NO_Y");
+					spt.SetTexture("NO_B");//to be change
 				}
 
 				if (ID_tag.GetTag() == "Yes")
 				{
-					spt.SetTexture("YES_Y");
+					spt.SetTexture("YES_B");//to be change
 				}
 
-				if (curr_state != button_state::click)
-					curr_state = button_state::idle;
-
-
-				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::idle)
+				if (curr_state == button_state::release) // when mouse button is release, call the button functions, release is selected to prevent function from calling when mouse is held down 
 				{
-					curr_state = button_state::click;
-				}
+					if (ID_tag.GetTag() == "Resume")
+					{
+						p_GUI->toggle_pause(); //change the pause state back when clicked
+					}
 
-				else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && curr_state == button_state::click)
-				{
-					curr_state = button_state::release;
-				}
+					if (ID_tag.GetTag() == "Quit")
+					{
+						Graphic::camera.SetPosition({ 0.0f, 8.0f, 0.0f }); //go to are you sure before quiting
+						p_GUI->sub_menu = true;//let the game know that sub menu is being accessed
+					}
 
-				glm::vec2 newmousepos{ (p_GUI->MousePosition.x + camPos.x),(p_GUI->MousePosition.y + camPos.y)};
-				//component to detect if mouse is hovering over the buttons
-				if (is_within_box(newmousepos, col, transform))//if system is pause and continue button is pressed, tell the system to resume the game
-				{
-					if (ID_tag.GetTag() == "Resume" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
+					if (ID_tag.GetTag() == "Options")
 					{
-						spt.SetTexture("ResumeGame_Blue");
+						Graphic::camera.SetPosition({ 0.0f, 4.0f, 0.0f });// go to the option screen
+						p_GUI->sub_menu = true;//let the game know that sub menu is being accessed
 					}
-					if (ID_tag.GetTag() == "Quit" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
-					{
-						spt.SetTexture("Quit_Blue");
-					}
-					if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
-					{
-						spt.SetTexture("Option_Blue");
-					}
-					if (ID_tag.GetTag() == "HTP" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
-					{
-						spt.SetTexture("HTP_Blue");
-					}
+
 
 					if (ID_tag.GetTag() == "Back")
 					{
-						spt.SetTexture("BACK_B");
+						Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });//return to pause menu
 					}
 
 					if (ID_tag.GetTag() == "No")
 					{
-						spt.SetTexture("NO_B");
+						Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });//return to pause menu
 					}
 
 					if (ID_tag.GetTag() == "Yes")
 					{
-						spt.SetTexture("YES_B");
+						p_GUI->toggle_pause();//set pause state back
+						p_Scene->setSceneToLoad("Assets/Scene/Menu.json");// return to main menu
 					}
 
-					if (curr_state == button_state::release)
+
+					if (ID_tag.GetTag() == "HTP")
 					{
-						if (ID_tag.GetTag() == "Resume" && press_once == false)
-						{
-							p_GUI->toggle_pause();
-						}
-
-						if (ID_tag.GetTag() == "Quit" && press_once == false)
-						{
-							
-							Graphic::camera.SetPosition({ 0.0f, 8.0f, 0.0f });
-							press_once = true;
-							
-						}
-
-						if (ID_tag.GetTag() == "Options" && press_once == false)
-						{
-
-							Graphic::camera.SetPosition({ 0.0f, 4.0f, 0.0f });
-							press_once = true;
-
-						}
-
-
-						if (ID_tag.GetTag() == "Back" && press_once == false)
-						{
-							Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
-							press_once = true;
-						}
-
-						if (ID_tag.GetTag() == "No" && press_once == false)
-						{
-							Graphic::camera.SetPosition({ 0.0f, -4.0f, 0.0f });
-							press_once = true;
-						}
-
-						if (ID_tag.GetTag() == "Yes" && press_once == false)
-						{
-							//curr_state = button_state::idle;
-							//p_GUI->toggle_menu();
-							p_GUI->toggle_pause();
-							p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-							press_once = true;
-						}
-
-
-						if (ID_tag.GetTag() == "HTP" && press_once == false)
-						{
-							Graphic::camera.SetPosition({ 0.0f, -8.0f, 0.0f });
-							curr_state = button_state::idle;
-							press_once = true;
-						}
+						Graphic::camera.SetPosition({ 0.0f, -8.0f, 0.0f });//set camera to how to play
+						p_GUI->sub_menu = true;//let the game know that sub menu is being accessed
 					}
+				}
 
-					if (curr_state == button_state::click)
+				//when mouse is held down set the coresspoding sprites to clicked state
+				if (curr_state == button_state::click)
+				{
+					if (ID_tag.GetTag() == "Resume")
 					{
-						if (ID_tag.GetTag() == "Resume")
-						{
-							spt.SetTexture("ResumeGame_Red");
-							
-						}
-
-						if (ID_tag.GetTag() == "Quit")
-						{
-							spt.SetTexture("Quit_Red");
-
-						}
-
-						if (ID_tag.GetTag() == "Back")
-						{
-							spt.SetTexture("BACK_R");//to be change
-						}
-
-						if (ID_tag.GetTag() == "No")
-						{
-							spt.SetTexture("NO_R");//to be change
-						}
-
-						if (ID_tag.GetTag() == "Yes")
-						{
-							spt.SetTexture("YES_R");//to be change
-						}
-
-						if (ID_tag.GetTag() == "Options")
-						{
-							spt.SetTexture("Option_Red");
-						}
-
-						if (ID_tag.GetTag() == "HTP")
-						{
-							spt.SetTexture("HTP_Red");
-						}
-
-
-						if (ID_tag.GetTag() == "PAUSED")
-						{
-							spt.SetTexture("Restart_Click");
-						}
-
+						spt.SetTexture("ResumeGame_Red");
 					}
-				}			
+
+					if (ID_tag.GetTag() == "Quit")
+					{
+						spt.SetTexture("ExitToMainMenu_Red");
+					}
+
+					if (ID_tag.GetTag() == "Back")
+					{
+						spt.SetTexture("BACK_R");
+					}
+
+					if (ID_tag.GetTag() == "No")
+					{
+						spt.SetTexture("NO_R");
+					}
+
+					if (ID_tag.GetTag() == "Yes")
+					{
+						spt.SetTexture("YES_R");
+					}
+
+					if (ID_tag.GetTag() == "Options")
+					{
+						spt.SetTexture("Option_Red");
+					}
+
+					if (ID_tag.GetTag() == "HTP")
+					{
+						spt.SetTexture("HTP_Red");
+					}
+
+
+					if (ID_tag.GetTag() == "PAUSED")
+					{
+						spt.SetTexture("Restart_Click");
+					}
+
+				}
+			}
 		}
+
+
+		//////////code to set all entity to when the game is set out of pause state/////////////////////////////////////
 		else if (p_GUI->check_pause() == false)
 		{
-		spt.SetTexture("Blank");
+			spt.SetTexture("Blank");
 		}
-		press_once = false;
+
 	}
 
 	void PauseMenu::End()
@@ -269,10 +278,10 @@ namespace EM
 		return "PauseMenu";
 	}
 
-	bool PauseMenu::is_within_box(glm::vec2 cur, Collider box, Transform trans)
+	bool PauseMenu::is_within_box(glm::vec2 cur, Collider box, Transform trans) //unique aabb code for entity and mouse
 	{
-		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x/2 )) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&
-			cur.x < ((box[0].mMax.x * (trans.GetScale().x/2 )) + trans.GetPos().x) && cur.y < (box[0].mMax.y * (trans.GetScale().y / 2) + trans.GetPos().y))
+		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x / 2)) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&
+			cur.x < ((box[0].mMax.x * (trans.GetScale().x / 2)) + trans.GetPos().x) && cur.y < (box[0].mMax.y * (trans.GetScale().y / 2) + trans.GetPos().y))
 		{
 			return true;//return true if the position of the cursor is between both of the button minimun and maximum bounding point
 		}
