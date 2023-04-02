@@ -18,6 +18,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyNotActive.h"
 #include "EnemyIdle.h"
 #include "EnemyChase.h"
+#include "EnemyDamaged.h"
 
 namespace EM
 {
@@ -60,20 +61,25 @@ namespace EM
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		/*if (spawnBehind) {
+		if (spawnBehind) {
 			if ((playerPos.x - p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x) > 0) {
 				if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) >= 0.2f) {
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 					stateMachine->ChangeState(new EnemyIdle(stateMachine));
 				}
 			}
-		}*/
-		//else {
+		}
+		else {
 			if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.5f) {
 				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = true;
 				stateMachine->ChangeState(new EnemyIdle(stateMachine));
 			}
-		//}
+		}
+
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive)
+		{
+			stateMachine->ChangeState(new EnemyIdle(stateMachine));
+		}
 	}
 
 	/*!*************************************************************************

@@ -85,14 +85,15 @@ namespace EM
 					}
 
 					if (p_Input->KeyHold(GLFW_KEY_W)) {
-						vel.y = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
+						vel.y = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y/3;
 					}
 					if (p_Input->KeyHold(GLFW_KEY_S)) {
-						vel.y = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y;
+						vel.y = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.y/3;
 					}
 					if (p_Input->KeyHold(GLFW_KEY_D)) {
 						vel.x = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
 						p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir.x = 1.0f;
+						p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetDir(1.0f, 0.0f);
 						p_ecs.GetComponent <PlayerAttributes>(stateMachine->GetEntityID()).mFacing = PlayerAttributes::Facing::RIGHT;
 						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x < 0)
 						{
@@ -103,6 +104,7 @@ namespace EM
 					if (p_Input->KeyHold(GLFW_KEY_A)) {
 						vel.x = -p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mVel.x;
 						p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDir.x = -1.0f;
+						p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID()).SetDir(-1.0f, 0.0f);
 						p_ecs.GetComponent <PlayerAttributes>(stateMachine->GetEntityID()).mFacing = PlayerAttributes::Facing::LEFT;
 						if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x > 0)
 						{

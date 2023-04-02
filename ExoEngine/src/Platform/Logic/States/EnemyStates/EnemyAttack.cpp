@@ -70,21 +70,19 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer -= Frametime;
 		//if is ranged enemy and passed ranged enemy atk timer
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 1.08f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 0.96f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
 		{
 			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
 			for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 			{
 				if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "RangeLaser")
 				{
-
 					p_ecs.GetComponent<Sprite>(i).SetLayerOrder(5);
 					if (p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale().x <= 0) offsetlaser = 0.2f;
 					else offsetlaser = -0.2f;
 					p_ecs.GetComponent<Transform>(i).SetPos(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + offsetlaser,
 						p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y - 0.018f);
 					p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
-					
 				}
 			}
 		}
@@ -96,11 +94,16 @@ namespace EM
 
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
 		{
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 			stateMachine->ChangeState(new EnemyTransition(stateMachine));
 		}
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter != 0)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+		{
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
 	}
 

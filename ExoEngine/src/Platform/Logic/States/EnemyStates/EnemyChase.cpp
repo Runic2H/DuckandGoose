@@ -168,7 +168,7 @@ namespace EM
 			//check if within range. If not, set to moving state
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			{
-				if (dist <= 0.20f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.02f && transform.GetPos().y >= playerPos.y - 0.02f)
+				if (dist <= 0.10f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
 				{
 					//if within range to attack, set mode to attacking
 					stateMachine->ChangeState(new EnemyAttack(stateMachine));
@@ -176,11 +176,15 @@ namespace EM
 			}
 			else
 			{
-				if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
+				if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
 				{
 					stateMachine->ChangeState(new EnemyAttack(stateMachine));
 				}
 			}
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+		{
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
 	}
 

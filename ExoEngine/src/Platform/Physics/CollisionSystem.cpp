@@ -95,9 +95,9 @@ namespace EM {
                                                         normal = normal * dotProd;
                                                         response -= normal;
                                                         rigid1.SetVel(response);
+                                                        vec2D nextPos = trans1.GetPos() + rigid1.GetVel();
+                                                        rigid1.SetNextPos(nextPos);
                                                     }
-                                                    vec2D nextPos = trans1.GetPos() + rigid1.GetVel();
-                                                    rigid1.SetNextPos(nextPos);
                                                 }
                                             }
                                             if (e2 == Collider::ColliderType::circle) {
@@ -113,8 +113,8 @@ namespace EM {
                                                     if (dotProd1 <= 0) {
                                                         normal1 = normal1 * dotProd1;
                                                         response1 -= normal1;
-                                                        if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
-                                                            rigid1.SetVel(response1);
+                                                        if (p_ecs.GetComponent<NameTag>(j).GetNameTag() == "player") {
+                                                            rigid1.SetVel(vec2D(0, 0));
                                                         }
                                                         else {
                                                             rigid1.SetVel(response1);
@@ -133,8 +133,8 @@ namespace EM {
                                                     if (dotProd2 <= 0) {
                                                         normal2 = normal2 * dotProd2;
                                                         response2 -= normal2;
-                                                        if (p_ecs.GetComponent<NameTag>(j).GetNameTag() == "player") {
-                                                            rigid2.SetVel(response2);
+                                                        if (p_ecs.GetComponent<NameTag>(i).GetNameTag() == "player") {
+                                                            rigid2.SetVel(vec2D(0, 0));
                                                         }
                                                         else {
                                                             rigid2.SetVel(response2);
@@ -142,6 +142,12 @@ namespace EM {
                                                         vec2D nextPos2 = trans2.GetPos() + rigid2.GetVel();
                                                         rigid2.SetNextPos(nextPos2);
                                                     }
+                                                }
+                                            }
+                                            if (e2 == Collider::ColliderType::dashCirc) {
+                                                if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
+                                                    vec2D nextPos1 = trans1.GetPos() - (rigid1.GetVel() * 3);
+                                                    rigid1.SetNextPos(nextPos1);
                                                 }
                                             }
                                             if (e2 == Collider::ColliderType::bubble) {
@@ -220,9 +226,44 @@ namespace EM {
                                                         normal = normal * dotProd;
                                                         response -= normal;
                                                         rigid2.SetVel(response);
+                                                        vec2D nextPos = trans2.GetPos() + rigid2.GetVel();
+                                                        rigid2.SetNextPos(nextPos);
                                                     }
-                                                    vec2D nextPos = trans2.GetPos() + rigid2.GetVel();
-                                                    rigid2.SetNextPos(nextPos);
+                                                }
+                                            }
+                                            if (e2 == Collider::ColliderType::dashCirc) {
+                                                rigid1.SetNextPos(trans1.GetPos());
+                                                offset1 = trans1.GetPos() + col1[a].mOffset;
+                                                vec2D max1 = offset1 + col1[a].mMax;
+                                                vec2D min1 = offset1 - col1[a].mMin;
+                                                if (ecm.simpleCircleRect(offset2, col2[b].mRadius, max1, min1, offset1)) {
+                                                    vec2D norm2;
+                                                    if (((offset2.y - col2[b].mRadius) < (max1.y) && (offset2.y + col2[b].mRadius) > (min1.y)) && (offset2.x - col2[b].mRadius) <= min1.x) {
+                                                        norm2.x = -1;
+                                                    }
+                                                    else if (((offset2.y - col2[b].mRadius) < (max1.y) && (offset2.y + col2[b].mRadius) > (min1.y)) && (offset2.x + col2[b].mRadius) >= max1.x) {
+                                                        norm2.x = 1;
+                                                    }
+                                                    if (((offset2.x - col2[b].mRadius) < (max1.x) && (offset2.x + col2[b].mRadius) > (min1.x)) && (offset2.y + col2[b].mRadius) >= max1.y) {
+                                                        norm2.y = 1;
+                                                    }
+                                                    else if (((offset2.x - col2[b].mRadius) < (max1.x) && (offset2.x + col2[b].mRadius) > (min1.x)) && (offset2.y - col2[b].mRadius) <= min1.y) {
+                                                        norm2.y = -1;
+                                                    }
+                                                    Normalize(norm2, norm2);
+                                                    col2[b].mHit = 1;
+                                                    col2[b].mCollisionNormal = norm2;
+
+                                                    vec2D response = rigid2.GetVel();
+                                                    vec2D normal = norm2;
+                                                    float dotProd = dotProduct(normal, response);
+                                                    if (dotProd <= 0) {
+                                                        normal = normal * dotProd;
+                                                        response -= normal;
+                                                        rigid2.SetVel(response);
+                                                        vec2D nextPos = trans2.GetPos() + rigid2.GetVel();
+                                                        rigid2.SetNextPos(nextPos);
+                                                    }
                                                 }
                                             }
                                         }
@@ -242,6 +283,49 @@ namespace EM {
                                                 vec2D min2 = offset2 - col2[b].mMin;
                                                 if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
                                                     col1[a].mHit = 2;
+                                                }
+                                            }
+                                        }
+                                        else if (e1 == Collider::ColliderType::dashCirc) {
+                                            if (e2 == Collider::ColliderType::box) {
+                                                rigid2.SetNextPos(trans2.GetPos());
+                                                offset2 = trans2.GetPos() + col2[b].mOffset;
+                                                vec2D max2 = offset2 + col2[b].mMax;
+                                                vec2D min2 = offset2 - col2[b].mMin;
+                                                if (ecm.simpleCircleRect(offset1, col1[a].mRadius, max2, min2, offset2)) {
+                                                    vec2D norm1;
+                                                    if (((offset1.y - col1[a].mRadius) < (max2.y) && (offset1.y + col1[a].mRadius) > (min2.y)) && (offset1.x - col1[a].mRadius) <= min2.x) {
+                                                        norm1.x = -1;
+                                                    }
+                                                    else if (((offset1.y - col1[a].mRadius) < (max2.y) && (offset1.y + col1[a].mRadius) > (min2.y)) && (offset1.x + col1[a].mRadius) >= max2.x) {
+                                                        norm1.x = 1;
+                                                    }
+                                                    if (((offset1.x - col1[a].mRadius) < (max2.x) && (offset1.x + col1[a].mRadius) > (min2.x)) && (offset1.y + col1[a].mRadius) >= max2.y) {
+                                                        norm1.y = 1;
+                                                    }
+                                                    else if (((offset1.x - col1[a].mRadius) < (max2.x) && (offset1.x + col1[a].mRadius) > (min2.x)) && (offset1.y - col1[a].mRadius) <= min2.y) {
+                                                        norm1.y = -1;
+                                                    }
+                                                    Normalize(norm1, norm1);
+                                                    col1[a].mHit = 1;
+                                                    col1[a].mCollisionNormal = norm1;
+
+                                                    vec2D response = rigid1.GetVel();
+                                                    vec2D normal = norm1;
+                                                    float dotProd = dotProduct(normal, response);
+                                                    if (dotProd <= 0) {
+                                                        normal = normal * dotProd;
+                                                        response -= normal;
+                                                        rigid1.SetVel(response);
+                                                        vec2D nextPos = trans1.GetPos() + rigid1.GetVel();
+                                                        rigid1.SetNextPos(nextPos);
+                                                    }
+                                                }
+                                            }
+                                            if (e2 == Collider::ColliderType::circle) {
+                                                if (ecm.simpleCircleCircle(offset1, offset2, col1[a].mRadius, col2[b].mRadius)) {
+                                                    vec2D nextPos2 = trans2.GetPos() - (rigid2.GetVel() * 3);
+                                                    rigid2.SetNextPos(nextPos2);
                                                 }
                                             }
                                         }

@@ -92,11 +92,12 @@ namespace EM
 		}
 		if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f)
 		{
-			stateMachine->ChangeState(new HazardIdle(stateMachine));
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 			{
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = false;
 			}
+			stateMachine->ChangeState(new HazardIdle(stateMachine));
 		}
 		
 	}

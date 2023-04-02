@@ -29,8 +29,8 @@ namespace EM
 			ENEMY_NONE,
 			ENEMY_MELEE,
 			ENEMY_RANGED,
-			ENEMY_SPECIAL,
-			ENEMY_BOSS
+			ENEMY_PICKUP,
+			ENEMY_BOSS,
 		};
 		enum class Facing
 		{
@@ -60,8 +60,11 @@ namespace EM
 		float mAttackCoolDown;
 		float mDamageCoolDownTimer;
 		float mDamageDurationTimer;
+		float mIdleTimer;
+		int mHitCounter;
 		bool mIsAlive;
 		bool mIsDamaged;
+		bool mIsPickedUp;
 		EnemyTypes mEnemyType;
 		Facing mEnemyFacing;
 		vec2D mVel;

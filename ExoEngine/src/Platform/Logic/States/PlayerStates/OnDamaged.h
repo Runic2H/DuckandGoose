@@ -34,5 +34,10 @@ namespace EM
 		float mCamMaxX;
 		float mCamMinY;
 		float mCamMaxY;
+		float EaseInOutSine(float start, float end, float value)
+		{
+			end -= start;
+			return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
+		}
 	};
 }
