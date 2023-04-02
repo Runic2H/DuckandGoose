@@ -46,8 +46,8 @@ namespace EM
 		else
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer = 0.5f;
-		mMaxX = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + float((rand() * 1.0 / RAND_MAX * 5) + 1 - 5.0f) / 100.0f;
-		mMaxY = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y + float((rand() * 1.0 / RAND_MAX * 5) + 1 - 5.0f) / 100.0f;
+		mMaxX = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().x + float((rand() * 1.0 / RAND_MAX * 3) + 1 - 3.0f) / 100.0f;
+		mMaxY = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y + float((rand() * 1.0 / RAND_MAX * 3) + 1 - 3.0f) / 100.0f;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter == 0)
 		{
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter = (rand() * 1.0 / RAND_MAX * 3) + 1;
@@ -63,7 +63,7 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer -= Frametime;
-		mTimer += Frametime;
+		mTimer += Frametime/2;
 		if (mTimer >= mDuration) {
 			mTimer = 0.f;
 			std::swap(mMinX, mMaxX);
@@ -88,7 +88,8 @@ namespace EM
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer <= 0.0f) {
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.3f && check && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIdleTimer <= 0.0f) {
+
 			stateMachine->ChangeState(new EnemyChase(stateMachine));
 		}
 
