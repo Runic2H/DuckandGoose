@@ -122,10 +122,6 @@ namespace EM {
         for (c = text.begin(); c != text.end(); c++)
         {
             Character ch = Characters[*c];
-
-           // float xpos = position.x + ch.Bearing.x * scale;
-           // float ypos = position.y - (ch.Size.y - ch.Bearing.y) * scale;
-
             float w = ch.Size.x * scale;
             float h = ch.Size.y * scale;
             // update VBO for each character

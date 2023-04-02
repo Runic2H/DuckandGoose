@@ -38,7 +38,6 @@ namespace EM
 	****************************************************************************/
 	void EnemyIdle::OnEnter(StateMachine* stateMachine)
 	{
-		//p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 		{
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_MELEE_ENEMY_HOVERING");
@@ -50,7 +49,7 @@ namespace EM
 		mMaxY = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y + float((rand() * 1.0 / RAND_MAX * 5) + 1 - 5.0f) / 100.0f;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter == 0)
 		{
-			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter = (rand() * 1.0 / RAND_MAX * 3) + 1;
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter = (int)(rand() * 1.0 / RAND_MAX * 3) + 1;
 		}
 	}
 

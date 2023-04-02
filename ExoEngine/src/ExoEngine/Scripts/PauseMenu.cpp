@@ -58,12 +58,6 @@ namespace EM
 
 		if (p_GUI->check_pause() == true&& p_Editor->is_ShowWindow == false)
 		{
-			//if (calibrate_pos == false)
-			//{	
-			//	//offset = camPos - transform.GetPos();//this code lock the offset base on the camera position
-			//	calibrate_pos = true;
-			//}
-
 			if (ID_tag.GetTag() == "PauseMenuBG")	
 			{
 				spt.SetTexture("PAUSED");
@@ -71,44 +65,35 @@ namespace EM
 				if (ID_tag.GetTag() == "Resume")
 				{
 					spt.SetTexture("ResumeGame_Yellow");
-				//	transform.SetPos(offset.x + camPos.y, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "Quit")
 				{
 					spt.SetTexture("Quit_Yellow");
-				//	transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "Options")
 				{
 					spt.SetTexture("Option_Yellow");
-				//	transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
 				}
 				if (ID_tag.GetTag() == "HTP")
 				{
-					spt.SetTexture("HTP_Yellow");//to be change
-					//transform.SetPos(offset.x + camPos.x, offset.y + camPos.y);
+					spt.SetTexture("HTP_Yellow");
 				}
 				
 
 				if (ID_tag.GetTag() == "Back")
 				{
-					spt.SetTexture("BACK_Y");//to be change
+					spt.SetTexture("BACK_Y");
 				}
 
 				if (ID_tag.GetTag() == "No")
 				{
-					spt.SetTexture("NO_Y");//to be change
+					spt.SetTexture("NO_Y");
 				}
 
 				if (ID_tag.GetTag() == "Yes")
 				{
-					spt.SetTexture("YES_Y");//to be change
+					spt.SetTexture("YES_Y");
 				}
-
-				
-				
-				
-
 
 				if (curr_state != button_state::click)
 					curr_state = button_state::idle;
@@ -138,26 +123,26 @@ namespace EM
 					}
 					if (ID_tag.GetTag() == "Options" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("Option_Blue"); //to be updated
+						spt.SetTexture("Option_Blue");
 					}
 					if (ID_tag.GetTag() == "HTP" && !(p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT)))
 					{
-						spt.SetTexture("HTP_Blue"); //to be updated
+						spt.SetTexture("HTP_Blue");
 					}
 
 					if (ID_tag.GetTag() == "Back")
 					{
-						spt.SetTexture("BACK_B");//to be change
+						spt.SetTexture("BACK_B");
 					}
 
 					if (ID_tag.GetTag() == "No")
 					{
-						spt.SetTexture("NO_B");//to be change
+						spt.SetTexture("NO_B");
 					}
 
 					if (ID_tag.GetTag() == "Yes")
 					{
-						spt.SetTexture("YES_B");//to be change
+						spt.SetTexture("YES_B");
 					}
 
 					if (curr_state == button_state::release)
@@ -165,10 +150,6 @@ namespace EM
 						if (ID_tag.GetTag() == "Resume" && press_once == false)
 						{
 							p_GUI->toggle_pause();
-							//Graphic::mcamera->SetPosition(p_GUI->PrevCamPos);
-							//Graphic::mcamera->SetZoomLevel(0.25f);
-
-
 						}
 
 						if (ID_tag.GetTag() == "Quit" && press_once == false)

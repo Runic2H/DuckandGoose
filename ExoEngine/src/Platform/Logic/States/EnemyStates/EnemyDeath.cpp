@@ -48,7 +48,7 @@ namespace EM
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
-		mItemDropChance = 1;//(rand() * 1.0 / RAND_MAX * 3) + 1;
+		mItemDropChance = 1;
 	}
 
 	/*!*************************************************************************

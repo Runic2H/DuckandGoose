@@ -43,7 +43,7 @@ namespace EM {
 	{
 
 	}
-	//
+
 	Mat4x4::Mat4x4(Mat3D mat) :
 		m00{ mat.m00 }, m01{ mat.m01 }, m02{ mat.m02 }, m03{ 0 },
 		m10{ mat.m10 }, m11{ mat.m11 }, m12{ mat.m12 }, m13{ 0 },

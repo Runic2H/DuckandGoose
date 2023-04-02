@@ -92,7 +92,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseHold(const int& key)
     {
-        return  mMouseStatus[key] == GLFW_REPEAT /*|| mMouseStatus[key] == GLFW_PRESS*/;
+        return  mMouseStatus[key] == GLFW_REPEAT;
     }
 
     /*!*************************************************************************

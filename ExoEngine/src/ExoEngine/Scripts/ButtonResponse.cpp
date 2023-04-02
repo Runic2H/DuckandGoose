@@ -115,7 +115,7 @@ namespace EM
 
 			if (ID_tag.GetTag() == "Back")
 			{
-				spt.SetTexture("BACK_B");//to be change
+				spt.SetTexture("BACK_B");
 			}
 			
 			if (curr_state == button_state::release)
@@ -153,7 +153,6 @@ namespace EM
 
 				if (ID_tag.GetTag() == "MainMenu" && p_GUI->Check_HTP() == false)
 				{
-					//p_GUI->toggle_menu();
 					p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 				}
 				if (ID_tag.GetTag() == "PResart")
@@ -185,7 +184,6 @@ namespace EM
 
 				if (ID_tag.GetTag() == "Start" && p_GUI->Check_HTP() == false)
 				{
-				//	p_GUI->toggle_menu();
 					spt.SetTexture("Start_Click");
 				}
 
@@ -223,17 +221,17 @@ namespace EM
 				}
 				if (ID_tag.GetTag() == "PRestart")
 				{
-					spt.SetTexture("Restart_Click");//to be change
+					spt.SetTexture("Restart_Click");
 				}
 
 				if (ID_tag.GetTag() == "Mute")
 				{
-					spt.SetTexture("Mute_Click");//to be change
+					spt.SetTexture("Mute_Click");
 				}
 
 				if (ID_tag.GetTag() == "Back")
 				{
-					spt.SetTexture("BACK_R");//to be change
+					spt.SetTexture("BACK_R");
 				}
 				
 			}
@@ -279,11 +277,11 @@ namespace EM
 						}
 			if (ID_tag.GetTag() == "PRestart")
 						{
-							spt.SetTexture("Restart_Idle");//to be change
+							spt.SetTexture("Restart_Idle");
 						}
 			if (ID_tag.GetTag() == "Back")
 			{
-				spt.SetTexture("BACK_Y");//to be change
+				spt.SetTexture("BACK_Y");
 			}
 		}
 
