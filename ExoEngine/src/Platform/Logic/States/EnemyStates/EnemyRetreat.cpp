@@ -41,6 +41,7 @@ namespace EM
 		}
 		else
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer = 1.0f;
 	}
 
 	/*!*************************************************************************
@@ -50,6 +51,7 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 		{
 			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
@@ -75,6 +77,15 @@ namespace EM
 			rigidbody.SetDir(-rigidbody.GetDir().x, -rigidbody.GetDir().y);
 			vec2D newVel = vec2D(0.0f, 0.0f);
 			newVel = rigidbody.GetVel();
+			if (rigidbody.GetDir().x > 0)
+			{
+				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+
+			}
+			else
+			{
+				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+			}
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 			newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
 			newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
@@ -93,10 +104,33 @@ namespace EM
 			dist = distance(transform.GetPos(), playerPos);
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (dist >= 0.4f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			{
-				//if within range to attack, set mode to attacking
-				stateMachine->ChangeState(new EnemyChase(stateMachine));
+				if (dist > 0.35f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer <= 0.0f)
+				{
+					//if within range to attack, set mode to attacking
+					rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
+					vec2D newVel = vec2D(0.0f, 0.0f);
+					newVel = rigidbody.GetVel();
+					if (newVel.x > -99 && newVel.y < 99) {
+						newVel = newVel * -1;
+						rigidbody.SetVel(newVel);
+						if (newVel.x < 0 && transform.GetScale().x < 0) {
+							transform.GetScale().x *= -1;
+						}
+						if (newVel.x > 0 && transform.GetScale().x > 0) {
+							transform.GetScale().x *= -1;
+						}
+					}
+					stateMachine->ChangeState(new EnemyIdle(stateMachine));
+				}
+			}
+			else
+			{
+				if (dist > 0.35f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+				{
+					stateMachine->ChangeState(new EnemyChase(stateMachine));
+				}
 			}
 		}
 	}

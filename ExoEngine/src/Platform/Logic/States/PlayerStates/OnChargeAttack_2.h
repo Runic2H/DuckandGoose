@@ -31,5 +31,9 @@ namespace EM
 		float mTimer;
 		float mDuration;
 		int mChargeIndex;
+		int Linear(int start, int end, float value)
+		{
+			return (int)((1.f - value) * start + value * end);
+		}
 	};
 }
