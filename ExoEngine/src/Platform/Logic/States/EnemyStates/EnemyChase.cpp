@@ -132,7 +132,6 @@ namespace EM
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
 					if (colliderbox[1].mMin.x > 0.f)
 					{
-						//colliderbox[1].mMin.x *= -1; //min = -0.3, max = 0
 						if (colliderbox[1].mMin.x > colliderbox[1].mMax.x)
 						{
 							float tempmin = colliderbox[1].mMin.x;

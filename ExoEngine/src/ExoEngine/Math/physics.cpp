@@ -91,6 +91,7 @@ namespace EM {
     that returns a boolean inditating whether collision was detected or not
     ****************************************************************************/
     int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
+        UNREFERENCED_PARAMETER(center);
         if (ent1.x + rad1 < min1.x || ent1.x - rad1 > max1.x || ent1.y + rad1 < min1.y || ent1.y - rad1 > max1.y) {
             return 0;
         }

@@ -92,7 +92,6 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
 				}
-				//p_Audio->SetVolume(0, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
@@ -112,8 +111,6 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), 0.0f);
 				}
-				//p_Audio->SetVolume(1, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + 1);
-
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
@@ -126,22 +123,12 @@ namespace EM
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), 0.0f);
 				}
-				//p_Audio->SetVolume(2, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + 1);
-
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
 				}
 			}
 		}
-
-		/*if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
-		{
-				limitset = false;
-				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-		}*/
-
-		
 	}
 
 	void SliderScript::End()
