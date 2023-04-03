@@ -1,3 +1,19 @@
+/*!*************************************************************************
+****
+\file BossIdle.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when boss is in an idle state. This is a transition stage
+		which goes to the chase state
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "BossIdle.h"
 #include "BossChasing.h"
@@ -12,7 +28,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Enter state for when Boss is not active state
+	Enter state for when Boss is idle
 	****************************************************************************/
 	void BossIdle::OnEnter(StateMachine* stateMachine)
 	{
@@ -26,7 +42,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Update state for when Boss is not active state
+	Update state for when Boss is idle
 	****************************************************************************/
 	void BossIdle::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -47,7 +63,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Exit state for when Boss is not active state
+	Exit state for when Boss is idle
 	****************************************************************************/
 	void BossIdle::OnExit(StateMachine* stateMachine)
 	{

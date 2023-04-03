@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file Button.h
+\file ButtonResponse.h
 \author Lau Yong Hui
 \par DP email: l.yonghui@gmail.com
 \par Course: CSD2450 / GAM250

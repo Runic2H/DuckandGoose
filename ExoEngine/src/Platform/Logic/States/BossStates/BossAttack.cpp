@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file BossAttack.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when boss is attacking
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include"empch.h"
 #include"BossAttack.h"
 #include"BossIdle.h"
@@ -15,7 +30,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Enter state for when enemy is chasing state
+	Enter state for when enemy is attacking state
 	****************************************************************************/
 	void BossAttack::OnEnter(StateMachine* stateMachine)
 	{
@@ -28,7 +43,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Update state for when enemy is chasing state
+	Update state for when enemy is attacking state
 	****************************************************************************/
 	void BossAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -76,7 +91,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Exit state for when enemy is chasing state
+	Exit state for when enemy is attacking state
 	****************************************************************************/
 	void BossAttack::OnExit(StateMachine* stateMachine)
 	{

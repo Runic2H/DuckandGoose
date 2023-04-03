@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file OnDieded.cpp
+\file OnIdle.cpp
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2450

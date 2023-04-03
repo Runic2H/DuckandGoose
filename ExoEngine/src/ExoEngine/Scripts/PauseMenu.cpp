@@ -23,10 +23,15 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
+	/*!*************************************************************************
+	Start state for Pause Menu
+	****************************************************************************/
 	void PauseMenu::Start()
 	{
 	}
-
+	/*!*************************************************************************
+	Update state for Pause Menu
+	****************************************************************************/
 	void PauseMenu::Update(float Frametime)
 	{
 
@@ -262,22 +267,30 @@ namespace EM
 		}
 
 	}
-
+	/*!*************************************************************************
+	End state for Pause Menu
+	****************************************************************************/
 	void PauseMenu::End()
 	{
 		delete this;
 	}
-
+	/*!*************************************************************************
+	Copy constructor for Pause Menu
+	****************************************************************************/
 	PauseMenu* PauseMenu::Clone() const
 	{
 		return new PauseMenu(*this);
 	}
-
+	/*!*************************************************************************
+	Get name of Pause Menu
+	****************************************************************************/
 	std::string PauseMenu::GetScriptName()
 	{
 		return "PauseMenu";
 	}
-
+	/*!*************************************************************************
+	Check if cursor is within the bounds of the box
+	****************************************************************************/
 	bool PauseMenu::is_within_box(glm::vec2 cur, Collider box, Transform trans) //unique aabb code for entity and mouse
 	{
 		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x / 2)) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&

@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file Nametag.cpp
+\file NameTag.cpp
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2400 / GAM200
