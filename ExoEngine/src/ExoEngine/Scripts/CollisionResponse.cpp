@@ -144,7 +144,11 @@ namespace EM
 									}
 									else if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsBlocking)
 									{
+										if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsChargeAttack) {
+											enemystats.mIsChargedDamage = true;
+										}
 										enemystats.mIsDamaged = true;
+										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.16f;
 									}
 								}
 							}

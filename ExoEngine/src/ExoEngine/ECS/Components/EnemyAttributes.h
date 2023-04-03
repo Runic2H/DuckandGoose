@@ -65,6 +65,7 @@ namespace EM
 		int mHitCounter;
 		bool mIsAlive;
 		bool mIsDamaged;
+		bool mIsChargedDamage;
 		bool mIsPickedUp;
 		EnemyTypes mEnemyType;
 		Facing mEnemyFacing;

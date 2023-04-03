@@ -21,7 +21,7 @@ namespace EM
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[0].is_Alive = true;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID())[1].is_Alive = false;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 2.5f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown = 1.0f;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.016f;
 	}
 
