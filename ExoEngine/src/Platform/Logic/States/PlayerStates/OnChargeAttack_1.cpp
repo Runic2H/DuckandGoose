@@ -37,7 +37,7 @@ namespace EM
 	void OnChargeAttack_1::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer = 0.6f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer = 0.3f;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.3f;
 		}
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
@@ -47,6 +47,7 @@ namespace EM
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
 		mTimer = 0.1f;
+
 	}
 
 	/*!*************************************************************************
@@ -70,17 +71,17 @@ namespace EM
 				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 				{
 					//play charged sound
-					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 18))
+					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 13))
 					{
-						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[18].should_play = true; // looped charging
+						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[13].should_play = true; // looped charging
 					}
 					p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
 				}
-			}
-			//play charging sound
-			else if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 17))
-			{
-				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[17].should_play = true; //charge atk start
+				//play charging sound
+				else if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
+				{
+					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = true; //charge atk start
+				}
 			}
 			
 		}

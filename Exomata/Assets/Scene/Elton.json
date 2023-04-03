@@ -1314,7 +1314,17 @@
           "Channel": 3,
           "IsLooping": false
         },
-        "AudioArrCount": 12,
+        "12": {
+          "AudioPath": "ChargingSFX_Start.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "13": {
+          "AudioPath": "ChargingSFX_Loop.wav",
+          "Channel": 3,
+          "IsLooping": false
+        },
+        "AudioArrCount": 14,
         "BGM Volume": 0.10499999672174454,
         "SFX Volume": 0.6349999904632568,
         "Master Volume": 0.6650000214576721
