@@ -178,7 +178,7 @@ Application constructor
 
 				}
 			}
-			for (auto entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
+			for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
 			{
 				if (p_ecs.HaveComponent<NameTag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Splash Screen")
 				{

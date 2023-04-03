@@ -1,8 +1,8 @@
 /*!*************************************************************************
 ****
 \file DialogueManager.h
-\author Tan Ek Hern
-\par DP email: t.ekhern@digipen.edu
+\author Huang Xin Xiang
+\par DP email: h.xinxiang@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
