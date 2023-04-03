@@ -2,6 +2,7 @@
 #include"BossAttack.h"
 #include"BossIdle.h"
 #include"BossChasing.h"
+#include"BossOnDamage.h"
 
 namespace EM
 {
@@ -32,7 +33,7 @@ namespace EM
 	void BossAttack::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer -= Frametime;
-
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Boss Laser")
@@ -64,7 +65,12 @@ namespace EM
 		}
 		if(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
 		{
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 			stateMachine->ChangeState(new BossIdle(stateMachine));
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+		{
+			stateMachine->ChangeState(new BossOnDamage(stateMachine));
 		}
 
 	}

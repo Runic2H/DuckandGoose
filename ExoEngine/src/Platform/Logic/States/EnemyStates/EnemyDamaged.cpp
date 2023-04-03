@@ -82,7 +82,7 @@ namespace EM
 				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 				vec2D dir = rigidbody.GetDir();
-				dir = dir * 200.0f;
+				dir = dir * 350.0f;
 				rigidbody.SetVel(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
 				vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
 				rigidbody.SetNextPos(nextPos);
@@ -92,7 +92,7 @@ namespace EM
 				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
 				vec2D dir = rigidbody.GetDir();
-				dir = dir * 300.0f;
+				dir = dir * 350.0f;
 				rigidbody.SetVel(p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), dir, Frametime));
 				vec2D nextPos = (transform.GetPos() + rigidbody.GetVel());
 				rigidbody.SetNextPos(nextPos);

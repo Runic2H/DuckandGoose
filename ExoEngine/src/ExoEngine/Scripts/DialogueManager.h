@@ -30,7 +30,7 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Dialogue Manager
 		****************************************************************************/
-		DialogueManager() : mDialogues{"Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4","Tutorial1","Tutorial2","Tutorial3",
+		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4","Tutorial1","Tutorial2","Tutorial3",
 										"Tutorial4","Tutorial5","Tutorial6","Dialogue7","Dialogue8","Dialogue9","Dialogue10",
 										"Dialogue11","Dialogue12" },
 			counter{ 0 }, MaxCounter{ 4 } {}
@@ -58,8 +58,8 @@ namespace EM
 		{
 
 			UNREFERENCED_PARAMETER(Frametime);
-			Entity i{0};
-		
+			Entity i{ 0 };
+
 			for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
 			{
 				if (p_ecs.HaveComponent<PlayerAttributes>(e))
@@ -116,8 +116,8 @@ namespace EM
 					}
 				}
 			}
-				
-			
+
+
 		}
 		/*!*************************************************************************
 		End State for DialogueManager

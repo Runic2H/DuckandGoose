@@ -74,7 +74,7 @@ namespace EM
 				vec2D newVel = vec2D(0.0f, 0.0f);
 				newVel = rigidbody.GetVel();
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.y *= 2;
+				newVel.y *= 3;
 				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 				vec2D nextPos = transform.GetPos();
 				nextPos.y -= rigidbody.GetVel().y;

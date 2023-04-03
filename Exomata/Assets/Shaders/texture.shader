@@ -29,7 +29,7 @@ in vec4 v_Color;
 in vec2 v_TexCoord;
 in float v_TextureIndex;
 
-uniform sampler2D u_Texture[64];
+uniform sampler2D u_Texture[32];
 
 void main()
 {

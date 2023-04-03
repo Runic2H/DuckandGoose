@@ -39,7 +39,7 @@ namespace EM
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 
 		if (mDeathTimer <= 0.0f) {
-			p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
+			p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 		}
 
 	}

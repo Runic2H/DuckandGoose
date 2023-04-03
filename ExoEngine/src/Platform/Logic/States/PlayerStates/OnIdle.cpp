@@ -27,7 +27,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 namespace EM
 {
 	float time{};
-	OnIdle::OnIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	OnIdle::OnIdle(StateMachine* stateMachine) : mTempDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -46,6 +46,11 @@ namespace EM
 		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f)
 		{
 			return new OnBlock(stateMachine);
+		}
+		if (key == GLFW_KEY_F4 && p_Input->KeyPressed(GLFW_KEY_F4))
+		{
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth != p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mMaxHealth ?
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mMaxHealth : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth;
 		}
 		return nullptr;
 	}

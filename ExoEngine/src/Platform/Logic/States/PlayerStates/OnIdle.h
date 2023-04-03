@@ -27,5 +27,7 @@ namespace EM
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
+	private:
+		int mTempDamage;
 	};
 }

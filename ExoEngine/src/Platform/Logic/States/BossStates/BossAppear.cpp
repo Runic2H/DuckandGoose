@@ -29,7 +29,7 @@ namespace EM
 	****************************************************************************/
 	void BossAppear::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		float fallspeed = 5.f;
+		float fallspeed = 2.5f;
 		if(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos().y >= 0)
 		{
 			vec2D& nextpos = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos();

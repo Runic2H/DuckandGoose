@@ -43,7 +43,7 @@ namespace EM
 		}
 		else
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer = 1.0f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer = 0.5f;
 	}
 
 	/*!*************************************************************************
@@ -54,10 +54,6 @@ namespace EM
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
 		bool check = false;
@@ -81,7 +77,12 @@ namespace EM
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[retreatDistribution(retreatGenerator)].should_play = true;
 			}
 		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+		{
+			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+		}
 		if (check) {
+			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer -= Frametime;
 			rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
 			rigidbody.SetDir(-rigidbody.GetDir().x, -rigidbody.GetDir().y);
 			vec2D newVel = vec2D(0.0f, 0.0f);
@@ -119,15 +120,24 @@ namespace EM
 				{
 					//if within range to attack, set mode to attacking
 					rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);
-					vec2D newVel = vec2D(0.0f, 0.0f);
-					newVel = rigidbody.GetVel();
-					if (newVel.x > -99 && newVel.y < 99) {
-						newVel = newVel * -1;
-						rigidbody.SetVel(newVel);
-						if (newVel.x < 0 && transform.GetScale().x < 0) {
+					vec2D dirVel = vec2D(0.0f, 0.0f);
+					dirVel = rigidbody.GetVel();
+					if (rigidbody.GetDir().x > 0)
+					{
+						p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::LEFT;
+
+					}
+					else
+					{
+						p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
+					}
+					if (dirVel.x > -99 && dirVel.y < 99) {
+						dirVel = dirVel * -1;
+						rigidbody.SetVel(dirVel);
+						if (dirVel.x < 0 && transform.GetScale().x < 0) {
 							transform.GetScale().x *= -1;
 						}
-						if (newVel.x > 0 && transform.GetScale().x > 0) {
+						if (dirVel.x > 0 && transform.GetScale().x > 0) {
 							transform.GetScale().x *= -1;
 						}
 					}
@@ -136,7 +146,7 @@ namespace EM
 			}
 			else
 			{
-				if (dist > 0.35f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
+				if (dist > 0.30f || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f)
 				{
 					stateMachine->ChangeState(new EnemyChase(stateMachine));
 				}

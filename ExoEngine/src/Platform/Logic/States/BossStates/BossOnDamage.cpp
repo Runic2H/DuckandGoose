@@ -2,6 +2,7 @@
 #include "BossOnDamage.h"
 #include "BossChasing.h"
 #include "BossDeath.h"
+#include "BossAttack.h"
 
 namespace EM
 {

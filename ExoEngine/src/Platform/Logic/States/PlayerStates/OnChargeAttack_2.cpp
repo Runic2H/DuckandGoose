@@ -23,7 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 1.0f }, mChargeIndex{ 0 } { UNREFERENCED_PARAMETER(stateMachine); }
+	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f }, mDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage }, mChargeDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage * 2 } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnChargeAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -80,6 +80,7 @@ namespace EM
 			{
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = true;
+				std::swap(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage, mChargeDamage);
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -127,6 +128,7 @@ namespace EM
 	{
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = false;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage = mDamage;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer = 0.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

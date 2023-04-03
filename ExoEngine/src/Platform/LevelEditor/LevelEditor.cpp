@@ -106,10 +106,12 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Update()
     {
+#if DEBUG
         if (p_Input->KeyPressed(GLFW_KEY_F1))
         {
             is_ShowWindow = !is_ShowWindow;
         }
+#endif
         if (is_ShowWindow)
         {
             ImGui_ImplOpenGL3_NewFrame();

@@ -199,7 +199,6 @@ namespace EM {
 					{
 						mRenderer->DrawQuadImpact({ p_ecs.GetComponent<Transform>(entity).GetPos().x,p_ecs.GetComponent<Transform>(entity).GetPos().y,0.0f }, 
 							{ 1.f,1.f }, { 1.0f,0.0f,0.0f,p_ecs.GetComponent<PlayerAttributes>(entity).mDamageCoolDown * 4.f});
-
 					}
 				}
 
