@@ -1,3 +1,18 @@
+/*!*************************************************************************
+****
+\file BossDeath.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when boss dies.
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "Platform/Graphics/Graphics.h"
 #include "BossDeath.h"

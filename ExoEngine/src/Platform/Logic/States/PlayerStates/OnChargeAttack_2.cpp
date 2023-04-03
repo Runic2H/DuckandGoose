@@ -7,7 +7,7 @@
 \par Section: a
 \par Assignment GAM200
 \date 24/2/2022
-\brief	1st Charge attacking state for player
+\brief	2nd Charge attacking state for player
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -23,7 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f }, mDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage }, mChargeDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage * 2 } { UNREFERENCED_PARAMETER(stateMachine); }
+	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnChargeAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -32,7 +32,7 @@ namespace EM
 		return nullptr;
 	}
 	/*!*************************************************************************
-		Enter state for Player Attack 1
+		Enter state for Player Charge Attack 2
 	****************************************************************************/
 	void OnChargeAttack_2::OnEnter(StateMachine* stateMachine)
 	{
@@ -51,7 +51,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-		Update state for Player Attack 1
+		Update state for Player Charge Attack 2
 	****************************************************************************/
 	void OnChargeAttack_2::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -71,16 +71,25 @@ namespace EM
 				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 				{
 					p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+					//play charged sound
+					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 13))
+					{
+						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[13].should_play = true; // looped charging
+					}
 				}
 			}
 		}
 		else if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 		{
+			//play charging sound
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = true; //charge atk start
+			}
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f)
 			{
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = true;
-				std::swap(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage, mChargeDamage);
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -122,13 +131,17 @@ namespace EM
 		}
 	}
 	/*!*************************************************************************
-		Exit state for Player Attack 1
+		Exit state for Player Charge Attack 2
 	****************************************************************************/
 	void OnChargeAttack_2::OnExit(StateMachine* stateMachine)
 	{
+		//play charging sound
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = false; //charge atk start
+		}
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = false;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage = mDamage;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer = 0.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;

@@ -77,10 +77,6 @@ namespace EM
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[retreatDistribution(retreatGenerator)].should_play = true;
 			}
 		}
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
 		if (check) {
 			p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mRetreatDurationTimer -= Frametime;
 			rigidbody.SetDir(transform.GetPos().x - playerPos.x, transform.GetPos().y - playerPos.y);

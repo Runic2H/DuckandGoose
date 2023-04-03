@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file			CameraComponent.cpp
+\file			CameraComponent.h
 \author			Huang Xin Xiang
 \par DP email:	h.xinxiang@digipen.edu
 \par Course:	CSD2400 / GAM200

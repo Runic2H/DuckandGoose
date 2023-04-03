@@ -85,25 +85,41 @@ namespace EM
 					p_ecs.GetComponent<Transform>(i).SetScale(p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetScale());
 				}
 			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
+			{
+				p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
+				stateMachine->ChangeState(new EnemyTransition(stateMachine));
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter != 0)
+			{
+				stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+			{
+				stateMachine->ChangeState(new EnemyDeath(stateMachine));
+			}
 		}
-		//if melee enemy and passed melee enemy atk timer 
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 0.23f)
+		else
 		{
-			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
-		}
+			//if melee enemy and passed melee enemy atk timer 
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer < 0.23f)
+			{
+				p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = true;
+			}
 
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
-		{
-			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
-			stateMachine->ChangeState(new EnemyTransition(stateMachine));
-		}
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter != 0)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
-		{
-			stateMachine->ChangeState(new EnemyDeath(stateMachine));
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackTimer <= 0.0f)
+			{
+				p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
+				stateMachine->ChangeState(new EnemyTransition(stateMachine));
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter != 0)
+			{
+				stateMachine->ChangeState(new EnemyDamaged(stateMachine));
+			}
+			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+			{
+				stateMachine->ChangeState(new EnemyDeath(stateMachine));
+			}
 		}
 	}
 
