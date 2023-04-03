@@ -71,7 +71,17 @@ namespace EM
 				if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 				{
 					p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+					//play charged sound
+					if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 18))
+					{
+						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[18].should_play = true; // looped charging
+					}
 				}
+			}
+			//play charging sound
+			else if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 17))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[17].should_play = true; //charge atk start
 			}
 		}
 		else if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
@@ -113,6 +123,11 @@ namespace EM
 		}
 		else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && !p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack)
 		{
+			//play attack swing
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 9))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[9].should_play = true;
+			}
 			stateMachine->ChangeState(new OnAttack_2(stateMachine));
 		}
 

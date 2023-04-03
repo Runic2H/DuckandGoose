@@ -63,9 +63,19 @@ namespace EM
 		else
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EXOMATA_RANGED_ENEMY_HOVERING");
 
-		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
-		{
-			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsChargedDamage) {
+			//play charged damage sound
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 7))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[7].should_play = true;
+				p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsChargedDamage = false;
+			}
+		}
+		else {
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[1].should_play = true;
+			}
 		}
 	}
 
