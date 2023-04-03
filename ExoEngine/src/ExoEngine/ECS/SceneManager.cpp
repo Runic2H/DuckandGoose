@@ -244,56 +244,59 @@ namespace EM
 			for (ComponentType compID = 0; compID < p_ecs.GetTotalRegisteredComponents(); ++compID)
 			{
 				writer->StartObject();
-				if (p_ecs.GetEntitySignature(j).test(compID))
+				if (p_ecs.GetEntitySignature(j).any())
 				{
-					//ADD COMPONENTS HERE FOR SERIALIZE
-					if (p_ecs.GetComponentTypeName(compID) == "Transform")
+					if (p_ecs.GetEntitySignature(j).test(compID))
 					{
-						p_ecs.GetComponent<Transform>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "RigidBody")
-					{
-						p_ecs.GetComponent<RigidBody>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Collider")
-					{
-						p_ecs.GetComponent<Collider>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "NameTag")
-					{
-						p_ecs.GetComponent<NameTag>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Sprite")
-					{
-						p_ecs.GetComponent<Sprite>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Logic")
-					{
-						p_ecs.GetComponent<Logic>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Tag")
-					{
-						p_ecs.GetComponent<Tag>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Audio")
-					{
-						p_ecs.GetComponent<Audio>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "HUDComponent")
-					{
-						p_ecs.GetComponent<HUDComponent>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "Attributes")
-					{
-						p_ecs.GetComponent<Attributes>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "PlayerAttributes")
-					{
-						p_ecs.GetComponent<PlayerAttributes>(j).Serialize(writer);
-					}
-					if (p_ecs.GetComponentTypeName(compID) == "EnemyAttributes")
-					{
-						p_ecs.GetComponent<EnemyAttributes>(j).Serialize(writer);
+						//ADD COMPONENTS HERE FOR SERIALIZE
+						if (p_ecs.GetComponentTypeName(compID) == "Transform")
+						{
+							p_ecs.GetComponent<Transform>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "RigidBody")
+						{
+							p_ecs.GetComponent<RigidBody>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Collider")
+						{
+							p_ecs.GetComponent<Collider>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "NameTag")
+						{
+							p_ecs.GetComponent<NameTag>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Sprite")
+						{
+							p_ecs.GetComponent<Sprite>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Logic")
+						{
+							p_ecs.GetComponent<Logic>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Tag")
+						{
+							p_ecs.GetComponent<Tag>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Audio")
+						{
+							p_ecs.GetComponent<Audio>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "HUDComponent")
+						{
+							p_ecs.GetComponent<HUDComponent>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "Attributes")
+						{
+							p_ecs.GetComponent<Attributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "PlayerAttributes")
+						{
+							p_ecs.GetComponent<PlayerAttributes>(j).Serialize(writer);
+						}
+						if (p_ecs.GetComponentTypeName(compID) == "EnemyAttributes")
+						{
+							p_ecs.GetComponent<EnemyAttributes>(j).Serialize(writer);
+						}
 					}
 				}
 				writer->EndObject();
@@ -320,29 +323,34 @@ void EM::SceneManager::checkForSceneToLoad()
 	{
 		if (sceneToLoad == "Assets/Scene/Elton.json")
 		{
+			isGameplay = true;
 			Graphic::camera.SetZoomLevel(0.25f);
 		}
 
 		if (sceneToLoad == "Assets/Scene/Menu.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/Options.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/Game_Over.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(1.0f);
 			Graphic::camera.SetPosition({ 0.0f,0.0f,0.0f });
 		}
 
 		if (sceneToLoad == "Assets/Scene/CutScene.json")
 		{
+			isGameplay = false;
 			Graphic::camera.SetZoomLevel(0.25f);
 		}
 

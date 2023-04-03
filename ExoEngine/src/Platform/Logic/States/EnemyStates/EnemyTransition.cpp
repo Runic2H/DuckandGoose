@@ -19,6 +19,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyAttack.h"
 #include "EnemyRetreat.h"
 #include "EnemyChase.h"
+#include "EnemyIdle.h"
 
 namespace EM
 {
@@ -45,7 +46,7 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
-		if ((rand() % 100) <= 80) {
+		if ((rand() % 100) <= 80 || p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter != 0) {
 			vec2D playerPos = vec2D();
 			bool check = false;
 			if (!check)
@@ -59,13 +60,13 @@ namespace EM
 					}
 				}
 			}
-			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.15f
+			if (check && distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) <= 0.10f
 				&& p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f) {
 				stateMachine->ChangeState(new EnemyAttack(stateMachine));
 			}
 			else
 			{
-				stateMachine->ChangeState(new EnemyChase(stateMachine));
+				stateMachine->ChangeState(new EnemyIdle(stateMachine));
 			}
 		}
 		else

@@ -38,7 +38,7 @@ namespace EM
 		{
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_GROUND)
 			{
-				p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos(mCurrTrans.x + -0.015f, mCurrTrans.y + 0.091f);
+				p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).SetPos(mCurrTrans.x + -0.023f, mCurrTrans.y + 0.070f);
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Ground_Hazards_Fire");
 			}
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_LASER)
@@ -92,11 +92,12 @@ namespace EM
 		}
 		if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mFireDurationTimer <= 0.0f)
 		{
-			stateMachine->ChangeState(new HazardIdle(stateMachine));
+			p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 			{
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = false;
 			}
+			stateMachine->ChangeState(new HazardIdle(stateMachine));
 		}
 		
 	}

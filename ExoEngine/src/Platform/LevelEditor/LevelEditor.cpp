@@ -52,7 +52,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Scripts/CutScene.h"
 #include "ExoEngine/Scripts/DialogueManager.h"
 #include "ExoEngine/Scripts/BossScript.h"
-//#include "ExoEngine/Scripts/NoLoopBackgroundAudio.h"
 
 namespace EM {
 
@@ -107,10 +106,12 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::Update()
     {
+#if DEBUG
         if (p_Input->KeyPressed(GLFW_KEY_F1))
         {
             is_ShowWindow = !is_ShowWindow;
         }
+#endif
         if (is_ShowWindow)
         {
             ImGui_ImplOpenGL3_NewFrame();
@@ -1020,7 +1021,7 @@ namespace EM {
                             ImGui::PopID();
                         }
                         ImGui::Text("Layering Order: "); ImGui::SameLine();
-                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 6);
+                        ImGui::DragInt("##layering", (int*)&sprite.LayerOrder, 1, 0, 8);
                     }
                 }
                 //Collider Component
@@ -1273,10 +1274,6 @@ namespace EM {
                                     {
                                         logic.InsertScript(new BossScript(selectedEntity), selectedEntity);
                                     }
-                                    /*if (mScriptList[current_script] == "NoLoopBackgroundAudio" && p_ecs.HaveComponent<Audio>(selectedEntity))
-                                    {
-                                        logic.InsertScript(new NoLoopBackgroundAudio(), selectedEntity);
-                                    }*/
                                 }
                             }
                         }
@@ -1619,7 +1616,7 @@ namespace EM {
             }
             //set voulume slider
             ImGui::SliderFloat("Master Volume", &f1, 0.0f, 1.0f, "Min - Max %.3f");
-            p_Audio->SetVolume(current_sound, 1 / (f1 + 1));
+            p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), f1);
 
             ImGui::SliderFloat("BGM vol", &f4, 0.0f, 1.0f, "Min - Max %.3f");
             if (f4 > f1)

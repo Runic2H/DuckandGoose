@@ -19,10 +19,14 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "EnemyDeath.h"
 #include "EnemyDamaged.h"
 #include "EnemyIdle.h"
+#include "EnemyRetreat.h"
 
 namespace EM
 {
-	EnemyChase::EnemyChase(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	std::default_random_engine generator2;
+	std::uniform_int_distribution<>distribution(3, 6);
+
+	EnemyChase::EnemyChase(StateMachine* stateMachine) : mChaseTimer{2.0f} { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyChase::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -73,9 +77,17 @@ namespace EM
 			}
 		}
 
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check)
+		{
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > distribution(generator2)))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[distribution(generator2)].should_play = true;
+			}
+		}
+
 		if (check) {
 			dist = distance(transform.GetPos(), playerPos);
-			
+			mChaseTimer == 0.0f ? 0.f : mChaseTimer -= Frametime;
 			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 			{
 				rigidbody.SetDir(transform.GetPos().x - playerPos.x,  transform.GetPos().y - playerPos.y);
@@ -131,7 +143,6 @@ namespace EM
 					p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyFacing = EnemyAttributes::Facing::RIGHT;
 					if (colliderbox[1].mMin.x > 0.f)
 					{
-						//colliderbox[1].mMin.x *= -1; //min = -0.3, max = 0
 						if (colliderbox[1].mMin.x > colliderbox[1].mMax.x)
 						{
 							float tempmin = colliderbox[1].mMin.x;
@@ -143,7 +154,7 @@ namespace EM
 				}
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetUVCoor().x = 512.0f;
 				newVel = rigidbody.GetDir() * length(rigidbody.GetAccel()) / 2.f;
-				newVel.y *= 6;
+				newVel.y *= 4;
 				newVel = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mPhys.accelent(rigidbody.GetVel(), newVel, Frametime);
 				if (newVel.x > -99 && newVel.y < 99) {
 					newVel = newVel * -1;
@@ -166,21 +177,32 @@ namespace EM
 
 			//Attack Range
 			//check if within range. If not, set to moving state
-			if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
+			if (mChaseTimer > 0.0f)
 			{
-				if (dist <= 0.15f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
+				if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE)
 				{
-					//if within range to attack, set mode to attacking
-					stateMachine->ChangeState(new EnemyAttack(stateMachine));
+					if (dist <= 0.10f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
+					{
+						//if within range to attack, set mode to attacking
+						stateMachine->ChangeState(new EnemyAttack(stateMachine));
+					}
+				}
+				else
+				{
+					if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && playerPos.y <= transform.GetPos().y + colliderbox[1].mMax.y && playerPos.y >= transform.GetPos().y - colliderbox[1].mMin.y)
+					{
+						stateMachine->ChangeState(new EnemyAttack(stateMachine));
+					}
 				}
 			}
-			else
+			else if (mChaseTimer <= 0.0f && dist >= 0.10f && colliderbox[0].mHit == 1)
 			{
-				if (dist <= 0.25f && p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f && transform.GetPos().y <= playerPos.y + 0.01f && transform.GetPos().y >= playerPos.y - 0.01f)
-				{
-					stateMachine->ChangeState(new EnemyAttack(stateMachine));
-				}
+				stateMachine->ChangeState(new EnemyRetreat(stateMachine));
 			}
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
+		{
+			stateMachine->ChangeState(new EnemyDeath(stateMachine));
 		}
 	}
 

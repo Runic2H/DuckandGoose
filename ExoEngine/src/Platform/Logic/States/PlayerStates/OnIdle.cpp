@@ -20,14 +20,18 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "OnDash.h"
 #include "OnBlock.h"
 #include "OnDamaged.h"
+#include "OnChargeAttack_1.h"
+#include "ExoEngine/Timer/Time.h"
+#include "ExoEngine/Timer/Fps.h"
 
 namespace EM
 {
-	OnIdle::OnIdle(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
+	float time{};
+	OnIdle::OnIdle(StateMachine* stateMachine) : mTempDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnIdle::HandleInput(StateMachine* stateMachine, const int& key)
 	{
-		if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && p_Input->isKeyPressed(key))
+		if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && p_Input->KeyHold(key))
 		{
 			return new OnMove(stateMachine);
 		}
@@ -37,11 +41,16 @@ namespace EM
 		}
 		if (key == GLFW_MOUSE_BUTTON_LEFT && p_Input->MousePressed(key))
 		{
-			return new OnAttack_1(stateMachine);
+			return new OnChargeAttack_1(stateMachine);
 		}
 		if (key == GLFW_MOUSE_BUTTON_RIGHT && p_Input->MousePressed(key) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f)
 		{
 			return new OnBlock(stateMachine);
+		}
+		if (key == GLFW_KEY_F4 && p_Input->KeyPressed(GLFW_KEY_F4))
+		{
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth != p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mMaxHealth ?
+				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mMaxHealth : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth;
 		}
 		return nullptr;
 	}
@@ -63,8 +72,10 @@ namespace EM
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown -= Frametime;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockDurationTimer -= Frametime;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown -= Frametime;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown -= Frametime;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer -= Frametime;
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged)
 			{
 				stateMachine->ChangeState(new OnDamaged(stateMachine));

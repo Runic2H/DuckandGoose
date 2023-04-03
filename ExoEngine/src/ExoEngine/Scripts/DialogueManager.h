@@ -30,7 +30,10 @@ namespace EM
 		/*!*************************************************************************
 		Default constructor for Dialogue Manager
 		****************************************************************************/
-		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4", "Dialogue5", "HowToPlay"}, counter{0}, MaxCounter{2} {}
+		DialogueManager() : mDialogues{ "Dialogue1", "Dialogue2", "Dialogue3", "Dialogue4","Tutorial1","Tutorial2","Tutorial3",
+										"Tutorial4","Tutorial5","Tutorial6","Dialogue7","Dialogue8","Dialogue9","Dialogue10",
+										"Dialogue11","Dialogue12" },
+			counter{ 0 }, MaxCounter{ 4 } {}
 		/*!*************************************************************************
 		Default destructor for Dialogue Manager
 		****************************************************************************/
@@ -54,10 +57,9 @@ namespace EM
 		virtual void Update(float Frametime) override
 		{
 
-
 			UNREFERENCED_PARAMETER(Frametime);
-			Entity i{0};
-			
+			Entity i{ 0 };
+
 			for (Entity e = 0; e < p_ecs.GetTotalEntities(); ++e)
 			{
 				if (p_ecs.HaveComponent<PlayerAttributes>(e))
@@ -65,16 +67,19 @@ namespace EM
 					if (p_ecs.GetComponent<Transform>(e).GetPos().x >= p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().x)
 					{
 						p_ecs.GetComponent<Sprite>(e).SetTexture("Idle");
-						p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(5);
-						p_ecs.GetComponent<Transform>(GetScriptEntityID()).SetPos(p_ecs.GetComponent<Transform>(e).GetPos().x, p_ecs.GetComponent<Transform>(e).GetPos().y - 0.140f);
-
-						
-						if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue3") { MaxCounter = 3; counter = 2; }
-						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue4") { MaxCounter = 4; counter = 3; }
-						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue5"){ MaxCounter = 5; counter = 4; }
+						p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetLayerOrder(7);
+						p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y = p_ecs.GetComponent<Transform>(e).GetPos().y - 0.15f;
+						if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Tutorial1") { MaxCounter = 7; counter = 4; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Tutorial4") { MaxCounter = 10; counter = 7; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue7") { MaxCounter = 14; counter = 10; }
+						else if (p_ecs.GetComponent<Sprite>(GetScriptEntityID()).GetTexture() == "Dialogue11") { MaxCounter = 16; counter = 14; }
 						if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
 						{
 							++counter;
+							if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+							{
+								p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true;
+							}
 							p_Input->mMouseStatus[GLFW_MOUSE_BUTTON_LEFT] = GLFW_RELEASE;
 						}
 						if (counter < MaxCounter)
@@ -86,6 +91,10 @@ namespace EM
 								{
 									p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = true;
 								}
+								if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<EnemyAttributes>(i) && p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
+								{
+									p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyScript")->mScriptPause = true;
+								}
 							}
 						}
 						else
@@ -96,6 +105,10 @@ namespace EM
 								{
 									p_ecs.GetComponent<Logic>(i).GetScriptByName("PlayerControl")->mScriptPause = false;
 								}
+								if (p_ecs.HaveComponent<Logic>(i) && p_ecs.HaveComponent<EnemyAttributes>(i) && p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
+								{
+									p_ecs.GetComponent<Logic>(i).GetScriptByName("EnemyScript")->mScriptPause = false;
+								}
 							}
 							this->mScriptPause = true;
 							p_ecs.GetComponent<Sprite>(GetScriptEntityID()).SetTexture("Blank");
@@ -103,11 +116,8 @@ namespace EM
 					}
 				}
 			}
-			
-			
-			
-			
-			
+
+
 		}
 		/*!*************************************************************************
 		End State for DialogueManager
@@ -128,9 +138,9 @@ namespace EM
 
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
-	private:
-		std::string mDialogues[6];
 		int counter;
+	private:
+		std::string mDialogues[16];
 		int MaxCounter;
 	};
 }

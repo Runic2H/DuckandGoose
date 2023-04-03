@@ -145,7 +145,7 @@ namespace EM {
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		/// FOR QUADS
+		//FOR QUADS
 		r_Data.QuadVertexArray = VertexArray::Create();
 
 		r_Data.QuadVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(QuadVertex));
@@ -187,18 +187,18 @@ namespace EM {
 
 		//Shader
 		r_Data.QuadShader = ResourceManager::GetShader("QuadShader");
-		int TextureSamplers[64];
-		for (int i = 0; i < 64; i++)
+		int TextureSamplers[32];
+		for (int i = 0; i < 32; i++)
 			TextureSamplers[i] = i;
 		r_Data.QuadShader->Bind();
-		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 64);
+		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 32);
 
 		//set first texture unit 0 to be blanktexture
 		r_Data.TextureUnits[0] = r_Data.BlankTexture;
 		
 
 
-		//// FOR drawing LINE and also debug drawing
+		//FOR drawing LINE and also debug drawing
 		r_Data.LineVertexArray = VertexArray::Create();
 		r_Data.LineVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(LineVertex));
 		r_Data.LineVertexBuffer->SetLayout({ 
@@ -211,7 +211,7 @@ namespace EM {
 
 		r_Data.LineShader = ResourceManager::GetShader("LineShader");
 
-		/// For boxes without texture
+		//For boxes without texture
 		r_Data.BoxVertexArray = VertexArray::Create();
 
 		r_Data.BoxVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(BoxVertex));
@@ -244,7 +244,7 @@ namespace EM {
 		//box shader
 		r_Data.BoxShader = ResourceManager::GetShader("LineShader");
 
-		/// For impact
+		//For impact
 		r_Data.ImpactVertexArray = VertexArray::Create();
 
 		r_Data.ImpactVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(ImpactVertex));
@@ -278,7 +278,7 @@ namespace EM {
 
 
 
-		/// For Circle
+		//For Circle
 		r_Data.CircleVertexArray = VertexArray::Create();
 
 		r_Data.CircleVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(CircleVertex));
@@ -557,7 +557,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 64)
+			if (r_Data.TextureUnitIndex >= 32)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;
@@ -670,7 +670,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 64)
+			if (r_Data.TextureUnitIndex >= 32)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;

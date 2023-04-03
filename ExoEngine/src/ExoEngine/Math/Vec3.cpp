@@ -103,13 +103,9 @@ namespace EM
 		return Vec3(-x, -y, -z);
 	}
 
-	void Vec3::Vec2Set(Vec3& curr, float x_, float y_, float z_)
-	{
-		(void)curr;
-		x = x_;
-		y = y_;
-		z = z_;
-	}
+	
+
+
 
 	void Normalize(Vec3& result, const Vec3 Vec0)
 	{

@@ -36,7 +36,7 @@ namespace EM
 		{
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_GROUND)
 			{
-				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Ground_Hazards_Charging");
+				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("GroundElectricHazard");
 			}
 			if (p_ecs.GetComponent<Attributes>(stateMachine->GetEntityID()).mHazardType == Attributes::HazardTypes::HAZARD_LASER)
 			{

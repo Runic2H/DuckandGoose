@@ -28,21 +28,21 @@ namespace EM
 
 	void SliderScript::Start()
 	{
-		clicked = false;
-		selected = false;
+		clicked = false;//set click to false at the start
+		selected = false;// set select to false at the start
 	
-		def_position = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
-		limit.min = { def_position.x - 0.5f,def_position.y - 0.1f };
-		limit.max = { def_position.x+0.5f,def_position.y+0.1f };
+		def_position = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();//set defualt position at the start
+		limit.min = { def_position.x - 0.5f,def_position.y - 0.1f }; // set minium volume limit at the start
+		limit.max = { def_position.x+0.5f,def_position.y+0.1f }; // set maximum volume limit at the start
 	}
 
 	void SliderScript::Update(float Frametime)
 	{
 		UNREFERENCED_PARAMETER(Frametime);
 
-		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y);
+		vec2D camPos = vec2D(Graphic::mcamera->GetPosition().x, Graphic::mcamera->GetPosition().y); // set cameraposition
 
-		if (p_Editor->is_ShowWindow == true || limitset == false)
+		if (p_Editor->is_ShowWindow == true || limitset == false) // this code allow the slider position and limit to  be edited in the editor
 		{
 			if (SliderCali == true)
 			{
@@ -50,15 +50,15 @@ namespace EM
 				SliderCali = false;//slider have been calibrated
 			}
 			def_position = p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos();
-			limit.min = { def_position.x - 0.5f,def_position.y - 0.1f };
-			limit.max = { def_position.x + 0.5f,def_position.y + 0.1f };
-			limitset = true;
+			limit.min = { def_position.x - 0.5f,def_position.y - 0.1f }; // calculate the minimum position
+			limit.max = { def_position.x + 0.5f,def_position.y + 0.1f };// calculate the maximum position
+			limitset = true;// let the entity know that limit have been set
 		}
-
+		//this set of codes are to allow easy access to the game component when coding
 		auto& transform = p_ecs.GetComponent<Transform>(GetScriptEntityID());
 		auto& ID_tag = p_ecs.GetComponent<Tag>(GetScriptEntityID());
 		
-		if(p_Editor->is_ShowWindow == false)
+		if(p_Editor->is_ShowWindow == false) // when not in editor mode set the slider position in accordance to the current volume set
 		{ 
 			if(ID_tag.GetTargetTag()== "Master")
 			transform.SetPos(p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup())+limit.min.x, transform.GetPos().y);
@@ -71,34 +71,37 @@ namespace EM
 
 			SliderCali = true;
 			if((p_GUI->MousePosition.x +  camPos.x >= limit.min.x && p_GUI->MousePosition.y + camPos.y >= limit.min.y) &&
-				(p_GUI->MousePosition.x + camPos.x <= limit.max.x&& p_GUI->MousePosition.y + +camPos.y <= limit.max.y))//if system is pause and continue button is pressed, tell the system to resume the game
+				(p_GUI->MousePosition.x + camPos.x <= limit.max.x&& p_GUI->MousePosition.y + +camPos.y <= limit.max.y)) // check if the mouse is inside the slider 
 			{
-				if (p_Input->MousePressed(GLFW_MOUSE_BUTTON_LEFT))
+				if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_LEFT)) // when mouse is held down, allow the volume ball to be adjusted
 				{
 					clicked = true;
-					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);		
+					transform.SetPos(p_GUI->MousePosition.x, transform.GetPos().y);	
+					if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && ((p_ecs.GetComponent<Audio>(GetScriptEntityID())).GetSize() > 0))
+					{
+						p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_play = true; //volume slider click audio
+					}
 				}
 				else
 				{
-					clicked = false;
+					clicked = false;// let the entity know that it is not being clicked on
 				}
 			}
 
 			
-			if (ID_tag.GetTargetTag() == "Master")
+			if (ID_tag.GetTargetTag() == "Master")// when master is  being adjusted
 			{
-				p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+				p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x)); //calculate and set the volume of master
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < 0.01)
 				{
-					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f);
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), 0.0f); // if it is less than 0.01, set sound to mute
 				}
-				//p_Audio->SetVolume(0, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) + 1);
-				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup())) //adjust SFX Volume to ensure volume is equal or less than master at all time
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
 				}
 
-				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))//adjust BGM Volume to ensure volume is equal or less than master at all time
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
 				}
@@ -107,41 +110,31 @@ namespace EM
 
 			if (ID_tag.GetTargetTag() == "BGM")
 			{
-				p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
-				if (p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) < 0.01)
+				p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));//calculate and set the volume of BGM
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) < 0.01) // if it is less than 0.01, set sound to mute
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetBGMChannelGroup(), 0.0f);
 				}
-				//p_Audio->SetVolume(1, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()) + 1);
 
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetBGMChannelGroup()))
 				{
-					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));//adjust Master volume when BGM volume is larger than Master
 				}
 			}
 			if (ID_tag.GetTargetTag() == "SFX")
 			{
-				p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
-				if (p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) < 0.01)
+				p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));//calculate and set the volume of BGM
+				if (p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) < 0.01) // if it is less than 0.01, set sound to mute
 				{
 					p_Audio->SetVolumeByChannel(p_Audio->GetSFXChannelGroup(), 0.0f);
 				}
-				//p_Audio->SetVolume(2, 1 / p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()) + 1);
 
 				if (p_Audio->GetVolumeByChannel(p_Audio->GetMasterChannelGroup()) < p_Audio->GetVolumeByChannel(p_Audio->GetSFXChannelGroup()))
 				{
-					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));
+					p_Audio->SetVolumeByChannel(p_Audio->GetMasterChannelGroup(), transform.GetPos().x - limit.min.x / (limit.max.x - limit.min.x));//adjust Master volume when SFX volume is larger than Master
 				}
 			}
 		}
-
-		/*if (p_Input->KeyPressed(GLFW_KEY_ESCAPE))
-		{
-				limitset = false;
-				p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-		}*/
-
-		
 	}
 
 	void SliderScript::End()

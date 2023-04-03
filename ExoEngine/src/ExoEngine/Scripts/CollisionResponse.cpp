@@ -14,8 +14,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 *******************************************************************************/
 #include "empch.h"
 #include "CollisionResponse.h"
-#include "SkillsChest.h"
 #include "ExoEngine/ECS/SceneManager.h"
+#include "ExoEngine/Timer/Time.h"
+#include "ExoEngine/Timer/Fps.h"
 
 namespace EM
 {
@@ -61,7 +62,49 @@ namespace EM
 			{
 				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
-					if (p_ecs.HaveComponent<EnemyAttributes>(i) || p_ecs.HaveComponent<Attributes>(i))
+					if (p_ecs.HaveComponent<EnemyAttributes>(i))
+					{
+						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
+						{
+							if (col.GetCollisionArray()[0].mHit == 2)
+							{
+								if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_PICKUP)
+								{
+									auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+									playerstats.mDamageCoolDown = 0.1f;
+									p_ecs.GetComponent<EnemyAttributes>(i).mIsPickedUp = true;
+								}
+								else
+								{
+									if ((p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().x > p_ecs.GetComponent<Transform>(i).GetPos().x) && p_ecs.GetComponent<EnemyAttributes>(i).mEnemyFacing != EnemyAttributes::Facing::LEFT)
+									{
+										if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y <= p_ecs.GetComponent<Transform>(i).GetPos().y + p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].mMax.y
+											&& p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y >= p_ecs.GetComponent<Transform>(i).GetPos().y - p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].mMin.y)
+										{
+											auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+											if (playerstats.mDamageCoolDown <= 0.0f)
+											{
+												playerstats.mIsDamaged = true;
+											}
+										}
+									}
+									if (((p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().x < p_ecs.GetComponent<Transform>(i).GetPos().x) && p_ecs.GetComponent<EnemyAttributes>(i).mEnemyFacing != EnemyAttributes::Facing::RIGHT))
+									{
+										if (p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y <= p_ecs.GetComponent<Transform>(i).GetPos().y + p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].mMax.y
+											&& p_ecs.GetComponent<Transform>(GetScriptEntityID()).GetPos().y >= p_ecs.GetComponent<Transform>(i).GetPos().y - p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].mMin.y)
+										{
+											auto& playerstats = p_ecs.GetComponent<PlayerAttributes>(GetScriptEntityID());
+											if (playerstats.mDamageCoolDown <= 0.0f)
+											{
+												playerstats.mIsDamaged = true;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					if (p_ecs.HaveComponent<Attributes>(i))
 					{
 						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
 						{
@@ -97,34 +140,28 @@ namespace EM
 											p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID()).mEnemyFacing == EnemyAttributes::Facing::RIGHT))
 									{
 										enemystats.mIsDamaged = true;
-										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.16f;
+										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.1f;
+									}
+									else if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsBlocking)
+									{
+										enemystats.mIsDamaged = true;
 									}
 								}
 							}
 						}
 					}
-				}
-			}
-
-			if (p_ecs.HaveComponent<Tag>(GetScriptEntityID()) && p_ecs.GetComponent<Tag>(GetScriptEntityID()).GetTag() == "Player")
-			{
-				mTotalDeadEnemies = 0;
-				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
-				{
-					if (p_ecs.HaveComponent<EnemyAttributes>(i))
+					if (p_ecs.HaveComponent<Attributes>(i))
 					{
-						if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive == false && p_ecs.GetComponent<EnemyAttributes>(i).mHealth <= 0.0f)
+						if (p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive)
 						{
-							++mTotalDeadEnemies;
-						}
-					}
-					if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Win" && (mTotalDeadEnemies == mTotalEnemies))
-					{
-						p_ecs.GetComponent<Collider>(i).GetCollisionArray()[0].is_Alive = true;
-						p_ecs.GetComponent<Collider>(i).GetCollisionArray()[1].is_Alive = true;
-						if (col.GetCollisionArray()[0].mHit == 2 && p_ecs.GetComponent<Collider>(i).GetCollisionArray()[0].mHit == 4)
-						{
-							p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+							if (col.GetCollisionArray()[0].mHit == 2)
+							{
+								auto& enemystats = p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID());
+								if (enemystats.mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS && enemystats.mDamageCoolDownTimer <= 0.0f)
+								{
+									enemystats.mIsDamaged = true;
+								}
+							}
 						}
 					}
 				}

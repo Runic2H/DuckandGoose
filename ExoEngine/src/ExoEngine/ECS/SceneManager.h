@@ -57,6 +57,7 @@ namespace EM
 		void checkForSceneToLoad();
 		void changeScene(std::string s);
 		
+		bool isGameplay;
 	private:
 		// Unique pointer to SceneManager
 		static std::unique_ptr<SceneManager> m_instance;
