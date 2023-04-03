@@ -73,6 +73,7 @@ Application constructor
 	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -114,7 +115,7 @@ Application constructor
 		}
 		mPosUpdate->Init();
 #if !DEBUG
-		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+		p_Scene->setSceneToLoad("Assets/Scene/SplashScreen.json");
 #endif
 		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
@@ -174,6 +175,15 @@ Application constructor
 					//temper
 					if (p_ecs.HaveComponent<PlayerAttributes>(i))
 						p_ecs.GetComponent<Transform>(i).SetPos(5.67f, 0.0f);
+
+				}
+			}
+			for (auto entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
+			{
+				if (p_ecs.HaveComponent<NameTag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Splash Screen")
+				{
+					if (p_ecs.GetComponent<Transform>(entity).GetScale().x > 3.5f)
+						p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 				}
 			}
 			end_state = p_GUI->Update(m_window);

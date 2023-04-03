@@ -38,7 +38,6 @@ namespace EM {
 		void End();
 
 	private:
-		
 	};
 	 
 	//To be defined in CLIENT
