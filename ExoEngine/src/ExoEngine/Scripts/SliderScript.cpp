@@ -25,7 +25,9 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-
+	/*!*************************************************************************
+	Start State of Slider Script
+	****************************************************************************/
 	void SliderScript::Start()
 	{
 		clicked = false;//set click to false at the start
@@ -35,7 +37,9 @@ namespace EM
 		limit.min = { def_position.x - 0.5f,def_position.y - 0.1f }; // set minium volume limit at the start
 		limit.max = { def_position.x+0.5f,def_position.y+0.1f }; // set maximum volume limit at the start
 	}
-
+	/*!*************************************************************************
+	Update State of Slider Script
+	****************************************************************************/
 	void SliderScript::Update(float Frametime)
 	{
 		UNREFERENCED_PARAMETER(Frametime);
@@ -136,23 +140,31 @@ namespace EM
 			}
 		}
 	}
-
+	/*!*************************************************************************
+	End State of Slider Script
+	****************************************************************************/
 	void SliderScript::End()
 	{
 		delete this;
 	}
-
+	/*!*************************************************************************
+	Clones the Slider Script
+	****************************************************************************/
 	SliderScript* SliderScript::Clone() const
 	{
 		return new SliderScript(*this);
 	}
 
-
+	/*!*************************************************************************
+	Returns the names of the Slider Script
+	****************************************************************************/
 	std::string SliderScript::GetScriptName()
 	{
 		return "SliderScript";
 	}
-
+	/*!*************************************************************************
+	Checks if slider is within the slider box
+	****************************************************************************/
 	bool SliderScript::is_within_box(glm::vec2 cur, Collider box, Transform trans)
 	{
 		if (cur.x > ((box[0].mMin.x * (trans.GetScale().x / 2)) + trans.GetPos().x) && cur.y > (box[0].mMin.y * (trans.GetScale().y / 2) + trans.GetPos().y) &&

@@ -7,7 +7,7 @@
 \par Section: a
 \par Assignment GAM200
 \date 24/2/2022
-\brief	1st Charge attacking state for player
+\brief	2nd Charge attacking state for player
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
 without the prior written consent of DigiPen Institute of Technology is prohibited.
@@ -29,7 +29,5 @@ namespace EM
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
 		float mTimer;
-		int mDamage;
-		int mChargeDamage;
 	};
 }

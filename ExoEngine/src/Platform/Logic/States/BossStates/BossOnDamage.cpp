@@ -1,8 +1,24 @@
+/*!*************************************************************************
+****
+\file BossOnDamage.cpp
+\author Elton Teo Zhe Wei
+\par DP email: e.teo@digipen.edu
+\par Course: CSD2450
+\par Section: a
+\par Assignment GAM200
+\date 24/2/2022
+\brief	This file contains the logic for the state when takes damage from the player
+
+Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents
+without the prior written consent of DigiPen Institute of Technology is prohibited.
+****************************************************************************
+***/
 #include "empch.h"
 #include "BossOnDamage.h"
 #include "BossChasing.h"
 #include "BossDeath.h"
 #include "BossAttack.h"
+#include "BossIdle.h"
 
 namespace EM
 {
@@ -15,21 +31,33 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Enter state for when enemy is damaged state
+	Enter state for when boss is damaged state
 	****************************************************************************/
 	void BossOnDamage::OnEnter(StateMachine* stateMachine)
 	{
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
-				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				if (p_ecs.GetComponent<PlayerAttributes>(i).mIsBlocking)
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage / p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				}
+				else if (p_ecs.GetComponent<PlayerAttributes>(i).mIsChargeAttack)
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage * 2;
+				}
+				else
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				}
 			}
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Damaged");
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
+		--p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.25f;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.20f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.1f;
 
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
 		{
@@ -38,7 +66,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-	Update state for when enemy is damaged state
+	Update state for when boss is damaged state
 	****************************************************************************/
 	void BossOnDamage::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -57,15 +85,19 @@ namespace EM
 
 				stateMachine->ChangeState(new BossDeath(stateMachine));
 			}
-			else
+			else if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter == 0)
 			{	
-				stateMachine->ChangeState(new BossChasing(stateMachine));
+				stateMachine->ChangeState(new BossAttack(stateMachine));
+			}
+			else
+			{
+				stateMachine->ChangeState(new BossIdle(stateMachine));
 			}
 		}
 	}
 
 	/*!*************************************************************************
-	Exit state for when enemy is damaged state
+	Exit state for when boss is damaged state
 	****************************************************************************/
 	void BossOnDamage::OnExit(StateMachine* stateMachine)
 	{

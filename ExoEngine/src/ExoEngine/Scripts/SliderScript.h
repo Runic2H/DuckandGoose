@@ -1,7 +1,7 @@
 #pragma once
 /*!*************************************************************************
 ****
-\file Sider.h
+\file SiderScript.h
 \author Lau Yong Hui
 \par DP email: l.yonghui@gmail.com
 \par Course: CSD2450 / GAM250

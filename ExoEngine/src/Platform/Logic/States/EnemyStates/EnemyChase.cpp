@@ -54,10 +54,6 @@ namespace EM
 	{
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer -= Frametime;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mAttackCoolDown -= Frametime;
-		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
-		{
-			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
-		}
 		float dist = 0;
 		vec2D playerPos = vec2D();
 		
@@ -199,6 +195,10 @@ namespace EM
 			{
 				stateMachine->ChangeState(new EnemyRetreat(stateMachine));
 			}
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsDamaged)
+		{
+			stateMachine->ChangeState(new EnemyDamaged(stateMachine));
 		}
 		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 		{

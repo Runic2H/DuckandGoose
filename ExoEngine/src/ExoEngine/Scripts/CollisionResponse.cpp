@@ -140,11 +140,15 @@ namespace EM
 											p_ecs.GetComponent<EnemyAttributes>(GetScriptEntityID()).mEnemyFacing == EnemyAttributes::Facing::RIGHT))
 									{
 										enemystats.mIsDamaged = true;
-										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.1f;
+										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.12f;
 									}
 									else if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsBlocking)
 									{
+										if (p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mIsChargeAttack) {
+											enemystats.mIsChargedDamage = true;
+										}
 										enemystats.mIsDamaged = true;
+										p_ecs.GetComponent<PlayerAttributes>(mEntityPlayer).mHitStopTimer = 0.12f;
 									}
 								}
 							}

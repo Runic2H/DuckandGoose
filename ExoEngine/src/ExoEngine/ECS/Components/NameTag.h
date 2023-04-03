@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file Nametag.h
+\file NameTag.h
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2400
