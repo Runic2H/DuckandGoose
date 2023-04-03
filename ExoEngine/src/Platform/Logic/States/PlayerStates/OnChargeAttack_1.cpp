@@ -32,7 +32,7 @@ namespace EM
 		return nullptr;
 	}
 	/*!*************************************************************************
-		Enter state for Player Attack 1
+		Enter state for Player Charge Attack 1
 	****************************************************************************/
 	void OnChargeAttack_1::OnEnter(StateMachine* stateMachine)
 	{
@@ -51,7 +51,7 @@ namespace EM
 	}
 
 	/*!*************************************************************************
-		Update state for Player Attack 1
+		Update state for Player Charge Attack 1
 	****************************************************************************/
 	void OnChargeAttack_1::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
@@ -132,7 +132,7 @@ namespace EM
 		}
 	}
 	/*!*************************************************************************
-		Exit state for Player Attack 1
+		Exit state for Player Charge Attack 1
 	****************************************************************************/
 	void OnChargeAttack_1::OnExit(StateMachine* stateMachine)
 	{

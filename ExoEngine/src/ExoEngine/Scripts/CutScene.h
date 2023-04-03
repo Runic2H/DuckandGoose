@@ -9,28 +9,28 @@
 namespace EM
 {
 	/*!*************************************************************************
-	Class for Gate Controller Script
+	Class for Cutscenes Script
 	****************************************************************************/
 	class CutScene : public IScript
 	{
 	public:
 		/*!*************************************************************************
-		Default constructor for Gate Controller
+		Default constructor for Cutscenes
 		****************************************************************************/
 		CutScene() : timer(0), mScenePicker{ 0 }, mSwitchAudio{ 1 } {}
 		/*!*************************************************************************
-		Default destructor for Gate Controller
+		Default destructor for Cutscenes
 		****************************************************************************/
 		~CutScene() = default;
 		/*!*************************************************************************
-		Returns a new copy of GateController Script
+		Returns a new copy of Cutscenes Script
 		****************************************************************************/
 		virtual CutScene* Clone() const override
 		{
 			return new CutScene(*this);
 		}
 		/*!*************************************************************************
-		Start State of GateController Script
+		Start State of Cutscenes Script
 		****************************************************************************/
 		virtual void Start() override
 		{
@@ -47,7 +47,7 @@ namespace EM
 			}
 		}
 		/*!*************************************************************************
-		Update Loop of GateController Script
+		Update Loop of Cutscenes Script
 		****************************************************************************/
 		virtual void Update(float Frametime) override
 		{
@@ -98,7 +98,7 @@ namespace EM
 
 		}
 		/*!*************************************************************************
-		End State for GateController
+		End State for Cutscenes
 		****************************************************************************/
 		virtual void End() override
 		{
