@@ -1,6 +1,6 @@
 {
     "Number of Entities": {
-        "Entities": 185
+        "Entities": 186
     },
   "EntitySignatures": [
     "00000000000000000000000000001000",
@@ -187,6 +187,7 @@
     "00000000000000000000000100111001",
     "00000000000000000000000000011000",
     "00000000000000000000000000011111",
+    "00000000000000000000000000011111",
     "00000000000000000000000000011111"
   ],
   "Components": {
@@ -241,7 +242,7 @@
     "2": [
       {
         "posX": -6.769,
-        "posY": 0.275,
+        "posY": 0.278,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -633,7 +634,7 @@
     "9": [
       {
         "posX": 4.643,
-        "posY": 0.290,
+        "posY": 0.273,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -745,7 +746,7 @@
     "11": [
       {
         "posX": -3.777,
-        "posY": 0.232,
+        "posY": 0.223,
         "scaleX": 0.9999980330467224,
         "scaleY": 0.9999980330467224,
         "Rot": 0.0
@@ -1603,8 +1604,8 @@
     ],
     "28": [
       {
-        "posX": 2.575,
-        "posY": 0.245,
+        "posX": 2.576,
+        "posY": 0.246,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -6454,8 +6455,8 @@
       {},
       {},
       {
-        "Health": 400,
-        "Max Health": 400,
+        "Health": 200,
+        "Max Health": 200,
         "Damage": 20,
         "EnemyType": 4
       }
@@ -7650,21 +7651,21 @@
         "DisplayTime 5": 0.015,
         "DisplayTime 6": 0.015,
         "DisplayTime 7": 0.015,
-        "DisplayTime 8": 0.034,
-        "DisplayTime 9": 0.034,
-        "DisplayTime 10": 0.034,
-        "DisplayTime 11": 0.034,
-        "DisplayTime 12": 0.034,
-        "DisplayTime 13": 0.034,
-        "DisplayTime 14": 0.034,
+        "DisplayTime 8": 0.033,
+        "DisplayTime 9": 0.033,
+        "DisplayTime 10": 0.033,
+        "DisplayTime 11": 0.033,
+        "DisplayTime 12": 0.033,
+        "DisplayTime 13": 0.033,
+        "DisplayTime 14": 0.033,
         "DisplayTime 15": 0.034,
         "DisplayTime 16": 0.034,
         "DisplayTime 17": 0.034,
         "DisplayTime 18": 0.034,
         "DisplayTime 19": 0.034,
-        "DisplayTime 20": 0.16667,
-        "DisplayTime 21": 0.16667,
-        "DisplayTime 22": 0.16667,
+        "DisplayTime 20": 0.016667,
+        "DisplayTime 21": 0.016667,
+        "DisplayTime 22": 0.016667,
         "DisplayTime 23": 0.025,
         "DisplayTime 24": 0.025,
         "DisplayTime 25": 0.025,
@@ -7705,17 +7706,17 @@
         "DisplayTime 3": 0.01,
         "DisplayTime 4": 0.01,
         "DisplayTime 5": 0.01,
-        "DisplayTime 6": 0.045,
-        "DisplayTime 7": 0.045,
-        "DisplayTime 8": 0.045,
-        "DisplayTime 9": 0.045,
-        "DisplayTime 10": 0.045,
-        "DisplayTime 11": 0.045,
-        "DisplayTime 12": 0.045,
-        "DisplayTime 13": 0.045,
-        "DisplayTime 14": 0.045,
-        "DisplayTime 15": 0.045,
-        "DisplayTime 16": 0.045,
+        "DisplayTime 6": 0.033,
+        "DisplayTime 7": 0.033,
+        "DisplayTime 8": 0.034,
+        "DisplayTime 9": 0.034,
+        "DisplayTime 10": 0.034,
+        "DisplayTime 11": 0.034,
+        "DisplayTime 12": 0.036,
+        "DisplayTime 13": 0.036,
+        "DisplayTime 14": 0.038,
+        "DisplayTime 15": 0.038,
+        "DisplayTime 16": 0.042,
         "DisplayTime 17": 0.045,
         "DisplayTime 18": 0.038,
         "DisplayTime 19": 0.038,
@@ -8459,8 +8460,8 @@
     ],
     "147": [
       {
-        "posX": -3.817,
-        "posY": 0.280,
+        "posX": -3.064,
+        "posY": 0.288,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -10643,8 +10644,8 @@
     ],
     "180": [
       {
-        "posX": 5.548,
-        "posY": 0.27,
+        "posX": 5.557,
+        "posY": 0.273,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -10770,8 +10771,8 @@
     ],
     "183": [
       {
-        "posX": -2.067,
-        "posY": 0.297,
+        "posX": -1.964,
+        "posY": 0.285,
         "scaleX": 1.0,
         "scaleY": 1.0,
         "Rot": 0.0
@@ -10860,6 +10861,62 @@
       },
       {
         "NameTag": "Collider blue floor top"
+      },
+      {
+        "TextureName": "Blank",
+        "Index_X": 0,
+        "Index_Y": 0,
+        "Ucoordinates": 512.0,
+        "Vcoordinates": 512.0,
+        "IsSpriteSheet": false,
+        "IsAnimated": false,
+        "MaxIndex": 0,
+        "LayeringOrder": 0
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "185": [
+      {
+        "posX": -5.035,
+        "posY": 0.271,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "Rot": 0.0
+      },
+      {
+        "velX": 100.0,
+        "velY": 0.0,
+        "dirX": 0.0,
+        "dirY": 0.0,
+        "Friction": 0.0,
+        "Restitution": 0.0
+      },
+      {
+        "ColliderType1": 5,
+        "ColliderType2": 0,
+        "minX1": 1.0,
+        "minX2": 0.0,
+        "minY1": 0.07500000298023224,
+        "minY2": 0.0,
+        "maxX1": 1.0,
+        "maxX2": 0.0,
+        "maxY1": 0.07500000298023224,
+        "maxY2": 0.0,
+        "offsetX1": 0.0,
+        "offsetX2": 0.0,
+        "offsetY1": 0.0,
+        "offsetY2": 0.0,
+        "radius1": 0.0,
+        "radius2": 0.0
+      },
+      {
+        "NameTag": "top boundary at gate 1"
       },
       {
         "TextureName": "Blank",

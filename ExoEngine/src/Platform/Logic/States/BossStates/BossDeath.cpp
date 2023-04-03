@@ -14,11 +14,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
+#include "Platform/Graphics/Graphics.h"
 #include "BossDeath.h"
 #include "ExoEngine/ECS/SceneManager.h"
 namespace EM
 {
-	BossDeath::BossDeath(StateMachine* stateMachine) : mDeathTimer{ 1.35f } { UNREFERENCED_PARAMETER(stateMachine); }
+	BossDeath::BossDeath(StateMachine* stateMachine){ UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* BossDeath::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -41,6 +42,7 @@ namespace EM
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[0].is_Alive = false;
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDeathTimer = 4.f;
 	}
 
 	/*!*************************************************************************
@@ -48,12 +50,17 @@ namespace EM
 	****************************************************************************/
 	void BossDeath::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		mDeathTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDeathTimer -= Frametime;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mFadeofftimer += Frametime;
 
 		if(p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x == p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex() - 1)
 			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
 
-		if (mDeathTimer <= 0.0f) {
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDeathTimer < 3.0f)
+		{
+			Graphic::camera.SetPosition({ 8.0f, 1.0f, 0.0f });
+		}
+		if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDeathTimer <= 0.0f) {
 			p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
 		}
 

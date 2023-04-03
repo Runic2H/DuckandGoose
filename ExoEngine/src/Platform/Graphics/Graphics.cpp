@@ -24,6 +24,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "FrameBuffer.h"
 #include "ExoEngine/Timer/Fps.h"
 #include "ExoEngine/ECS/SceneManager.h"
+#include "Platform/Logic/States/BossStates/BossDeath.h"
 namespace EM {
 	/*!*************************************************************************
 	Load Icon from filepath using resource manager
@@ -203,21 +204,9 @@ namespace EM {
 				}
 
 			}
-			/*if (p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.GetComponent<HUDComponent>(entity).GetType() == HUDComponent::ElementType::Text) {
-				auto& mComp = p_ecs.GetComponent<HUDComponent>(entity);
-				mFont->RenderText(mComp.GetAtk(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.321f }, 
-				0.002f, camera, { 0.87f, 0.92f, 0.18f });
-				mFont->RenderText(mComp.GetDef(), { camera.GetPosition().x + 0.426f, camera.GetPosition().y + 0.321f }, 
-				0.002f, camera, { 0.87f, 0.92f, 0.18f });
-				mFont->RenderText(mComp.GetSpd(), { camera.GetPosition().x + 0.526f, camera.GetPosition().y + 0.321f }, 
-				0.002f, camera, { 0.87f, 0.92f, 0.18f });
-				mFont->RenderText(mComp.GetCombo(), { camera.GetPosition().x + 0.326f, camera.GetPosition().y + 0.421f }, 
-				0.002f, camera, { 0.87f, 0.92f, 0.18f });
-			}*/
-
 			//for rendering of enemy health bar
 			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.HaveComponent<HUDComponent>(entity) && p_ecs.HaveComponent<Tag>(entity) && p_ecs.GetComponent<Tag>(entity).GetTag() == "Enemy") {
-				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive && p_ecs.GetComponent<EnemyAttributes>(entity).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
+				if (p_ecs.GetComponent<EnemyAttributes>(entity).mIsAlive == true && p_ecs.GetComponent<EnemyAttributes>(entity).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
 				{
 					
 					auto& mTrans = p_ecs.GetComponent<Transform>(entity);
@@ -246,6 +235,19 @@ namespace EM {
 
 					
 				}
+			}
+			if (p_ecs.HaveComponent<EnemyAttributes>(entity) && p_ecs.GetComponent<EnemyAttributes>(entity).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_BOSS)
+			{
+
+				if (p_ecs.GetComponent<EnemyAttributes>(entity).mHealth <= 0 && p_ecs.GetComponent<EnemyAttributes>(entity).mDeathTimer > 3.f)
+				{
+					mRenderer->DrawQuadImpact({ camera.GetPosition().x ,camera.GetPosition().y,0.0f },
+						{ 1.0f + p_ecs.GetComponent<EnemyAttributes>(entity).mFadeofftimer, 1.0f + p_ecs.GetComponent<EnemyAttributes>(entity).mFadeofftimer },
+						{ 0.0f,0.0f,0.0f, p_ecs.GetComponent<EnemyAttributes>(entity).mFadeofftimer * 2.5f });
+				}
+				else if (p_ecs.GetComponent<EnemyAttributes>(entity).mHealth <= 0 && p_ecs.GetComponent<EnemyAttributes>(entity).mDeathTimer > 2.0f )
+					mRenderer->DrawQuad({ 8.0f, 1.0f }, { 0.8f, 0.3f },
+						{ 0.0f }, GETTEXTURE("Ending_Dialogue"));
 			}
 		}
 

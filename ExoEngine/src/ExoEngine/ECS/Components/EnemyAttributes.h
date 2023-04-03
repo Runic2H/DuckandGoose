@@ -62,6 +62,8 @@ namespace EM
 		float mDamageDurationTimer;
 		float mIdleTimer;
 		float mRetreatDurationTimer;
+		float mDeathTimer;
+		float mFadeofftimer;
 		int mHitCounter;
 		bool mIsAlive;
 		bool mIsDamaged;
