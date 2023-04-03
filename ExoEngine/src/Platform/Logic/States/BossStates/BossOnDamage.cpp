@@ -3,6 +3,7 @@
 #include "BossChasing.h"
 #include "BossDeath.h"
 #include "BossAttack.h"
+#include "BossIdle.h"
 
 namespace EM
 {
@@ -22,14 +23,26 @@ namespace EM
 		int pDmg = 0;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); i++) {
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player") {
-				pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				if (p_ecs.GetComponent<PlayerAttributes>(i).mIsBlocking)
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage / p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				}
+				else if (p_ecs.GetComponent<PlayerAttributes>(i).mIsChargeAttack)
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage * 2;
+				}
+				else
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
+				}
 			}
 		}
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("EYEBOSS_Damaged");
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth = p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth;
+		--p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter;
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.25f;
-		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.20f;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mDamageCoolDownTimer = 0.1f;
 
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 1))
 		{
@@ -57,9 +70,13 @@ namespace EM
 
 				stateMachine->ChangeState(new BossDeath(stateMachine));
 			}
-			else
+			else if (p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHitCounter == 0)
 			{	
-				stateMachine->ChangeState(new BossChasing(stateMachine));
+				stateMachine->ChangeState(new BossAttack(stateMachine));
+			}
+			else
+			{
+				stateMachine->ChangeState(new BossIdle(stateMachine));
 			}
 		}
 	}

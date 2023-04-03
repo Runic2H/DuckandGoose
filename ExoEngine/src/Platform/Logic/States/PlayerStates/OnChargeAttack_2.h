@@ -29,7 +29,5 @@ namespace EM
 		virtual void OnExit(StateMachine* stateMachine) override;
 	private:
 		float mTimer;
-		int mDamage;
-		int mChargeDamage;
 	};
 }

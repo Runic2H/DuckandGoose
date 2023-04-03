@@ -24,7 +24,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) : playerPos{ vec2D() } { UNREFERENCED_PARAMETER(stateMachine); }
+	EnemyDamaged::EnemyDamaged(StateMachine* stateMachine) { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* EnemyDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -44,11 +44,14 @@ namespace EM
 				{
 					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage/p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 				}
+				else if (p_ecs.GetComponent<PlayerAttributes>(i).mIsChargeAttack)
+				{
+					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage * 2;
+				}
 				else
 				{
 					pDmg = p_ecs.GetComponent<PlayerAttributes>(i).mDamage;
 				}
-				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
 		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;

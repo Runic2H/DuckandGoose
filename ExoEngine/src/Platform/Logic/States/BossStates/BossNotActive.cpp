@@ -57,17 +57,17 @@ namespace EM
 			}
 			if (p_ecs.HaveComponent<EnemyAttributes>(i))
 			{
-				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
-					|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+				if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType != EnemyAttributes::EnemyTypes::ENEMY_BOSS)
 				{
-					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth != 0 /*&& p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive*/)
+					if (p_ecs.GetComponent<EnemyAttributes>(i).mHealth != 0 )
 					{
 						EnemyPopulation++;
 					}
 				}
 			}
 		}
-		if(EnemyPopulation == 0) // the enemy has been kill
+
+		if(EnemyPopulation == 0 || playerPos.x > 5.67f) // the enemy has been kill
 			stateMachine->ChangeState(new BossAppear(stateMachine));
 		
 	}

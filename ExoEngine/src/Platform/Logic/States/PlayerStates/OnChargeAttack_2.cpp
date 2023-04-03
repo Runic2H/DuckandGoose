@@ -23,7 +23,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 
 namespace EM
 {
-	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f }, mDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage }, mChargeDamage{ p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage * 2 } { UNREFERENCED_PARAMETER(stateMachine); }
+	OnChargeAttack_2::OnChargeAttack_2(StateMachine* stateMachine) : mTimer{ 0.0f } { UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnChargeAttack_2::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -37,7 +37,7 @@ namespace EM
 	void OnChargeAttack_2::OnEnter(StateMachine* stateMachine)
 	{
 		if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
-			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer = 0.3f;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer = 0.6f;
 			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer = 0.3f;
 		}
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
@@ -77,20 +77,19 @@ namespace EM
 						p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[13].should_play = true; // looped charging
 					}
 				}
-				//play charging sound
-				else if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
-				{
-					p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = true; //charge atk start
-				}
 			}
 		}
 		else if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mChargeTimer <= 0.0f)
 		{
+			//play charging sound
+			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
+			{
+				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = true; //charge atk start
+			}
 			if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer <= 0.0f)
 			{
 				p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = true;
-				std::swap(p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage, mChargeDamage);
 				p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer -= Frametime;
 				auto& transform = p_ecs.GetComponent<Transform>(stateMachine->GetEntityID());
 				auto& rigidbody = p_ecs.GetComponent<RigidBody>(stateMachine->GetEntityID());
@@ -123,11 +122,6 @@ namespace EM
 		}
 		else if (p_Input->MouseIsReleased(GLFW_MOUSE_BUTTON_LEFT) && !p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack)
 		{
-			//play attack swing
-			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 9))
-			{
-				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[9].should_play = true;
-			}
 			stateMachine->ChangeState(new OnAttack_2(stateMachine));
 		}
 
@@ -141,9 +135,13 @@ namespace EM
 	****************************************************************************/
 	void OnChargeAttack_2::OnExit(StateMachine* stateMachine)
 	{
+		//play charging sound
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 12))
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[12].should_play = false; //charge atk start
+		}
 		p_ecs.GetComponent<Collider>(stateMachine->GetEntityID()).GetCollisionArray()[1].is_Alive = false;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsChargeAttack = false;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamage = mDamage;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHitStopTimer = 0.0f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = true;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
