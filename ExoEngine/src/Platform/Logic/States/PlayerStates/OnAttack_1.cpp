@@ -80,7 +80,7 @@ namespace EM
 			}
 			if (p_ecs.HaveComponent<PlayerAttributes>(stateMachine->GetEntityID())) {
 
-				if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.03f)
+				if (p_Input->MouseHold(GLFW_MOUSE_BUTTON_LEFT) && p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mCooldownTimer <= 0.15f)
 				{
 					stateMachine->ChangeState(new OnChargeAttack_2(stateMachine));
 				}

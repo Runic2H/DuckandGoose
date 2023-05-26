@@ -176,7 +176,6 @@ namespace EM
 		{
 			std::fill(mEntityToIndexMap.begin(), mEntityToIndexMap.end(), MAX_ENTITIES);
 			std::fill(mIndexToEntityMap.begin(), mIndexToEntityMap.end(), MAX_ENTITIES);
-			std::cout << mComponentArray.empty() << std::endl;
 		}
 
 	private:

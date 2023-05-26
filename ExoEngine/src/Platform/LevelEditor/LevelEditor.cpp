@@ -230,11 +230,11 @@ namespace EM {
     ****************************************************************************/
     void LevelEditor::LoadScriptsFromFile()
     {
-//#if DEBUG
+#if DEBUG
         std::string scriptPath = "../ExoEngine/src/ExoEngine/Scripts";
-//#else
-  //      std::string scriptPath = "Assets/Scripts"; //for release mode
-//#endif
+#else
+        std::string scriptPath = "Assets/Scripts"; //for release mode
+#endif
         for (auto const& dir_entry : std::filesystem::directory_iterator{ scriptPath })
         {
             if (!dir_entry.is_regular_file())

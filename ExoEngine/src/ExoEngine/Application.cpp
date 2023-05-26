@@ -124,11 +124,11 @@ Application constructor
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
 
-			p_Editor->Update();
+			//p_Editor->Update();
 
 			if (p_Editor->is_ShowWindow)
 			{
-				//p_Editor->Update();
+				p_Editor->Update();
 				p_Editor->Draw();
 			}
 			
@@ -178,7 +178,7 @@ Application constructor
 
 				}
 			}
-			for (auto entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
+			for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
 			{
 				if (p_ecs.HaveComponent<NameTag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Splash Screen")
 				{

@@ -1,12 +1,12 @@
 /*!*************************************************************************
 ****
 \file DialogueManager.h
-\author Huang Xin Xiang
-\par DP email: h.xinxiang@digipen.edu
+\author Tan Ek Hern
+\par DP email: t.ekhern@digipen.edu
 \par Course: CSD2400
 \par Section: a
 \par Assignment GAM200
-\date 2/3/2022
+\date 2/11/2022
 \brief	Script for Dialogue Manager
 
 Copyright (C) 20xx DigiPen Institute of Technology. Reproduction or disclosure of this file or its contents

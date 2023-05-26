@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file NoLoopBackgroundAudio.h
+\file BackgroundAudio.h
 \author Cheung Jun Yin Matthew
 \par DP email: j.cheung@digipen.edu
 \par Course: CSD2400
@@ -19,12 +19,12 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "ExoEngine/Input/Input.h"
 
 namespace EM {
-	class NoLoopBackgroundAudio : public IScript
+	class BackgroundAudio : public IScript
 	{
 	public:
-		NoLoopBackgroundAudio();
-		~NoLoopBackgroundAudio() = default;
-		virtual NoLoopBackgroundAudio* Clone() const override;
+		BackgroundAudio();
+		~BackgroundAudio() = default;
+		virtual BackgroundAudio* Clone() const override;
 		virtual void Start() override;
 		virtual void Update(float Frametime) override;
 		virtual void End() override;
@@ -33,6 +33,6 @@ namespace EM {
 		virtual Entity& GetScriptEntityID() override { return entityID; }
 
 	private:
-
+		
 	};
 }

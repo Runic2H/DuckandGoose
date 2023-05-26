@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file NoLoopBackgroundAudio.cpp
+\file BackgroundAudio.cpp
 \author Cheung Jun Yin Matthew
 \par DP email: j.cheung@digipen.edu
 \par Course: CSD2400
@@ -14,45 +14,45 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ****************************************************************************
 ***/
 #include "empch.h"
-#include "NoLoopBackgroundAudio.h"
+#include "BackgroundAudio.h"
 #include "ExoEngine/Audio/AudioEngine.h"
 #include "ExoEngine/ECS/Components/Audio.h"
 
 namespace EM {
-	NoLoopBackgroundAudio::NoLoopBackgroundAudio() {}
+	BackgroundAudio::BackgroundAudio(){}
 
-	NoLoopBackgroundAudio* NoLoopBackgroundAudio::Clone() const
+	BackgroundAudio* BackgroundAudio::Clone() const
 	{
-		return new NoLoopBackgroundAudio(*this);
+		return new BackgroundAudio(*this);
 	}
 
-	void NoLoopBackgroundAudio::Start()
+	void BackgroundAudio::Start()
 	{
 		//check if it has an audio loaded 
+		if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && (p_ecs.GetComponent<Audio>(GetScriptEntityID()).GetSize() > 0) )
+		{
+			p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = true;
+		}
+	}
+
+	void BackgroundAudio::Update(float Frametime)
+	{
+		UNREFERENCED_PARAMETER(Frametime);
 		if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && (p_ecs.GetComponent<Audio>(GetScriptEntityID()).GetSize() > 0))
 		{
 			p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = true;
 		}
 	}
 
-	void NoLoopBackgroundAudio::Update(float Frametime)
-	{
-		UNREFERENCED_PARAMETER(Frametime);
-		if (p_ecs.HaveComponent<Audio>(GetScriptEntityID()) && (p_ecs.GetComponent<Audio>(GetScriptEntityID()).GetSize() > 0))
-		{
-			p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = false;
-		}
-	}
-
-	void NoLoopBackgroundAudio::End()
+	void BackgroundAudio::End()
 	{
 		p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].should_stop = true;
 		p_ecs.GetComponent<Audio>(GetScriptEntityID())[0].is_Looping = false;
 		delete this;
 	}
 
-	std::string NoLoopBackgroundAudio::GetScriptName()
+	std::string BackgroundAudio::GetScriptName()
 	{
-		return "NoLoopBackgroundAudio";
+		return "BackgroundAudio";
 	}
 }

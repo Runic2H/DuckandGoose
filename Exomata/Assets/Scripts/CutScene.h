@@ -1,17 +1,3 @@
-/**
-\file CutScene.h
-\author Huang Xin Xiang
-\par DP email : h.xinxiang@digipen.edu
-\par Course : CSD2400
-\par Section : a
-\par Assignment GAM200
-\date 2/3/2023
-\brief    Script for CutScene
-
-Copyright(C) 20xx DigiPen Institute of Technology.Reproduction or disclosure of this file or its contents
-without the prior written consent of DigiPen Institute of Technology is prohibited.
-**
-***/
 #pragma once
 #include "IScript.h"
 #include "ExoEngine/Input/Input.h"
