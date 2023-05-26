@@ -51,14 +51,15 @@ namespace EM {
 		void ResetPressedMouse();
 
 		bool isKeyPressed(keycode key);
-		
+
 	public:
 		//data
 		std::unordered_map<keycode, keystatus> mKeyStatus;
 		std::unordered_map<mousecode, mousestatus> mMouseStatus;
 		std::vector<keycode> mReset;
-		
+		std::vector<mousecode> mouseReset;
+
 		double mMouseScrollStatus = 0.0f;
-		
+
 	};
 }

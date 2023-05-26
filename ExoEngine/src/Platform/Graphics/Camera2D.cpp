@@ -80,7 +80,7 @@ namespace EM {
 	}
 
 	/*!*************************************************************************
-	////Reset zoom level
+	Reset zoom level
 	****************************************************************************/
 	void Camera2D::resetZoomLevel()
 	{
@@ -98,5 +98,26 @@ namespace EM {
 		glm::vec3 up = glm::normalize(glm::cross(right, front));
 		mViewMatrix = glm::lookAt(mPosition, mPosition + front, up);
 		mViewProjectionMatrix = mProjectionMatrix * mViewMatrix;
+	}
+
+	void Camera2D::SetPositionSmooth(const float x, const float y, const float speed)
+	{
+		glm::vec2 target = glm::vec2(mPosition.x + x, mPosition.y + y); //how much we want to see infront/ behind
+
+		if (abs(mPosition.x) != abs(target.x))
+		{
+			mPosition.x += x * Timer::GetInstance().GetGlobalDT() * speed;//offset position
+		}
+		RecalculateMatrix();
+	}
+	void Camera2D::Follow(glm::vec2 pos)
+	{
+		if (mPosition.x != pos.x)
+		{	
+			mPosition.x += pos.x * Timer::GetInstance().GetGlobalDT() * 1.0f;
+		}
+		if (mPosition.y != pos.y)
+			mPosition.y += pos.y * Timer::GetInstance().GetGlobalDT() * 1.0f;
+		RecalculateMatrix();
 	}
 }

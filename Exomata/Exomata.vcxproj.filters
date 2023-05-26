@@ -88,7 +88,6 @@
     <Media Include="Assets\metadigger\Whoosh5.wav">
       <Filter>Assets\metadigger</Filter>
     </Media>
-    <Media Include="..\..\metadigger\test.wav" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\BackGround.png">

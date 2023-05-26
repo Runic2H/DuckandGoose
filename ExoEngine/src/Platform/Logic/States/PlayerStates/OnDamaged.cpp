@@ -20,16 +20,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "OnIdle.h"
 #include "OnDieded.h"
 
+
 namespace EM
 {
-	float EaseInOutSine(float start, float end, float value)
-	{
-		end -= start;
-		return (float)-end * 0.5f * (cosf(M_PI * value) - 1) + start;
-	}
-
-	OnDamaged::OnDamaged(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.2f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.05f},
-		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.05f } {UNREFERENCED_PARAMETER(stateMachine); }
+	OnDamaged::OnDamaged(StateMachine* stateMachine) : mTimer{ 0.0f }, mDuration{ 0.15f }, mCamMinX{ EM::Graphic::camera.GetPosition().x }, mCamMaxX{ EM::Graphic::camera.GetPosition().x + 0.02f},
+		mCamMinY{ EM::Graphic::camera.GetPosition().y }, mCamMaxY{ EM::Graphic::camera.GetPosition().y + 0.02f } {UNREFERENCED_PARAMETER(stateMachine); }
 
 	IStates* OnDamaged::HandleInput(StateMachine* stateMachine, const int& key)
 	{
@@ -50,7 +45,7 @@ namespace EM
 		}
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth -= pDmg;
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer = 0.5f;
-		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 2.0f;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.25f;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Damage");
 
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 5))
@@ -64,7 +59,7 @@ namespace EM
 	****************************************************************************/
 	void OnDamaged::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		mTimer += Frametime;
+		mTimer += Frametime * 2;
 		if (mTimer >= mDuration) {
 			mTimer = 0.f;
 			std::swap(mCamMinX, mCamMaxX);
@@ -73,8 +68,12 @@ namespace EM
 		EM::Graphic::camera.SetPosition({ EaseInOutSine(mCamMinX,mCamMaxX,mTimer/mDuration) , EaseInOutSine(mCamMinY,mCamMaxY,mTimer / mDuration), EM::Graphic::camera.GetPosition().z });
 
 		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDashCoolDown -= Frametime;
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown <= 0.0f ? 0.0f : p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mBlockCoolDown -= Frametime;
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mHealth <= 0)
 		{
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mIsDamaged = false;
+			p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageCoolDown = 0.0f;
 			stateMachine->ChangeState(new OnDieded(stateMachine));
 		}
 		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDamageDurationTimer <= 0)

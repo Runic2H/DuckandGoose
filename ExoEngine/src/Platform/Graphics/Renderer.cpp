@@ -41,6 +41,12 @@ namespace EM {
 		Vec3 Position;
 		Vec4 Color;
 	};
+
+	struct ImpactVertex
+	{
+		Vec3 Position;
+		Vec4 Color;
+	};
 	
 	//whats inside a circle
 	struct CircleVertex
@@ -61,6 +67,15 @@ namespace EM {
 		static const unsigned int MaxQuads = 40000;			//max number of square or triangles can be adjust
 		static const unsigned int MaxVertices = MaxQuads * 4;	//since one quard have 4 vertices we multi by 4
 		static const unsigned int MaxIndices = MaxQuads * 6;	//{0, 1, 2, 2, 3, 0} 6 indices per quad
+
+		//for impact
+		MultiRefs<VertexArray> ImpactVertexArray;
+		MultiRefs<VertexBuffer> ImpactVertexBuffer;
+		MultiRefs<Shader> ImpactShader;
+
+		unsigned int ImpactIndexCount = 0;
+		ImpactVertex* ImpactVertexBufferBase = nullptr;
+		ImpactVertex* ImpactVertexBufferPtr = nullptr;
 
 		//for boxes without texture
 		MultiRefs<VertexArray> BoxVertexArray;
@@ -130,7 +145,7 @@ namespace EM {
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		/// FOR QUADS
+		//FOR QUADS
 		r_Data.QuadVertexArray = VertexArray::Create();
 
 		r_Data.QuadVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(QuadVertex));
@@ -172,18 +187,18 @@ namespace EM {
 
 		//Shader
 		r_Data.QuadShader = ResourceManager::GetShader("QuadShader");
-		int TextureSamplers[64];
-		for (int i = 0; i < 64; i++)
+		int TextureSamplers[32];
+		for (int i = 0; i < 32; i++)
 			TextureSamplers[i] = i;
 		r_Data.QuadShader->Bind();
-		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 64);
+		r_Data.QuadShader->SetUniform("u_Texture", TextureSamplers, 32);
 
 		//set first texture unit 0 to be blanktexture
 		r_Data.TextureUnits[0] = r_Data.BlankTexture;
 		
 
 
-		//// FOR drawing LINE and also debug drawing
+		//FOR drawing LINE and also debug drawing
 		r_Data.LineVertexArray = VertexArray::Create();
 		r_Data.LineVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(LineVertex));
 		r_Data.LineVertexBuffer->SetLayout({ 
@@ -196,8 +211,7 @@ namespace EM {
 
 		r_Data.LineShader = ResourceManager::GetShader("LineShader");
 
-		/// For boxes without texture
-
+		//For boxes without texture
 		r_Data.BoxVertexArray = VertexArray::Create();
 
 		r_Data.BoxVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(BoxVertex));
@@ -230,7 +244,41 @@ namespace EM {
 		//box shader
 		r_Data.BoxShader = ResourceManager::GetShader("LineShader");
 
-		/// For Circle
+		//For impact
+		r_Data.ImpactVertexArray = VertexArray::Create();
+
+		r_Data.ImpactVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(ImpactVertex));
+		r_Data.ImpactVertexBuffer->SetLayout({ { ShaderDataType::Float3, "position" },
+												{ ShaderDataType::Float4, "a_Color" },
+			});
+		r_Data.ImpactVertexArray->AddVertexBuffer(r_Data.ImpactVertexBuffer);
+		r_Data.ImpactVertexBufferBase = new ImpactVertex[r_Data.MaxVertices];
+
+		unsigned int* ImpactIndices = new unsigned int[r_Data.MaxIndices];
+
+		unsigned int offsetImpact = 0;
+		for (int i = 0; i < r_Data.MaxIndices; i += 6)
+		{
+			ImpactIndices[i + 0] = offsetImpact + 0;
+			ImpactIndices[i + 1] = offsetImpact + 1;
+			ImpactIndices[i + 2] = offsetImpact + 2;
+
+			ImpactIndices[i + 3] = offsetImpact + 2;
+			ImpactIndices[i + 4] = offsetImpact + 3;
+			ImpactIndices[i + 5] = offsetImpact + 0;
+
+			offsetImpact += 4;
+		}
+
+		MultiRefs<IndexBuffer> ImpactIndexBuffer = IndexBuffer::Create(ImpactIndices, r_Data.MaxIndices);
+		r_Data.ImpactVertexArray->SetIndexBuffer(ImpactIndexBuffer);
+		delete[] ImpactIndices;
+		//impact shader
+		r_Data.ImpactShader = ResourceManager::GetShader("ImpactShader");
+
+
+
+		//For Circle
 		r_Data.CircleVertexArray = VertexArray::Create();
 
 		r_Data.CircleVertexBuffer = VertexBuffer::Create(r_Data.MaxVertices * sizeof(CircleVertex));
@@ -287,6 +335,10 @@ namespace EM {
 		//Circle
 		r_Data.CircleIndexCount = 0;
 		r_Data.CircleVertexBufferPtr = r_Data.CircleVertexBufferBase;
+
+		//impact
+		r_Data.ImpactIndexCount = 0;
+		r_Data.ImpactVertexBufferPtr = r_Data.ImpactVertexBufferBase;
 		
 	}
 
@@ -346,6 +398,18 @@ namespace EM {
 			Renderer::DrawIndexed(r_Data.CircleVertexArray, r_Data.CircleIndexCount);
 			r_Data.Infos.n_DrawCalls++;
 		}
+		//impact
+		if (r_Data.ImpactIndexCount)
+		{
+			unsigned int  ImpactDataSize = (unsigned int)((uint8_t*)r_Data.ImpactVertexBufferPtr - (uint8_t*)r_Data.ImpactVertexBufferBase);
+			r_Data.ImpactVertexBuffer->SetBufferData(r_Data.ImpactVertexBufferBase, ImpactDataSize);
+
+			//reset count
+			r_Data.ImpactShader->Bind();
+			r_Data.ImpactShader->SetUniform("u_ViewProjection", mtx_adapter(s_SceneData->ViewProjectionMatrix));
+			Renderer::DrawIndexed(r_Data.ImpactVertexArray, r_Data.ImpactIndexCount);
+			r_Data.Infos.n_DrawCalls++;
+		}
 	}
 
 	/*!*************************************************************************
@@ -364,6 +428,7 @@ namespace EM {
 	{
 		delete[] r_Data.QuadVertexBufferBase;
 		delete[] r_Data.BoxVertexBufferBase;
+		delete[] r_Data.ImpactVertexBufferBase;
 	}
 	/*!*************************************************************************
 	Set and bind the vertexarray to tell the gpu how to draw the  quad obj
@@ -392,11 +457,8 @@ namespace EM {
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec3 position with no texture just shader
 	****************************************************************************/
-	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const Vec4& color)
+	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const Vec4& color )
 	{
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-		*/
 		Mat4x4 transform(1.0f);	
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -427,6 +489,33 @@ namespace EM {
 
 		r_Data.Infos.n_Quad++;
 	}
+
+	void Renderer::DrawQuadImpact(const Vec3& position, const vec2D& size, const Vec4& color)
+	{
+		Mat4x4 transform(1.0f);
+		Mat4x4 translate(1.0f);
+		Mat4x4 scale(1.0f);
+		Translate4x4(translate, position.x, position.y, position.z);
+		Scale4x4(scale, size.x, size.y, 1.0f);
+		transform = translate * scale;
+	
+		
+		constexpr size_t ImpactCount = 4;
+
+		if (r_Data.ImpactIndexCount >= RendererData::MaxIndices)
+			NextBatch();
+
+		for (size_t i = 0; i < ImpactCount; i++)
+		{
+			r_Data.ImpactVertexBufferPtr->Position = transform * r_Data.QuadVertexPosition[i];
+			r_Data.ImpactVertexBufferPtr->Color = color;
+			r_Data.ImpactVertexBufferPtr++;
+		}
+
+		r_Data.ImpactIndexCount += 6;
+
+		r_Data.Infos.n_Quad++;
+	}
 	/*!*************************************************************************
 	Overload function for Draw Quad using vec2 position with texture
 	****************************************************************************/
@@ -440,10 +529,6 @@ Overload function for Draw Quad using vec3 position with texture
 ****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, const MultiRefs<Texture>& texture)
 	{
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-			*/
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -472,7 +557,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 64)
+			if (r_Data.TextureUnitIndex >= 32)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;
@@ -506,11 +591,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const Vec4& color)
 	{
-	
-		/*Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
-			* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });*/
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -539,10 +619,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawQuad(const Vec3& position, const vec2D& size, float rotation, const MultiRefs<Texture>& texture)
 	{
-		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-			//* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-			//* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -552,8 +628,6 @@ Overload function for Draw Quad using vec3 position with texture
 		Scale4x4(scale, size.x, size.y, 1.0f);
 		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
 		transform = translate* scale * rot ;
-		
-
 		DrawQuad(transform, texture);
 	}
 	/*!*************************************************************************
@@ -569,10 +643,6 @@ Overload function for Draw Quad using vec3 position with texture
 	****************************************************************************/
 	void Renderer::DrawSprite(const Vec3& position, const vec2D& size, const float& rotation, const MultiRefs<SpriteRender>& sprite)
 	{
-		//Mat4x4 transform = glm::translate(Mat4x4(1.0f), position)
-		//	* glm::rotate(Mat4x4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-		//	* glm::scale(Mat4x4(1.0f), { size.x, size.y, 1.0f });
-
 		Mat4x4 transform(1.0f);
 		Mat4x4 translate(1.0f);
 		Mat4x4 scale(1.0f);
@@ -581,7 +651,6 @@ Overload function for Draw Quad using vec3 position with texture
 		Scale4x4(scale, size.x, size.y, 1.0f);
 		RotRad4x4(rot, rotation, { 0.0f, 0.0f, 1.0f });
 		transform = translate * rot * scale;
-
 		DrawSprite(transform, sprite);
 	}
 	/*!*************************************************************************
@@ -601,7 +670,7 @@ Overload function for Draw Quad using vec3 position with texture
 
 		if (textureIndex == 0.0f)
 		{
-			if (r_Data.TextureUnitIndex >= 64)
+			if (r_Data.TextureUnitIndex >= 32)
 				NextBatch();
 
 			textureIndex = (float)r_Data.TextureUnitIndex;

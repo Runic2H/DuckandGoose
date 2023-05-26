@@ -23,6 +23,12 @@ namespace EM
 	class PlayerAttributes : public IComponent
 	{
 	public:
+		enum class Facing
+		{
+			NONE,
+			RIGHT,
+			LEFT
+		};
 		PlayerAttributes();
 		~PlayerAttributes() = default;
 		virtual bool Deserialize(const rapidjson::Value& obj);
@@ -44,17 +50,28 @@ namespace EM
 		int mAttackCounter;
 		float mDamageCoolDown;
 		float mDashCoolDown;
+		float mDashMaxCoolDown;
 		float mDashDurationTimer;
 		float mBlockCoolDown;	//5.0f
+		float mBlockMaxCoolDown;
 		float mBlockDurationTimer;
 		float mCooldownTimer;
+		float mCooldownMaxTimer;
 		float mDamageTaken;
 		float mDamageDurationTimer;
+		float mHitStopTimer;
+		float mChargeAttackCoolDown;
+		float mChargeTimer;
+		float mDeathDuration;
+		bool mIsChargeAttack;
 		bool mIsDamaged;
 		bool mIsBlocking;
 		bool mIsDashing;
+		bool mIsGOD;
+		bool mComboNext;
 		vec2D mVel;
 		vec2D mDir;
+		Facing mFacing;
 		entityPhysics mPhys;
 	};
 }

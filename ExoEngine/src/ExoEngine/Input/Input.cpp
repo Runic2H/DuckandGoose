@@ -21,7 +21,7 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include <GLFW/glfw3.h>
 
 namespace EM {
-    
+
     std::unique_ptr<InputSystem> mInstance;
     std::unique_ptr<InputSystem>& InputSystem::GetInstance()
     {
@@ -37,8 +37,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyPressed(const int& key)
     {
-       // mReset.push_back(key);
-
         return mKeyStatus[key] == GLFW_PRESS;
     }
 
@@ -55,7 +53,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::KeyReleased(const int& key)
     {
-       // mReset.push_back(key);
         return mKeyStatus[key] == GLFW_RELEASE;
     }
 
@@ -73,12 +70,11 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::ResetPressedKey()
     {
-        for (auto& key : mReset) 
+        for (auto& key : mReset)
         {
             if (mKeyStatus[key] == GLFW_PRESS)
                 mKeyStatus[key] = GLFW_REPEAT;
         }
-
 
         mReset.clear();
     }
@@ -96,7 +92,7 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseHold(const int& key)
     {
-        return mMouseStatus[key] == GLFW_PRESS || mMouseStatus[key] == GLFW_REPEAT;
+        return  mMouseStatus[key] == GLFW_REPEAT;
     }
 
     /*!*************************************************************************
@@ -104,14 +100,6 @@ namespace EM {
     ****************************************************************************/
     bool InputSystem::MouseIsReleased(const int& key)
     {
-/*        if (MousePressed(key) || MouseHold(key))
-        {
-            if (mMouseStatus[key] == GLFW_RELEASE)
-            {
-                return true;
-            }
-        }
-        else return false;  */    
         return mMouseStatus[key] == GLFW_RELEASE;
     }
 
@@ -120,6 +108,7 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::SetMouseStatus(mousecode key, mousestatus status)
     {
+        mouseReset.emplace_back(key);
         mMouseStatus[key] = status;
     }
 
@@ -128,8 +117,13 @@ namespace EM {
     ****************************************************************************/
     void InputSystem::ResetPressedMouse()
     {
-        for (auto& [key, status] : mMouseStatus)
-            status = -1;
+        for (auto& key : mouseReset)
+        {
+            if (mMouseStatus[key] == GLFW_PRESS)
+                mMouseStatus[key] = GLFW_REPEAT;
+        }
+
+        mouseReset.clear();
     }
 
     /*!*************************************************************************
@@ -140,7 +134,8 @@ namespace EM {
         auto it = mKeyStatus.find(key);
         if (it != mKeyStatus.end())
             return it->second == GLFW_PRESS; //find the key in the map and execute the order
-        
+
         return false;
     }
+
 }

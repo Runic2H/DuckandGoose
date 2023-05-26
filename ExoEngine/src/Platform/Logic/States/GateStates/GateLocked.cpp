@@ -48,30 +48,28 @@ namespace EM
         {
             if (p_ecs.HaveComponent<EnemyAttributes>(i))
             {
-                if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive)
-                {
-                    ++aliveCount;
-                }
+				if (p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive)
+				{
+					++aliveCount;
+				}
             }
         }
 		vec2D playerPos = vec2D();
 		bool check = false;
 		for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 		{
-			//std::cout << "Prox Check" << std::endl;
 			if (p_ecs.HaveComponent<Tag>(i) && p_ecs.GetComponent<Tag>(i).GetTag() == "Player")
 			{
 				check = true;
-				//std::cout << "Found Player" << std::endl;
 				playerPos = p_ecs.GetComponent<Transform>(i).GetPos();
 			}
 		}
 		//if player moves within x radius, set mode to moving
-		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) {
+		if (distance(playerPos, p_ecs.GetComponent<Transform>(stateMachine->GetEntityID()).GetPos()) < 0.4f && check) 
+		{
 			if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0))
 			{
 				p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_play = true;
-				//std::cout << "Playing Gate Audio" << std::endl;
 			}
 		}
         if (aliveCount == 0)
@@ -87,6 +85,10 @@ namespace EM
 	{
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex() - 1;
 		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
+		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 0) && p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].is_Playing == true)
+		{
+			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[0].should_stop = true;
+		}
 		delete this;
 	}
 }

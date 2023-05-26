@@ -62,7 +62,7 @@ namespace EM {
             int simpleCirclePoint(vec2D ent1, float rad1, vec2D pt1);
             /*!*************************************************************************
             This function is a simple static circle to AABB collision detection function
-            that returns a boolean inditating whether collision was detected or not
+            that  returns a boolean inditating whether collision was detected or not
             ****************************************************************************/
             int simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center);
             /*!*************************************************************************

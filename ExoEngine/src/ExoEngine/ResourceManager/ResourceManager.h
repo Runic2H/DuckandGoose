@@ -44,9 +44,7 @@ namespace EM {
 		static std::shared_ptr<CAudioEngine> GetAudio(std::string name);
 		static std::shared_ptr<CAudioEngine> LoadAudio(std::string name, const std::string& filepath);
 		
-		////load different type of fonts from file tff
-		//static std::shared_ptr<Font> LoadFont(std::string name, unsigned int size);
-		//static std::shared_ptr<Font> GetFont(std::string name);
+		//load different type of fonts from file tff
 		static void clear();
 	private:
 		

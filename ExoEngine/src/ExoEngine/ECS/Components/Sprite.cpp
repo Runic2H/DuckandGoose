@@ -16,7 +16,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 ***/
 #include "empch.h"
 #include "Sprite.h"
-//#include "ExoEngine/ResourceManager/ResourceManager.h"
 #include "ExoEngine/Animation/Animation.h"
 namespace EM {
 
@@ -24,7 +23,7 @@ namespace EM {
 	Ctor for Sprite Component
 	****************************************************************************/
 	Sprite::Sprite() : mTextureName("Blank"), Index({ 0,0 }), mUVcooridnates({ 512.0f, 512.0f }),
-		is_SpriteSheet(false), is_Animated(false), mAlpha(1), MaxIndex_X(0),displayTime(GetMaxIndex()), internaltimer(0){}
+		is_SpriteSheet(false), is_Animated(false), mAlpha(1), MaxIndex_X(0),displayTime(GetMaxIndex()), internaltimer(0), LayerOrder(0){}
 
 	/*!*************************************************************************
 	Deserialize for Sprite Component
@@ -49,7 +48,7 @@ namespace EM {
 		{
 			Animation::spriteContainer.emplace(mTextureName, displayTime);
 		}
-			
+		LayerOrder= int(obj["LayeringOrder"].GetInt());
 		return true;
 	}
 
@@ -58,7 +57,6 @@ namespace EM {
 	****************************************************************************/
 	bool Sprite::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("TextureName");
 		writer->String(mTextureName.c_str());
 		writer->Key("Index_X");
@@ -82,7 +80,8 @@ namespace EM {
 			writer->Key(DpNum.c_str());
 			writer->Double(displayTime[i]);
 		}
-		//writer->EndObject();
+		writer->Key("LayeringOrder");
+		writer->Int(LayerOrder);
 		return true;
 	}
 	

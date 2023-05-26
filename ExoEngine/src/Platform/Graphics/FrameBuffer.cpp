@@ -258,7 +258,6 @@ namespace EM {
 		// draw (max of 4 color attachments)
 		if (mColorAttachments.size() > 1)
 		{
-			/*GM_CORE_ASSERT(mColorAttachments.size() <= 4, "Color AttachMent is more than 4");*/
 			GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
 			glDrawBuffers((GLsizei)mColorAttachments.size(), buffers);
 		}

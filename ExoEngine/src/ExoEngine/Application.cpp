@@ -35,11 +35,11 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #include "Platform/Logic/LogicSystem.h"
 #include "ExoEngine/Scripts/PauseMenu.h"
 #include "ExoEngine/GUI/GUI.h"
+#include "ExoEngine/Scripts/DialogueManager.h"
 #include <stdlib.h>
 
 namespace EM {
 	bool end_state{ false }; //placeholder
-
 
 /*!*************************************************************************
 Application constructor
@@ -73,6 +73,7 @@ Application constructor
 	void Application::Run()
 	{
 		Timer::GetInstance().GlobalTimeStarter();
+		
 		Window* m_window = new Window;
 		m_window->Init();
 		p_Audio->Init();
@@ -113,48 +114,92 @@ Application constructor
 			p_ecs.SetSystemSignature<PhysicsSystem>(signature);
 		}
 		mPosUpdate->Init();
-
-		p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
-
+#if !DEBUG
+		p_Scene->setSceneToLoad("Assets/Scene/SplashScreen.json");
+#endif
+		
 		while (!glfwWindowShouldClose(m_window->GetWindow()) && end_state == false) //game loop
 		{
 			FramePerSec::GetInstance().StartFrameCount();
 			Timer::GetInstance().Start(Systems::API);
 			Timer::GetInstance().GetDT(Systems::API);
 
-			p_Editor->Update();
+			//p_Editor->Update();
+
 			if (p_Editor->is_ShowWindow)
 			{
+				p_Editor->Update();
 				p_Editor->Draw();
 			}
+			
 			p_Scene->checkForSceneToLoad();
-			mLogic->Update(Timer::GetInstance().GetGlobalDT());
+
+			if (p_Scene->isGameplay == true)
+				glfwSetInputMode(m_window->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			else
+				glfwSetInputMode(m_window->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			if (!m_window->isWindowNotFocus)
+			{
+//#if !DEBUG
+				mLogic->Update(Timer::GetInstance().GetGlobalDT());
+//#endif
+			}
 			mCollision->Update(Timer::GetInstance().GetGlobalDT());
 			mPosUpdate->Update();
-			p_Audio->Update();
 
+			
+			p_Audio->Update();
+			
 			if (p_Input->KeyPressed(GLFW_KEY_F3))
 			{
-				for (Entity i = 0; i <= p_ecs.GetTotalEntities(); ++i)
+				for (Entity i = 0; i < p_ecs.GetTotalEntities(); ++i)
 				{
 					if (p_ecs.HaveComponent<EnemyAttributes>(i))
 					{
-						p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
-						p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+						if (p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_MELEE
+							|| p_ecs.GetComponent<EnemyAttributes>(i).mEnemyType == EnemyAttributes::EnemyTypes::ENEMY_RANGED)
+						{
+							if (p_ecs.GetComponent<Transform>(i).GetPos().x < 5.67f)
+							{
+								p_ecs.GetComponent<EnemyAttributes>(i).mIsAlive = true;
+								p_ecs.GetComponent<EnemyAttributes>(i).mHealth = 0;
+								p_ecs.GetComponent<EnemyAttributes>(i).mIsDamaged = true;
+							}
+						}
 					}
+				
+					if (p_ecs.HaveComponent<Logic>(i) && p_ecs.GetComponent<Logic>(i).GetScriptByName("DialogueManager") != nullptr)
+					{
+						p_ecs.GetComponent<Logic>(i).GetScriptByName("DialogueManager")->mScriptPause = true;
+					}
+					//temper
+					if (p_ecs.HaveComponent<PlayerAttributes>(i))
+						p_ecs.GetComponent<Transform>(i).SetPos(5.67f, 0.0f);
+
 				}
 			}
-
+			for (Entity entity = 0; entity < p_ecs.GetTotalEntities(); entity++)
+			{
+				if (p_ecs.HaveComponent<NameTag>(entity) && p_ecs.GetComponent<NameTag>(entity).GetNameTag() == "Splash Screen")
+				{
+					if (p_ecs.GetComponent<Transform>(entity).GetScale().x > 3.5f)
+						p_Scene->setSceneToLoad("Assets/Scene/Menu.json");
+				}
+			}
 			end_state = p_GUI->Update(m_window);
 
 			// test menu script
 
 			p_Input->ResetPressedKey();//to fix the buggy error from glfwpollevent
+			p_Input->ResetPressedMouse();
 
 
 			m_window->Update(Timer::GetInstance().GetGlobalDT());
 			mGraphics->Update(Timer::GetInstance().GetGlobalDT());
-			//p_Editor->is_ShowWindow = false;
+			
+#if !DEBUG
+			p_Editor->is_ShowWindow = false;
+#endif 
 			FramePerSec::GetInstance().EndFrameCount();
 			Timer::GetInstance().Update(Systems::API);
 		}
@@ -167,7 +212,6 @@ Application constructor
 	****************************************************************************/
 	void Application::End()
 	{
-		//p_Scene->SerializeToFile("Assets/Scene/Leveltest.json");
 		p_Editor->End();
 		p_Audio->Release();
 	}

@@ -40,7 +40,6 @@ namespace EM
 	****************************************************************************/
 	bool Transform::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("posX");
 		writer->Double(mPosition.x);
 		writer->Key("posY");
@@ -51,7 +50,6 @@ namespace EM
 		writer->Double(mScale.y);
 		writer->Key("Rot");
 		writer->Double(mRot);
-		//writer->EndObject();
 		return true;
 	}
 	//End Transform

@@ -38,7 +38,6 @@ namespace EM
 	****************************************************************************/
 	bool Attributes::Serialize(rapidjson::PrettyWriter<rapidjson::StringBuffer>* writer) const
 	{
-		//writer->StartObject();
 		writer->Key("FiringCooldown");
 		writer->Double(mFiringCoolDown);
 		writer->Key("FiringDuration");
@@ -49,7 +48,6 @@ namespace EM
 		writer->Int(mHazardDmg);
 		writer->Key("HazardType");
 		writer->Int(static_cast<int>(mHazardType));
-		//writer->EndObject();
 		return true;
 	}
 }

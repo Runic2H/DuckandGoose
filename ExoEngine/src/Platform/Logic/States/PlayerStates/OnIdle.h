@@ -1,6 +1,6 @@
 /*!*************************************************************************
 ****
-\file OnDieded.h
+\file OnIdle.h
 \author Elton Teo Zhe Wei
 \par DP email: e.teo@digipen.edu
 \par Course: CSD2450
@@ -27,5 +27,7 @@ namespace EM
 		virtual void OnEnter(StateMachine* stateMachine) override;
 		virtual void OnUpdate(StateMachine* stateMachine, float Frametime) override;
 		virtual void OnExit(StateMachine* stateMachine) override;
+	private:
+		int mTempDamage;
 	};
 }

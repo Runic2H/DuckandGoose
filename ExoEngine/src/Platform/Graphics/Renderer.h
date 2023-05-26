@@ -43,6 +43,7 @@ namespace EM {
 		void DrawQuad(const vec2D& position, const vec2D& size, const Vec4& color);
 		void DrawQuad(const Vec3& position, const vec2D& size, const Vec4& color);
 		void DrawQuad(const Mat4x4& transform, const Vec4& color);
+		void DrawQuadImpact(const Vec3& position, const vec2D& size, const Vec4& color);
 		void DrawQuad(const vec2D& position, const vec2D& size, const MultiRefs<Texture>& texture);
 		void DrawQuad(const Vec3& position, const vec2D& size, const MultiRefs<Texture>& texture);
 		void DrawQuad(const Mat4x4& transform, const MultiRefs<Texture>& texture);
@@ -68,7 +69,7 @@ namespace EM {
 		//Information for renderer
 		struct Information
 		{
-			unsigned int n_DrawCalls = 0; //n_ = no. of
+			unsigned int n_DrawCalls = 0; 
 			unsigned int n_Quad = 0;
 
 			unsigned int TotalVertexUsed()const { return n_Quad * 4; }

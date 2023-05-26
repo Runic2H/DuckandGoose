@@ -116,6 +116,19 @@ namespace EM
 		}
 
 		/*!*************************************************************************
+		Returns the number of live entities
+		****************************************************************************/
+		Entity GetAliveEntities()
+		{
+			return static_cast<Entity>(mEntityManager->GetAliveEntities().size());
+		}
+
+		std::set<Entity> GetAliveEntitiesSet()
+		{
+			return mEntityManager->GetAliveEntities();
+		}
+
+		/*!*************************************************************************
 		Sets the total entities for Scene build 
 		****************************************************************************/
 		void SetTotalEntitiesForWorldBuild(Entity entity)
@@ -253,7 +266,6 @@ namespace EM
 		****************************************************************************/
 		void ClearArrayForWorldBuild(ComponentType Type)
 		{
-			//ResetEntities();
 			mComponentManager->ClearArrayForWorldBuild(Type);
 		}
 

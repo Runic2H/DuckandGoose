@@ -3,12 +3,12 @@
         "Entities": 6
     },
     "EntitySignatures": [
-        "00000000000000000000000001111101",
+        "00000000000000000000000011111101",
         "00000000000000000000000000011001",
-        "00000000000000000000000001111101",
-        "00000000000000000000000001111101",
-        "00000000000000000000000001111101",
-        "00000000000000000000000001111101"
+        "00000000000000000000000011111101",
+        "00000000000000000000000011111101",
+        "00000000000000000000000011111101",
+        "00000000000000000000000011111101"
     ],
     "Components": {
         "0": [
@@ -21,7 +21,7 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
                 "minX1": 0.0,
                 "minX2": 0.0,
@@ -49,16 +49,29 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
-                "ScriptCount": 0
+                "0": "AudioManager",
+                "1": "BackgroundAudio",
+                "ScriptCount": 2
             },
             {
                 "Tag": "Untagged",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "ShortCircuit_Menu_Music_Loop.wav",
+                    "Channel": 2,
+                    "IsLooping": true
+                },
+                "AudioArrCount": 1,
+                "BGM Volume": 0.75,
+                "SFX Volume": 0.75,
+                "Master Volume": 0.75
+            },
             {},
             {},
             {},
@@ -85,7 +98,8 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {},
             {},
@@ -105,15 +119,15 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
-                "minX1": -0.5,
+                "minX1": -1.0,
                 "minX2": 0.0,
-                "minY1": -0.5,
+                "minY1": -0.6600000262260437,
                 "minY2": 0.0,
-                "maxX1": 0.5,
+                "maxX1": 1.0,
                 "maxX2": 0.0,
-                "maxY1": 0.5,
+                "maxY1": 0.6600000262260437,
                 "maxY2": 0.0,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
@@ -133,17 +147,34 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "ButtonResponse",
-                "ScriptCount": 1
+                "1": "AudioManager",
+                "ScriptCount": 2
             },
             {
                 "Tag": "Start",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "UI_Hover.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "UI_Click.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 2,
+                "BGM Volume": 0.75,
+                "SFX Volume": 0.75,
+                "Master Volume": 0.75
+            },
             {},
             {},
             {},
@@ -159,15 +190,15 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
-                "minX1": -0.5,
+                "minX1": -1.0,
                 "minX2": 0.0,
-                "minY1": -0.5,
+                "minY1": -0.6600000262260437,
                 "minY2": 0.0,
-                "maxX1": 0.5,
+                "maxX1": 1.0,
                 "maxX2": 0.0,
-                "maxY1": 0.5,
+                "maxY1": 0.6600000262260437,
                 "maxY2": 0.0,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
@@ -187,17 +218,34 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "ButtonResponse",
-                "ScriptCount": 1
+                "1": "AudioManager",
+                "ScriptCount": 2
             },
             {
                 "Tag": "Quit",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "UI_Hover.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "UI_Click.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 2,
+                "BGM Volume": 0.75,
+                "SFX Volume": 0.75,
+                "Master Volume": 0.75
+            },
             {},
             {},
             {},
@@ -213,15 +261,15 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
-                "minX1": -0.5,
+                "minX1": -1.0,
                 "minX2": 0.0,
-                "minY1": -0.5,
+                "minY1": -0.6600000262260437,
                 "minY2": 0.0,
-                "maxX1": 0.5,
+                "maxX1": 1.0,
                 "maxX2": 0.0,
-                "maxY1": 0.5,
+                "maxY1": 0.6600000262260437,
                 "maxY2": 0.0,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
@@ -241,17 +289,34 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "ButtonResponse",
-                "ScriptCount": 1
+                "1": "AudioManager",
+                "ScriptCount": 2
             },
             {
                 "Tag": "Options",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "UI_Hover.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "UI_Click.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 2,
+                "BGM Volume": 0.75,
+                "SFX Volume": 0.75,
+                "Master Volume": 0.75
+            },
             {},
             {},
             {},
@@ -267,15 +332,15 @@
             },
             {},
             {
-                "ColliderType1": 0,
+                "ColliderType1": 4,
                 "ColliderType2": 0,
-                "minX1": -0.5,
+                "minX1": -1.0,
                 "minX2": 0.0,
-                "minY1": -0.5,
+                "minY1": -0.6600000262260437,
                 "minY2": 0.0,
-                "maxX1": 0.5,
+                "maxX1": 1.0,
                 "maxX2": 0.0,
-                "maxY1": 0.5,
+                "maxY1": 0.6600000262260437,
                 "maxY2": 0.0,
                 "offsetX1": 0.0,
                 "offsetX2": 0.0,
@@ -295,17 +360,34 @@
                 "Vcoordinates": 512.0,
                 "IsSpriteSheet": false,
                 "IsAnimated": false,
-                "MaxIndex": 0
+                "MaxIndex": 0,
+                "LayeringOrder": 0
             },
             {
                 "0": "ButtonResponse",
-                "ScriptCount": 1
+                "1": "AudioManager",
+                "ScriptCount": 2
             },
             {
                 "Tag": "HowToPlay",
                 "TargetTag": ""
             },
-            {},
+            {
+                "0": {
+                    "AudioPath": "UI_Hover.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "1": {
+                    "AudioPath": "UI_Click.wav",
+                    "Channel": 3,
+                    "IsLooping": false
+                },
+                "AudioArrCount": 2,
+                "BGM Volume": 0.75,
+                "SFX Volume": 0.75,
+                "Master Volume": 0.75
+            },
             {},
             {},
             {},

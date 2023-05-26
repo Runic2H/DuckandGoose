@@ -32,9 +32,8 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnEnter(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_Animated = false;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).is_SpriteSheet = false;
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
+		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Death");
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDeathDuration = 2.f;
 		if (p_ecs.HaveComponent<Audio>(stateMachine->GetEntityID()) && (p_ecs.GetComponent<Audio>(stateMachine->GetEntityID()).GetSize() > 6))
 		{
 			p_ecs.GetComponent<Audio>(stateMachine->GetEntityID())[6].should_play = true;
@@ -47,9 +46,17 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnUpdate(StateMachine* stateMachine, float Frametime)
 	{
-		UNREFERENCED_PARAMETER(Frametime);
 		UNREFERENCED_PARAMETER(stateMachine);
-		p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
+		p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDeathDuration -= Frametime;
+
+		if (p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x == p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetMaxIndex()-1)
+		{
+			p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).SetTexture("Blank");
+		}
+		if (p_ecs.GetComponent<PlayerAttributes>(stateMachine->GetEntityID()).mDeathDuration <= 0.0f)
+		{
+			p_Scene->setSceneToLoad("Assets/Scene/Game_Over.json");
+		}
 	}
 
 	/*!*************************************************************************
@@ -57,7 +64,7 @@ namespace EM
 	****************************************************************************/
 	void OnDieded::OnExit(StateMachine* stateMachine)
 	{
-		p_ecs.GetComponent<Sprite>(stateMachine->GetEntityID()).GetIndex().x = 0;
+		p_ecs.GetComponent<EnemyAttributes>(stateMachine->GetEntityID()).mIsAlive = false;
 		delete this;
 	}
 }

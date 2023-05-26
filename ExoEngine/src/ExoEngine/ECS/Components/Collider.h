@@ -32,7 +32,9 @@ namespace EM
 			line, //---------LineSegment
 			rect, //---------AABB
 			box, //----------Playable area box
-			button
+			bossball, //-----Boss damage circle
+			button,
+			dashCirc
 		};
 
 		struct Colpiece {

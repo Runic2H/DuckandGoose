@@ -33,7 +33,7 @@ namespace EM {
     acceleration regardless of frame rate
     ****************************************************************************/
     vec2D entityPhysics::friction(vec2D& entvel, float dt) {
-        entvel -= entvel * 8.5f * dt;
+        entvel -= entvel * 15.5f * dt;
         return entvel;
     }
     /*!*************************************************************************
@@ -91,18 +91,10 @@ namespace EM {
     that returns a boolean inditating whether collision was detected or not
     ****************************************************************************/
     int entityCollision::simpleCircleRect(vec2D ent1, float rad1, vec2D max1, vec2D min1, vec2D center) {
-        UNREFERENCED_PARAMETER(min1);
-        vec2D dist = vec2D();
-        dist.x = center.x - ent1.x;
-        dist.y = center.y - ent1.y;
-        if (dist.x > (rad1+max1.x-center.x) || dist.x < -(rad1+max1.x-center.x) || dist.y > (rad1+max1.y-center.y) || dist.y < -(rad1+max1.y-center.y)) {
+        UNREFERENCED_PARAMETER(center);
+        if (ent1.x + rad1 < min1.x || ent1.x - rad1 > max1.x || ent1.y + rad1 < min1.y || ent1.y - rad1 > max1.y) {
             return 0;
         }
-        /*vec2D topleft = vec2D(min1.x, max1.y);
-        vec2D bottomright = vec2D(max1.x, min1.y);
-        if (distance(ent1, max1) > rad1 || distance(ent1, min1) > rad1 || distance(ent1, topleft) > rad1 || distance(ent1, bottomright) > rad1) {
-            return 0;
-        }*/
         return 1;
     }
     /*!*************************************************************************

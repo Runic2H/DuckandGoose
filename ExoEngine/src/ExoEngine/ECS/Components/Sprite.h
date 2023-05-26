@@ -16,7 +16,6 @@ without the prior written consent of DigiPen Institute of Technology is prohibit
 #pragma once
 #include "IComponent.h"
 #include "glm/glm.hpp"
-//#include "Platform/Graphics/Texture.h"
 
 namespace EM {
 
@@ -48,6 +47,7 @@ namespace EM {
 		void SetAlpha(float in) { mAlpha = in; }
 		float GetAlpha() { return mAlpha; }
 
+		void SetLayerOrder(int layer) { LayerOrder = layer; }
 		/*!*************************************************************************
 		Retrieves Component Entity ID
 		****************************************************************************/
@@ -62,6 +62,7 @@ namespace EM {
 		bool is_SpriteSheet; // to tell whether we are using a spritesheet
 		bool is_Animated;	// if is a spritesheet do we want it to be animated 
 		float internaltimer;
+		int LayerOrder;
 		//altas 
 	private:
 		std::string mTextureName;
